@@ -4,6 +4,7 @@ docs_dir: ".wiki"
 nav:
     - Home: index.md
     - Document:
+        - Getting started: getting-started.md
         - Folder structure: module-folder-structure-for-rdbadmin.md
         - Controllers:
             - Front-end controllers: frontend-controllers.md

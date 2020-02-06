@@ -2,6 +2,13 @@
 
 RundizBones Admin is a management module for manage users, roles, permissions, and site settings. This module is working on RundizBones framework.
 
+## Getting started
+* [Getting started](getting-started.md).
+
+If you want to start development using RdbAdmin module, please read following. Otherwise this is finished.
+
+---
+
 ## Folder structure
 
 * [Module folder structure](module-folder-structure-for-rdbadmin.md).
