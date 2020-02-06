@@ -1,0 +1,15 @@
+<?php
+namespace Modules\%ModuleName%\Tests;
+
+
+class ExampleTest extends \Tests\Rdb\BaseTestCase
+{
+
+
+    public function testExample()
+    {
+        $this->assertTrue(true);
+    }// testExample
+
+
+}

@@ -1,0 +1,14 @@
+dev_addr: "127.0.0.1:8002"
+site_name: RdbAdmin module
+docs_dir: ".wiki"
+nav:
+    - Home: index.md
+    - Document:
+        - Folder structure: module-folder-structure-for-rdbadmin.md
+        - Controllers:
+            - Front-end controllers: frontend-controllers.md
+            - Admin controllers: admin-controllers.md
+        - Models: models.md
+        - Views:
+            - Admin: admin-views.md
+plugins: []

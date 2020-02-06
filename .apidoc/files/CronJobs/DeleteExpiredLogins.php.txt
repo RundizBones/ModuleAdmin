@@ -1,0 +1,53 @@
+<?php
+/**
+ * @license http://opensource.org/licenses/MIT MIT
+ */
+
+
+namespace Modules\RdbAdmin\CronJobs;
+
+
+/**
+ * Delete expired logins cron job.
+ * 
+ * @since 0.1
+ */
+class DeleteExpiredLogins extends BaseCronJobs
+{
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function execute(): bool
+    {
+        // crontab format is 'minute' 'hour' 'day of month' 'month' 'day of week'
+        // 0-15 for minute unit is start at 0 minute but can delay for 15 minutes.
+        $CronExpression = new \Cron\CronExpression('0-15 0 * * *', new \Cron\FieldFactory());
+
+        if ($CronExpression->isDue() && !$this->Cron->hasRun()) {
+            $sql = 'DELETE FROM `' . $this->Db->tableName('user_logins') . '` WHERE `userlogin_result` = 1 AND `userlogin_expire_date_gmt` < :userlogin_expire_date_gmt';
+            $Sth = $this->Db->PDO()->prepare($sql);
+            unset($sql);
+
+            $Sth->bindValue(':userlogin_expire_date_gmt', gmdate('Y-m-d H:i:s'));
+            $Sth->execute();
+            $Sth->closeCursor();
+            unset($Sth);
+
+            // write cache that this job had already run.
+            $cacheTTL = $this->getSecondsBeforeNext();
+            $this->Cron->cacheHadRun($cacheTTL);
+            unset($cacheTTL);
+
+            unset($CronExpression);
+            return true;
+        }// endif isDue()
+
+        unset($CronExpression);
+        return false;
+    }// execute
+
+
+}
+

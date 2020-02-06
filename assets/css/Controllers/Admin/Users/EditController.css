@@ -1,0 +1,17 @@
+/* Edit user CSS */
+
+
+.rdbadmin-current-avatar button {
+    margin-bottom: 10px;
+}
+.rdbadmin-current-avatar .rdbadmin-current-avatar-container {
+    border: 1px solid #eee;
+    margin-bottom: 5px;
+    max-width: 300px;
+}
+
+
+.rdbadmin-select-avatar-dropzone {
+    border: 3px dashed #ddd;
+    padding: 5px;
+}

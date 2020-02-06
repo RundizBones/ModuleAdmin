@@ -1,0 +1,15 @@
+{
+    "require": {
+        "dapphp/securimage": "^3.0",
+        "firebase/php-jwt": "^5.0",
+        "gettext/gettext": "^4.6",
+        "marcj/topsort": "^1.0",
+        "phpmailer/phpmailer": "^6.0",
+        "rundiz/serializer": "^1.0",
+        "rundiz/simple-cache": "^3.0",
+        "rundiz/upload": "~2.0",
+        "rundiz/image": "~3.0",
+        "slim/csrf": "^0.8",
+        "dragonmantank/cron-expression": "^2.0"
+    }
+}

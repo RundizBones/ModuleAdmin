@@ -1,0 +1,5 @@
+The assets folders for this module is automatically DELETE and re-create via `npm run build` command.
+
+DO NOT create anything directly in the assets folder.
+
+Create CSS, JS files in assets-src folder and use `npm run build` to build them.

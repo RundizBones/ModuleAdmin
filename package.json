@@ -1,0 +1,58 @@
+{
+    "name": "rundizbones-admin-module",
+    "version": "0.1.1",
+    "description": "Admin module for RundizBones framework.",
+    "main": "gulpfile.js",
+    "keywords": [
+        "admin_module",
+        "admin",
+        "backoffice",
+        "backend",
+        "rundizbones"
+    ],
+    "author": "Vee W.",
+    "license": "MIT",
+    "repository": {},
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.12.0",
+        "css-element-queries": "^1.2.3",
+        "datatables.net-dt": "^1.10.20",
+        "datatables.net-fixedheader-dt": "^3.1.6",
+        "datatables.net-plugins": "^1.10.20",
+        "datatables.net-responsive-dt": "^2.2.3",
+        "handlebars": "^4.7.2",
+        "jquery": "^3.4.1",
+        "lodash": "^4.17.15",
+        "moment": "^2.24.0",
+        "moment-timezone": "^0.5.27",
+        "popper.js": "^1.16.1",
+        "rundiz-template-for-admin": "^2.1.1",
+        "sanitize.css": "^11.0.0",
+        "smartmenus": "^1.1.0",
+        "sortablejs": "^1.10.2",
+        "sticky-sidebar": "^3.3.1",
+        "tippy.js": "^5.2.0"
+    },
+    "devDependencies": {
+        "del": "^5.1.0",
+        "gulp": "^4.0.2",
+        "gulp-cached": "^1.1.1",
+        "gulp-clean-css": "^4.2.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-header": "^2.0.9",
+        "gulp-print": "^5.0.2",
+        "gulp-rename": "^2.0.0",
+        "gulp-replace": "^1.0.0",
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-uglify-es": "^2.0.0",
+        "gulp-zip": "^5.0.1",
+        "merge-stream": "^2.0.0"
+    },
+    "scripts": {
+        "build": "gulp",
+        "pack": "gulp pack",
+        "writeVersions": "gulp writeVersions",
+        "watch": "gulp watch",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
+}

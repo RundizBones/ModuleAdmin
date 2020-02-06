@@ -1,0 +1,85 @@
+<?php
+/**
+ * %ModuleName%
+ * 
+ * @package %ModuleName%
+ */
+
+
+namespace Modules\%ModuleName%;
+
+
+/**
+ * Module installer class for %ModuleName%.
+ */
+class Installer implements \System\Interfaces\ModuleInstaller
+{
+
+
+    /**
+     * @var \System\Container
+     */
+    protected $Container;
+
+
+    /**
+     * @var \System\Libraries\Db
+     */
+    protected $Db;
+
+
+    /**
+     * @var \System\Libraries\Logger
+     */
+    protected $Logger;
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct(\System\Container $Container)
+    {
+        $this->Container = $Container;
+
+        if ($this->Container->has('Db')) {
+            $this->Db = $this->Container->get('Db');
+        } else {
+            $this->Db = new \System\Libraries\Db($Container);
+        }
+
+        if ($this->Container->has('Logger')) {
+            $this->Logger = $this->Container->get('Logger');
+        } else {
+            $this->Logger = new \System\Libraries\Logger($Container);
+        }
+    }// __construct
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function install()
+    {
+        
+    }// install
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function uninstall()
+    {
+        
+    }// uninstall
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function update()
+    {
+        
+    }// update
+
+
+}

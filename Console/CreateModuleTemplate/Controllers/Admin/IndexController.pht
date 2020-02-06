@@ -1,0 +1,70 @@
+<?php
+/**
+ * @license http://opensource.org/licenses/MIT MIT
+ */
+
+
+namespace Modules\%ModuleName%\Controllers\Admin;
+
+
+/**
+ * Your controller.
+ */
+class IndexController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+{
+
+
+    /**
+     * Use `\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait` to access method that is required for common admin pages.
+     */
+    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+
+
+    /**
+     * Page action.
+     * 
+     * @return string
+     */
+    public function indexAction(): string
+    {
+        // processing part ----------------------------------------------------------------------------------------------------
+        // bind text domain file and you can use translation with functions that work for specific domain such as `d__()`.
+        $this->Languages->bindTextDomain(
+            '%modulename%', 
+            MODULE_PATH . DIRECTORY_SEPARATOR . '%ModuleName%' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'translations'
+        );
+        $this->Languages->getHelpers();
+
+        $output = [];
+        $output['configDb'] = $this->getConfigDb();
+        $output['pageTitle'] = d__('%modulename%', 'Your title');
+        $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);
+        $output['pageHtmlClasses'] = $this->getPageHtmlClasses();
+
+        // display, response part ---------------------------------------------------------------------------------------------
+        if ($this->Input->isNonHtmlAccept()) {
+            // if custom HTTP accept, response content.
+            $this->responseNoCache();
+            return $this->responseAcceptType($output);
+        } else {
+            // if not custom HTTP accept.
+            // get RdbAdmin module's assets data for render page correctly.
+            $rdbAdminAssets = $this->getRdbAdminAssets();
+            // Assets class for add CSS and JS.
+            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+
+            // add CSS and JS assets to make basic functional and style on admin page works correctly.
+            $this->setCssAssets($Assets, $rdbAdminAssets);
+            $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);
+
+            $output['Assets'] = $Assets;
+            $output['pageContent'] = $this->Views->render('Admin/Index/index_v', $output);
+
+            unset($Assets, $rdbAdminAssets);
+
+            return $this->Views->render('common/Admin/mainLayout_v', $output, ['viewsModule' => 'RdbAdmin']);
+        }
+    }// indexAction
+
+
+}

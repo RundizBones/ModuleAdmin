@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>RdbAdmin Module</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">RdbAdmin Module</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/Modules.html">\Modules</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">158</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1542337483"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1542337483" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-203563703"></a>
+                                <a href="../namespaces/Modules.html" style="margin-left: 30px; padding-left: 0">Modules</a>
+            </div>
+            <div id="namespace-203563703" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-627898637"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.html" style="margin-left: 30px; padding-left: 0">RdbAdmin</a>
+            </div>
+            <div id="namespace-627898637" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-533998393"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Console.html" style="margin-left: 30px; padding-left: 0">Console</a>
+            </div>
+            <div id="namespace-533998393" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Console.Cron.html">Cron</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1979292748"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.html" style="margin-left: 30px; padding-left: 0">Controllers</a>
+            </div>
+            <div id="namespace-1979292748" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1207617061"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers._SubControllers.html" style="margin-left: 30px; padding-left: 0">_SubControllers</a>
+            </div>
+            <div id="namespace-1207617061" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers._SubControllers.BruteForceLoginPrevention.html">BruteForceLoginPrevention</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers._SubControllers.LoginSubController.html">LoginSubController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers._SubControllers.MenuItems.html">MenuItems</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers._SubControllers.SkipCaptchaCookie.html">SkipCaptchaCookie</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1782646298"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.html" style="margin-left: 30px; padding-left: 0">Admin</a>
+            </div>
+            <div id="namespace-1782646298" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-195084501"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Permissions.html" style="margin-left: 30px; padding-left: 0">Permissions</a>
+            </div>
+            <div id="namespace-195084501" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1409143091"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Permissions.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1409143091" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Permissions.Traits.PermissionsTrait.html">PermissionsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Permissions.EditController.html">EditController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Permissions.PermissionsController.html">PermissionsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1834753460"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Roles.html" style="margin-left: 30px; padding-left: 0">Roles</a>
+            </div>
+            <div id="namespace-1834753460" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1362236936"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Roles.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1362236936" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.Traits.RolesTrait.html">RolesTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.ActionsController.html">ActionsController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.AddController.html">AddController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.EditController.html">EditController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.ReorderController.html">ReorderController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.RolesController.html">RolesController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1260408152"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Settings.html" style="margin-left: 30px; padding-left: 0">Settings</a>
+            </div>
+            <div id="namespace-1260408152" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Settings.SettingsController.html">SettingsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1270438953"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Tools.html" style="margin-left: 30px; padding-left: 0">Tools</a>
+            </div>
+            <div id="namespace-1270438953" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Tools.CacheController.html">CacheController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1077851723"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.UI.html" style="margin-left: 30px; padding-left: 0">UI</a>
+            </div>
+            <div id="namespace-1077851723" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1234889771"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.UI.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1234889771" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html">CommonDataTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-938407511"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.UI.Widgets.html" style="margin-left: 30px; padding-left: 0">Widgets</a>
+            </div>
+            <div id="namespace-938407511" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.UI.Widgets.WidgetsController.html">WidgetsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.UI.XhrCommonDataController.html">XhrCommonDataController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.UI.XhrDashboardWidgetsController.html">XhrDashboardWidgetsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-91169745"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Users.html" style="margin-left: 30px; padding-left: 0">Users</a>
+            </div>
+            <div id="namespace-91169745" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-504193557"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.html" style="margin-left: 30px; padding-left: 0">Sessions</a>
+            </div>
+            <div id="namespace-504193557" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1693742017"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1693742017" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html">SessionsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.PingController.html">PingController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.SessionsController.html">SessionsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1929166569"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Users.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1929166569" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.Traits.UsersTrait.html">UsersTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.ActionsController.html">ActionsController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.AddController.html">AddController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.EditController.html">EditController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.PreviousEmailsController.html">PreviousEmailsController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.UsersController.html">UsersController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html">AdminBaseController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.CaptchaController.html">CaptchaController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.CronController.html">CronController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.ForgotLoginPassController.html">ForgotLoginPassController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.IndexController.html">IndexController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.LoginController.html">LoginController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.LogoutController.html">LogoutController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.RegisterController.html">RegisterController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.BaseController.html">BaseController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1134205115"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.CronJobs.html" style="margin-left: 30px; padding-left: 0">CronJobs</a>
+            </div>
+            <div id="namespace-1134205115" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.BaseCronJobs.html">BaseCronJobs</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteExpiredDcLockout.html">DeleteExpiredDcLockout</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteExpiredLogins.html">DeleteExpiredLogins</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteExpiredUserRegisterWaitConfirm.html">DeleteExpiredUserRegisterWaitConfirm</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteFailedLogins.html">DeleteFailedLogins</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteSoftDeleteUsers.html">DeleteSoftDeleteUsers</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1363474772"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Interfaces.html" style="margin-left: 30px; padding-left: 0">Interfaces</a>
+            </div>
+            <div id="namespace-1363474772" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Modules.RdbAdmin.Interfaces.CronJobs.html">CronJobs</a></li>
+                                                    <li class="interface"><a href="../classes/Modules.RdbAdmin.Interfaces.ModuleAdmin.html">ModuleAdmin</a></li>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-462193176"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Libraries.html" style="margin-left: 30px; padding-left: 0">Libraries</a>
+            </div>
+            <div id="namespace-462193176" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-852260404"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Libraries.Extended.html" style="margin-left: 30px; padding-left: 0">Extended</a>
+            </div>
+            <div id="namespace-852260404" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Extended.SlimGuard.html">SlimGuard</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Assets.html">Assets</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Cache.html">Cache</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Cookie.html">Cookie</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Cron.html">Cron</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Csrf.html">Csrf</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.DataTablesJs.html">DataTablesJs</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Email.html">Email</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Encryption.html">Encryption</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Input.html">Input</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Languages.html">Languages</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.RdbaString.html">RdbaString</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1409018862"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Models.html" style="margin-left: 30px; padding-left: 0">Models</a>
+            </div>
+            <div id="namespace-1409018862" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-959990522"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Models.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-959990522" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Models.Traits.CacheFileTrait.html">CacheFileTrait</a></li>
+                                                    <li class="trait"><a href="../classes/Modules.RdbAdmin.Models.Traits.MetaFieldsTrait.html">MetaFieldsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.ConfigDb.html">ConfigDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UserFieldsDb.html">UserFieldsDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UserLoginsDb.html">UserLoginsDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UserPermissionsDb.html">UserPermissionsDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UserRolesDb.html">UserRolesDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UsersDb.html">UsersDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UsersRolesDb.html">UsersRolesDb</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1863456067"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.ModuleData.html" style="margin-left: 30px; padding-left: 0">ModuleData</a>
+            </div>
+            <div id="namespace-1863456067" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.ModuleData.ModuleAdmin.html">ModuleAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.ModuleData.ModuleAssets.html">ModuleAssets</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Installer.html">Installer</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/Modules.RdbAdmin.Libraries.html">\Modules\RdbAdmin\Libraries</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\Modules\RdbAdmin\Libraries</small>Languages</h1>
+                    <p><em>Languages class that work as connector to oscarotero/gettext class.</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Languages.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Languages.html#method_bindTextDomain" class="">bindTextDomain()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Languages.html#method_getHelpers" class="">getHelpers()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Languages.html#method_getTranslator" class="">getTranslator()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Languages.html#method_registerTextDomain" class="">registerTextDomain()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Languages.html#property_Container" class="">$Container</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Languages.html#property_currentTextDomain" class="">$currentTextDomain</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Languages.html#property_registeredTextDomains" class="">$registeredTextDomains</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Languages.html#property_Translator" class="">$Translator</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Libraries.Languages.html"><div class="path-wrapper">Libraries\Languages.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\Modules\RdbAdmin\Libraries\Languages</div>
+                            </dd>
+
+                        
+                        
+                        
+                                                                            <dt>See also</dt>
+                                                                                        <dd><a href="https://github.com/oscarotero/Gettext"><span class="namespace-wrapper">Gettext class document.</span></a></dd>
+                                                    
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                since
+                            </th>
+                            <td>
+                                                                    
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_Container" name="property_Container" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$Container</h3>
+                <pre class="signature">$Container : \System\Container</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                \System\Container
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_currentTextDomain" name="property_currentTextDomain" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$currentTextDomain</h3>
+                <pre class="signature">$currentTextDomain : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; Currently loaded text domain.                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_registeredTextDomains" name="property_registeredTextDomains" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$registeredTextDomains</h3>
+                <pre class="signature">$registeredTextDomains : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; The text domains that was registered via registerTextDomain() method.                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_Translator" name="property_Translator" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$Translator</h3>
+                <pre class="signature">$Translator : \Gettext\Translator</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                \Gettext\Translator
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(\System\Container  <span class="argument">$Container</span>) </pre>
+                <p><em>Class constructor.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\System\Container</td>
+                                <td>$Container </td>
+                                <td><p>The DI container class.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_bindTextDomain" name="method_bindTextDomain" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">bindTextDomain()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">bindTextDomain(string  <span class="argument">$domain</span>, string  <span class="argument">$directory = &#039;&#039;</span>) : boolean</pre>
+                <p><em>Bind text domain file.</em></p>
+                <p>Load the translation file to get ready to use.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$domain </td>
+                                <td><p>The text domain. Example: 'mymdoule'.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$directory </td>
+                                <td><p>The full path to folder that contain translations (mo file). No trailing slash. Example: '/var/www/Modules/MyModule/languages/translations'.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Return <code>true</code> on success, <code>false</code> on failure.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getHelpers" name="method_getHelpers" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getHelpers()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getHelpers() : $this</pre>
+                <p><em>Get helpers functions.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTranslator" name="method_getTranslator" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTranslator()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTranslator() : \Gettext\Translator</pre>
+                <p><em>Get `Translator` object.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    \Gettext\Translator
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_registerTextDomain" name="method_registerTextDomain" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">registerTextDomain()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">registerTextDomain(string  <span class="argument">$domain</span>, string  <span class="argument">$directory</span>) </pre>
+                <p><em>Register text domain.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$domain </td>
+                                <td><p>The text domain. Example: 'mymodule'.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$directory </td>
+                                <td><p>The full path to folder that contain translations (mo file). Example: '/var/www/Modules/MyModule/languages/translations'.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">Languages.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Libraries\Languages.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/Modules.html">\Modules</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on December 3rd, 2019 at 00:36.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

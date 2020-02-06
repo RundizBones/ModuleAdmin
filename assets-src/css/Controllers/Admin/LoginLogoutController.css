@@ -1,0 +1,81 @@
+/*
+Login & Logout page CSS.
+Also including pages that interact with these pages such as 
+    forgot password (come from login page), 
+    reset password (come from forgot password page).
+*/
+
+
+.rdba-login-logout-pages,
+.rdba-login-logout-pages body {
+    background-color: #f1f1f1;
+}
+
+
+.rdba-login-logout-pages .column {
+    margin: 0 auto;
+    max-width: 350px;
+}
+
+
+.rdba-login-logout-pages .rdba-links-under-form {
+    font-size: 70%;
+    margin-bottom: 20px;
+    margin-top: 0;
+    padding: 0;
+}
+.rdba-login-logout-pages .rdba-links-under-form > span + span::before {
+    content: ' | ';
+}
+
+
+.rdba-login-logout-pages .page-form-body {
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.833rem;
+    margin-bottom: 10px;
+    padding: 14px;
+}
+.rdba-login-logout-pages .rd-form .form-group.submit-button-row {
+    margin-bottom: 0;
+}
+.rdba-login-logout-pages .rd-form .form-group.submit-button-row .loading-icon {
+    font-size: 0.862rem;
+}
+
+
+.rdba-login-logout-pages .page-header {
+    cursor: default;
+    font-size: 1.753em;
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+
+.rdba-login-logout-pages .rdba-language-switch-form .form-group .control-label {
+    font-size: 0.833rem;
+    font-weight: normal;
+}
+
+
+.rdba-page-admin_logout .user-icon-wrapper {
+    background-color: #333;
+    border-radius: 50%;
+    color: #f1f1f1;
+    height: 80px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 80px;
+}
+.rdba-page-admin_logout .user-icon-wrapper .user-icon {
+    font-size: 50px;
+    line-height: 80px;
+}
+
+
+.rundizbones-languages-selectbox {
+    background-color: rgba(255, 255, 255, 0.7);
+    font-size: 0.833rem;
+}

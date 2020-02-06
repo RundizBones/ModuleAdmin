@@ -1,0 +1,299 @@
+/*
+For common use to display listing data in the data table page.
+*/
+
+
+.dataTables_wrapper .dataTables_processing {
+    background: rgba(255,255,255,0.8);
+    background: -ms-linear-gradient(left, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.95) 47%, rgba(255,255,255,0.95) 75%, rgba(255,255,255,0.8) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.95) 47%, rgba(255,255,255,0.95) 75%, rgba(255,255,255,0.8) 100%);
+    line-height: 40px;/* line height must match its original height value */
+    padding-top: 0;
+}
+
+
+/* update design of data table from datatables.net */
+table.rdba-datatables-js {
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+table.rdba-datatables-js tbody tr.table-row-danger {
+    background-color: #f4d0d0;
+}
+table.rdba-datatables-js tbody tr.table-row-danger:hover {
+    background-color: #eeb9b9;
+}
+table.rdba-datatables-js tbody tr.table-row-info {
+    background-color: #c4e3f2;
+}
+table.rdba-datatables-js tbody tr.table-row-info:hover {
+    background-color: #abd7ec;
+}
+table.rdba-datatables-js tbody tr.table-row-primary {
+    background-color: #a2ccf0;
+}
+table.rdba-datatables-js tbody tr.table-row-primary:hover {
+    background-color: #91c2ed;
+}
+table.rdba-datatables-js tbody tr.table-row-success {
+    background-color: #d1e6d1;
+}
+table.rdba-datatables-js tbody tr.table-row-success:hover {
+    background-color: #c0dcc0;
+}
+table.rdba-datatables-js tbody tr.table-row-warning {
+    background-color: #fbd38f;
+}
+table.rdba-datatables-js tbody tr.table-row-warning:hover {
+    background-color: #fac875;
+}
+
+.rdba-datatables-js tfoot td, 
+.rdba-datatables-js tfoot th, 
+.rdba-datatables-js thead td, 
+.rdba-datatables-js thead th {
+    background-color: transparent;
+}
+
+.rdba-datatables-js tfoot .column-checkbox,
+.rdba-datatables-js thead .column-checkbox {
+    padding-left: 10px;
+}
+table.rdba-datatables-js tfoot td,
+table.rdba-datatables-js tfoot th {
+    border-top: 2px solid #ddd;
+}
+table.rdba-datatables-js thead td,
+table.rdba-datatables-js thead th {
+    border-bottom: 2px solid #ddd;
+    white-space: nowrap;
+}
+table.rdba-datatables-js tfoot td,
+table.rdba-datatables-js tfoot th,
+table.rdba-datatables-js thead td,
+table.rdba-datatables-js thead th {
+    padding: 8px 10px;
+}
+table.rdba-datatables-js tfoot td:not(.sorting_disabled),
+table.rdba-datatables-js tfoot th:not(.sorting_disabled),
+table.rdba-datatables-js thead td:not(.sorting_disabled),
+table.rdba-datatables-js thead th:not(.sorting_disabled) {
+    padding-right: 1rem;
+}
+
+.rdba-datatables-js tbody tr:last-child td,
+.rdba-datatables-js tbody tr:last-child th {
+    border-bottom: none;
+}
+
+.rdba-datatables-js tbody td,
+.rdba-datatables-js tbody th {
+    vertical-align: top;
+}
+
+.rdba-datatables-js tbody .control {
+    min-width: 1rem;
+}
+
+.rdba-datatables-js td,
+.rdba-datatables-js th {
+    border-left: none;
+    border-right: none;
+}
+
+.rdba-datatables-js .column-checkbox {
+    width: .8125rem;
+}
+.rdba-datatables-js .column-primary {
+    min-width: 90px;
+}
+
+.rdba-datatables-js .row-actions {
+    font-size: 0.75em;
+    line-height: 1.948em;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.rdba-datatables-js tr:hover .row-actions {
+    opacity: 1;
+}
+.rdba-datatables-js .row-actions > span + span::before {
+    content: ' \00a0 | \00a0 ';
+}
+
+.rdba-datatables-js.fixedHeader-floating {
+    top: 0;
+}
+@media (min-width: 1000px) {
+    .rdba-datatables-js.fixedHeader-floating {
+        top: 50px !important;
+    }
+}
+
+/* About sortable (reorderable). */
+.rdba-datatables-js tbody tr .sortable-handle {
+    cursor: ns-resize;
+}
+.rdba-datatables-js tbody tr.disallow-sortable .sortable-handle {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+
+/* Override datatables sort icons */
+table.rdba-datatables-js thead td:not(.sorting_disabled),
+table.rdba-datatables-js thead th:not(.sorting_disabled) {
+    background-image: none;
+    position: relative;
+}
+table.rdba-datatables-js thead .sorting::after,
+table.rdba-datatables-js thead .sorting_asc::after,
+table.rdba-datatables-js thead .sorting_asc_disabled::after,
+table.rdba-datatables-js thead .sorting_desc::after,
+table.rdba-datatables-js thead .sorting_desc_disabled::after {
+    color: #aaa;
+    font-family: 'Font Awesome 5 Free';
+    font-size: 1rem;
+    font-weight: 900;
+    position: absolute;
+    right: .2em;
+    top: .45em;
+}
+table.rdba-datatables-js thead .sorting_asc_disabled::after,
+table.rdba-datatables-js thead .sorting_desc_disabled::after {
+    color: #ddd;
+}
+table.rdba-datatables-js thead .sorting::after {
+    content: '\f0dc';
+}
+table.rdba-datatables-js thead .sorting_asc::after {
+    content: '\f0de';
+}
+table.rdba-datatables-js thead .sorting_desc::after {
+    content: '\f0dd';
+}
+
+
+/* datatables controls (filter, pagination, bulk actions) */
+.rdba-datatables-result-controls label {
+    display: inline-block;
+    margin-bottom: 0.938em;
+}
+
+.rdba-datatables-actions-controls .rd-button,
+.rdba-datatables-result-controls .rd-button,
+.rdba-datatables-result-pagination .rd-button {
+    font-size: 0.99em;
+    height: 2.03em;
+    line-height: 1.4;
+}
+.rdba-datatables-result-controls select,
+.rdba-datatables-result-controls .rdba-datatables-input-search {
+    max-width: 10em;
+}
+
+.rdba-datatables-result-pagination {
+    text-align: left;
+}
+@media (min-width: 768px) {
+    .rdba-datatables-result-pagination {
+        text-align: right;
+    }
+}
+.rdba-datatables-result-pagination > * {
+    display: inline-block;
+    margin-bottom: 0.938em;
+    padding-bottom: 0;
+    padding-top: 0;
+    vertical-align: top;
+}
+.rdba-datatables-result-pagination .dataTables_paginate {
+    float: none;
+    padding-top: 0;
+}
+.rdba-datatables-result-pagination .dataTables_paginate > * {
+    display: inline-block;
+    margin-left: 0.313em;
+}
+.rdba-datatables-result-pagination .paginate_input {
+    width: 2.5em;
+}
+
+.rdba-datatables-actions-controls .rdba-datatables-result-pagination > * {
+    margin-bottom: 0;
+    margin-top: 0.938em;
+}
+.rdba-datatables-actions-controls label {
+    display: inline-block;
+    margin-top: 0.938em;
+}
+
+.rdba-datatables-result-controls-info {
+    margin-bottom: 0;
+    margin-top: 0;
+    position: relative;
+    top: 0.35em;
+}
+
+
+/* datatables responsive (expand/collapse) icons */
+table.dataTable.dtr-column > tbody > tr > td.control::before, 
+table.dataTable.dtr-column > tbody > tr > th.control::before {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    box-shadow: none;
+    color: inherit;
+    content: '\f0d7';
+    font-family: 'Font Awesome 5 Free';
+    font-size: 1rem;
+    font-weight: 900;
+}
+table.dataTable.dtr-column > tbody > tr > td.control:hover::before, 
+table.dataTable.dtr-column > tbody > tr > th.control:hover::before {
+    box-shadow: 0 0 3px #444;
+}
+
+table.dataTable.dtr-column > tbody > tr.parent td.control:before,
+table.dataTable.dtr-column > tbody > tr.parent th.control:before {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 3px #444;
+    color: inherit;
+    content: '\f0d8';
+    font-family: 'Font Awesome 5 Free';
+    font-size: 1rem;
+    font-weight: 900;
+}
+table.dataTable > tbody > tr.child ul.dtr-details {
+    width: 100%;
+}
+
+
+/* page content header (maybe with add button) */
+.rdba-page-content-header {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 2.2em;
+    line-height: 1.4;
+    margin-bottom: 1.25rem;
+}
+@media (min-width: 768px) {
+    .rdba-page-content-header {
+        flex-direction: row;
+    }
+}
+.rdba-page-content-header > a {
+    font-size: 1rem;
+}
+@media (min-width: 768px) {
+    .rdba-page-content-header > a {
+        align-self: center;
+        line-height: normal;
+        margin-left: 0.938rem;
+    }
+}

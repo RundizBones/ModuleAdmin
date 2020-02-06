@@ -1,0 +1,8 @@
+.backup
+.dev-notes/dummy data - users.sql
+.disabled
+.dist
+.phpdoc
+assets-src/vendor
+node_modules
+package-lock.json

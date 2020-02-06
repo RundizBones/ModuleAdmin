@@ -1,0 +1,58 @@
+<?php
+/**
+ * @license http://opensource.org/licenses/MIT MIT
+ */
+
+
+namespace Modules\RdbAdmin\CronJobs;
+
+
+/**
+ * Delete failed logins log.
+ * 
+ * @since 0.1
+ */
+class DeleteFailedLogins extends BaseCronJobs
+{
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function execute(): bool
+    {
+        // crontab format is 'minute' 'hour' 'day of month' 'month' 'day of week'
+        // 0-15 for minute unit is start at 0 minute but can delay for 15 minutes.
+        $CronExpression = new \Cron\CronExpression('0-15 0 * * *', new \Cron\FieldFactory());
+
+        if ($CronExpression->isDue() && !$this->Cron->hasRun()) {
+            $keepLoginsForDays = 90;// keep for xx days.
+            $sql = 'DELETE FROM `' . $this->Db->tableName('user_logins') . '` WHERE `userlogin_result` = 0 AND `userlogin_date_gmt` < :userlogin_date_gmt';
+            $Sth = $this->Db->PDO()->prepare($sql);
+            unset($sql);
+
+            $DateTimeUtc = new \DateTime('now', new \DateTimeZone('UTC'));
+            $DateTimeUtc->sub(new \DateInterval('P' . $keepLoginsForDays . 'D'));
+
+            $Sth->bindValue(':userlogin_date_gmt', $DateTimeUtc->format('Y-m-d H:i:s'));
+            $Sth->execute();
+            $Sth->closeCursor();
+            unset($DateTimeUtc, $keepLoginsForDays, $Sth);
+
+            // write cache that this job had already run.
+            $cacheTTL = $this->getSecondsBeforeNext();
+            $this->Cron->cacheHadRun($cacheTTL);
+            unset($cacheTTL);
+
+            unset($CronExpression);
+            return true;
+        }// endif isDue()
+
+        unset($CronExpression);
+        return false;
+    }// execute
+
+
+
+}
+

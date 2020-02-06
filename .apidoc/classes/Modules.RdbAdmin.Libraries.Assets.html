@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>RdbAdmin Module</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">RdbAdmin Module</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/Modules.html">\Modules</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">158</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1826416509"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1826416509" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1677278211"></a>
+                                <a href="../namespaces/Modules.html" style="margin-left: 30px; padding-left: 0">Modules</a>
+            </div>
+            <div id="namespace-1677278211" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-818079721"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.html" style="margin-left: 30px; padding-left: 0">RdbAdmin</a>
+            </div>
+            <div id="namespace-818079721" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-486937533"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Console.html" style="margin-left: 30px; padding-left: 0">Console</a>
+            </div>
+            <div id="namespace-486937533" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Console.Cron.html">Cron</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1656686670"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.html" style="margin-left: 30px; padding-left: 0">Controllers</a>
+            </div>
+            <div id="namespace-1656686670" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-606913037"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers._SubControllers.html" style="margin-left: 30px; padding-left: 0">_SubControllers</a>
+            </div>
+            <div id="namespace-606913037" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers._SubControllers.BruteForceLoginPrevention.html">BruteForceLoginPrevention</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers._SubControllers.LoginSubController.html">LoginSubController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers._SubControllers.MenuItems.html">MenuItems</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers._SubControllers.SkipCaptchaCookie.html">SkipCaptchaCookie</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-830801024"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.html" style="margin-left: 30px; padding-left: 0">Admin</a>
+            </div>
+            <div id="namespace-830801024" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-793089689"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Permissions.html" style="margin-left: 30px; padding-left: 0">Permissions</a>
+            </div>
+            <div id="namespace-793089689" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1302119506"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Permissions.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1302119506" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Permissions.Traits.PermissionsTrait.html">PermissionsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Permissions.EditController.html">EditController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Permissions.PermissionsController.html">PermissionsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1443883792"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Roles.html" style="margin-left: 30px; padding-left: 0">Roles</a>
+            </div>
+            <div id="namespace-1443883792" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-762367700"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Roles.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-762367700" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.Traits.RolesTrait.html">RolesTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.ActionsController.html">ActionsController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.AddController.html">AddController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.EditController.html">EditController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.ReorderController.html">ReorderController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Roles.RolesController.html">RolesController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1454373545"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Settings.html" style="margin-left: 30px; padding-left: 0">Settings</a>
+            </div>
+            <div id="namespace-1454373545" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Settings.SettingsController.html">SettingsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1978478821"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Tools.html" style="margin-left: 30px; padding-left: 0">Tools</a>
+            </div>
+            <div id="namespace-1978478821" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Tools.CacheController.html">CacheController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2076587060"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.UI.html" style="margin-left: 30px; padding-left: 0">UI</a>
+            </div>
+            <div id="namespace-2076587060" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-5696274"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.UI.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-5696274" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html">CommonDataTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-335607602"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.UI.Widgets.html" style="margin-left: 30px; padding-left: 0">Widgets</a>
+            </div>
+            <div id="namespace-335607602" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.UI.Widgets.WidgetsController.html">WidgetsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.UI.XhrCommonDataController.html">XhrCommonDataController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.UI.XhrDashboardWidgetsController.html">XhrDashboardWidgetsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1277234472"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Users.html" style="margin-left: 30px; padding-left: 0">Users</a>
+            </div>
+            <div id="namespace-1277234472" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1891763835"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.html" style="margin-left: 30px; padding-left: 0">Sessions</a>
+            </div>
+            <div id="namespace-1891763835" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-513468687"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-513468687" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html">SessionsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.PingController.html">PingController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.Sessions.SessionsController.html">SessionsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1657447146"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Controllers.Admin.Users.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1657447146" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.Traits.UsersTrait.html">UsersTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.ActionsController.html">ActionsController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.AddController.html">AddController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.EditController.html">EditController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.PreviousEmailsController.html">PreviousEmailsController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.Users.UsersController.html">UsersController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html">AdminBaseController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.CaptchaController.html">CaptchaController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.CronController.html">CronController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.ForgotLoginPassController.html">ForgotLoginPassController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.IndexController.html">IndexController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.LoginController.html">LoginController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.LogoutController.html">LogoutController</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.Admin.RegisterController.html">RegisterController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Controllers.BaseController.html">BaseController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1922524383"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.CronJobs.html" style="margin-left: 30px; padding-left: 0">CronJobs</a>
+            </div>
+            <div id="namespace-1922524383" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.BaseCronJobs.html">BaseCronJobs</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteExpiredDcLockout.html">DeleteExpiredDcLockout</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteExpiredLogins.html">DeleteExpiredLogins</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteExpiredUserRegisterWaitConfirm.html">DeleteExpiredUserRegisterWaitConfirm</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteFailedLogins.html">DeleteFailedLogins</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.CronJobs.DeleteSoftDeleteUsers.html">DeleteSoftDeleteUsers</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2768960"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Interfaces.html" style="margin-left: 30px; padding-left: 0">Interfaces</a>
+            </div>
+            <div id="namespace-2768960" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Modules.RdbAdmin.Interfaces.CronJobs.html">CronJobs</a></li>
+                                                    <li class="interface"><a href="../classes/Modules.RdbAdmin.Interfaces.ModuleAdmin.html">ModuleAdmin</a></li>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1151300698"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Libraries.html" style="margin-left: 30px; padding-left: 0">Libraries</a>
+            </div>
+            <div id="namespace-1151300698" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1036682136"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Libraries.Extended.html" style="margin-left: 30px; padding-left: 0">Extended</a>
+            </div>
+            <div id="namespace-1036682136" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Extended.SlimGuard.html">SlimGuard</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Assets.html">Assets</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Cache.html">Cache</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Cookie.html">Cookie</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Cron.html">Cron</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Csrf.html">Csrf</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.DataTablesJs.html">DataTablesJs</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Email.html">Email</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Encryption.html">Encryption</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Input.html">Input</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.Languages.html">Languages</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Libraries.RdbaString.html">RdbaString</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1148268579"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Models.html" style="margin-left: 30px; padding-left: 0">Models</a>
+            </div>
+            <div id="namespace-1148268579" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1837149527"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.Models.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1837149527" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Modules.RdbAdmin.Models.Traits.CacheFileTrait.html">CacheFileTrait</a></li>
+                                                    <li class="trait"><a href="../classes/Modules.RdbAdmin.Models.Traits.MetaFieldsTrait.html">MetaFieldsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.ConfigDb.html">ConfigDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UserFieldsDb.html">UserFieldsDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UserLoginsDb.html">UserLoginsDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UserPermissionsDb.html">UserPermissionsDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UserRolesDb.html">UserRolesDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UsersDb.html">UsersDb</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Models.UsersRolesDb.html">UsersRolesDb</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-106254929"></a>
+                                <a href="../namespaces/Modules.RdbAdmin.ModuleData.html" style="margin-left: 30px; padding-left: 0">ModuleData</a>
+            </div>
+            <div id="namespace-106254929" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.ModuleData.ModuleAdmin.html">ModuleAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.ModuleData.ModuleAssets.html">ModuleAssets</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Modules.RdbAdmin.Installer.html">Installer</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/Modules.RdbAdmin.Libraries.html">\Modules\RdbAdmin\Libraries</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\Modules\RdbAdmin\Libraries</small>Assets</h1>
+                    <p><em>Assets class.</em></p>
+                    <p>To use Assets class, you have to call these methods by order.<br></p>
+<ol>
+<li><code>addAsset()</code>, <code>addMultipleAssets()</code>. You can use one of these methods but no need to call them all.<br></li>
+<li>If you want to add more inline style or JavaScript please call <code>addCssInline()</code>, <code>addJsInline()</code>.<br></li>
+<li>If you want to add JS object (to access them easily in JSON format) please call <code>addJsObject()</code>.<br></li>
+<li>In the views page call to <code>renderAssets()</code>.<br>
+That's all the basic usage.</li>
+</ol>
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_addAsset" class="">addAsset()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_addCssInline" class="">addCssInline()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_addJsInline" class="">addJsInline()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_addJsObject" class="">addJsObject()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_addMultipleAssets" class="">addMultipleAssets()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_assetIs" class="">assetIs()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_clear" class="">clear()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_removeAsset" class="">removeAsset()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_renderAssets" class="">renderAssets()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_addMissedDependencies" class="">addMissedDependencies()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_generateAssetUrlWithVersion" class="">generateAssetUrlWithVersion()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_generateAttributes" class="">generateAttributes()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_generateInlineScript" class="">generateInlineScript()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_generateInlineStyle" class="">generateInlineStyle()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_generateJsObject" class="">generateJsObject()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_getDependencyExists" class="">getDependencyExists()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_topologicalSort" class="">topologicalSort()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_verifyType" class="">verifyType()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#property_addedAssets" class="">$addedAssets</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#property_assetsSorted" class="">$assetsSorted</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#property_Container" class="">$Container</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_renderAssetCss" class="">renderAssetCss()</a><br />
+                                                                    <a href="../classes/Modules.RdbAdmin.Libraries.Assets.html#method_renderAssetJs" class="">renderAssetJs()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Libraries.Assets.html"><div class="path-wrapper">Libraries\Assets.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\Modules\RdbAdmin\Libraries\Assets</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                since
+                            </th>
+                            <td>
+                                                                    
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_addedAssets" name="property_addedAssets" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$addedAssets</h3>
+                <pre class="signature">$addedAssets : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; Contain the associative array with `js`, `css` keys and its asset files that was added.                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_assetsSorted" name="property_assetsSorted" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$assetsSorted</h3>
+                <pre class="signature">$assetsSorted : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; Contain the associative array with `css`, `js` keys and its value is boolean for checking before do topological sort.                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_Container" name="property_Container" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$Container</h3>
+                <pre class="signature">$Container : \System\Container</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                \System\Container
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(\System\Container  <span class="argument">$Container</span>) </pre>
+                <p><em>Class constructor.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\System\Container</td>
+                                <td>$Container </td>
+                                <td><p>The DI container class.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addAsset" name="method_addAsset" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addAsset()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addAsset(string  <span class="argument">$type</span>, string  <span class="argument">$handle</span>, string  <span class="argument">$file</span>, array  <span class="argument">$dependency = array()</span>, string|boolean  <span class="argument">$version = true</span>, array  <span class="argument">$attributes = array()</span>, string|null  <span class="argument">$group = null</span>) </pre>
+                <p><em>Add an asset to the queue by type.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type (css, js).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$handle </td>
+                                <td><p>The handle name of the asset. It must be unique to prevent overriding and duplication.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$file </td>
+                                <td><p>The URL to file, it can be full URL or just relative path.<br>
+If the file has special characters, it should be <code>rawurlencode()</code> before calling this.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$dependency </td>
+                                <td><p>An array of added asset handles that this asset is depend on.<br>
+The css and js dependency cannot be cross type. <br>
+This class is not support cross group dependency yet.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|boolean</td>
+                                <td>$version </td>
+                                <td><p>The version number to added to the query string of this asset URL. If <code>false</code> means no version is added.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$attributes </td>
+                                <td><p>An array of HTML attributes for this asset. Do not add id attribute because it will be auto generated.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|null</td>
+                                <td>$group </td>
+                                <td><p>The group name. This can be helped when you want to render the assets by group.</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InvalidArgumentException</dt>
+                            <dd><p>Throw the errors if invalid argument is specified.</p></dd>
+                                                                    </dl>
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addCssInline" name="method_addCssInline" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addCssInline()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addCssInline(string  <span class="argument">$handle</span>, string  <span class="argument">$data</span>) </pre>
+                <p><em>Add in-line stylesheet to extend current css file.</em></p>
+                <p>You have to escape anything that should not be HTML by yourself before add to data.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$handle </td>
+                                <td><p>The handle name of exists css file.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$data </td>
+                                <td><p>The stylesheet content. Do not include <code>&lt;style&gt;...&lt;/style&gt;</code> tag.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addJsInline" name="method_addJsInline" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addJsInline()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addJsInline(string  <span class="argument">$handle</span>, string  <span class="argument">$data</span>, string  <span class="argument">$position = &#039;after&#039;</span>) </pre>
+                <p><em>Add in-line JavaScript to extend current js file.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$handle </td>
+                                <td><p>The handle name of exists js file.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$data </td>
+                                <td><p>The JavaScript content. Do not include <code>&amp;ltscript&amp;gt;...&amp;lt/script&amp;gt;</code> tag.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$position </td>
+                                <td><p>Position to add this in-line js. The value is &quot;before&quot;, &quot;after&quot;. Please call this method after <code>addAsset()</code> method even if position is before, otherwise it will not show up.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addJsObject" name="method_addJsObject" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addJsObject()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addJsObject(string  <span class="argument">$handle</span>, string  <span class="argument">$name</span>, array  <span class="argument">$data</span>) </pre>
+                <p><em>Add JavaScript object for use the data between js and php such as translation text.</em></p>
+                <p>You have to escape anything that should not be HTML by yourself before add to data.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$handle </td>
+                                <td><p>The asset handle name of exists js file.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>The JavaScript object name. This should be unique to prevent conflict with others.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>Recommended use associative array where the key will becomes js property.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addMultipleAssets" name="method_addMultipleAssets" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addMultipleAssets()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addMultipleAssets(string  <span class="argument">$type</span>, array  <span class="argument">$handles</span>, array  <span class="argument">$assetsData</span>) </pre>
+                <p><em>Add multiple assets at once to the queue by type.</em></p>
+                <p>This method will add those dependencies for each asset handle automatically.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type (css, js).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$handles </td>
+                                <td><p>The array list of asset's handle name that you want to add. The handle should exists in <code>$assetsData</code>.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$assetsData </td>
+                                <td><p>The assets data in array value. These assets will be chosen by <code>$handles</code> and add to the class. <br>
+The data structure will be...</p>
+<pre>
+              array(
+                  'css' => array( // contain the asset type in array key.
+                      array(
+                          // the array keys name in this will be matched Assets->addAsset() arguments except the type.
+                          'handle' => (string)'xxx', // this is required
+                          'file' => (string)'xxx/xxx/xxx.xx', // this is required
+                          'dependency' => array('the', 'array', 'of', 'handle', 'this', 'asset', 'depend', 'on'),
+                          'version' => 'x.x.x', // string or boolean
+                          'attributes' => array('an', 'array', 'of', 'html', 'attributes', 'for', 'this', 'asset'),
+                          'group' => null, // string or null
+                      ),
+                      array(
+                          ....
+                      ),
+                  ),
+                  'js' => array( // contain the asset type in array key.
+                      array(
+                          // the array keys name in this will be matched Assets->addAsset() arguments except the type.
+                          'handle' => (string)'xxx', // this is required
+                          'file' => (string)'xxx/xxx/xxx.xx', // this is required
+                          'dependency' => array('the', 'array', 'of', 'handle', 'this', 'asset', 'depend', 'on'),
+                          'version' => 'x.x.x', // string or boolean
+                          'attributes' => array('an', 'array', 'of', 'html', 'attributes', 'for', 'this', 'asset'),
+                          'group' => null, // string or null
+                      ),
+                      array(
+                          ....
+                      ),
+                  ),
+              )
+</pre>
+<pre><code>             This class is not support cross group dependency yet.</code></pre></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_assetIs" name="method_assetIs" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">assetIs()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">assetIs(string  <span class="argument">$type</span>, string  <span class="argument">$handle</span>, string  <span class="argument">$action = &#039;added&#039;</span>) : boolean</pre>
+                <p><em>Check that if asset is .</em></p>
+                <p>..(action)...</p>
+<p>Example: check if asset is already &quot;added&quot; or &quot;printed&quot;.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type (css, js).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$handle </td>
+                                <td><p>The asset's handle name by type.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$action </td>
+                                <td><p>The action to check. The value is &quot;added&quot;, &quot;printed&quot;</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Return true if the selected action already did. Return false for not.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_clear" name="method_clear" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">clear()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">clear(string  <span class="argument">$type</span>) </pre>
+                <p><em>Clear any added assets and begins again.</em></p>
+                <p>It will be clear by asset type (css, js).</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type to be cleared. The value is css, js. Set this to empty means clear all.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_removeAsset" name="method_removeAsset" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">removeAsset()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">removeAsset(string  <span class="argument">$type</span>, string  <span class="argument">$handle</span>) </pre>
+                <p><em>Remove the added asset from specified handle name.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type (css, js).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$handle </td>
+                                <td><p>The asset handle name.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_renderAssets" name="method_renderAssets" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">renderAssets()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">renderAssets(string  <span class="argument">$type</span>, string|null  <span class="argument">$group = null</span>) : string</pre>
+                <p><em>Render the assets into HTML elements.</em></p>
+                <p>This will be call to <code>topologicalSort()</code> and then render.<br>
+This class is not support cross group dependency yet.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type (css, js).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|null</td>
+                                <td>$group </td>
+                                <td><p>The asset group that was specified via <code>addCss()</code> method.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Return the generated HTML elements into string.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addMissedDependencies" name="method_addMissedDependencies" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">addMissedDependencies()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addMissedDependencies(string  <span class="argument">$type</span>, array  <span class="argument">$handles</span>, array  <span class="argument">$assetsData</span>) </pre>
+                <p><em>Automatically add missed dependencies.</em></p>
+                <p>This method was called from <code>addMultipleAssets()</code> method.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type (css, js).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$handles </td>
+                                <td><p>The array list of asset's handle name to check that its dependency is already added or not.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$assetsData </td>
+                                <td><p>The assets data in array value.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_generateAssetUrlWithVersion" name="method_generateAssetUrlWithVersion" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">generateAssetUrlWithVersion()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">generateAssetUrlWithVersion(array  <span class="argument">$item</span>) : \Modules\RdbAdmin\Libraries\Return</pre>
+                <p><em>Generate asset URL with ?v=version_number append.</em></p>
+                <p>This method was called from <code>renderAssets()</code> method.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$item </td>
+                                <td><p>The item should have &quot;file&quot; and &quot;version&quot; in array key.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Modules\RdbAdmin\Libraries\Return
+                                            &mdash; <p>generated asset URL. The returned value did not escape for HTML, you must use <code>htmlspecialchars()</code> to make something such as <code>&amp;</code> to be <code>&amp;amp;</code> which is correct HTML value.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_generateAttributes" name="method_generateAttributes" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">generateAttributes()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">generateAttributes(array  <span class="argument">$attributes</span>, array  <span class="argument">$disallowAttributes = array()</span>) : string</pre>
+                <p><em>Generate HTML attributes by filter out disallow attributes.</em></p>
+                <p>This method was called from <code>renderAssets()</code> method.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$attributes </td>
+                                <td><p>The associative array of attributes. Example: <code>['title' =&gt; 'My Title', 'data-id' =&gt; 3]</code> will becomes <code>title="My Title" data-id="3"</code></p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$disallowAttributes </td>
+                                <td><p>The 2D array of disallow attribute names. Example: <code>['id', 'class']</code> so, the <code>$attributes</code> that contain id and class will be removed.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Return generated HTML attributes with trim spaces. The returned value is already escape attribute value with <code>htmlspecialchars()</code>.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_generateInlineScript" name="method_generateInlineScript" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">generateInlineScript()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">generateInlineScript(array  <span class="argument">$item</span>, string  <span class="argument">$position = &#039;after&#039;</span>) : string</pre>
+                <p><em>Generate in-line JavaScript.</em></p>
+                <p>This method was called from <code>renderAssets()</code> method.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$item </td>
+                                <td><p>The item should have &quot;inline&quot; in array key.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$position </td>
+                                <td><p>The position is &quot;before&quot;, &quot;after&quot;.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Return generated in-line JavaScript.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_generateInlineStyle" name="method_generateInlineStyle" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">generateInlineStyle()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">generateInlineStyle(array  <span class="argument">$item</span>) : string</pre>
+                <p><em>Generate in-line stylesheet.</em></p>
+                <p>This method was called from <code>renderAssets()</code> method.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$item </td>
+                                <td><p>The item should have &quot;inline&quot; in array key.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Return generated in-line stylesheet.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_generateJsObject" name="method_generateJsObject" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">generateJsObject()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">generateJsObject(array  <span class="argument">$item</span>) : string</pre>
+                <p><em>Generate JavaScript object.</em></p>
+                <p>This method was called from <code>renderAssets()</code> method.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$item </td>
+                                <td><p>The item should have <code>jsobject</code> in array key.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Return generated JS object.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getDependencyExists" name="method_getDependencyExists" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">getDependencyExists()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getDependencyExists(string  <span class="argument">$type</span>, array  <span class="argument">$dependency</span>) : array</pre>
+                <p><em>Check and separate dependencies into exists and not exists.</em></p>
+                <p>This method was called from <code>topologicalSort()</code> method.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type (css, js).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$dependency </td>
+                                <td><p>The dependencies list array.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Return associative array with <code>exists</code> and <code>not_exists</code> in keys. The array values of <code>exists</code>, <code>not_exists</code> are from <code>$dependency</code> list.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_topologicalSort" name="method_topologicalSort" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">topologicalSort()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">topologicalSort(string  <span class="argument">$type</span>) </pre>
+                <p><em>Topological sort the assets by type (js, css).</em></p>
+                <p>Topological sort is sorting by dependency comes before and then follow by order.<br>
+Thanks to marcj/topsort ( <a href="https://github.com/marcj/topsort.php">https://github.com/marcj/topsort.php</a> ) to make this easy.</p>
+<p>This method was called from <code>renderAssets()</code> method.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type value is css, js.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_verifyType" name="method_verifyType" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">verifyType()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">verifyType(string  <span class="argument">$type</span>) : string</pre>
+                <p><em>Verify asset type.</em></p>
+                <p>This is common use in many methods to verify asset type (css, js).</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The asset type (css, js).</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Return the correct asset type. If incorrect then return <code>js</code>.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_renderAssetCss" name="method_renderAssetCss" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">renderAssetCss()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">renderAssetCss(string  <span class="argument">$handle</span>, array  <span class="argument">$item</span>) : string</pre>
+                <p><em>Render individual asset (CSS).</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$handle </td>
+                                <td><p>The handle name.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$item </td>
+                                <td><p>The array item.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Return rendered HTML.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_renderAssetJs" name="method_renderAssetJs" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">renderAssetJs()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">renderAssetJs(string  <span class="argument">$handle</span>, array  <span class="argument">$item</span>) : string</pre>
+                <p><em>Render individual asset (JS).</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$handle </td>
+                                <td><p>The handle name.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$item </td>
+                                <td><p>The array item.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Return rendered HTML.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">Assets.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Libraries\Assets.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/Modules.html">\Modules</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on December 3rd, 2019 at 00:36.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

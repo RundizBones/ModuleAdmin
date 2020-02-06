@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor>
+  <title><![CDATA[RdbAdmin Module]]></title>
+  <parser>
+    <target>.phpdoc/cache</target>
+  </parser>
+  <transformer>
+    <target>.phpdoc/doc</target>
+  </transformer>
+  <files>
+    <directory>.</directory>
+    <ignore>.*/*</ignore>
+    <ignore>assets*/*</ignore>
+    <ignore>config/*</ignore>
+    <ignore>gulpfile.js/*</ignore>
+    <ignore>languages/*</ignore>
+    <ignore>node_modules/*</ignore>
+    <ignore>phinxdb/*</ignore>
+    <ignore>Tests/*</ignore>
+  </files>
+</phpdocumentor>

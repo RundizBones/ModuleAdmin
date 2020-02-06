@@ -1,0 +1,2 @@
+* notification system
+* use try..catch on add, update things and catch the PDO error message.

@@ -1,0 +1,346 @@
+<?php
+/**
+ * @license http://opensource.org/licenses/MIT MIT
+ */
+
+
+namespace Modules\RdbAdmin\Controllers\Admin\Settings;
+
+
+/**
+ * Settings controller.
+ * 
+ * @since 0.1
+ */
+class SettingsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+{
+
+
+    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+
+
+    public function doUpdateAction(): string
+    {
+        // processing part ----------------------------------------------------------------------------------------------------
+        $this->checkPermission('RdbAdmin', 'RdbAdminSettings', ['changeSettings']);
+
+        if (session_id() === '') {
+            session_start();
+        }
+
+        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \System\Libraries\Url($this->Container);
+        $Serializer = new \Rundiz\Serializer\Serializer();
+        $this->Languages->getTranslator()->register();
+
+        $output = [];
+        $output['configDb'] = $this->getConfigDb();
+        list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
+
+        // make patch data into $_PATCH variable.
+        $this->Input->patch('');
+        global $_PATCH;
+
+        if (
+            isset($_PATCH[$csrfName]) &&
+            isset($_PATCH[$csrfValue]) &&
+            $Csrf->validateToken($_PATCH[$csrfName], $_PATCH[$csrfValue])
+        ) {
+            // if validated csrf token passed.
+            unset($_PATCH[$csrfName], $_PATCH[$csrfValue]);
+
+            // prepare data for save.
+            $data = [];
+            foreach ($this->getConfigNames() as $configName) {
+                $data[$configName] = $this->Input->patch($configName);
+
+                // sanitize and validate value again.
+                if (is_scalar($data[$configName])) {
+                    // if string, number, scalar...
+                    $data[$configName] = trim($data[$configName]);
+                } else {
+                    // if anything else...
+                    if ($configName === 'rdbadmin_UserRegisterDefaultRoles') {
+                        $data[$configName] = implode(',', $data[$configName]);
+                    } elseif (!is_null($data[$configName])) {
+                        $data[$configName] = $Serializer->maybeSerialize($data[$configName]);
+                    }
+                }
+            }
+            unset($configName);
+
+            // form validation. ----------------------------------------------------------------------------
+            $formValidated = true;
+            if (isset($data['rdbadmin_SiteName']) && empty($data['rdbadmin_SiteName'])) {
+                $output['formResultStatus'] = 'error';
+                $output['formResultMessage'] = __('Please enter all required fields.');
+                http_response_code(400);
+                $formValidated = false;
+            }
+            // end form validation. ------------------------------------------------------------------------
+
+            if (isset($formValidated) && $formValidated === true) {
+                // if form validation passed.
+                // update to DB.
+                $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+                $updateResult = $ConfigDb->updateMultipleValues($data);
+                unset($ConfigDb);
+
+                if ($updateResult === true) {
+                    $output['formResultStatus'] = 'success';
+                    $output['formResultMessage'] = __('Updated successfully.');
+                    http_response_code(200);
+                } else {
+                    $output['formResultStatus'] = 'warning';
+                    $output['formResultMessage'] = __('Some setting value has not been update, please reload the page and see what was changed.');
+                    http_response_code(400);
+                }
+            }
+        } else {
+            // if unable to validate token.
+            $output['formResultStatus'] = 'error';
+            $output['formResultMessage'] = __('Unable to validate token, please try again. If this problem still occur please reload the page and try again.');
+            http_response_code(400);
+        }
+
+        unset($csrfName, $csrfValue);
+        // generate new token for re-submit the form continueously without reload the page.
+        $output = array_merge($output, $Csrf->createToken());
+
+        // display, response part ---------------------------------------------------------------------------------------------
+        unset($Csrf, $Serializer, $Url);
+        return $this->responseAcceptType($output);
+    }// doUpdateAction
+
+
+    /**
+     * Get list of **ALL** roles (for display in select box in default role option).
+     * 
+     * @return array
+     */
+    protected function getRoles(): array
+    {
+        $options = [];
+        $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
+        $options['unlimited'] = true;
+        $options['where'] = [
+            'userrole_priority' => '< 10000',
+        ];
+        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $output = $UserRolesDb->listItems($options);
+
+        unset($options, $UserRolesDb);
+        return $output;
+    }// getRoles
+
+
+    /**
+     * Get config (settings) values.
+     * 
+     * @return array
+     */
+    protected function getConfigData(): array
+    {
+        $configNames = $this->getConfigNames();
+
+        // get data from db not model to get it fresh (without cache).
+        $placeholders = array_fill(0, (int) count($configNames), '?');
+        $sql = 'SELECT * FROM `' . $this->Db->tableName('config') . '` WHERE `config_name` IN (' . implode(', ', $placeholders) . ')';
+        $Sth = $this->Db->PDO()->prepare($sql);
+        unset($placeholders, $sql);
+        $Sth->execute($configNames);
+        $result = $Sth->fetchAll();
+        $Sth->closeCursor();
+        unset($Sth);
+
+        if (is_array($result)) {
+            return $result;
+        }
+        return [];
+    }// getConfigData
+
+
+    /**
+     * Get config names that will be work on settings page.
+     * 
+     * This method was called from `getConfigData()`, `doUpdateAction()` methods.
+     * 
+     * @return array
+     */
+    protected function getConfigNames(): array
+    {
+        return [
+            'rdbadmin_SiteName',
+            'rdbadmin_SiteTimezone',
+            'rdbadmin_UserRegister',
+            'rdbadmin_UserRegisterNotifyAdmin',
+            'rdbadmin_UserRegisterNotifyAdminEmails',
+            'rdbadmin_UserRegisterVerification',
+            'rdbadmin_UserRegisterDisallowedName',
+            'rdbadmin_UserRegisterDefaultRoles',
+            'rdbadmin_UserLoginCaptcha',
+            'rdbadmin_UserLoginBruteforcePreventByIp',
+            'rdbadmin_UserLoginBruteforcePreventByDc',
+            'rdbadmin_UserLoginMaxFail',
+            'rdbadmin_UserLoginMaxFailWait',
+            'rdbadmin_UserLoginNotRememberLength',
+            'rdbadmin_UserLoginRememberLength',
+            'rdbadmin_UserConfirmEmailChange',
+            'rdbadmin_UserConfirmWait',
+            'rdbadmin_MailProtocol',
+            'rdbadmin_MailPath',
+            'rdbadmin_MailSmtpHost',
+            'rdbadmin_MailSmtpPort',
+            'rdbadmin_MailSmtpSecure',
+            'rdbadmin_MailSmtpUser',
+            'rdbadmin_MailSmtpPass',
+            'rdbadmin_MailSenderEmail',
+            'rdbadmin_AdminItemsPerPage'
+        ];
+    }// getConfigNames
+
+
+    /**
+     * Get all timezones using PHP class.
+     * 
+     * @return array
+     */
+    protected function getTimezones(): array
+    {
+        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+            $this->Container,
+            [
+                'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/Settings/SettingsController',
+            ]
+        ))->getCacheObject();
+        $cacheKey = 'timezonesList';
+        $cacheExpire = (15 * 24 * 60 * 60);// 15 days
+
+        if ($Cache->has($cacheKey)) {
+            return $Cache->get($cacheKey);
+        } else {
+            $timezones = \DateTimeZone::listIdentifiers();
+            $options = [];
+            $lastRegion = '';
+            if (is_array($timezones)) {
+                foreach ($timezones as $key => $timezone) {
+                    $DateTimeZone = new \DateTimeZone($timezone);
+                    $expTimezone = explode('/', $timezone);
+                    if (isset($expTimezone[0])) {
+                        if ($expTimezone[0] !== $lastRegion) {
+                            $lastRegion = $expTimezone[0];
+                        }
+                        $getOffset = $DateTimeZone->getOffset(new \DateTime());
+                        $offset = ($getOffset < 0 ? '-' : '+');
+                        $offset .= gmdate('H:i', abs($getOffset));
+                        $options[$expTimezone[0]][$timezone] = [
+                            'name' => $timezone,
+                            'offset' => $offset,
+                        ];
+                        unset($getOffset, $offset);
+                    }
+                    unset($DateTimeZone, $expTimezone);
+                }// endforeach;
+                unset($key, $timezone);
+            }
+            unset($lastRegion, $timezones);
+
+            if (!empty($options)) {
+                $Cache->set($cacheKey, $options, $cacheExpire);
+            }
+            return $options;
+        }
+    }// getTimezones
+
+
+    /**
+     * Main settings page.
+     * 
+     * @link https://www.w3schools.com/howto/howto_js_filter_lists.asp JS search html content example.
+     * @link https://github.com/stidges/jquery-searchable as JS library.
+     * @link https://listjs.com/ as JS library.
+     * @link https://github.com/bvaughn/js-search as JS library.
+     * @return string
+     */
+    public function indexAction(): string
+    {
+        // processing part ----------------------------------------------------------------------------------------------------
+        $this->checkPermission('RdbAdmin', 'RdbAdminSettings', ['changeSettings']);
+
+        if (session_id() === '') {
+            session_start();
+        }
+
+        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \System\Libraries\Url($this->Container);
+        $this->Languages->getTranslator()->register();
+        $this->Languages->getHelpers();
+
+        $output = [];
+        $output['configDb'] = $this->getConfigDb();
+        $output = array_merge($output, $Csrf->createToken());
+        unset($Csrf);
+
+        // urls & methods
+        $urlAppBased = $Url->getAppBasedPath(true);
+        $output['getSettingsUrl'] = $urlAppBased . '/admin/settings';// get settings page, also get data via rest.
+        $output['getSettingsMethod'] = 'GET';
+        $output['editSettingsSubmitUrl'] = $urlAppBased . '/admin/settings';// edit, save settings via rest.
+        $output['editSettingsSubmitMethod'] = 'PATCH';
+        unset($urlAppBased);
+
+        if ($this->Input->isNonHtmlAccept() || $this->Input->isXhr()) {
+            // if request via REST API or AJAX
+            $output['configData'] = $this->getConfigData();
+        }
+
+        $output['pageTitle'] = __('Main settings');
+        $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);
+        $output['pageHtmlClasses'] = $this->getPageHtmlClasses();
+        $output['timezones'] = $this->getTimezones();
+        $output['listRoles'] = $this->getRoles();
+
+        // display, response part ---------------------------------------------------------------------------------------------
+        if ($this->Input->isNonHtmlAccept() || $this->Input->isXhr()) {
+            // if custom HTTP accept, response content.
+            // response the data.
+            $this->responseNoCache();
+            return $this->responseAcceptType($output);
+        } else {
+            // if not custom HTTP accept.
+            $rdbAdminAssets = $this->getRdbAdminAssets();
+            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+
+            $Assets->addMultipleAssets('css', ['datatables', 'rdbaCommonListDataPage'], $rdbAdminAssets);
+            $Assets->addMultipleAssets('js', ['rdbaSettings'], $rdbAdminAssets);
+            $Assets->addJsObject(
+                'rdbaSettings',
+                'RdbaSettings',
+                [
+                    'csrfName' => $output['csrfName'],
+                    'csrfValue' => $output['csrfValue'],
+                    'csrfKeyPair' => $output['csrfKeyPair'],
+                    'getSettingsUrl' => $output['getSettingsUrl'],
+                    'getSettingsMethod' => $output['getSettingsMethod'],
+                    'editSettingsSubmitUrl' => $output['editSettingsSubmitUrl'],
+                    'editSettingsSubmitMethod' => $output['editSettingsSubmitMethod'],
+                ]
+            );
+
+            $this->setCssAssets($Assets, $rdbAdminAssets);
+            $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);
+
+            $output['Assets'] = $Assets;
+            $output['Modules'] = $this->Modules;
+            $output['Url'] = $Url;
+            $output['Views'] = $this->Views;
+            $output['pageContent'] = $this->Views->render('Admin/Settings/index_v', $output);
+
+            unset($Assets, $rdbAdminAssets, $Url);
+            return $this->Views->render('common/Admin/mainLayout_v', $output);
+        }
+    }// indexAction
+
+
+}
+

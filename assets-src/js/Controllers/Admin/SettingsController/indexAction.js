@@ -1,0 +1,378 @@
+/**
+ * Settings page JS for its controller.
+ */
+
+
+class RdbaSettingsController {
+
+
+    /**
+     * AJAX get form data.
+     * 
+     * @returns {Promise}
+     */
+    ajaxGetFormData() {
+        let $ = jQuery.noConflict();
+
+        let promiseObj = new Promise(function(resolve, reject) {
+            RdbaCommon.XHR({
+                'url': RdbaSettings.getSettingsUrl,
+                'method': RdbaSettings.getSettingsMethod,
+                'dataType': 'json',
+            })
+            .catch(function(responseObject) {
+                console.error(responseObject);
+                let response = (responseObject ? responseObject.response : {});
+
+                if (typeof(response) !== 'undefined') {
+                    if (typeof(response.formResultMessage) !== 'undefined') {
+                        let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
+                        let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
+                        document.querySelector('.form-result-placeholder').innerHTML = alertBox;
+                    }
+                }
+
+                reject(response);
+            })
+            .then(function(responseObject) {
+                let response = (responseObject ? responseObject.response : {});
+
+                if (RdbaCommon.isset(() => response.configData) && _.isArray(response.configData)) {
+                    response.configData.forEach(function(item, index) {
+                        if (
+                            RdbaCommon.isset(() => item.config_name) && 
+                            RdbaCommon.isset(() => item.config_value)
+                        ) {
+                            let thisInputElement = document.querySelector('#rdba-settings-form #' + item.config_name);
+                            if (thisInputElement.type.toLowerCase() === 'checkbox') {
+                                if (thisInputElement.value == item.config_value) {
+                                    thisInputElement.checked = true;
+                                    //console.log('mark ' + key + ' as checked.');
+                                }
+                            } else {
+                                thisInputElement.value = item.config_value;
+                            }
+
+                            if (item.config_name === 'rdbadmin_UserRegisterDefaultRoles') {
+                                // if default roles setting.
+                                let defaultRoles = item.config_value.split(',');
+                                // set multiple values.
+                                defaultRoles.forEach(function(item) {
+                                    let roleValue = item.trim();
+                                    if (roleValue) {
+                                        let defaultRolesSelectbox = document.querySelector('#rdba-settings-form #rdbadmin_UserRegisterDefaultRoles option[value="' + roleValue + '"]');
+                                        defaultRolesSelectbox.selected = true;
+                                    }
+                                });
+                            }
+                        }// endif isset item.xxx
+
+                        if (RdbaCommon.isset(() => item.config_description)) {
+                            let thisInputElement = document.querySelector('#rdba-settings-form #' + item.config_name);
+                            let parentFormGroupElement = $(thisInputElement).parents('.form-group')[0];
+                            parentFormGroupElement.dataset.configdescription = RdbaCommon.escapeHtml(RdbaCommon.stripTags(item.config_description));
+                        }// endif isset item.config_description
+                    });
+                }// endif response.configData
+
+                if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                    RdbaSettings.csrfKeyPair = response.csrfKeyPair;
+                }
+
+                resolve(response);
+            });// end XHR
+        });// end new Promise();
+
+        return promiseObj;
+    }// ajaxGetFormData
+
+
+    /**
+     * Initialize class.
+     * 
+     * @returns {undefined}
+     */
+    init() {
+        let $ = jQuery.noConflict();
+        let thisClass = this;
+
+        // wait for UI XHR common data finished then start working.
+        $.when(uiXhrCommonData)
+        .then(function() {
+            return thisClass.ajaxGetFormData();
+        })
+        .then(function() {
+            return thisClass.listenOnSearchSettings();
+        })
+        ;
+
+        // listen on form submit and make ajax request.
+        this.listenOnFormSubmit();
+        // prevent search the settings form submit.
+        this.listenOnSearchSubmit();
+
+        // listen on test smtp connection.
+        this.listenOnTestSmtpConnection();
+    }// init
+
+
+    /**
+     * Listen on form submit (save) and make ajax request.
+     * 
+     * @returns {undefined}
+     */
+    listenOnFormSubmit() {
+        let settingsForm = document.querySelector('#rdba-settings-form');
+        settingsForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // reset form result placeholder
+            settingsForm.querySelector('.form-result-placeholder').innerHTML = '';
+            // add spinner icon
+            settingsForm.querySelector('.submit-button-row .submit-button-wrapper').insertAdjacentHTML('beforeend', '<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+            // lock submit button
+            settingsForm.querySelector('.rdba-submit-button').setAttribute('disabled', 'disabled');
+
+            let formData = new FormData(settingsForm);
+            formData.append(RdbaSettings.csrfName, RdbaSettings.csrfKeyPair[RdbaSettings.csrfName]);
+            formData.append(RdbaSettings.csrfValue, RdbaSettings.csrfKeyPair[RdbaSettings.csrfValue]);
+
+            RdbaCommon.XHR({
+                'url': RdbaSettings.editSettingsSubmitUrl,
+                'method': RdbaSettings.editSettingsSubmitMethod,
+                'data': new URLSearchParams(_.toArray(formData)).toString(),
+                'dataType': 'json'
+            })
+            .catch(function(responseObject) {
+                // XHR failed.
+                let response = responseObject.response;
+                console.error(responseObject);
+
+                if (response.formResultMessage) {
+                    RDTAAlertDialog.alert({
+                        'html': response.formResultMessage,
+                        'type': 'danger'
+                    });
+                }
+
+                if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                    RdbaSettings.csrfKeyPair = response.csrfKeyPair;
+                }
+
+                return Promise.reject(responseObject);
+            })
+            .then(function(responseObject) {
+                // XHR success.
+                let response = responseObject.response;
+
+                if (typeof(response) !== 'undefined') {
+                    if (typeof(response.formResultMessage) !== 'undefined') {
+                        RdbaCommon.displayAlertboxFixed(response.formResultMessage, response.formResultStatus);
+                    }
+                }
+
+                if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                    RdbaSettings.csrfKeyPair = response.csrfKeyPair;
+                }
+
+                return Promise.resolve(responseObject);
+            })
+            .finally(function() {
+                // remove loading icon
+                settingsForm.querySelector('.loading-icon').remove();
+                // unlock submit button
+                settingsForm.querySelector('.rdba-submit-button').removeAttribute('disabled');
+            });
+        });
+    }// listenOnFormSubmit
+
+
+    /**
+     * Listen on search settings typing and search the settings form.
+     * 
+     * @returns {Promise}
+     */
+    listenOnSearchSettings() {
+        let promiseObj = new Promise(function(resolve, reject) {
+            document.addEventListener('keyup', function(event) {
+                if (RdbaCommon.isset(() => event.currentTarget.activeElement.id) && event.currentTarget.activeElement.id === 'rdba-search-settings-input') {
+                    event.preventDefault();
+                    let inputSearchElement = (RdbaCommon.isset(() => event.currentTarget.activeElement) ? event.currentTarget.activeElement : {});
+                    let timer = 0;
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        search(inputSearchElement);
+                    }, 1000);
+                }
+            });
+
+            resolve('listening on search input key up.');
+        });// end new Promise();
+
+        //console.log('listening on search input key up.');
+        return promiseObj;
+
+        /**
+         * Do search the HTML content and hide unmatched.
+         * 
+         * @param {type} inputSearchElement
+         * @returns {undefined}
+         */
+        function search(inputSearchElement) {
+            let formGroupElements = document.querySelectorAll('#rdba-settings-form .form-group');
+
+            if (!inputSearchElement.value || inputSearchElement.value === null || inputSearchElement.value.trim() === '') {
+                //console.log('reset `.form-group` from hidden.');
+                formGroupElements.forEach(function(item, index) {
+                    item.classList.remove('rd-hidden');
+                });
+                return false;
+            }
+
+            formGroupElements.forEach(function(item, index) {
+                let configDescription = ''
+                if (RdbaCommon.isset(() => item.dataset.configdescription)) {
+                    configDescription = item.dataset.configdescription;
+                }
+                let formGroupText = '';
+                if (item.innerText) {
+                    formGroupText = item.innerText;
+                }
+                let inputValue = '';
+                if (RdbaCommon.isset(() => item.querySelectorAll('input')[0].value)) {
+                    inputValue = item.querySelectorAll('input')[0].value;
+                }
+
+                let inputSearchRegexp = new RegExp(inputSearchElement.value, "i");
+                if (
+                    configDescription.search(inputSearchRegexp) !== -1 || 
+                    formGroupText.search(inputSearchRegexp) !== -1 ||
+                    inputValue.search(inputSearchRegexp) !== -1
+                ) {
+                    item.classList.remove('rd-hidden');
+                } else {
+                    item.classList.add('rd-hidden');
+                }
+            });
+        }// search
+    }// listenOnSearchSettings
+
+
+    /**
+     * Listen on search submit and prevent default.
+     * 
+     * @returns {undefined}
+     */
+    listenOnSearchSubmit() {
+        let searchForm = document.querySelector('#rdba-search-settings-form');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                //console.log('prevented search form submit.');
+            });
+        }
+    }// listenOnSearchSubmit
+
+
+    /**
+     * Listen on test smtp connection.
+     * 
+     * @returns {undefined}
+     */
+    listenOnTestSmtpConnection() {
+        let settingsForm = document.querySelector('#rdba-settings-form');
+        let testSmtpButton = document.querySelector('#rdbadmin_MailSmtpTestConnectionButton');
+        let testSmtpResultPlaceholder = document.querySelector('#rdbadmin_MailSmtpTestConnectionResultPlaceholder');
+
+        if (testSmtpButton && testSmtpResultPlaceholder) {
+            testSmtpButton.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                // reset result placeholder
+                testSmtpResultPlaceholder.innerHTML = '';
+                // add spinner icon
+                testSmtpResultPlaceholder.insertAdjacentHTML('beforeend', '<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+                // lock submit button
+                testSmtpButton.setAttribute('disabled', 'disabled');
+
+                let formData = new FormData(settingsForm);
+                formData.append(RdbaSettings.csrfName, RdbaSettings.csrfKeyPair[RdbaSettings.csrfName]);
+                formData.append(RdbaSettings.csrfValue, RdbaSettings.csrfKeyPair[RdbaSettings.csrfValue]);
+
+                RdbaCommon.XHR({
+                    'url': RdbaSettings.editSettingsTestSmtpConnectionUrl,
+                    'method': RdbaSettings.editSettingsTestSmtpConnectionMethod,
+                    'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
+                    'data': new URLSearchParams(_.toArray(formData)).toString(),
+                    'dataType': 'json'
+                })
+                 .catch(function(responseObject) {
+                    // XHR failed.
+                    let response = responseObject.response;
+                    console.error(responseObject);
+
+                    if (response && response.debugMessage) {
+                        testSmtpResultPlaceholder.insertAdjacentHTML('beforeend', response.debugMessage);
+                    }
+
+                    if (response.formResultMessage) {
+                        RDTAAlertDialog.alert({
+                            'html': response.formResultMessage,
+                            'type': 'danger'
+                        });
+                    }
+
+                    if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                        RdbaSettings.csrfKeyPair = response.csrfKeyPair;
+                    }
+
+                    return Promise.reject(responseObject);
+                })
+                .then(function(responseObject) {
+                    // XHR success.
+                    let response = responseObject.response;
+
+                    if (response && response.debugMessage) {
+                        testSmtpResultPlaceholder.insertAdjacentHTML('beforeend', response.debugMessage);
+                    }
+
+                    if (typeof(response) !== 'undefined') {
+                        if (response.formResultMessage) {
+                            RDTAAlertDialog.alert({
+                                'html': response.formResultMessage,
+                                'type': response.formResultStatus
+                            });
+                        }
+                    }
+
+                    if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                        RdbaSettings.csrfKeyPair = response.csrfKeyPair;
+                    }
+
+                    return Promise.resolve(responseObject);
+                })
+                .finally(function() {
+                    // remove loading icon
+                    testSmtpResultPlaceholder.querySelector('.loading-icon').remove();
+                    // unlock submit button
+                    testSmtpButton.removeAttribute('disabled');
+                });
+            });
+        }
+    }// listenOnTestSmtpConnection
+
+
+}// RdbaSettingsController
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    let rdbaSettingsController = new RdbaSettingsController();
+
+    // initialize class.
+    rdbaSettingsController.init();
+
+    // activate rdta tabs.
+    RDTATabs.init('.tabs', {
+        'rememberLastTab': true,
+    });
+});
