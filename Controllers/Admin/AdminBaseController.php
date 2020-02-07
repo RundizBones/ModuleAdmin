@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin;
 
 
 /**
@@ -12,14 +12,14 @@ namespace Modules\RdbAdmin\Controllers\Admin;
  * 
  * @since 0.1
  */
-abstract class AdminBaseController extends \Modules\RdbAdmin\Controllers\BaseController
+abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
 
 
     use Users\Sessions\Traits\SessionsTrait;
 
 
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         parent::__construct($Container);
 
@@ -47,7 +47,7 @@ abstract class AdminBaseController extends \Modules\RdbAdmin\Controllers\BaseCon
 
         if ($isLoggedin === false) {
             // if not logged in.
-            $Url = new \System\Libraries\Url($this->Container);
+            $Url = new \Rdb\System\Libraries\Url($this->Container);
             $redirectQuery = 'goback=' . rawurlencode(
                     $Url->getAppBasedPath() . '/admin/login?goback=' . 
                     $Url->getCurrentUrl() . $Url->getQuerystring()
@@ -91,11 +91,11 @@ abstract class AdminBaseController extends \Modules\RdbAdmin\Controllers\BaseCon
      * @param string|array $action The action(s) on that page. Use string if check for single action, use array if check for multiple actions.<br>
      *                                              If checking for multiple actions, any single action matched with certain module, page will be return `true`.
      * @param array $identity The associative array of identity.
-     * @see \Modules\RdbAdmin\Models\UserPermissionsDb::checkPermission();
+     * @see \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb::checkPermission();
      */
     protected function checkPermission(string $moduleSystemName, string $page, $action, array $identity = [])
     {
-        $UserPermissionsDb = new \Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+        $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
         if ($UserPermissionsDb->checkPermission($moduleSystemName, $page, $action, $identity) !== true) {
             // if permission denied.
             if ($this->Input->isNonHtmlAccept() || $this->Input->isXhr()) {
@@ -125,7 +125,7 @@ abstract class AdminBaseController extends \Modules\RdbAdmin\Controllers\BaseCon
                 // then redirect.
                 http_response_code(303);
                 $this->responseNoCache();
-                $Url = new \System\Libraries\Url($this->Container);
+                $Url = new \Rdb\System\Libraries\Url($this->Container);
                 header('Location: ' . $Url->getAppBasedPath(true) . '/admin');
                 unset($Url);
                 exit();
@@ -144,7 +144,7 @@ abstract class AdminBaseController extends \Modules\RdbAdmin\Controllers\BaseCon
      */
     protected function getRdbAdminAssets(): array
     {
-        $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+        $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
         return $ModuleAssets->getModuleAssets();
     }// getRdbAdminAssets
 

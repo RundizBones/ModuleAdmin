@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\UI;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\UI;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\Admin\UI;
  *
  * @since 0.1
  */
-class XhrCommonDataController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
@@ -113,7 +113,7 @@ class XhrCommonDataController extends \Modules\RdbAdmin\Controllers\Admin\AdminB
      */
     protected function getLanguages()
     {
-        $languagesResult = $this->Modules->execute('Modules\\Languages\\Controllers\\Languages:index', []);
+        $languagesResult = $this->Modules->execute('Rdb\\Modules\\Languages\\Controllers\\Languages:index', []);
 
         $languagesResultDecode = json_decode($languagesResult);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -182,8 +182,8 @@ class XhrCommonDataController extends \Modules\RdbAdmin\Controllers\Admin\AdminB
      */
     protected function getUrlsMenuItems(): array
     {
-        $Url = new \System\Libraries\Url($this->Container);
-        $MenuItems = new \Modules\RdbAdmin\Controllers\_SubControllers\MenuItems($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
+        $MenuItems = new \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\MenuItems($this->Container);
         $output = [];
 
         $output['urls'] = [
@@ -209,7 +209,7 @@ class XhrCommonDataController extends \Modules\RdbAdmin\Controllers\Admin\AdminB
     {
         $cookieData = $this->userSessionCookieData;
 
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
 
@@ -232,7 +232,7 @@ class XhrCommonDataController extends \Modules\RdbAdmin\Controllers\Admin\AdminB
         }
         unset($cookieData);
 
-        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
         $userAvatar = $UserFieldsDb->get($output['user_id'], 'rdbadmin_uf_avatar');
         if (isset($userAvatar->field_value) && !empty($userAvatar->field_value)) {
             $output['user_avatar'] = $userAvatar->field_value;

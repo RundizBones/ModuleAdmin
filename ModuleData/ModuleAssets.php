@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\ModuleData;
+namespace Rdb\Modules\RdbAdmin\ModuleData;
 
 
 /**
@@ -17,7 +17,7 @@ class ModuleAssets
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
@@ -25,9 +25,9 @@ class ModuleAssets
     /**
      * Class constructor.
      * 
-     * @param \System\Container $Container The DI container class.
+     * @param \Rdb\System\Container $Container The DI container class.
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         $this->Container = $Container;
     }// __construct
@@ -36,12 +36,12 @@ class ModuleAssets
     /**
      * Get module's assets list.
      * 
-     * @see \Modules\RdbAdmin\Libraries\Assets::addMultipleAssets() See <code>\Modules\RdbAdmin\Libraries\Assets</code> class at <code>addMultipleAssets()</code> method for data structure.
+     * @see \Rdb\Modules\RdbAdmin\Libraries\Assets::addMultipleAssets() See <code>\Rdb\Modules\RdbAdmin\Libraries\Assets</code> class at <code>addMultipleAssets()</code> method for data structure.
      * @return array Return associative array with `css` and `js` key with its values.
      */
     public function getModuleAssets(): array
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 

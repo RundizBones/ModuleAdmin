@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\Admin;
  * 
  * @since 0.1
  */
-class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
+class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
 
 
@@ -31,8 +31,8 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -40,7 +40,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
 
         $output['tokenValue'] = $this->Input->request('token', null);
         @list($userId, $registerConfirmKey) = explode('::', base64_decode($output['tokenValue']));
-        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
         $addSince = $UserFieldsDb->get($userId, 'rdbadmin_uf_adduser_waitactivation_since');
         if (!empty($addSince)) {
             $output['showSetPasswordFields'] = true;
@@ -72,10 +72,10 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
             $MyModuleAssets = $ModuleAssets->getModuleAssets();
             unset($ModuleAssets);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['rdta', 'rdbaLoginLogout'], $MyModuleAssets);
             $Assets->addMultipleAssets('js', ['rdta', 'lodash', 'rdbaCommon', 'rdbaRegisterConfirm'], $MyModuleAssets);
@@ -118,7 +118,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $output = [];
         $output = array_merge($output, $this->getConfig());
@@ -135,7 +135,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             @list($userId, $registerConfirmKey) = explode('::', base64_decode($tokenValue));
             unset($tokenValue);
 
-            $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
             $where = [];
             $where['user_id'] = $userId;
             $result = $UsersDb->get($where);
@@ -149,7 +149,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
                 $result->user_deleted == '0'
             ) {
                 // if found user.
-                $UserFields = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                $UserFields = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                 $fieldResult = $UserFields->get((int) $userId, 'rdbadmin_uf_registerconfirm_key');
                 $addSince = $UserFields->get((int) $userId, 'rdbadmin_uf_adduser_waitactivation_since');
                 $formValidated = true;
@@ -188,7 +188,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
                                 http_response_code(500);
 
                                 if ($this->Container->has('Logger')) {
-                                    /* @var $Logger \System\Libraries\Logger */
+                                    /* @var $Logger \Rdb\System\Libraries\Logger */
                                     $Logger = $this->Container->get('Logger');
                                     $Logger->write('modules/rdbadmin/controllers/admin/registercontroller', 5, 'Password hash error.');
                                     unset($Logger);
@@ -260,7 +260,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
                     }
                     unset($updateUserResult);
 
-                    $Url = new \System\Libraries\Url($this->Container);
+                    $Url = new \Rdb\System\Libraries\Url($this->Container);
                     $output['formResultStatus'] = 'success';
                     $output['formResultMessage'] = __('Success, you can use your username and password to login now. Go to %1$slogin page%2$s.', '<a href="' . $Url->getAppBasedPath() . '/admin/login' . '">', '</a>');
                     unset($Url);
@@ -315,7 +315,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $output = [];
         $output = array_merge($output, $this->getConfig());
@@ -354,7 +354,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
                 sleep(3);
             }
 
-            $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 
             // validate the form. --------------------------------------------------------
             $data['captcha'] = trim($this->Input->post('captcha'));
@@ -389,7 +389,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
                 http_response_code(500);
 
                 if ($this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $Logger->write('modules/rdbadmin/controllers/admin/registercontroller', 5, 'Password hash error.');
                     unset($Logger);
@@ -400,7 +400,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             if (isset($formValidated) && $formValidated === true) {
                 // if all form validation passed.
                 // prepare data for save.
-                $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+                $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
                 $data['user_login'] = $RdbaString->sanitizeUsername($data['user_login']);
                 unset($RdbaString);
                 $data['user_display_name'] = $data['user_login'];
@@ -435,7 +435,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
                         $dataFields = [];
                         $dataFields['rdbadmin_uf_registerconfirm_key'] = $genKey['readableKey'];
 
-                        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                         $UserFieldsDb->update($userId, 'rdbadmin_uf_registerconfirm_key', $genKey['encryptedKey'], true);
                         unset($genKey, $UserFieldsDb);
                     }
@@ -450,7 +450,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
                             $defaultRoles = array_map('trim', $defaultRoles);
                         }
 
-                        $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+                        $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
                         $UsersRolesDb->add((int) $userId, $defaultRoles);
                         unset($defaultRoles, $UsersRolesDb);
                     }
@@ -551,7 +551,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             ];
             $output['responseStatus'] = 400;
         } else {
-            $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+            $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
             if ($RdbaString->sanitizeUsername($data['user_login']) !== $data['user_login']) {
                 // if invalid username characters.
                 $output['formResultStatus'] = 'error';
@@ -634,7 +634,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             if (count($errors) == 0) {
                 // if found no error.
                 // verify username, email must not exists.
-                $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+                $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 
                 if (!empty($UsersDb->get(['user_login' => $data['user_login']]))) {
                     $output['formResultStatus'] = 'error';
@@ -688,8 +688,8 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
      */
     private function doRegisterSendEmails(array $options, array $data, array $dataFields = []): array
     {
-        $Email = new \Modules\RdbAdmin\Libraries\Email($this->Container);
-        $Url = new \System\Libraries\Url($this->Container);
+        $Email = new \Rdb\Modules\RdbAdmin\Libraries\Email($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         extract($options);
         if (!isset($output)) {
@@ -820,7 +820,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             } catch (\SkipEmailAdminException $ske) {
                 // just skip.
                 if ($this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $Logger->write('modules/rdbadmin/controllers/admin/registercontroller', 1, 'email to admin was skipped.');
                     unset($Logger);
@@ -848,7 +848,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
                 }
 
                 if ($this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $Logger->write('modules/rdbadmin/controllers/admin/registercontroller', 4, 'An error has been occured while trying to send email to admin.', $e->getMessage());
                     unset($Logger);
@@ -869,7 +869,7 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
      */
     protected function getConfig(): array
     {
-        $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $configNames = [
             'rdbadmin_SiteName',
             'rdbadmin_UserRegister',
@@ -909,8 +909,8 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -948,10 +948,10 @@ class RegisterController extends \Modules\RdbAdmin\Controllers\BaseController
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
             $MyModuleAssets = $ModuleAssets->getModuleAssets();
             unset($ModuleAssets);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['rdbaLoginLogout'], $MyModuleAssets);
             $Assets->addMultipleAssets('js', ['rdbaRegister'], $MyModuleAssets);

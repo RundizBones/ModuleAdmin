@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Roles;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Roles;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Roles;
  * 
  * @since 0.1
  */
-class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\RolesTrait;
@@ -38,8 +38,8 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -109,7 +109,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
                 ) {
                     // if deleting user default role.
                     // update configDb user default role. -----------------------------------
-                    $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+                    $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
                     $defaultRoles = $ConfigDb->get('rdbadmin_UserRegisterDefaultRoles');
                     $defaultRoleArray = explode(',', $defaultRoles);
                     unset($defaultRoles);
@@ -135,7 +135,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
                 }
 
                 // replace users's role. --------------------------------------------------------
-                $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+                $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
                 $optoins = [];
                 $options['roleIdsIn'] = $validateRolesAction['userrole_id_array'];
                 $listUsersRoles = $UsersRolesDb->listItems($options);// get the users that has deleting role ids.
@@ -164,7 +164,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
                 unset($listUsersRoles, $UsersRolesDb);
 
                 // now, delete roles from user_roles and users_roles tables. -----------
-                $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+                $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
                 $output['deleted'] = $UserRolesDb->delete($validateRolesAction['userrole_id_array']);
                 unset($UserRolesDb);
 
@@ -215,8 +215,8 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -228,7 +228,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
         $output = array_merge($output, $this->validateRoleActions($this->Input->get('userrole_ids'), $this->Input->get('action')));
 
         // list selected roles.
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $options = [];
         $options['unlimited'] = true;
         $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
@@ -267,10 +267,10 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
             $MyModuleAssets = $ModuleAssets->getModuleAssets();
             unset($ModuleAssets);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['datatables', 'rdbaCommonListDataPage'], $MyModuleAssets);
             $Assets->addMultipleAssets('js', ['rdbaRolesActions', 'rdbaHistoryState'], $MyModuleAssets);
@@ -366,7 +366,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             $output['actionText'] = $output['action'];
         }
 
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
 
         // get selected user roles data.
         $options = [];
@@ -378,7 +378,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
 
         if ($formValidated === true) {
             if ($output['action'] === 'delete') {
-                $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+                $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
                 $userRegisterDefaultRoles = $ConfigDb->get('rdbadmin_UserRegisterDefaultRoles');
                 $output['deleteUserDefaultRole'] = false;
                 $output['deleteUserDefaultRoleIds'] = [];

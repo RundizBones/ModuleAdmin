@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\Admin;
  * 
  * @since 0.1
  */
-class CronController extends \Modules\RdbAdmin\Controllers\BaseController
+class CronController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
 
 
@@ -26,7 +26,7 @@ class CronController extends \Modules\RdbAdmin\Controllers\BaseController
     public function indexAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        $Cron = new \Modules\RdbAdmin\Libraries\Cron($this->Container);
+        $Cron = new \Rdb\Modules\RdbAdmin\Libraries\Cron($this->Container);
 
         $output = [];
         $output['runnedJobs'] = $Cron->runJobsOnAllModules();

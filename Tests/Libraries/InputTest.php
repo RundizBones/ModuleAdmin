@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
-class InputTest extends \Tests\Rdb\BaseTestCase
+class InputTest extends \Rdb\Tests\BaseTestCase
 {
 
 
     /**
-     * @var \Modules\RdbAdmin\Libraries\Input
+     * @var \Rdb\Modules\RdbAdmin\Libraries\Input
      */
     protected $Input;
 
@@ -37,7 +37,7 @@ class InputTest extends \Tests\Rdb\BaseTestCase
         $_POST['inputarraynumstring2'][] = '9,876';
         $_POST['inputarraynumstring2'][] = '5432';
 
-        $Config = new \System\Config();
+        $Config = new \Rdb\System\Config();
         $_COOKIE['mycookie'.$Config->get('suffix', 'cookie')] = 'my cookie value';
 
         $_SESSION['mysession'] = 'my session value';
@@ -46,7 +46,7 @@ class InputTest extends \Tests\Rdb\BaseTestCase
 
         $this->runApp('POST', '/?gethtml=<div class="myclass">div-element</div>&getstring=just text&getint=123&requestname=requestval-via-get', $_COOKIE, $_POST);
 
-        $this->Input = new \Modules\RdbAdmin\Libraries\Input();
+        $this->Input = new \Rdb\Modules\RdbAdmin\Libraries\Input();
     }// setup
 
 

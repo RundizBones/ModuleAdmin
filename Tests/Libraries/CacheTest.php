@@ -4,15 +4,15 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
-class CacheTest extends \Tests\Rdb\BaseTestCase
+class CacheTest extends \Rdb\Tests\BaseTestCase
 {
 
 
     /**
-     * @var \Modules\RdbAdmin\Libraries\Cache
+     * @var \Rdb\Modules\RdbAdmin\Libraries\Cache
      */
     protected $Cache;
 
@@ -22,11 +22,11 @@ class CacheTest extends \Tests\Rdb\BaseTestCase
         $this->runApp('GET', '/');
         $this->Container = $this->RdbApp->getContainer();
 
-        if (!$this->Container instanceof \System\Container) {
+        if (!$this->Container instanceof \Rdb\System\Container) {
             $this->markTestIncomplete('Unable to get container');
         }
 
-        $this->Cache = new \Modules\RdbAdmin\Libraries\Cache(
+        $this->Cache = new \Rdb\Modules\RdbAdmin\Libraries\Cache(
             $this->Container,
             [
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Tests',
@@ -37,7 +37,7 @@ class CacheTest extends \Tests\Rdb\BaseTestCase
 
     public function testConstructor()
     {
-        $this->assertTrue($this->Cache instanceof \Modules\RdbAdmin\Libraries\Cache);
+        $this->assertTrue($this->Cache instanceof \Rdb\Modules\RdbAdmin\Libraries\Cache);
     }// testConstructor
 
 

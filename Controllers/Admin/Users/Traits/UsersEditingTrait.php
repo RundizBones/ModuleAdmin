@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users\Traits;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits;
 
 
 /**
@@ -33,7 +33,7 @@ trait UsersEditingTrait
             is_array($this->userSessionCookieData) && 
             array_key_exists('user_id', $this->userSessionCookieData)
         ) {
-            $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+            $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
             $options = [];
             $options['where']['user_id'] = $this->userSessionCookieData['user_id'];
             $options['limit'] = 1;

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Libraries;
+namespace Rdb\Modules\RdbAdmin\Libraries;
 
 
 /**
@@ -17,7 +17,7 @@ class Input
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
@@ -25,11 +25,11 @@ class Input
     /**
      * Class constructor.
      * 
-     * @param \System\Container $Container The DI container class. Only required for some method.
+     * @param \Rdb\System\Container $Container The DI container class. Only required for some method.
      */
-    public function __construct(\System\Container $Container = null)
+    public function __construct(\Rdb\System\Container $Container = null)
     {
-        if ($Container instanceof \System\Container) {
+        if ($Container instanceof \Rdb\System\Container) {
             $this->Container = $Container;
         }
     }// __construct
@@ -50,12 +50,12 @@ class Input
      */
     public function cookie(string $name, $default = '', $filter = FILTER_UNSAFE_RAW, $options = null)
     {
-        /* @var $Config \System\Config */
-        if ($this->Container instanceof \System\Container && $this->Container->has('Config')) {
+        /* @var $Config \Rdb\System\Config */
+        if ($this->Container instanceof \Rdb\System\Container && $this->Container->has('Config')) {
             $Config = $this->Container->get('Config');
             $Config->setModule('');
         } else {
-            $Config = new \System\Config();
+            $Config = new \Rdb\System\Config();
         }
 
         return $this->inputParams('COOKIE', $name . $Config->get('suffix', 'cookie'), $default, $filter, $options);

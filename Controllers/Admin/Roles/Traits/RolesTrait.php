@@ -2,7 +2,7 @@
 /**
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Modules\RdbAdmin\Controllers\Admin\Roles\Traits;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Roles\Traits;
 
 
 /**
@@ -26,7 +26,7 @@ trait RolesTrait
      */
     protected function getRoleUrlsMethods($userrole_id = ''): array
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $urlAppBased = $Url->getAppBasedPath(true);
 
         $output = [];
@@ -69,7 +69,7 @@ trait RolesTrait
      */
     protected function isRestrictedPriority(array $userrole_ids): bool
     {
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
 
         $options = [];
         $options['roleIdsIn'] = $userrole_ids;

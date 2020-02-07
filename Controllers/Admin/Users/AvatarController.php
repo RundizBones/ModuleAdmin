@@ -4,17 +4,17 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users;
 
 
 /**
  * Avatar (profile picture) controller.
  */
-class AvatarController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class AvatarController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\UsersTrait;
@@ -36,8 +36,8 @@ class AvatarController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCont
 
         $user_id = (int) $user_id;
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -54,7 +54,7 @@ class AvatarController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCont
             // if validate csrf passed.
             unset($_DELETE[$csrfName], $_DELETE[$csrfValue]);
 
-            $FileSystem = new \System\Libraries\FileSystem(PUBLIC_PATH);
+            $FileSystem = new \Rdb\System\Libraries\FileSystem(PUBLIC_PATH);
 
             $formValidated = false;
             if ($this->isEditingHigherRole($user_id) === true) {
@@ -74,7 +74,7 @@ class AvatarController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCont
             }
 
             if (isset($formValidated) && $formValidated === true) {
-                $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                 $userAvatar = $UserFieldsDb->get($user_id, 'rdbadmin_uf_avatar');
                 if (!empty($userAvatar) && isset($userAvatar->field_value)) {
                     $output['deletePreviousAvatar'] = true;
@@ -151,8 +151,8 @@ class AvatarController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCont
 
         $user_id = (int) $user_id;
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -166,7 +166,7 @@ class AvatarController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCont
             unset($_POST[$csrfName], $_POST[$csrfValue]);
 
             $targetAvatarFolder = 'rdbadmin-public/avatar/' . date('Y');
-            $FileSystem = new \System\Libraries\FileSystem(PUBLIC_PATH);
+            $FileSystem = new \Rdb\System\Libraries\FileSystem(PUBLIC_PATH);
             $FileSystem->createFolder($targetAvatarFolder);// create folder if not exists.
 
             $formValidated = false;
@@ -212,7 +212,7 @@ class AvatarController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCont
                     unset($Image, $resizeResult, $saveImageResult);
 
                     if (isset($resizeImage) && $resizeImage === true) {
-                        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                         // delete previous avatar of this user.
                         $userAvatar = $UserFieldsDb->get($user_id, 'rdbadmin_uf_avatar');
                         if (!empty($userAvatar) && isset($userAvatar->field_value)) {

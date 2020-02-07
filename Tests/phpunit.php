@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Modules\RdbAdmin\Tests;
+namespace Rdb\Modules\RdbAdmin\Tests;
 
 
 /**
@@ -154,7 +154,7 @@ class Psr4AutoloaderClass
 // register our module namespace before
 $Psr4Autoloader = new Psr4AutoloaderClass();
 $Psr4Autoloader->register();
-$Psr4Autoloader->addNamespace('Modules\\RdbAdmin', dirname(__DIR__));
+$Psr4Autoloader->addNamespace('Rdb\\Modules\\RdbAdmin', dirname(__DIR__));
 $Psr4Autoloader->addNamespace('Tests', dirname(dirname(dirname(__DIR__))) . '/Tests');
 $Psr4Autoloader->addNamespace('System', dirname(dirname(dirname(__DIR__))) . '/System');
 

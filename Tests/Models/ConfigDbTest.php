@@ -4,21 +4,21 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Models;
+namespace Rdb\Modules\RdbAdmin\Tests\Models;
 
 
-class ConfigDbTest extends \Tests\Rdb\BaseTestCase
+class ConfigDbTest extends \Rdb\Tests\BaseTestCase
 {
 
 
     public function setup()
     {
-        $this->Container = new \System\Container();
+        $this->Container = new \Rdb\System\Container();
         $this->Container['Config'] = function ($c) {
-            return new \System\Config();
+            return new \Rdb\System\Config();
         };
         $this->Container['Db'] = function ($c) {
-            return new \System\Libraries\Db($c);
+            return new \Rdb\System\Libraries\Db($c);
         };
 
         $this->Db = $this->Container['Db'];
@@ -37,7 +37,7 @@ class ConfigDbTest extends \Tests\Rdb\BaseTestCase
 
     public function testGet()
     {
-        $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $assertNot = (time() . microtime(true)*1000);
         $this->assertNotEquals($assertNot, $ConfigDb->get('rdbadmin_SiteName', $assertNot));
         $this->assertTrue(is_string($ConfigDb->get('rdbadmin_SiteName')));

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Models;
+namespace Rdb\Modules\RdbAdmin\Models;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Models;
  * 
  * @since 0.1
  */
-class UsersRolesDb extends \System\Core\Models\BaseModel
+class UsersRolesDb extends \Rdb\System\Core\Models\BaseModel
 {
 
 
@@ -178,7 +178,7 @@ class UsersRolesDb extends \System\Core\Models\BaseModel
             // if found current user.
             $myRoles = array_shift($myRoles['items']);
 
-            $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
             $options = [];
             if (is_scalar($selectedUserIds)) {
                 $options['where']['users.user_id'] = $selectedUserIds;

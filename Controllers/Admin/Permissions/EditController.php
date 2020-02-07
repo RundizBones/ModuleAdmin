@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Permissions;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Permissions;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Permissions;
  * 
  * @since 0.1
  */
-class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\PermissionsTrait;
@@ -38,7 +38,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf(['persistentTokenMode' => true]);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf(['persistentTokenMode' => true]);
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -110,7 +110,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf(['persistentTokenMode' => true]);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf(['persistentTokenMode' => true]);
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -159,7 +159,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
                 http_response_code(400);
                 // also log error because this is not normal.
                 if ($this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $Logger->write('modules/rdbadmin/controllers/admin/permissions/editcontroller', 4, 'Could not update, no \'userrole_id\' or \'user_id\' were found. PATCH data is {patchData}', ['patchData' => $_PATCH]);
                     unset($Logger);
@@ -171,7 +171,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
                 http_response_code(400);
                 // also log error because this is not normal.
                 if ($this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $Logger->write('modules/rdbadmin/controllers/admin/permissions/editcontroller', 4, 'Could not update, no \'checked\' were found. PATCH data is {patchData}', ['patchData' => $_PATCH]);
                     unset($Logger);
@@ -214,7 +214,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
     protected function doUpdateDelete(array $data): array
     {
         $output = [];
-        $UserPermissionsDb = new \Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+        $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
         try {
             $deleteResult = $UserPermissionsDb->delete($data);
         } catch (\Exception $e) {
@@ -230,7 +230,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             $output['formResultMessage'] = __('Deleted successfully.');
 
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
                 $Logger->write('modules/rdbadmin/controllers/admin/permissions', 0, 'permission deleted', ['data' => $data, 'result' => $output]);
                 unset($Logger);
@@ -264,7 +264,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
     protected function doUpdateInsert(array $data): array
     {
         $output = [];
-        $UserPermissionsDb = new \Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+        $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
         $permissionRow = $UserPermissionsDb->get($data);
         if (is_object($permissionRow) && !empty($permissionRow)) {
             // if already exists.
@@ -283,7 +283,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
                 $output['permission_id'] = $addResult;
 
                 if ($this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $Logger->write('modules/rdbadmin/controllers/admin/permissions', 0, 'permission inserted', ['data' => $data, 'result' => $output]);
                     unset($Logger);

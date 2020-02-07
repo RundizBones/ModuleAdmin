@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Tools;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Tools;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Tools;
  * 
  * @since 0.1
  */
-class CacheController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     /**
@@ -33,8 +33,8 @@ class CacheController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
         $output['configDb'] = $this->getConfigDb();
@@ -52,7 +52,7 @@ class CacheController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             // if validated token to prevent CSRF.
             unset($_DELETE[$csrfName], $_DELETE[$csrfValue]);
 
-            $Fs = new \System\Libraries\FileSystem(STORAGE_PATH . DIRECTORY_SEPARATOR . 'cache');
+            $Fs = new \Rdb\System\Libraries\FileSystem(STORAGE_PATH . DIRECTORY_SEPARATOR . 'cache');
             $output['cleared'] = $Fs->deleteFolder('');
             unset($Fs);
             if ($output['cleared'] === true) {
@@ -95,8 +95,8 @@ class CacheController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -108,7 +108,7 @@ class CacheController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             // if non html accept or ajax request.
             $output['cache'] = [];
             $output['cache']['basePath'] = realpath(STORAGE_PATH . '/cache');
-            $RdbaCache = new \Modules\RdbAdmin\Libraries\Cache(
+            $RdbaCache = new \Rdb\Modules\RdbAdmin\Libraries\Cache(
                 $this->Container, 
                 [
                     'cachePath' => $output['cache']['basePath'],
@@ -117,7 +117,7 @@ class CacheController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             $Cache = $RdbaCache->getCacheObject();
             $output['cache']['driver'] = $RdbaCache->driver;
             if ($RdbaCache->driver === 'filesystem') {
-                $Fs = new \System\Libraries\FileSystem($output['cache']['basePath']);
+                $Fs = new \Rdb\System\Libraries\FileSystem($output['cache']['basePath']);
                 $output['cache']['totalSize'] = $Fs->getFolderSize('');
                 $output['cache']['totalFilesFolders'] = count($Fs->listFilesSubFolders(''));
             }
@@ -145,7 +145,7 @@ class CacheController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             //$Assets->addMultipleAssets('css', [], $rdbAdminAssets);
             $Assets->addMultipleAssets('js', ['rdbaToolsCache'], $rdbAdminAssets);

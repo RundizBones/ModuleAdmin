@@ -4,10 +4,10 @@
  */
 
 
-namespace Tests\RdbAdmin\System\Libraries;
+namespace Tests\RdbAdmin\Rdb\System\Libraries;
 
 
-class EmailTest extends \Tests\Rdb\BaseTestCase
+class EmailTest extends \Rdb\Tests\BaseTestCase
 {
 
 
@@ -15,12 +15,12 @@ class EmailTest extends \Tests\Rdb\BaseTestCase
     {
         $_SERVER['RUNDIZBONES_LANGUAGE'] = 'th';
 
-        $this->Container = new \System\Container();
+        $this->Container = new \Rdb\System\Container();
         $this->Container['Config'] = function ($c) {
-            return new \System\Config();
+            return new \Rdb\System\Config();
         };
         $this->Container['Db'] = function ($c) {
-            return new \System\Libraries\Db($c);
+            return new \Rdb\System\Libraries\Db($c);
         };
 
         $this->Db = $this->Container['Db'];
@@ -33,14 +33,14 @@ class EmailTest extends \Tests\Rdb\BaseTestCase
 
     public function testGetMailer()
     {
-        $Email = new \Modules\RdbAdmin\Libraries\Email($this->Container);
+        $Email = new \Rdb\Modules\RdbAdmin\Libraries\Email($this->Container);
         $this->assertTrue($Email->getMailer() instanceof \PHPMailer\PHPMailer\PHPMailer);
     }// testGetMailer
 
 
     public function testGetMessage()
     {
-        $Email = new \Modules\RdbAdmin\Libraries\Email($this->Container);
+        $Email = new \Rdb\Modules\RdbAdmin\Libraries\Email($this->Container);
         $message = $Email->getMessage('RdbAdmin', 'ForgotLoginPass');
         $this->assertTrue((is_string($message) && !empty($message)));
     }// testGetMessage

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\UI\Widgets;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Widgets;
 
 
 /**
@@ -12,14 +12,14 @@ namespace Modules\RdbAdmin\Controllers\Admin\UI\Widgets;
  * 
  * @since 0.1
  */
-class WidgetsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class WidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         parent::__construct($Container);
 
@@ -38,7 +38,7 @@ class WidgetsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
         $output = array_merge($output, $this->getConfigDb());
         $return = [];
 
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $PDO = $this->Db->PDO();
         $userLoginsTable = $this->Db->tableName('user_logins');
         $usersTable = $this->Db->tableName('users');
@@ -68,7 +68,7 @@ class WidgetsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
         $output['result'] = $Sth->fetchAll();
         $Sth->closeCursor();
 
-        $UserPermissionsDb = new \Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+        $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
         $output['editPermission'] = $UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'edit');
         $output['editUserUrlBase'] = $Url->getAppBasedPath(true) . '/admin/users/edit';
         unset($UserPermissionsDb);

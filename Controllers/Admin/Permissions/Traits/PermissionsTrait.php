@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Permissions\Traits;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Permissions\Traits;
 
 
 /**
@@ -23,7 +23,7 @@ trait PermissionsTrait
      */
     protected function getPermissionUrlsMethods(): array
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $urlAppBased = $Url->getAppBasedPath(true);
 
         $output = [];

@@ -1,8 +1,8 @@
 <?php
-namespace Modules\%ModuleName%\Tests;
+namespace Rdb\Modules\%ModuleName%\Tests;
 
 
-class ExampleTest extends \Tests\Rdb\BaseTestCase
+class ExampleTest extends \Rdb\Tests\BaseTestCase
 {
 
 

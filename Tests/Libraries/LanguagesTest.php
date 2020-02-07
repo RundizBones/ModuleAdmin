@@ -4,15 +4,15 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
-class LanguagesTest extends \Tests\Rdb\BaseTestCase
+class LanguagesTest extends \Rdb\Tests\BaseTestCase
 {
 
 
     /**
-     * @var Modules\RdbAdmin\Tests\Libraries\LanguagesExtended
+     * @var Rdb\Modules\RdbAdmin\Tests\Libraries\LanguagesExtended
      */
     protected $Languages;
 
@@ -21,7 +21,7 @@ class LanguagesTest extends \Tests\Rdb\BaseTestCase
     {
         $_SERVER['RUNDIZBONES_LANGUAGE'] = 'th';
 
-        $this->Languages = new LanguagesExtended(new \System\Container());
+        $this->Languages = new LanguagesExtended(new \Rdb\System\Container());
     }// setup
 
 

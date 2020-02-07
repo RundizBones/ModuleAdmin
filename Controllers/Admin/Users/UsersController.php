@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users;
 
 
 /**
@@ -12,17 +12,17 @@ namespace Modules\RdbAdmin\Controllers\Admin\Users;
  * 
  * @since 0.1
  */
-class UsersController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class UsersController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\UsersTrait;
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\Permissions\Traits\PermissionsTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\Permissions\Traits\PermissionsTrait;
 
 
     /**
@@ -36,7 +36,7 @@ class UsersController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
         $options = [];
         $options['unlimited'] = true;
         $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $output['listRoles'] = $UserRolesDb->listItems($options);
 
         unset($options, $UserRolesDb);
@@ -67,11 +67,11 @@ class UsersController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $this->Languages->getHelpers();
 
         // get a user data.
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $where = [];
         $where['user_id'] = $user_id;
         $options = [];
@@ -84,7 +84,7 @@ class UsersController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
         unset($Csrf);
 
         if (is_object($userRow) && !empty($userRow)) {
-            $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+            $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
             $options = [];
             $options['where'] = ['user_id' => (int) $user_id];
             $options['unlimited'] = true;
@@ -122,13 +122,13 @@ class UsersController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
     {
         $columns = $this->Input->get('columns', [], FILTER_UNSAFE_RAW, FILTER_REQUIRE_ARRAY);
         $order = $this->Input->get('order', [], FILTER_UNSAFE_RAW, FILTER_REQUIRE_ARRAY);
-        $DataTablesJs = new \Modules\RdbAdmin\Libraries\DataTablesJs();
+        $DataTablesJs = new \Rdb\Modules\RdbAdmin\Libraries\DataTablesJs();
         $sortOrders = $DataTablesJs->buildSortOrdersFromInput($columns, $order);
         unset($columns, $DataTablesJs, $order);
 
         $output = [];
 
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $options = [];
         $options['sortOrders'] = $sortOrders;
         $options['offset'] = $this->Input->get('start', 0, FILTER_SANITIZE_NUMBER_INT);
@@ -179,8 +179,8 @@ class UsersController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -209,7 +209,7 @@ class UsersController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
         $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);
         $output['pageHtmlClasses'] = $this->getPageHtmlClasses();
 
-        $UserPermissionsDb = new \Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+        $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
         $output['permissions'] = [];
         $output['permissions']['add'] = $UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'add');
         $output['permissions']['edit'] = $UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'edit');
@@ -227,7 +227,7 @@ class UsersController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['datatables', 'rdbaCommonListDataPage'], $rdbAdminAssets);
             $Assets->addMultipleAssets('js', ['rdbaUsers'], $rdbAdminAssets);

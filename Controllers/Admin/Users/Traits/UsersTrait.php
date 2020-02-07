@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users\Traits;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits;
 
 
 /**
@@ -43,7 +43,7 @@ trait UsersTrait
 
         $errors = [];
         $output = [];
-        $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+        $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
 
         if (isset($data['user_login']) && empty($data['user_login'])) {
             $errors['user_login']['message'] = __('Please enter username.');
@@ -96,7 +96,7 @@ trait UsersTrait
         if (isset($dataUsersRoles['roleIds']) && !empty($dataUsersRoles['roleIds'])) {
             // if entered user roles.
             // validate new user's roles have no higher priority that current user who add them.
-            $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+            $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
 
             $currentUserId = 0;
             if ($this->Container->has('UsersSessionsTrait')) {
@@ -117,7 +117,7 @@ trait UsersTrait
             if (isset($myRoles['items']) && !empty($myRoles['items'])) {
                 $myRoles = array_shift($myRoles['items']);
 
-                $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+                $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
                 $options = [];
                 $options['roleIdsIn'] = $dataUsersRoles['roleIds'];
                 $options['unlimited'] = true;
@@ -150,7 +150,7 @@ trait UsersTrait
         if (count($errors) == 0) {
             // if found no errors.
             // verify username, email must not exists.
-            $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 
             if ($saveType === 'insert') {
                 // if check for insert.
@@ -240,15 +240,15 @@ trait UsersTrait
             $encryptedKey = '';
         }
 
-        /* @var $Config \System\Config */
+        /* @var $Config \Rdb\System\Config */
         if ($this->Container->has('Config')) {
             $Config = $this->Container->get('Config');
         } else {
-            $Config = new \System\Config();
+            $Config = new \Rdb\System\Config();
         }
         $Config->setModule('RdbAdmin');
 
-        $Encryption = new \Modules\RdbAdmin\Libraries\Encryption();
+        $Encryption = new \Rdb\Modules\RdbAdmin\Libraries\Encryption();
         $decrypted = $Encryption->decrypt($encryptedKey, $Config->get('rdbaUserFieldsKeys', 'hash'));
         if (!is_null($decrypted)) {
             $output = $decrypted;
@@ -273,16 +273,16 @@ trait UsersTrait
     {
         $output = [];
 
-        /* @var $Config \System\Config */
+        /* @var $Config \Rdb\System\Config */
         if ($this->Container->has('Config')) {
             $Config = $this->Container->get('Config');
         } else {
-            $Config = new \System\Config();
+            $Config = new \Rdb\System\Config();
         }
         $Config->setModule('RdbAdmin');
 
-        $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
-        $Encryption = new \Modules\RdbAdmin\Libraries\Encryption();
+        $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
+        $Encryption = new \Rdb\Modules\RdbAdmin\Libraries\Encryption();
 
         $output['readableKey'] = $RdbaString->random($length);
         $output['encryptedKey'] = $Encryption->encrypt($output['readableKey'], $Config->get('rdbaUserFieldsKeys', 'hash'));
@@ -301,7 +301,7 @@ trait UsersTrait
      */
     protected function getUserUrlsMethods($user_id = ''): array
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $urlAppBased = $Url->getAppBasedPath(true);
 
         $output = [];
@@ -361,7 +361,7 @@ trait UsersTrait
      */
     protected function logoutUser(array $cookieData = [], bool $logoutAllDevice = false)
     {
-        $Cookie = new \Modules\RdbAdmin\Libraries\Cookie($this->Container);
+        $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
         $Cookie->setEncryption('rdbaLoggedinKey');
 
         if (empty($cookieData)) {
@@ -369,7 +369,7 @@ trait UsersTrait
         }
 
         // delete login data in db.
-        $UserLogins = new \Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
+        $UserLogins = new \Rdb\Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
         if ($logoutAllDevice === true) {
             // if logout on ALL devices.
             if (is_array($cookieData) && array_key_exists('user_id', $cookieData)) {

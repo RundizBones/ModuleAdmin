@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\_SubControllers;
+namespace Rdb\Modules\RdbAdmin\Controllers\_SubControllers;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\_SubControllers;
  * 
  * @link https://www.owasp.org/index.php/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies OWASP device cookie document.
  */
-class BruteForceLoginPrevention extends \Modules\RdbAdmin\Controllers\BaseController
+class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
 
 
@@ -93,11 +93,11 @@ class BruteForceLoginPrevention extends \Modules\RdbAdmin\Controllers\BaseContro
      * 
      * @param array $configDb The configuration values in DB.
      */
-    public function __construct(\System\Container $Container, array $configDb = [])
+    public function __construct(\Rdb\System\Container $Container, array $configDb = [])
     {
         parent::__construct($Container);
 
-        $this->Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+        $this->Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
             $this->Container,
             ['cachePath' => $this->cacheBasedPath]
         ))->getCacheObject();
@@ -110,7 +110,7 @@ class BruteForceLoginPrevention extends \Modules\RdbAdmin\Controllers\BaseContro
             $Config = $this->Container->get('Config');
             $Config->setModule('');
         } else {
-            $Config = new \System\Config();
+            $Config = new \Rdb\System\Config();
         }
         $this->deviceCookieName = 'rdbadmin_cookie_devicecookie' . $Config->get('suffix', 'cookie');
         unset($Config);
@@ -215,7 +215,7 @@ class BruteForceLoginPrevention extends \Modules\RdbAdmin\Controllers\BaseContro
             // if enabled brute force prevention by Device Cookie.
             // (even if it was checked and passed by IP based - if IP based enabled, then check again with device cookie based).
             // Entry point for authentication request
-            $UserLoginsDb = new \Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
+            $UserLoginsDb = new \Rdb\Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
             $output = [];// start fresh to prevent mess up with previous check.
 
             if (isset($_COOKIE[$this->deviceCookieName])) {
@@ -348,7 +348,7 @@ class BruteForceLoginPrevention extends \Modules\RdbAdmin\Controllers\BaseContro
             if ($this->Container->has('Config')) {
                 $Config = $this->Container->get('Config');
             } else {
-                $Config = new \System\Config();
+                $Config = new \Rdb\System\Config();
             }
             $Config->setModule('RdbAdmin');
 
@@ -392,7 +392,7 @@ class BruteForceLoginPrevention extends \Modules\RdbAdmin\Controllers\BaseContro
             if ($this->Container->has('Config')) {
                 $Config = $this->Container->get('Config');
             } else {
-                $Config = new \System\Config();
+                $Config = new \Rdb\System\Config();
             }
             $Config->setModule('RdbAdmin');
 
@@ -471,7 +471,7 @@ class BruteForceLoginPrevention extends \Modules\RdbAdmin\Controllers\BaseContro
             // remove data that is not exists in table fields before insert/update to db.
             unset($data['user_login_email']);
 
-            $UserLoginsDb = new \Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
+            $UserLoginsDb = new \Rdb\Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
             $configTimePeriod = (int) ($this->configDb['rdbadmin_UserLoginMaxFailWait'] ?? 60);
 
             // 1. register a failed authentication attempt
@@ -560,7 +560,7 @@ class BruteForceLoginPrevention extends \Modules\RdbAdmin\Controllers\BaseContro
             if ($this->Container->has('Config')) {
                 $Config = $this->Container->get('Config');
             } else {
-                $Config = new \System\Config();
+                $Config = new \Rdb\System\Config();
             }
             $Config->setModule('RdbAdmin');
 

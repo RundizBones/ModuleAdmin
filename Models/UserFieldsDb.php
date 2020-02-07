@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Models;
+namespace Rdb\Modules\RdbAdmin\Models;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Models;
  * 
  * @since 0.1
  */
-class UserFieldsDb extends \System\Core\Models\BaseModel
+class UserFieldsDb extends \Rdb\System\Core\Models\BaseModel
 {
 
 
@@ -49,7 +49,7 @@ class UserFieldsDb extends \System\Core\Models\BaseModel
     /**
      * {@inheritDoc}
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         parent::__construct($Container);
 
@@ -126,17 +126,17 @@ class UserFieldsDb extends \System\Core\Models\BaseModel
         array $options = []
     ): array
     {
-        /* @var $Config \System\Config */
+        /* @var $Config \Rdb\System\Config */
         if ($this->Container->has('Config')) {
             $Config = $this->Container->get('Config');
         } else {
-            $Config = new \System\Config();
+            $Config = new \Rdb\System\Config();
         }
         $Config->setModule('RdbAdmin');
         $hashKey = $Config->get('rdbaUserFieldsKeys', 'hash');
         unset($Config);
 
-        $Encryption = new \Modules\RdbAdmin\Libraries\Encryption();
+        $Encryption = new \Rdb\Modules\RdbAdmin\Libraries\Encryption();
 
         $output = [];
         $keyRow = $this->get($user_id, $keyFieldName);
@@ -188,7 +188,7 @@ class UserFieldsDb extends \System\Core\Models\BaseModel
             $options = array_merge($defaultOptions, $options);
             unset($defaultOptions);
 
-            $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+            $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
             $DateTime = new \DateTime();
             $DateTime->add(new \DateInterval('PT' . $waitMinute . 'M'));
             $output['readableKey'] = $RdbaString->random($options['keyLength'], $options['keyCharacters']);
@@ -199,7 +199,7 @@ class UserFieldsDb extends \System\Core\Models\BaseModel
         }
 
         //if ($this->Container->has('Logger')) {
-            /* @var $Logger \System\Libraries\Logger */
+            /* @var $Logger \Rdb\System\Libraries\Logger */
             //$Logger = $this->Container->get('Logger');
             //$Logger->write('modules/rdbadmin/models/userfieldsdb/generatekeywithwaittime', 0, 'output debug {output}', ['output' => $output]);
             //$Logger->write('modules/rdbadmin/models/userfieldsdb/generatekeywithwaittime', 0, 'hash key {hash}', ['hash' => $hashKey]);

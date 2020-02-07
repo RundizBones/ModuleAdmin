@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Settings;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Settings;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Settings;
  * 
  * @since 0.1
  */
-class SettingsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     public function doUpdateAction(): string
@@ -28,8 +28,8 @@ class SettingsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $Serializer = new \Rundiz\Serializer\Serializer();
 
         $output = [];
@@ -82,7 +82,7 @@ class SettingsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                 // if form validation passed.
                 // update to DB.
                 try {
-                    $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+                    $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
                     $updateResult = $ConfigDb->updateMultipleValues($data);
                     unset($ConfigDb);
                 } catch (\Exception $e) {
@@ -132,7 +132,7 @@ class SettingsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
         $options['where'] = [
             'userrole_priority' => '< 10000',
         ];
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $output = $UserRolesDb->listItems($options);
 
         unset($options, $UserRolesDb);
@@ -213,7 +213,7 @@ class SettingsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
      */
     protected function getTimezones(): array
     {
-        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
             $this->Container,
             [
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/Settings/SettingsController',
@@ -277,8 +277,8 @@ class SettingsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -316,7 +316,7 @@ class SettingsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('js', ['rdbaSettings'], $rdbAdminAssets);
             $Assets->addJsObject(
@@ -365,8 +365,8 @@ class SettingsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $Serializer = new \Rundiz\Serializer\Serializer();
 
         $output = [];

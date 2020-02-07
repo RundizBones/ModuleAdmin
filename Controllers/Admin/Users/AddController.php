@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Users;
  * 
  * @since 0.1
  */
-class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class AddController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\UsersTrait;
@@ -36,8 +36,8 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
         $output['configDb'] = $this->getConfigDbUser();
@@ -58,7 +58,7 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
             $data['user_status'] = intval(trim($this->Input->post('user_status', 0)));
             $data['user_statustext'] = trim($this->Input->post('user_statustext', null));
 
-            $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 
             if ($data['user_login'] === '') {
                 if ($data['user_email'] !== '') {
@@ -139,7 +139,7 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
                     http_response_code(500);
 
                     if ($this->Container->has('Logger')) {
-                        /* @var $Logger \System\Libraries\Logger */
+                        /* @var $Logger \Rdb\System\Libraries\Logger */
                         $Logger = $this->Container->get('Logger');
                         $Logger->write('modules/rdbadmin/controllers/admin/users/addcontroller', 5, 'Password hash error.');
                         unset($Logger);
@@ -151,7 +151,7 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
             if (isset($formValidated) && $formValidated === true) {
                 // if form validation passed.
                 // sanitize values.
-                $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+                $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
                 if (!is_null($data['user_login'])) {
                     $data['user_login'] = $RdbaString->sanitizeUsername($data['user_login']);
                 }
@@ -174,14 +174,14 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
                         $dataFields['rdbadmin_uf_registerconfirm_key'] = $genKey['readableKey'];
                         $dataFields['rdbadmin_uf_adduser_waitactivation_since'] = date('Y-m-d H:i:s');
 
-                        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                         $UserFieldsDb->update($userId, 'rdbadmin_uf_registerconfirm_key', $genKey['encryptedKey'], true);
                         $UserFieldsDb->update($userId, 'rdbadmin_uf_adduser_waitactivation_since', $dataFields['rdbadmin_uf_adduser_waitactivation_since'], true);
                         unset($genKey, $UserFieldsDb);
                     }
 
                     // add roles.
-                    $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+                    $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
                     $UsersRolesDb->add((int) $userId, $dataUsersRoles['roleIds']);
                     unset($UsersRolesDb);
                 }
@@ -260,8 +260,8 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
      */
     protected function doAddSendEmails(array $data, array $dataFields = []): array
     {
-        $Email = new \Modules\RdbAdmin\Libraries\Email($this->Container);
-        $Url = new \System\Libraries\Url($this->Container);
+        $Email = new \Rdb\Modules\RdbAdmin\Libraries\Email($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $output = [];
 
         try {
@@ -315,7 +315,7 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
      */
     protected function getConfigDbUser(): array
     {
-        $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $configNames = [
             'rdbadmin_UserRegisterDefaultRoles',
         ];
@@ -344,7 +344,7 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
             'userrole_priority' => '< 10000',
         ];
         $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $output['listRoles'] = $UserRolesDb->listItems($options);
 
         unset($options, $UserRolesDb);
@@ -366,8 +366,8 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -386,7 +386,7 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
         // pre-define form values.
         $output['user_status'] = '1';
         $output['notify_user'] = '1';
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $output['predefinedStatusTexts'] = $UsersDb->predefinedStatusText();
         unset($UsersDb);
 
@@ -398,7 +398,7 @@ class AddController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseControl
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             //$Assets->addMultipleAssets('css', [], $rdbAdminAssets);
             $Assets->addMultipleAssets('js', ['rdbaUsersAdd', 'rdbaHistoryState'], $rdbAdminAssets);

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Roles;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Roles;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Roles;
  * 
  * @since 0.1
  */
-class RolesController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class RolesController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\RolesTrait;
@@ -36,7 +36,7 @@ class RolesController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
         $this->Languages->getHelpers();
 
         // get a role data.
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $where = [];
         $where['userrole_id'] = $userrole_id;
         $roleRow = $UserRolesDb->get($where);
@@ -69,7 +69,7 @@ class RolesController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
     {
         $output = [];
 
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $options = [];
         $options['unlimited'] = true;
         $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
@@ -118,8 +118,8 @@ class RolesController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -165,10 +165,10 @@ class RolesController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
             $MyModuleAssets = $ModuleAssets->getModuleAssets();
             unset($ModuleAssets);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['datatables', 'rdbaCommonListDataPage'], $MyModuleAssets);
             $Assets->addMultipleAssets('js', ['rdbaRoles'], $MyModuleAssets);

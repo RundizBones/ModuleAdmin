@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Users;
  * 
  * @since 0.1
  */
-class PreviousEmailsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class PreviousEmailsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\UsersTrait;
@@ -27,7 +27,7 @@ class PreviousEmailsController extends \Modules\RdbAdmin\Controllers\Admin\Admin
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['edit']);
 
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -46,7 +46,7 @@ class PreviousEmailsController extends \Modules\RdbAdmin\Controllers\Admin\Admin
             $isRESTorXHR = true;
             if (!isset($formValidated) || (isset($formValidated) && $formValidated === true)) {
                 // get previous emails data.
-                $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+                $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
                 $output['user'] = $UsersDb->get(['user_id' => (int) $user_id], ['getUserFields' => true]);
                 unset($UsersDb);
             }
@@ -86,7 +86,7 @@ class PreviousEmailsController extends \Modules\RdbAdmin\Controllers\Admin\Admin
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('js', ['rdbaUsersPreviousEmails'], $rdbAdminAssets);
             $Assets->addJsObject(
@@ -134,7 +134,7 @@ class PreviousEmailsController extends \Modules\RdbAdmin\Controllers\Admin\Admin
             is_array($this->userSessionCookieData) && 
             array_key_exists('user_id', $this->userSessionCookieData)
         ) {
-            $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+            $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
             $options = [];
             $options['where']['user_id'] = $this->userSessionCookieData['user_id'];
             $options['limit'] = 1;

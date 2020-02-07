@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\UI\Traits;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits;
 
 
 /**
@@ -30,7 +30,7 @@ trait CommonDataTrait
      */
     protected function getConfigDb(): array
     {
-        $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $configNames = [
             'rdbadmin_SiteName',
             'rdbadmin_SiteTimezone',
@@ -55,12 +55,12 @@ trait CommonDataTrait
      * 
      * This is required to make basic admin pages working correctly.
      * 
-     * @param \Modules\RdbAdmin\Libraries\Assets $Assets The Assets class.
-     * @param array $assetsData The assets data. Please read more on `\Modules\RdbAdmin\Libraries\Assets::addMultipleAssets()`.
+     * @param \Rdb\Modules\RdbAdmin\Libraries\Assets $Assets The Assets class.
+     * @param array $assetsData The assets data. Please read more on `\Rdb\Modules\RdbAdmin\Libraries\Assets::addMultipleAssets()`.
      */
-    protected function setCssAssets(\Modules\RdbAdmin\Libraries\Assets $Assets, array $assetsData)
+    protected function setCssAssets(\Rdb\Modules\RdbAdmin\Libraries\Assets $Assets, array $assetsData)
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $Assets->addMultipleAssets(
             'css',
@@ -78,12 +78,12 @@ trait CommonDataTrait
      * 
      * This is required to make basic admin pages working correctly.
      * 
-     * @param \Modules\RdbAdmin\Libraries\Assets $Assets The Assets class.
-     * @param array $assetsData The assets data. Please read more on `\Modules\RdbAdmin\Libraries\Assets::addMultipleAssets()`.
+     * @param \Rdb\Modules\RdbAdmin\Libraries\Assets $Assets The Assets class.
+     * @param array $assetsData The assets data. Please read more on `\Rdb\Modules\RdbAdmin\Libraries\Assets::addMultipleAssets()`.
      */
-    protected function setJsAssetsAndObject(\Modules\RdbAdmin\Libraries\Assets $Assets, array $assetsData)
+    protected function setJsAssetsAndObject(\Rdb\Modules\RdbAdmin\Libraries\Assets $Assets, array $assetsData)
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $Assets->addMultipleAssets(
             'js', 

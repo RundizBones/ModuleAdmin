@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Controllers\_SubControllers;
+namespace Rdb\Modules\RdbAdmin\Tests\Controllers\_SubControllers;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Tests\Controllers\_SubControllers;
  * 
  * @since 0.1
  */
-class MenuItemsExtended extends \Modules\RdbAdmin\Controllers\_SubControllers\MenuItems
+class MenuItemsExtended extends \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\MenuItems
 {
 
 

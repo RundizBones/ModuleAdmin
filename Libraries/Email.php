@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Libraries;
+namespace Rdb\Modules\RdbAdmin\Libraries;
 
 
 /**
@@ -19,7 +19,7 @@ class Email
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
@@ -33,11 +33,11 @@ class Email
     /**
      * Class constructor.
      * 
-     * @param \System\Container $Container The DI container class. Only required for some method.
+     * @param \Rdb\System\Container $Container The DI container class. Only required for some method.
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
-        if ($Container instanceof \System\Container) {
+        if ($Container instanceof \Rdb\System\Container) {
             $this->Container = $Container;
         }
     }// __construct
@@ -69,7 +69,7 @@ class Email
      */
     public function getMailer(): \PHPMailer\PHPMailer\PHPMailer
     {
-        $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $configNames = [
             'rdbadmin_MailProtocol',
             'rdbadmin_MailPath',
@@ -101,8 +101,8 @@ class Email
             $Mail->SMTPDebug = 3;
             $Mail->Debugoutput = function($str, $level) {
                 // the log file name should be unique by date/time (with seconds).
-                if (isset($this->Container) && $this->Container instanceof \System\Container && $this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                if (isset($this->Container) && $this->Container instanceof \Rdb\System\Container && $this->Container->has('Logger')) {
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $Logger->write('modules/rdbadmin/libraries/email', 0, date('Y-m-d H:i:s') . ' ' . trim($str));
                     unset($Logger);
@@ -164,7 +164,7 @@ class Email
      * 
      * Full example:
      * <pre>
-     * $Email = new \Modules\RdbAdmin\Libraries\Email($this->Container);
+     * $Email = new \Rdb\Modules\RdbAdmin\Libraries\Email($this->Container);
      * $Mail = $Email->getMailer();
      * $Mail->addAddress('someone@address.tld', 'someone name');
      * $Mail->Subject = 'Forgot my password.';

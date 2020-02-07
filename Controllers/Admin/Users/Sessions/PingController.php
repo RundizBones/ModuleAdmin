@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users\Sessions;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Sessions;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\Admin\Users\Sessions;
  * 
  * @since 0.1
  */
-class PingController extends \Modules\RdbAdmin\Controllers\BaseController
+class PingController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
 
 
@@ -41,7 +41,7 @@ class PingController extends \Modules\RdbAdmin\Controllers\BaseController
         }
         unset($headers);
 
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
         
         $output['loggedInAsString'] = ($output['loggedIn'] === true ? 'true' : 'false');

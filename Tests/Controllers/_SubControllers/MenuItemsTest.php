@@ -4,21 +4,21 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Controllers\SubControllers;
+namespace Rdb\Modules\RdbAdmin\Tests\Controllers\SubControllers;
 
 
-class MenuItemsTest extends \Tests\Rdb\BaseTestCase
+class MenuItemsTest extends \Rdb\Tests\BaseTestCase
 {
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
 
     /**
-     * @var \Modules\RdbAdmin\Tests\Controllers\_SubControllers\MenuItemsExtended
+     * @var \Rdb\Modules\RdbAdmin\Tests\Controllers\_SubControllers\MenuItemsExtended
      */
     protected $MenuItems;
 
@@ -28,14 +28,14 @@ class MenuItemsTest extends \Tests\Rdb\BaseTestCase
 
     public function setup()
     {
-        $this->Container = new \System\Container();
-        $Modules = new \System\Modules($this->Container);
+        $this->Container = new \Rdb\System\Container();
+        $Modules = new \Rdb\System\Modules($this->Container);
         $this->Container['Modules'] = function ($c) use ($Modules) {
             return $Modules;
         };
         unset($Modules);
 
-        $this->MenuItems = new \Modules\RdbAdmin\Tests\Controllers\_SubControllers\MenuItemsExtended($this->Container);
+        $this->MenuItems = new \Rdb\Modules\RdbAdmin\Tests\Controllers\_SubControllers\MenuItemsExtended($this->Container);
 
         $this->menuItems = [
             0 => [

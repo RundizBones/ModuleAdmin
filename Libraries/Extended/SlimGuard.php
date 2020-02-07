@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Libraries\Extended;
+namespace Rdb\Modules\RdbAdmin\Libraries\Extended;
 
 
 /**

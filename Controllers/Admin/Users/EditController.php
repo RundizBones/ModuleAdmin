@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Users;
  * 
  * @since 0.1
  */
-class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\UsersTrait;
@@ -73,8 +73,8 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
 
         unset($userId);
 
-        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 
         $keyResult = $UserFieldsDb->get($user_id, 'rdbadmin_uf_changeemail_key');
         $keyDate = $UserFieldsDb->get($user_id, 'rdbadmin_uf_changeemail_time');
@@ -170,8 +170,8 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
         $output['configDb'] = $this->getConfigDbUser();
@@ -199,7 +199,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             // remove fields that is unable to update manually.
             $this->doUpdateRemoveUnUpdatableDataFields($dataFields);
 
-            $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
             $user_login = $data['user_login'];
 
             // get user data and if user is not exists then make form invalid. ------
@@ -282,7 +282,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
                         http_response_code(500);
 
                         if ($this->Container->has('Logger')) {
-                            /* @var $Logger \System\Libraries\Logger */
+                            /* @var $Logger \Rdb\System\Libraries\Logger */
                             $Logger = $this->Container->get('Logger');
                             $Logger->write('modules/rdbadmin/controllers/admin/users/addcontroller', 5, 'Password hash error.');
                             unset($Logger);
@@ -403,7 +403,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
                     $successUpdate = true;
 
                     // update user fields.
-                    $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                    $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                     if (isset($dataFields) && is_array($dataFields) && !empty($dataFields)) {
                         $output['updateUserFields'] = [];
                         foreach ($dataFields as $fieldName => $fieldValue) {
@@ -416,7 +416,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
                     }
 
                     // update roles.
-                    $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+                    $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
                     $output['updateUsersRoles'] = $UsersRolesDb->update((int) $user_id, ($dataUsersRoles['roleIds'] ?? []));
 
                     unset($UserFieldsDb, $UsersRolesDb);
@@ -486,7 +486,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
     {
         $dataFields = [];
 
-        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
 
         $emailHistoryField = $UserFieldsDb->get($user_id, 'rdbadmin_uf_changeemail_history');
         if (is_object($emailHistoryField)) {
@@ -542,7 +542,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
         if (isset($data['user_display_name']) && !empty($data['user_display_name'])) {
             // if display name was set and not empty.
             // sanitize display name.
-            $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+            $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
             $data['user_display_name'] = $RdbaString->sanitizeDisplayname($data['user_display_name']);
             unset($RdbaString);
         }
@@ -705,8 +705,8 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
      */
     protected function doUpdateSendEmailChanging(array $options = []): array
     {
-        $Email = new \Modules\RdbAdmin\Libraries\Email($this->Container);
-        $Url = new \System\Libraries\Url($this->Container);
+        $Email = new \Rdb\Modules\RdbAdmin\Libraries\Email($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $output = [];
 
         if (
@@ -813,7 +813,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
      */
     protected function getConfigDbUser(): array
     {
-        $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $configNames = [
             'rdbadmin_UserRegisterDefaultRoles',
             'rdbadmin_UserRegisterNotifyAdminEmails',
@@ -848,7 +848,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             'userrole_priority' => '< 10000',
         ];
         $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $output['listRoles'] = $UserRolesDb->listItems($options);
 
         unset($options, $UserRolesDb);
@@ -873,8 +873,8 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -931,7 +931,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
         // pre-define form value.
         $output['user_id'] = $user_id;
         $output['my_user_id'] = (isset($this->userSessionCookieData['user_id']) ? (int) $this->userSessionCookieData['user_id'] : 0);
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $output['predefinedStatusTexts'] = $UsersDb->predefinedStatusText();
         unset($UsersDb);
 
@@ -967,7 +967,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['rdbaUsersEdit'], $rdbAdminAssets);
             $Assets->addMultipleAssets('js', ['rdbaUsersEdit', 'rdbaHistoryState'], $rdbAdminAssets);

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\UI;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\UI;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\Admin\UI;
  * 
  * @since 0.1
  */
-class XhrDashboardWidgetsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class XhrDashboardWidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
@@ -44,10 +44,10 @@ class XhrDashboardWidgetsController extends \Modules\RdbAdmin\Controllers\Admin\
             // loop each module.
             foreach ($modules as $module) {
                 if (is_file(MODULE_PATH . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'ModuleData' . DIRECTORY_SEPARATOR . 'ModuleAdmin.php')) {
-                    $ModuleAdminClassName = '\\Modules\\' . $module . '\\ModuleData\\ModuleAdmin';
+                    $ModuleAdminClassName = '\\Rdb\\Modules\\' . $module . '\\ModuleData\\ModuleAdmin';
 
                     if (class_exists($ModuleAdminClassName)) {
-                        $ReflectionClassTargetInstance = new \ReflectionClass('\\Modules\\RdbAdmin\\Interfaces\\ModuleAdmin');
+                        $ReflectionClassTargetInstance = new \ReflectionClass('\\Rdb\\Modules\\RdbAdmin\\Interfaces\\ModuleAdmin');
                         $ReflectionClass = new \ReflectionClass($ModuleAdminClassName);
                         $classInstance = $ReflectionClass->newInstanceWithoutConstructor();
 
@@ -78,7 +78,7 @@ class XhrDashboardWidgetsController extends \Modules\RdbAdmin\Controllers\Admin\
         // re-order widgets to user's saved data. ------------------------------------------------------------------------
         // get current user's ID.
         $user_id = (isset($this->userSessionCookieData['user_id']) ? (int) $this->userSessionCookieData['user_id'] : 0);
-        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
         $fieldResult = $UserFieldsDb->get($user_id, 'rdbadmin_uf_admindashboardwidgets_order');
         if (is_object($fieldResult) && isset($fieldResult->field_value)) {
             $savedWidgetsOrdered = $fieldResult->field_value;
@@ -163,7 +163,7 @@ class XhrDashboardWidgetsController extends \Modules\RdbAdmin\Controllers\Admin\
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -185,7 +185,7 @@ class XhrDashboardWidgetsController extends \Modules\RdbAdmin\Controllers\Admin\
             $updateData = json_decode($_PATCH['updateData'], true);
             $widgetsType = $this->Input->patch('widgetsType', 'normal');
 
-            $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+            $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
             $fieldResult = $UserFieldsDb->get($user_id, 'rdbadmin_uf_admindashboardwidgets_order');
             if (is_object($fieldResult) && isset($fieldResult->field_value)) {
                 $dashboardWidgetsOrder = $fieldResult->field_value;

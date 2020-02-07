@@ -4,10 +4,10 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
-class EncryptionTest extends \Tests\Rdb\BaseTestCase
+class EncryptionTest extends \Rdb\Tests\BaseTestCase
 {
 
 
@@ -15,7 +15,7 @@ class EncryptionTest extends \Tests\Rdb\BaseTestCase
     {
         // test that encrypt and then decrypt must be the same.
         // cannot test and assert just encrypted message because it can be different results.
-        $Encryption = new \Modules\RdbAdmin\Libraries\Encryption();
+        $Encryption = new \Rdb\Modules\RdbAdmin\Libraries\Encryption();
         $key = 'secretKey';
         $readableText = 'Hello World!';
 

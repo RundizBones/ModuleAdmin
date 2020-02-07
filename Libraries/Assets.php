@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Libraries;
+namespace Rdb\Modules\RdbAdmin\Libraries;
 
 
 /**
@@ -36,7 +36,7 @@ class Assets
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
@@ -44,9 +44,9 @@ class Assets
     /**
      * Class constructor.
      * 
-     * @param \System\Container $Container The DI container class.
+     * @param \Rdb\System\Container $Container The DI container class.
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         $this->Container = $Container;
     }// __construct
@@ -84,7 +84,7 @@ class Assets
             if (is_array($this->addedAssets[$type]) && array_key_exists($handle, $this->addedAssets[$type])) {
                 // if the handle specified is already exists.
                 if ($this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 2);
                     $caller = '';
@@ -103,13 +103,13 @@ class Assets
 
         if (stripos($file, '://') === false && stripos($file, '//') !== 0) {
             // if the asset file is local. check that if it exists or not.
-            $Url = new \System\Libraries\Url($this->Container);
+            $Url = new \Rdb\System\Libraries\Url($this->Container);
             $fileRealPath = preg_replace('#' . $Url->getAppBasedPath() . '#', PUBLIC_PATH . '/', $file, 1);
             $fileRealPath = realpath($fileRealPath);
             if (!is_file($fileRealPath)) {
                 // if asset file is not exists.
                 if ($this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 1);
                     $caller = '';
@@ -159,7 +159,7 @@ class Assets
         if (!array_key_exists($handle, $this->addedAssets['css'])) {
             // if handle name is not found in added assets.
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
                 $Logger->write('modules/rdbadmin/libraries/assets', 3, 'The css handle name {handle} is not exists.', ['handle' => $handle]);
                 unset($Logger);
@@ -186,7 +186,7 @@ class Assets
 
         if (!array_key_exists($handle, $this->addedAssets['js'])) {
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
                 $Logger->write('modules/rdbadmin/libraries/assets', 3, 'The js handle name {handle} is not exists.', ['handle' => $handle]);
                 unset($Logger);
@@ -222,7 +222,7 @@ class Assets
 
         if (!array_key_exists($handle, $this->addedAssets['js'])) {
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
                 $Logger->write('modules/rdbadmin/libraries/assets', 3, 'The js handle name {handle} is not exists.', ['handle' => $handle]);
                 unset($Logger);
@@ -339,7 +339,7 @@ class Assets
 
         if (count($handles) !== count($foundAssetKeys)) {
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
                 $Logger->write('modules/rdbadmin/libraries/assets', 3, 'Found only ' . count($foundAssetKeys) . ' assets from total ' . count($handles) . ' input handles for ' . $type . '.', ['found' => $foundHandles, 'handles' => $handles]);
                 unset($Logger);
@@ -450,7 +450,7 @@ class Assets
             $this->assetsSorted['js'] = false;
         } else {
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
                 $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 1);
                 $caller = '';
@@ -502,7 +502,7 @@ class Assets
                         // check again for file version that is local and get its modify date.
                         if (stripos($item['file'], '://') === false && stripos($item['file'], '//') !== 0) {
                             // if local file
-                            $Url = new \System\Libraries\Url();
+                            $Url = new \Rdb\System\Libraries\Url();
                             $fileRealPath = preg_replace('#'.$Url->getAppBasedPath().'#', PUBLIC_PATH . '/', $item['file'], 1);
                             $fileRealPath = realpath($fileRealPath);
 
@@ -668,7 +668,7 @@ class Assets
         $notExists = [];
 
         if ($this->Container->has('Logger')) {
-            /* @var $Logger \System\Libraries\Logger */
+            /* @var $Logger \Rdb\System\Libraries\Logger */
             $Logger = $this->Container->get('Logger');
         }
 
@@ -897,7 +897,7 @@ class Assets
 
         if (is_array($this->addedAssets) && array_key_exists($type, $this->addedAssets) && is_array($this->addedAssets[$type])) {
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
             }
 

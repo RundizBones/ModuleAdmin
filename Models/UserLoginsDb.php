@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Models;
+namespace Rdb\Modules\RdbAdmin\Models;
 
 
 /**
@@ -14,7 +14,7 @@ namespace Modules\RdbAdmin\Models;
  *
  * @author mr.v
  */
-class UserLoginsDb extends \System\Core\Models\BaseModel
+class UserLoginsDb extends \Rdb\System\Core\Models\BaseModel
 {
 
 
@@ -47,7 +47,7 @@ class UserLoginsDb extends \System\Core\Models\BaseModel
      * 
      * @inheritDoc
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         parent::__construct($Container);
 
@@ -275,7 +275,7 @@ class UserLoginsDb extends \System\Core\Models\BaseModel
      */
     public function generateSessionKey(int $user_id): string
     {
-        $String = new \Modules\RdbAdmin\Libraries\RdbaString();
+        $String = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
         $exists = true;
         $sessionKey = $user_id . ($_SERVER['REMOTE_ADDR'] ?? '0.0.0.0') . time();
         $i = 0;
@@ -523,7 +523,7 @@ class UserLoginsDb extends \System\Core\Models\BaseModel
                 if ($this->Container->has('Languages')) {
                     $Languages = $this->Container->get('Languages');
                 } else {
-                    $Languages = new \Modules\RdbAdmin\Libraries\Languages($this->Container);
+                    $Languages = new \Rdb\Modules\RdbAdmin\Libraries\Languages($this->Container);
                 }
                 $Languages->bindTextDomain(
                     'rdbadmin', 
@@ -597,7 +597,7 @@ class UserLoginsDb extends \System\Core\Models\BaseModel
             return false;
         }
 
-        $Input = new \Modules\RdbAdmin\Libraries\Input();
+        $Input = new \Rdb\Modules\RdbAdmin\Libraries\Input();
 
         $defaults = [
             'userlogin_ua' => $Input->server('HTTP_USER_AGENT', null, FILTER_SANITIZE_STRING),
@@ -620,7 +620,7 @@ class UserLoginsDb extends \System\Core\Models\BaseModel
                 $userData = $UsersSessionsTrait->userSessionCookieData;
                 unset($UsersSessionsTrait);
             } else {
-                $Cookie = new \Modules\RdbAdmin\Libraries\Cookie($this->Container);
+                $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
                 $Cookie->setEncryption('rdbaLoggedinKey');
                 $userData = $Cookie->get('rdbadmin_cookie_users');
                 unset($Cookie);

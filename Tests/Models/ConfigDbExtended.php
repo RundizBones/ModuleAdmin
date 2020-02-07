@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Models;
+namespace Rdb\Modules\RdbAdmin\Tests\Models;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Tests\Models;
  *
  * @author mr.v
  */
-class ConfigDbExtended extends \Modules\RdbAdmin\Models\ConfigDb
+class ConfigDbExtended extends \Rdb\Modules\RdbAdmin\Models\ConfigDb
 {
 
 

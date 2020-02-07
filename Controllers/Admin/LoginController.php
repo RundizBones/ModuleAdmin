@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\Admin;
  * 
  * @since 0.1
  */
-class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
+class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
 
 
@@ -49,21 +49,21 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             $userLoginEmail = $data['user_email'];
         }
 
-        $BruteForceLoginPrevention = new \Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention($this->Container, $output['configDb']);
+        $BruteForceLoginPrevention = new \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention($this->Container, $output['configDb']);
         $bruteForceResult = $BruteForceLoginPrevention->checkBruteForceStatus($userLoginEmail);
 
         if (isset($bruteForceResult['status']) && $bruteForceResult['status'] === 'authenticate') {
             // if brute-force prevention status is no problem (status = authenticate).
-            $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
-            $UserLoginsDb = new \Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
+            $UserLoginsDb = new \Rdb\Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
             // check (username or email) and password.
             $doLoginResult = $UsersDb->checkLogin($data);
-            $LoginSubController = new \Modules\RdbAdmin\Controllers\_SubControllers\LoginSubController($this->Container);
+            $LoginSubController = new \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\LoginSubController($this->Container);
 
             if (isset($doLoginResult['result']) && $doLoginResult['result'] === true) {
                 // if check login success. ----------------------------------------------------------------------------------
                 // check 2 step verification.
-                $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                 $login2Step = $UserFieldsDb->get((int) $doLoginResult['user_id'], 'rdbadmin_uf_login2stepverification');
 
                 if (isset($login2Step->field_value) && $login2Step->field_value === 'email') {
@@ -75,7 +75,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
                         unset($output['emailSent']);
                         $proceedLoginSuccess = true;
                     } else {
-                        $Url = new \System\Libraries\Url($this->Container);
+                        $Url = new \Rdb\System\Libraries\Url($this->Container);
                         $output['redirectUrl'] = $Url->getDomainProtocol() . $Url->getAppBasedPath(true) . '/admin/login/2fa';
                         if (isset($_POST['gobackUrl'])) {
                             $output['redirectUrl'] .= '?gobackUrl=' . rawurldecode($_POST['gobackUrl']);
@@ -144,7 +144,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $output = [];
         $output = array_merge($output, $this->getConfig());
@@ -270,7 +270,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -313,7 +313,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
                     http_response_code(400);
                 } else {
                     // if form validation passed.
-                    $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+                    $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
                     $dataUpdate = [];
                     $dataUpdate['user_password'] = $UsersDb->hashPassword($data['new_password']);
                     $dataUpdate['user_status'] = 1;
@@ -322,7 +322,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
                         // if failed to hash password.
                         $updateStatus = false;
                         if ($this->Container->has('Logger')) {
-                            /* @var $Logger \System\Libraries\Logger */
+                            /* @var $Logger \Rdb\System\Libraries\Logger */
                             $Logger = $this->Container->get('Logger');
                             $Logger->write('modules/rdbadmin/controllers/admin/forgotloginpasscontroller', 5, 'Password hash error.');
                             unset($Logger);
@@ -338,7 +338,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
                         http_response_code(500);
                     } else {
                         // cleanup login reset time key and its timeout.
-                        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                         $UserFieldsDb->delete($user_id, 'rdbadmin_uf_simultaneouslogin_reset_key');
                         $UserFieldsDb->delete($user_id, 'rdbadmin_uf_simultaneouslogin_reset_time');
                         unset($UserFieldsDb);
@@ -350,7 +350,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
                         unset($row);
 
                         // cleanup cache that store just sent email.
-                        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+                        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
                             $this->Container, 
                             [
                                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
@@ -414,7 +414,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $output = [];
         $output = array_merge($output, $this->getConfig());
@@ -429,9 +429,9 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             // if validated token to prevent CSRF.
             $user_id = (int) ($_SESSION['user_id'] ?? 0);
 
-            $Url = new \System\Libraries\Url($this->Container);
-            $LoginSubController = new \Modules\RdbAdmin\Controllers\_SubControllers\LoginSubController($this->Container);
-            $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+            $Url = new \Rdb\System\Libraries\Url($this->Container);
+            $LoginSubController = new \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\LoginSubController($this->Container);
+            $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
 
             $output = array_merge(
                 $output,
@@ -466,7 +466,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
      */
     protected function getConfig(): array
     {
-        $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $configNames = [
             'rdbadmin_SiteName',
             'rdbadmin_UserRegister',
@@ -505,7 +505,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             } else {
                 // if config is use captcha but can skip after login success.
                 // check if there is skip "require captcha" cookie.
-                $SkipCaptchaCookie = new \Modules\RdbAdmin\Controllers\_SubControllers\SkipCaptchaCookie($this->Container);
+                $SkipCaptchaCookie = new \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\SkipCaptchaCookie($this->Container);
                 $output['requireCaptcha'] = ($SkipCaptchaCookie->isSkipCaptcha() === true ? false : true);// if there is skip cookie then mark as `false`, otherwise mark as `true`.
                 unset($SkipCaptchaCookie);
             }
@@ -529,8 +529,8 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -582,10 +582,10 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
             $MyModuleAssets = $ModuleAssets->getModuleAssets();
             unset($ModuleAssets);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['rdbaLoginLogout'], $MyModuleAssets);
             $Assets->addMultipleAssets('js', ['rdbaLogin'], $MyModuleAssets);
@@ -681,8 +681,8 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         if (!isset($_SESSION['user_id'])) {
@@ -725,10 +725,10 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
             $MyModuleAssets = $ModuleAssets->getModuleAssets();
             unset($ModuleAssets);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['rdbaLoginLogout'], $MyModuleAssets);
             $Assets->addMultipleAssets('js', ['rdbaLoginMfa'], $MyModuleAssets);
@@ -773,8 +773,8 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -810,7 +810,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
                     unset($row);
                     $this->userRow = null;
                     // check 2 step auth.
-                    $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                    $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                     $login2StepVerification = $UserFieldsDb->get($user_id, 'rdbadmin_uf_login2stepverification');
                     if (isset($login2StepVerification->field_value) && !empty($login2StepVerification->field_value)) {
                         $output['loginPageUrl'] = $Url->getAppBasedPath(true) . '/admin/login';
@@ -850,10 +850,10 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
             $MyModuleAssets = $ModuleAssets->getModuleAssets();
             unset($ModuleAssets);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['rdbaLoginLogout'], $MyModuleAssets);
             $Assets->addMultipleAssets('js', ['rdbaLoginReset'], $MyModuleAssets);
@@ -900,7 +900,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
      */
     protected function validateLoginResetKey(int $user_id, string $userEnteredLoginResetKey): bool
     {
-        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
         $loginResetKey = $UserFieldsDb->get($user_id, 'rdbadmin_uf_simultaneouslogin_reset_key');
         $loginResetTime = $UserFieldsDb->get($user_id, 'rdbadmin_uf_simultaneouslogin_reset_time');
         unset($UserFieldsDb);
@@ -935,7 +935,7 @@ class LoginController extends \Modules\RdbAdmin\Controllers\BaseController
         }
         unset($NowDt, $ResetDt, $loginResetTime);
 
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $result = $UsersDb->get(['user_id' => $user_id, 'user_status' => 0]);
         unset($UsersDb);
         if (empty($result) || $result === false) {

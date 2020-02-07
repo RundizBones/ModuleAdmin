@@ -1,8 +1,8 @@
 <?php
-/* @var $Assets \Modules\RdbAdmin\Libraries\Assets */
-/* @var $Modules \System\Modules */
-/* @var $Views \System\Views */
-/* @var $Url \System\Libraries\Url */
+/* @var $Assets \Rdb\Modules\RdbAdmin\Libraries\Assets */
+/* @var $Modules \Rdb\System\Modules */
+/* @var $Views \Rdb\System\Views */
+/* @var $Url \Rdb\System\Libraries\Url */
 ?>
                         <h1><?php echo __('Admin home'); ?></h1>
                         <div class="rdba-dashboard-container">

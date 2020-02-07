@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users\Sessions;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Sessions;
 
 
 /**
@@ -12,14 +12,14 @@ namespace Modules\RdbAdmin\Controllers\Admin\Users\Sessions;
  * 
  * @since 0.1
  */
-class SessionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class SessionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersTrait;
 
 
     /**
@@ -37,8 +37,8 @@ class SessionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -61,7 +61,7 @@ class SessionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
             $userlogin_ids = $this->Input->delete('userlogin_ids');
 
             $formValidated = false;
-            $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+            $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
             if ($UsersRolesDb->isEditingHigherRole((int) ($this->userSessionCookieData['user_id'] ?? 0), (int) $user_id)) {
                 http_response_code(403);
                 $output['formResultStatus'] = 'error';
@@ -152,13 +152,13 @@ class SessionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
     {
         $columns = $this->Input->get('columns', [], FILTER_UNSAFE_RAW, FILTER_REQUIRE_ARRAY);
         $order = $this->Input->get('order', [], FILTER_UNSAFE_RAW, FILTER_REQUIRE_ARRAY);
-        $DataTablesJs = new \Modules\RdbAdmin\Libraries\DataTablesJs();
+        $DataTablesJs = new \Rdb\Modules\RdbAdmin\Libraries\DataTablesJs();
         $sortOrders = $DataTablesJs->buildSortOrdersFromInput($columns, $order);
         unset($columns, $DataTablesJs, $order);
 
         $output = [];
 
-        $UserLoginsDb = new \Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
+        $UserLoginsDb = new \Rdb\Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
         $options = [];
         $options['sortOrders'] = $sortOrders;
         $options['offset'] = $this->Input->get('start', 0, FILTER_SANITIZE_NUMBER_INT);
@@ -191,7 +191,7 @@ class SessionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
     {
         $output = [];
 
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $where = [];
         $where['user_id'] = $user_id;
         $options = [];
@@ -218,8 +218,8 @@ class SessionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -249,7 +249,7 @@ class SessionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['datatables', 'rdbaCommonListDataPage'], $rdbAdminAssets);
             $Assets->addMultipleAssets('js', ['rdbaUserLoginSessions'], $rdbAdminAssets);

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\CronJobs;
+namespace Rdb\Modules\RdbAdmin\CronJobs;
 
 
 /**
@@ -12,24 +12,24 @@ namespace Modules\RdbAdmin\CronJobs;
  * 
  * @since 0.1
  */
-abstract class BaseCronJobs implements \Modules\RdbAdmin\Interfaces\CronJobs
+abstract class BaseCronJobs implements \Rdb\Modules\RdbAdmin\Interfaces\CronJobs
 {
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
 
     /**
-     * @var \Modules\RdbAdmin\Libraries\Cron
+     * @var \Rdb\Modules\RdbAdmin\Libraries\Cron
      */
     protected $Cron;
 
 
     /**
-     * @var \System\Libraries\Db
+     * @var \Rdb\System\Libraries\Db
      */
     protected $Db;
 
@@ -37,7 +37,7 @@ abstract class BaseCronJobs implements \Modules\RdbAdmin\Interfaces\CronJobs
     /**
      * {@inheritDoc}
      */
-    public function __construct(\System\Container $Container, \Modules\RdbAdmin\Libraries\Cron $Cron)
+    public function __construct(\Rdb\System\Container $Container, \Rdb\Modules\RdbAdmin\Libraries\Cron $Cron)
     {
         $this->Container = $Container;
         $this->Cron = $Cron;

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\ModuleData;
+namespace Rdb\Modules\RdbAdmin\ModuleData;
 
 
 /**
@@ -12,12 +12,12 @@ namespace Modules\RdbAdmin\ModuleData;
  * 
  * @since 0.1
  */
-class ModuleAdmin implements \Modules\RdbAdmin\Interfaces\ModuleAdmin
+class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
 {
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
@@ -25,7 +25,7 @@ class ModuleAdmin implements \Modules\RdbAdmin\Interfaces\ModuleAdmin
     /**
      * {@inheritDoc}
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         $this->Container = $Container;
     }// __construct
@@ -38,7 +38,7 @@ class ModuleAdmin implements \Modules\RdbAdmin\Interfaces\ModuleAdmin
     {
         $output = [];
 
-        $WidgetsController = new \Modules\RdbAdmin\Controllers\Admin\UI\Widgets\WidgetsController($this->Container);
+        $WidgetsController = new \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Widgets\WidgetsController($this->Container);
         $output['RdbAdmin.userSummary'] = $WidgetsController->userSummary();
         $output['RdbAdmin.lastLoggedinUsers'] = $WidgetsController->lastLoggedinUsers();
         $output['RdbAdmin.systemSummary'] = $WidgetsController->systemSummary();
@@ -70,7 +70,7 @@ class ModuleAdmin implements \Modules\RdbAdmin\Interfaces\ModuleAdmin
         if ($this->Container->has('Languages')) {
             $Languages = $this->Container->get('Languages');
         } else {
-            $Languages = new \Modules\RdbAdmin\Libraries\Languages($this->Container);
+            $Languages = new \Rdb\Modules\RdbAdmin\Libraries\Languages($this->Container);
         }
         $Languages->bindTextDomain(
             'rdbadmin', 
@@ -119,13 +119,13 @@ class ModuleAdmin implements \Modules\RdbAdmin\Interfaces\ModuleAdmin
      */
     public function menuItems(): array
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         // declare language object, set text domain to make sure that this is translation for your module.
         if ($this->Container->has('Languages')) {
             $Languages = $this->Container->get('Languages');
         } else {
-            $Languages = new \Modules\RdbAdmin\Libraries\Languages($this->Container);
+            $Languages = new \Rdb\Modules\RdbAdmin\Libraries\Languages($this->Container);
         }
         $Languages->bindTextDomain(
             'rdbadmin', 

@@ -4,10 +4,10 @@
  */
 
 
-namespace Modules\RdbAdmin\Libraries;
+namespace Rdb\Modules\RdbAdmin\Libraries;
 
 
-use Modules\RdbAdmin\Libraries\Encryption;
+use Rdb\Modules\RdbAdmin\Libraries\Encryption;
 
 
 /**
@@ -20,7 +20,7 @@ class Cookie
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
@@ -40,11 +40,11 @@ class Cookie
     /**
      * Class constructor.
      * 
-     * @param \System\Container $Container The DI container.
+     * @param \Rdb\System\Container $Container The DI container.
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
-        if ($Container instanceof \System\Container) {
+        if ($Container instanceof \Rdb\System\Container) {
             $this->Container = $Container;
         }
     }// __construct
@@ -62,12 +62,12 @@ class Cookie
      */
     public function get(string $name, $default = null)
     {
-        /* @var $Config \System\Config */
+        /* @var $Config \Rdb\System\Config */
         if ($this->Container->has('Config')) {
             $Config = $this->Container->get('Config');
             $Config->setModule('');
         } else {
-            $Config = new \System\Config();
+            $Config = new \Rdb\System\Config();
         }
         $name .= $Config->get('suffix', 'cookie');
 
@@ -115,12 +115,12 @@ class Cookie
      */
     public function set(string $name, $value = '', int $expires = 0, string $path = '', string $domain = '', bool $secure = false, bool $httponly = false): bool
     {
-        /* @var $Config \System\Config */
+        /* @var $Config \Rdb\System\Config */
         if ($this->Container->has('Config')) {
             $Config = $this->Container->get('Config');
             $Config->setModule('');
         } else {
-            $Config = new \System\Config();
+            $Config = new \Rdb\System\Config();
         }
         $name .= $Config->get('suffix', 'cookie');
 

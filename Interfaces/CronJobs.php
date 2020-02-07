@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Interfaces;
+namespace Rdb\Modules\RdbAdmin\Interfaces;
 
 
 /**
@@ -19,10 +19,10 @@ interface CronJobs
     /**
      * Class constructor.
      * 
-     * @param \System\Container $Container The DI container class.
-     * @param \Modules\RdbAdmin\Libraries\Cron $Cron The cron class to help check job had already run.
+     * @param \Rdb\System\Container $Container The DI container class.
+     * @param \Rdb\Modules\RdbAdmin\Libraries\Cron $Cron The cron class to help check job had already run.
      */
-    public function __construct(\System\Container $Container, \Modules\RdbAdmin\Libraries\Cron $Cron);
+    public function __construct(\Rdb\System\Container $Container, \Rdb\Modules\RdbAdmin\Libraries\Cron $Cron);
 
 
     /**

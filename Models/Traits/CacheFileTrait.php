@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Models\Traits;
+namespace Rdb\Modules\RdbAdmin\Models\Traits;
 
 
 /**
@@ -14,9 +14,9 @@ namespace Modules\RdbAdmin\Models\Traits;
  * Example:
  * <pre>
  * // To use cache data with your build cache content.
- * class MyModel extends \System\Core\Models\BaseModel
+ * class MyModel extends \Rdb\System\Core\Models\BaseModel
  * {
- *      public function __construct(\System\Container $Container)
+ *      public function __construct(\Rdb\System\Container $Container)
  *      {
  *          $this->storageFile = 'mymodel-db.php';
  *          $this->beginCacheFileTrait($Container);
@@ -48,9 +48,9 @@ namespace Modules\RdbAdmin\Models\Traits;
  * }
  * 
  * // To use auto generated build cache content.
- * class MyModel extends \Modules\RdbAdmin\Models\BaseModel
+ * class MyModel extends \Rdb\Modules\RdbAdmin\Models\BaseModel
  * {
- *      public function __construct(\System\Container $Container)
+ *      public function __construct(\Rdb\System\Container $Container)
  *      {
  *          $this->storageFile = 'mymodel-db.php';
  *          $this->beginCacheFileTrait($Container);
@@ -83,7 +83,7 @@ trait CacheFileTrait
 
 
     /**
-     * @var \System\Libraries\FileSystem
+     * @var \Rdb\System\Libraries\FileSystem
      */
     protected $FileSystem;
 
@@ -113,9 +113,9 @@ trait CacheFileTrait
      * 
      * This method must be called before it can be working.
      * 
-     * @param \System\Container $Container The DI container class.
+     * @param \Rdb\System\Container $Container The DI container class.
      */
-    protected function beginCacheFileTrait(\System\Container $Container)
+    protected function beginCacheFileTrait(\Rdb\System\Container $Container)
     {
         if (empty($this->storageFile) || !is_string($this->storageFile)) {
             $this->storageFile = hash('sha512', get_called_class()) . '.php';
@@ -148,7 +148,7 @@ trait CacheFileTrait
             unset($Module);
         }
 
-        $this->FileSystem = new \System\Libraries\FileSystem($this->storagePath);
+        $this->FileSystem = new \Rdb\System\Libraries\FileSystem($this->storagePath);
     }// beginCacheFileTrait
 
 
@@ -205,7 +205,7 @@ trait CacheFileTrait
         $buildResult = $this->FileSystem->writeFile($this->storageFile, $content);
 
         if ($buildResult !== false && $this->Container->has('Logger')) {
-            /* @var $Logger \System\Libraries\Logger */
+            /* @var $Logger \Rdb\System\Libraries\Logger */
             $Logger = $this->Container->get('Logger');
             $Logger->write('modules/rdbadmin/models/traits/cachefiletrait', 0, $this->storagePath . DIRECTORY_SEPARATOR . $this->storageFile . ' has been built.');
             unset($Logger);
@@ -239,7 +239,7 @@ trait CacheFileTrait
             }
 
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
                 $Logger->write('modules/rdbadmin/models/traits/cachefiletrait', 0, $this->storagePath . DIRECTORY_SEPARATOR . $this->storageFile . ' has been deleted.');
                 unset($Logger);
@@ -287,10 +287,10 @@ trait CacheFileTrait
             // if file exists.
             // check how old is it.
             if ($this->Container->has('Config')) {
-                /* @var $Config \System\Config */
+                /* @var $Config \Rdb\System\Config */
                 $Config = $this->Container->get('Config');
             } else {
-                $Config = new \System\Config();
+                $Config = new \Rdb\System\Config();
             }
             $Config->setModule('RdbAdmin');
 

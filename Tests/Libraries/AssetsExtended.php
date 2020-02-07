@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Tests\Libraries;
  * 
  * @since 0.1
  */
-class AssetsExtended extends \Modules\RdbAdmin\Libraries\Assets
+class AssetsExtended extends \Rdb\Modules\RdbAdmin\Libraries\Assets
 {
 
 

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers;
+namespace Rdb\Modules\RdbAdmin\Controllers;
 
 
 /**
@@ -12,18 +12,18 @@ namespace Modules\RdbAdmin\Controllers;
  * 
  * @since 0.1
  */
-abstract class BaseController extends \System\Core\Controllers\BaseController
+abstract class BaseController extends \Rdb\System\Core\Controllers\BaseController
 {
 
 
     /**
-     * @var \Modules\RdbAdmin\Libraries\Input
+     * @var \Rdb\Modules\RdbAdmin\Libraries\Input
      */
     protected $Input;
 
 
     /**
-     * @var \Modules\RdbAdmin\Libraries\Languages
+     * @var \Rdb\Modules\RdbAdmin\Libraries\Languages
      */
     protected $Languages;
 
@@ -31,16 +31,16 @@ abstract class BaseController extends \System\Core\Controllers\BaseController
     /**
      * {@inheritDoc}
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         parent::__construct($Container);
 
         // set default timezone, etc.
         $this->setBasicConfig();
 
-        $this->Input = new \Modules\RdbAdmin\Libraries\Input($Container);
+        $this->Input = new \Rdb\Modules\RdbAdmin\Libraries\Input($Container);
 
-        $Languages = new \Modules\RdbAdmin\Libraries\Languages($Container);
+        $Languages = new \Rdb\Modules\RdbAdmin\Libraries\Languages($Container);
         if (!$this->Container->has('Languages')) {
             $this->Container['Languages'] = function ($c) use ($Languages) {
                 return $Languages;
@@ -67,7 +67,7 @@ abstract class BaseController extends \System\Core\Controllers\BaseController
      */
     protected function getPageHtmlClasses(array $classes = []): string
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $default = [];
         $default[] = 'rdba-page-' . str_replace('/', '_', trim(ltrim($Url->getPath(), '/')));
@@ -98,7 +98,7 @@ abstract class BaseController extends \System\Core\Controllers\BaseController
 
         if ($siteName === false) {
             // if `$siteName` is `false` means get site name from config db automatically.
-            $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+            $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
             $siteName = $ConfigDb->get('rdbadmin_SiteName');
             unset($ConfigDb);
         }
@@ -130,7 +130,7 @@ abstract class BaseController extends \System\Core\Controllers\BaseController
             ) &&
             $this->Container->has('Config')
         ) {
-            /* @var $Config \System\Config */
+            /* @var $Config \Rdb\System\Config */
             $Config = $this->Container->get('Config');
             $Config->setModule('RdbAdmin');
 
@@ -138,8 +138,8 @@ abstract class BaseController extends \System\Core\Controllers\BaseController
                 $Config->get('useServerCron', 'cron', false) === false && 
                 $Config->get('enableCron', 'cron', true) === true
             ) {
-                /* @var $Modules \System\Modules */
-                $Cron = new \Modules\RdbAdmin\Libraries\Cron($this->Container);
+                /* @var $Modules \Rdb\System\Modules */
+                $Cron = new \Rdb\Modules\RdbAdmin\Libraries\Cron($this->Container);
                 $Cron->runJobsOnAllModules();
                 unset($Cron);
             }
@@ -153,7 +153,7 @@ abstract class BaseController extends \System\Core\Controllers\BaseController
      */
     protected function setBasicConfig()
     {
-        $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
 
         $configNames = [
             'rdbadmin_SiteTimezone',

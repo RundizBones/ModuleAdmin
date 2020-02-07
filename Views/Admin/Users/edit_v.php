@@ -1,8 +1,8 @@
 <?php
-/* @var $Assets \Modules\RdbAdmin\Libraries\Assets */
-/* @var $Modules \System\Modules */
-/* @var $Views \System\Views */
-/* @var $Url \System\Libraries\Url */
+/* @var $Assets \Rdb\Modules\RdbAdmin\Libraries\Assets */
+/* @var $Modules \Rdb\System\Modules */
+/* @var $Views \Rdb\System\Views */
+/* @var $Url \Rdb\System\Libraries\Url */
 ?>
                         <h1 class="rdba-page-content-header"><?php echo __('Edit user'); ?></h1>
 
@@ -98,7 +98,7 @@
                                         if (isset($listRoles['items']) && is_array($listRoles['items'])) {
                                             foreach ($listRoles['items'] as $row) {
                                                 echo '<option value="' . $row->userrole_id . '"';
-                                                echo \System\Libraries\Form::staticSetSelected($row->userrole_id, $user_roles);
+                                                echo \Rdb\System\Libraries\Form::staticSetSelected($row->userrole_id, $user_roles);
                                                 echo '>';
                                                 echo $row->userrole_name;
                                                 echo '</option>' . PHP_EOL;
@@ -114,8 +114,8 @@
                                 <label class="control-label" for="user_status"><?php echo __('Status'); ?></label>
                                 <div class="control-wrapper">
                                     <select id="user_status" name="user_status">
-                                        <option value="0"<?php echo \System\Libraries\Form::staticSetSelected('0', ($user_status ?? 1)); ?>><?php echo __('Disabled'); ?></option>
-                                        <option value="1"<?php echo \System\Libraries\Form::staticSetSelected('1', ($user_status ?? 1)); ?>><?php echo __('Enabled'); ?></option>
+                                        <option value="0"<?php echo \Rdb\System\Libraries\Form::staticSetSelected('0', ($user_status ?? 1)); ?>><?php echo __('Disabled'); ?></option>
+                                        <option value="1"<?php echo \Rdb\System\Libraries\Form::staticSetSelected('1', ($user_status ?? 1)); ?>><?php echo __('Enabled'); ?></option>
                                     </select>
                                 </div>
                             </div>

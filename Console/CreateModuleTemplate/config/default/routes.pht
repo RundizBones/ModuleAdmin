@@ -1,9 +1,9 @@
 <?php
 /* @var $Rc \FastRoute\RouteCollector */
-/* @var $this \System\Router */
+/* @var $this \Rdb\System\Router */
 
 
 $Rc->addGroup('/admin', function(\FastRoute\RouteCollector $Rc) {
     // /admin/%modulename% page
-    $Rc->addRoute(['GET', 'POST'], '/%modulename%', '\\Modules\\%ModuleName%\\Controllers\\Admin\\Index:index');
+    $Rc->addRoute(['GET', 'POST'], '/%modulename%', '\\Rdb\\Modules\\%ModuleName%\\Controllers\\Admin\\Index:index');
 });

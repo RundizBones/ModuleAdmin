@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Roles;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Roles;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Roles;
  * 
  * @since 0.1
  */
-class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\RolesTrait;
@@ -37,8 +37,8 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -78,7 +78,7 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             if ($formValidated === true) {
                 // if form validation passed.
                 // update to DB.
-                $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+                $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
                 $updateResult = $UserRolesDb->update($data, ['userrole_id' => $userrole_id]);
                 $output['rowUpdated'] = $this->Db->PDOStatement()->rowCount();
                 unset($UserRolesDb);
@@ -129,8 +129,8 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -167,10 +167,10 @@ class EditController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContro
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
             $MyModuleAssets = $ModuleAssets->getModuleAssets();
             unset($ModuleAssets);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['datatables', 'rdbaCommonListDataPage'], $MyModuleAssets);
             $Assets->addMultipleAssets('js', ['rdbaRolesEdit', 'rdbaHistoryState'], $MyModuleAssets);

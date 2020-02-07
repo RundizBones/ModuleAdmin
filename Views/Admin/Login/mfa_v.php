@@ -1,8 +1,8 @@
 <?php
-/* @var $Assets \Modules\RdbAdmin\Libraries\Assets */
-/* @var $Modules \System\Modules */
-/* @var $Views \System\Views */
-/* @var $Url \System\Libraries\Url */
+/* @var $Assets \Rdb\Modules\RdbAdmin\Libraries\Assets */
+/* @var $Modules \Rdb\System\Modules */
+/* @var $Views \Rdb\System\Views */
+/* @var $Url \Rdb\System\Libraries\Url */
 ?>
         <div class="rd-columns-flex-container rd-block-level-margin-bottom">
             <div class="column">
@@ -37,7 +37,7 @@
                         <label class="control-label" for="rundizbones-languages"><?php echo __('Change language'); ?></label>
                         <div class="control-wrapper">
                             <?php
-                            $languagesResult = $Modules->execute('Modules\\Languages\\Controllers\\Languages:index', []);
+                            $languagesResult = $Modules->execute('Rdb\\Modules\\Languages\\Controllers\\Languages:index', []);
                             $languagesResult = unserialize($languagesResult);
                             if (isset($languagesResult['languages']) && is_array($languagesResult['languages']) && !empty($languagesResult['languages'])) {
                             ?>

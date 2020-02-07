@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\CronJobs\Jobs;
+namespace Rdb\Modules\RdbAdmin\CronJobs\Jobs;
 
 
 /**
@@ -19,9 +19,9 @@ class DeleteFailedLogins
     /**
      * Execute the job.
      * 
-     * @param \System\Libraries\Db $Db The Database class.
+     * @param \Rdb\System\Libraries\Db $Db The Database class.
      */
-    public static function execute(\System\Libraries\Db $Db)
+    public static function execute(\Rdb\System\Libraries\Db $Db)
     {
         $keepLoginsForDays = 90;// keep for xx days.
         $sql = 'DELETE FROM `' . $Db->tableName('user_logins') . '` WHERE `userlogin_result` = 0 AND `userlogin_date_gmt` < :userlogin_date_gmt';

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Interfaces;
+namespace Rdb\Modules\RdbAdmin\Interfaces;
 
 
 /**
@@ -21,9 +21,9 @@ interface ModuleAdmin
     /**
      * The class constructor.
      * 
-     * @param \System\Container $Container The DI container class.
+     * @param \Rdb\System\Container $Container The DI container class.
      */
-    public function __construct(\System\Container $Container);
+    public function __construct(\Rdb\System\Container $Container);
 
 
     /**
@@ -158,7 +158,7 @@ interface ModuleAdmin
      * if ($this->Container->has(&#039;Languages&#039;)) {
      *     $Languages = $this->Container->get(&#039;Languages&#039;);
      * } else {
-     *     $Languages = new \Modules\RdbAdmin\Libraries\Languages($this->Container);
+     *     $Languages = new \Rdb\Modules\RdbAdmin\Libraries\Languages($this->Container);
      * }
      * $Languages-&gt;bindTextDomain(
      *     &#039;rdbadmin&#039;, 

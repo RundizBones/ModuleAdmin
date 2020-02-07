@@ -4,27 +4,27 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
-class AssetsTest extends \Tests\Rdb\BaseTestCase
+class AssetsTest extends \Rdb\Tests\BaseTestCase
 {
 
 
     /**
-     * @var \Modules\RdbAdmin\Tests\Libraries\AssetsExtended 
+     * @var \Rdb\Modules\RdbAdmin\Tests\Libraries\AssetsExtended 
      */
     protected $Assets;
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
 
     /**
-     * @var \System\Libraries\FileSystem
+     * @var \Rdb\System\Libraries\FileSystem
      */
     protected $FileSystem;
 
@@ -66,23 +66,23 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
             umask($umask);
         }
 
-        $this->FileSystem = new \System\Libraries\FileSystem(PUBLIC_PATH);
+        $this->FileSystem = new \Rdb\System\Libraries\FileSystem(PUBLIC_PATH);
         $this->FileSystem->createFolder('Modules/RdbAdmin/assets/' . $this->testAssetFolderName);
 
-        $this->FileSystem = new \System\Libraries\FileSystem($this->testAssetFolderPath);
+        $this->FileSystem = new \Rdb\System\Libraries\FileSystem($this->testAssetFolderPath);
         $this->FileSystem->createFile('jquery.js', 'test only');
         $this->FileSystem->createFile('bootstrap.js', 'test only');
         $this->FileSystem->createFile('bootstrap.css', 'test only');
         $this->FileSystem->createFile('bootstrap-theme.css', 'test only');
 
-        $this->Container = new \System\Container();
-        $Modules = new \System\Modules($this->Container);
+        $this->Container = new \Rdb\System\Container();
+        $Modules = new \Rdb\System\Modules($this->Container);
         $this->Container['Modules'] = function ($c) use ($Modules) {
             return $Modules;
         };
         unset($Modules);
         $this->Container['Logger'] = function ($c) {
-            return new \System\Libraries\Logger($c);
+            return new \Rdb\System\Libraries\Logger($c);
         };
 
         $this->Assets = new AssetsExtended($this->Container);
@@ -98,7 +98,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testAddAsset()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -201,7 +201,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testAddCssInline()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -230,7 +230,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testAddJsInline()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -263,7 +263,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testAddJsObject()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -298,7 +298,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testAddMultipleAssets()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -429,7 +429,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testAssetIs()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -447,7 +447,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testClear()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -489,7 +489,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testGenerateAssetUrlWithVersion()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -542,7 +542,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testGenerateInlineScript()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $this->Assets->addAsset('js', 'jquery', $Url->getPublicModuleUrl(__FILE__) . '/assets/' . $this->testAssetFolderName . '/jquery.js');
         $this->Assets->addJsInline('jquery', 'function thisIsjustTest() {}', 'after');
@@ -561,7 +561,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testGenerateInlineStyle()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $this->Assets->addAsset('css', 'bootstrap', $Url->getPublicModuleUrl(__FILE__) . '/assets/' . $this->testAssetFolderName . '/bootstrap.css');
         $this->Assets->addCssInline('bootstrap', 'body {background-color: white;}');
@@ -576,7 +576,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testGenerateJsObject()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $this->Assets->addAsset('js', 'jquery', $Url->getPublicModuleUrl(__FILE__) . '/assets/' . $this->testAssetFolderName . '/jquery.js');
         $this->Assets->addJsObject('jquery', 'myJqueryObject', ['name' => 'TestJQueryObj', 'version' => '3.x.x']);
@@ -591,7 +591,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testGetDependencyExists()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -709,7 +709,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testRemoveAsset()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -732,7 +732,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testRenderAssets()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 
@@ -785,7 +785,7 @@ class AssetsTest extends \Tests\Rdb\BaseTestCase
 
     public function testTopologicalSort()
     {
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
         unset($Url);
 

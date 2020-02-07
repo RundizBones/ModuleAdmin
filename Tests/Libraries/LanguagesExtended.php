@@ -4,10 +4,10 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
-class LanguagesExtended extends \Modules\RdbAdmin\Libraries\Languages
+class LanguagesExtended extends \Rdb\Modules\RdbAdmin\Libraries\Languages
 {
 
 

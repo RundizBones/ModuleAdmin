@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Models\Traits;
+namespace Rdb\Modules\RdbAdmin\Models\Traits;
 
 
 /**
@@ -93,9 +93,9 @@ trait MetaFieldsTrait
      * 
      * This method must be called before it can be working.
      * 
-     * @param \System\Container $Container The DI container class.
+     * @param \Rdb\System\Container $Container The DI container class.
      */
-    protected function beginMetaFieldsTrait(\System\Container $Container)
+    protected function beginMetaFieldsTrait(\Rdb\System\Container $Container)
     {
         $this->beginCacheFileTrait($Container);
     }// beginMetaFieldsTrait

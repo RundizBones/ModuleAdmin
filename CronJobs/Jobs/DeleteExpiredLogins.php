@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\CronJobs\Jobs;
+namespace Rdb\Modules\RdbAdmin\CronJobs\Jobs;
 
 
 /**
@@ -19,9 +19,9 @@ class DeleteExpiredLogins
     /**
      * Execute the job.
      * 
-     * @param \System\Libraries\Db $Db The Database class.
+     * @param \Rdb\System\Libraries\Db $Db The Database class.
      */
-    public static function execute(\System\Libraries\Db $Db)
+    public static function execute(\Rdb\System\Libraries\Db $Db)
     {
         $sql = 'DELETE FROM `' . $Db->tableName('user_logins') . '` WHERE `userlogin_result` = 1 AND `userlogin_expire_date_gmt` < :userlogin_expire_date_gmt';
         $Sth = $Db->PDO()->prepare($sql);

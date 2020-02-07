@@ -5,12 +5,12 @@
  * The administrator module for RundizBones.
  * 
  * @package RdbAdmin
- * @version 0.1.1
+ * @version 0.2.0
  * @license http://opensource.org/licenses/MIT MIT
  */
 
 
-namespace Modules\RdbAdmin;
+namespace Rdb\Modules\RdbAdmin;
 
 
 /**
@@ -18,24 +18,24 @@ namespace Modules\RdbAdmin;
  * 
  * @since 0.1
  */
-class Installer implements \System\Interfaces\ModuleInstaller
+class Installer implements \Rdb\System\Interfaces\ModuleInstaller
 {
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
 
     /**
-     * @var \System\Libraries\Db
+     * @var \Rdb\System\Libraries\Db
      */
     protected $Db;
 
 
     /**
-     * @var \System\Libraries\Logger
+     * @var \Rdb\System\Libraries\Logger
      */
     protected $Logger;
 
@@ -43,20 +43,20 @@ class Installer implements \System\Interfaces\ModuleInstaller
     /**
      * {@inheritDoc}
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         $this->Container = $Container;
 
         if ($this->Container->has('Db')) {
             $this->Db = $this->Container->get('Db');
         } else {
-            $this->Db = new \System\Libraries\Db($Container);
+            $this->Db = new \Rdb\System\Libraries\Db($Container);
         }
 
         if ($this->Container->has('Logger')) {
             $this->Logger = $this->Container->get('Logger');
         } else {
-            $this->Logger = new \System\Libraries\Logger($Container);
+            $this->Logger = new \Rdb\System\Libraries\Logger($Container);
         }
     }// __construct
 

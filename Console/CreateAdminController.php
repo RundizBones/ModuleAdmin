@@ -8,7 +8,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Console;
+namespace Rdb\Modules\RdbAdmin\Console;
 
 
 use Symfony\Component\Console\Question\ConfirmationQuestion;
@@ -24,12 +24,12 @@ use \Symfony\Component\Console\Style\SymfonyStyle;
  * 
  * @since 0.1
  */
-class CreateAdminController extends \System\Core\Console\BaseConsole
+class CreateAdminController extends \Rdb\System\Core\Console\BaseConsole
 {
 
 
     /**
-     * @var \System\Libraries\FileSystem
+     * @var \Rdb\System\Libraries\FileSystem
      */
     private $Fs;
 
@@ -44,7 +44,7 @@ class CreateAdminController extends \System\Core\Console\BaseConsole
             ->setHelp(
                 'Create an admin controller for development.' . "\n" .
                 'The admin controller must be in an existing module and the module has to compatible with the RdbAdmin module.' . "\n" .
-                'The controller that will be creating will extend the "\Modules\RdbAdmin\Controllers\Admin\AdminBaseController" controller.' . "\n" .
+                'The controller that will be creating will extend the "\Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController" controller.' . "\n" .
                 'The controller name is start related to "<your module>/Controllers" folder.' . "\n" .
                 'If controller name you specified is already exists, it will show the error and not be created.' . "\n\n" .
                 'Example:' . "\n" .
@@ -97,7 +97,7 @@ class CreateAdminController extends \System\Core\Console\BaseConsole
 
         if (!is_dir($controllerParentFolder)) {
             $controllerParentFolderRelated = dirname($controllerRelatePath);
-            $Fs = new \System\Libraries\FileSystem(MODULE_PATH);
+            $Fs = new \Rdb\System\Libraries\FileSystem(MODULE_PATH);
             $createFolderResult = $Fs->createFolder($controllerParentFolderRelated);
             unset($controllerParentFolderRelated, $Fs);
 
@@ -235,7 +235,7 @@ class CreateAdminController extends \System\Core\Console\BaseConsole
         $controllerFullPath = MODULE_PATH . DIRECTORY_SEPARATOR . $controllerRelatePath;
 
         if (is_file($controllerFullPath)) {
-            $controllerFullClass = 'Modules\\' . str_replace('.php', '', $controllerRelatePath);
+            $controllerFullClass = 'Rdb\\Modules\\' . str_replace('.php', '', $controllerRelatePath);
             $controllerNamespace = dirname($controllerFullClass);
             $controllerClass = str_replace($controllerNamespace . '\\', '', $controllerFullClass);
 
@@ -252,7 +252,7 @@ class CreateAdminController extends \System\Core\Console\BaseConsole
             unset($controllerClass, $controllerFullClass, $controllerNamespace);
             // end replace contens. ------------------------------------------------------------------------------------
 
-            $Fs = new \System\Libraries\FileSystem(MODULE_PATH);
+            $Fs = new \Rdb\System\Libraries\FileSystem(MODULE_PATH);
             $writeResult = $Fs->writeFile($controllerRelatePath, $fileContents);
             unset($Fs);
 

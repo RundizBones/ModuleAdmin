@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\CronJobs\Jobs;
+namespace Rdb\Modules\RdbAdmin\CronJobs\Jobs;
 
 
 /**
@@ -19,10 +19,10 @@ class DeleteSoftDeleteUsers
     /**
      * Execute the job.
      * 
-     * @param \System\Container $Container The DI Container class.
-     * @param \System\Libraries\Db $Db The Database class.
+     * @param \Rdb\System\Container $Container The DI Container class.
+     * @param \Rdb\System\Libraries\Db $Db The Database class.
      */
-    public static function execute(\System\Container $Container, \System\Libraries\Db $Db)
+    public static function execute(\Rdb\System\Container $Container, \Rdb\System\Libraries\Db $Db)
     {
         $keepSoftDeleteForDays = 30;// keep for xx days.
         $sql = 'SELECT `user_id`, `user_deleted`, `user_deleted_since_gmt` 
@@ -39,7 +39,7 @@ class DeleteSoftDeleteUsers
 
         $result = $Sth->fetchAll();
         if (is_array($result)) {
-            $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($Container);
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($Container);
             foreach ($result as $row) {
                 $UsersDb->delete((int) $row->user_id);
             }// endforeach;

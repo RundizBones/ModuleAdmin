@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Console;
+namespace Rdb\Modules\RdbAdmin\Console;
 
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,7 +17,7 @@ use \Symfony\Component\Console\Style\SymfonyStyle;
  * 
  * @since 0.1
  */
-class Cron extends \System\Core\Console\BaseConsole
+class Cron extends \Rdb\System\Core\Console\BaseConsole
 {
 
 
@@ -41,7 +41,7 @@ class Cron extends \System\Core\Console\BaseConsole
      */
     protected function execute(InputInterface $Input, OutputInterface $Output)
     {
-        $Cron = new \Modules\RdbAdmin\Libraries\Cron($this->Container);
+        $Cron = new \Rdb\Modules\RdbAdmin\Libraries\Cron($this->Container);
         $Io = new SymfonyStyle($Input, $Output);
 
         $dataOutput = [];

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Roles;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Roles;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\Admin\Roles;
  * 
  * @since 0.1
  */
-class ReorderController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class ReorderController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
@@ -34,8 +34,8 @@ class ReorderController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -54,7 +54,7 @@ class ReorderController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
 
             if (is_array($updateData) && $this->isRestrictedPriority($updateData) === false) {
                 // if update roles are not in restricted.
-                $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+                $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
 
                 // prepare priority data for checking and re-ordering.
                 $priorities = [];

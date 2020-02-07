@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Permissions;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Permissions;
 
 
 /**
@@ -12,20 +12,20 @@ namespace Modules\RdbAdmin\Controllers\Admin\Permissions;
  * 
  * @since 0.1
  */
-class PermissionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class PermissionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\PermissionsTrait;
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersTrait;
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\Roles\Traits\RolesTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\Roles\Traits\RolesTrait;
 
 
     /**
@@ -47,14 +47,14 @@ class PermissionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBas
     ): array
     {
         if ($this->Container->has('Modules')) {
-            /* @var $Modules \System\Modules */
+            /* @var $Modules \Rdb\System\Modules */
             $Modules = $this->Container->get('Modules');
         } else {
-            $Modules = new \System\Modules($this->Container);
+            $Modules = new \Rdb\System\Modules($this->Container);
             $Modules->setCurrentModule(get_called_class());
         }
 
-        $Url = new \System\Libraries\Url($this->Container);
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
 
@@ -71,19 +71,19 @@ class PermissionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBas
 
         // get module's pages and actions.
         if (is_file(MODULE_PATH . '/' . $permissionModule . '/ModuleData/ModuleAdmin.php')) {
-            $ModuleAdminInterfaceInstance = new \ReflectionClass('\\Modules\\RdbAdmin\\Interfaces\\ModuleAdmin');
-            $ReflectionClass = new \ReflectionClass('\\Modules\\' . $permissionModule . '\\ModuleData\\ModuleAdmin');
+            $ModuleAdminInterfaceInstance = new \ReflectionClass('\\Rdb\\Modules\\RdbAdmin\\Interfaces\\ModuleAdmin');
+            $ReflectionClass = new \ReflectionClass('\\Rdb\\Modules\\' . $permissionModule . '\\ModuleData\\ModuleAdmin');
             $ModuleAdminClass = $ReflectionClass->newInstanceWithoutConstructor();
 
             if ($ModuleAdminInterfaceInstance->isInstance($ModuleAdminClass)) {
                 // if module admin class in instance of module admin interface.
                 // get defined permissions for selected module.
-                /* @var $ModuleAdmin \Modules\RdbAdmin\Interfaces\ModuleAdmin */
+                /* @var $ModuleAdmin \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin */
                 $ModuleAdmin = $ReflectionClass->newInstance($this->Container);
                 $permissions = $ModuleAdmin->definePermissions();
 
                 // get permissions saved in DB.
-                $UserPermissionsDb = new \Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+                $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
                 $options = [];
                 $options['unlimited'] = true;
                 $options['where'] = [];
@@ -270,7 +270,7 @@ class PermissionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBas
         $options = [];
         $options['unlimited'] = true;
         $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
-        $UserRolesDb = new \Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $output['listColumns'] = $UserRolesDb->listItems($options);
 
         unset($options, $UserRolesDb);
@@ -287,7 +287,7 @@ class PermissionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBas
     protected function getUser(int $user_id): array
     {
         $output = [];
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $where = [];
         $where['user_id'] = $user_id;
         $options = [];
@@ -298,7 +298,7 @@ class PermissionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBas
         if (is_object($userRow) && !empty($userRow)) {
             // if successfully get user data.
             // get user's roles data.
-            $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+            $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
             $options = [];
             $options['where']['user_id'] = $user_id;
             $options['unlimited'] = true;
@@ -350,8 +350,8 @@ class PermissionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBas
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf(['persistentTokenMode' => true]);// use persistent for ajax save on click can be multiple click  at a time.
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf(['persistentTokenMode' => true]);// use persistent for ajax save on click can be multiple click  at a time.
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -423,7 +423,7 @@ class PermissionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBas
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['datatables', 'rdbaCommonListDataPage'], $rdbAdminAssets);
             $Assets->addMultipleAssets('js', ['rdbaPermissions'], $rdbAdminAssets);

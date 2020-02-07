@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Models;
+namespace Rdb\Modules\RdbAdmin\Models;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Models;
  * 
  * @since 0.1
  */
-class ConfigDb extends \System\Core\Models\BaseModel
+class ConfigDb extends \Rdb\System\Core\Models\BaseModel
 {
 
 
@@ -34,11 +34,11 @@ class ConfigDb extends \System\Core\Models\BaseModel
     /**
      * {@inheritDoc}
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         $this->storagePath = STORAGE_PATH . '/cache/Modules/RdbAdmin/Models/ConfigDb';
         if ($Container->has('Modules')) {
-            /* @var $Modules \System\Modules */
+            /* @var $Modules \Rdb\System\Modules */
             $Modules = $Container->get('Modules');
             $Modules->setCurrentModule(get_called_class());
             unset($Modules);

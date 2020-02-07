@@ -7,14 +7,14 @@
 namespace Tests\Rdb\System\Libraries;
 
 
-class CsrfTest extends \Tests\Rdb\BaseTestCase
+class CsrfTest extends \Rdb\Tests\BaseTestCase
 {
 
 
     public function testConstructorOptions()
     {
         // test default options.
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $assert1 = [
             'prefix' => 'csrf',
             'storage' => null,
@@ -26,7 +26,7 @@ class CsrfTest extends \Tests\Rdb\BaseTestCase
         $this->assertSame($assert1, $Csrf->options);
 
         // test customized options. (with wrong order).
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf([
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf([
             'failureCallable' => null,
             'strength' => 20,
             'prefix' => 'csrf2',
@@ -44,7 +44,7 @@ class CsrfTest extends \Tests\Rdb\BaseTestCase
         $this->assertSame($assert2, $Csrf->options);
 
         // test wrong options value.
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf([
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf([
             'persistentTokenMode' => 'true',
             'strength' => '20',
             'prefix' => ['csrf2'],
@@ -67,7 +67,7 @@ class CsrfTest extends \Tests\Rdb\BaseTestCase
 
     public function testCreateToken()
     {
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $genToken = $Csrf->createToken();
 
@@ -80,7 +80,7 @@ class CsrfTest extends \Tests\Rdb\BaseTestCase
 
     public function testGetTokenNameValueKey()
     {
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $tokenKeys = $Csrf->getTokenNameValueKey();
         $this->assertTrue(is_array($tokenKeys));
@@ -97,7 +97,7 @@ class CsrfTest extends \Tests\Rdb\BaseTestCase
 
     public function testValidateToken()
     {
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $genToken = $Csrf->createToken();
 

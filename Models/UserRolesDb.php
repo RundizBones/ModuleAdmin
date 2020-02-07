@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Models;
+namespace Rdb\Modules\RdbAdmin\Models;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Models;
  * 
  * @since 0.1
  */
-class UserRolesDb extends \System\Core\Models\BaseModel
+class UserRolesDb extends \Rdb\System\Core\Models\BaseModel
 {
 
 
@@ -39,7 +39,7 @@ class UserRolesDb extends \System\Core\Models\BaseModel
      * 
      * @inheritDoc
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         parent::__construct($Container);
 

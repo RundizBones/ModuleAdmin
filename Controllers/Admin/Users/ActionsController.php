@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users;
 
 
 /**
@@ -12,11 +12,11 @@ namespace Modules\RdbAdmin\Controllers\Admin\Users;
  * 
  * @since 0.1
  */
-class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     use Traits\UsersTrait;
@@ -37,8 +37,8 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -68,7 +68,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
                 $data['user_deleted_since'] = date('Y-m-d H:i:s');
                 $data['user_deleted_since_gmt'] = gmdate('Y-m-d H:i:s');
 
-                $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+                $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 
                 $i = 0;
                 if (isset($output['listUsers']['items']) && is_array($output['listUsers']['items'])) {
@@ -135,8 +135,8 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -168,7 +168,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
                 $data['user_deleted_since'] = date('Y-m-d H:i:s');
                 $data['user_deleted_since_gmt'] = gmdate('Y-m-d H:i:s');
 
-                $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+                $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
                 $output['updateResult'] = $UsersDb->update($data, ['user_id' => $user_ids]);
 
                 if ($output['updateResult'] === true) {
@@ -223,8 +223,8 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -260,7 +260,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
                         break;
                 }
 
-                $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+                $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 
                 $i = 0;
                 if (isset($output['listUsers']['items']) && is_array($output['listUsers']['items'])) {
@@ -327,8 +327,8 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -365,7 +365,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             //$Assets->addMultipleAssets('css', [], $rdbAdminAssets);
             $Assets->addMultipleAssets('js', ['rdbaUsersActions', 'rdbaHistoryState'], $rdbAdminAssets);
@@ -410,8 +410,8 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -454,7 +454,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
         } else {
             // if not custom HTTP accept.
             $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             //$Assets->addMultipleAssets('css', [], $rdbAdminAssets);
             $Assets->addMultipleAssets('js', ['rdbaUsersDeleteMe'], $rdbAdminAssets);
@@ -563,7 +563,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             $usersActionOk = false;
         }
 
-        $UsersRolesDb = new \Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+        $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
         $options = [];
         $options['where']['user_id'] = ($this->userSessionCookieData['user_id'] ?? 0);
         $options['limit'] = 1;
@@ -574,7 +574,7 @@ class ActionsController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
         if (isset($myRoles['items'])) {
             $myRoles = array_shift($myRoles['items']);
 
-            $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
             $listUsers = $UsersDb->listItems(['userIdsIn' => $expUserIds]);
 
             // validate not editing, deleting higher role. --------------------

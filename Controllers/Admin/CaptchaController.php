@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\Admin;
  * 
  * @since 0.1
  */
-class CaptchaController extends \System\Core\Controllers\BaseController
+class CaptchaController extends \Rdb\System\Core\Controllers\BaseController
 {
 
 

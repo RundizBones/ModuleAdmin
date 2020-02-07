@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Models;
+namespace Rdb\Modules\RdbAdmin\Models;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Models;
  * 
  * @since 0.1
  */
-class UserPermissionsDb extends \System\Core\Models\BaseModel
+class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
 {
 
 
@@ -70,7 +70,7 @@ class UserPermissionsDb extends \System\Core\Models\BaseModel
     public function checkPermission(string $module, string $page, $action, array $identity = []): bool
     {
         // make cache object ready.
-        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
             $this->Container,
             [
                 'cachePath' => $this->cachePath,
@@ -282,7 +282,7 @@ class UserPermissionsDb extends \System\Core\Models\BaseModel
      */
     public function deleteCheckPermissionCache(array $options)
     {
-        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
             $this->Container,
             [
                 'cachePath' => $this->cachePath,

@@ -4,15 +4,15 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
-class CronTest extends \Tests\Rdb\BaseTestCase
+class CronTest extends \Rdb\Tests\BaseTestCase
 {
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 

@@ -4,20 +4,20 @@
  */
 
 
-namespace Modules\%ModuleName%\Controllers\Admin;
+namespace Rdb\Modules\%ModuleName%\Controllers\Admin;
 
 
 /**
  * Your controller.
  */
-class IndexController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class IndexController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
 
 
     /**
-     * Use `\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait` to access method that is required for common admin pages.
+     * Use `\Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait` to access method that is required for common admin pages.
      */
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
     /**
@@ -51,7 +51,7 @@ class IndexController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseContr
             // get RdbAdmin module's assets data for render page correctly.
             $rdbAdminAssets = $this->getRdbAdminAssets();
             // Assets class for add CSS and JS.
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             // add CSS and JS assets to make basic functional and style on admin page works correctly.
             $this->setCssAssets($Assets, $rdbAdminAssets);

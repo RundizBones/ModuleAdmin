@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Libraries;
+namespace Rdb\Modules\RdbAdmin\Libraries;
 
 
 /**
@@ -18,7 +18,7 @@ class Languages
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
@@ -44,14 +44,14 @@ class Languages
     /**
      * Class constructor.
      * 
-     * @param \System\Container $Container The DI container class.
+     * @param \Rdb\System\Container $Container The DI container class.
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
-        if ($Container instanceof \System\Container) {
+        if ($Container instanceof \Rdb\System\Container) {
             $this->Container = $Container;
         } else {
-            $this->Container = new \System\Container();
+            $this->Container = new \Rdb\System\Container();
         }
 
         $this->Translator = new \Gettext\Translator();
@@ -70,7 +70,7 @@ class Languages
     public function bindTextDomain(string $domain, string $directory = ''): bool
     {
         if ($this->Container->has('Logger')) {
-            /* @var $Logger \System\Libraries\Logger */
+            /* @var $Logger \Rdb\System\Libraries\Logger */
             $Logger = $this->Container->get('Logger');
         }
 

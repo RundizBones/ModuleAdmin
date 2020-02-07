@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\_SubControllers;
+namespace Rdb\Modules\RdbAdmin\Controllers\_SubControllers;
 
 
 /**
@@ -14,7 +14,7 @@ namespace Modules\RdbAdmin\Controllers\_SubControllers;
  * 
  * @since 0.1
  */
-class SkipCaptchaCookie extends \Modules\RdbAdmin\Controllers\BaseController
+class SkipCaptchaCookie extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
 
 
@@ -38,7 +38,7 @@ class SkipCaptchaCookie extends \Modules\RdbAdmin\Controllers\BaseController
     public function isSkipCaptcha(): bool
     {
         // get skip "require captcha" cookie.
-        $Cookie = new \Modules\RdbAdmin\Libraries\Cookie($this->Container);
+        $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
         $Cookie->setEncryption($this->encryptionConfigName);
 
         $requireCaptchaCookie = $Cookie->get($this->cookieName);
@@ -93,8 +93,8 @@ class SkipCaptchaCookie extends \Modules\RdbAdmin\Controllers\BaseController
      */
     public function issueSkipCaptchaCookie(int $user_id, int $cookieExpiresConfig)
     {
-        $Cookie = new \Modules\RdbAdmin\Libraries\Cookie($this->Container);
-        $String = new \Modules\RdbAdmin\Libraries\RdbaString();
+        $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
+        $String = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
         $secretKey = $String->random(30);
         $loginDate = date('Y-m-d H:i:s');
         $dataForHmac = [
@@ -120,7 +120,7 @@ class SkipCaptchaCookie extends \Modules\RdbAdmin\Controllers\BaseController
         }
 
         if ($this->Container->has('Logger')) {
-            /* @var $Logger \System\Libraries\Logger */
+            /* @var $Logger \Rdb\System\Libraries\Logger */
             $Logger = $this->Container->get('Logger');
             $Logger->write(
                 'modules/rdbadmin/controllers/_subcontrollers/skipcaptchacookie', 

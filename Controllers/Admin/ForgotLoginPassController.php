@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Controllers\Admin;
  * 
  * @since 0.1
  */
-class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseController
+class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
 
 
@@ -33,8 +33,8 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
      */
     private function generateResetPasswordKey(int $user_id): array
     {
-        $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
-        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
         $resetPasswordKey = $UserFieldsDb->generateKeyWithWaitTime(
             $user_id,
             'rdbadmin_uf_resetpassword_key',
@@ -52,7 +52,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
             $UserFieldsDb->update($user_id, 'rdbadmin_uf_resetpassword_time', $output['time'], true);
 
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
                 $Logger->write('modules/rdbadmin/controllers/admin/forgotloginpasscontroller', 0, 'The reset password key was regenerated and updated.', [$output['key']]);
                 unset($Logger);
@@ -77,8 +77,8 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -103,10 +103,10 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
             $rdbAdminAssets = $ModuleAssets->getModuleAssets();
             unset($ModuleAssets);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['rdbaLoginLogout'], $rdbAdminAssets);
             $Assets->addMultipleAssets('js', ['rdbaForgotLoginPass'], $rdbAdminAssets);
@@ -198,8 +198,8 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \System\Libraries\Url($this->Container);
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
         $this->Languages->getHelpers();
 
         $output = [];
@@ -235,7 +235,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
                     $output['user_display_name'] = $row->user_display_name;
                     unset($row);
                     // check 2 step auth.
-                    $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                    $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                     $login2StepVerification = $UserFieldsDb->get($user_id, 'rdbadmin_uf_login2stepverification');
                     if (isset($login2StepVerification->field_value) && !empty($login2StepVerification->field_value)) {
                         $output['loginPageUrl'] = $Url->getAppBasedPath(true) . '/admin/login';
@@ -276,8 +276,8 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
             return $this->responseAcceptType($output);
         } else {
             // if not custom HTTP accept.
-            $ModuleAssets = new \Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $ModuleAssets = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAssets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets('css', ['rdbaLoginLogout'], $ModuleAssets->getModuleAssets());
             $Assets->addMultipleAssets('js', ['rdbaForgotLoginPassReset'], $ModuleAssets->getModuleAssets());
@@ -330,7 +330,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -372,7 +372,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
 
             if (isset($formValidated) && $formValidated === true) {
                 // if all form validation passed.
-                $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+                $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
                     $this->Container, 
                     [
                         'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/ForgotLoginPassController',
@@ -389,7 +389,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
                     // if email did not sent recently.
                     $where = [];
                     $where['user_email'] = $data['user_email'];
-                    $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+                    $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
                     $result = $UsersDb->get($where);
                     unset($where);
 
@@ -420,7 +420,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
                             unset($generateResult);
 
                             // init email class and get mailer.
-                            $Email = new \Modules\RdbAdmin\Libraries\Email($this->Container);
+                            $Email = new \Rdb\Modules\RdbAdmin\Libraries\Email($this->Container);
 
                             try {
                                 $tokenValue = base64_encode($result->user_id . '::' . $generatedKey);
@@ -431,7 +431,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
                                 $Mail->isHTML(true);
 
                                 $Mail->Subject = __('You had requested to reset your password.');
-                                $Url = new \System\Libraries\Url($this->Container);
+                                $Url = new \Rdb\System\Libraries\Url($this->Container);
                                 $replaces = [];
                                 $replaces['%resetpasswordlink%'] = $Url->getDomainProtocol() . $Url->getAppBasedPath(true) . '/admin/forgot-login-password/reset?token=' . rawurlencode($tokenValue);
                                 $replaces['%tokenvalue%'] = $tokenValue;
@@ -502,7 +502,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
             session_start();
         }
 
-        $Csrf = new \Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
 
         $output = [];
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -542,14 +542,14 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
                     http_response_code(400);
                 } else {
                     // if form validation passed.
-                    $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+                    $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
                     $dataUpdate = [];
                     $dataUpdate['user_password'] = $UsersDb->hashPassword($data['new_password']);
                     if ($dataUpdate['user_password'] === false) {
                         // if failed to hash password.
                         $updateStatus = false;
                         if ($this->Container->has('Logger')) {
-                            /* @var $Logger \System\Libraries\Logger */
+                            /* @var $Logger \Rdb\System\Libraries\Logger */
                             $Logger = $this->Container->get('Logger');
                             $Logger->write('modules/rdbadmin/controllers/admin/forgotloginpasscontroller', 5, 'Password hash error.');
                             unset($Logger);
@@ -565,7 +565,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
                         http_response_code(500);
                     } else {
                         // cleanup resetpassword key and its timeout.
-                        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                         $UserFieldsDb->update($user_id, 'rdbadmin_uf_resetpassword_key', null);
                         $UserFieldsDb->update($user_id, 'rdbadmin_uf_resetpassword_time', null);
                         unset($UserFieldsDb);
@@ -577,7 +577,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
                         unset($row);
 
                         // cleanup cache that store just sent email.
-                        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+                        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
                             $this->Container, 
                             [
                                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/ForgotLoginPassController',
@@ -636,7 +636,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
      */
     private function validateResetPasswordKey(int $user_id, string $userEnteredResetPasswordKey): bool
     {
-        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
         $resetPasswordKey = $UserFieldsDb->get($user_id, 'rdbadmin_uf_resetpassword_key');
         $resetPasswordTime = $UserFieldsDb->get($user_id, 'rdbadmin_uf_resetpassword_time');
         unset($UserFieldsDb);
@@ -670,7 +670,7 @@ class ForgotLoginPassController extends \Modules\RdbAdmin\Controllers\BaseContro
         }
         unset($NowDt, $ResetDt, $resetPasswordTime);
 
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $result = $UsersDb->get(['user_id' => $user_id, 'user_status' => 1]);
         unset($UsersDb);
         if (empty($result) || $result === false) {

@@ -4,16 +4,16 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
-class RdbaStringTest extends \Tests\Rdb\BaseTestCase
+class RdbaStringTest extends \Rdb\Tests\BaseTestCase
 {
 
 
     public function testRandom()
     {
-        $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+        $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
 
         $this->assertSame(12, strlen($RdbaString->random(12)));
         $this->assertSame(33, strlen($RdbaString->random(33)));
@@ -30,7 +30,7 @@ class RdbaStringTest extends \Tests\Rdb\BaseTestCase
 
     public function testRandomUnicode()
     {
-        $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+        $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
 
         $this->assertSame(14, mb_strlen($RdbaString->randomUnicode(14)));
         $this->assertSame(26, mb_strlen($RdbaString->randomUnicode(26)));
@@ -49,7 +49,7 @@ class RdbaStringTest extends \Tests\Rdb\BaseTestCase
 
     public function testSanitizeDisplayname()
     {
-        $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+        $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
 
         // no HTML
         $this->assertSame('displayname', $RdbaString->sanitizeDisplayname('<div>displayname</div>'));
@@ -90,7 +90,7 @@ class RdbaStringTest extends \Tests\Rdb\BaseTestCase
 
     public function testSanitizeUsername()
     {
-        $RdbaString = new \Modules\RdbAdmin\Libraries\RdbaString();
+        $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
 
         // no HTML
         $this->assertSame('username', $RdbaString->sanitizeUsername('<div>username</div>'));

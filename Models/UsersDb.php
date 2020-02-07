@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Models;
+namespace Rdb\Modules\RdbAdmin\Models;
 
 
 /**
@@ -12,7 +12,7 @@ namespace Modules\RdbAdmin\Models;
  * 
  * @since 0.1
  */
-class UsersDb extends \System\Core\Models\BaseModel
+class UsersDb extends \Rdb\System\Core\Models\BaseModel
 {
 
 
@@ -47,14 +47,14 @@ class UsersDb extends \System\Core\Models\BaseModel
     /**
      * {@inheritDoc}
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         parent::__construct($Container);
 
         if ($Container->has('Config')) {
             $Config = $Container->get('Config');
         } else {
-            $Config = new \System\Config();
+            $Config = new \Rdb\System\Config();
         }
         $Config->setModule('RdbAdmin');
         $this->passwordAlgo = $Config->get('algo', 'password', PASSWORD_DEFAULT);
@@ -164,7 +164,7 @@ class UsersDb extends \System\Core\Models\BaseModel
                             $output['user']['passwordRehashed'] = true;
                         } else {
                             if ($this->Container->has('Logger')) {
-                                /* @var $Logger \System\Libraries\Logger */
+                                /* @var $Logger \Rdb\System\Libraries\Logger */
                                 $Logger = $this->Container->get('Logger');
                                 $Logger->write(
                                     'module/rdbadmin/models/usersdb/checklogin', 
@@ -300,7 +300,7 @@ class UsersDb extends \System\Core\Models\BaseModel
             // remove some fields for security and privacy.
             unset($result->user_password);
             if (isset($options['getUserFields']) && $options['getUserFields'] === true) {
-                $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                 $resultFields = $UserFieldsDb->get($result->user_id);
                 if (is_array($resultFields)) {
                     $result->user_fields = $resultFields;
@@ -477,7 +477,7 @@ class UsersDb extends \System\Core\Models\BaseModel
         if (is_array($result)) {
             $newResult = [];
             $i = 0;
-            $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+            $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
 
             foreach ($result as $row) {
                 if (!empty($row->user_statustext) && function_exists('__')) {
@@ -561,7 +561,7 @@ class UsersDb extends \System\Core\Models\BaseModel
             if ($this->Container->has('Languages')) {
                 $Languages = $this->Container->get('Languages');
             } else {
-                $Languages = new \Modules\RdbAdmin\Libraries\Languages($this->Container);
+                $Languages = new \Rdb\Modules\RdbAdmin\Libraries\Languages($this->Container);
             }
             $Languages->bindTextDomain(
                 'rdbadmin', 

@@ -8,7 +8,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Console;
+namespace Rdb\Modules\RdbAdmin\Console;
 
 
 use Symfony\Component\Console\Input\InputArgument;
@@ -23,12 +23,12 @@ use \Symfony\Component\Console\Style\SymfonyStyle;
  * 
  * @since 0.1
  */
-class CreateModule extends \System\Core\Console\BaseConsole
+class CreateModule extends \Rdb\System\Core\Console\BaseConsole
 {
 
 
     /**
-     * @var \System\Libraries\FileSystem
+     * @var \Rdb\System\Libraries\FileSystem
      */
     private $Fs;
 
@@ -140,7 +140,7 @@ class CreateModule extends \System\Core\Console\BaseConsole
         }
 
         if ($validated === true) {
-            $this->Fs = new \System\Libraries\FileSystem(MODULE_PATH);
+            $this->Fs = new \Rdb\System\Libraries\FileSystem(MODULE_PATH);
             $createModuleFolder = $this->Fs->createFolder($this->moduleName);
 
             if ($createModuleFolder === true) {
@@ -246,7 +246,7 @@ class CreateModule extends \System\Core\Console\BaseConsole
     /**
      * Rename PHP template file (.pht) to .php file.
      * 
-     * @param array $files The list of files that has got from `\System\Libraries\FileSystem->listFilesSubFolders()`.
+     * @param array $files The list of files that has got from `\Rdb\System\Libraries\FileSystem->listFilesSubFolders()`.
      * @param OutputInterface $Output
      * @param SymfonyStyle $Io
      */
@@ -286,7 +286,7 @@ class CreateModule extends \System\Core\Console\BaseConsole
      * %ModuleName% to EnteredModuleName.<br>
      * %modulename% to enteredmodulename.
      * 
-     * @param array $files The list of files that has got from `\System\Libraries\FileSystem->listFilesSubFolders()`.
+     * @param array $files The list of files that has got from `\Rdb\System\Libraries\FileSystem->listFilesSubFolders()`.
      * @param OutputInterface $Output
      * @param SymfonyStyle $Io
      */

@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\_SubControllers;
+namespace Rdb\Modules\RdbAdmin\Controllers\_SubControllers;
 
 
 /**
@@ -19,7 +19,7 @@ class MenuItems
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
@@ -27,9 +27,9 @@ class MenuItems
     /**
      * Class constructor.
      * 
-     * @param \System\Container $Container The DI container class.
+     * @param \Rdb\System\Container $Container The DI container class.
      */
-    public function __construct(\System\Container $Container)
+    public function __construct(\Rdb\System\Container $Container)
     {
         $this->Container = $Container;
     }// __construct
@@ -85,7 +85,7 @@ class MenuItems
         $menuItems = $menuItems + $additionalMenuItems;
 
         // sort recursive.
-        \System\Libraries\ArrayUtil::staticRecursiveKsort($menuItems, SORT_NATURAL);
+        \Rdb\System\Libraries\ArrayUtil::staticRecursiveKsort($menuItems, SORT_NATURAL);
 
         return $menuItems;
     }// addToMenu
@@ -128,13 +128,13 @@ class MenuItems
      * This method was called from `getMenuItems()`.
      * 
      * @param string $moduleSystemName The module system name of this menu items.
-     * @param array $menuItems The menu items as seen in the [module_system_name]/ModuleData/ModuleAdmin.php or read more at \Modules\RdbAdmin\Interfaces\ModuleAdmin interface
+     * @param array $menuItems The menu items as seen in the [module_system_name]/ModuleData/ModuleAdmin.php or read more at \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin interface
      * @return array Return the same array structure but filtered to list only permission granted.
      */
     protected function filterMenuPermissions(string $moduleSystemName, array $menuItems): array
     {
         if (!empty($menuItems)) {
-            $UserPermissionsDb = new \Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+            $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
 
             foreach ($menuItems as $key => $item) {
                 if (isset($item['permission']) && is_array($item['permission']) && !empty($item['permission'])) {
@@ -193,7 +193,7 @@ class MenuItems
      */
     public function getMenuItems(array $cookieData = []): array
     {
-        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
             $this->Container,
             [
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/_SubControllers/MenuItems',
@@ -213,8 +213,8 @@ class MenuItems
                     MODULE_PATH . DIRECTORY_SEPARATOR . 'RdbAdmin' . DIRECTORY_SEPARATOR . 'ModuleData' . DIRECTORY_SEPARATOR . 'ModuleAdmin.php'
                 )
             ) {
-                $Admin = new \Modules\RdbAdmin\ModuleData\ModuleAdmin($this->Container);
-                if ($Admin instanceof \Modules\RdbAdmin\Interfaces\ModuleAdmin) {
+                $Admin = new \Rdb\Modules\RdbAdmin\ModuleData\ModuleAdmin($this->Container);
+                if ($Admin instanceof \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin) {
                     $menuItems = $Admin->menuItems();
                     if (!is_array($menuItems) || empty($menuItems)) {
                         unset($menuItems);
@@ -225,7 +225,7 @@ class MenuItems
 
             if (!isset($menuItems) || (isset($menuItems) && empty($menuItems))) {
                 // if menu is empty or not exists.
-                $Url = new \System\Libraries\Url($this->Container);
+                $Url = new \Rdb\System\Libraries\Url($this->Container);
                 $menuItems = [
                     0 => [
                         'id' => 'rdbadmin-home',
@@ -243,7 +243,7 @@ class MenuItems
 
             // get other module's menu items. --------------------------------------------------
             if ($this->Container->has('Modules')) {
-                /* @var $Modules \System\Modules */
+                /* @var $Modules \Rdb\System\Modules */
                 $Modules = $this->Container->get('Modules');
                 $enabledModules = $Modules->getModules();
                 unset($Modules);
@@ -255,10 +255,10 @@ class MenuItems
                         }
 
                         if (is_file(MODULE_PATH . DIRECTORY_SEPARATOR . $eachModule . DIRECTORY_SEPARATOR . 'ModuleData' . DIRECTORY_SEPARATOR . 'ModuleAdmin.php')) {
-                            $ModuleAdminClassName = '\\Modules\\' . $eachModule . '\\ModuleData\\ModuleAdmin';
+                            $ModuleAdminClassName = '\\Rdb\\Modules\\' . $eachModule . '\\ModuleData\\ModuleAdmin';
                             if (class_exists($ModuleAdminClassName)) {
                                 $Admin = new $ModuleAdminClassName($this->Container);
-                                if ($Admin instanceof \Modules\RdbAdmin\Interfaces\ModuleAdmin) {
+                                if ($Admin instanceof \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin) {
                                     $additionalMenuItems = $Admin->menuItems();
                                     if (!is_array($additionalMenuItems) || empty($additionalMenuItems)) {
                                         unset($additionalMenuItems);
@@ -296,7 +296,7 @@ class MenuItems
             // end the last check to remove empty (filtered out) menu items. ----------------
 
             if ($this->Container->has('Config')) {
-                /* @var $Config \System\Config */
+                /* @var $Config \Rdb\System\Config */
                 $Config = $this->Container->get('Config');
                 $Config->setModule('RdbAdmin');
                 $cacheMenuItem = $Config->get('cacheMenuItem', 'cache', false);

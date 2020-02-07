@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Libraries;
+namespace Rdb\Modules\RdbAdmin\Libraries;
 
 
 /**
@@ -23,7 +23,7 @@ class Cache
 
 
     /**
-     * @var \System\Container
+     * @var \Rdb\System\Container
      */
     protected $Container;
 
@@ -37,21 +37,21 @@ class Cache
     /**
      * Class constructor.
      * 
-     * @param \System\Container $Container The DI container.
+     * @param \Rdb\System\Container $Container The DI container.
      * @param array $options Additional options or configuration in associative array.
      *                                      For file system, it accept 'cachePath', 'umask' array keys.
      */
-    public function __construct(\System\Container $Container, array $options = [])
+    public function __construct(\Rdb\System\Container $Container, array $options = [])
     {
-        if ($Container instanceof \System\Container) {
+        if ($Container instanceof \Rdb\System\Container) {
             $this->Container = $Container;
         }
 
-        /* @var $Config \System\Config */
+        /* @var $Config \Rdb\System\Config */
         if ($this->Container->has('Config')) {
             $Config = $this->Container->get('Config');
         } else {
-            $Config = new \System\Config();
+            $Config = new \Rdb\System\Config();
         }
         $Config->setModule('RdbAdmin');
 

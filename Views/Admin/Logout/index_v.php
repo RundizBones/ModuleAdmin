@@ -1,7 +1,7 @@
 <?php
-/* @var $Assets \Modules\RdbAdmin\Libraries\Assets */
-/* @var $Views \System\Views */
-/* @var $Url \System\Libraries\Url */
+/* @var $Assets \Rdb\Modules\RdbAdmin\Libraries\Assets */
+/* @var $Views \Rdb\System\Views */
+/* @var $Url \Rdb\System\Libraries\Url */
 ?>
         <div class="rd-columns-flex-container rd-block-level-margin-bottom">
             <div class="column">

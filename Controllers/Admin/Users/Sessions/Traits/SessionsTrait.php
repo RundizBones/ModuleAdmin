@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\Admin\Users\Sessions\Traits;
+namespace Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Sessions\Traits;
 
 
 /**
@@ -41,7 +41,7 @@ trait SessionsTrait
      */
     protected function isUserLoggedIn(int $user_id = null, string $userlogin_session_key = ''): bool
     {
-        $Cookie = new \Modules\RdbAdmin\Libraries\Cookie($this->Container);
+        $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
         $Cookie->setEncryption('rdbaLoggedinKey');
         $cookieData = $Cookie->get('rdbadmin_cookie_users');// contain `user_id`, `user_display_name`, `sessionKey`.
         $this->userSessionCookieData = $cookieData;
@@ -55,7 +55,7 @@ trait SessionsTrait
 
         $output = false;
 
-        $UserLoginsDb = new \Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
+        $UserLoginsDb = new \Rdb\Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
         $isLoggedIn = $UserLoginsDb->isUserLoggedIn(
             $user_id, 
             ['userlogin_session_key' => $userlogin_session_key]
@@ -67,7 +67,7 @@ trait SessionsTrait
                 // if logged in sessions is equal or more than 2.
                 $this->totalLoggedInSessions = $isLoggedIn;
                 // get simultaneous login setting for current user.
-                $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+                $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                 $simultaneousLogin = $UserFieldsDb->get($user_id, 'rdbadmin_uf_securitysimultaneouslogin');
                 $simultaneousLogin = ($simultaneousLogin->field_value ?? 'allow');
 
@@ -78,7 +78,7 @@ trait SessionsTrait
                 } elseif ($simultaneousLogin === 'allOut') {
                     // if all login sessions out!
                     if ($this->Container != null && $this->Container->has('Logger')) {
-                        /* @var $Logger \System\Libraries\Logger */
+                        /* @var $Logger \Rdb\System\Libraries\Logger */
                         $Logger = $this->Container->get('Logger');
                         $Logger->write('modules/rdbadmin/controllers/admin/users/sessions/traits/sessionstrait', 0, 'Found {totalSession} sessions.', ['totalSession' => $isLoggedIn]);
                         if (!is_null($UserLoginsDb->userLoginsResult)) {
@@ -140,15 +140,15 @@ trait SessionsTrait
      * This method was called from `LoginController->doLogin()`.
      * 
      * @param int $user_id
-     * @param \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
+     * @param \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
      */
     protected function sessionTraitLogoutAll(
         int $user_id, 
-        \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb, 
-        \Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb
+        \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb, 
+        \Rdb\Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb
     )
     {
-        $UsersDb = new \Modules\RdbAdmin\Models\UsersDb($this->Container);
+        $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $userRow = $UsersDb->get(['user_id' => $user_id]);
         if (empty($userRow)) {
             unset($userRow, $UsersDb);
@@ -182,7 +182,7 @@ trait SessionsTrait
             }
 
             // send login link to email. ---------------------------------------------------------
-            $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+            $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
             $fieldKey = $UserFieldsDb->generateKeyWithWaitTime(
                 $user_id, 
                 'rdbadmin_uf_simultaneouslogin_reset_key', 
@@ -194,7 +194,7 @@ trait SessionsTrait
             unset($ConfigDb);
 
             // init email class and get mailer.
-            $Email = new \Modules\RdbAdmin\Libraries\Email($this->Container);
+            $Email = new \Rdb\Modules\RdbAdmin\Libraries\Email($this->Container);
             $tokenValue = base64_encode($user_id . '::' . ($fieldKey['readableKey'] ?? null));
 
             // get mailer object.
@@ -203,7 +203,7 @@ trait SessionsTrait
             $Mail->isHTML(true);
 
             $Mail->Subject = __('Your login link.');
-            $Url = new \System\Libraries\Url($this->Container);
+            $Url = new \Rdb\System\Libraries\Url($this->Container);
             $replaces = [];
             $replaces['%loginresetlink%'] = $Url->getDomainProtocol() . $Url->getAppBasedPath(true) . '/admin/login/reset?token=' . rawurlencode($tokenValue);
             $replaces['%loginlink%'] = $Url->getDomainProtocol() . $Url->getAppBasedPath(true) . '/admin/login';
@@ -220,7 +220,7 @@ trait SessionsTrait
             unset($Mail, $tokenValue);
 
             // set cache that email was sent recently.
-            $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+            $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
                 $this->Container, 
                 [
                     'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
@@ -233,7 +233,7 @@ trait SessionsTrait
             $PDO->commit();
         } catch (\Exception $e) {
             if ($this->Container->has('Logger')) {
-                /* @var $Logger \System\Libraries\Logger */
+                /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
                 $Logger->write('modules/rdbadmin/controllers/admin/users/sessions/traits/sessionstrait', 4, 'An email could not be sent. ' . $e->getMessage());
                 unset($Logger);
@@ -264,9 +264,9 @@ trait SessionsTrait
      * This method was called from `isUserLoggedIn()`.
      * 
      * @param int $user_id
-     * @param \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
+     * @param \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
      */
-    private function sessionTraitLogoutPreviousSessions(int $user_id, \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb)
+    private function sessionTraitLogoutPreviousSessions(int $user_id, \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb)
     {
         // @link https://stackoverflow.com/questions/578867/sql-query-delete-all-records-from-the-table-except-latest-n Original source code.
         $sql = 'DELETE FROM `' . $UserLoginsDb->tableName . '` 

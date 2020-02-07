@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Controllers\_SubControllers;
+namespace Rdb\Modules\RdbAdmin\Controllers\_SubControllers;
 
 
 /**
@@ -12,28 +12,28 @@ namespace Modules\RdbAdmin\Controllers\_SubControllers;
  *
  * @author mr.v
  */
-class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
+class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\Users\Sessions\Traits\SessionsTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Sessions\Traits\SessionsTrait;
 
 
-    use \Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersTrait;
 
 
     /**
      * Clear 2 step verification code, time, temp data, cache, session (user_id).
      * 
      * @param int $user_id The user ID.
-     * @param \Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb UserFieldsDb model class.
+     * @param \Rdb\Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb UserFieldsDb model class.
      */
     protected function doLogin2faClearData(
         int $user_id,
-        \Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb
+        \Rdb\Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb
     )
     {
-        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
             $this->Container, 
             [
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
@@ -42,7 +42,7 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
         $cacheKey = '2faSubmitRetries_' . $user_id;
         $Cache->delete($cacheKey);
 
-        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
             $this->Container, 
             [
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
@@ -78,8 +78,8 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * 
      * @param int $user_id
      * @param array $output
-     * @param \Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb
-     * @param \System\Libraries\Url $Url
+     * @param \Rdb\Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb
+     * @param \Rdb\System\Libraries\Url $Url
      * @return array Return associative array with keys:<br>
      *                          'gobackUrl' (string - optional) Go back URL on success only.<br>
      *                          'redirectUrl' (string - optional) Redirect URL.<br>
@@ -90,8 +90,8 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
     public function doLogin2faVerify(
         int $user_id,
         array $output,
-        \Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb,
-        \System\Libraries\Url $Url
+        \Rdb\Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb,
+        \Rdb\System\Libraries\Url $Url
     ): array
     {
         $mfaKey = $UserFieldsDb->get($user_id, 'rdbadmin_uf_login2stepverification_key');
@@ -115,8 +115,8 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
             $data = ($loginTempData['data'] ?? []);
             $doLoginResult = ($loginTempData['doLoginResult'] ?? []);
 
-            $BruteForceLoginPrevention = new \Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention($this->Container);
-            $UserLoginsDb = new \Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
+            $BruteForceLoginPrevention = new \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention($this->Container);
+            $UserLoginsDb = new \Rdb\Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
 
             $output = array_merge(
                 $output, 
@@ -143,7 +143,7 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
             }
         } else {
             // if incorrect code.
-            $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+            $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
                 $this->Container, 
                 [
                     'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
@@ -203,16 +203,16 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * if configuration was enabled brute-force prevention via dc, it will be already record there in `BruteForceLoginPrevention->registerFailedAuth()`.<br>
      * This method was called from `handleLoginFail()` method.
      * 
-     * @param array $doLoginResult The check login result that have got from `\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
+     * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
      * @param array $output The output array that contain `configDb` in key.
      * @param string $untranslatedMessage The error message that was not translated.
-     * @param \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb UserLoginsDb model class.
+     * @param \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb UserLoginsDb model class.
      */
     protected function doLoginFailedRecordLogins(
         array $doLoginResult, 
         array $output, 
         string $untranslatedMessage,
-        \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
+        \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
     )
     {
         if (
@@ -237,15 +237,15 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * 
      * This method was called from `handleLoginFail()` method.
      * 
-     * @see \Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention::registerFailedAuth()
-     * @param array $doLoginResult The check login result that have got from `\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
+     * @see \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention::registerFailedAuth()
+     * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
      * @param array $regFailedData The register data. For more information please read in `BruteForceLoginPrevention->registerFailedAuth()` method.
-     * @param \Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention BruteForceLoginPrevention class.
+     * @param \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention BruteForceLoginPrevention class.
      */
     protected function doLoginFailedRegisterBruteForceFailedAuth(
         array $doLoginResult, 
         array $regFailedData, 
-        \Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention
+        \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention
     )
     {
         if (isset($doLoginResult['userStatusText'])) {
@@ -266,19 +266,19 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * This method will set or add error message(s) and also set http response code (example: 4xx).<br>
      * This method was called from `handleLoginFail()` method.
      * 
-     * @param array $doLoginResult The check login result that have got from `\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
+     * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
      * @param array $output The associative output used in `doLogin()` method. This method will modify the output.
-     * @param \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb UserLoginsDb model class.
+     * @param \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb UserLoginsDb model class.
      */
     protected function doLoginFailedSendLoginResetEmail(
         array $doLoginResult,
         array &$output,
-        \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
+        \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
     )
     {
         // check if user account was locked AND it is because of simultaneous login setting.
         // (user fields contain 'rdbadmin_uf_simultaneouslogin_reset_key').
-        $UserFieldsDb = new \Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
         $userFieldRow = $UserFieldsDb->get($doLoginResult['user_id'], 'rdbadmin_uf_simultaneouslogin_reset_key');
 
         if (
@@ -305,7 +305,7 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
             // if user account locked and because simultaneous login.
             // send login email again.
             // set cache to limit send max 10 minutes per time.
-            $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+            $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
                 $this->Container, 
                 [
                     'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
@@ -342,13 +342,13 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * 
      * This method was called from `handleLoginFail()` method.
      * 
-     * @param array $doLoginResult The check login result that have got from `\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
-     * @param \Modules\RdbAdmin\Models\UsersDb $UsersDb UsersDb model class.
+     * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
+     * @param \Rdb\Modules\RdbAdmin\Models\UsersDb $UsersDb UsersDb model class.
      * @return array Return associative array with keys:
      *                          `formResultMessage` (string) The error message that was translated.<br>
      *                          `untranslatedMessage` (string) The error message that was not translated.
      */
-    protected function doLoginFailedSetErrorMessage(array $doLoginResult, \Modules\RdbAdmin\Models\UsersDb $UsersDb): array
+    protected function doLoginFailedSetErrorMessage(array $doLoginResult, \Rdb\Modules\RdbAdmin\Models\UsersDb $UsersDb): array
     {
         $output = [];
 
@@ -387,15 +387,15 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * 
      * This method was called from `handleLoginSuccess()` method.
      * 
-     * @param array $doLoginResult The check login result that have got from `\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
+     * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
      * @param string|null $deviceCookieSignature Device cookie signature got from `$BruteForceLoginPrevention->deviceCookieSignature` property.
-     * @param \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb UserLoginsDb model class.
+     * @param \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb UserLoginsDb model class.
      * @param array $recordLoginsData Additional record logins data.
      */
     protected function doLoginSucceessRecordLogins(
         array $doLoginResult,
         $deviceCookieSignature,
-        \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb,
+        \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb,
         array $recordLoginsData = []
     )
     {
@@ -423,12 +423,12 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * 
      * This method was called from `handleLoginSuccess()` method.
      * 
-     * @param array $doLoginResult The check login result that have got from `\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
+     * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
      * @param int $cookieExpires The time the cookie expires. This is a Unix timestamp so is in number of seconds since the epoch. In other words, you'll most likely set this with the time() function plus the number of seconds before you want it to expire.
      */
     protected function doLoginSuccessSetCookie(array $doLoginResult, int $cookieExpires)
     {
-        $Cookie = new \Modules\RdbAdmin\Libraries\Cookie($this->Container);
+        $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
         $Cookie->setEncryption('rdbaLoggedinKey');
         $Cookie->set('rdbadmin_cookie_users', $doLoginResult['user'], $cookieExpires, '/');
         unset($Cookie);
@@ -438,7 +438,7 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
     /**
      * On check login success, update last login date/time.
      * 
-     * @param array $doLoginResult The check login result that have got from `\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
+     * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
      */
     protected function doLoginSuccessUpdateLastLogin(array $doLoginResult)
     {
@@ -448,10 +448,10 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
 
         // update using Db class not UsersDb model because we do not need to update last update column.
         if ($this->Container->has('Db')) {
-            /* @var $Db \System\Libraries\Db */
+            /* @var $Db \Rdb\System\Libraries\Db */
             $Db = $this->Container->get('Db');
         } else {
-            $Db = new \System\Libraries\Db($this->Container);
+            $Db = new \Rdb\System\Libraries\Db($this->Container);
         }
 
         $Db->update($Db->tableName('users'), $dataUpdate, ['user_id' => $doLoginResult['user_id']]);
@@ -507,18 +507,18 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * @param array $data
      * @param array $output
      * @param array $doLoginResult
-     * @param \Modules\RdbAdmin\Models\UsersDb $UsersDb
-     * @param \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
-     * @param \Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention
+     * @param \Rdb\Modules\RdbAdmin\Models\UsersDb $UsersDb
+     * @param \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb
+     * @param \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention
      * @return array
      */
     public function handleLoginFail(
         array $data,
         array $output,
         array $doLoginResult,
-        \Modules\RdbAdmin\Models\UsersDb $UsersDb,
-        \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb,
-        \Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention
+        \Rdb\Modules\RdbAdmin\Models\UsersDb $UsersDb,
+        \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb,
+        \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention
     ): array
     {
         if (isset($data['user_login_or_email'])) {
@@ -586,9 +586,9 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * @param array $output The output views data. Require array that contain keys:<br>
      *                                      `['configDb']['rdbadmin_UserLoginRememberLength']`,<br>
      *                                      `['configDb']['rdbadmin_UserLoginNotRememberLength']`
-     * @param array $doLoginResult The check login result that have got from `\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
-     * @param \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb UserLoginsDb model class.
-     * @param \Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention BruteForceLoginPrevention class.
+     * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
+     * @param \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb UserLoginsDb model class.
+     * @param \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention BruteForceLoginPrevention class.
      * @return array Return associative array with keys:<br>
      *                          'formResultStatus' (string) if there is alert message(s).<br>
      *                          'formResultMessage' (string) if there is alert message(s).<br>
@@ -599,8 +599,8 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
         array $data,
         array $output,
         array $doLoginResult,
-        \Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb,
-        \Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention
+        \Rdb\Modules\RdbAdmin\Models\UserLoginsDb $UserLoginsDb,
+        \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\BruteForceLoginPrevention $BruteForceLoginPrevention
     ): array
     {
         if (isset($data['user_login_or_email'])) {
@@ -643,7 +643,7 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
         // write login cookie.
         $this->doLoginSuccessSetCookie($doLoginResult, $cookieExpires);
 
-        $SkipCaptchaCookie = new \Modules\RdbAdmin\Controllers\_SubControllers\SkipCaptchaCookie($this->Container);
+        $SkipCaptchaCookie = new \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\SkipCaptchaCookie($this->Container);
         if (!$SkipCaptchaCookie->isSkipCaptcha()) {
             // if there is no skip "require captcha" cookie.
             // write skip "require captcha" cookie.
@@ -684,9 +684,9 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
      * 
      * @param array $data The form data.
      * @param array $output The output views data.
-     * @param array $doLoginResult The check login result that have got from `\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
-     * @param \Modules\RdbAdmin\Models\UsersDb $UsersDb UsersDb model class.
-     * @param \Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb UserFieldsDb model class.
+     * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
+     * @param \Rdb\Modules\RdbAdmin\Models\UsersDb $UsersDb UsersDb model class.
+     * @param \Rdb\Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb UserFieldsDb model class.
      * @return array Return associative array with the same `$output` as in argument. Additional keys are:<br>
      *                          'formResultStatus' (string) if contain alert message(s).<br>
      *                          'formResultMessage' (array) if contain alert message(s).<br>
@@ -696,11 +696,11 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
         array $data,
         array $output,
         array $doLoginResult,
-        \Modules\RdbAdmin\Models\UsersDb $UsersDb,
-        \Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb
+        \Rdb\Modules\RdbAdmin\Models\UsersDb $UsersDb,
+        \Rdb\Modules\RdbAdmin\Models\UserFieldsDb $UserFieldsDb
     ): array
     {
-        $Cache = (new \Modules\RdbAdmin\Libraries\Cache(
+        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
             $this->Container, 
             [
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
@@ -722,7 +722,7 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
             http_response_code(429);
         } else {
             // if email did not sent recently.
-            $ConfigDb = new \Modules\RdbAdmin\Models\ConfigDb($this->Container);
+            $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
             $mfaKey = $UserFieldsDb->generateKeyWithWaitTime(
                 $user_id,
                 'rdbadmin_uf_login2stepverification_key',
@@ -743,7 +743,7 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
             $userRow = $UsersDb->get(['user_id' => $user_id]);
 
             // init email class and get mailer.
-            $Email = new \Modules\RdbAdmin\Libraries\Email($this->Container);
+            $Email = new \Rdb\Modules\RdbAdmin\Libraries\Email($this->Container);
 
             try {
                 // get mailer object.
@@ -786,7 +786,7 @@ class LoginSubController extends \Modules\RdbAdmin\Controllers\BaseController
                 $_SESSION['user_id'] = $user_id;
             } catch (\Exception $e) {
                 if ($this->Container->has('Logger')) {
-                    /* @var $Logger \System\Libraries\Logger */
+                    /* @var $Logger \Rdb\System\Libraries\Logger */
                     $Logger = $this->Container->get('Logger');
                     $Logger->write('modules/rdbadmin/controllers/_subcontrollers/loginsubcontroller', 4, 'An email could not be sent. ' . $e->getMessage());
                     unset($Logger);

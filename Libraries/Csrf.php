@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\Libraries;
+namespace Rdb\Modules\RdbAdmin\Libraries;
 
 
 /**
@@ -17,7 +17,7 @@ class Csrf
 
 
     /**
-     * @var \Modules\RdbAdmin\Libraries\Extended\SlimGuard
+     * @var \Rdb\Modules\RdbAdmin\Libraries\Extended\SlimGuard
      */
     protected $CsrfClass;
 
@@ -124,7 +124,7 @@ class Csrf
     /**
      * Get CSRF class instance.
      * 
-     * @return \Modules\RdbAdmin\Libraries\Extended\SlimGuard
+     * @return \Rdb\Modules\RdbAdmin\Libraries\Extended\SlimGuard
      */
     public function getInstance(): Extended\SlimGuard
     {

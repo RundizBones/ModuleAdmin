@@ -4,7 +4,7 @@
  */
 
 
-namespace Modules\RdbAdmin\CronJobs;
+namespace Rdb\Modules\RdbAdmin\CronJobs;
 
 
 /**

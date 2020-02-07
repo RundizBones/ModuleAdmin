@@ -4,10 +4,10 @@
  */
 
 
-namespace Modules\RdbAdmin\Tests\Libraries;
+namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
-class CookieTest extends \Tests\Rdb\BaseTestCase
+class CookieTest extends \Rdb\Tests\BaseTestCase
 {
 
 
@@ -16,7 +16,7 @@ class CookieTest extends \Tests\Rdb\BaseTestCase
         $this->runApp('GET', '/');
         $this->Container = $this->RdbApp->getContainer();
 
-        if (!$this->Container instanceof \System\Container) {
+        if (!$this->Container instanceof \Rdb\System\Container) {
             $this->markTestIncomplete('Unable to get container');
         }
     }// setup
@@ -24,7 +24,7 @@ class CookieTest extends \Tests\Rdb\BaseTestCase
 
     public function testSet()
     {
-        $Cookie = new \Modules\RdbAdmin\Libraries\Cookie($this->Container);
+        $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
         $cookieValue = [
             'name' => 'Vee',
             'lastname' => 'W.',
