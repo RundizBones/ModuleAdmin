@@ -2,23 +2,23 @@
 Front-end controller is no login needed, anyone can access it.  
 
 ## Controller and route
-Your controller in the **config/routes.php** should be `\\Modules\\ModuleName\\Controllers\\MyFront:index`
+Your controller in the **config/routes.php** should be `\\Rdb\\Modules\\ModuleName\\Controllers\\MyFront:index`
 and the controller file should be in **Modules/ModuleName/Controllers/MyFrontController.php**.<br>
 The controller file can be anywhere, it will be loaded using PSR-4 autoload. 
 The controller file must have **Controller** suffix in the file name and its class.<br>
 The controller action (method) must have **Action** suffix, in this case it should be `indexAction()`.
 
 ## Create controller
-The controller class should extends `\Modules\RdbAdmin\Controllers\BaseController` to easily access `Languages`, `Input` properties and some methods that might be necessary for your code.
+The controller class should extends `\Rdb\Modules\RdbAdmin\Controllers\BaseController` to easily access `Languages`, `Input` properties and some methods that might be necessary for your code.
 
 Example:
 
 ```php
 <?php
 
-namespace Modules\ModuleName\Controllers;
+namespace Rdb\Modules\ModuleName\Controllers;
 
-class MyFrontController extends \Modules\RdbAdmin\Controllers\BaseController
+class MyFrontController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 {
     public function indexAction(): string
     {
@@ -40,8 +40,8 @@ class MyFrontController extends \Modules\RdbAdmin\Controllers\BaseController
         } else {
             // if not custom HTTP accept.
             // add asset file (CSS, JS) only if you have to use it.
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
-            $Url = new \System\Libraries\Url($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Url = new \Rdb\System\Libraries\Url($this->Container);
             $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
             unset($Url);
 
@@ -70,7 +70,7 @@ Example:
 // You can follow to the class very easy by control and click on the class name in the line @var.
 // Some of these variables also useful while you writing the code in the IDE, it will be show the drop down helper for you.
 
-/* @var $Assets \Modules\RdbAdmin\Libraries\Assets */
+/* @var $Assets \Rdb\Modules\RdbAdmin\Libraries\Assets */
 // End doc helper ---------------------------------------------------------------------------
 ?>
 <!DOCTYPE html>

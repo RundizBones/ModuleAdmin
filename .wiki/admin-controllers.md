@@ -4,22 +4,22 @@ Before you continue on this document, please read about **Controller and route**
 Admin controller is needed for logged in users only.
 
 ## Create controller
-The controller class should extends `\Modules\RdbAdmin\Controllers\Admin\AdminBaseController` to make it check for logged in every request.
-This `AdminBaseController` is extended on `\Modules\RdbAdmin\Controllers\BaseController`.
+The controller class should extends `\Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController` to make it check for logged in every request.
+This `AdminBaseController` is extended on `\Rdb\Modules\RdbAdmin\Controllers\BaseController`.
 
 Example:
 
 ```php
 <?php
 
-namespace Modules\ModuleName\Controllers;
+namespace Rdb\Modules\ModuleName\Controllers;
 
-class MyAdminController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseController
+class MyAdminController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController
 {
     /**
-     * Use `\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait` to access method that is required for common admin pages.
+     * Use `\Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait` to access method that is required for common admin pages.
      */
-    use \Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
     public function indexAction(): string
     {
@@ -47,7 +47,7 @@ class MyAdminController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             // get RdbAdmin module's assets data for render page correctly.
             $rdbAdminAssets = $this->getRdbAdminAssets();
             // Assets class for add CSS and JS.
-            $Assets = new \Modules\RdbAdmin\Libraries\Assets($this->Container);
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             // add CSS and JS assets to make basic functional and style on admin page works correctly.
             $this->setCssAssets($Assets, $rdbAdminAssets);
@@ -67,7 +67,7 @@ class MyAdminController extends \Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
 ### Required `$output` keys
 
 * `pageHtmlTitle` - Should have (string value). This is page title in `<title>` HTML element.
-* `Assets` - Must have (`\Modules\RdbAdmin\Libraries\Assets` class value). For main layout use as assets (CSS, JS) renderer.
+* `Assets` - Must have (`\Rdb\Modules\RdbAdmin\Libraries\Assets` class value). For main layout use as assets (CSS, JS) renderer.
 * `pageContent` - Must have (string value). Your views must render into this output data so it can be display properly in admin page.
 
 ### More features

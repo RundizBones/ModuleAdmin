@@ -8,7 +8,7 @@ ModuleName/
         MyModel.php
 ```
 
-Any model files should extends `\System\Core\Models\BaseModel` to access the database class (`\System\Libraries\Db`) easily via `Db` property.<br>
+Any model files should extends `\Rdb\System\Core\Models\BaseModel` to access the database class (`\Rdb\System\Libraries\Db`) easily via `Db` property.<br>
 RundizBones is using PDO as main database component to connect with MariaDB, MySQL server.
 
 Example:
@@ -16,9 +16,9 @@ Example:
 ```php
 <?php
 
-namespace Modules\ModuleName\Models;
+namespace Rdb\Modules\ModuleName\Models;
 
-class MyModel extends \System\Core\Models\BaseModel
+class MyModel extends \Rdb\System\Core\Models\BaseModel
 {
     public function getData()
     {
@@ -38,7 +38,7 @@ To access your model just use auto load feature. Example.
 ```php
 <?php
 // in your controller.
-$MyModel = new \Modules\ModuleName\Models\MyModel($this->Container);
+$MyModel = new \Rdb\Modules\ModuleName\Models\MyModel($this->Container);
 $result = $MyModel->getData();
 print_r($result);
 ```
