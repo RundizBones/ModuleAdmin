@@ -140,31 +140,52 @@
                             <div class="form-group">
                                 <label class="control-label"><?php echo __('Profile picture'); ?></label>
                                 <div class="control-wrapper">
-                                    <div id="rdbadmin-current-avatar" class="rdbadmin-current-avatar"></div><!--.rdbadmin-current-avatar-->
-                                    <template id="rdbadmin-current-avatar-display-template">
-                                        <div class="rdbadmin-current-avatar-container">
-                                            <img id="rdbadmin-current-avatar-image" class="fluid current-avatar-image" src="{{this.rdbadmin_uf_avatar}}" alt="">
-                                        </div>
-                                        <button id="rdbadmin-delete-current-avatar-button" class="rd-button danger" type="button">
-                                            <i class="fas fa-times"></i>
-                                            <?php echo __('Delete this profile picture'); ?>
-                                        </button>
-                                        <span id="rdbadmin-delete-avatar-status-placeholder"></span>
-                                    </template>
-                                    <div id="rdbadmin-select-avatar-dropzone" class="rdbadmin-select-avatar-dropzone">
-                                        <span class="rd-button info rd-inputfile" tabindex="0">
-                                            <span class="label"><?php echo __('Choose image'); ?></span>
-                                            <input id="user_fields_rdbadmin_uf_avatar" type="file" name="user_fields[rdbadmin_uf_avatar]" tabindex="-1">
-                                        </span>
-                                        <span class="rd-input-files-queue"></span>
-                                        <template class="rd-inputfile-reset-button">
-                                            <button class="rd-button tiny" type="button" onclick="return RundizTemplateAdmin.resetInputFile(this);" title="<?php echo esc__('Remove file'); ?>"><i class="fas fa-times"></i><span class="screen-reader-only"><?php echo esc__('Remove file'); ?></span></button>
+                                    <div class="rdbadmin-avatar-type">
+                                        <label>
+                                            <input class="user_fields_rdbadmin_uf_avatar_type" type="radio" name="user_fields[rdbadmin_uf_avatar_type]" value="upload" checked="">
+                                            <?php echo __('Use upload profile picture'); ?>
+                                        </label>
+                                        <label>
+                                            <input class="user_fields_rdbadmin_uf_avatar_type" type="radio" name="user_fields[rdbadmin_uf_avatar_type]" value="gravatar">
+                                            <?php echo __('Use Gravatar'); ?>
+                                        </label>
+                                    </div><!--.rdbadmin-avatar-type-->
+                                    <div class="rdbadmin-avatar-type-gravatar rdbadmin-avatar-type-form rd-hidden">
+                                        <div id="rdbadmin-avatar-current-gravatar"></div>
+                                        <template id="rdbadmin-current-gravatar-display-template">
+                                            <div class="rdbadmin-current-gravatar-container">
+                                                <img src="{{gravatarUrl}}" alt="">
+                                            </div>
+                                            <a href="https://gravatar.com" target="gravatar"><?php echo __('Change your profile picture on Gravatar.'); ?></a>
                                         </template>
-                                        <div id="rdbadmin-avatar-upload-status-placeholder"></div>
-                                    </div><!--.rdbadmin-select-avatar-dropzone-->
-                                    <div class="form-description"><?php echo __('Click on choose image or drop image into the area above to upload profile picture.'); ?></div>
-                                </div>
-                            </div>
+                                    </div><!--.rdbadmin-avatar-type-gravatar-->
+                                    <div class="rdbadmin-avatar-type-upload rdbadmin-avatar-type-form">
+                                        <div id="rdbadmin-current-avatar" class="rdbadmin-current-avatar"></div><!--.rdbadmin-current-avatar-->
+                                        <template id="rdbadmin-current-avatar-display-template">
+                                            <div class="rdbadmin-current-avatar-container">
+                                                <img id="rdbadmin-current-avatar-image" class="fluid current-avatar-image" src="{{this.rdbadmin_uf_avatar}}" alt="">
+                                            </div>
+                                            <button id="rdbadmin-delete-current-avatar-button" class="rd-button warning" type="button">
+                                                <i class="fas fa-times"></i>
+                                                <?php echo __('Delete this profile picture'); ?>
+                                            </button>
+                                            <span id="rdbadmin-delete-avatar-status-placeholder"></span>
+                                        </template>
+                                        <div id="rdbadmin-select-avatar-dropzone" class="rdbadmin-select-avatar-dropzone">
+                                            <span class="rd-button info rd-inputfile" tabindex="0">
+                                                <span class="label"><?php echo __('Choose image'); ?></span>
+                                                <input id="user_fields_rdbadmin_uf_avatar" type="file" name="user_fields[rdbadmin_uf_avatar]" tabindex="-1">
+                                            </span>
+                                            <span class="rd-input-files-queue"></span>
+                                            <template class="rd-inputfile-reset-button">
+                                                <button class="rd-button tiny" type="button" onclick="return RundizTemplateAdmin.resetInputFile(this);" title="<?php echo esc__('Remove file'); ?>"><i class="fas fa-times"></i><span class="screen-reader-only"><?php echo esc__('Remove file'); ?></span></button>
+                                            </template>
+                                            <div id="rdbadmin-avatar-upload-status-placeholder"></div>
+                                        </div><!--.rdbadmin-select-avatar-dropzone-->
+                                        <div class="form-description"><?php echo __('Click on choose image or drop image into the area above to upload profile picture.'); ?></div>
+                                    </div><!--.rdbadmin-avatar-type-upload-->
+                                </div><!--.control-wrapper-->
+                            </div><!--.form-group-->
                             <div class="form-group">
                                 <label class="control-label" for="user_fields_rdbadmin_uf_website"><?php echo __('Website'); ?></label>
                                 <div class="control-wrapper">

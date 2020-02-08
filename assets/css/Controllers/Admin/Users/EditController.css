@@ -1,13 +1,18 @@
 /* Edit user CSS */
 
 
+.rdbadmin-avatar-type label:not(:last-child) {
+    margin-right: .625em;
+}
+
+
 .rdbadmin-current-avatar button {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .rdbadmin-current-avatar .rdbadmin-current-avatar-container {
     border: 1px solid #eee;
     margin-bottom: 5px;
-    max-width: 300px;
+    max-width: 200px;
 }
 
 

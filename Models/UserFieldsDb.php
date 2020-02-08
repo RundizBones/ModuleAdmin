@@ -42,6 +42,7 @@ class UserFieldsDb extends \Rdb\System\Core\Models\BaseModel
         'rdbadmin_uf_simultaneouslogin_reset_key' => 'Login key to use after there is simultaneous logins and get logged out.',
         'rdbadmin_uf_simultaneouslogin_reset_time' => 'Login key expire date/time.',
         'rdbadmin_uf_avatar' => 'User\'s profile picture (avatar).',
+        'rdbadmin_uf_avatar_type' => 'Avatar type (upload or gravatar).',
         'rdbadmin_uf_website' => 'User\'s website.',
     ];
 

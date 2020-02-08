@@ -463,7 +463,12 @@ class RdbaUiXhrCommonDataController {
         $('#rdba-user-navbar ul').html(htmlRendered);
 
         if (userData.user_avatar) {
-            let avatarUrl = userData.UrlAppBased + '/' + userData.user_avatar;
+            let avatarUrl;
+            if (userData.user_avatar.indexOf('//') !== -1) {
+                avatarUrl = userData.user_avatar;
+            } else {
+                avatarUrl = userData.UrlAppBased + '/' + userData.user_avatar;
+            }
             $('#rdba-user-navbar .rdba-user-icon').replaceWith('<img class="fluid rdba-user-profilepicture" src="' + avatarUrl + '" alt="">');
         }
 

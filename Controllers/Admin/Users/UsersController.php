@@ -83,6 +83,10 @@ class UsersController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
         $output = array_merge($output, $Csrf->createToken());
         unset($Csrf);
 
+        $Gravatar = new \Rdb\Modules\RdbAdmin\Libraries\Gravatar();
+        $output['gravatarUrl'] = $Gravatar->getImage($userRow->user_email, 200);
+        unset($Gravatar);
+
         if (is_object($userRow) && !empty($userRow)) {
             $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
             $options = [];

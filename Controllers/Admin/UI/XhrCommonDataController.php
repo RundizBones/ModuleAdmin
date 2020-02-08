@@ -233,11 +233,22 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
         unset($cookieData);
 
         $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
-        $userAvatar = $UserFieldsDb->get($output['user_id'], 'rdbadmin_uf_avatar');
-        if (isset($userAvatar->field_value) && !empty($userAvatar->field_value)) {
-            $output['user_avatar'] = $userAvatar->field_value;
+        $userAvatarType = $UserFieldsDb->get($output['user_id'], 'rdbadmin_uf_avatar_type');
+        if (isset($userAvatarType->field_value) && $userAvatarType->field_value === 'gravatar') {
+            $Gravatar = new \Rdb\Modules\RdbAdmin\Libraries\Gravatar();
+            $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
+            $user = $UsersDb->get(['user_id' => $output['user_id']]);
+            $output['user_avatar'] = $Gravatar->getImage($user->user_email);
+            $output['useGravatar'] = true;
+            unset($Gravatar, $user, $UsersDb);
+        } else {
+            $userAvatar = $UserFieldsDb->get($output['user_id'], 'rdbadmin_uf_avatar');
+            if (isset($userAvatar->field_value) && !empty($userAvatar->field_value)) {
+                $output['user_avatar'] = $userAvatar->field_value;
+            }
+            unset($userAvatar);
         }
-        unset($userAvatar, $UserFieldsDb);
+        unset($userAvatarType, $UserFieldsDb);
 
         $output['UrlBaseDomain'] = $Url->getDomainProtocol();
         $output['UrlAppBased'] = $Url->getAppBasedPath();

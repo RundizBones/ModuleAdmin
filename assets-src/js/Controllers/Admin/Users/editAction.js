@@ -103,10 +103,24 @@ class RdbaUsersEditController {
                             if (typeof(item.field_value) !== 'object') {
                                 item.field_value = [item.field_value];
                             }
-                            $('#user_fields_' + item.field_name).val(item.field_value);// native js is never been as easy as or easier than jquery with this.
+                            $('.user_fields_' + item.field_name).val(item.field_value);// native js is never been as easy as or easier than jquery with this.
                         }
                         if (targetElement && targetElement.type.toLowerCase() !== 'file') {
                             $('#user_fields_' + item.field_name).val(item.field_value);// use this can set input and select (with multiple).
+                        }
+
+                        // show/hide to only selected avatar type.
+                        if (item.field_name === 'rdbadmin_uf_avatar_type') {
+                            // hide all avatar type form.
+                            editForm.querySelectorAll('.rdbadmin-avatar-type-form').forEach(function(item, index) {
+                                item.classList.add('rd-hidden');
+                            });
+                            // remove hidden class from only selected.
+                            editForm.querySelector('.rdbadmin-avatar-type-' + item.field_value).classList.remove('rd-hidden');
+                            // render gravatar.
+                            if (RdbaCommon.isset(() => response.gravatarUrl)) {
+                                thisClass.renderCurrentGravatar(response.gravatarUrl);
+                            }
                         }
 
                         // render current avatar.
@@ -172,6 +186,38 @@ class RdbaUsersEditController {
             }
         });
     }// ajaxGetFormData
+
+
+    /**
+     * Listen on avatar type change and switch avatar form.
+     * 
+     * @private This method was called from `staticInit()` method.
+     * @returns {undefined}
+     */
+    listenAvatarTypeChange() {
+        let thisClass = this;
+        let editForm = document.querySelector('#rdba-edit-user-form');
+        /*let inputAvatarType;
+        if (editForm) {
+            inputAvatarType = editForm.querySelectorAll('.user_fields_rdbadmin_uf_avatar_type');
+        }*/
+
+        if (editForm) {
+            editForm.addEventListener('change', function(event) {
+                if (RdbaCommon.isset(() => event.target.classList) && event.target.classList.contains('user_fields_rdbadmin_uf_avatar_type')) {
+                    event.preventDefault();
+
+                    let inputAvatarType = event.target;
+                    // hide all avatar type form.
+                    editForm.querySelectorAll('.rdbadmin-avatar-type-form').forEach(function(item, index) {
+                        item.classList.add('rd-hidden');
+                    });
+                    // remove hidden class from only selected.
+                    editForm.querySelector('.rdbadmin-avatar-type-' + inputAvatarType.value).classList.remove('rd-hidden');
+                }
+            });
+        }
+    }// listenAvatarTypeChange
 
 
     /**
@@ -580,6 +626,27 @@ class RdbaUsersEditController {
 
 
     /**
+     * Render current Gravatar.
+     * 
+     * @private This method was called from `ajaxGetFormData()` method.
+     * @param {string} avatarRelativeUrl
+     * @returns {undefined}
+     */
+    renderCurrentGravatar(gravatarUrl) {
+        let editForm = document.querySelector('#rdba-edit-user-form');
+        let currentGravatarPlaceholder = editForm.querySelector('#rdbadmin-avatar-current-gravatar');
+
+        let source = editForm.querySelector('#rdbadmin-current-gravatar-display-template').innerHTML;
+        let template = Handlebars.compile(source);
+
+        let item = {};
+        item.gravatarUrl = gravatarUrl;
+        let html = template(item);
+        currentGravatarPlaceholder.innerHTML = html;
+    }// renderCurrentGravatar
+
+
+    /**
      * Reset input file (profile picture or avatar).
      * 
      * @private This method was called from `ajaxGetFormData()`, `listenAvatarUpload()` methods.
@@ -618,6 +685,8 @@ class RdbaUsersEditController {
         thisClass.ajaxGetFormData();
         // listen on status change and toggle description.
         thisClass.listenStatusChange();
+        // listen on avatar type change and switch avatar form.
+        thisClass.listenAvatarTypeChange();
         // listen on change avatar to upload.
         thisClass.listenAvatarUpload();
         // listen click button to delete avatar.
