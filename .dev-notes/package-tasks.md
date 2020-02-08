@@ -41,5 +41,6 @@ To edit files in **assets-src** folder such as CSS, JS, please run the following
 
 ## Before publish or commit.
 * Run command `phpdoc2` or using phpDocumentor 2. (API doc is no need to generate every commit, just when there are changes on release.)
+* Update version number in **Installer.php** file.
 * Run update version number again from the command in section **Update version number of packages**.
-* Update version number in **package.json** and **Installer.php** files.
+* Run `npm run pack` and `npm run pack -- --development` for write version number in **Installer.php** to **package.json** file.
