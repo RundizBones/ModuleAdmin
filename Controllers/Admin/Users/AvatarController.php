@@ -23,6 +23,13 @@ class AvatarController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBase
     use Traits\UsersEditingTrait;
 
 
+    /**
+     * Delete uploaded avatar.
+     * 
+     * @global array $_DELETE
+     * @param string $user_id
+     * @return string
+     */
     public function deleteAction($user_id): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
@@ -81,7 +88,7 @@ class AvatarController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBase
                     $output['previousAvatar'] = $userAvatar->field_value;
                     $FileSystem->deleteFile($userAvatar->field_value);
                 }
-                $output['deleteSuccess'] = $UserFieldsDb->delete($user_id, 'rdbadmin_uf_avatar');
+                $output['deleteSuccess'] = $UserFieldsDb->update($user_id, 'rdbadmin_uf_avatar', null);
                 unset($userAvatar, $UserFieldsDb);
             }
 
