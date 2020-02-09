@@ -53,7 +53,7 @@ class RdbaIndexController {
 
                         if (RdbaCommon.isset(() => item.js) && _.isArray(item.js)) {
                             item.js.forEach(function(jsItem, jsIndex) {
-                                promises.push(thisClass.injectJs(item.id, jsItem));
+                                promises.push(thisClass.injectJs(item.id, jsItem, jsIndex));
                             });
                         }
                     };
@@ -114,12 +114,13 @@ class RdbaIndexController {
      * @private This method was called from `ajaxGetWidgetsHTML()` method.
      * @param {string} jsId The JS ID.
      * @param {string} jsPath The JS file path.
+     * @param {int} indexNumber The array index number for append to id.
      * @returns {Promise}
      */
-    injectJs(jsId, jsPath) {
+    injectJs(jsId, jsPath, indexNumber) {
         return new Promise(function(resolve, reject) {
             let injectJs = document.createElement('script');
-            injectJs.id = 'rdba-dashboard-widget-js-' + jsId;
+            injectJs.id = 'rdba-dashboard-widget-js-' + jsId + (indexNumber ? '-' + indexNumber : '');
             injectJs.src = jsPath;
             injectJs.type = 'text/javascript';
             injectJs.addEventListener('load', resolve);
