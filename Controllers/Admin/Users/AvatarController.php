@@ -68,7 +68,7 @@ class AvatarController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBase
                 $formValidated = false;
                 http_response_code(403);
                 $output['formResultStatus'] = 'error';
-                $output['formResultMessage'] = __('Unable to edit user who has higher priority role than you.');
+                $output['formResultMessage'][] = __('Unable to edit user who has higher priority role than you.');
             } else {
                 $formValidated = true;
             }
@@ -77,7 +77,14 @@ class AvatarController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBase
                 $formValidated = false;
                 http_response_code(403);
                 $output['formResultStatus'] = 'error';
-                $output['formResultMessage'] = __('Unable to edit the selected user.');
+                $output['formResultMessage'][] = __('Unable to edit the selected user.');
+            }
+
+            if ($user_id <= 0) {
+                $formValidated = false;
+                http_response_code(403);
+                $output['formResultStatus'] = 'error';
+                $output['formResultMessage'][] = __('Unable to edit guest user.');
             }
 
             if (isset($formValidated) && $formValidated === true) {
@@ -181,15 +188,22 @@ class AvatarController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBase
                 $formValidated = false;
                 http_response_code(403);
                 $output['formResultStatus'] = 'error';
-                $output['formResultMessage'] = __('Unable to edit user who has higher priority role than you.');
+                $output['formResultMessage'][] = __('Unable to edit user who has higher priority role than you.');
             } else {
                 $formValidated = true;
+            }
+
+            if ($user_id <= 0) {
+                $formValidated = false;
+                http_response_code(403);
+                $output['formResultStatus'] = 'error';
+                $output['formResultMessage'][] = __('Unable to edit guest user.');
             }
 
             if (!isset($_FILES['user_fields']['name']['rdbadmin_uf_avatar'])) {
                 $formValidated = false;
                 $output['formResultStatus'] = 'error';
-                $output['formResultMessage'] = __('You did not upload the file.');
+                $output['formResultMessage'][] = __('You did not upload the file.');
                 http_response_code(400);
             }
 
