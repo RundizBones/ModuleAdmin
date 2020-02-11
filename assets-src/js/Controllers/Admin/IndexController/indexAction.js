@@ -56,6 +56,12 @@ class RdbaIndexController {
                                 promises.push(thisClass.injectJs(item.id, jsItem, jsIndex));
                             });
                         }
+
+                        if (RdbaCommon.isset(() => item.css) && _.isArray(item.css)) {
+                            item.css.forEach(function(cssItem, cssIndex) {
+                                promises.push(thisClass.injectCss(item.id, cssItem, cssIndex));
+                            });
+                        }
                     };
                 }// endif response contain widgets.
 
@@ -74,7 +80,7 @@ class RdbaIndexController {
                 // wait until all promises resolved and dispatch custom event so those widgets can use as event ready.
                 Promise.all(promises)
                 .catch(function(event) {
-                    console.error('Inject JS error', event);
+                    console.error('Inject JS, CSS error:', event);
                 })
                 .then(function() {
                     let event = new Event('rdba.admindashboard.widgets.ready');
@@ -106,6 +112,33 @@ class RdbaIndexController {
             return thisClass.makeWidgetsSortable();
         });
     }// init
+
+
+    /**
+     * Inject CSS to before end head.
+     * 
+     * @private This method was called from `ajaxGetWidgetsHTML()` method.
+     * @param {string} cssId The CSS ID.
+     * @param {string} cssPath The CSS file path.
+     * @param {int} indexNumber The array index number for append to id.
+     * @returns {Promise}
+     */
+    injectCss(cssId, cssPath, indexNumber) {
+        return new Promise(function(resolve, reject) {
+            let injectCss = document.createElement('link');
+            injectCss.id = 'rdba-dashboard-widget-css-' + cssId + (indexNumber ? '-' + indexNumber : '');
+            injectCss.rel = 'stylesheet';
+            injectCss.type = 'text/css';
+            injectCss.href = cssPath;
+            injectCss.addEventListener('load', resolve);
+            injectCss.addEventListener('error', () => reject('Error loading CSS'));
+            injectCss.addEventListener('abort', () => reject('Abort loading CSS'));
+
+            if (!document.querySelector('#rdba-dashboard-widget-css-' + cssId)) {
+                document.head.appendChild(injectCss);
+            }
+        });
+    }// injectCss
 
 
     /**

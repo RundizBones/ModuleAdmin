@@ -34,9 +34,10 @@ interface ModuleAdmin
      *<pre>
      *return [
      *    'Modulename.WidgetID' => [
-     *        'rowHero' => false, // boolean - `true` or `false`. skip this if dont use it.
-     *        'classes' => 'additional css class names', // skip this if dont use it.
-     *        'js' => 'path/to/js/file.js', // skip this if dont use it.
+     *        'rowHero' => false, // boolean - `true` or `false`. this is optional, default is `false`.
+     *        'classes' => 'additional css class names', // optional.
+     *        'js' => ['path/to/js/file.js', 'another.js'], // optional.
+     *        'css' => ['path/to/file.css', 'another.css'],// optional.
      *        'content' => '&lt;h1&gt;Widget title&lt;/h1&gt;Widget HTML contents.',
      *    ],
      *    'Modulename.AnotherWidgetID' => [
