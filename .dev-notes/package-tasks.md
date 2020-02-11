@@ -40,7 +40,7 @@ To edit files in **assets-src** folder such as CSS, JS, please run the following
 * Run the command `npm run watch` to automatic copy asset files from **assets-src** to **assets/** and **public/** folder.
 
 ## Before publish or commit.
-* Run command `phpdoc2` or using phpDocumentor 2. (API doc is no need to generate every commit, just when there are changes on release.)
 * Update version number in **Installer.php** file.
+* Run command `phpdoc2` or using phpDocumentor 2. (API doc is no need to generate every commit, just when there are changes on release.)
 * Run update version number again from the command in section **Update version number of packages**.
 * Run `npm run pack` and `npm run pack -- --development` for write version number from **Installer.php** to **package.json** file.
