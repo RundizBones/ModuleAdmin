@@ -24,7 +24,13 @@ class DeleteExpiredUserRegisterWaitConfirm
      */
     public static function execute(\Rdb\System\Container $Container, \Rdb\System\Libraries\Db $Db)
     {
-        $keepWaitActivateDays = 2;// keep for xx days.
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($Container);
+        $keepWaitActivateDays = $ConfigDb->get('rdbadmin_UserRegisterWaitVerification', 2);
+        unset($ConfigDb);
+        if (empty($keepWaitActivateDays) || !is_numeric($keepWaitActivateDays) || $keepWaitActivateDays <= 0) {
+            $keepWaitActivateDays = 2; 
+        }
+
         $sql = 'SELECT * FROM `' . $Db->tableName('user_fields') . '` AS `user_fields`
             LEFT JOIN `' . $Db->tableName('users') . '` AS `users` ON `users`.`user_id` = `user_fields`.`user_id`
             WHERE `users`.`user_status` = 0 

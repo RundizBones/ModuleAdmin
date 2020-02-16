@@ -216,7 +216,7 @@ class Cron
                             if (is_array($RecurItIt) || is_object($RecurItIt)) {
                                 foreach ($RecurItIt as $filePath => $object) {
                                     if (is_file($filePath)) {
-                                        $pathToClass = str_replace([ROOT_PATH, '.php', '/'], ['', '', '\\'], $filePath);// from /Path/To/Class.php => \Path\To\Class
+                                        $pathToClass = '\\Rdb' . str_replace([ROOT_PATH, '.php', '/'], ['', '', '\\'], $filePath);// from /Path/To/Class.php => \Rdb\Path\To\Class
 
                                         if (class_exists($pathToClass)) {
                                             $ReflectionCronJob = new \ReflectionClass($pathToClass);

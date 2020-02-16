@@ -19,11 +19,18 @@ class DeleteFailedLogins
     /**
      * Execute the job.
      * 
+     * @param \Rdb\System\Container $Container The DI Container class.
      * @param \Rdb\System\Libraries\Db $Db The Database class.
      */
-    public static function execute(\Rdb\System\Libraries\Db $Db)
+    public static function execute(\Rdb\System\Container $Container, \Rdb\System\Libraries\Db $Db)
     {
-        $keepLoginsForDays = 90;// keep for xx days.
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($Container);
+        $keepLoginsForDays = $ConfigDb->get('rdbadmin_UserLoginLogsKeep', 90);
+        unset($ConfigDb);
+        if (empty($keepLoginsForDays) || !is_numeric($keepLoginsForDays) || $keepLoginsForDays <= 0) {
+            $keepLoginsForDays = 90; 
+        }
+
         $sql = 'DELETE FROM `' . $Db->tableName('user_logins') . '` WHERE `userlogin_result` = 0 AND `userlogin_date_gmt` < :userlogin_date_gmt';
         $Sth = $Db->PDO()->prepare($sql);
         unset($sql);
