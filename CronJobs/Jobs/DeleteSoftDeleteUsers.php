@@ -24,7 +24,13 @@ class DeleteSoftDeleteUsers
      */
     public static function execute(\Rdb\System\Container $Container, \Rdb\System\Libraries\Db $Db)
     {
-        $keepSoftDeleteForDays = 30;// keep for xx days.
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($Container);
+        $keepSoftDeleteForDays = $ConfigDb->get('rdbadmin_UserRegisterWaitVerification', 2);
+        unset($ConfigDb);
+        if (empty($keepSoftDeleteForDays) || !is_numeric($keepSoftDeleteForDays) || $keepSoftDeleteForDays <= 0) {
+            $keepSoftDeleteForDays = 30; 
+        }
+
         $sql = 'SELECT `user_id`, `user_deleted`, `user_deleted_since_gmt` 
             FROM `' . $Db->tableName('users') . '` 
             WHERE `user_deleted` = 1 AND `user_deleted_since_gmt` < :user_deleted_since_gmt';

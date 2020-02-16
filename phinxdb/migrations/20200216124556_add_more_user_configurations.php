@@ -58,7 +58,7 @@ class AddMoreUserConfigurations extends AbstractMigration
             $singleRow = [
                 'config_name'    => 'rdbadmin_UserDeleteSelfKeep',
                 'config_value'  => 30,
-                'config_description' => 'If allowed user to delete themself, How many days to keep their data before actual delete from db?',
+                'config_description' => 'On delete user wether delete themself or by admin, How many days before it gets actual delete?',
             ];
 
             $this->table('config')->insert($singleRow)->save();
