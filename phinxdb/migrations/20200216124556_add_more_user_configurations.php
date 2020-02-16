@@ -38,6 +38,32 @@ class AddMoreUserConfigurations extends AbstractMigration
             $this->table('config')->insert($singleRow)->save();
         }
 
+        $Sth = $this->query('SELECT * FROM `' . $configTable . '` WHERE `config_name` = \'rdbadmin_UserDeleteSelfGrant\'');
+        $result = $Sth->fetchAll();
+        $Sth->closeCursor();
+        if (empty($result)) {
+            $singleRow = [
+                'config_name'    => 'rdbadmin_UserDeleteSelfGrant',
+                'config_value'  => 0,
+                'config_description' => 'Allow user to delete themself?\n0=do not allowed\n1=allowed.',
+            ];
+
+            $this->table('config')->insert($singleRow)->save();
+        }
+
+        $Sth = $this->query('SELECT * FROM `' . $configTable . '` WHERE `config_name` = \'rdbadmin_UserDeleteSelfKeep\'');
+        $result = $Sth->fetchAll();
+        $Sth->closeCursor();
+        if (empty($result)) {
+            $singleRow = [
+                'config_name'    => 'rdbadmin_UserDeleteSelfKeep',
+                'config_value'  => 30,
+                'config_description' => 'If allowed user to delete themself, How many days to keep their data before actual delete from db?',
+            ];
+
+            $this->table('config')->insert($singleRow)->save();
+        }
+
         unset($configTable, $result, $singleRow, $Sth, $TableAdapter);
     }// up
 
@@ -51,6 +77,8 @@ class AddMoreUserConfigurations extends AbstractMigration
         $configTable = $TableAdapter->getAdapterTableName('config');
         $this->execute('DELETE FROM `' . $configTable . '` WHERE `config_name` = \'rdbadmin_UserRegisterWaitVerification\'');
         $this->execute('DELETE FROM `' . $configTable . '` WHERE `config_name` = \'rdbadmin_UserLoginLogsKeep\'');
+        $this->execute('DELETE FROM `' . $configTable . '` WHERE `config_name` = \'rdbadmin_UserDeleteSelfGrant\'');
+        $this->execute('DELETE FROM `' . $configTable . '` WHERE `config_name` = \'rdbadmin_UserDeleteSelfKeep\'');
 
         unset($configTable, $TableAdapter);
     }// down
