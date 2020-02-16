@@ -819,12 +819,14 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
             'rdbadmin_UserRegisterNotifyAdminEmails',
             'rdbadmin_UserConfirmEmailChange',
             'rdbadmin_UserConfirmWait',
+            'rdbadmin_UserDeleteSelfGrant',
         ];
         $configDefaults = [
             '3',// register default roles
             '',// admin emails
             '0',
             '10',
+            '0',
         ];
 
         $output = $ConfigDb->get($configNames, $configDefaults);

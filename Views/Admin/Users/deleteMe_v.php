@@ -7,7 +7,11 @@
                         <h1 class="rdba-page-content-header"><?php echo __('Delete my account'); ?></h1>
 
                         <form id="rdba-delete-me-confirm-form" class="rd-form horizontal rdba-edit-form">
-                            <div class="form-result-placeholder"></div>
+                            <div class="form-result-placeholder"><?php
+                            if (isset($formResultMessage) && isset($formResultStatus)) {
+                                echo renderAlertHtml($formResultMessage, $formResultStatus);
+                            }
+                            ?></div>
 
                             <div class="form-group">
                                 <label class="control-label" for="user_login"><?php echo __('Username'); ?> <em>*</em></label>

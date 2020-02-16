@@ -298,7 +298,15 @@
                                 </template>
                             </div><!--.list-email-changed-history-->
 
-                            <?php if (isset($user_id) && isset($my_user_id) && $user_id === $my_user_id) { ?> 
+                            <?php 
+                            if (
+                                isset($user_id) && 
+                                isset($my_user_id) && 
+                                $user_id === $my_user_id &&
+                                isset($configDb['rdbadmin_UserDeleteSelfGrant']) && 
+                                $configDb['rdbadmin_UserDeleteSelfGrant'] == '1'
+                            ) { 
+                            ?> 
                             <fieldset>
                                 <legend><?php echo __('Danger zone'); ?></legend>
                                 <div class="form-group submit-button-row">
@@ -308,6 +316,8 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <?php }// endif; ?> 
+                            <?php 
+                            }// endif; 
+                            ?> 
                         </form>
                         

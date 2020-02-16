@@ -51,7 +51,7 @@ $Rc->addGroup('/admin', function(\FastRoute\RouteCollector $Rc) {
     $Rc->addRoute('DELETE', '/users/{id:[0-9,]+}', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Users\\Actions:doDelete');
 
     // /admin/users/delete/me page (delete self confirmation).
-    $Rc->addRoute('GET', '/users/delete/me', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Users\\Actions:me');
+    $Rc->addRoute('GET', '/users/delete/me', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Users\\Actions:deleteMe');
     // /admin/users REST API (delete self).
     $Rc->addRoute('DELETE', '/users', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Users\\Actions:doDeleteMe');
 

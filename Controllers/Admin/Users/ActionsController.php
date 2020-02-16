@@ -23,6 +23,106 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
 
 
     /**
+     * Delete self confirmation page.
+     * 
+     * @return string
+     */
+    public function deleteMeAction(): string
+    {
+        // processing part ----------------------------------------------------------------------------------------------------
+        // no need permission check
+
+        if (session_id() === '') {
+            session_start();
+        }
+
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Url = new \Rdb\System\Libraries\Url($this->Container);
+        $this->Languages->getHelpers();
+
+        $output = [];
+        $output['configDb'] = $this->getConfigDb();
+        $output = array_merge($output, $Csrf->createToken());
+        unset($Csrf);
+
+        // set generic values.
+        $output = array_merge($output, $this->getUserUrlsMethods());
+
+        $output['user_id'] = (isset($this->userSessionCookieData['user_id']) ? (int) $this->userSessionCookieData['user_id'] : 0);
+
+        $output['pageTitle'] = __('Delete my account');
+        $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);
+        $output['pageHtmlClasses'] = $this->getPageHtmlClasses();
+        $output['breadcrumb'] = [
+            [
+                'item' => __('Admin home'),
+                'link' => $Url->getAppBasedPath(true) . '/admin',
+            ],
+            [
+                'item' => __('Users'),
+                'link' => $Url->getAppBasedPath(true) . '/admin/users',
+            ],
+            [
+                'item' => __('Edit user'),
+                'link' => $Url->getAppBasedPath(true) . '/admin/users/edit/' . $output['user_id'],
+            ],
+            [
+                'item' => __('Delete my account'),
+                'link' => $Url->getCurrentUrl(true),
+            ],
+        ];
+
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        if ($ConfigDb->get('rdbadmin_UserDeleteSelfGrant', 1) == '0') {
+            http_response_code(403);
+            $output['formResultStatus'] = 'error';
+            $output['formResultMessage'] = __('Site setting is not allowed user to delete themself.');
+            $output['deleteSelfGrant'] = false;
+        }
+        unset($ConfigDb);
+
+        // display, response part ---------------------------------------------------------------------------------------------
+        if ($this->Input->isNonHtmlAccept()) {
+            // if custom HTTP accept, response content.
+            // response the data.
+            return $this->responseAcceptType($output);
+        } else {
+            // if not custom HTTP accept.
+            $rdbAdminAssets = $this->getRdbAdminAssets();
+            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
+
+            //$Assets->addMultipleAssets('css', [], $rdbAdminAssets);
+            $Assets->addMultipleAssets('js', ['rdbaUsersDeleteMe'], $rdbAdminAssets);
+            $Assets->addJsObject(
+                'rdbaUsersDeleteMe',
+                'RdbaDeleteMe',
+                array_merge([
+                    'user_id' => $output['user_id'],
+                    'csrfName' => $output['csrfName'],
+                    'csrfValue' => $output['csrfValue'],
+                    'csrfKeyPair' => $output['csrfKeyPair'],
+                ], $this->getUserUrlsMethods())
+            );
+
+            $this->setCssAssets($Assets, $rdbAdminAssets);
+            $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);
+
+            include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
+
+            $output['Assets'] = $Assets;
+            $output['Modules'] = $this->Modules;
+            $output['Url'] = $Url;
+            $output['Views'] = $this->Views;
+            $output['pageContent'] = $this->Views->render('Admin/Users/deleteMe_v', $output);
+            $output['pageBreadcrumb'] = renderBreadcrumbHtml($output['breadcrumb']);
+
+            unset($Assets, $rdbAdminAssets, $Url);
+            return $this->Views->render('common/Admin/mainLayout_v', $output);
+        }
+    }// deleteMeAction
+
+
+    /**
      * Do delete user(s) via REST API.
      * 
      * @param string $user_ids
@@ -397,97 +497,6 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
 
 
     /**
-     * Delete self confirmation page.
-     * 
-     * @return string
-     */
-    public function meAction(): string
-    {
-        // processing part ----------------------------------------------------------------------------------------------------
-        // no need permission check
-
-        if (session_id() === '') {
-            session_start();
-        }
-
-        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
-        $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
-
-        $output = [];
-        $output['configDb'] = $this->getConfigDb();
-        $output = array_merge($output, $Csrf->createToken());
-        unset($Csrf);
-
-        // set generic values.
-        $output = array_merge($output, $this->getUserUrlsMethods());
-
-        $output['user_id'] = (isset($this->userSessionCookieData['user_id']) ? (int) $this->userSessionCookieData['user_id'] : 0);
-
-        $output['pageTitle'] = __('Delete my account');
-        $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);
-        $output['pageHtmlClasses'] = $this->getPageHtmlClasses();
-        $output['breadcrumb'] = [
-            [
-                'item' => __('Admin home'),
-                'link' => $Url->getAppBasedPath(true) . '/admin',
-            ],
-            [
-                'item' => __('Users'),
-                'link' => $Url->getAppBasedPath(true) . '/admin/users',
-            ],
-            [
-                'item' => __('Edit user'),
-                'link' => $Url->getAppBasedPath(true) . '/admin/users/edit/' . $output['user_id'],
-            ],
-            [
-                'item' => __('Delete my account'),
-                'link' => $Url->getCurrentUrl(true),
-            ],
-        ];
-
-        // display, response part ---------------------------------------------------------------------------------------------
-        if ($this->Input->isNonHtmlAccept()) {
-            // if custom HTTP accept, response content.
-            // response the data.
-            return $this->responseAcceptType($output);
-        } else {
-            // if not custom HTTP accept.
-            $rdbAdminAssets = $this->getRdbAdminAssets();
-            $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
-
-            //$Assets->addMultipleAssets('css', [], $rdbAdminAssets);
-            $Assets->addMultipleAssets('js', ['rdbaUsersDeleteMe'], $rdbAdminAssets);
-            $Assets->addJsObject(
-                'rdbaUsersDeleteMe',
-                'RdbaDeleteMe',
-                array_merge([
-                    'user_id' => $output['user_id'],
-                    'csrfName' => $output['csrfName'],
-                    'csrfValue' => $output['csrfValue'],
-                    'csrfKeyPair' => $output['csrfKeyPair'],
-                ], $this->getUserUrlsMethods())
-            );
-
-            $this->setCssAssets($Assets, $rdbAdminAssets);
-            $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);
-
-            include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
-
-            $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
-            $output['pageContent'] = $this->Views->render('Admin/Users/deleteMe_v', $output);
-            $output['pageBreadcrumb'] = renderBreadcrumbHtml($output['breadcrumb']);
-
-            unset($Assets, $rdbAdminAssets, $Url);
-            return $this->Views->render('common/Admin/mainLayout_v', $output);
-        }
-    }// meAction
-
-
-    /**
      * Validate user(s) and action.
      * 
      * It's validating users and action must be selected.<br>
@@ -574,6 +583,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         if (isset($myRoles['items'])) {
             $myRoles = array_shift($myRoles['items']);
 
+            $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
             $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
             $listUsers = $UsersDb->listItems(['userIdsIn' => $expUserIds]);
 
@@ -584,6 +594,14 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
                         http_response_code(403);
                         $output['formResultStatus'] = 'error';
                         $output['formResultMessage'] = __('Unable to edit guest user.');
+                        $usersActionOk = false;
+                        break;
+                    }
+
+                    if ($ConfigDb->get('rdbadmin_UserDeleteSelfGrant', 1) == '0') {
+                        http_response_code(403);
+                        $output['formResultStatus'] = 'error';
+                        $output['formResultMessage'] = __('Site setting is not allowed user to delete themself.');
                         $usersActionOk = false;
                         break;
                     }
@@ -606,7 +624,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
             // end validate not editing, deleting higher role. ----------------
 
             $output['listUsers'] = $listUsers;
-            unset($listUsers, $UsersDb);
+            unset($ConfigDb, $listUsers, $UsersDb);
         }// endif; $myRoles
         unset($myRoles);
 

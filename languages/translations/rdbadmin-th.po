@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2020-02-16 21:46+0700\n"
-"PO-Revision-Date: 2020-02-16 21:46+0700\n"
+"POT-Creation-Date: 2020-02-16 21:54+0700\n"
+"PO-Revision-Date: 2020-02-16 21:55+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -602,12 +602,16 @@ msgid "Disable user"
 msgid_plural "Disable users"
 msgstr[0] "ปิดใช้งานผู้ใช้"
 
-#: Controllers/Admin/Users/ActionsController.php:586 Controllers/Admin/Users/AvatarController.php:87
+#: Controllers/Admin/Users/ActionsController.php:587 Controllers/Admin/Users/AvatarController.php:87
 #: Controllers/Admin/Users/AvatarController.php:200 Controllers/Admin/Users/EditController.php:252
 msgid "Unable to edit guest user."
 msgstr "ไม่สามารถแก้ไขผู้ใช้ guest."
 
-#: Controllers/Admin/Users/ActionsController.php:596 Controllers/Admin/Users/AvatarController.php:71
+#: Controllers/Admin/Users/ActionsController.php:595
+msgid "Site setting is not allowed user to delete themself."
+msgstr "การตั้งค่าของเว็บไซต์ไม่อนุญาตให้ผู้ใช้ลบบัญชีของตนเอง."
+
+#: Controllers/Admin/Users/ActionsController.php:605 Controllers/Admin/Users/AvatarController.php:71
 #: Controllers/Admin/Users/AvatarController.php:191 Controllers/Admin/Users/EditController.php:264
 #: Controllers/Admin/Users/EditController.php:959 Controllers/Admin/Users/PreviousEmailsController.php:41
 #: Controllers/Admin/Users/Sessions/SessionsController.php:68
