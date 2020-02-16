@@ -90,6 +90,18 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label class="control-label" for="rdbadmin_UserRegisterWaitVerification"><?php echo __('Registration verification wait time'); ?></label>
+                                                <div class="control-wrapper">
+                                                    <div class="rd-input-group">
+                                                        <input id="rdbadmin_UserRegisterWaitVerification" class="rd-input-control" type="number" name="rdbadmin_UserRegisterWaitVerification" value="" min="1">
+                                                        <div class="rd-input-group-block append">
+                                                            <span class="rd-input-group-block-text"><?php echo __('days'); ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-description"><?php echo __('How many days that user needs to take action to verify their email on register or added a new user by admin?') ?></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="control-label" for="rdbadmin_UserRegisterNotifyAdminEmails"><?php echo __('Admin notification emails'); ?></label>
                                                 <div class="control-wrapper">
                                                     <input id="rdbadmin_UserRegisterNotifyAdminEmails" type="text" name="rdbadmin_UserRegisterNotifyAdminEmails" value="" maxlength="255">
@@ -266,6 +278,41 @@
                                                         echo ' ';
                                                         echo __('Example: reset password, change email, prevent simultaneuos login link, etc.');
                                                         ?> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="rdbadmin_UserLoginLogsKeep"><?php echo __('Logins log expiration'); ?></label>
+                                                <div class="control-wrapper">
+                                                    <div class="rd-input-group">
+                                                        <input id="rdbadmin_UserLoginLogsKeep" class="rd-input-control" type="number" name="rdbadmin_UserLoginLogsKeep" value="" min="90">
+                                                        <div class="rd-input-group-block append">
+                                                            <span class="rd-input-group-block-text"><?php echo __('days'); ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-description">
+                                                        <?php echo __('How many days that user\'s failed logins data to keep in database?') ?> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>
+                                                    <input id="rdbadmin_UserDeleteSelfGrant" type="checkbox" name="rdbadmin_UserDeleteSelfGrant" value="1">
+                                                    <?php echo __('Allow user to delete their account'); ?> 
+                                                    <span class="form-description"><?php echo __('If allowed, once account was deleted it will be stay in the database for days before actual deleted.'); ?></span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="rdbadmin_UserDeleteSelfKeep"><?php echo __('Actual delete user'); ?></label>
+                                                <div class="control-wrapper">
+                                                    <div class="rd-input-group">
+                                                        <input id="rdbadmin_UserDeleteSelfKeep" class="rd-input-control" type="number" name="rdbadmin_UserDeleteSelfKeep" value="" min="10">
+                                                        <div class="rd-input-group-block append">
+                                                            <span class="rd-input-group-block-text"><?php echo __('days'); ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-description">
+                                                        <?php echo __('On delete user wether delete themself or by admin, How many days before it gets actual delete from database?') ?> 
                                                     </div>
                                                 </div>
                                             </div>

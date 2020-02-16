@@ -51,17 +51,23 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             // prepare data for save.
             $data = [];
             foreach ($this->getConfigNames() as $configName) {
-                $data[$configName] = $this->Input->patch($configName);
+                if (isset($_PATCH[$configName])) {
+                    $data[$configName] = $this->Input->patch($configName);
+                }
 
                 // sanitize and validate value again.
-                if (is_scalar($data[$configName])) {
+                if (isset($data[$configName]) && is_scalar($data[$configName])) {
                     // if string, number, scalar...
                     $data[$configName] = trim($data[$configName]);
                 } else {
-                    // if anything else...
-                    if ($configName === 'rdbadmin_UserRegisterDefaultRoles') {
+                    // if anything else... (array, object, null or anything non scalar).
+                    if ($configName === 'rdbadmin_UserRegisterDefaultRoles' && isset($data[$configName])) {
+                        // if config name is default roles.
+                        // use comma to merge array values into string.
                         $data[$configName] = implode(',', $data[$configName]);
-                    } elseif (!is_null($data[$configName])) {
+                    } elseif (isset($data[$configName]) && !is_null($data[$configName])) {
+                        // if the rest of config ... and it is not null.
+                        // serialize it.
                         $data[$configName] = $Serializer->maybeSerialize($data[$configName]);
                     }
                 }
@@ -182,6 +188,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             'rdbadmin_UserRegisterNotifyAdmin',
             'rdbadmin_UserRegisterNotifyAdminEmails',
             'rdbadmin_UserRegisterVerification',
+            'rdbadmin_UserRegisterWaitVerification',
             'rdbadmin_UserRegisterDisallowedName',
             'rdbadmin_UserRegisterDefaultRoles',
             'rdbadmin_UserLoginCaptcha',
@@ -191,8 +198,11 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             'rdbadmin_UserLoginMaxFailWait',
             'rdbadmin_UserLoginNotRememberLength',
             'rdbadmin_UserLoginRememberLength',
+            'rdbadmin_UserLoginLogsKeep',
             'rdbadmin_UserConfirmEmailChange',
             'rdbadmin_UserConfirmWait',
+            'rdbadmin_UserDeleteSelfGrant',
+            'rdbadmin_UserDeleteSelfKeep',
             'rdbadmin_MailProtocol',
             'rdbadmin_MailPath',
             'rdbadmin_MailSmtpHost',

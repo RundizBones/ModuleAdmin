@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2020-02-09 00:44+0700\n"
-"PO-Revision-Date: 2020-02-09 00:44+0700\n"
+"POT-Creation-Date: 2020-02-16 21:46+0700\n"
+"PO-Revision-Date: 2020-02-16 21:46+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -13,9 +13,8 @@ msgstr ""
 "X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;d__:2;dn__:2,3;dnp__:2c,3,4;dp__:2c,3;n__:1,2;noop__;np__:1c,2,3;p__:1c,2;"
-"esc__;esc_d__:2;esc_dn__:2,3;esc_dnp__:2c,3,4;esc_dp__:2c,3;esc_n__:1,2;esc_np__:1c,2,3;"
-"esc_p__:1c,2\n"
+"X-Poedit-KeywordsList: __;d__:2;dn__:2,3;dnp__:2c,3,4;dp__:2c,3;n__:1,2;noop__;np__:1c,2,3;p__:1c,2;esc__;"
+"esc_d__:2;esc_dn__:2,3;esc_dnp__:2c,3,4;esc_dp__:2c,3;esc_n__:1,2;esc_np__:1c,2,3;esc_p__:1c,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: Tests\n"
@@ -31,12 +30,11 @@ msgstr "ปฏิเสธการเข้าถึง!"
 msgid "Forgot username or password?"
 msgstr "ลืมชื่อผู้ใช้หรือรหัสผ่าน?"
 
-#: Controllers/Admin/ForgotLoginPassController.php:219
-#: Controllers/Admin/ForgotLoginPassController.php:227
-#: Controllers/Admin/ForgotLoginPassController.php:255
-#: Controllers/Admin/ForgotLoginPassController.php:608 Controllers/Admin/LoginController.php:381
-#: Controllers/Admin/LoginController.php:793 Controllers/Admin/LoginController.php:801
-#: Controllers/Admin/LoginController.php:830 Controllers/Admin/Users/EditController.php:142
+#: Controllers/Admin/ForgotLoginPassController.php:219 Controllers/Admin/ForgotLoginPassController.php:227
+#: Controllers/Admin/ForgotLoginPassController.php:255 Controllers/Admin/ForgotLoginPassController.php:608
+#: Controllers/Admin/LoginController.php:381 Controllers/Admin/LoginController.php:793
+#: Controllers/Admin/LoginController.php:801 Controllers/Admin/LoginController.php:830
+#: Controllers/Admin/Users/EditController.php:142
 msgid "Unable to validate token or your token may expired."
 msgstr "ไม่สามารถตรวจสอบโทเคนได้ หรือโทเคนของคุณอาจหมดอายุแล้ว."
 
@@ -53,8 +51,7 @@ msgstr "กรุณากรอกอีเมลของคุณ."
 msgid "Incorrect captcha code."
 msgstr "อักษรภาพไม่ถูกต้อง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:386
-#: Controllers/_SubControllers/LoginSubController.php:324
+#: Controllers/Admin/ForgotLoginPassController.php:386 Controllers/_SubControllers/LoginSubController.php:324
 msgid "The email has just been sent recently, please wait and try again later."
 msgstr "อีเมลเพิ่งถูกส่งไม่นานนี้, กรุณารอและลองใหม่ในภายหลัง."
 
@@ -62,8 +59,7 @@ msgstr "อีเมลเพิ่งถูกส่งไม่นานนี
 msgid "The email was not found."
 msgstr "ไม่พบอีเมลดังกล่าว."
 
-#: Controllers/Admin/ForgotLoginPassController.php:406
-#: Controllers/_SubControllers/LoginSubController.php:361
+#: Controllers/Admin/ForgotLoginPassController.php:406 Controllers/_SubControllers/LoginSubController.php:361
 #, php-format
 msgid "Your account has been disabled. (%1$s)"
 msgstr "บัญชีผู้ใช้ของคุณถูกระงับการใช้งาน. (%1$s)"
@@ -76,31 +72,27 @@ msgstr "คุณได้ร้องขอตั้งค่ารหัสผ
 msgid "An email has been sent, please check your email and follow instruction."
 msgstr "อีเมลถูกส่งแล้ว, โปรดตรวจอีเมลของคุณและทำตามคำแนะนำ."
 
-#: Controllers/Admin/ForgotLoginPassController.php:457
-#: Controllers/Admin/ForgotLoginPassController.php:463 Controllers/Admin/RegisterController.php:737
-#: Controllers/Admin/RegisterController.php:746 Controllers/Admin/RegisterController.php:845
-#: Controllers/Admin/Users/AddController.php:303
+#: Controllers/Admin/ForgotLoginPassController.php:457 Controllers/Admin/ForgotLoginPassController.php:463
+#: Controllers/Admin/RegisterController.php:737 Controllers/Admin/RegisterController.php:746
+#: Controllers/Admin/RegisterController.php:845 Controllers/Admin/Users/AddController.php:303
 msgid "An email could not be sent."
 msgstr "ไม่สามารถส่งอีเมลได้."
 
-#: Controllers/Admin/ForgotLoginPassController.php:479
-#: Controllers/Admin/ForgotLoginPassController.php:616 Controllers/Admin/LoginController.php:244
-#: Controllers/Admin/LoginController.php:389 Controllers/Admin/LoginController.php:446
-#: Controllers/Admin/LogoutController.php:69 Controllers/Admin/Permissions/EditController.php:84
-#: Controllers/Admin/Permissions/EditController.php:191 Controllers/Admin/RegisterController.php:289
-#: Controllers/Admin/RegisterController.php:506 Controllers/Admin/Roles/ActionsController.php:190
-#: Controllers/Admin/Roles/AddController.php:102 Controllers/Admin/Roles/EditController.php:103
-#: Controllers/Admin/Roles/ReorderController.php:126
-#: Controllers/Admin/Settings/SettingsController.php:108
-#: Controllers/Admin/Settings/SettingsController.php:473
+#: Controllers/Admin/ForgotLoginPassController.php:479 Controllers/Admin/ForgotLoginPassController.php:616
+#: Controllers/Admin/LoginController.php:244 Controllers/Admin/LoginController.php:389
+#: Controllers/Admin/LoginController.php:446 Controllers/Admin/LogoutController.php:69
+#: Controllers/Admin/Permissions/EditController.php:84 Controllers/Admin/Permissions/EditController.php:191
+#: Controllers/Admin/RegisterController.php:289 Controllers/Admin/RegisterController.php:506
+#: Controllers/Admin/Roles/ActionsController.php:190 Controllers/Admin/Roles/AddController.php:102
+#: Controllers/Admin/Roles/EditController.php:103 Controllers/Admin/Roles/ReorderController.php:126
+#: Controllers/Admin/Settings/SettingsController.php:114 Controllers/Admin/Settings/SettingsController.php:483
 #: Controllers/Admin/Tools/CacheController.php:70 Controllers/Admin/Users/ActionsController.php:110
 #: Controllers/Admin/Users/ActionsController.php:197 Controllers/Admin/Users/ActionsController.php:302
-#: Controllers/Admin/Users/AddController.php:237 Controllers/Admin/Users/AvatarController.php:99
-#: Controllers/Admin/Users/AvatarController.php:264 Controllers/Admin/Users/EditController.php:462
+#: Controllers/Admin/Users/AddController.php:237 Controllers/Admin/Users/AvatarController.php:106
+#: Controllers/Admin/Users/AvatarController.php:278 Controllers/Admin/Users/EditController.php:462
 #: Controllers/Admin/Users/Sessions/SessionsController.php:130
 msgid ""
-"Unable to validate token, please try again. If this problem still occur please reload the page and "
-"try again."
+"Unable to validate token, please try again. If this problem still occur please reload the page and try again."
 msgstr "ไม่สามารถตรวจสอบโทเคน, โปรดลองอีกครั้ง. ถ้าปัญหานี้ยังอยู่ โปรดโหลดหน้านี้แล้วลองอีกครั้ง."
 
 #: Controllers/Admin/ForgotLoginPassController.php:529 Controllers/Admin/LoginController.php:300
@@ -159,22 +151,18 @@ msgstr "ไม่สามารถล้างค่าการอนุญา
 msgid "All permissions for %1$s module were cleared successfully."
 msgstr "การอนุญาตทั้งหมดสำหรับโมดูล %1$s ถูกล้างค่าสำเร็จแล้ว."
 
-#: Controllers/Admin/Permissions/EditController.php:158
-#: Controllers/Admin/Permissions/EditController.php:170
+#: Controllers/Admin/Permissions/EditController.php:158 Controllers/Admin/Permissions/EditController.php:170
 msgid ""
-"Could not update. Please reload the page and try again, if problem still exists please contact "
-"administrator."
+"Could not update. Please reload the page and try again, if problem still exists please contact administrator."
 msgstr "ไม่สามารถปรับปรุงได้. โปรดโหลดหน้านี้แล้วลองใหม่อีกครั้ง, ถ้าปัญหายังอยู่โปรดติดต่อผู้ดูแล."
 
-#: Controllers/Admin/Permissions/EditController.php:230
-#: Controllers/Admin/Roles/ActionsController.php:173 Controllers/Admin/Users/ActionsController.php:85
-#: Controllers/Admin/Users/ActionsController.php:178
+#: Controllers/Admin/Permissions/EditController.php:230 Controllers/Admin/Roles/ActionsController.php:173
+#: Controllers/Admin/Users/ActionsController.php:85 Controllers/Admin/Users/ActionsController.php:178
 #: Controllers/Admin/Users/Sessions/SessionsController.php:123
 msgid "Deleted successfully."
 msgstr "ลบสำเร็จ."
 
-#: Controllers/Admin/Permissions/EditController.php:244
-#: Controllers/Admin/Users/ActionsController.php:185
+#: Controllers/Admin/Permissions/EditController.php:244 Controllers/Admin/Users/ActionsController.php:185
 msgid "Unable to delete."
 msgstr "ไม่สามารถลบได้."
 
@@ -193,19 +181,16 @@ msgstr "การทำงาน"
 
 #: Controllers/Admin/Permissions/PermissionsController.php:403
 #: Controllers/Admin/Permissions/PermissionsController.php:412 ModuleData/ModuleAdmin.php:98
-#: ModuleData/ModuleAdmin.php:215 Views/Admin/Permissions/index_v.php:7
-#: Views/Admin/Users/index_v.php:71
+#: ModuleData/ModuleAdmin.php:215 Views/Admin/Permissions/index_v.php:7 Views/Admin/Users/index_v.php:71
 msgid "Manage permissions"
 msgstr "จัดการการอนุญาต"
 
-#: Controllers/Admin/Permissions/PermissionsController.php:408
-#: Controllers/Admin/Roles/ActionsController.php:250 Controllers/Admin/Roles/AddController.php:147
-#: Controllers/Admin/Roles/EditController.php:150 Controllers/Admin/Roles/RolesController.php:151
-#: Controllers/Admin/UI/Traits/CommonDataTrait.php:103
+#: Controllers/Admin/Permissions/PermissionsController.php:408 Controllers/Admin/Roles/ActionsController.php:250
+#: Controllers/Admin/Roles/AddController.php:147 Controllers/Admin/Roles/EditController.php:150
+#: Controllers/Admin/Roles/RolesController.php:151 Controllers/Admin/UI/Traits/CommonDataTrait.php:103
 #: Controllers/Admin/Users/ActionsController.php:432 Controllers/Admin/Users/EditController.php:943
-#: Controllers/Admin/Users/PreviousEmailsController.php:63
-#: Controllers/_SubControllers/MenuItems.php:234 ModuleData/ModuleAdmin.php:144
-#: Views/Admin/Index/index_v.php:7
+#: Controllers/Admin/Users/PreviousEmailsController.php:63 Controllers/_SubControllers/MenuItems.php:234
+#: ModuleData/ModuleAdmin.php:144 Views/Admin/Index/index_v.php:7
 msgid "Admin home"
 msgstr "หน้าแรกผู้ดูแล"
 
@@ -215,9 +200,7 @@ msgid "Are you sure to clear all permissions for selected module (%s)?"
 msgstr "คุณแน่ใจหรือไม่ที่จะล้างค่าการอนุญาตทั้งหมดสำหรับโมดูลที่เลือก (%s)?"
 
 #: Controllers/Admin/Permissions/PermissionsController.php:442
-msgid ""
-"This cannot be undone, any users that are in the highest role priority will always have full "
-"control."
+msgid "This cannot be undone, any users that are in the highest role priority will always have full control."
 msgstr "นี่จะไม่สามารถเลิกทำได้, ผู้ใช้ใดๆที่มีหน้าที่สำคัญที่สุดจะยังคงเข้าถึงการควบคุมได้ทุกอย่างเสมอ."
 
 #: Controllers/Admin/Permissions/PermissionsController.php:443 Views/common/Admin/mainLayout_v.php:18
@@ -226,8 +209,8 @@ msgstr "นี่จะไม่สามารถเลิกทำได้, �
 msgid "Loading &hellip;"
 msgstr "กำลังโหลด &hellip;"
 
-#: Controllers/Admin/Permissions/PermissionsController.php:444
-#: Views/Admin/UI/Widgets/lastLoggedinUsers_v.php:26 Views/Admin/UI/Widgets/systemSummary_v.php:19
+#: Controllers/Admin/Permissions/PermissionsController.php:444 Views/Admin/UI/Widgets/lastLoggedinUsers_v.php:26
+#: Views/Admin/UI/Widgets/systemSummary_v.php:19
 msgid "No data"
 msgstr "ไม่มีข้อมูล"
 
@@ -319,8 +302,8 @@ msgstr "ชื่อผู้ใช้นี้มีคนใช้อยู่
 msgid "This email is already in use."
 msgstr "อีเมลนี้มีคนใช้อยู่แล้ว."
 
-#: Controllers/Admin/RegisterController.php:712 Models/UsersDb.php:574
-#: Views/Admin/Roles/actions_v.php:7 Views/Admin/Users/actions_v.php:7
+#: Controllers/Admin/RegisterController.php:712 Models/UsersDb.php:574 Views/Admin/Roles/actions_v.php:7
+#: Views/Admin/Users/actions_v.php:7
 msgid "Confirmation required."
 msgstr "ต้องการการยืนยัน."
 
@@ -383,8 +366,7 @@ msgstr "ต้องการการยืนยัน"
 
 #: Controllers/Admin/Roles/ActionsController.php:254 Controllers/Admin/Roles/AddController.php:151
 #: Controllers/Admin/Roles/EditController.php:154 Controllers/Admin/Roles/RolesController.php:146
-#: Controllers/Admin/Roles/RolesController.php:155 ModuleData/ModuleAdmin.php:203
-#: Views/Admin/Roles/index_v.php:8
+#: Controllers/Admin/Roles/RolesController.php:155 ModuleData/ModuleAdmin.php:203 Views/Admin/Roles/index_v.php:8
 msgid "Manage roles"
 msgstr "จัดการหน้าที่"
 
@@ -395,8 +377,7 @@ msgstr "โปรดเลือกหน้าที่อย่างน้อ
 #: Controllers/Admin/Roles/ActionsController.php:357 Controllers/Admin/Roles/RolesController.php:183
 #: Controllers/Admin/Users/ActionsController.php:536 Controllers/Admin/Users/ActionsController.php:562
 #: Controllers/Admin/Users/Sessions/SessionsController.php:78
-#: Controllers/Admin/Users/Sessions/SessionsController.php:268
-#: Controllers/Admin/Users/UsersController.php:260
+#: Controllers/Admin/Users/Sessions/SessionsController.php:268 Controllers/Admin/Users/UsersController.php:252
 msgid "Please select an action."
 msgstr "โปรดเลือกการทำงาน."
 
@@ -443,8 +424,7 @@ msgstr "ไม่สามารถบันทึกหน้าที่ได
 msgid "There are problems with your items, please reload the page and try again."
 msgstr "มีปัญหาบางอย่างเกี่ยวกับรายการของคุณ, กรุณาโหลดหน้านี้แล้วลองใหม่อีกครั้ง."
 
-#: Controllers/Admin/Roles/ReorderController.php:105
-#: Controllers/Admin/Settings/SettingsController.php:94
+#: Controllers/Admin/Roles/ReorderController.php:105 Controllers/Admin/Settings/SettingsController.php:100
 #: Controllers/Admin/Users/ActionsController.php:277
 msgid "Updated successfully."
 msgstr "อัพเดทเรียบร้อย."
@@ -461,29 +441,28 @@ msgstr "ไม่สามารถอัพเดทหน้าที่ที
 msgid "Not found selected role."
 msgstr "ไม่พบหน้าที่ที่เลือก."
 
-#: Controllers/Admin/Settings/SettingsController.php:75
+#: Controllers/Admin/Settings/SettingsController.php:81
 msgid "Please enter all required fields."
 msgstr "โปรดกรอกฟอร์มที่จำเป็น."
 
-#: Controllers/Admin/Settings/SettingsController.php:98
+#: Controllers/Admin/Settings/SettingsController.php:104
 msgid "Some setting value has not been update, please reload the page and see what was changed."
 msgstr "การตั้งค่าบางอย่างไม่ถูกอัพเดท, โปรดโหลดหน้านี้ใหม่แล้วดูว่ามีสิ่งใดเปลี่ยนแปลงไปบ้าง."
 
-#: Controllers/Admin/Settings/SettingsController.php:304 ModuleData/ModuleAdmin.php:240
+#: Controllers/Admin/Settings/SettingsController.php:314 ModuleData/ModuleAdmin.php:240
 #: Views/Admin/Settings/index_v.php:8
 msgid "Main settings"
 msgstr "การตั้งค่าหลัก"
 
-#: Controllers/Admin/Settings/SettingsController.php:400
+#: Controllers/Admin/Settings/SettingsController.php:410
 msgid "Unable to test other mail protocol."
 msgstr "ไม่สามารถทดสอบโปรโตคอลอีเมลอื่นๆได้."
 
-#: Controllers/Admin/Settings/SettingsController.php:434
-#: Controllers/Admin/Settings/SettingsController.php:457
+#: Controllers/Admin/Settings/SettingsController.php:444 Controllers/Admin/Settings/SettingsController.php:467
 msgid "An error has been occurred."
 msgstr "มีข้อผิดพลาดเกิดขึ้น."
 
-#: Controllers/Admin/Settings/SettingsController.php:454
+#: Controllers/Admin/Settings/SettingsController.php:464
 msgid "Connection was successfull."
 msgstr "การเชื่อมต่อสำเร็จ."
 
@@ -495,8 +474,8 @@ msgstr "แคชถูกล้างหมดแล้ว."
 msgid "Unable to clear cache."
 msgstr "ไม่สามารถล้างแคชได้."
 
-#: Controllers/Admin/Tools/CacheController.php:135 ModuleData/ModuleAdmin.php:97
-#: ModuleData/ModuleAdmin.php:262 Views/Admin/Tools/cache_v.php:8
+#: Controllers/Admin/Tools/CacheController.php:135 ModuleData/ModuleAdmin.php:97 ModuleData/ModuleAdmin.php:262
+#: Views/Admin/Tools/cache_v.php:8
 msgid "Manage cache"
 msgstr "จัดการแคช"
 
@@ -525,8 +504,7 @@ msgstr "โมดูลผู้ดูแลสำหรับ RundizBones"
 msgid "Version %1$s"
 msgstr "รุ่น %1$s"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:92
-#: Controllers/Admin/UI/XhrCommonDataController.php:102
+#: Controllers/Admin/UI/XhrCommonDataController.php:92 Controllers/Admin/UI/XhrCommonDataController.php:102
 msgctxt "translation for datatables."
 msgid "No data"
 msgstr "ไม่มีข้อมูล"
@@ -570,8 +548,7 @@ msgstr "กำลังประมวลผล..."
 msgid "Guest"
 msgstr "ผู้เยี่ยมชม"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:271
-#: Controllers/Admin/UI/XhrDashboardWidgetsController.php:32
+#: Controllers/Admin/UI/XhrCommonDataController.php:282 Controllers/Admin/UI/XhrDashboardWidgetsController.php:32
 msgid "Sorry, this page is for request via XHR, REST API."
 msgstr "ขออภัย, หน้านี้สำหรับ XHR, REST API."
 
@@ -589,7 +566,7 @@ msgid "Unable to update users."
 msgstr "ไม่สามารถอัพเดทผู้ใช้."
 
 #: Controllers/Admin/Users/ActionsController.php:427 Controllers/Admin/Users/ActionsController.php:444
-#: Views/Admin/Users/deleteMe_v.php:7 Views/Admin/Users/edit_v.php:305
+#: Views/Admin/Users/deleteMe_v.php:7 Views/Admin/Users/edit_v.php:307
 msgid "Delete my account"
 msgstr "ลบบัญชีผู้ใช้ของฉัน"
 
@@ -606,7 +583,7 @@ msgstr "ผู้ใช้"
 msgid "Edit user"
 msgstr "แก้ไขผู้ใช้"
 
-#: Controllers/Admin/Users/ActionsController.php:529 Controllers/Admin/Users/UsersController.php:261
+#: Controllers/Admin/Users/ActionsController.php:529 Controllers/Admin/Users/UsersController.php:253
 msgid "Please select at least one user."
 msgstr "โปรดเลือกผู้ใช้อย่างน้อยหนึ่งราย."
 
@@ -625,14 +602,14 @@ msgid "Disable user"
 msgid_plural "Disable users"
 msgstr[0] "ปิดใช้งานผู้ใช้"
 
-#: Controllers/Admin/Users/ActionsController.php:586 Controllers/Admin/Users/EditController.php:252
+#: Controllers/Admin/Users/ActionsController.php:586 Controllers/Admin/Users/AvatarController.php:87
+#: Controllers/Admin/Users/AvatarController.php:200 Controllers/Admin/Users/EditController.php:252
 msgid "Unable to edit guest user."
 msgstr "ไม่สามารถแก้ไขผู้ใช้ guest."
 
 #: Controllers/Admin/Users/ActionsController.php:596 Controllers/Admin/Users/AvatarController.php:71
-#: Controllers/Admin/Users/AvatarController.php:184 Controllers/Admin/Users/EditController.php:264
-#: Controllers/Admin/Users/EditController.php:959
-#: Controllers/Admin/Users/PreviousEmailsController.php:41
+#: Controllers/Admin/Users/AvatarController.php:191 Controllers/Admin/Users/EditController.php:264
+#: Controllers/Admin/Users/EditController.php:959 Controllers/Admin/Users/PreviousEmailsController.php:41
 #: Controllers/Admin/Users/Sessions/SessionsController.php:68
 msgid "Unable to edit user who has higher priority role than you."
 msgstr "ไม่สามารถแก้ไขผู้ใช้ที่มีหน้าที่สูงกว่าคุณได้."
@@ -661,101 +638,99 @@ msgstr "เพิ่มผู้ใช้ใหม่"
 msgid "Unable to edit the selected user."
 msgstr "ไม่สามารถแก้ไขผู้ใช้ที่เลือก."
 
-#: Controllers/Admin/Users/AvatarController.php:119
+#: Controllers/Admin/Users/AvatarController.php:126
 #, php-format
 msgid "The uploaded file exceeds the max file size directive. (%s &gt; %s)."
 msgstr "ขนาดไฟล์ที่อัพโหลดเกินกว่าที่อนุญาต. (%s &gt; %s)."
 
-#: Controllers/Admin/Users/AvatarController.php:120
+#: Controllers/Admin/Users/AvatarController.php:127
 msgid "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form."
 msgstr "ขนาดไฟล์ที่อัพโหลดเกินกว่าที่ระบุใน MAX_FILE_SIZE ซึ่งกำหนดในฟอร์ม."
 
-#: Controllers/Admin/Users/AvatarController.php:121
+#: Controllers/Admin/Users/AvatarController.php:128
 msgid "The uploaded file was only partially uploaded."
 msgstr "ไฟล์ถูกอัพโหลดเพียงบางส่วน."
 
-#: Controllers/Admin/Users/AvatarController.php:122 Controllers/Admin/Users/AvatarController.php:192
+#: Controllers/Admin/Users/AvatarController.php:129 Controllers/Admin/Users/AvatarController.php:206
 msgid "You did not upload the file."
 msgstr "คุณไม่ได้อัพโหลดไฟล์."
 
-#: Controllers/Admin/Users/AvatarController.php:123
+#: Controllers/Admin/Users/AvatarController.php:130
 msgid "Missing a temporary folder."
 msgstr "ไม่พบโฟลเดอร์ชั่วคราว."
 
-#: Controllers/Admin/Users/AvatarController.php:124
+#: Controllers/Admin/Users/AvatarController.php:131
 msgid "Failed to write file to disk."
 msgstr "ล้มเหลวในการเขียนไฟล์."
 
-#: Controllers/Admin/Users/AvatarController.php:125
+#: Controllers/Admin/Users/AvatarController.php:132
 msgid "A PHP extension stopped the file upload."
 msgstr "ส่วนขยายของ PHP หยุดการอัพโหลด."
 
-#: Controllers/Admin/Users/AvatarController.php:126
+#: Controllers/Admin/Users/AvatarController.php:133
 #, php-format
 msgid "Unable to move uploaded file. (%s =&gt; %s)"
 msgstr "ไม่สามารถย้ายไฟล์ที่อัพโหลดแล้วได้. (%s =&gt; %s)"
 
-#: Controllers/Admin/Users/AvatarController.php:127
+#: Controllers/Admin/Users/AvatarController.php:134
 #, php-format
 msgid "Error! Found php embedded in the uploaded file. (%s)."
 msgstr "ผิดพลาด! พบ php ฝังตัวอยู่ในไฟล์ที่อัพโหลด. (%s)."
 
-#: Controllers/Admin/Users/AvatarController.php:128
+#: Controllers/Admin/Users/AvatarController.php:135
 #, php-format
 msgid "Error! Found cgi/perl embedded in the uploaded file. (%s)."
 msgstr "ผิดพลาด! พบ cgi/perl ฝังตัวอยู่ในไฟล์ที่อัพโหลด. (%s)."
 
-#: Controllers/Admin/Users/AvatarController.php:129
+#: Controllers/Admin/Users/AvatarController.php:136
 #, php-format
 msgid "Error! Found shell script embedded in the uploaded file. (%s)."
 msgstr "ผิดพลาด! พบ shell script ฝังตัวอยู่ในไฟล์ที่อัพโหลด. (%s)."
 
-#: Controllers/Admin/Users/AvatarController.php:130
+#: Controllers/Admin/Users/AvatarController.php:137
 msgid "The target location where the uploaded file(s) will be moved to is not folder or directory."
 msgstr "ปลายทางที่ไฟล์อัพโหลดแล้วจะย้ายไปนั้นไม่ใช่โฟลเดอร์."
 
-#: Controllers/Admin/Users/AvatarController.php:131
+#: Controllers/Admin/Users/AvatarController.php:138
 msgid ""
-"The target location where the uploaded file(s) will be moved to is not writable. Please check the "
-"folder permission."
+"The target location where the uploaded file(s) will be moved to is not writable. Please check the folder "
+"permission."
 msgstr "ปลายทางที่ไฟล์อัพโหลดแล้วจะย้ายไปนั้นไม่สามารถเขียนได้. โปรดตรวจสอบการอนุญาตโฟลเดอร์."
 
-#: Controllers/Admin/Users/AvatarController.php:132
+#: Controllers/Admin/Users/AvatarController.php:139
 #, php-format
 msgid "Unable to validate extension for the file %s."
 msgstr "ไม่สามารถตรวจสอบสกุลไฟล์ %s."
 
-#: Controllers/Admin/Users/AvatarController.php:133
+#: Controllers/Admin/Users/AvatarController.php:140
 #, php-format
 msgid ""
-"Unable to validate the file extension and mime type. (%s). This file extension was not set in the "
-"&quot;file_extensions_mime_types&quot; property."
+"Unable to validate the file extension and mime type. (%s). This file extension was not set in the &quot;"
+"file_extensions_mime_types&quot; property."
 msgstr ""
 "ไม่สามารถตรวจสอบประเภท mime และนามสกุลไฟล์. (%s). นามสกุลไฟล์ไม่ได้กำหนดในพร็อพเพอร์ตี้ &quot;"
 "file_extensions_mime_types&quot;."
 
-#: Controllers/Admin/Users/AvatarController.php:134
+#: Controllers/Admin/Users/AvatarController.php:141
 #, php-format
 msgid "You have uploaded the file that is not allowed extension. (%s)"
 msgstr "คุณได้อัพโหลดไฟล์ที่มีนามสกุลที่ไม่ได้อนุญาตไว้. (%s)"
 
-#: Controllers/Admin/Users/AvatarController.php:135
+#: Controllers/Admin/Users/AvatarController.php:142
 #, php-format
 msgid "The uploaded file has invalid mime type. (%s : %s)."
 msgstr "ประเภท mime ไม่ถูกต้อง. (%s : %s)."
 
-#: Controllers/Admin/Users/AvatarController.php:136
-msgid ""
-"Unable to validate mime type. The format of &quot;file_extensions_mime_types&quot; property is "
-"incorrect."
+#: Controllers/Admin/Users/AvatarController.php:143
+msgid "Unable to validate mime type. The format of &quot;file_extensions_mime_types&quot; property is incorrect."
 msgstr "ไม่สามารถตรวจประเภท mime. รูปแบบสำหรับ &quot;file_extensions_mime_types&quot; นั้นไม่ถูกต้อง."
 
-#: Controllers/Admin/Users/AvatarController.php:137
+#: Controllers/Admin/Users/AvatarController.php:144
 #, php-format
 msgid "The uploaded image dimensions are larger than allowed max dimensions. (%s &gt; %s)."
 msgstr "ภาพที่อัพโหลดมีขนาดใหญ่กว่าที่อนุญาต. (%s &gt; %s)."
 
-#: Controllers/Admin/Users/AvatarController.php:138
+#: Controllers/Admin/Users/AvatarController.php:145
 #, php-format
 msgid "The uploaded image contain no image or multiple images. (%s)."
 msgstr "ภาพที่อัพโหลดไม่ใช่ภาพจริงๆหรือมีหลายภาพ. (%s)."
@@ -768,7 +743,7 @@ msgstr "ปฏิเสธการเข้าถึง! คุณกำลั�
 msgid "Your email was changed."
 msgstr "อีเมลของคุณได้เปลี่ยนเรียบร้อยแล้ว."
 
-#: Controllers/Admin/Users/EditController.php:214 Controllers/Admin/Users/UsersController.php:116
+#: Controllers/Admin/Users/EditController.php:214 Controllers/Admin/Users/UsersController.php:108
 msgid "Not found selected user."
 msgstr "ไม่พบผู้ใช้ที่เลือก."
 
@@ -800,28 +775,28 @@ msgstr "มีปัญหาเกี่ยวกับการเปลี่
 msgid "The email was changed but a notification email could not be sent."
 msgstr "อีเมลถูกเปลี่ยนแล้วแต่ไม่สามารถส่งอีเมลแจ้งเตือนได้."
 
-#: Controllers/Admin/Users/EditController.php:982 Controllers/Admin/Users/UsersController.php:256
+#: Controllers/Admin/Users/EditController.php:982 Controllers/Admin/Users/UsersController.php:248
 msgid "Are you sure you want to delete this profile picture?"
 msgstr "คุณแน่ใจหรือไม่ว่าจะลบรูปโปรไฟล์นี้?"
 
-#: Controllers/Admin/Users/EditController.php:983 Controllers/Admin/Users/UsersController.php:257
+#: Controllers/Admin/Users/EditController.php:983 Controllers/Admin/Users/UsersController.php:249
 msgid "Are you sure you want to upload selected profile picture?"
 msgstr "คุณแน่ใจหรือไม่ว่าจะอัพโหลดรูปโปรไฟล์ที่เลือก?"
 
-#: Controllers/Admin/Users/EditController.php:983 Controllers/Admin/Users/UsersController.php:257
+#: Controllers/Admin/Users/EditController.php:983 Controllers/Admin/Users/UsersController.php:249
 msgid "Any existing profile picture will be changed."
 msgstr "รูปโปรไฟล์ใดๆที่มีอยู่แล้วจะเปลี่ยนไป."
 
-#: Controllers/Admin/Users/EditController.php:984 Controllers/Admin/Users/UsersController.php:262
+#: Controllers/Admin/Users/EditController.php:984 Controllers/Admin/Users/UsersController.php:254
 msgid "You can only select one file."
 msgstr "คุณสามารถเลือกได้เพียงไฟล์เดียว."
 
-#: Controllers/Admin/Users/EditController.php:985 Controllers/Admin/Users/UsersController.php:264
+#: Controllers/Admin/Users/EditController.php:985 Controllers/Admin/Users/UsersController.php:256
 msgid "Uploading"
 msgstr "กำลังอัพโหลด"
 
 #: Controllers/Admin/Users/PreviousEmailsController.php:58
-#: Controllers/Admin/Users/PreviousEmailsController.php:75 Views/Admin/Users/edit_v.php:267
+#: Controllers/Admin/Users/PreviousEmailsController.php:75 Views/Admin/Users/edit_v.php:269
 #: Views/Admin/Users/previousEmails_v.php:7
 msgid "Previous emails"
 msgstr "อีเมลที่ใช้ก่อนหน้า"
@@ -865,15 +840,14 @@ msgstr "ล้มเหลว"
 msgid "Succeeded"
 msgstr "สำเร็จ"
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:271
-#: Controllers/Admin/Users/UsersController.php:263
+#: Controllers/Admin/Users/Sessions/SessionsController.php:271 Controllers/Admin/Users/UsersController.php:255
 msgid "Unknow"
 msgstr "ไม่ทราบ"
 
 #: Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php:176
 msgid ""
-"Your account has been locked due to your simultaneous login setting, please login using link that "
-"has been sent to your email."
+"Your account has been locked due to your simultaneous login setting, please login using link that has been "
+"sent to your email."
 msgstr "บัญชีผู้ใช้ของคุณถูกระงับเนื่องจากการตั้งค่าเข้าสู่ระบบซ้ำซ้อนของคุณ, โปรดเข้าสู่ระบบโดยใช้ลิ้งค์ที่ส่งไปยังอีเมลของคุณ."
 
 #: Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php:205
@@ -919,17 +893,16 @@ msgid ""
 "administrator."
 msgstr "ไม่สามารถดึงข้อมูลหน้าที่ของคุณมาตรวจสอบกับหน้าที่ของผู้ใช้ใหม่ได้. ไม่สามารถบันทึกผู้ใช้, โปรดติดต่อผู้ดูแล."
 
-#: Controllers/Admin/Users/UsersController.php:220 ModuleData/ModuleAdmin.php:166
-#: Views/Admin/Users/index_v.php:8
+#: Controllers/Admin/Users/UsersController.php:212 ModuleData/ModuleAdmin.php:166 Views/Admin/Users/index_v.php:8
 msgid "Manage users"
 msgstr "จัดการผู้ใช้"
 
-#: Controllers/Admin/Users/UsersController.php:258 Views/Admin/Users/add_v.php:102
+#: Controllers/Admin/Users/UsersController.php:250 Views/Admin/Users/add_v.php:102
 #: Views/Admin/Users/edit_v.php:117 Views/Admin/Users/index_v.php:82
 msgid "Disabled"
 msgstr "ปิดใช้งาน"
 
-#: Controllers/Admin/Users/UsersController.php:259 Views/Admin/Users/add_v.php:103
+#: Controllers/Admin/Users/UsersController.php:251 Views/Admin/Users/add_v.php:103
 #: Views/Admin/Users/edit_v.php:118 Views/Admin/Users/index_v.php:83
 msgid "Enabled"
 msgstr "เปิดใช้งาน"
@@ -939,8 +912,7 @@ msgstr "เปิดใช้งาน"
 #: Controllers/_SubControllers/BruteForceLoginPrevention.php:271
 #, php-format
 msgid ""
-"You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try "
-"again in %3$s."
+"You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try again in %3$s."
 msgstr "คุณได้เข้าสู่ระบบผิดพลาดต่อเนื่องเกิน %1$d ครั้ง, คุณต้องรอ %2$d นาที. โปรดลองใหม่อีกครั้งในเวลา %3$s."
 
 #: Controllers/_SubControllers/LoginSubController.php:181
@@ -956,8 +928,7 @@ msgstr "ถ้ารหัสของคุณหมดอายุ, โปร�
 msgid "You had submitted more than %d times, please try to login again."
 msgstr "คุณได้กรอกแล้วมากกว่า %d ครั้ง, โปรดเข้าสู่ระบบใหม่."
 
-#: Controllers/_SubControllers/LoginSubController.php:367
-#: Controllers/_SubControllers/LoginSubController.php:373
+#: Controllers/_SubControllers/LoginSubController.php:367 Controllers/_SubControllers/LoginSubController.php:373
 msgid "The username or password is incorrect."
 msgstr "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง."
 
@@ -966,8 +937,7 @@ msgid "Login successfully."
 msgstr "เข้าสู่ระบบเรียบร้อย."
 
 #: Controllers/_SubControllers/LoginSubController.php:719
-msgid ""
-"The 2 step verification code email has just been sent recently, please wait and try again later."
+msgid "The 2 step verification code email has just been sent recently, please wait and try again later."
 msgstr "อีเมลรหัสขั้นตอนที่ 2 เพิ่งถูกส่งไม่นานนี้, กรุณารอและลองใหม่ในภายหลัง."
 
 #: Controllers/_SubControllers/LoginSubController.php:754 Views/Admin/Login/mfa_v.php:19
@@ -995,8 +965,8 @@ msgstr "โปรดรอผู้ดูแลทำการยืนยัน
 msgid "Permissions"
 msgstr "การอนุญาต"
 
-#: ModuleData/ModuleAdmin.php:84 Views/Admin/Permissions/index_v.php:21
-#: Views/Admin/Users/index_v.php:27 Views/Admin/Users/index_v.php:40 Views/Admin/Users/index_v.php:87
+#: ModuleData/ModuleAdmin.php:84 Views/Admin/Permissions/index_v.php:21 Views/Admin/Users/index_v.php:27
+#: Views/Admin/Users/index_v.php:40 Views/Admin/Users/index_v.php:87
 msgid "Roles"
 msgstr "หน้าที่"
 
@@ -1037,7 +1007,7 @@ msgstr "แก้ไข"
 msgid "List items"
 msgstr "แสดงรายการ"
 
-#: ModuleData/ModuleAdmin.php:99 Views/Admin/Users/edit_v.php:261 Views/Admin/Users/index_v.php:68
+#: ModuleData/ModuleAdmin.php:99 Views/Admin/Users/edit_v.php:263 Views/Admin/Users/index_v.php:68
 msgid "View logins"
 msgstr "ดูรายการเข้าสู่ระบบ"
 
@@ -1049,42 +1019,40 @@ msgstr "กรอกอีเมลของคุณเพื่อตั้ง
 msgid "You may need to check your spam folder."
 msgstr "คุณอาจต้องตรวจสอบโฟลเดอร์สแปมของคุณ."
 
-#: Views/Admin/ForgotLoginPass/index_v.php:19 Views/Admin/Login/index_v.php:23
-#: Views/Admin/Login/index_v.php:25
+#: Views/Admin/ForgotLoginPass/index_v.php:19 Views/Admin/Login/index_v.php:23 Views/Admin/Login/index_v.php:25
 msgid "Username or Email"
 msgstr "ชื่อผู้ใช้หรืออีเมล"
 
 #: Views/Admin/ForgotLoginPass/index_v.php:21 Views/Admin/Register/index_v.php:35
-#: Views/Admin/Settings/index_v.php:22 Views/Admin/Users/add_v.php:34
-#: Views/Admin/Users/deleteMe_v.php:19 Views/Admin/Users/edit_v.php:39
-#: Views/Admin/Users/edit_v.php:272 Views/Admin/Users/edit_v.php:278 Views/Admin/Users/index_v.php:26
-#: Views/Admin/Users/index_v.php:39 Views/Admin/Users/previousEmails_v.php:16
+#: Views/Admin/Settings/index_v.php:22 Views/Admin/Users/add_v.php:34 Views/Admin/Users/deleteMe_v.php:19
+#: Views/Admin/Users/edit_v.php:39 Views/Admin/Users/edit_v.php:274 Views/Admin/Users/edit_v.php:280
+#: Views/Admin/Users/index_v.php:26 Views/Admin/Users/index_v.php:39 Views/Admin/Users/previousEmails_v.php:16
 #: Views/Admin/Users/previousEmails_v.php:22 Views/Admin/Users/previousEmails_v.php:35
 msgid "Email"
 msgstr "อีเมล"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:25 Views/Admin/Login/index_v.php:89
-#: Views/Admin/Login/reset_v.php:102 Views/Admin/Register/index_v.php:55
+#: Views/Admin/ForgotLoginPass/index_v.php:25 Views/Admin/Login/index_v.php:89 Views/Admin/Login/reset_v.php:102
+#: Views/Admin/Register/index_v.php:55
 msgid "Please enter text in the image below."
 msgstr "กรุณากรอกตัวอักษรในภาพด้านล่าง."
 
-#: Views/Admin/ForgotLoginPass/index_v.php:28 Views/Admin/Login/index_v.php:92
-#: Views/Admin/Login/reset_v.php:105 Views/Admin/Register/index_v.php:58
+#: Views/Admin/ForgotLoginPass/index_v.php:28 Views/Admin/Login/index_v.php:92 Views/Admin/Login/reset_v.php:105
+#: Views/Admin/Register/index_v.php:58
 msgid "Captcha"
 msgstr "อักษรภาพ"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:37 Views/Admin/Login/index_v.php:101
-#: Views/Admin/Login/reset_v.php:114 Views/Admin/Register/index_v.php:67
+#: Views/Admin/ForgotLoginPass/index_v.php:37 Views/Admin/Login/index_v.php:101 Views/Admin/Login/reset_v.php:114
+#: Views/Admin/Register/index_v.php:67
 msgid "Get new image"
 msgstr "รับภาพใหม่"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:41 Views/Admin/Login/index_v.php:105
-#: Views/Admin/Login/reset_v.php:118 Views/Admin/Register/index_v.php:71
+#: Views/Admin/ForgotLoginPass/index_v.php:41 Views/Admin/Login/index_v.php:105 Views/Admin/Login/reset_v.php:118
+#: Views/Admin/Register/index_v.php:71
 msgid "Play audio"
 msgstr "เล่นเสียง"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:45 Views/Admin/Login/index_v.php:109
-#: Views/Admin/Login/reset_v.php:122 Views/Admin/Register/index_v.php:75
+#: Views/Admin/ForgotLoginPass/index_v.php:45 Views/Admin/Login/index_v.php:109 Views/Admin/Login/reset_v.php:122
+#: Views/Admin/Register/index_v.php:75
 msgid "Captcha text"
 msgstr "ตัวอักษรภาพ"
 
@@ -1119,9 +1087,8 @@ msgstr "ยืนยันรหัสผ่าน"
 msgid "Proceed to login"
 msgstr "ดำเนินการเข้าสู่ระบบต่อไป"
 
-#: Views/Admin/Login/index_v.php:29 Views/Admin/Login/index_v.php:31
-#: Views/Admin/Register/confirm_v.php:17 Views/Admin/Register/index_v.php:42
-#: Views/Admin/Users/add_v.php:48
+#: Views/Admin/Login/index_v.php:29 Views/Admin/Login/index_v.php:31 Views/Admin/Register/confirm_v.php:17
+#: Views/Admin/Register/index_v.php:42 Views/Admin/Users/add_v.php:48
 msgid "Password"
 msgstr "รหัสผ่าน"
 
@@ -1135,11 +1102,9 @@ msgstr "ตรวจสอบ"
 
 #: Views/Admin/Login/reset_v.php:10
 msgid ""
-"You get logged out to prevent simultaneous log in (depend on your setting). To log in again, please "
-"set the new password."
-msgstr ""
-"คุณถูกให้ออกจากระบบเพื่อป้องกันการเข้าสู่ระบบซ้ำซ้อน (ขึ้นอยู่กับการตั้งค่าของคุณ). เพื่อจะเข้าสู่ระบบได้อีก, "
-"โปรดกำหนดรหัสผ่านใหม่."
+"You get logged out to prevent simultaneous log in (depend on your setting). To log in again, please set the "
+"new password."
+msgstr "คุณถูกให้ออกจากระบบเพื่อป้องกันการเข้าสู่ระบบซ้ำซ้อน (ขึ้นอยู่กับการตั้งค่าของคุณ). เพื่อจะเข้าสู่ระบบได้อีก, โปรดกำหนดรหัสผ่านใหม่."
 
 #: Views/Admin/Logout/index_v.php:20
 msgid "Logout on all devices"
@@ -1159,13 +1124,13 @@ msgstr "การอนุญาตสำหรับ"
 
 #: Views/Admin/Permissions/index_v.php:26 Views/Admin/Register/index_v.php:29
 #: Views/Admin/UI/Widgets/lastLoggedinUsers_v.php:7 Views/Admin/Users/add_v.php:27
-#: Views/Admin/Users/deleteMe_v.php:13 Views/Admin/Users/edit_v.php:32
-#: Views/Admin/Users/index_v.php:24 Views/Admin/Users/index_v.php:37
+#: Views/Admin/Users/deleteMe_v.php:13 Views/Admin/Users/edit_v.php:32 Views/Admin/Users/index_v.php:24
+#: Views/Admin/Users/index_v.php:37
 msgid "Username"
 msgstr "ชื่อผู้ใช้"
 
-#: Views/Admin/Permissions/index_v.php:31 Views/Admin/Roles/index_v.php:71
-#: Views/Admin/Users/index_v.php:100 Views/Admin/Users/sessions_v.php:51
+#: Views/Admin/Permissions/index_v.php:31 Views/Admin/Roles/index_v.php:71 Views/Admin/Users/index_v.php:100
+#: Views/Admin/Users/sessions_v.php:51
 msgid "Filter"
 msgstr "กรอง"
 
@@ -1177,19 +1142,16 @@ msgstr "ล้างค่าการอนุญาตทั้งหมดส
 msgid "Clear"
 msgstr "ล้างค่า"
 
-#: Views/Admin/Register/confirm_v.php:23 Views/Admin/Register/index_v.php:48
-#: Views/Admin/Users/add_v.php:54
+#: Views/Admin/Register/confirm_v.php:23 Views/Admin/Register/index_v.php:48 Views/Admin/Users/add_v.php:54
 msgid "Confirm password"
 msgstr "ยืนยันรหัสผ่าน"
 
-#: Views/Admin/Register/confirm_v.php:32 Views/Admin/Roles/actions_v.php:110
-#: Views/Admin/Users/actions_v.php:51
+#: Views/Admin/Register/confirm_v.php:32 Views/Admin/Roles/actions_v.php:110 Views/Admin/Users/actions_v.php:51
 msgid "Confirm"
 msgstr "ยืนยัน"
 
 #: Views/Admin/Register/index_v.php:82
-msgid ""
-"The confirmation email will be sent to you and you have to click on confirm link in your email."
+msgid "The confirmation email will be sent to you and you have to click on confirm link in your email."
 msgstr "อีเมลยืนยันจะส่งไปหาคุณและคุณต้องคลิกลิ้งค์ยืนยันในอีเมลของคุณ."
 
 #: Views/Admin/Register/index_v.php:84
@@ -1205,9 +1167,7 @@ msgid "Please select user's default role"
 msgstr "โปรดเลือกหน้าที่ค่าเริ่มต้น"
 
 #: Views/Admin/Roles/actions_v.php:48
-msgid ""
-"You are deleting at least a role that is in user's default role on register, please select a new "
-"one."
+msgid "You are deleting at least a role that is in user's default role on register, please select a new one."
 msgstr "คุณกำลังลบหน้าที่อย่างน้อยหนึ่งรายการที่อยู่ในค่าเริ่มต้นของผู้ใช้ตอนลงทะเบียน, โปรดเลือกรายการใหม่."
 
 #: Views/Admin/Roles/actions_v.php:50
@@ -1219,9 +1179,7 @@ msgid "Replace user's role"
 msgstr "แทนที่หน้าที่ของผู้ใช้"
 
 #: Views/Admin/Roles/actions_v.php:79
-msgid ""
-"The selected roles maybe in your current user's role, please select a new one if they will be "
-"deleted."
+msgid "The selected roles maybe in your current user's role, please select a new one if they will be deleted."
 msgstr "หน้าที่ที่เลือกอาจจะอยู่ในหน้าที่ของผู้ใช้ของคุณ, โปรดเลือกรายการใหม่ถ้ามันจะถูกลบ."
 
 #: Views/Admin/Roles/add_v.php:27 Views/Admin/Roles/edit_v.php:32 Views/Admin/Roles/index_v.php:22
@@ -1234,18 +1192,18 @@ msgstr "หน้าที่"
 msgid "Description"
 msgstr "รายละเอียด"
 
-#: Views/Admin/Roles/add_v.php:42 Views/Admin/Roles/edit_v.php:60 Views/Admin/Settings/index_v.php:355
-#: Views/Admin/Users/add_v.php:127 Views/Admin/Users/edit_v.php:238
+#: Views/Admin/Roles/add_v.php:42 Views/Admin/Roles/edit_v.php:60 Views/Admin/Settings/index_v.php:402
+#: Views/Admin/Users/add_v.php:127 Views/Admin/Users/edit_v.php:240
 msgid "Save"
 msgstr "บันทึก"
 
 #: Views/Admin/Roles/edit_v.php:45 Views/Admin/Roles/index_v.php:24 Views/Admin/Roles/index_v.php:36
-#: Views/Admin/Users/deleteMe_v.php:32 Views/Admin/Users/edit_v.php:245
+#: Views/Admin/Users/deleteMe_v.php:32 Views/Admin/Users/edit_v.php:247
 msgid "Created date"
 msgstr "วันที่สร้าง"
 
 #: Views/Admin/Roles/edit_v.php:51 Views/Admin/Roles/index_v.php:25 Views/Admin/Roles/index_v.php:37
-#: Views/Admin/Users/deleteMe_v.php:38 Views/Admin/Users/edit_v.php:251
+#: Views/Admin/Users/deleteMe_v.php:38 Views/Admin/Users/edit_v.php:253
 msgid "Last update"
 msgstr "อัพเดทล่าสุด"
 
@@ -1258,33 +1216,27 @@ msgstr "ไอดี"
 msgid "Priority"
 msgstr "ความสำคัญ"
 
-#: Views/Admin/Roles/index_v.php:67 Views/Admin/Users/index_v.php:96
-#: Views/Admin/Users/sessions_v.php:47
+#: Views/Admin/Roles/index_v.php:67 Views/Admin/Users/index_v.php:96 Views/Admin/Users/sessions_v.php:47
 msgid "Search"
 msgstr "ค้นหา"
 
-#: Views/Admin/Roles/index_v.php:74 Views/Admin/Users/index_v.php:103
-#: Views/Admin/Users/sessions_v.php:54
+#: Views/Admin/Roles/index_v.php:74 Views/Admin/Users/index_v.php:103 Views/Admin/Users/sessions_v.php:54
 msgid "More"
 msgstr "เพิ่มเติม"
 
-#: Views/Admin/Roles/index_v.php:77 Views/Admin/Users/index_v.php:106
-#: Views/Admin/Users/sessions_v.php:57
+#: Views/Admin/Roles/index_v.php:77 Views/Admin/Users/index_v.php:106 Views/Admin/Users/sessions_v.php:57
 msgid "Reset"
 msgstr "เริ่มใหม่"
 
-#: Views/Admin/Roles/index_v.php:85 Views/Admin/Users/index_v.php:114
-#: Views/Admin/Users/sessions_v.php:65
+#: Views/Admin/Roles/index_v.php:85 Views/Admin/Users/index_v.php:114 Views/Admin/Users/sessions_v.php:65
 msgid "items"
 msgstr "รายการ"
 
-#: Views/Admin/Roles/index_v.php:87 Views/Admin/Users/index_v.php:116
-#: Views/Admin/Users/sessions_v.php:67
+#: Views/Admin/Roles/index_v.php:87 Views/Admin/Users/index_v.php:116 Views/Admin/Users/sessions_v.php:67
 msgid "item"
 msgstr "รายการ"
 
-#: Views/Admin/Roles/index_v.php:99 Views/Admin/Users/index_v.php:134
-#: Views/Admin/Users/sessions_v.php:80
+#: Views/Admin/Roles/index_v.php:99 Views/Admin/Users/index_v.php:134 Views/Admin/Users/sessions_v.php:80
 msgid "Apply"
 msgstr "นำไปใช้"
 
@@ -1292,7 +1244,7 @@ msgstr "นำไปใช้"
 msgid "Search settings"
 msgstr "ค้นหาการตั้งค่า"
 
-#: Views/Admin/Settings/index_v.php:20 Views/Admin/Users/edit_v.php:188
+#: Views/Admin/Settings/index_v.php:20 Views/Admin/Users/edit_v.php:190
 msgid "Website"
 msgstr "เว็บไซต์"
 
@@ -1325,8 +1277,7 @@ msgid "Send notification email to administrators"
 msgstr "ส่งอีเมลแจ้งเตือนไปยังผู้ดูแล"
 
 #: Views/Admin/Settings/index_v.php:78
-msgid ""
-"A notification email still be sent if registration verification must be done by an administrator."
+msgid "A notification email still be sent if registration verification must be done by an administrator."
 msgstr "อีเมลแจ้งเตือนจะยังคงส่งถ้าหากการตรวจสอบลงทะเบียนต้องกระทำโดยผู้ดูแล."
 
 #: Views/Admin/Settings/index_v.php:83
@@ -1346,234 +1297,266 @@ msgid "Verify by an administrator"
 msgstr "ตรวจโดยผู้ดูแล"
 
 #: Views/Admin/Settings/index_v.php:93
+msgid "Registration verification wait time"
+msgstr "ระยะเวลารอตรวจสอบการลงทะเบียน"
+
+#: Views/Admin/Settings/index_v.php:98 Views/Admin/Settings/index_v.php:159 Views/Admin/Settings/index_v.php:175
+#: Views/Admin/Settings/index_v.php:290 Views/Admin/Settings/index_v.php:311
+msgid "days"
+msgstr "วัน"
+
+#: Views/Admin/Settings/index_v.php:101
+msgid ""
+"How many days that user needs to take action to verify their email on register or added a new user by admin?"
+msgstr "ระยะเวลากี่วันที่ผู้ใช้ต้องลงมือกระทำเพื่อตรวจสอบยืนยันอีเมลการลงทะเบียนหรือการถูกเพิ่มผู้ใช้โดยผู้ดูแล?"
+
+#: Views/Admin/Settings/index_v.php:105
 msgid "Admin notification emails"
 msgstr "อีเมลแจ้งเตือนผู้ดูแล"
 
-#: Views/Admin/Settings/index_v.php:98
+#: Views/Admin/Settings/index_v.php:110
 msgid "The administrator's emails to notify where there is new user registration."
 msgstr "อีเมลผู้ดูแลที่จะแจ้งเตือนเมื่อมีผู้ใช้ลงทะเบียนใหม่."
 
-#: Views/Admin/Settings/index_v.php:100
+#: Views/Admin/Settings/index_v.php:112
 #, php-format
 msgid "Use comma %s to separate multiple emails."
 msgstr "ใช้เครื่องหมายคอมม่า %s เพื่อแยกหลายอีเมล."
 
-#: Views/Admin/Settings/index_v.php:106
+#: Views/Admin/Settings/index_v.php:118
 msgid "Disallowed name"
 msgstr "ไม่อนุญาตชื่อ"
 
-#: Views/Admin/Settings/index_v.php:111
+#: Views/Admin/Settings/index_v.php:123
 msgid "Disallowed name to use in username, email, display name."
 msgstr "ไม่อนุญาตชื่อในชื่อผู้ใช้, อีเมล, ชื่อแสดง."
 
-#: Views/Admin/Settings/index_v.php:113
+#: Views/Admin/Settings/index_v.php:125
 #, php-format
 msgid "Use comma %s to separate multiple names."
 msgstr "ใช้เครื่องหมายคอมม่า %s เพื่อแยกหลายชื่อ."
 
-#: Views/Admin/Settings/index_v.php:115
+#: Views/Admin/Settings/index_v.php:127
 #, php-format
 msgid "Use asterisk %s as wild card in each name."
 msgstr "ใช้เครื่องหมายดอกจัน %s แทนอักขระใดๆก็ตามในแต่ละชื่อ."
 
-#: Views/Admin/Settings/index_v.php:121
+#: Views/Admin/Settings/index_v.php:133
 msgid "Default role"
 msgstr "หน้าที่เริ่มต้น"
 
-#: Views/Admin/Settings/index_v.php:135
+#: Views/Admin/Settings/index_v.php:147
 msgid "Default role to use when user register their account or add new user from administrator page."
 msgstr "หน้าที่เริ่มต้นที่จะใช้เมื่อผู้ใช้ลงทะเบียนสมาชิกหรือเพิ่มผู้ใช้ผ่านหน้าผู้ดูแล."
 
-#: Views/Admin/Settings/index_v.php:140
+#: Views/Admin/Settings/index_v.php:152
 msgid "Login & Security"
 msgstr "การเข้าสู่ระบบ & ความปลอดภัย"
 
-#: Views/Admin/Settings/index_v.php:142
+#: Views/Admin/Settings/index_v.php:154
 msgid "Login length without remember"
 msgstr "ระยะเวลาเข้าสู่ระบบกับการไม่ให้จดจำ"
 
-#: Views/Admin/Settings/index_v.php:147 Views/Admin/Settings/index_v.php:163
-msgid "days"
-msgstr "วัน"
-
-#: Views/Admin/Settings/index_v.php:152
+#: Views/Admin/Settings/index_v.php:164
 msgid ""
-"Number of days for cookie to be expire when user login without remember option checked. Use zero to "
-"keep session until browser close."
+"Number of days for cookie to be expire when user login without remember option checked. Use zero to keep "
+"session until browser close."
 msgstr "จำนวนวันสำหรับคุกกี้ที่จะหมดอายุเมื่อผู้ใช้เข้าสู่ระบบกับไม่ได้เลือกให้จดจำ. ใช้เลขศูนย์สำหรับให้หมดอายุเมื่อปิดเบราเซอร์."
 
-#: Views/Admin/Settings/index_v.php:158
+#: Views/Admin/Settings/index_v.php:170
 msgid "Login length with remember"
 msgstr "ระยะเวลาเข้าสู่ระบบกับการให้จดจำ"
 
-#: Views/Admin/Settings/index_v.php:168
+#: Views/Admin/Settings/index_v.php:180
 msgid "Number of days for cookie to be expire when user login with remember option checked."
 msgstr "จำนวนวันสำหรับคุกกี้ที่จะหมดอายุเมื่อผู้ใช้เข้าสู่ระบบกับตัวเลือกให้จดจำ."
 
-#: Views/Admin/Settings/index_v.php:174
+#: Views/Admin/Settings/index_v.php:186
 msgid "Login captcha"
 msgstr "อักษรภาพเข้าสู่ระบบ"
 
-#: Views/Admin/Settings/index_v.php:177
+#: Views/Admin/Settings/index_v.php:189
 msgid "Do not use"
 msgstr "ไม่ใช้งาน"
 
-#: Views/Admin/Settings/index_v.php:178
+#: Views/Admin/Settings/index_v.php:190
 msgid "Use until login success"
 msgstr "ใช้จนกระทั่งเข้าสู่ระบบสำเร็จ"
 
-#: Views/Admin/Settings/index_v.php:179
+#: Views/Admin/Settings/index_v.php:191
 msgid "Always use"
 msgstr "ใช้งานเสมอ"
 
-#: Views/Admin/Settings/index_v.php:182
+#: Views/Admin/Settings/index_v.php:194
 msgid ""
-"To use login captcha until login success, the captcha will be skipped until login cookies expired "
-"with these conditions."
-msgstr ""
-"การใช้อักษรภาพในการเข้าสู่ระบบจนกระทั่งเข้าสู่ระบบสำเร็จ, "
-"อักษรภาพจะถูกข้ามไปจนกระทั่งคุกกี้เข้าสู่ระบบหมดอายุด้วยเงื่อนไขต่อไปนี้."
+"To use login captcha until login success, the captcha will be skipped until login cookies expired with these "
+"conditions."
+msgstr "การใช้อักษรภาพในการเข้าสู่ระบบจนกระทั่งเข้าสู่ระบบสำเร็จ, อักษรภาพจะถูกข้ามไปจนกระทั่งคุกกี้เข้าสู่ระบบหมดอายุด้วยเงื่อนไขต่อไปนี้."
 
-#: Views/Admin/Settings/index_v.php:183
+#: Views/Admin/Settings/index_v.php:195
 msgid "If user login without remember then it will be expired in one day."
 msgstr "ถ้าผู้ใช้เข้าสู่ระบบโดยไม่ให้จดจำ มันจะหมดอายุในหนึ่งวัน."
 
-#: Views/Admin/Settings/index_v.php:184
-msgid ""
-"If user login with remember then it will be expired within remember length multiply with 6 days."
+#: Views/Admin/Settings/index_v.php:196
+msgid "If user login with remember then it will be expired within remember length multiply with 6 days."
 msgstr "ถ้าผู้ใช้เข้าสู่ระบบด้วยการให้จดจำ มันจะหมดอายุภายในระยะเวลาจดจำคูณด้วย 6 วัน."
 
-#: Views/Admin/Settings/index_v.php:192
+#: Views/Admin/Settings/index_v.php:204
 msgid "Prevent brute-force attack by IP address"
 msgstr "ป้องกันการสุ่มโจมตีโดยที่อยู่ไอพี"
 
-#: Views/Admin/Settings/index_v.php:200
+#: Views/Admin/Settings/index_v.php:212
 msgid "Prevent brute-force attack by device cookie"
 msgstr "ป้องกันการสุ่มโจมตีโดย device cookie"
 
-#: Views/Admin/Settings/index_v.php:203
+#: Views/Admin/Settings/index_v.php:215
 #, php-format
 msgid "Read more about device cookie at %1$s."
 msgstr "อ่านเพิ่มเติมเกี่ยวกับ device cookie ได้ที่ %1$s."
 
-#: Views/Admin/Settings/index_v.php:208
+#: Views/Admin/Settings/index_v.php:220
 msgid "Maximum login failed"
 msgstr "ล้มเหลวในการเข้าสู่ระบบไม่เกิน"
 
-#: Views/Admin/Settings/index_v.php:213
+#: Views/Admin/Settings/index_v.php:225
 msgctxt "Number of times such as 3 times."
 msgid "times"
 msgstr "ครั้ง"
 
-#: Views/Admin/Settings/index_v.php:218
+#: Views/Admin/Settings/index_v.php:230
 msgid "Maximum of failed login allowed."
 msgstr "จำนวนมากที่สุดที่จะอนุญาตเมื่อเข้าสู่ระบบล้มเหลว."
 
-#: Views/Admin/Settings/index_v.php:220 Views/Admin/Settings/index_v.php:238
+#: Views/Admin/Settings/index_v.php:232 Views/Admin/Settings/index_v.php:250
 msgid "This will work only when one of brute-force option were checked."
 msgstr "นี่จะทำงานเฉพาะตัวเลือกป้องกันการสุ่มโจมตีถูกติ๊ก."
 
-#: Views/Admin/Settings/index_v.php:226
+#: Views/Admin/Settings/index_v.php:238
 msgid "Login failed wait time"
 msgstr "เวลาที่ต้องรอหลังจากเข้าสู่ระบบล้มเหลว"
 
-#: Views/Admin/Settings/index_v.php:231 Views/Admin/Settings/index_v.php:260
+#: Views/Admin/Settings/index_v.php:243 Views/Admin/Settings/index_v.php:272
 msgid "minutes"
 msgstr "นาที"
 
-#: Views/Admin/Settings/index_v.php:236
+#: Views/Admin/Settings/index_v.php:248
 msgid "Wait time in minutes if user reach maximum login failed."
 msgstr "จำนวนนาทีที่รอถ้าผู้ใช้ล้มเหลวในการเข้าสู่ระบบเกินจำนวนที่ระบุ."
 
-#: Views/Admin/Settings/index_v.php:246
+#: Views/Admin/Settings/index_v.php:258
 msgid "Other user settings"
 msgstr "การตั้งค่าผู้ใช้อื่นๆ"
 
-#: Views/Admin/Settings/index_v.php:250
+#: Views/Admin/Settings/index_v.php:262
 msgid "Confirmation is required when users change their email"
 msgstr "ต้องการการยืนยันเมื่อผู้ใช้เปลี่ยนอีเมลของพวกเขา"
 
-#: Views/Admin/Settings/index_v.php:251
+#: Views/Admin/Settings/index_v.php:263
 msgid "A confirmation message with link will be sent to new user's email."
 msgstr "ข้อความและลิ้งค์ยืนยันจะส่งไปยังอีเมลใหม่ของผู้ใช้."
 
-#: Views/Admin/Settings/index_v.php:255
+#: Views/Admin/Settings/index_v.php:267
 msgid "Confirmation wait time"
 msgstr "เวลารอในการยืนยัน"
 
-#: Views/Admin/Settings/index_v.php:265
+#: Views/Admin/Settings/index_v.php:277
 msgid "Number of minutes that a user must take action when waiting for confirmation."
 msgstr "จำนวนนาทีที่ผู้ใช้ต้องลงมือกระทำเมื่อมีการรอการยืนยัน."
 
-#: Views/Admin/Settings/index_v.php:267
+#: Views/Admin/Settings/index_v.php:279
 msgid "Example: reset password, change email, prevent simultaneuos login link, etc."
 msgstr "ตัวอย่าง: ตั้งค่ารหัสผ่านใหม่, เปลี่ยนอีเมล, ลิ้งค์เข้าสู่ระบบป้องกันการเข้าสู่ระบบซ้ำซ้อน, อื่นๆ."
 
-#: Views/Admin/Settings/index_v.php:278
+#: Views/Admin/Settings/index_v.php:285
+msgid "Logins log expiration"
+msgstr "การหมดอายุของบันทึกการเข้าสู่ระบบ"
+
+#: Views/Admin/Settings/index_v.php:294
+msgid "How many days that user's failed logins data to keep in database?"
+msgstr "บันทึกการเข้าสู่ระบบที่ล้มเหลวของผู้ใช้จะถูกเก็บไว้ในฐานข้อมูลเป็นเวลากี่วัน?"
+
+#: Views/Admin/Settings/index_v.php:301
+msgid "Allow user to delete their account"
+msgstr "อนุญาตให้ผู้ใช้ลบบัญชีของตน"
+
+#: Views/Admin/Settings/index_v.php:302
+msgid "If allowed, once account was deleted it will be stay in the database for days before actual deleted."
+msgstr "ถ้าอนุญาต, เมื่อบัญชีผู้ใช้ถูกลบแล้ว มันจะอยู่ในฐานข้อมูลหลายวันก่อนจะถูกลบจริงๆ."
+
+#: Views/Admin/Settings/index_v.php:306
+msgid "Actual delete user"
+msgstr "ลบผู้ใช้จริง"
+
+#: Views/Admin/Settings/index_v.php:315
+msgid ""
+"On delete user wether delete themself or by admin, How many days before it gets actual delete from database?"
+msgstr "เมื่อมีการลบผู้ใช้ ไม่ว่าจะโดยผู้ใช้ลบตัวเองหรือโดยผู้ดูแล, จะใช้เวลากี่วันก่อนที่ผู้ใช้นั้นจะถูกลบจริงๆจากฐานข้อมูล?"
+
+#: Views/Admin/Settings/index_v.php:325
 msgid "Email protocol"
 msgstr "โปรโตคอลอีเมล"
 
-#: Views/Admin/Settings/index_v.php:281
+#: Views/Admin/Settings/index_v.php:328
 msgid "Mail function"
 msgstr "Mail function"
 
-#: Views/Admin/Settings/index_v.php:282
+#: Views/Admin/Settings/index_v.php:329
 msgid "Sendmail function"
 msgstr "Sendmail function"
 
-#: Views/Admin/Settings/index_v.php:283 Views/Admin/Settings/index_v.php:297
+#: Views/Admin/Settings/index_v.php:330 Views/Admin/Settings/index_v.php:344
 msgid "SMTP"
 msgstr "SMTP"
 
-#: Views/Admin/Settings/index_v.php:288
+#: Views/Admin/Settings/index_v.php:335
 msgid "Sendmail"
 msgstr "Sendmail"
 
-#: Views/Admin/Settings/index_v.php:290
+#: Views/Admin/Settings/index_v.php:337
 msgid "Sendmail path"
 msgstr "ตำแหน่งสำหรับโปรแกรม Sendmail"
 
-#: Views/Admin/Settings/index_v.php:299
+#: Views/Admin/Settings/index_v.php:346
 msgid "SMTP host"
 msgstr "SMTP host"
 
-#: Views/Admin/Settings/index_v.php:305
+#: Views/Admin/Settings/index_v.php:352
 msgid "SMTP port"
 msgstr "SMTP port"
 
-#: Views/Admin/Settings/index_v.php:311
+#: Views/Admin/Settings/index_v.php:358
 msgid "SMTP encryption"
 msgstr "การเข้ารหัส SMTP"
 
-#: Views/Admin/Settings/index_v.php:314
+#: Views/Admin/Settings/index_v.php:361
 msgid "No encryption"
 msgstr "ไม่มีการเข้ารหัส"
 
-#: Views/Admin/Settings/index_v.php:315
+#: Views/Admin/Settings/index_v.php:362
 msgid "SSL"
 msgstr "SSL"
 
-#: Views/Admin/Settings/index_v.php:316
+#: Views/Admin/Settings/index_v.php:363
 msgid "TLS"
 msgstr "TLS"
 
-#: Views/Admin/Settings/index_v.php:321
+#: Views/Admin/Settings/index_v.php:368
 msgid "SMTP username"
 msgstr "ชื่อผู้ใช้ SMTP"
 
-#: Views/Admin/Settings/index_v.php:327
+#: Views/Admin/Settings/index_v.php:374
 msgid "SMTP password"
 msgstr "รหัสผ่าน SMTP"
 
-#: Views/Admin/Settings/index_v.php:335
+#: Views/Admin/Settings/index_v.php:382
 msgid "Test connection"
 msgstr "ทดสอบการเชื่อมต่อ"
 
-#: Views/Admin/Settings/index_v.php:341
+#: Views/Admin/Settings/index_v.php:388
 msgid "Sender email"
 msgstr "อีเมลผู้ส่ง"
 
-#: Views/Admin/Settings/index_v.php:345
+#: Views/Admin/Settings/index_v.php:392
 msgid "An email that will be use as sender such as registration verification email."
 msgstr "อีเมลที่จะใช้ในฐานะผู้ส่ง ตัวอย่างเช่นอีเมลตรวจสอบการลงทะเบียน."
 
@@ -1629,8 +1612,8 @@ msgstr "ผู้ใช้ปิดใช้งาน: %d"
 #: Views/Admin/Users/actions_v.php:36
 #, php-format
 msgid ""
-"Please note that this will be mark the users as deleted, the marked users will be really deleted "
-"after %1$d days."
+"Please note that this will be mark the users as deleted, the marked users will be really deleted after %1$d "
+"days."
 msgstr "โปรดทราบว่านี่จะเป็นการทำเครื่องหมายว่าผู้ใช้ถูกลบแล้ว, ผู้ใช้ที่ถูกทำเครื่องหมายจะถูกลบจริงๆหลังจาก %1$d วัน."
 
 #: Views/Admin/Users/add_v.php:30 Views/Admin/Users/edit_v.php:35
@@ -1659,9 +1642,7 @@ msgid "Send an email to notify user about their account."
 msgstr "ส่งอีเมลไปแจ้งเตือนผู้ใช้เกี่ยวกับบัญชีของเขา."
 
 #: Views/Admin/Users/add_v.php:95
-msgid ""
-"If this were checked, the status will be disabled and this user have to click on the activation "
-"link."
+msgid "If this were checked, the status will be disabled and this user have to click on the activation link."
 msgstr "ถ้าช่องนี้ถูกติ๊ก, สถานะจะเป็นปิดใช้งานและผู้ใช้นี้จะต้องคลิกลิ้งค์ยืนยัน."
 
 #: Views/Admin/Users/add_v.php:99 Views/Admin/Users/edit_v.php:114 Views/Admin/Users/index_v.php:28
@@ -1677,8 +1658,8 @@ msgstr "รายละเอียดสถานะ"
 msgid "If status is disabled, please describe the reason."
 msgstr "ถ้าปิดใช้งาน, โปรดอธิบายรายละเอียด."
 
-#: Views/Admin/Users/deleteMe_v.php:44 Views/Admin/Users/edit_v.php:257
-#: Views/Admin/Users/index_v.php:29 Views/Admin/Users/index_v.php:42
+#: Views/Admin/Users/deleteMe_v.php:44 Views/Admin/Users/edit_v.php:259 Views/Admin/Users/index_v.php:29
+#: Views/Admin/Users/index_v.php:42
 msgid "Last login"
 msgstr "เข้าสู่ระบบล่าสุด"
 
@@ -1708,8 +1689,7 @@ msgstr "อนุญาตเข้าสู่ระบบซ้ำซ้อน
 
 #: Views/Admin/Users/edit_v.php:71
 msgid ""
-"Allow only last success login (if there is new success login session, the older sessions will be "
-"logged out)."
+"Allow only last success login (if there is new success login session, the older sessions will be logged out)."
 msgstr "อนุญาตเฉพาะที่เข้าสู่ระบบสำเร็จครั้งล่าสุด (ถ้ามีการเข้าสู่ระบบสำเร็จครั้งใหม่, ครั้งเก่าก่อนหน้าจะถูกออกจากระบบทั้งหมด)."
 
 #: Views/Admin/Users/edit_v.php:72
@@ -1752,46 +1732,44 @@ msgstr "ใช้อัพโหลดรูปโปรไฟล์"
 msgid "Use Gravatar"
 msgstr "ใช้ Gravatar"
 
-#: Views/Admin/Users/edit_v.php:157
+#: Views/Admin/Users/edit_v.php:159
 msgid "Change your profile picture on Gravatar."
 msgstr "เปลี่ยนรูปภาพของคุณบน Gravatar."
 
-#: Views/Admin/Users/edit_v.php:168
+#: Views/Admin/Users/edit_v.php:170
 msgid "Delete this profile picture"
 msgstr "ลบรูปโปรไฟล์นี้"
 
-#: Views/Admin/Users/edit_v.php:174
+#: Views/Admin/Users/edit_v.php:176
 msgid "Choose image"
 msgstr "เลือกรูป"
 
-#: Views/Admin/Users/edit_v.php:179
+#: Views/Admin/Users/edit_v.php:181
 msgid "Remove file"
 msgstr "เอาไฟล์ออก"
 
-#: Views/Admin/Users/edit_v.php:183
+#: Views/Admin/Users/edit_v.php:185
 msgid "Click on choose image or drop image into the area above to upload profile picture."
 msgstr "คลิกที่เลือกรูปหรือวางรูปภาพบนพื้นที่ด้านบนเพื่ออัพโหลดรูปโปรไฟล์."
 
-#: Views/Admin/Users/edit_v.php:273 Views/Admin/Users/edit_v.php:279
-#: Views/Admin/Users/previousEmails_v.php:17 Views/Admin/Users/previousEmails_v.php:23
-#: Views/Admin/Users/previousEmails_v.php:42
+#: Views/Admin/Users/edit_v.php:275 Views/Admin/Users/edit_v.php:281 Views/Admin/Users/previousEmails_v.php:17
+#: Views/Admin/Users/previousEmails_v.php:23 Views/Admin/Users/previousEmails_v.php:42
 msgid "Changed date"
 msgstr "วันที่ถูกเปลี่ยน"
 
-#: Views/Admin/Users/edit_v.php:284
+#: Views/Admin/Users/edit_v.php:286
 msgid "View all"
 msgstr "ดูทั้งหมด"
 
-#: Views/Admin/Users/edit_v.php:301
+#: Views/Admin/Users/edit_v.php:303
 msgid "Danger zone"
 msgstr "โซนอันตราย"
 
-#: Views/Admin/Users/edit_v.php:303
+#: Views/Admin/Users/edit_v.php:305
 msgid "Delete account"
 msgstr "ลบบัญชีผู้ใช้"
 
-#: Views/Admin/Users/index_v.php:81 Views/Admin/Users/index_v.php:89
-#: Views/Admin/Users/sessions_v.php:41
+#: Views/Admin/Users/index_v.php:81 Views/Admin/Users/index_v.php:89 Views/Admin/Users/sessions_v.php:41
 msgid "All"
 msgstr "ทั้งหมด"
 
@@ -1825,8 +1803,7 @@ msgstr "User agent"
 msgid "IP address"
 msgstr "ที่อยู่ไอพี"
 
-#: Views/Admin/Users/sessions_v.php:20 Views/Admin/Users/sessions_v.php:30
-#: Views/Admin/Users/sessions_v.php:39
+#: Views/Admin/Users/sessions_v.php:20 Views/Admin/Users/sessions_v.php:30 Views/Admin/Users/sessions_v.php:39
 msgid "Result"
 msgstr "ผลลัพธ์"
 

@@ -18,6 +18,7 @@ class RdbaSettingsController {
             RdbaCommon.XHR({
                 'url': RdbaSettings.getSettingsUrl,
                 'method': RdbaSettings.getSettingsMethod,
+                'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'dataType': 'json',
             })
             .catch(function(responseObject) {
@@ -44,13 +45,15 @@ class RdbaSettingsController {
                             RdbaCommon.isset(() => item.config_value)
                         ) {
                             let thisInputElement = document.querySelector('#rdba-settings-form #' + item.config_name);
-                            if (thisInputElement.type.toLowerCase() === 'checkbox') {
-                                if (thisInputElement.value == item.config_value) {
-                                    thisInputElement.checked = true;
-                                    //console.log('mark ' + key + ' as checked.');
+                            if (thisInputElement) {
+                                if (thisInputElement.type.toLowerCase() === 'checkbox') {
+                                    if (thisInputElement.value == item.config_value) {
+                                        thisInputElement.checked = true;
+                                        //console.log('mark ' + key + ' as checked.');
+                                    }
+                                } else {
+                                    thisInputElement.value = item.config_value;
                                 }
-                            } else {
-                                thisInputElement.value = item.config_value;
                             }
 
                             if (item.config_name === 'rdbadmin_UserRegisterDefaultRoles') {
@@ -70,7 +73,9 @@ class RdbaSettingsController {
                         if (RdbaCommon.isset(() => item.config_description)) {
                             let thisInputElement = document.querySelector('#rdba-settings-form #' + item.config_name);
                             let parentFormGroupElement = $(thisInputElement).parents('.form-group')[0];
-                            parentFormGroupElement.dataset.configdescription = RdbaCommon.escapeHtml(RdbaCommon.stripTags(item.config_description));
+                            if (parentFormGroupElement) {
+                                parentFormGroupElement.dataset.configdescription = RdbaCommon.escapeHtml(RdbaCommon.stripTags(item.config_description));
+                            }
                         }// endif isset item.config_description
                     });
                 }// endif response.configData
@@ -137,9 +142,19 @@ class RdbaSettingsController {
             formData.append(RdbaSettings.csrfName, RdbaSettings.csrfKeyPair[RdbaSettings.csrfName]);
             formData.append(RdbaSettings.csrfValue, RdbaSettings.csrfKeyPair[RdbaSettings.csrfValue]);
 
+            // make sure that unchecked check box is send zero value instead of nothing.
+            settingsForm.querySelectorAll('input[type="checkbox"]').forEach(function(item, index) {
+                if (item.checked === false && item.name && item.value == '1') {
+                    // if checkbox is not checked and contains name and value is '1'. this means its value should be '0'.
+                    // append name and value '0' to form object.
+                    formData.append(item.name, 0);
+                }
+            });
+
             RdbaCommon.XHR({
                 'url': RdbaSettings.editSettingsSubmitUrl,
                 'method': RdbaSettings.editSettingsSubmitMethod,
+                'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'data': new URLSearchParams(_.toArray(formData)).toString(),
                 'dataType': 'json'
             })
