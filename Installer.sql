@@ -44,6 +44,8 @@ INSERT INTO `%$config%` (`config_name`, `config_value`, `config_description`) VA
 ('rdbadmin_UserLoginLogsKeep', '90', 'How many days that user logins data to keep in database?'),
 ('rdbadmin_UserConfirmEmailChange', '1', 'When user change their email, do they need to confirm? 1=yes, 0=no.'),
 ('rdbadmin_UserConfirmWait', '10', 'How many minutes that the user needs to take action such as confirm reset password, change email?'),
+('rdbadmin_UserDeleteSelfGrant', '0', 'Allow user to delete themself?\n0=do not allowed\n1=allowed.'),
+('rdbadmin_UserDeleteSelfKeep', '30', 'If allowed user to delete themself, How many days to keep their data before actual delete from db?'),
 ('rdbadmin_MailProtocol', 'mail', 'The mail sending protocol.\nmail, sendmail, smtp'),
 ('rdbadmin_MailPath', '/usr/sbin/sendmail', 'The sendmail path.'),
 ('rdbadmin_MailSmtpHost', '', 'SMTP host'),
