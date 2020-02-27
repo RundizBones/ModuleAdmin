@@ -323,7 +323,7 @@ class PermissionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Admi
                 $userRow->user_deleted_since_gmt
             );
 
-            $output['listColumns']['total'] = count($userRow);
+            $output['listColumns']['total'] = count((array) $userRow);
             $output['listColumns']['items'] = [$userRow];
             $output['userData'] = $userRow;
         } else {
