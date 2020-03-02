@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2020-03-02 18:45+0700\n"
-"PO-Revision-Date: 2020-03-02 18:45+0700\n"
+"POT-Creation-Date: 2020-03-02 19:05+0700\n"
+"PO-Revision-Date: 2020-03-02 19:05+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -81,7 +81,7 @@ msgstr "ไม่สามารถส่งอีเมลได้."
 #: Controllers/Admin/ForgotLoginPassController.php:479 Controllers/Admin/ForgotLoginPassController.php:616
 #: Controllers/Admin/LoginController.php:244 Controllers/Admin/LoginController.php:389
 #: Controllers/Admin/LoginController.php:446 Controllers/Admin/LogoutController.php:69
-#: Controllers/Admin/Modules/Plugins/ActionsController.php:88 Controllers/Admin/Permissions/EditController.php:84
+#: Controllers/Admin/Modules/Plugins/ActionsController.php:89 Controllers/Admin/Permissions/EditController.php:84
 #: Controllers/Admin/Permissions/EditController.php:191 Controllers/Admin/RegisterController.php:289
 #: Controllers/Admin/RegisterController.php:506 Controllers/Admin/Roles/ActionsController.php:190
 #: Controllers/Admin/Roles/AddController.php:102 Controllers/Admin/Roles/EditController.php:103
@@ -147,13 +147,13 @@ msgstr "ออกจากระบบ"
 msgid "Updated successfully."
 msgstr "อัพเดทเรียบร้อย."
 
-#: Controllers/Admin/Modules/Plugins/ActionsController.php:131
+#: Controllers/Admin/Modules/Plugins/ActionsController.php:132
 #: Controllers/Admin/Modules/Plugins/PluginsController.php:114
 msgid "Please select at least one plugin."
 msgstr "โปรดเลือกปลั๊กอินอย่างน้อยหนึ่งอย่าง."
 
-#: Controllers/Admin/Modules/Plugins/ActionsController.php:138
-#: Controllers/Admin/Modules/Plugins/ActionsController.php:153
+#: Controllers/Admin/Modules/Plugins/ActionsController.php:139
+#: Controllers/Admin/Modules/Plugins/ActionsController.php:154
 #: Controllers/Admin/Modules/Plugins/PluginsController.php:113 Controllers/Admin/Roles/ActionsController.php:357
 #: Controllers/Admin/Roles/RolesController.php:183 Controllers/Admin/Users/ActionsController.php:545
 #: Controllers/Admin/Users/ActionsController.php:571 Controllers/Admin/Users/Sessions/SessionsController.php:78
@@ -161,12 +161,12 @@ msgstr "โปรดเลือกปลั๊กอินอย่างน้
 msgid "Please select an action."
 msgstr "โปรดเลือกการทำงาน."
 
-#: Controllers/Admin/Modules/Plugins/ActionsController.php:145
+#: Controllers/Admin/Modules/Plugins/ActionsController.php:146
 msgid "Enable plugin"
 msgid_plural "Enable plugins"
 msgstr[0] "เปิดใช้งานปลั๊กอิน"
 
-#: Controllers/Admin/Modules/Plugins/ActionsController.php:147
+#: Controllers/Admin/Modules/Plugins/ActionsController.php:148
 msgid "Disable plugin"
 msgid_plural "Disable plugins"
 msgstr[0] "ปิดใช้งานปลั๊กอิน"
@@ -218,7 +218,7 @@ msgstr "ไม่สามารถกำหนดการอนุญาต."
 msgid "Page"
 msgstr "หน้า"
 
-#: Controllers/Admin/Permissions/PermissionsController.php:105 Views/Admin/Modules/Plugins/index_v.php:68
+#: Controllers/Admin/Permissions/PermissionsController.php:105 Views/Admin/Modules/Plugins/index_v.php:71
 #: Views/Admin/Roles/index_v.php:95 Views/Admin/Users/index_v.php:124 Views/Admin/Users/sessions_v.php:75
 msgid "Action"
 msgstr "การทำงาน"
@@ -1177,25 +1177,29 @@ msgstr "รายละเอียด"
 msgid "Status"
 msgstr "สถานะ"
 
-#: Views/Admin/Modules/Plugins/index_v.php:58 Views/Admin/Roles/index_v.php:85 Views/Admin/Users/index_v.php:114
+#: Views/Admin/Modules/Plugins/index_v.php:48
+msgid "Version"
+msgstr "รุ่น"
+
+#: Views/Admin/Modules/Plugins/index_v.php:61 Views/Admin/Roles/index_v.php:85 Views/Admin/Users/index_v.php:114
 #: Views/Admin/Users/sessions_v.php:65
 msgid "items"
 msgstr "รายการ"
 
-#: Views/Admin/Modules/Plugins/index_v.php:60 Views/Admin/Roles/index_v.php:87 Views/Admin/Users/index_v.php:116
+#: Views/Admin/Modules/Plugins/index_v.php:63 Views/Admin/Roles/index_v.php:87 Views/Admin/Users/index_v.php:116
 #: Views/Admin/Users/sessions_v.php:67
 msgid "item"
 msgstr "รายการ"
 
-#: Views/Admin/Modules/Plugins/index_v.php:70 Views/Admin/Users/index_v.php:129
+#: Views/Admin/Modules/Plugins/index_v.php:73 Views/Admin/Users/index_v.php:129
 msgid "Enable"
 msgstr "เปิดใช้งาน"
 
-#: Views/Admin/Modules/Plugins/index_v.php:71 Views/Admin/Users/index_v.php:130
+#: Views/Admin/Modules/Plugins/index_v.php:74 Views/Admin/Users/index_v.php:130
 msgid "Disable"
 msgstr "ปิดใช้งาน"
 
-#: Views/Admin/Modules/Plugins/index_v.php:75 Views/Admin/Roles/index_v.php:99 Views/Admin/Users/index_v.php:134
+#: Views/Admin/Modules/Plugins/index_v.php:78 Views/Admin/Roles/index_v.php:99 Views/Admin/Users/index_v.php:134
 #: Views/Admin/Users/sessions_v.php:80
 msgid "Apply"
 msgstr "นำไปใช้"

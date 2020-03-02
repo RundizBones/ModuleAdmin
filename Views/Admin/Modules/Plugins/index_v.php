@@ -44,6 +44,9 @@
                                         {{RdbaModulesPlugins.txtDisabled}}
                                     {{/if}}
                                 </span>
+                                {{#if plugin_version}}
+                                <span class="action"><?php echo __('Version'); ?>: {{plugin_version}}</span>
+                                {{/if}}
                             </div>
                         </template>
 
