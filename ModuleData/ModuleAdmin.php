@@ -53,11 +53,12 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
     public function definePermissions(): array
     {
         return [
-            'RdbAdminUsers' => ['add', 'edit', 'delete', 'list', 'viewLogins', 'deleteLogins'],// user cannot add or edit or delete users who are in higher role priority or cannot promote user who has same role priority to higher.
-            'RdbAdminRoles' => ['add', 'edit', 'delete', 'list', 'changePriority'],
             'RdbAdminPermissions' => ['managePermissions'],
+            'RdbAdminModulesPlugins' => ['listPlugins', 'managePlugins'],
+            'RdbAdminRoles' => ['add', 'edit', 'delete', 'list', 'changePriority'],
             'RdbAdminSettings' => ['changeSettings'],
             'RdbAdminTools' => ['manageCache'],
+            'RdbAdminUsers' => ['add', 'edit', 'delete', 'list', 'viewLogins', 'deleteLogins'],// user cannot add or edit or delete users who are in higher role priority or cannot promote user who has same role priority to higher.
         ];
     }// definePermissions
 
@@ -81,6 +82,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
 
         // pages keywords
         $keywords['RdbAdminPermissions'] = noop__('Permissions');
+        $keywords['RdbAdminModulesPlugins'] = noop__('Modules Plugins');
         $keywords['RdbAdminRoles'] = noop__('Roles');
         $keywords['RdbAdminSettings'] = noop__('Settings');
         $keywords['RdbAdminTools'] = noop__('Tools');
@@ -94,8 +96,10 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
         $keywords['deleteLogins'] = noop__('Delete logins');
         $keywords['edit'] = noop__('Edit');
         $keywords['list'] = noop__('List items');
+        $keywords['listPlugins'] = noop__('List plugins');
         $keywords['manageCache'] = noop__('Manage cache');
         $keywords['managePermissions'] = noop__('Manage permissions');
+        $keywords['managePlugins'] = noop__('Manage plugins');
         $keywords['viewLogins'] = noop__('View logins');
 
         if (!empty($key)) {
@@ -221,6 +225,31 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                 ],// subMenu
             ],// 100
             101 => [
+                'id' => 'rdbadmin-modules',
+                'permission' => [
+                    ['RdbAdminModulesPlugins', 'listPlugins', 'managePlugins'],
+                ],
+                'icon' => 'fas fa-cubes fa-fw',
+                'name' => __('Modules'),
+                'link' => '#',
+                'liAttributes' => [
+                    'data-mainmenucontainer' => true,
+                ],
+                'aAttributes' => [
+                    'onclick' => 'return false;',
+                ],
+                'subMenu' => [
+                    0 => [
+                        'id' => 'rdbadmin-modules-listplugins',
+                        'permission' => [
+                            ['RdbAdminModulesPlugins', 'listPlugins', 'managePlugins'],
+                        ],
+                        'name' => __('Modules Plugins'),
+                        'link' => $urlBaseWithLang . '/admin/modules/plugins',
+                    ],
+                ],//subMenu
+            ],// 101
+            102 => [
                 'id' => 'rdbadmin-settings',
                 'icon' => 'fas fa-sliders-h fa-fw',
                 'name' => __('Settings'),
@@ -241,8 +270,8 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                         'link' => $urlBaseWithLang . '/admin/settings',
                     ],
                 ],//subMenu
-            ],// 101
-            102 => [
+            ],// 102
+            103 => [
                 'id' => 'rdbadmin-tools',
                 'icon' => 'fas fa-tools fa-fw',
                 'name' => __('Tools'),
@@ -263,7 +292,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                         'link' => $urlBaseWithLang . '/admin/tools/cache',
                     ],
                 ],
-            ],// 102
+            ],// 103
         ];
     }// menuItems
 

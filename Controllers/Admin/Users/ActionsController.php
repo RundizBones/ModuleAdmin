@@ -531,7 +531,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         $expUserIds = explode(',', $output['user_ids']);
         $usersActionOk = false;// if users and action were selected, it will be true.
 
-        // validate selected usersand action. ------------------------------
+        // validate selected users and action. ------------------------------
         if (count($expUserIds) <= 0) {
             http_response_code(400);
             $output['formResultStatus'] = 'error';
@@ -545,7 +545,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
             $output['formResultMessage'][] = __('Please select an action.');
             $usersActionOk = false;
         }
-        // end validate selected usersand action. --------------------------
+        // end validate selected users and action. --------------------------
 
         // set action text for display.
         if ($output['action'] === 'delete') {

@@ -10,7 +10,7 @@ namespace Rdb\Modules\RdbAdmin\Interfaces;
 /**
  * Module admin interface.
  * 
- * The interface for set permissions, menu items that will be use in RdbAdmin module.
+ * The interface for set permissions, dashboard widgets, menu items that will be use in RdbAdmin module.
  * 
  * @since 0.1
  */

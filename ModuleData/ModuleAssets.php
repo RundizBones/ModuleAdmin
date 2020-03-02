@@ -298,6 +298,13 @@ class ModuleAssets
                     'dependency' => ['rdta', 'rdbaCommon', 'rdbaUiXhrCommonData', 'handlebars', 'lodash'],
                 ],
 
+                // modules plugins
+                [
+                    'handle' => 'rdbaModulesPlugins',
+                    'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Modules/PluginsController/indexAction.js',
+                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-plugins-pagination', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
+                ],
+
                 // settings
                 [
                     'handle' => 'rdbaSettings',

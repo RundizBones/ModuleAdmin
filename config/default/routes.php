@@ -106,6 +106,11 @@ $Rc->addGroup('/admin', function(\FastRoute\RouteCollector $Rc) {
     $Rc->addRoute('DELETE', '/permissions/{module_system_name}', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Permissions\\Edit:doClear');
     // end permissions management. -------------------------------------------------------------
 
+    // modules plugins management. -------------------------------------------------------------
+    $Rc->addRoute('GET', '/modules/plugins', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Plugins\\Plugins:index');
+    $Rc->addRoute('PATCH', '/modules/plugins/actions', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Plugins\\Actions:doUpdate');
+    // end modules plugins management. --------------------------------------------------------
+
     // settings (config) management. -------------------------------------------------------------
     // /admin/settings page + REST API (settings page - get data via REST).
     $Rc->addRoute('GET', '/settings', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\Settings:index');
