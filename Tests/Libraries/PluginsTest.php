@@ -30,9 +30,9 @@ class PluginsTest extends \Rdb\Tests\BaseTestCase
         $pluginPhpContents = <<< EOT
 <?php
 /**
- * Name: Demo plugin
- * Description: Just for <strong>demonstration</strong>.
- * Version: 0.1a
+ * Name: Test Demo plugin
+ * Description: A plugin for unit test, create by unit test.
+ * Version: 0.0.1-test
  * 
  * @license http://opensource.org/licenses/MIT MIT
  */
@@ -86,7 +86,8 @@ EOT;
         $Plugins = new \Rdb\Modules\RdbAdmin\Libraries\Plugins($this->Container);
 
         // test with all plugins (no enabled, disabled filtered).
-        $listPlugins = $Plugins->listPlugins();
+        $listPlugins = $Plugins->listPlugins(['unlimited' => true]);
+        $listPlugins = ($listPlugins['items'] ?? []);
         $this->assertGreaterThanOrEqual(1, $listPlugins);
         $countEnabled = 0;
         $countDisabled = 0;
@@ -109,7 +110,8 @@ EOT;
         $this->assertSame(1, $countEnabled);
 
         // test with all enabled filter.
-        $listPlugins = $Plugins->listPlugins(['availability' => 'enabled']);
+        $listPlugins = $Plugins->listPlugins(['unlimited' => true, 'availability' => 'enabled']);
+        $listPlugins = ($listPlugins['items'] ?? []);
         $countEnabled = 0;
         $countDisabled = 0;
         if (is_array($listPlugins)) {
@@ -131,7 +133,8 @@ EOT;
         $this->assertSame(1, $countEnabled);
 
         // test with all disabled filter.
-        $listPlugins = $Plugins->listPlugins(['availability' => 'disabled']);
+        $listPlugins = $Plugins->listPlugins(['unlimited' => true, 'availability' => 'disabled']);
+        $listPlugins = ($listPlugins['items'] ?? []);
         $countEnabled = 0;
         $countDisabled = 0;
         if (is_array($listPlugins)) {

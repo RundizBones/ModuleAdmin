@@ -37,8 +37,11 @@ class Plugins
      * List plugins
      * 
      * @param array $options Available options:<br>
-     *                                      'availability' (string) accept '' (empty string - means all), 'enabled', 'disabled'. Default is empty string.
-     * @return array Return array of plugins with associative array in details.
+    *                           `availability` (string) accept '' (empty string - means all), 'enabled', 'disabled'. Default is empty string.<br>
+    *                           `unlimited` (bool) set to `true` to show unlimited items, unset or set to `false` to show limited items,<br>
+     *                          `limit` (int) limit items per page. maximum is 100,<br>
+     *                          `offset` (int) offset or start at record. 0 is first record,<br>
+     * @return array Return associative array with `total` and `items` in keys.
      */
     public function listPlugins(array $options = []): array
     {
@@ -48,6 +51,21 @@ class Plugins
             $availability = '';
         }
 
+        // prepare options and check if incorrect.
+        if (!isset($options['offset']) || !is_numeric($options['offset'])) {
+            $options['offset'] = 0;
+        }
+        if (!isset($options['unlimited']) || (isset($options['unlimited']) && $options['unlimited'] !== true)) {
+            if (!isset($options['limit']) || !is_numeric($options['limit'])) {
+                $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
+                $options['limit'] = $ConfigDb->get('rdbadmin_AdminItemsPerPage', 20);
+                unset($ConfigDb);
+            } elseif (isset($options['limit']) && $options['limit'] > 100) {
+                $options['limit'] = 100;
+            }
+        }
+
+        $output = [];
         $plugins = [];// list of fetched plugins.
 
         if ($this->Container->has('Modules')) {
@@ -58,6 +76,7 @@ class Plugins
         }
 
         $enabledModules = $Modules->getModules();
+        sort($enabledModules, SORT_NATURAL);
         unset($Modules);
 
         if (is_array($enabledModules)) {
@@ -67,6 +86,7 @@ class Plugins
                 // loop each module
                 if ($FileSystem->isDir($moduleSystemName . '/Plugins')) {
                     $modulePlugins = $FileSystem->listFiles($moduleSystemName . '/Plugins', 'folders');
+                    sort($modulePlugins, SORT_NATURAL);
 
                     if (is_array($modulePlugins)) {
                         foreach ($modulePlugins as $modulePlugin) {
@@ -121,7 +141,14 @@ class Plugins
         }
         unset($availability, $enabledModules);
 
-        return $plugins;
+        $output['total'] = count($plugins);
+        if (!isset($options['unlimited']) || (isset($options['unlimited']) && $options['unlimited'] !== true)) {
+            $plugins = array_slice($plugins, $options['offset'], $options['limit']);
+        }
+        $output['items'] = $plugins;
+        unset($plugins);
+
+        return $output;
     }// listPlugins
 
 

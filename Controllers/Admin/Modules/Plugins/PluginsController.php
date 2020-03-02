@@ -25,20 +25,24 @@ class PluginsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
     /**
      * Get all modules plugins (including enabled and disabled).
      * 
+     * @param array $configDb The configuration from config table DB.
      * @return array
      */
-    protected function getPlugins(): array
+    protected function getPlugins(array $configDb): array
     {
         $output = [];
 
         $Plugins = new \Rdb\Modules\RdbAdmin\Libraries\Plugins($this->Container);
-        $listPlugins = $Plugins->listPlugins();
-        unset($Plugins);
+        $options = [];
+        $options['offset'] = $this->Input->get('start', 0, FILTER_SANITIZE_NUMBER_INT);
+        $options['limit'] = $this->Input->get('length', $configDb['rdbadmin_AdminItemsPerPage'], FILTER_SANITIZE_NUMBER_INT);
+        $listPlugins = $Plugins->listPlugins($options);
+        unset($options, $Plugins);
 
         $output['draw'] = $this->Input->get('draw', 1, FILTER_SANITIZE_NUMBER_INT);
-        $output['recordsTotal'] = count($listPlugins);
+        $output['recordsTotal'] = $listPlugins['total'];
         $output['recordsFiltered'] = $output['recordsTotal'];
-        $output['listItems'] = $listPlugins;
+        $output['listItems'] = $listPlugins['items'];
 
         return $output;
     }// getPlugins
@@ -69,7 +73,7 @@ class PluginsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
 
         if ($this->Input->isNonHtmlAccept() || $this->Input->isXhr()) {
             // if custom accept type or ajax.
-            $output = array_merge($output, $this->getPlugins());
+            $output = array_merge($output, $this->getPlugins($output['configDb']));
         }
 
         // set generic values.

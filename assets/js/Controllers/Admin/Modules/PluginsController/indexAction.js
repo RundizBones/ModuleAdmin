@@ -92,7 +92,7 @@ class RdbaPluginsController extends RdbaDatatables {
                             row.RdbaModulesPlugins = RdbaModulesPlugins;
                             let plugin_name = RdbaCommon.escapeHtml(data);
                             if (row.enabled === false) {
-                                plugin_name = '<i class="fas fa-lock"></i> ' + plugin_name;
+                                plugin_name = '<i class="fas fa-ban"></i> ' + plugin_name;
                             }
                             let html = plugin_name + template(row);
                             return html;
