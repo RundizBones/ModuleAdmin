@@ -54,6 +54,12 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
             dirname(__DIR__) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'translations'
         );
 
+        if (!$this->Container->has('Plugins')) {
+            $this->Container['Plugins'] = function ($c) {
+                return new \Rdb\Modules\RdbAdmin\Libraries\Plugins($c);
+            };
+        }
+
         // maybe run cron job.
         $this->maybeRunCron();
     }// __construct

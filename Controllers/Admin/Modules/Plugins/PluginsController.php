@@ -32,7 +32,12 @@ class PluginsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
     {
         $output = [];
 
-        $Plugins = new \Rdb\Modules\RdbAdmin\Libraries\Plugins($this->Container);
+        if ($this->Container->has('Plugins')) {
+            /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+            $Plugins = $this->Container->get('Plugins');
+        } else {
+            $Plugins = new \Rdb\Modules\RdbAdmin\Libraries\Plugins($this->Container);
+        }
         $options = [];
         $options['offset'] = $this->Input->get('start', 0, FILTER_SANITIZE_NUMBER_INT);
         $options['limit'] = $this->Input->get('length', $configDb['rdbadmin_AdminItemsPerPage'], FILTER_SANITIZE_NUMBER_INT);
