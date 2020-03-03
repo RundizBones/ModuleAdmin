@@ -25,7 +25,7 @@ class Plugins
     /**
      * Class constructor.
      * 
-     * @param \Rdb\System\Container $Container The DI container.
+     * @param \Rdb\System\Container $Container The DI container class.
      */
     public function __construct(\Rdb\System\Container $Container)
     {
@@ -37,10 +37,10 @@ class Plugins
      * List plugins
      * 
      * @param array $options Available options:<br>
-    *                           `availability` (string) accept '' (empty string - means all), 'enabled', 'disabled'. Default is empty string.<br>
-    *                           `unlimited` (bool) set to `true` to show unlimited items, unset or set to `false` to show limited items,<br>
-     *                          `limit` (int) limit items per page. maximum is 100,<br>
-     *                          `offset` (int) offset or start at record. 0 is first record,<br>
+    *                           `availability` (string) accept '' (empty string - means all), 'enabled', 'disabled'. Default is empty string.,<br>
+    *                           `unlimited` (bool) set to `true` to show unlimited items, unset or set to `false` to show limited items. Default is `false`.,<br>
+     *                          `limit` (int) limit items per page. maximum is 100.,<br>
+     *                          `offset` (int) offset or start at record. 0 is first record.,<br>
      * @return array Return associative array with `total` and `items` in keys.
      */
     public function listPlugins(array $options = []): array
@@ -96,13 +96,26 @@ class Plugins
                             $modulePluginSystemName = $expModulePlugin[(count($expModulePlugin) - 1)];
                             unset($expModulePlugin);
 
+                            // get class, target interface to check instance of without initialize new class object.
+                            $modulePluginClass = 'Rdb\\Modules\\' . str_replace('/', '\\', $modulePlugin) . '\\' . $modulePluginSystemName;
+                            $ReflectionClassTargetInstance = new \ReflectionClass('\\Rdb\\Modules\\RdbAdmin\\Interfaces\\Plugins');
+                            if (class_exists($modulePluginClass)) {
+                                $ReflectionPlugin = new \ReflectionClass($modulePluginClass);
+                                $pluginInstance = $ReflectionPlugin->newInstanceWithoutConstructor();
+                                unset($ReflectionPlugin);
+                            } else {
+                                $pluginInstance = null;
+                            }
+
                             if (
                                 (
                                     $availability === '' || 
                                     ($availability === 'enabled' && !$FileSystem->isFile($modulePlugin . '/.disabled')) ||
                                     ($availability === 'disabled' && $FileSystem->isFile($modulePlugin . '/.disabled'))
                                 ) && 
-                                $FileSystem->isFile($modulePlugin . '/' . $modulePluginSystemName . '.php')
+                                $FileSystem->isFile($modulePlugin . '/' . $modulePluginSystemName . '.php') && 
+                                class_exists($modulePluginClass) &&
+                                $ReflectionClassTargetInstance->isInstance($pluginInstance) // is instance of plugin interface.
                             ) {
                                 // if matched availability AND there is module file.
                                 $fileContents = file_get_contents(MODULE_PATH . DIRECTORY_SEPARATOR . $modulePlugin . '/' . $modulePluginSystemName . '.php');
@@ -130,6 +143,13 @@ class Plugins
 
                                 unset($author_name, $author_url, $description, $name, $url, $version);
                             }
+
+                            unset(
+                                $modulePluginClass, 
+                                $modulePluginSystemName, 
+                                $pluginInstance, 
+                                $ReflectionClassTargetInstance
+                            );
                         }// endforeach;
                         unset($modulePlugin);
                     }

@@ -41,8 +41,35 @@ class PluginsTest extends \Rdb\Tests\BaseTestCase
 namespace Rdb\Modules\%MODULE%\Plugins\%PLUGIN%;
 
 
-class %PLUGIN%
+class %PLUGIN% implements \Rdb\Modules\RdbAdmin\Interfaces\Plugins
 {
+
+
+    /**
+     * @var \Rdb\System\Container 
+     */
+    protected \$Container;
+
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct(\Rdb\System\Container \$Container)
+    {
+        \$this->Container = \$Container;
+    }// __construct
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function registerHooks()
+    {
+        
+    }// registerHooks
+
+
 }
 EOT;
 
