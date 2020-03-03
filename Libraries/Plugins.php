@@ -11,15 +11,36 @@ namespace Rdb\Modules\RdbAdmin\Libraries;
  * Plugins class.
  * 
  * @since 0.2.4
+ * @property-read array $pluginsRegisteredHooks The array of plugin classes that was registered hooks.
+ * @property-read array $callbackActions The array of callback hook actions.
+ * @property-read array $callbackFilters The array of callback hook filters.
  */
 class Plugins
 {
 
 
     /**
+     * @var array The array of callback hook actions.
+     */
+    protected $callbackActions = [];
+
+
+    /**
+     * @var array The array of callback hook filters.
+     */
+    protected $callbackFilters = [];
+
+
+    /**
      * @var \Rdb\System\Container
      */
     protected $Container;
+
+
+    /**
+     * @var array The array of plugin classes that was registered hooks.
+     */
+    protected $pluginsRegisteredHooks = [];
 
 
     /**
@@ -31,6 +52,112 @@ class Plugins
     {
         $this->Container = $Container;
     }// __construct
+
+
+    /**
+     * Magic get.
+     * 
+     * @param string $name
+     */
+    public function __get($name)
+    {
+        if (property_exists($this, $name)) {
+            return $this->{$name};
+        }
+    }// __get
+
+
+    /**
+     * Hooks a function onto a specific action.
+     * 
+     * @param string $tag The name of action.
+     * @param string|array|callable $callback The function or class to be called.
+     * @param int $priority Priority that function will be executed. Lower number will be execute earlier. Default is 10.
+     */
+    public function addAction(string $tag, $callback, int $priority = 10)
+    {
+        return $this->addHook('action', $tag, $callback, $priority);
+    }// addAction
+
+
+    /**
+     * Hooks a function onto a specific filter.
+     * 
+     * @param string $tag The name of filter.
+     * @param string|array|callable $callback The function or class to be called.
+     * @param int $priority Priority that function will be executed. Lower number will be execute earlier. Default is 10.
+     */
+    public function addFilter(string $tag, $callback, int $priority = 10)
+    {
+        return $this->addHook('filter', $tag, $callback, $priority);
+    }// addFilter
+
+
+    /**
+     * Hooks a function onto a specific action or filter.
+     * 
+     * This method was called from `addAction()` and `addFilter()` methods.
+     * 
+     * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/plugin.php Copied from WordPress.
+     * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-wp-hook.php Copied from WordPress.
+     * @param string $type The type of hook. Accept 'action', 'filter'.
+     * @param string $tag The name of action or filter.
+     * @param string|array|callable $callback The function or class to be called.
+     * @param int $priority Priority that function will be executed. Lower number will be execute earlier. Default is 10.
+     * @throws \InvalidArgumentException Throw the exception if argument is wrong type or wrong value.
+     */
+    protected function addHook(string $type, string $tag, $callback, int $priority = 10)
+    {
+        if ($type !== 'action' && $type !== 'filter') {
+            throw new \InvalidArgumentException(sprintf('The argument `$type` accept value action or filter, %s given', $type));
+        }
+
+        if (!is_string($callback) && !is_array($callback) && !is_callable($callback)) {
+            throw new \InvalidArgumentException('Invalid argument type for $callback argument.');
+        }
+
+        $idHash = $this->getHookIdHash($tag, $callback, $priority);
+        $callbackType = 'callback' . ucfirst($type) . 's';
+        $priorityExists = (isset($this->{$callbackType}[$tag][$priority]));
+
+        $this->{$callbackType}[$tag][$priority][$idHash] = [
+            'callback' => $callback,
+        ];
+
+        if (!$priorityExists) {
+            ksort($this->{$callbackType}[$tag], SORT_NUMERIC);
+        }
+    }// addHook
+
+
+    /**
+     * Get unique hook ID that is generate from arguments.
+     * 
+     * @param string $tag The name of hook.
+     * @param string|array|callable $callback The function or class to create unique ID.
+     * @param int $priority The priority of callback.
+     * @return string Return hashed value.
+     */
+    protected function getHookIdHash(string $tag, $callback, int $priority): string
+    {
+        $id = $tag;
+
+        if (is_object($callback) || is_string($callback)) {
+            $callback = [$callback, ''];
+        } else {
+            $callback = (array) $callback;
+        }
+
+        if (is_object($callback[0])) {
+            $id .= spl_object_hash($callback[0]) . $callback[1];
+        } else {
+            $id .= json_encode($callback[0]) . $callback[1];
+        }
+
+        $id .= $priority;
+
+        return sha1($id);
+    }// getHookIdHash
 
 
     /**
@@ -131,6 +258,7 @@ class Plugins
                                     'id' => str_replace(['\\', '/'], '/', $modulePlugin),
                                     'module_system_name' => $moduleSystemName,
                                     'plugin_system_name' => $modulePluginSystemName,
+                                    'plugin_class' => $modulePluginClass,
                                     'plugin_name' => (isset($name[1]) ? trim($name[1]) : $modulePluginSystemName),
                                     'plugin_url' => (isset($url[1]) ? trim($url[1]) : ''),
                                     'plugin_version' => (isset($version[1]) ? trim($version[1]) : ''),
@@ -170,6 +298,32 @@ class Plugins
 
         return $output;
     }// listPlugins
+
+
+    /**
+     * Register hooks for all enabled plugins.
+     * 
+     * Register hooks for make it ready to use from the other parts of the application.<br>
+     * This method was called from `\Rdb\Modules\RdbAdmin\Controllers\BaseController`.
+     */
+    public function registerAllPluginsHooks()
+    {
+        $enabledPlugins = $this->listPlugins(['availability' => 'enabled', 'unlimited' => true]);
+
+        if (isset($enabledPlugins['items']) && is_array($enabledPlugins['items'])) {
+            foreach ($enabledPlugins['items'] as $plugin) {
+                if (isset($plugin['plugin_class']) && !in_array($plugin['plugin_class'], $this->pluginsRegisteredHooks)) {
+                    $PluginObject = new $plugin['plugin_class']($this->Container);
+                    call_user_func([$PluginObject, 'registerHooks']);
+                    unset($PluginObject);
+                    $this->pluginsRegisteredHooks[] = $plugin['plugin_class'];
+                }
+            }// endforeach;
+            unset($plugin);
+        }
+
+        unset($enabledPlugins);
+    }// registerAllPluginsHooks
 
 
 }
