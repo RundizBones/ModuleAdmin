@@ -42,4 +42,10 @@ interface Plugins
     public function registerHooks();
 
 
+    /**
+     * Your uninstall action on uninstall or delete a plugin.
+     */
+    public function uninstall();
+
+
 }

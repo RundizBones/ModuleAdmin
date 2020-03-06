@@ -20,13 +20,13 @@ class Plugins
 
 
     /**
-     * @var array The array of callback hook actions.
+     * @var array The array of callback hook actions. The format is `[$tag][$priority][$idHash]['callback' => 'callbackFunctionOrClass']`.
      */
     protected $callbackActions = [];
 
 
     /**
-     * @var array The array of callback hook filters.
+     * @var array The array of callback hook filters. The format is `[$tag][$priority][$idHash]['callback' => 'callbackFunctionOrClass']`.
      */
     protected $callbackFilters = [];
 
@@ -70,6 +70,7 @@ class Plugins
     /**
      * Hooks a function onto a specific action.
      * 
+     * @see Rdb\Modules\RdbAdmin\Libraries\Plugins::addHook()
      * @param string $tag The name of action.
      * @param string|array|callable $callback The function or class to be called.
      * @param int $priority Priority that function will be executed. Lower number will be execute earlier. Default is 10.
@@ -83,6 +84,7 @@ class Plugins
     /**
      * Hooks a function onto a specific filter.
      * 
+     * @see Rdb\Modules\RdbAdmin\Libraries\Plugins::addHook()
      * @param string $tag The name of filter.
      * @param string|array|callable $callback The function or class to be called.
      * @param int $priority Priority that function will be executed. Lower number will be execute earlier. Default is 10.
@@ -119,7 +121,7 @@ class Plugins
         $priority = (int) $priority;
 
         $idHash = $this->getHookIdHash($tag, $callback);
-        $callbackType = 'callback' . ucfirst($type) . 's';// create name callbackXxxs where Xxx depend on type. Example: callbackActions, callbackFilters. This is for use in dynamic property
+        $callbackType = 'callback' . ucfirst($type) . 's';// create name callbackXxxs where Xxx depend on type. Example: callbackActions, callbackFilters. This is for use in dynamic property.
         $priorityExists = (isset($this->{$callbackType}[$tag][$priority]));
 
         $this->{$callbackType}[$tag][$priority][$idHash] = [
@@ -152,18 +154,21 @@ class Plugins
         }
 
         if (is_object($callback[0])) {
-            $id .= spl_object_hash($callback[0]) . $callback[1];
+            $id .= get_class($callback[0]) . '->' . $callback[1];
+        } elseif (is_string($callback[0])) {
+            $id .= $callback[0] . '::' . $callback[1];
         } else {
             $id .= json_encode($callback[0]) . $callback[1];
         }
 
-        return sha1($id);
+        return $id;
     }// getHookIdHash
 
 
     /**
      * Check if any action has been registered for a hook.
      * 
+     * @see Rdb\Modules\RdbAdmin\Libraries\Plugins::hasHook()
      * @param string $tag The name of action.
      * @param string|array|callable $callback The function or class callback to check for. Default is `false`.
      * @return bool|int Return boolean if $callback is set to `false`. If $callback is check for specific function, the priority of that hook is returned, or return `false` if not found.
@@ -177,6 +182,7 @@ class Plugins
     /**
      * Check if any action has been registered for a hook.
      * 
+     * @see Rdb\Modules\RdbAdmin\Libraries\Plugins::hasHook()
      * @param string $tag The name of filter.
      * @param string|array|callable $callback The function or class callback to check for. Default is `false`.
      * @return bool|int Return boolean if $callback is set to `false`. If $callback is check for specific function, the priority of that hook is returned, or return `false` if not found.
@@ -191,6 +197,7 @@ class Plugins
      * Check if any action has been registered for a hook.
      * 
      * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-wp-hook.php Copied from WordPress.
+     * @param string $type The type of hook. Accept 'action', 'filter'.
      * @param string $tag The name of action or filter.
      * @param string|array|callable $callback The function or class callback to check for. Default is `false`.
      * @return bool|int Return boolean if $callback is set to `false`. If $callback is check for specific function, the priority of that hook is returned, or return `false` if not found.
@@ -206,7 +213,7 @@ class Plugins
             throw new \InvalidArgumentException('Invalid argument type for $callback argument.');
         }
 
-        $callbackType = 'callback' . ucfirst($type) . 's';// create name callbackXxxs where Xxx depend on type. Example: callbackActions, callbackFilters. This is for use in dynamic property
+        $callbackType = 'callback' . ucfirst($type) . 's';// create name callbackXxxs where Xxx depend on type. Example: callbackActions, callbackFilters. This is for use in dynamic property.
 
         if (!isset($this->{$callbackType}[$tag]) || !is_array($this->{$callbackType}[$tag])) {
             // if not found this tag registered.
@@ -399,6 +406,145 @@ class Plugins
 
         unset($enabledPlugins);
     }// registerAllPluginsHooks
+
+
+    /**
+     * Remove all the hooks from an action.
+     * 
+     * @param string $tag The name of action.
+     * @param int|false $priority The priority number to remove. Set to false to remove all priorities. Default is `false`.
+     */
+    public function removeAllActions(string $tag, $priority = false)
+    {
+        return $this->removeAllHooks('action', $tag, $priority);
+    }// removeAllActions
+
+
+    /**
+     * Remove all the hooks from a filter.
+     * 
+     * @param string $tag The name of filter.
+     * @param int|false $priority The priority number to remove. Set to false to remove all priorities. Default is `false`.
+     */
+    public function removeAllFilters(string $tag, $priority = false)
+    {
+        return $this->removeAllHooks('filter', $tag, $priority);
+    }// removeAllFilters
+
+
+    /**
+     * Remove all the hooks from an action or a filter.
+     * 
+     * @param string $type The type of hook. Accept 'action', 'filter'.
+     * @param string $tag The name of action or filter.
+     * @param int|false $priority The priority number to remove. Set to false to remove all priorities. Default is `false`.
+     * @throws \InvalidArgumentException Throw the exception if argument is wrong type or wrong value.
+     */
+    protected function removeAllHooks(string $type, string $tag, $priority = false)
+    {
+        if ($type !== 'action' && $type !== 'filter') {
+            throw new \InvalidArgumentException(sprintf('The argument `$type` accept value action or filter, %s given', $type));
+        }
+
+        if (is_numeric($priority)) {
+            $priority = (int) $priority;
+        } else {
+            $priority = false;
+        }
+
+        $callbackType = 'callback' . ucfirst($type) . 's';// create name callbackXxxs where Xxx depend on type. Example: callbackActions, callbackFilters. This is for use in dynamic property.
+
+        if (isset($this->{$callbackType}[$tag])) {
+            if ($priority === false) {
+                unset($this->{$callbackType}[$tag]);
+            } elseif (isset($this->{$callbackType}[$tag][$priority])) {
+                unset($this->{$callbackType}[$tag][$priority]);
+            }
+
+            if (empty($this->{$callbackType}[$tag])) {
+                unset($this->{$callbackType}[$tag]);
+            }
+        }
+    }// removeAllHooks
+
+
+    /**
+     * Remove function from specified action.
+     * 
+     * @see Rdb\Modules\RdbAdmin\Libraries\Plugins::removeHook()
+     * @param string $tag The name of action.
+     * @param string|array|callable $callback The name of function which should be removed.
+     * @param int $priority The priority of the function. Default is 10.
+     * @return bool Return `true` if function is existed and removed, return `false` for otherwise.
+     */
+    public function removeAction(string $tag, $callback, int $priority = 10): bool
+    {
+        return $this->removeHook('action', $tag, $callback, $priority);
+    }// removeAction
+
+
+    /**
+     * Remove function from specified filter.
+     * 
+     * @see Rdb\Modules\RdbAdmin\Libraries\Plugins::removeHook()
+     * @param string $tag The name of filter.
+     * @param string|array|callable $callback The name of function which should be removed.
+     * @param int $priority The priority of the function. Default is 10.
+     * @return bool Return `true` if function is existed and removed, return `false` for otherwise.
+     */
+    public function removeFilter(string $tag, $callback, int $priority = 10): bool
+    {
+        return $this->removeHook('filter', $tag, $callback, $priority);
+    }// removeFilter
+
+
+    /**
+     * Remove function from specified hook.
+     * 
+     * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-wp-hook.php Copied from WordPress.
+     * @param string $type The type of hook. Accept 'action', 'filter'.
+     * @param string $tag The name of action or filter.
+     * @param string|array|callable $callback The name of function which should be removed.
+     * @param int $priority The priority of the function. Default is 10.
+     * @return bool Return `true` if function is existed and removed, return `false` for otherwise.
+     * @throws \InvalidArgumentException Throw the exception if argument is wrong type or wrong value.
+     */
+    protected function removeHook(string $type, string $tag, $callback, int $priority = 10): bool
+    {
+        if ($type !== 'action' && $type !== 'filter') {
+            throw new \InvalidArgumentException(sprintf('The argument `$type` accept value action or filter, %s given', $type));
+        }
+
+        if (!is_string($callback) && !is_array($callback) && !is_callable($callback)) {
+            throw new \InvalidArgumentException('Invalid argument type for $callback argument.');
+        }
+
+        $priority = (int) $priority;
+        $output = false;
+
+        $callbackType = 'callback' . ucfirst($type) . 's';// create name callbackXxxs where Xxx depend on type. Example: callbackActions, callbackFilters. This is for use in dynamic property.
+
+        if (isset($this->{$callbackType}[$tag])) {
+            $idHash = $this->getHookIdHash($tag, $callback);
+            if (isset($this->{$callbackType}[$tag][$priority][$idHash])) {
+                // if found tag hook and the specified function callback.
+                $output = true;
+                // remove it.
+                unset($this->{$callbackType}[$tag][$priority][$idHash]);
+            }
+
+            if (empty($this->{$callbackType}[$tag][$priority])) {
+                unset($this->{$callbackType}[$tag][$priority]);
+            }
+            if (empty($this->{$callbackType}[$tag])) {
+                unset($this->{$callbackType}[$tag]);
+            }
+        }
+
+        unset($callback, $idHash);
+
+        return $output;
+    }// removeHook
 
 
 }
