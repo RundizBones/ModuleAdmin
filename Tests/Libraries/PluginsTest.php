@@ -217,8 +217,6 @@ EOT;
 
     public function testAddHook()
     {
-        $this->Plugins->registerAllPluginsHooks();
-
         $callbackActions = $this->Plugins->callbackActions;
         $this->assertTrue(isset($callbackActions['rdbatest.demoaction1']));
         $this->assertTrue(isset($callbackActions['rdbatest.demoaction2']));
@@ -255,11 +253,35 @@ EOT;
 
     public function testGetHookIdHash()
     {
-        $this->assertTrue($this->isStringAndNotEmpty($this->Plugins->getHookIdHash('hook.name', 'function', 10)));// callback is tring.
-        $this->assertTrue($this->isStringAndNotEmpty($this->Plugins->getHookIdHash('hook.name', function() {}, 10)));// callback is anonymous function.
-        $this->assertTrue($this->isStringAndNotEmpty($this->Plugins->getHookIdHash('hook.name', ['Class', 'method'], 10)));// callback is array.
-        $this->assertTrue($this->isStringAndNotEmpty($this->Plugins->getHookIdHash('hook.name', [$this, 'tearDown'], 10)));// callback is array with object in first array.
+        $this->assertTrue($this->isStringAndNotEmpty($this->Plugins->getHookIdHash('hook.name', 'function')));// callback is tring.
+        $this->assertTrue($this->isStringAndNotEmpty($this->Plugins->getHookIdHash('hook.name', function() {})));// callback is anonymous function.
+        $this->assertTrue($this->isStringAndNotEmpty($this->Plugins->getHookIdHash('hook.name', ['Class', 'method'])));// callback is array.
+        $this->assertTrue($this->isStringAndNotEmpty($this->Plugins->getHookIdHash('hook.name', [$this, 'tearDown'])));// callback is array with object in first array.
     }// testGetHookIdHash
+
+
+    public function testHasHook()
+    {
+        $this->assertFalse($this->Plugins->hasAction('hook.name'));// return false because did not add any hook.
+        $this->Plugins->addAction('hook.name', 'function');
+        $this->assertTrue($this->Plugins->hasAction('hook.name'));// now return true.
+        $this->assertFalse($this->Plugins->hasAction('hook.name', 'function2'));// return false because specific function was not found.
+        $this->assertEquals(10, $this->Plugins->hasAction('hook.name', 'function'));// return number because specific function was found.
+
+        // test hasAction with callback as class (array).
+        $this->Plugins->addAction('hook.name2', ['Class', 'method'], 12);
+        $this->assertTrue($this->Plugins->hasAction('hook.name2'));
+        $this->assertEquals(12, $this->Plugins->hasAction('hook.name2', ['Class', 'method']));
+
+        $this->assertFalse($this->Plugins->hasFilter('hook.name'));// return false because did not add any hook.
+        $this->Plugins->addFilter('hook.name', 'function');
+        $this->assertTrue($this->Plugins->hasFilter('hook.name'));// now return true.
+        $this->assertFalse($this->Plugins->hasFilter('hook.name', 'function2'));// return false because specific function was not found.
+        $this->assertEquals(10, $this->Plugins->hasFilter('hook.name', 'function'));// return number because specific function was found.
+
+        $this->assertTrue($this->Plugins->hasHook('action', 'rdbatest.demoaction1'));
+        $this->assertTrue($this->Plugins->hasHook('filter', 'rdbatest.demofilter1'));
+    }// testHasHook
 
 
     public function testListPlugins()
@@ -338,7 +360,6 @@ EOT;
 
     public function testRegisterAllPluginsHooks()
     {
-        $this->Plugins->registerAllPluginsHooks();
         $pluginsRegisteredHooks = $this->Plugins->pluginsRegisteredHooks;
 
         $this->assertGreaterThanOrEqual(1, $pluginsRegisteredHooks);

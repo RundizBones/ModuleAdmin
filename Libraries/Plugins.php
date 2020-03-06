@@ -116,8 +116,10 @@ class Plugins
             throw new \InvalidArgumentException('Invalid argument type for $callback argument.');
         }
 
-        $idHash = $this->getHookIdHash($tag, $callback, $priority);
-        $callbackType = 'callback' . ucfirst($type) . 's';
+        $priority = (int) $priority;
+
+        $idHash = $this->getHookIdHash($tag, $callback);
+        $callbackType = 'callback' . ucfirst($type) . 's';// create name callbackXxxs where Xxx depend on type. Example: callbackActions, callbackFilters. This is for use in dynamic property
         $priorityExists = (isset($this->{$callbackType}[$tag][$priority]));
 
         $this->{$callbackType}[$tag][$priority][$idHash] = [
@@ -127,6 +129,8 @@ class Plugins
         if (!$priorityExists) {
             ksort($this->{$callbackType}[$tag], SORT_NUMERIC);
         }
+
+        unset($callbackType, $idHash, $priorityExists);
     }// addHook
 
 
@@ -135,10 +139,9 @@ class Plugins
      * 
      * @param string $tag The name of hook.
      * @param string|array|callable $callback The function or class to create unique ID.
-     * @param int $priority The priority of callback.
      * @return string Return hashed value.
      */
-    protected function getHookIdHash(string $tag, $callback, int $priority): string
+    protected function getHookIdHash(string $tag, $callback): string
     {
         $id = $tag;
 
@@ -154,10 +157,82 @@ class Plugins
             $id .= json_encode($callback[0]) . $callback[1];
         }
 
-        $id .= $priority;
-
         return sha1($id);
     }// getHookIdHash
+
+
+    /**
+     * Check if any action has been registered for a hook.
+     * 
+     * @param string $tag The name of action.
+     * @param string|array|callable $callback The function or class callback to check for. Default is `false`.
+     * @return bool|int Return boolean if $callback is set to `false`. If $callback is check for specific function, the priority of that hook is returned, or return `false` if not found.
+     */
+    public function hasAction(string $tag, $callback = false)
+    {
+        return $this->hasHook('action', $tag, $callback);
+    }// hasAction
+
+
+    /**
+     * Check if any action has been registered for a hook.
+     * 
+     * @param string $tag The name of filter.
+     * @param string|array|callable $callback The function or class callback to check for. Default is `false`.
+     * @return bool|int Return boolean if $callback is set to `false`. If $callback is check for specific function, the priority of that hook is returned, or return `false` if not found.
+     */
+    public function hasFilter(string $tag, $callback = false)
+    {
+        return $this->hasHook('filter', $tag, $callback);
+    }// hasFilter
+
+
+    /**
+     * Check if any action has been registered for a hook.
+     * 
+     * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-wp-hook.php Copied from WordPress.
+     * @param string $tag The name of action or filter.
+     * @param string|array|callable $callback The function or class callback to check for. Default is `false`.
+     * @return bool|int Return boolean if $callback is set to `false`. If $callback is check for specific function, the priority of that hook is returned, or return `false` if not found.
+     * @throws \InvalidArgumentException Throw the exception if argument is wrong type or wrong value.
+     */
+    protected function hasHook(string $type, string $tag, $callback = false)
+    {
+        if ($type !== 'action' && $type !== 'filter') {
+            throw new \InvalidArgumentException(sprintf('The argument `$type` accept value action or filter, %s given', $type));
+        }
+
+        if ($callback !== false && !is_string($callback) && !is_array($callback) && !is_callable($callback)) {
+            throw new \InvalidArgumentException('Invalid argument type for $callback argument.');
+        }
+
+        $callbackType = 'callback' . ucfirst($type) . 's';// create name callbackXxxs where Xxx depend on type. Example: callbackActions, callbackFilters. This is for use in dynamic property
+
+        if (!isset($this->{$callbackType}[$tag]) || !is_array($this->{$callbackType}[$tag])) {
+            // if not found this tag registered.
+            return false;
+        }
+
+        if ($callback === false) {
+            foreach ($this->{$callbackType}[$tag] as $priority => $subItems) {
+                if (!empty($subItems)) {
+                    return true;
+                }
+            }// endforeach;
+            unset($priority, $subItems);
+            return false;
+        }
+
+        $idHash = $this->getHookIdHash($tag, $callback);
+        foreach ($this->{$callbackType}[$tag] as $priority => $subItems) {
+            if (isset($subItems[$idHash])) {
+                return $priority;
+            }
+        }// endforeach;
+        unset($priority, $subItems);
+
+        return false;
+    }// hasHook
 
 
     /**

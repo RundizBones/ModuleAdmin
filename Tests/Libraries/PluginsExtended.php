@@ -17,10 +17,16 @@ class PluginsExtended extends \Rdb\Modules\RdbAdmin\Libraries\Plugins
     }// addHook
 
 
-    public function getHookIdHash(string $tag, $callback, int $priority): string
+    public function getHookIdHash(string $tag, $callback): string
     {
-        return parent::getHookIdHash($tag, $callback, $priority);
+        return parent::getHookIdHash($tag, $callback);
     }// getHookIdHash
+
+
+    public function hasHook(string $type, string $tag, $callback = false)
+    {
+        return parent::hasHook($type, $tag, $callback);
+    }// hasHook
 
 
 }
