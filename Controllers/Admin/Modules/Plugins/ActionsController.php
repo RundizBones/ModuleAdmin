@@ -62,14 +62,37 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
 
             if (isset($output['actionsFormOk']) && $output['actionsFormOk'] === true) {
                 $FileSystem = new \Rdb\System\Libraries\FileSystem(MODULE_PATH);
+                if ($this->Container->has('Plugins')) {
+                    $Plugins = $this->Container->get('Plugins');
+                } else {
+                    $Plugins = new \Rdb\Modules\RdbAdmin\Libraries\Plugins($this->Container);
+                    $Plugins->registerAllPluginsHooks();
+                }
+                $pluginClassNamePrefix = '\\Rdb\\Modules\\';
+                $ReflectionClassTargetInstance = new \ReflectionClass('\\Rdb\\Modules\\RdbAdmin\\Interfaces\\Plugins');
 
                 if (isset($output['pluginsSystemName']) && is_array($output['pluginsSystemName'])) {
                     foreach ($output['pluginsSystemName'] as $pluginSystemName) {
+                        $pluginName = explode('\\', str_replace('/', '\\', $pluginSystemName));
+                        $pluginClassName = $pluginClassNamePrefix . trim(str_replace('/', '\\', $pluginSystemName), '\\') . '\\' . $pluginName[count($pluginName) - 1];
+                        $ReflectionPlugin = new \ReflectionClass($pluginClassName);
+                        $pluginInstance = $ReflectionPlugin->newInstanceWithoutConstructor();
+
                         if (isset($output['action']) && $output['action'] === 'enable') {
                             $FileSystem->deleteFile($pluginSystemName . '/.disabled');
-                        } else {
+                            if (class_exists($pluginClassName) && $ReflectionClassTargetInstance->isInstance($pluginInstance)) {
+                                $PluginClassObject = new $pluginClassName($this->Container);
+                                $PluginClassObject->enable();
+                            }
+                        } elseif (isset($output['action']) && $output['action'] === 'disable') {
                             $FileSystem->writeFile($pluginSystemName . '/.disabled', '');
+                            if (class_exists($pluginClassName) && $ReflectionClassTargetInstance->isInstance($pluginInstance)) {
+                                $PluginClassObject = new $pluginClassName($this->Container);
+                                $PluginClassObject->disable();
+                            }
                         }
+
+                        unset($pluginClassName, $pluginInstance, $pluginName, $ReflectionPlugin);
                     }// endforeach;
                     unset($pluginSystemName);
                 }
@@ -78,7 +101,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
                 $output['formResultMessage'] = __('Updated successfully.');
                 $output['updated'] = true;
 
-                unset($FileSystem);
+                unset($FileSystem, $Plugins, $pluginClassNamePrefix, $ReflectionClassTargetInstance);
             } else {
                 // if form validation failed.
                 // it was already send out http response code and message was set, nothing to do here.

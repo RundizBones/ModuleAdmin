@@ -435,6 +435,7 @@ class Plugins
     /**
      * Remove all the hooks from an action or a filter.
      * 
+     * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-wp-hook.php Copied from WordPress.
      * @param string $type The type of hook. Accept 'action', 'filter'.
      * @param string $tag The name of action or filter.
      * @param int|false $priority The priority number to remove. Set to false to remove all priorities. Default is `false`.

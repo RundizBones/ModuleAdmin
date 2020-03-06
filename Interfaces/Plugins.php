@@ -30,6 +30,18 @@ interface Plugins
 
 
     /**
+     * When plugin is enabled, this method will be called.
+     */
+    public function enable();
+
+
+    /**
+     * When plugin is disabled, this method will be called.
+     */
+    public function disable();
+
+
+    /**
      * Register action and/or filter hooks.
      * 
      * Example:<pre>

@@ -70,6 +70,24 @@ class %PLUGIN% implements \Rdb\Modules\RdbAdmin\Interfaces\Plugins
     /**
      * {@inheritDoc}
      */
+    public function enable()
+    {
+        
+    }// enable
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function disable()
+    {
+        
+    }// disable
+
+
+    /**
+     * {@inheritDoc}
+     */
     public function registerHooks()
     {
         /* @var \$Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
