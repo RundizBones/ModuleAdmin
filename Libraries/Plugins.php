@@ -94,6 +94,42 @@ class Plugins
 
 
     /**
+     * Calls the callback function that have been added to a hook.
+     * 
+     * @link https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Extension!ModuleHandler.php/function/ModuleHandler%3A%3AinvokeAll/ Copied from Drupal.
+     * @link https://alanstorm.com/drupal_module_hooks/ How Drupal module/hook works.
+     * @param string $tag The name of hook.
+     * @param array $args Additional arguments which are passed on to the function hooked. Default is empty.
+     * @return array Return the hooked results. If the plugin that hooked has nothing to return then it will be return empty array.
+     */
+    public function doHook(string $tag, array $args = [])
+    {
+        if (!isset($this->callbackHooks[$tag])) {
+            return $args;
+        }
+
+        $return = [];
+
+        foreach ($this->callbackHooks[$tag] as $priority => $items) {
+            if (is_array($items)) {
+                foreach($items as $idHash => $subItem) {
+                    $result = call_user_func_array($subItem['callback'], $args);
+                    if (isset($result) && is_array($result)) {
+                        $return = \Drupal\Component\Utility\NestedArray::mergeDeep($return, $result);
+                    } elseif (isset($result)) {
+                        $return[] = $result;
+                    }
+                }// endforeach;
+                unset($idHash, $result, $subItem);
+            }
+        }// endforeach;
+        unset($items, $priority);
+
+        return $return;
+    }// doHook
+
+
+    /**
      * Get unique hook ID that is generate from arguments.
      * 
      * @param string $tag The name of hook.

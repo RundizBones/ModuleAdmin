@@ -99,11 +99,11 @@ class %PLUGIN% implements \Rdb\Modules\RdbAdmin\Interfaces\Plugins
         \$Plugins->addHook('rdbatest.demoaction1', [\$%PLUGIN%PlugInContentSubClass, 'demoAction2'], 11);
         \$Plugins->addHook('rdbatest.demoaction2', [\$%PLUGIN%PlugInContentSubClass, 'demoAction2'], 10);
 
-        \$Plugins->addHook('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter1'], 10);
-        \$Plugins->addHook('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter1p1'], 11);
-        \$Plugins->addHook('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter1p2'], 11);
-        \$Plugins->addHook('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter2'], 12);
-        \$Plugins->addHook('rdbatest.demofilter2', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter2'], 10);
+        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter1'], 10);
+        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter1p1'], 11);
+        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter1p2'], 11);
+        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter2'], 12);
+        \$Plugins->addHook('rdbatest.demoalter2', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter2'], 10);
     }// registerHooks
 
 
@@ -149,42 +149,46 @@ class %PLUGIN%PlugInContentSubClass
     public function demoAction1(\$name, \$email, \$website = '')
     {
         file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . __FUNCTION__ . '.txt', 'name: ' . \$name . ', email: ' . \$email . ', website: ' . \$website . PHP_EOL, FILE_APPEND);
+        return 'hook1(' . \$name . ')';
     }
 
 
     public function demoAction1p1(\$name, \$email, \$website = '')
     {
         file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . __FUNCTION__ . '.txt', 'name: ' . \$name . ', email: ' . \$email . ', website: ' . \$website . PHP_EOL, FILE_APPEND);
+        return 'hook1p1(' . \$name . ')';
     }
 
 
     public function demoAction2(\$name, \$email, \$website = '')
     {
         file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . __FUNCTION__ . '.txt', 'name: ' . \$name . ', email: ' . \$email . ', website: ' . \$website . PHP_EOL, FILE_APPEND);
+        return 'hook2(' . \$name . ')';
     }
 
 
-    public function demoFilter1(\$name, \$email, \$website = '')
+    public function demoAlter1(&\$name, \$email, \$website = '')
     {
-        return \$name . ':filtered:' . __FUNCTION__ . ':' . \$email . \$website;
+        \$name = 'Alter1(' . \$name . ')';
     }
 
 
-    public function demoFilter1p1(\$name, \$email, \$website = '')
+    public function demoAlter1p1(&\$name, \$email, \$website = '')
     {
-        return \$name . ':filtered:' . __FUNCTION__ . ':' . \$email . \$website;
+        \$name = 'Alter1p1(' . \$name . ')';
     }
 
 
-    public function demoFilter1p2(\$name, \$email, \$website = '')
+    public function demoAlter1p2(&\$name, \$email, \$website = '')
     {
-        return \$name . ':filtered:' . __FUNCTION__ . ':' . \$email . \$website;
+        \$name = 'Alter1p2(' . \$name . ')';
     }
 
 
-    public function demoFilter2(\$name, \$email, \$website = '')
+    public function demoAlter2(&\$name, \$email, \$website = '')
     {
-        return \$name . ':filtered:' . __FUNCTION__ . ':' . \$email . \$website;
+        \$name = 'Alter2(' . \$name . ')';
+        return ['name' => \$name, 'email' => \$email];
     }
 
 
@@ -269,22 +273,35 @@ EOT;
             foreach ($items as $idHash => $subItems) {
                 $countHook++;
             }
-        }echo PHP_EOL . PHP_EOL . PHP_EOL;
+        }
         $this->assertEquals(3, $countHook);// number of hook functions added.
 
-        $this->assertTrue(isset($callbackHooks['rdbatest.demofilter1']));
-        $this->assertTrue(isset($callbackHooks['rdbatest.demofilter2']));
+        $this->assertTrue(isset($callbackHooks['rdbatest.demoalter1']));
+        $this->assertTrue(isset($callbackHooks['rdbatest.demoalter2']));
         $this->assertGreaterThanOrEqual(4, $callbackHooks);
-        $this->assertEquals(3, count($callbackHooks['rdbatest.demofilter1']));// number of priorities in use.
-        $this->assertEquals(1, count($callbackHooks['rdbatest.demofilter2']));// number of priorities in use.
+        $this->assertEquals(3, count($callbackHooks['rdbatest.demoalter1']));// number of priorities in use.
+        $this->assertEquals(1, count($callbackHooks['rdbatest.demoalter2']));// number of priorities in use.
         $countHook = 0;
-        foreach ($callbackHooks['rdbatest.demofilter1'] as $priority => $items) {
+        foreach ($callbackHooks['rdbatest.demoalter1'] as $priority => $items) {
             foreach ($items as $idHash => $subItems) {
                 $countHook++;
             }
         }
         $this->assertEquals(4, $countHook);// number of hook functions added.
     }// testAddHook
+
+
+    public function testDoHook()
+    {
+        $name = 'Adam';
+        $email = 'adam@domain.tld';
+
+        $result = $this->Plugins->doHook('rdbatest.demoaction1', [$name, $email]);
+        $this->assertArraySubset(['hook1(Adam)', 'hook1p1(Adam)', 'hook2(Adam)'], $result);
+
+        $result = $this->Plugins->doHook('rdbatest.demoalter1', [&$name, $email]);
+        $this->assertSame('Alter2(Alter1p2(Alter1p1(Alter1(Adam))))', $name);
+    }// testDoHook
 
 
     public function testGetHookIdHash()
@@ -313,7 +330,7 @@ EOT;
         $this->assertEquals(12, $this->Plugins->hasHook('hook.name2', ['Class', 'method']));
 
         $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));
-        $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoalter1'));
     }// testHasHook
 
 
@@ -424,13 +441,13 @@ EOT;
         $this->assertEquals(11, $this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
 
         // check that has another hooks.
-        $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter1'));
-        $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter2'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoalter1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoalter2'));
 
-        $this->Plugins->removeAllHooks('rdbatest.demofilter1', false);// remove all filters without any priority care.
+        $this->Plugins->removeAllHooks('rdbatest.demoalter1', false);// remove all filters without any priority care.
 
-        $this->assertFalse($this->Plugins->hasHook('rdbatest.demofilter1'));// there are no filters left on this hook name.
-        $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter2'));
+        $this->assertFalse($this->Plugins->hasHook('rdbatest.demoalter1'));// there are no filters left on this hook name.
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoalter2'));
     }// testRemoveAllHooks
 
 
