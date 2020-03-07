@@ -146,7 +146,9 @@ class Plugins
             $callback = (array) $callback;
         }
 
-        if (is_object($callback[0])) {
+        if ($callback[0] instanceof \Closure) {
+            $id .= spl_object_hash($callback[0]);
+        } elseif (is_object($callback[0])) {
             $id .= get_class($callback[0]) . '->' . $callback[1];
         } elseif (is_string($callback[0])) {
             $id .= $callback[0] . '::' . $callback[1];
