@@ -40,6 +40,9 @@ This folder is for store any plugins that can be hook into any actions, filters.
 For example, You have more than one plugins in a single module and their names are **UserHooks**, **SettingHooks**.<br>
 The PHP file of each plugin should be **UserHooks/UserHooks.php**, **SettingHooks/SettingHooks.php**.
 
+Any plugin files must implements `\Rdb\Modules\RdbAdmin\Interfaces\Plugins`.<br>
+For more information, please read on **Modules/RdbAdmin/Interfaces/Plugins.php** file.
+
 You only need this folder if you want to use its feature.
 
 #### Reserved file name

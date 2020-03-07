@@ -94,16 +94,16 @@ class %PLUGIN% implements \Rdb\Modules\RdbAdmin\Interfaces\Plugins
         \$Plugins = \$this->Container['Plugins'];
         \$%PLUGIN%PlugInContentSubClass = new %PLUGIN%PlugInContentSubClass(\$this->Container);
 
-        \$Plugins->addAction('rdbatest.demoaction1', [\$%PLUGIN%PlugInContentSubClass, 'demoAction1'], 10);
-        \$Plugins->addAction('rdbatest.demoaction1', [\$%PLUGIN%PlugInContentSubClass, 'demoAction1p1'], 11);
-        \$Plugins->addAction('rdbatest.demoaction1', [\$%PLUGIN%PlugInContentSubClass, 'demoAction2'], 11);
-        \$Plugins->addAction('rdbatest.demoaction2', [\$%PLUGIN%PlugInContentSubClass, 'demoAction2'], 10);
+        \$Plugins->addHook('rdbatest.demoaction1', [\$%PLUGIN%PlugInContentSubClass, 'demoAction1'], 10);
+        \$Plugins->addHook('rdbatest.demoaction1', [\$%PLUGIN%PlugInContentSubClass, 'demoAction1p1'], 11);
+        \$Plugins->addHook('rdbatest.demoaction1', [\$%PLUGIN%PlugInContentSubClass, 'demoAction2'], 11);
+        \$Plugins->addHook('rdbatest.demoaction2', [\$%PLUGIN%PlugInContentSubClass, 'demoAction2'], 10);
 
-        \$Plugins->addFilter('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter1'], 10);
-        \$Plugins->addFilter('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter1p1'], 11);
-        \$Plugins->addFilter('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter1p2'], 11);
-        \$Plugins->addFilter('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter2'], 12);
-        \$Plugins->addFilter('rdbatest.demofilter2', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter2'], 10);
+        \$Plugins->addHook('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter1'], 10);
+        \$Plugins->addHook('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter1p1'], 11);
+        \$Plugins->addHook('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter1p2'], 11);
+        \$Plugins->addHook('rdbatest.demofilter1', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter2'], 12);
+        \$Plugins->addHook('rdbatest.demofilter2', [\$%PLUGIN%PlugInContentSubClass, 'demoFilter2'], 10);
     }// registerHooks
 
 
@@ -258,28 +258,27 @@ EOT;
 
     public function testAddHook()
     {
-        $callbackActions = $this->Plugins->callbackActions;
-        $this->assertTrue(isset($callbackActions['rdbatest.demoaction1']));
-        $this->assertTrue(isset($callbackActions['rdbatest.demoaction2']));
-        $this->assertGreaterThanOrEqual(4, $callbackActions);
-        $this->assertEquals(2, count($callbackActions['rdbatest.demoaction1']));// number of priorities in use.
-        $this->assertEquals(1, count($callbackActions['rdbatest.demoaction2']));// number of priorities in use.
+        $callbackHooks = $this->Plugins->callbackHooks;
+        $this->assertTrue(isset($callbackHooks['rdbatest.demoaction1']));
+        $this->assertTrue(isset($callbackHooks['rdbatest.demoaction2']));
+        $this->assertGreaterThanOrEqual(4, $callbackHooks);
+        $this->assertEquals(2, count($callbackHooks['rdbatest.demoaction1']));// number of priorities in use.
+        $this->assertEquals(1, count($callbackHooks['rdbatest.demoaction2']));// number of priorities in use.
         $countHook = 0;
-        foreach ($callbackActions['rdbatest.demoaction1'] as $priority => $items) {
+        foreach ($callbackHooks['rdbatest.demoaction1'] as $priority => $items) {
             foreach ($items as $idHash => $subItems) {
                 $countHook++;
             }
         }echo PHP_EOL . PHP_EOL . PHP_EOL;
         $this->assertEquals(3, $countHook);// number of hook functions added.
 
-        $callbackFilters = $this->Plugins->callbackFilters;
-        $this->assertTrue(isset($callbackFilters['rdbatest.demofilter1']));
-        $this->assertTrue(isset($callbackFilters['rdbatest.demofilter2']));
-        $this->assertGreaterThanOrEqual(4, $callbackFilters);
-        $this->assertEquals(3, count($callbackFilters['rdbatest.demofilter1']));// number of priorities in use.
-        $this->assertEquals(1, count($callbackFilters['rdbatest.demofilter2']));// number of priorities in use.
+        $this->assertTrue(isset($callbackHooks['rdbatest.demofilter1']));
+        $this->assertTrue(isset($callbackHooks['rdbatest.demofilter2']));
+        $this->assertGreaterThanOrEqual(4, $callbackHooks);
+        $this->assertEquals(3, count($callbackHooks['rdbatest.demofilter1']));// number of priorities in use.
+        $this->assertEquals(1, count($callbackHooks['rdbatest.demofilter2']));// number of priorities in use.
         $countHook = 0;
-        foreach ($callbackFilters['rdbatest.demofilter1'] as $priority => $items) {
+        foreach ($callbackHooks['rdbatest.demofilter1'] as $priority => $items) {
             foreach ($items as $idHash => $subItems) {
                 $countHook++;
             }
@@ -290,8 +289,7 @@ EOT;
 
     public function testGetHookIdHash()
     {
-        $this->Plugins->callbackActions = [];
-        $this->Plugins->callbackFilters = [];
+        $this->Plugins->callbackHooks = [];
         $this->Plugins->pluginsRegisteredHooks = [];
 
         $this->assertTrue($this->isStringAndNotEmpty($this->Plugins->getHookIdHash('hook.name', 'function')));// callback is tring.
@@ -303,25 +301,19 @@ EOT;
 
     public function testHasHook()
     {
-        $this->assertFalse($this->Plugins->hasAction('hook.name'));// return false because did not add any hook.
-        $this->Plugins->addAction('hook.name', 'function');
-        $this->assertTrue($this->Plugins->hasAction('hook.name'));// now return true.
-        $this->assertFalse($this->Plugins->hasAction('hook.name', 'function2'));// return false because specific function was not found.
-        $this->assertEquals(10, $this->Plugins->hasAction('hook.name', 'function'));// return number because specific function was found.
+        $this->assertFalse($this->Plugins->hasHook('hook.name'));// return false because did not add any hook.
+        $this->Plugins->addHook('hook.name', 'function');
+        $this->assertTrue($this->Plugins->hasHook('hook.name'));// now return true.
+        $this->assertFalse($this->Plugins->hasHook('hook.name', 'function2'));// return false because specific function was not found.
+        $this->assertEquals(10, $this->Plugins->hasHook('hook.name', 'function'));// return number because specific function was found.
 
-        // test hasAction with callback as class (array).
-        $this->Plugins->addAction('hook.name2', ['Class', 'method'], 12);
-        $this->assertTrue($this->Plugins->hasAction('hook.name2'));
-        $this->assertEquals(12, $this->Plugins->hasAction('hook.name2', ['Class', 'method']));
+        // test hasHook with callback as class (array).
+        $this->Plugins->addHook('hook.name2', ['Class', 'method'], 12);
+        $this->assertTrue($this->Plugins->hasHook('hook.name2'));
+        $this->assertEquals(12, $this->Plugins->hasHook('hook.name2', ['Class', 'method']));
 
-        $this->assertFalse($this->Plugins->hasFilter('hook.name'));// return false because did not add any hook.
-        $this->Plugins->addFilter('hook.name', 'function');
-        $this->assertTrue($this->Plugins->hasFilter('hook.name'));// now return true.
-        $this->assertFalse($this->Plugins->hasFilter('hook.name', 'function2'));// return false because specific function was not found.
-        $this->assertEquals(10, $this->Plugins->hasFilter('hook.name', 'function'));// return number because specific function was found.
-
-        $this->assertTrue($this->Plugins->hasHook('action', 'rdbatest.demoaction1'));
-        $this->assertTrue($this->Plugins->hasHook('filter', 'rdbatest.demofilter1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter1'));
     }// testHasHook
 
 
@@ -421,24 +413,24 @@ EOT;
         $Demo1Plug = new $pluginClassName($this->Container);
 
         // check that has actions.
-        $this->assertTrue($this->Plugins->hasAction('rdbatest.demoaction1'));
-        $this->assertTrue($this->Plugins->hasAction('rdbatest.demoaction2'));
-        $this->assertEquals(10, $this->Plugins->hasAction('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1']));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction2'));
+        $this->assertEquals(10, $this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1']));
 
-        $this->Plugins->removeAllHooks('action', 'rdbatest.demoaction1', 10);// remove all actions based on priority 10 on action 'rdbatest.demoaction1'.
+        $this->Plugins->removeAllHooks('rdbatest.demoaction1', 10);// remove all actions based on priority 10 on action 'rdbatest.demoaction1'.
 
-        $this->assertTrue($this->Plugins->hasAction('rdbatest.demoaction1'));// there are actions left.
-        $this->assertFalse($this->Plugins->hasAction('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1']));// removed
-        $this->assertEquals(11, $this->Plugins->hasAction('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));// there are actions left.
+        $this->assertFalse($this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1']));// removed
+        $this->assertEquals(11, $this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
 
         // check that has filters.
-        $this->assertTrue($this->Plugins->hasFilter('rdbatest.demofilter1'));
-        $this->assertTrue($this->Plugins->hasFilter('rdbatest.demofilter2'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter2'));
 
-        $this->Plugins->removeAllHooks('filter', 'rdbatest.demofilter1', false);// remove all filters without any priority care.
+        $this->Plugins->removeAllHooks('rdbatest.demofilter1', false);// remove all filters without any priority care.
 
-        $this->assertFalse($this->Plugins->hasFilter('rdbatest.demofilter1'));// there are no filters left on this hook name.
-        $this->assertTrue($this->Plugins->hasFilter('rdbatest.demofilter2'));
+        $this->assertFalse($this->Plugins->hasHook('rdbatest.demofilter1'));// there are no filters left on this hook name.
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter2'));
     }// testRemoveAllHooks
 
 
@@ -448,22 +440,22 @@ EOT;
         $Demo1Plug = new $pluginClassName($this->Container);
 
         // check that has actions.
-        $this->assertTrue($this->Plugins->hasAction('rdbatest.demoaction1'));
-        $this->assertTrue($this->Plugins->hasAction('rdbatest.demoaction2'));
-        $this->assertEquals(11, $this->Plugins->hasAction('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
-        $this->assertEquals(10, $this->Plugins->hasAction('rdbatest.demoaction2', [$Demo1Plug, 'demoAction2']));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction2'));
+        $this->assertEquals(11, $this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
+        $this->assertEquals(10, $this->Plugins->hasHook('rdbatest.demoaction2', [$Demo1Plug, 'demoAction2']));
 
         // remove hooks.
-        $this->assertTrue($this->Plugins->removeHook('action', 'rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1'],11));
-        $this->assertTrue($this->Plugins->removeHook('action', 'rdbatest.demoaction2', [$Demo1Plug, 'demoAction2'],10));
+        $this->assertTrue($this->Plugins->removeHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1'],11));
+        $this->assertTrue($this->Plugins->removeHook('rdbatest.demoaction2', [$Demo1Plug, 'demoAction2'],10));
 
         // check again that has actions.
-        $this->assertFalse($this->Plugins->hasAction('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
-        $this->assertFalse($this->Plugins->hasAction('rdbatest.demoaction2', [$Demo1Plug, 'demoAction2']));
+        $this->assertFalse($this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
+        $this->assertFalse($this->Plugins->hasHook('rdbatest.demoaction2', [$Demo1Plug, 'demoAction2']));
 
         // check that action still exists in property or not.
-        $this->assertTrue(isset($this->Plugins->callbackActions['rdbatest.demoaction1']));// 'rdbatest.demoaction1' has more than 1 function but removed only one, so it is still there.
-        $this->assertFalse(isset($this->Plugins->callbackActions['rdbatest.demoaction2']));// 'rdbatest.demoaction2' has only 1 function call, removed then it is not exists anymore.
+        $this->assertTrue(isset($this->Plugins->callbackHooks['rdbatest.demoaction1']));// 'rdbatest.demoaction1' has more than 1 function but removed only one, so it is still there.
+        $this->assertFalse(isset($this->Plugins->callbackHooks['rdbatest.demoaction2']));// 'rdbatest.demoaction2' has only 1 function call, removed then it is not exists anymore.
     }// testRemoveHook
 
 
