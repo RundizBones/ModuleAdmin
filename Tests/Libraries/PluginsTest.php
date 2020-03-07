@@ -244,20 +244,6 @@ EOT;
     {
         return is_string($string) && !empty($string);
     }
-    
-    public function slice_array_depth($array, $depth = 0) {
-    foreach ($array as $key => $value) {
-        if (is_array($value)) {
-            if ($depth > 0) {
-                $array[$key] = $this->slice_array_depth($value, $depth - 1);
-            } else {
-                unset($array[$key]);
-            }
-        }
-    }
-
-    return $array;
-}
 
 
     public function testAddHook()
