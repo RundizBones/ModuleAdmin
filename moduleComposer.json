@@ -10,6 +10,7 @@
         "rundiz/upload": "~2.0",
         "rundiz/image": "~3.0",
         "slim/csrf": "^0.8",
-        "dragonmantank/cron-expression": "^2.0"
+        "dragonmantank/cron-expression": "^2.0",
+        "drupal/core-utility": "~8.0"
     }
 }
