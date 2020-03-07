@@ -412,18 +412,18 @@ EOT;
         $pluginClassName = '\Rdb\Modules\\' . $this->newModule . '\Plugins\Demo1\Demo1PlugInContentSubClass';
         $Demo1Plug = new $pluginClassName($this->Container);
 
-        // check that has actions.
+        // check that has hook.
         $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));
         $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction2'));
         $this->assertEquals(10, $this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1']));
 
-        $this->Plugins->removeAllHooks('rdbatest.demoaction1', 10);// remove all actions based on priority 10 on action 'rdbatest.demoaction1'.
+        $this->Plugins->removeAllHooks('rdbatest.demoaction1', 10);// remove all hook based on priority 10 name 'rdbatest.demoaction1'.
 
-        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));// there are actions left.
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));// there are hooks left.
         $this->assertFalse($this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1']));// removed
         $this->assertEquals(11, $this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
 
-        // check that has filters.
+        // check that has another hooks.
         $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter1'));
         $this->assertTrue($this->Plugins->hasHook('rdbatest.demofilter2'));
 
@@ -439,7 +439,7 @@ EOT;
         $pluginClassName = '\Rdb\Modules\\' . $this->newModule . '\Plugins\Demo1\Demo1PlugInContentSubClass';
         $Demo1Plug = new $pluginClassName($this->Container);
 
-        // check that has actions.
+        // check that has hook.
         $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));
         $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction2'));
         $this->assertEquals(11, $this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
@@ -449,11 +449,11 @@ EOT;
         $this->assertTrue($this->Plugins->removeHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1'],11));
         $this->assertTrue($this->Plugins->removeHook('rdbatest.demoaction2', [$Demo1Plug, 'demoAction2'],10));
 
-        // check again that has actions.
+        // check again that has hook.
         $this->assertFalse($this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
         $this->assertFalse($this->Plugins->hasHook('rdbatest.demoaction2', [$Demo1Plug, 'demoAction2']));
 
-        // check that action still exists in property or not.
+        // check that hook still exists in property or not.
         $this->assertTrue(isset($this->Plugins->callbackHooks['rdbatest.demoaction1']));// 'rdbatest.demoaction1' has more than 1 function but removed only one, so it is still there.
         $this->assertFalse(isset($this->Plugins->callbackHooks['rdbatest.demoaction2']));// 'rdbatest.demoaction2' has only 1 function call, removed then it is not exists anymore.
     }// testRemoveHook

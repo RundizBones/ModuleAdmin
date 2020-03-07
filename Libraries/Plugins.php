@@ -61,13 +61,11 @@ class Plugins
 
 
     /**
-     * Hooks a function onto a specific action or filter.
-     * 
-     * This method was called from `addAction()` and `addFilter()` methods.
+     * Hooks a function onto a specific tag.
      * 
      * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/plugin.php Copied from WordPress.
      * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-wp-hook.php Copied from WordPress.
-     * @param string $tag The name of action or filter.
+     * @param string $tag The name of hook.
      * @param string|array|callable $callback The function or class to be called.
      * @param int $priority Priority that function will be executed. Lower number will be execute earlier. Default is 10.
      * @throws \InvalidArgumentException Throw the exception if argument is wrong type or wrong value.
@@ -125,10 +123,10 @@ class Plugins
 
 
     /**
-     * Check if any action has been registered for a hook.
+     * Check if any hook has been registered.
      * 
      * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-wp-hook.php Copied from WordPress.
-     * @param string $tag The name of action or filter.
+     * @param string $tag The name of hook.
      * @param string|array|callable $callback The function or class callback to check for. Default is `false`.
      * @return bool|int Return boolean if $callback is set to `false`. If $callback is check for specific function, the priority of that hook is returned, or return `false` if not found.
      * @throws \InvalidArgumentException Throw the exception if argument is wrong type or wrong value.
@@ -333,10 +331,10 @@ class Plugins
 
 
     /**
-     * Remove all the hooks from an action or a filter.
+     * Remove all the hooks.
      * 
      * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-wp-hook.php Copied from WordPress.
-     * @param string $tag The name of action or filter.
+     * @param string $tag The name of hook.
      * @param int|false $priority The priority number to remove. Set to false to remove all priorities. Default is `false`.
      * @throws \InvalidArgumentException Throw the exception if argument is wrong type or wrong value.
      */
@@ -366,7 +364,7 @@ class Plugins
      * Remove function from specified hook.
      * 
      * @link https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-wp-hook.php Copied from WordPress.
-     * @param string $tag The name of action or filter.
+     * @param string $tag The name of hook.
      * @param string|array|callable $callback The name of function which should be removed.
      * @param int $priority The priority of the function. Default is 10.
      * @return bool Return `true` if function is existed and removed, return `false` for otherwise.
