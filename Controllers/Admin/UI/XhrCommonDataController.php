@@ -154,6 +154,23 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
 
         $output = [];
 
+        if ($this->Container->has('Plugins')) {
+            /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+            $Plugins = $this->Container->get('Plugins');
+            /*
+             * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\UI->getPageAlertMessages.beforeGetSession
+             * PluginHookDescription: Hook before get message from session.
+             * PluginHookParam: array $output This argument will be pass by reference, you can alter but variable type must be array. 
+             *              The output of alert messages that will be send to browser. 
+             *              The format is `array(array('status' => 'error', 'message' => 'My error message.'), array('status' => 'success', 'message' => 'Success message.'))`.
+             * PluginHookSince: 0.2.4
+             */
+            $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.beforeGetSession', [&$output]);
+            if (!is_array($output)) {
+                $output = [];
+            }
+        }
+
         if (isset($_SESSION['pageAlert']) && is_array($_SESSION['pageAlert'])) {
             foreach ($_SESSION['pageAlert'] as $key => $item) {
                 if (!isset($item['message'])) {
@@ -168,6 +185,21 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
                 ];
             }// endforeach;
             unset($item, $key);
+        }
+
+        if (isset($Plugins)) {
+            /*
+             * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\UI->getPageAlertMessages.afterGetSession
+             * PluginHookDescription: Hook after get message from session.
+             * PluginHookParam: array $output This argument will be pass by reference, you can alter but variable type must be array. 
+             *              The output of alert messages that will be send to browser. 
+             *              The format is `array(array('status' => 'error', 'message' => 'My error message.'), array('status' => 'success', 'message' => 'Success message.'))`.
+             * PluginHookSince: 0.2.4
+             */
+            $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.afterGetSession', [&$output]);
+            if (!is_array($output)) {
+                $output = [];
+            }
         }
 
         unset($_SESSION['pageAlert']);

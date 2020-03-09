@@ -2,6 +2,7 @@
 /* @var $Assets \Rdb\Modules\RdbAdmin\Libraries\Assets */
 /* @var $Modules \Rdb\System\Modules */
 /* @var $Views \Rdb\System\Views */
+/* @var $this \Rdb\System\Views */
 /* @var $Url \Rdb\System\Libraries\Url */
 ?>
                         <h1 class="rdba-page-content-header"><?php echo __('Edit user'); ?></h1>
@@ -192,7 +193,19 @@
                                     <input id="user_fields_rdbadmin_uf_website" type="url" name="user_fields[rdbadmin_uf_website]" value="<?php if (isset($user_fields['website'])) {echo htmlspecialchars($user_fields['website'], ENT_QUOTES);} ?>" maxlength="255">
                                 </div>
                             </div>
-                            <?php /*<div class="form-group">
+                            <?php 
+                            if ($this->Container->has('Plugins')) {
+                                /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+                                $Plugins = $this->Container->get('Plugins');
+                                /*
+                                 * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\Users\EditController->indexAction.bottomOtherInfo
+                                 * PluginHookDescription: Hook to display contents at the bottom of other info section.
+                                 * PluginHookSince: 0.2.4
+                                 */
+                                $Plugins->doHook($this->controllerMethodHook.'.bottomOtherInfo');
+                                unset($Plugins);
+                            }
+                            /*<div class="form-group">
                                 <label class="control-label">Select multiple.</label>
                                 <div class="control-wrapper">
                                     <select id="user_fields_rdbadmin_uf_selectmultiple" name="user_fields[rdbadmin_uf_selectmultiple][]" multiple="" size="3">

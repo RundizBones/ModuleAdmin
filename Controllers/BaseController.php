@@ -54,6 +54,8 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
             dirname(__DIR__) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'translations'
         );
 
+        // initialize plugin class.
+        // @since 0.2.4
         $Plugins = new \Rdb\Modules\RdbAdmin\Libraries\Plugins($Container);
         if (!$this->Container->has('Plugins')) {
             $this->Container['Plugins'] = function ($c) use ($Plugins) {
