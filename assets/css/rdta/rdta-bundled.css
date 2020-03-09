@@ -284,7 +284,7 @@ select:not([multiple]):not([size]) {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Font Awesome Free 5.12.0 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.12.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 .fa,
@@ -1486,6 +1486,9 @@ select:not([multiple]):not([size]) {
 .fa-d-and-d-beyond:before {
   content: "\f6ca"
 }
+.fa-dailymotion:before {
+  content: "\f952"
+}
 .fa-dashcube:before {
   content: "\f210"
 }
@@ -2527,6 +2530,9 @@ select:not([multiple]):not([size]) {
 .fa-instagram:before {
   content: "\f16d"
 }
+.fa-instagram-square:before {
+  content: "\f955"
+}
 .fa-intercom:before {
   content: "\f7af"
 }
@@ -2925,6 +2931,9 @@ select:not([multiple]):not([size]) {
 }
 .fa-mixcloud:before {
   content: "\f289"
+}
+.fa-mixer:before {
+  content: "\f956"
 }
 .fa-mizuni:before {
   content: "\f3cc"
@@ -3630,6 +3639,9 @@ select:not([multiple]):not([size]) {
 }
 .fa-shoe-prints:before {
   content: "\f54b"
+}
+.fa-shopify:before {
+  content: "\f957"
 }
 .fa-shopping-bag:before {
   content: "\f290"
@@ -4719,6 +4731,7 @@ select:not([multiple]):not([size]) {
   src: url(../webfonts/fa-regular-400.eot);
   src: url(../webfonts/fa-regular-400.eot?#iefix) format("embedded-opentype"),url(../webfonts/fa-regular-400.woff2) format("woff2"),url(../webfonts/fa-regular-400.woff) format("woff"),url(../webfonts/fa-regular-400.ttf) format("truetype"),url(../webfonts/fa-regular-400.svg#fontawesome) format("svg")
 }
+.fab,
 .far {
   font-weight: 400
 }

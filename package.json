@@ -1,6 +1,6 @@
 {
     "name": "rundizbones-admin-module",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Admin module for RundizBones framework.",
     "main": "gulpfile.js",
     "keywords": [
@@ -14,24 +14,24 @@
     "license": "MIT",
     "repository": {},
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.12.0",
+        "@fortawesome/fontawesome-free": "^5.12.1",
         "css-element-queries": "^1.2.3",
         "datatables.net-dt": "^1.10.20",
         "datatables.net-fixedheader-dt": "^3.1.6",
         "datatables.net-plugins": "^1.10.20",
         "datatables.net-responsive-dt": "^2.2.3",
-        "handlebars": "^4.7.2",
+        "handlebars": "^4.7.3",
         "jquery": "^3.4.1",
         "lodash": "^4.17.15",
         "moment": "^2.24.0",
-        "moment-timezone": "^0.5.27",
+        "moment-timezone": "^0.5.28",
         "popper.js": "^1.16.1",
         "rundiz-template-for-admin": "^2.1.1",
         "sanitize.css": "^11.0.0",
         "smartmenus": "^1.1.0",
         "sortablejs": "^1.10.2",
         "sticky-sidebar": "^3.3.1",
-        "tippy.js": "^5.2.0"
+        "tippy.js": "^5.2.1"
     },
     "devDependencies": {
         "del": "^5.1.0",

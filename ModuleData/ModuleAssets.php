@@ -98,7 +98,7 @@ class ModuleAssets
                 [
                     'handle' => 'handlebars',
                     'file' => $publicModuleUrl . '/assets/vendor/handlebars/handlebars.min.js',
-                    'version' => '4.7.2',
+                    'version' => '4.7.3',
                 ],
                 [
                     'handle' => 'moment.js',
