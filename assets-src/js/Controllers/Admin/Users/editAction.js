@@ -203,17 +203,22 @@ class RdbaUsersEditController {
         }*/
 
         if (editForm) {
-            editForm.addEventListener('change', function(event) {
-                if (RdbaCommon.isset(() => event.target.classList) && event.target.classList.contains('user_fields_rdbadmin_uf_avatar_type')) {
-                    event.preventDefault();
+            document.addEventListener('change', function(event) {
+                if (RdbaCommon.isset(() => event.target.closest('form').id) && event.target.closest('form').id === 'rdba-edit-user-form') {
+                    if (RdbaCommon.isset(() => event.target.classList) && event.target.classList.contains('user_fields_rdbadmin_uf_avatar_type')) {
+                        event.preventDefault();
+                        // grab the form element object again on change to make js object fresh and go direct to current ajax loaded form.
+                        // if this part use `editForm` from the code above, it cannot mark element object to show/hide because `editForm` is the object from the first time ajax loaded..
+                        let currentEditForm = event.target.closest('form');
 
-                    let inputAvatarType = event.target;
-                    // hide all avatar type form.
-                    editForm.querySelectorAll('.rdbadmin-avatar-type-form').forEach(function(item, index) {
-                        item.classList.add('rd-hidden');
-                    });
-                    // remove hidden class from only selected.
-                    editForm.querySelector('.rdbadmin-avatar-type-' + inputAvatarType.value).classList.remove('rd-hidden');
+                        let inputAvatarType = event.target;
+                        // hide all avatar type form.
+                        currentEditForm.querySelectorAll('.rdbadmin-avatar-type-form').forEach(function(item, index) {
+                            item.classList.add('rd-hidden');
+                        });
+                        // remove hidden class from only selected.
+                        currentEditForm.querySelector('.rdbadmin-avatar-type-' + inputAvatarType.value).classList.remove('rd-hidden');
+                    }
                 }
             });
         }
