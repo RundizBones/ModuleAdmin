@@ -202,7 +202,7 @@
                                  * PluginHookDescription: Hook to display contents at the bottom of other info section.
                                  * PluginHookSince: 0.2.4
                                  */
-                                $Plugins->doHook($this->controllerMethodHook.'.bottomOtherInfo');
+                                $Plugins->doHook($this->controllerMethod.'.bottomOtherInfo');
                                 unset($Plugins);
                             }
                             /*<div class="form-group">

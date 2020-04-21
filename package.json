@@ -1,6 +1,6 @@
 {
     "name": "rundizbones-admin-module",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "description": "Admin module for RundizBones framework.",
     "main": "gulpfile.js",
     "keywords": [
