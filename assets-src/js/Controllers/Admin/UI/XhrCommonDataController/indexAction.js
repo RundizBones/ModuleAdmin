@@ -469,7 +469,7 @@ class RdbaUiXhrCommonDataController {
             } else {
                 avatarUrl = userData.UrlAppBased + '/' + userData.user_avatar;
             }
-            $('#rdba-user-navbar .rdba-user-icon').replaceWith('<img class="fluid rdba-user-profilepicture" src="' + avatarUrl + '" alt="">');
+            $('#rdba-user-navbar .rdba-user-icon').replaceWith('<img class="display-picture rdba-user-profilepicture" src="' + avatarUrl + '" alt="">');
         }
 
         $('.sm-rdta.navbar').smartmenus('refresh');
