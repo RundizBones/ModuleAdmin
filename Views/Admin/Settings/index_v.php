@@ -212,7 +212,7 @@
                                                         <?php echo __('Prevent brute-force attack by device cookie'); ?> 
                                                     </label>
                                                     <div class="form-description">
-                                                        <?php echo __('Read more about device cookie at %1$s.', '<a href="https://www.owasp.org/index.php/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies" target="owasp">OWASP</a>'); ?> 
+                                                        <?php echo __('Read more about device cookie at %1$s.', '<a href="https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies" target="owasp">OWASP</a>'); ?> 
                                                     </div>
                                                 </div>
                                             </div>
