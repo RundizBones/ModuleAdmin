@@ -14,7 +14,7 @@
     "license": "MIT",
     "repository": {},
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.12.1",
+        "@fortawesome/fontawesome-free": "^5.13.0",
         "css-element-queries": "^1.2.3",
         "datatables.net-dt": "^1.10.20",
         "datatables.net-fixedheader-dt": "^3.1.6",
@@ -25,13 +25,13 @@
         "lodash": "^4.17.15",
         "moment": "^2.24.0",
         "moment-timezone": "^0.5.28",
-        "popper.js": "^1.16.1",
+        "@popperjs/core": "^2.4.0",
         "rundiz-template-for-admin": "^2.1.1",
-        "sanitize.css": "^11.0.0",
+        "sanitize.css": "^11.0.1",
         "smartmenus": "^1.1.0",
         "sortablejs": "^1.10.2",
         "sticky-sidebar": "^3.3.1",
-        "tippy.js": "^5.2.1"
+        "tippy.js": "^6.2.3"
     },
     "devDependencies": {
         "del": "^5.1.0",

@@ -33,7 +33,7 @@ function bundleRDTA(cb) {
             // use smartmenus from its package directly.
             'node_modules/smartmenus/dist/jquery.smartmenus.min.js',
             // use popper from its package directly.
-            'node_modules/popper.js/dist/umd/popper.min.js',
+            'node_modules/@popperjs/core/dist/umd/popper.min.js',
             // use sticky-sidebar from its package directly.
             'node_modules/sticky-sidebar/dist/jquery.sticky-sidebar.min.js',
             // use resizesensor from its package directly.
@@ -46,7 +46,7 @@ function bundleRDTA(cb) {
             'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-dialog.min.js',
             'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-tabs.min.js',
             // tooltips (tippy)
-            'node_modules/tippy.js/dist/tippy-bundle.iife.min.js',
+            'node_modules/tippy.js/dist/tippy-bundle.umd.min.js',
             'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-tooltips.min.js',
         ])
             .pipe(print())
