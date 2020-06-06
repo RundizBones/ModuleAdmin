@@ -28,6 +28,12 @@ trait MetaFieldsTrait
 
 
     /**
+     * @var bool Indicate that `getFields()` and `getFieldsNoCache()` methods contain values or not. The result will be `true` if no value or no data, but will be `false` if there is at least a value or data.
+     */
+    protected $getFieldsNoData = false;
+
+
+    /**
      * @var int The object_id.
      */
     protected $objectId;
@@ -47,6 +53,8 @@ trait MetaFieldsTrait
 
     /**
      * Add meta field data.
+     * 
+     * This method is not recommended to call it directly, please call to `updateFieldsData()` method instead and if the data is not exists, it will be call this method automatically.
      * 
      * @param int $objectId Object ID.
      * @param string $field_name Field name.
@@ -183,7 +191,8 @@ trait MetaFieldsTrait
      * @param int $objectId The object ID.
      * @param string $field_name The field name to search in. If this is empty then it will return all.
      * @return mixed Return a single row of field or all rows depend on field name to search. If it was not found then return null.<br>
-     *                          The return value may be unserialize if it is not scalar and not `null`.
+     *                          The return value may be unserialize if it is not scalar and not `null`.<br>
+     *                          You can call to property `getFieldsNoData` (boolean) to check that are there any data or value from this method.
      */
     protected function getFields(int $objectId, string $field_name = '')
     {
@@ -191,6 +200,8 @@ trait MetaFieldsTrait
         $this->objectId = $objectId;
 
         $this->loadCacheData([$this, 'buildCacheContent']);
+
+        $this->getFieldsNoData = false;
 
         if (is_array($this->storageData)) {
             $Serializer = new \Rundiz\Serializer\Serializer();
@@ -214,8 +225,60 @@ trait MetaFieldsTrait
             unset($Serializer);
         }
 
+        $this->getFieldsNoData = true;
+
         return null;
     }// getFields
+
+
+    /**
+     * Get meta fields data by conditions but no cache.
+     * 
+     * This method work the same as `getFields()` method but connect to DB without cache to make very sure that data is really exists.
+     * 
+     * @see \Rdb\Modules\RdbAdmin\Models\Traits::getFields()
+     * @param int $objectId The object ID.
+     * @param string $field_name The field name to search in. If this is empty then it will return all.
+     * @return mixed Return a single row of field or all rows depend on field name to search. If it was not found then return null.<br>
+     *                          The return value may be unserialize if it is not scalar and not `null`.<br>
+     *                          You can call to property `getFieldsNoData` (boolean) to check that are there any data or value from this method.
+     */
+    protected function getFieldsNoCache(int $objectId, string $field_name = '')
+    {
+        $this->getFieldsNoData = false;
+
+        $sql = 'SELECT * FROM `' . $this->tableName . '` WHERE `' . $this->objectIdName . '` = :object_id';
+        $Pdo = $this->Db->PDO();
+        $Sth = $Pdo->prepare($sql);
+        $Sth->bindValue(':object_id', $objectId);
+        $Sth->execute();
+        $result = $Sth->fetchAll();
+        $Sth->closeCursor();
+        unset($Pdo, $sql, $Sth);
+
+        $Serializer = new \Rundiz\Serializer\Serializer();
+
+        if (!empty($field_name)) {
+            foreach ($result as $row) {
+                if (is_object($row) && isset($row->field_name) && $row->field_name === $field_name) {
+                    $row->field_value = $Serializer->maybeUnserialize($row->field_value);
+                    return $row;
+                }
+            }// endforeach;
+            unset($result, $row);
+        } else {
+            foreach ($result as $row) {
+                $row->field_value = $Serializer->maybeUnserialize($row->field_value);
+            }// endforeach;
+            unset($row);
+            return $result;
+        }
+
+        $this->getFieldsNoData = true;
+
+        unset($Serializer);
+        return null;
+    }// getFieldsNoCache
 
 
     /**
@@ -247,8 +310,8 @@ trait MetaFieldsTrait
             return false;
         }
 
-        $result = $this->getFields($objectId, $field_name);
-        if (empty($result)) {
+        $result = $this->getFieldsNoCache($objectId, $field_name);
+        if ($this->getFieldsNoData === true) {
             unset($result);
             return $this->addFieldsData($objectId, $field_name, $field_value, $field_description);
         }
