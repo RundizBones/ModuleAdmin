@@ -29,6 +29,7 @@ trait MetaFieldsTrait
 
     /**
      * @var bool Indicate that `getFields()` and `getFieldsNoCache()` methods contain values or not. The result will be `true` if no value or no data, but will be `false` if there is at least a value or data.
+	 * @since 1.0.1
      */
     protected $getFieldsNoData = false;
 
@@ -237,6 +238,7 @@ trait MetaFieldsTrait
      * This method work the same as `getFields()` method but connect to DB without cache to make very sure that data is really exists.
      * 
      * @see \Rdb\Modules\RdbAdmin\Models\Traits::getFields()
+	 * @since 1.0.1
      * @param int $objectId The object ID.
      * @param string $field_name The field name to search in. If this is empty then it will return all.
      * @return mixed Return a single row of field or all rows depend on field name to search. If it was not found then return null.<br>
