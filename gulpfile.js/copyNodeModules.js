@@ -144,8 +144,8 @@ function copyRDTA(cb) {
             .pipe(rename('sticky-sidebar-license.md'))
             .pipe(print())
             .pipe(dest('assets/vendor/')),
-        src('node_modules/rundiz-template-for-admin/assets/js/sticky-sidebar/ResizeSensor-license')
-            .pipe(rename('resizesendor-license.txt'))
+        src('node_modules/rundiz-template-for-admin/assets/js/resize-sensor/ResizeSensor-license')
+            .pipe(rename('resizesensor-license.txt'))
             .pipe(print())
             .pipe(dest('assets/vendor/')),
     );
