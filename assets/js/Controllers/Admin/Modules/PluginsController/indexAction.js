@@ -256,7 +256,9 @@ class RdbaPluginsController extends RdbaDatatables {
 
                         if (typeof(response) !== 'undefined') {
                             if (typeof(response.formResultMessage) !== 'undefined') {
-                                RdbaCommon.displayAlertboxFixed(response.formResultMessage, response.formResultStatus);
+                                let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
+                                let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
+                                document.querySelector('.form-result-placeholder').innerHTML = alertBox;
                             }
                         }
 
