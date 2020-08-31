@@ -5117,6 +5117,10 @@ select:not([multiple]):not([size]) {
   background-color: transparent;
   color: inherit
 }
+.sm-rdta.navbar ol li::before,
+.sm-rdta.navbar ul li::before {
+  content: ""
+}
 @media (min-width:1000px) {
   .sm-rdta ul {
     position: absolute;
@@ -5857,7 +5861,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Rundiz template for admin V.2.1.4
+ * Rundiz template for admin V.2.1.5
  */
 html.rd-template-admin {
   height: 100%
