@@ -598,7 +598,11 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
                         break;
                     }
 
-                    if ($ConfigDb->get('rdbadmin_UserDeleteSelfGrant', 1) == '0') {
+                    if (
+                        strtolower($output['action']) === 'delete' && 
+                        $eachUser->user_id == $this->userSessionCookieData['user_id'] &&
+                        $ConfigDb->get('rdbadmin_UserDeleteSelfGrant', 1) == '0'
+                    ) {
                         http_response_code(403);
                         $output['formResultStatus'] = 'error';
                         $output['formResultMessage'] = __('Site setting is not allowed user to delete themself.');
