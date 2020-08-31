@@ -36,10 +36,10 @@ class RdbaCommon {
     * @param {string|object} message The alert content.
      * @param {string} status The alert status. Example: 'success', 'error', 'info', 'warning', or can be alert class based on RDTA alert box class name such as 'alert-success', 'alert-danger', etc. Default is 'warning'.
     * @param {bool} dismissable Make alert dismissable if it is `true`, if `false` then it is not. Default is `true`.
-    * @param {string} fixed Fixed position. Accept value 'bottom' or 'top'. Default is 'bottom'.
+    * @param {string} position Fixed position. Accept value 'bottom' or 'top'. Default is 'bottom'.
      * @returns {undefined}
      */
-    static displayAlertboxFixed(message, status = 'warning', dismissable = true, fixed = 'bottom') {
+    static displayAlertboxFixed(message, status = 'warning', dismissable = true, position = 'bottom') {
         let timeoutAlertFade, timeoutAlertRemove;
 
         // validate argument type is correct.
@@ -49,25 +49,25 @@ class RdbaCommon {
         if (dismissable !== false && dismissable !== true) {
             dismissable = true;
         }
-        if (fixed !== 'top' && fixed !== 'bottom') {
-            fixed = 'bottom';
+        if (position !== 'top' && position !== 'bottom') {
+            position = 'bottom';
         }
 
         let alertClass = RdbaCommon.getAlertClassFromStatus(status);
         let alertContent = RdbaCommon.renderAlertContent(message);
-        let alertBox = RdbaCommon.renderAlertHtml(alertClass, alertContent, dismissable, fixed);
+        let alertBox = RdbaCommon.renderAlertHtml(alertClass, alertContent, dismissable, position);
 
         // alert box can only be display one box at a time.
         // remove previous alert box.
-        if (document.querySelector('.rd-alertbox.fixed-' + fixed)) {
-            document.querySelector('.rd-alertbox.fixed-' + fixed).remove();
+        if (document.querySelector('.rd-alertbox.fixed-' + position)) {
+            document.querySelector('.rd-alertbox.fixed-' + position).remove();
         }
 
         // put alert box HTML into before end of body.
         document.body.insertAdjacentHTML('beforeend', alertBox);
         // also add class for fade out when close.
-        document.querySelector('.rd-alertbox.fixed-' + fixed).classList.add('rd-animation');
-        document.querySelector('.rd-alertbox.fixed-' + fixed).classList.add('fade');
+        document.querySelector('.rd-alertbox.fixed-' + position).classList.add('rd-animation');
+        document.querySelector('.rd-alertbox.fixed-' + position).classList.add('fade');
 
         // clear old timeout meter.
         clearTimeout(timeoutAlertFade);
@@ -75,17 +75,75 @@ class RdbaCommon {
 
         // make alert box disappear after few seconds. number of seconds is based on rd-animation fade.
         timeoutAlertFade = setTimeout(function() {
-            if (document.querySelector('.rd-alertbox.fixed-' + fixed)) {
-                document.querySelector('.rd-alertbox.fixed-' + fixed).classList.add('fade-out');
+            if (document.querySelector('.rd-alertbox.fixed-' + position)) {
+                document.querySelector('.rd-alertbox.fixed-' + position).classList.add('fade-out');
             }
         }, 5000);
         // also remove alert box after disappeared. number of seconds is based on rd-animation fade.
         timeoutAlertRemove = setTimeout(function() {
-            if (document.querySelector('.rd-alertbox.fixed-' + fixed)) {
-                document.querySelector('.rd-alertbox.fixed-' + fixed).remove();
+            if (document.querySelector('.rd-alertbox.fixed-' + position)) {
+                document.querySelector('.rd-alertbox.fixed-' + position).remove();
             }
         }, 5400);
     }// displayAlertboxFixed
+
+
+    /**
+     * Display alert box float to web page.
+     * 
+    * @param {string|object} message The alert content.
+     * @param {string} status The alert status. Example: 'success', 'error', 'info', 'warning', or can be alert class based on RDTA alert box class name such as 'alert-success', 'alert-danger', etc. Default is 'warning'.
+    * @param {bool} dismissable Make alert dismissable if it is `true`, if `false` then it is not. Default is `true`.
+    * @param {string} position Float position. Accept value 'bottom' or 'top'. Default is 'bottom'.
+     * @returns {undefined}
+     */
+    static displayAlertboxFloat(message, status = 'warning', dismissable = true, position = 'bottom') {
+        let timeoutAlertFade, timeoutAlertRemove;
+
+        // validate argument type is correct.
+        if (typeof(status) !== 'string') {
+            status = 'warning';
+        }
+        if (dismissable !== false && dismissable !== true) {
+            dismissable = true;
+        }
+        if (position !== 'top' && position !== 'bottom') {
+            position = 'bottom';
+        }
+
+        let alertClass = RdbaCommon.getAlertClassFromStatus(status);
+        let alertContent = RdbaCommon.renderAlertContent(message);
+        let alertBox = RdbaCommon.renderAlertHtml(alertClass, alertContent, dismissable, position, 'float');
+
+        // alert box can only be display one box at a time.
+        // remove previous alert box.
+        if (document.querySelector('.rd-alertbox.float-' + position)) {
+            document.querySelector('.rd-alertbox.float-' + position).remove();
+        }
+
+        // put alert box HTML into before end of body.
+        document.body.insertAdjacentHTML('beforeend', alertBox);
+        // also add class for fade out when close.
+        document.querySelector('.rd-alertbox.float-' + position).classList.add('rd-animation');
+        document.querySelector('.rd-alertbox.float-' + position).classList.add('fade');
+
+        // clear old timeout meter.
+        clearTimeout(timeoutAlertFade);
+        clearTimeout(timeoutAlertRemove);
+
+        // make alert box disappear after few seconds. number of seconds is based on rd-animation fade.
+        timeoutAlertFade = setTimeout(function() {
+            if (document.querySelector('.rd-alertbox.float-' + position)) {
+                document.querySelector('.rd-alertbox.float-' + position).classList.add('fade-out');
+            }
+        }, 5000);
+        // also remove alert box after disappeared. number of seconds is based on rd-animation fade.
+        timeoutAlertRemove = setTimeout(function() {
+            if (document.querySelector('.rd-alertbox.float-' + position)) {
+                document.querySelector('.rd-alertbox.float-' + position).remove();
+            }
+        }, 5400);
+    }// displayAlertboxFloat
 
 
     /**
@@ -286,10 +344,11 @@ class RdbaCommon {
     * @param {string} alertClass The alert class based on RDTA alert box class name. Example: 'alert-success', 'alert-danger'.
     * @param {string|object} content The alert content.
     * @param {bool} dismissable Make alert dismissable if it is `true`, if `false` then it is not. Default is `true`.
-    * @param {string} fixed Fixed position. Accept value 'bottom' or 'top'. Default is empty.
+    * @param {string} position Fixed or float position. Accept value 'bottom' or 'top'. Default is empty.
+    * @param {string} alertBoxType Alert box type. Accept value 'fixed' or 'float'. 
     * @returns {string} Return generated alert box HTML.
     */
-    static renderAlertHtml(alertClass, content, dismissable = true, fixed = '') {
+    static renderAlertHtml(alertClass, content, dismissable = true, position = '', alertBoxType = 'fixed') {
         let $ = jQuery.noConflict();
 
         content = this.renderAlertContent(content);
@@ -298,20 +357,26 @@ class RdbaCommon {
             dismissable = true;
         }
 
-        let classFixed;
-        if (fixed === 'bottom' || fixed === 'top') {
-            classFixed = ' fixed-' + fixed;
+        let classPosition;
+        if (alertBoxType === 'fixed') {
+            classPosition = ' fixed-';
+        } else if (alertBoxType === 'float') {
+            classPosition = ' float-';
+        }
+
+        if (position === 'bottom' || position === 'top') {
+            classPosition += position;
         } else {
-            classFixed = '';
+            classPosition = '';
         }
 
         if (dismissable === true) {
-            return '<div class="rd-alertbox ' + alertClass + classFixed + ' is-dismissable">'+
+            return '<div class="rd-alertbox ' + alertClass + classPosition + ' is-dismissable">'+
                 '<button class="close" type="button" aria-label="Close" onclick="return RundizTemplateAdmin.closeAlertbox(this);"><span aria-hidden="true">&times;</span></button>'+
                 content+
                 '</div>';
         } else {
-            return '<div class="rd-alertbox ' + alertClass + classFixed + '">'+
+            return '<div class="rd-alertbox ' + alertClass + classPosition + '">'+
                 content+
                 '</div>';
         }
