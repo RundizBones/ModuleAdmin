@@ -33,10 +33,10 @@ class RdbaCommon {
     /**
      * Display alert box fixed to web page.
      * 
-    * @param {string|object} message The alert content.
+     * @param {string|object} message The alert content.
      * @param {string} status The alert status. Example: 'success', 'error', 'info', 'warning', or can be alert class based on RDTA alert box class name such as 'alert-success', 'alert-danger', etc. Default is 'warning'.
-    * @param {bool} dismissable Make alert dismissable if it is `true`, if `false` then it is not. Default is `true`.
-    * @param {string} position Fixed position. Accept value 'bottom' or 'top'. Default is 'bottom'.
+     * @param {bool} dismissable Make alert dismissable if it is `true`, if `false` then it is not. Default is `true`.
+     * @param {string} position Fixed position. Accept value 'bottom' or 'top'. Default is 'bottom'.
      * @returns {undefined}
      */
     static displayAlertboxFixed(message, status = 'warning', dismissable = true, position = 'bottom') {
@@ -91,10 +91,11 @@ class RdbaCommon {
     /**
      * Display alert box float to web page.
      * 
-    * @param {string|object} message The alert content.
+     * @since 1.0.4
+     * @param {string|object} message The alert content.
      * @param {string} status The alert status. Example: 'success', 'error', 'info', 'warning', or can be alert class based on RDTA alert box class name such as 'alert-success', 'alert-danger', etc. Default is 'warning'.
-    * @param {bool} dismissable Make alert dismissable if it is `true`, if `false` then it is not. Default is `true`.
-    * @param {string} position Float position. Accept value 'bottom' or 'top'. Default is 'bottom'.
+     * @param {bool} dismissable Make alert dismissable if it is `true`, if `false` then it is not. Default is `true`.
+     * @param {string} position Float position. Accept value 'bottom' or 'top'. Default is 'bottom'.
      * @returns {undefined}
      */
     static displayAlertboxFloat(message, status = 'warning', dismissable = true, position = 'bottom') {
