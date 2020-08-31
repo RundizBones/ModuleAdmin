@@ -14,7 +14,7 @@ This should be run every time before start modify the theme files.
 
 ## Update packages.
 * Run the command `npm outdated` for listing outdated packages.
-* Run the command `npm update` to update packages.
+* Run the command `npm update` to update packages or `npm install [packagename]@latest` to install latest for major version.
 * Run the command `npm run build` to do following tasks.
  * Delete **assets** folders.<br>
  * Copy packages from **node_modules** to **assets** folders.<br>
