@@ -24,3 +24,11 @@ If you want to start development using RdbAdmin module, please read following. O
 
 ## Views
 * [Admin views](admin-views.md).
+
+---
+
+## Commands
+RundizBones Admin module contain many commands to run in command line interface (**CLI**) such as Command Prompt, PowerShell, Terminal.<br>
+Run `php rdb list` to see the list of all available commands. 
+The commands that are from this module will be prefix with `rdbadmin:` for example: `rdbadmin:cron`.<br>
+To see help for each command run `php rdb` and follow with that command and end with `--help`. Example: `php rdb rdbadmin:create-module --help`.
