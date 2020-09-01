@@ -1,0 +1,23 @@
+.gitattributes
+.git-ftp-ignore
+.gitignore
+*/.gitignore      # ignore files in sub directories
+*/.gitkeep
+
+.backup
+.backup/*
+.dev-notes
+.dev-notes/*
+.disabled
+.dist
+.dist/*
+gulpfile.js
+gulpfile.js/*
+node_modules
+node_modules/*
+Tests
+Tests/*
+package.json
+package-lock.json
+phpdoc.xml
+phpunit.xml
