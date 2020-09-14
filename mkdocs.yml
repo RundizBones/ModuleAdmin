@@ -5,7 +5,9 @@ nav:
     - Home: index.md
     - Document:
         - Getting started: getting-started.md
-        - Folder structure: module-folder-structure-for-rdbadmin.md
+        - Folder structure: 
+            - Module folder structure: module-folder-structure-for-rdbadmin.md
+            - Public folder structure: public-folder-structure-for-rdbadmin.md
         - Controllers:
             - Front-end controllers: frontend-controllers.md
             - Admin controllers: admin-controllers.md
