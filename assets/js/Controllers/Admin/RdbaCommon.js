@@ -385,6 +385,55 @@ class RdbaCommon {
 
 
     /**
+     * Remove unsafe URL characters but not URL encode.
+     * 
+     * @link https://www.w3.org/Addressing/URL/url-spec.html URL specific.
+     * @link https://help.marklogic.com/Knowledgebase/Article/View/251/0/using-url-encoding-to-handle-special-characters-in-a-document-uri Reference.
+     * @link https://perishablepress.com/stop-using-unsafe-characters-in-urls/ Reference.
+     * @link https://stackoverflow.com/questions/12317049/how-to-split-a-long-regular-expression-into-multiple-lines-in-javascript Multiple line regular expression reference.
+     * @param {string} name
+     * @param {bool} alphanumOnly
+     * @returns {string}
+     */
+    static removeUnsafeUrlCharacters(name, alphanumOnly = false) {
+        if (!_.isString(name)) {
+            // if not string, don't waste time.
+            return '';
+        }
+
+        if (!_.isBoolean(alphanumOnly)) {
+            alphanumOnly = false;
+        }
+
+        // replace multiple spaces, tabs, new lines.
+        // @link https://stackoverflow.com/questions/1981349/regex-to-replace-multiple-spaces-with-a-single-space Reference.
+        name = name.replace(/\s\s+/g, ' ');
+        // replace space to dash (-).
+        name = name.replace(/ /g, '-');
+
+        if (alphanumOnly === true) {
+            // if alpha-numeric only.
+            name = name.replace(/[^a-zA-Z0-9\-_\.]/g, '');
+            return name;
+        }
+
+        let pattern = [
+            '$@&+', // w3 - safe
+            '!*"\'(),', // w3 - extra
+            '=;/#?:', // w3 - reserved
+            '%', // w3 - escape
+            '{}[]\\^~', // w3 - national
+            '<>', // w3 - punctuation
+            '|', // other unsafe characters.
+        ].join('');
+        let regex = new RegExp('[' + _.escapeRegExp(pattern) + ']', 'g');
+
+        name = name.replace(regex, '');
+        return name;
+    }// removeUnsafeUrlCharacters
+
+
+    /**
      * Strip HTML tags.
      * 
      * @link https://stackoverflow.com/a/5002618/128761 Original source code.
