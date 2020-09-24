@@ -112,7 +112,7 @@ class ModuleAssets
                 ],
                 [
                     'handle' => 'sortableJS',
-                    'file' => $publicModuleUrl . '/assets/vendor/sortablejs/Sortable.min.js',
+                    'file' => $publicModuleUrl . '/assets/vendor/sortablejs/dist/sortable.umd.js',
                     'version' => '1.12.0',
                 ],
                 // datatables----------------.
