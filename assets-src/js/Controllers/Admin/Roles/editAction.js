@@ -36,7 +36,7 @@ class RdbaRolesEditController {
                 if (typeof(response.formResultMessage) !== 'undefined') {
                     let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
                     let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
-                    document.querySelector('.form-result-placeholder').innerHTML = alertBox;
+                    thisForm.querySelector('.form-result-placeholder').innerHTML = alertBox;
                 }
             }
 
