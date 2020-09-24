@@ -115,15 +115,15 @@ class RdbaXhrDialog {
                 // get parts of ajax contents.
                 let pageContent = (parsedDoc.querySelector(thisClass.xhrPageContentSelector) ? parsedDoc.querySelector(thisClass.xhrPageContentSelector).outerHTML : response);
                 let pageTitle = (parsedDoc.querySelector(thisClass.xhrPageContentHeaderSelector) ? parsedDoc.querySelector(thisClass.xhrPageContentHeaderSelector).innerHTML : '');
-                let pageCss = parsedDoc.querySelector(thisClass.xhrInjectCssSelector);
-                let pageJs = parsedDoc.querySelector(thisClass.xhrInjectJsSelector);
+                let pageCss = parsedDoc.querySelectorAll(thisClass.xhrInjectCssSelector);
+                let pageJs = parsedDoc.querySelectorAll(thisClass.xhrInjectJsSelector);
 
                 // use storage to store ajax contents and it can get with push/pop state later.
                 let storageObject = {
                     'pageUrl': targetLink,
                     'pageContent': pageContent,
-                    'pageCss': (pageCss ? pageCss.outerHTML : null),
-                    'pageJs': (pageJs ? pageJs.outerHTML : null),
+                    'pageCss': (pageCss ? pageCss : null),
+                    'pageJs': (pageJs ? pageJs : null),
                     'pageFullContent': response,
                     'pageTitle': pageTitle
                 };
@@ -182,38 +182,53 @@ class RdbaXhrDialog {
         let thisClass = this;
 
         if (pageJs && typeof(pageJs) === 'object') {
-            let injectJs = document.createElement('script');
-            injectJs.async = pageJs.async;
-            injectJs.classList = pageJs.classList;
-            injectJs.className = pageJs.className;
-            injectJs.id = pageJs.id;
-            injectJs.src = pageJs.src;
-            injectJs.type = pageJs.type;
+            let dispatchDialogEvent = false;
 
-            if (!document.querySelector('#' + pageJs.id)) {
-                // if this element is really not found.
-                // insert into page.
-                document.body.appendChild(injectJs);
-            } else {
+            pageJs.forEach(function(item, index) {
+                let jsItem = item;
+                let injectJs = document.createElement('script');
+                injectJs.async = jsItem.async;
+                injectJs.classList = jsItem.classList;
+                injectJs.className = jsItem.className;
+                injectJs.id = jsItem.id;
+                injectJs.src = jsItem.src;
+                injectJs.type = jsItem.type;
+
+                if (!document.querySelector('#' + jsItem.id)) {
+                    // if this element is really not found.
+                    // insert into page.
+                    document.body.appendChild(injectJs);
+                } else {
+                    console.log('js ' + jsItem.id + ' was already loaded.');
+                    dispatchDialogEvent = true;
+                }
+            });
+
+            if (dispatchDialogEvent === true) {
                 let event = new CustomEvent(thisClass.dialogInitEvent);
                 document.dispatchEvent(event);
             }
         }
 
         if (pageCss && typeof(pageCss) === 'object') {
-            let injectCss = document.createElement('link');
-            injectCss.classList = pageCss.classList;
-            injectCss.className = pageCss.className;
-            injectCss.id = pageCss.id;
-            injectCss.rel = pageCss.rel;
-            injectCss.type = pageCss.type;
-            injectCss.href = pageCss.href;
+            pageCss.forEach(function(item, index) {
+                let cssItem = item;
+                let injectCss = document.createElement('link');
+                injectCss.classList = cssItem.classList;
+                injectCss.className = cssItem.className;
+                injectCss.id = cssItem.id;
+                injectCss.rel = cssItem.rel;
+                injectCss.type = cssItem.type;
+                injectCss.href = cssItem.href;
 
-            if (!document.querySelector('#' + pageCss.id)) {
-                // if this element is really not found.
-                // insert into page.
-                document.head.appendChild(injectCss);
-            }
+                if (!document.querySelector('#' + cssItem.id)) {
+                    // if this element is really not found.
+                    // insert into page.
+                    document.head.appendChild(injectCss);
+                } else {
+                    console.log('css ' + cssItem.id + ' was already loaded.');
+                }
+            });
         }
     }// injectCssAndJs
 
@@ -326,8 +341,8 @@ class RdbaXhrDialog {
                         if (storageObject.pageFullContent) {
                             let parser = new DOMParser();
                             let parsedDoc = parser.parseFromString(storageObject.pageFullContent, 'text/html');
-                            let pageCss = parsedDoc.querySelector(thisClass.xhrInjectCssSelector);
-                            let pageJs = parsedDoc.querySelector(thisClass.xhrInjectJsSelector);
+                            let pageCss = parsedDoc.querySelectorAll(thisClass.xhrInjectCssSelector);
+                            let pageJs = parsedDoc.querySelectorAll(thisClass.xhrInjectJsSelector);
 
                             // get parts of ajax contents.
                             let pageContent = (parsedDoc.querySelector('.rdba-edit-form') ? parsedDoc.querySelector('.rdba-edit-form').outerHTML : '');
