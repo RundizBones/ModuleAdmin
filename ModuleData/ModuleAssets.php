@@ -56,7 +56,7 @@ class ModuleAssets
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/css/datatables-bundled.min.css',
-                    'version' => '1.10.21',
+                    'version' => '1.10.22',
                 ],
                 // end datatables----------.
                 [
@@ -103,7 +103,7 @@ class ModuleAssets
                 [
                     'handle' => 'moment.js',
                     'file' => $publicModuleUrl . '/assets/vendor/moment/moment-bundled.min.js',
-                    'version' => '2.27.0',
+                    'version' => '2.29.0',
                 ],
                 [
                     'handle' => 'lodash',
@@ -113,20 +113,20 @@ class ModuleAssets
                 [
                     'handle' => 'sortableJS',
                     'file' => $publicModuleUrl . '/assets/vendor/sortablejs/Sortable.min.js',
-                    'version' => '1.10.2',
+                    'version' => '1.12.0',
                 ],
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/js/datatables-bundled.min.js',
                     'dependency' => ['rdta'],
-                    'version' => '1.10.21',
+                    'version' => '1.10.22',
                 ],
                 [
                     'handle' => 'datatables-plugins-pagination',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/plugins/pagination/input.js',
                     'dependency' => ['rdta', 'datatables'],
-                    'version' => '1.10.21',
+                    'version' => '1.10.22',
                 ],
                 // end datatables----------.
                 [

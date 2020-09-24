@@ -5,7 +5,7 @@
  * The administrator module for RundizBones.
  * 
  * @package RdbAdmin
- * @version 1.0.4
+ * @version 1.0.5
  * @license http://opensource.org/licenses/MIT MIT
  */
 
