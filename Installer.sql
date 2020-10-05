@@ -3,9 +3,9 @@
  * 
  * Please follow these instruction strictly.
  * The table name in this file must wrap with %$...% and have no prefix. Example: `%$users%` will be converted to `prefix_users`.
- * No ENGINE=xxx in the SQL.
- * No COLLATE xxx in each table or column (except it is special such as `utf8_bin` for work with case sensitive).
- * Use only CHARSET=utf8 in the CREATE TABLE, nothing else, no utf8mb4 or anything. Just utf8.
+ * No `ENGINE=xxx` in the SQL.
+ * No `COLLATE xxx` in each table or column (except it is special such as `utf8_bin` for work with case sensitive).
+ * Use only `CHARSET=utf8` in the `CREATE TABLE`, nothing else, no `utf8mb4` or anything. Just `utf8`.
  *
  * DO NOT just paste the SQL data that exported from MySQL. Please modify by read the instruction above first.
  */
