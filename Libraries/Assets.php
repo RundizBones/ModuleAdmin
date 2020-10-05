@@ -721,7 +721,21 @@ class Assets
      */
     public function mergeAssetsData(string $type, array $assetsData1, array $assetsData2): array
     {
-        if (isset($assetsData1[$type]) && isset($assetsData2[$type]) && !empty($assetsData2[$type])) {
+        $type = $this->verifyType($type);
+
+        if (!array_key_exists($type, $assetsData1) && !array_key_exists($type, $assetsData2)) {
+            // if both don't have certain type.
+            return $assetsData1;
+        }
+
+        if (!array_key_exists($type, $assetsData1)) {
+            $assetsData1[$type] = [];
+        }
+        if (!array_key_exists($type, $assetsData2)) {
+            $assetsData2[$type] = [];
+        }
+
+        if (!empty($assetsData2[$type])) {
             array_push($assetsData1[$type], ...$assetsData2[$type]);
         }
 
