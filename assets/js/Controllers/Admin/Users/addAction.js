@@ -104,7 +104,7 @@ class RdbaUsersAddController {
 
                     // remove loading icon
                     thisForm.querySelector('.loading-icon').remove();
-                    // unlock login button
+                    // unlock submit button
                     thisForm.querySelector('.rdba-submit-button').removeAttribute('disabled');
                 });
             }
