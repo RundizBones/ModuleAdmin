@@ -199,7 +199,7 @@ class RdbaXhrDialog {
                     // insert into page.
                     document.body.appendChild(injectJs);
                 } else {
-                    console.log('js ' + jsItem.id + ' was already loaded.');
+                    console.log('js ' + jsItem.id + ' is already loaded.');
                     dispatchDialogEvent = true;
                 }
             });
