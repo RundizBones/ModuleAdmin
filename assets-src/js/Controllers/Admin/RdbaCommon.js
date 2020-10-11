@@ -387,13 +387,15 @@ class RdbaCommon {
     /**
      * Remove unsafe URL characters but not URL encode.
      * 
+     * This will not remove new line (if `alphanumOnly` is `false`).
+     * 
      * @link https://www.w3.org/Addressing/URL/url-spec.html URL specific.
      * @link https://help.marklogic.com/Knowledgebase/Article/View/251/0/using-url-encoding-to-handle-special-characters-in-a-document-uri Reference.
      * @link https://perishablepress.com/stop-using-unsafe-characters-in-urls/ Reference.
      * @link https://stackoverflow.com/questions/12317049/how-to-split-a-long-regular-expression-into-multiple-lines-in-javascript Multiple line regular expression reference.
-     * @param {string} name
-     * @param {bool} alphanumOnly
-     * @returns {string}
+     * @param {string} name The URL name.
+     * @param {bool} alphanumOnly Alpha-numeric only or not. Default is `false` (not).
+     * @returns {string} Return formatted URL name.
      */
     static removeUnsafeUrlCharacters(name, alphanumOnly = false) {
         if (!_.isString(name)) {
