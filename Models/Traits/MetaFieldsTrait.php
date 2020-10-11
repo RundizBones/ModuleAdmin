@@ -29,7 +29,7 @@ trait MetaFieldsTrait
 
     /**
      * @var bool Indicate that `getFields()` and `getFieldsNoCache()` methods contain values or not. The result will be `true` if no value or no data, but will be `false` if there is at least a value or data.
-	 * @since 1.0.1
+     * @since 1.0.1
      */
     protected $getFieldsNoData = false;
 
