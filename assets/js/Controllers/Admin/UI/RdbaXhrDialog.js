@@ -187,7 +187,9 @@ class RdbaXhrDialog {
             pageJs.forEach(function(item, index) {
                 let jsItem = item;
                 let injectJs = document.createElement('script');
-                injectJs.async = jsItem.async;
+                if (!jsItem.getAttribute('async') || jsItem.getAttribute('async') != 'false') {
+                    injectJs.async = jsItem.async;
+                }
                 injectJs.classList = jsItem.classList;
                 injectJs.className = jsItem.className;
                 injectJs.id = jsItem.id;
