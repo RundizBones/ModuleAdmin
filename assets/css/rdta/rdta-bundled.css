@@ -297,7 +297,7 @@ select:not([multiple]):not([size]) {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Font Awesome Free 5.14.0 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 .fa,
@@ -511,9 +511,6 @@ select:not([multiple]):not([size]) {
 }
 .fa-adn:before {
   content: "\f170"
-}
-.fa-adobe:before {
-  content: "\f778"
 }
 .fa-adversal:before {
   content: "\f36a"
@@ -1303,6 +1300,9 @@ select:not([multiple]):not([size]) {
 }
 .fa-cloud-upload-alt:before {
   content: "\f382"
+}
+.fa-cloudflare:before {
+  content: "\e07d"
 }
 .fa-cloudscale:before {
   content: "\f383"
@@ -2297,6 +2297,9 @@ select:not([multiple]):not([size]) {
 .fa-grunt:before {
   content: "\f3ad"
 }
+.fa-guilded:before {
+  content: "\e07e"
+}
 .fa-guitar:before {
   content: "\f7a6"
 }
@@ -2471,6 +2474,9 @@ select:not([multiple]):not([size]) {
 .fa-history:before {
   content: "\f1da"
 }
+.fa-hive:before {
+  content: "\e07f"
+}
 .fa-hockey-puck:before {
   content: "\f453"
 }
@@ -2600,11 +2606,17 @@ select:not([multiple]):not([size]) {
 .fa-info-circle:before {
   content: "\f05a"
 }
+.fa-innosoft:before {
+  content: "\e080"
+}
 .fa-instagram:before {
   content: "\f16d"
 }
 .fa-instagram-square:before {
   content: "\e055"
+}
+.fa-instalod:before {
+  content: "\e081"
 }
 .fa-intercom:before {
   content: "\f7af"
@@ -3125,6 +3137,9 @@ select:not([multiple]):not([size]) {
 .fa-object-ungroup:before {
   content: "\f248"
 }
+.fa-octopus-deploy:before {
+  content: "\e082"
+}
 .fa-odnoklassniki:before {
   content: "\f263"
 }
@@ -3262,6 +3277,9 @@ select:not([multiple]):not([size]) {
 }
 .fa-pepper-hot:before {
   content: "\f816"
+}
+.fa-perbyte:before {
+  content: "\e083"
 }
 .fa-percent:before {
   content: "\f295"
@@ -4433,6 +4451,9 @@ select:not([multiple]):not([size]) {
 .fa-umbrella-beach:before {
   content: "\f5ca"
 }
+.fa-uncharted:before {
+  content: "\e084"
+}
 .fa-underline:before {
   content: "\f0cd"
 }
@@ -4586,6 +4607,12 @@ select:not([multiple]):not([size]) {
 .fa-venus-mars:before {
   content: "\f228"
 }
+.fa-vest:before {
+  content: "\e085"
+}
+.fa-vest-patches:before {
+  content: "\e086"
+}
 .fa-viacoin:before {
   content: "\f237"
 }
@@ -4676,6 +4703,9 @@ select:not([multiple]):not([size]) {
 .fa-warehouse:before {
   content: "\f494"
 }
+.fa-watchman-monitoring:before {
+  content: "\e087"
+}
 .fa-water:before {
   content: "\f773"
 }
@@ -4750,6 +4780,9 @@ select:not([multiple]):not([size]) {
 }
 .fa-wizards-of-the-coast:before {
   content: "\f730"
+}
+.fa-wodu:before {
+  content: "\e088"
 }
 .fa-wolf-pack-battalion:before {
   content: "\f514"
@@ -5861,7 +5894,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Rundiz template for admin V.2.1.5
+ * Rundiz template for admin V.2.1.6
  */
 html.rd-template-admin {
   height: 100%

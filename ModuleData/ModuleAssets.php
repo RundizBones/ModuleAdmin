@@ -50,7 +50,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/css/rdta/rdta-bundled.min.css',
-                    'version' => '2.1.5',
+                    'version' => '2.1.6',
                 ],
                 // datatables----------------.
                 [
@@ -93,7 +93,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/js/rdta/rdta-bundled.min.js',
-                    'version' => '2.1.5',
+                    'version' => '2.1.6',
                 ],
                 [
                     'handle' => 'handlebars',
@@ -103,7 +103,7 @@ class ModuleAssets
                 [
                     'handle' => 'moment.js',
                     'file' => $publicModuleUrl . '/assets/vendor/moment/moment-bundled.min.js',
-                    'version' => '2.29.0',
+                    'version' => '2.29.1',
                 ],
                 [
                     'handle' => 'lodash',
