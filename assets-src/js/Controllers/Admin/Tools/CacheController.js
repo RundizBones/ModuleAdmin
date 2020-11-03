@@ -16,6 +16,7 @@ class RdbaCacheController {
             RdbaCommon.XHR({
                 'url': RdbaToolsCache.getCacheUrl,
                 'method': RdbaToolsCache.getCacheMethod,
+                'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'dataType': 'json'
             })
             .catch(function(responseObject) {

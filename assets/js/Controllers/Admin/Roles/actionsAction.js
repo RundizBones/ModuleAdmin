@@ -44,6 +44,7 @@ class RdbaUserRolesActionsController {
                 RdbaCommon.XHR({
                     'url': formUrl,
                     'method': formMethod,
+                    'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                     'data': new URLSearchParams(_.toArray(formData)).toString(),
                     'dataType': 'json'
                 })

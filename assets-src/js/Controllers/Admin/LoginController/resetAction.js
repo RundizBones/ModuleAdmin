@@ -32,6 +32,7 @@ class RdbaLoginResetController {
                 RdbaCommon.XHR({
                     'url': RdbaLoginReset.loginUrl,
                     'method': RdbaLoginReset.loginMethod,
+                    'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                     'data': formData,
                     'dataType': 'json'
                 })
@@ -121,6 +122,7 @@ class RdbaLoginResetController {
                 RdbaCommon.XHR({
                     'url': RdbaLoginReset.loginResetUrl,
                     'method': RdbaLoginReset.loginResetMethod,
+                    'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                     'data': formData,
                     'dataType': 'json'
                 })

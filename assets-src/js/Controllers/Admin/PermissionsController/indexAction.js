@@ -24,6 +24,7 @@ class RdbAdminPermissionsController {
         RdbaCommon.XHR({
             'url': RdbaPermissions.getPermissionsUrl + '?permissionFor=' + RdbaPermissions.permissionFor + '&permissionForUserId=' + RdbaPermissions.permissionForUserId + '&permissionModule=' + RdbaPermissions.permissionModule,
             'method': RdbaPermissions.getPermissionsMethod,
+            'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
             'dataType': 'json'
         })
         .catch(function(responseObject) {
@@ -176,6 +177,7 @@ class RdbAdminPermissionsController {
                 RdbaCommon.XHR({
                     'url': RdbaPermissions.editPermissionSubmitUrl,
                     'method': RdbaPermissions.editPermissionSubmitMethod,
+                    'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                     'data': new URLSearchParams(_.toArray(formData)).toString(),
                     'dataType': 'json'
                 })
@@ -267,6 +269,7 @@ class RdbAdminPermissionsController {
                     RdbaCommon.XHR({
                         'url': RdbaPermissions.clearPermissionsSubmitUrlBase + '/' + RdbaPermissions.permissionModule,
                         'method': RdbaPermissions.clearPermissionsSUbmitMethod,
+                        'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                         'data': new URLSearchParams(_.toArray(formData)).toString(),
                         'dataType': 'json'
                     })
@@ -389,6 +392,7 @@ class RdbAdminPermissionsController {
                 RdbaCommon.XHR({
                     'url': RdbaPermissions.getUsersUrl + '?search[value]=' + filterPermissionUsername.value,
                     'method': RdbaPermissions.getUsersMethod,
+                    'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                     'dataType': 'json'
                 })
                 .catch(function(responseObject) {

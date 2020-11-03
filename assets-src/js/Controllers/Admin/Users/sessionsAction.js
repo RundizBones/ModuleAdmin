@@ -56,6 +56,7 @@ class RdtaSessionsController extends RdbaDatatables {
             RdbaCommon.XHR({
                 'url': deleteUrl,
                 'method': RdbaUserSessions.deleteLoginsMethod,
+                'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'data': data
             })
             .catch(function(responseObject) {

@@ -32,6 +32,7 @@ class RdbaMfaController {
                 RdbaCommon.XHR({
                     'url': RdbaLoginMfa.loginMfaUrl,
                     'method': RdbaLoginMfa.loginMfaMethod,
+                    'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                     'data': formData,
                     'dataType': 'json'
                 })

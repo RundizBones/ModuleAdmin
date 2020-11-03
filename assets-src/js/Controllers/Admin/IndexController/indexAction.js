@@ -18,6 +18,7 @@ class RdbaIndexController {
             RdbaCommon.XHR({
                 'url': RdbaAdminIndex.getDashboardWidgetsUrl,
                 'method': RdbaAdminIndex.getDashboardWidgetsMethod,
+                'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'dataType': 'json',
             })
             .catch(function(responseObject) {
@@ -223,6 +224,7 @@ class RdbaIndexController {
                         RdbaCommon.XHR({
                             'url': RdbaAdminIndex.orderDashboardWidgetsUrl,
                             'method': RdbaAdminIndex.orderDashboardWidgetsMethod,
+                            'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                             'data': formData,
                             'dataType': 'json'
                         })

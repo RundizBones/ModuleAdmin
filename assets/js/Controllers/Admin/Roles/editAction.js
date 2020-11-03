@@ -111,6 +111,7 @@ class RdbaRolesEditController {
                 RdbaCommon.XHR({
                     'url': RdbaRoles.editRoleSubmitUrlBase + '/' + document.getElementById('userrole_id').value,
                     'method': RdbaRoles.editRoleMethod,
+                    'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                     'data': new URLSearchParams(_.toArray(formData)).toString(),
                     'dataType': 'json'
                 })

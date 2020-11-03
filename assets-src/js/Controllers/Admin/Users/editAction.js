@@ -318,7 +318,7 @@ class RdbaUsersEditController {
                     RdbaCommon.XHR({
                         'url': submitUrl,
                         'method': RdbaUsers.avatarUploadRESTMethod,
-                        //'contentType': 'multipart/form-data',
+                        //'contentType': 'multipart/form-data',// do not set `contentType` because it is already set in `formData`.
                         'data': formData,
                         'dataType': 'json',
                     })
