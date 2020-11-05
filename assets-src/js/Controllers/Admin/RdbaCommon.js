@@ -206,25 +206,29 @@ class RdbaCommon {
      * @link https://stackoverflow.com/a/14919494/128761 Original source code.
      * @param {int} bytes File size in bytes.
      * @param {bool} si SI unit. Set to `true` to return in xB unit, `false` to return in xiB unit.
+     * @param {int} dp
      * @returns {String} Return human readable file size.
      */
-    static humanFileSize(bytes, si) {
-        let thresh = si ? 1000 : 1024;
+    static humanFileSize(bytes, si = false, dp=1) {
+        const thresh = si ? 1000 : 1024;
+
         if (Math.abs(bytes) < thresh) {
             return bytes + ' B';
         }
 
-        let units = si
-                ? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-                : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+        const units = si 
+            ? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'] 
+            : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
         let u = -1;
+        const r = 10**dp;
 
         do {
             bytes /= thresh;
             ++u;
-        } while (Math.abs(bytes) >= thresh && u < units.length - 1);
+        } while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1);
 
-        return bytes.toFixed(1) + ' ' + units[u];
+
+        return bytes.toFixed(dp) + ' ' + units[u];
     }// humanReadableFileSize
 
 
