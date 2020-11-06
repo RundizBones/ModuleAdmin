@@ -204,9 +204,10 @@ class RdbaCommon {
      * 
      * @link https://physics.nist.gov/cuu/Units/binary.html SI unit.
      * @link https://stackoverflow.com/a/14919494/128761 Original source code.
-     * @param {int} bytes File size in bytes.
-     * @param {bool} si SI unit. Set to `true` to return in xB unit, `false` to return in xiB unit.
-     * @param {int} dp
+     * @param {int} bytes Number of bytes.
+     * @param {bool} si True to use metric (SI) units, aka powers of 1000. False to use 
+     *           binary (IEC), aka powers of 1024.
+     * @param {int} dp Number of decimal places to display.
      * @returns {String} Return human readable file size.
      */
     static humanFileSize(bytes, si = false, dp=1) {
