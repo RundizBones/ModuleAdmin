@@ -363,37 +363,40 @@ class RdbaUiXhrCommonDataController {
             // reset the list (ul).
             $('#rdba-languages-navbar-list').html('');
             // prepare template.
-            let source = document.getElementById('rdba-languages-navbar-item').innerHTML;
+            let navbarElement = document.getElementById('rdba-languages-navbar-item');
+            if (navbarElement) {
+                let source = document.getElementById('rdba-languages-navbar-item').innerHTML;
 
-            Handlebars.registerHelper('ifEquals', function (v1, v2, options) {
-                if (v1 === v2) {
-                    return options.fn(this);
-                }
-                return options.inverse(this);
-            });
+                Handlebars.registerHelper('ifEquals', function (v1, v2, options) {
+                    if (v1 === v2) {
+                        return options.fn(this);
+                    }
+                    return options.inverse(this);
+                });
 
-            let template = Handlebars.compile(source);
-            let htmlRendered = template(languages);
-            $('#rdba-languages-navbar-list').append(htmlRendered);
+                let template = Handlebars.compile(source);
+                let htmlRendered = template(languages);
+                $('#rdba-languages-navbar-list').append(htmlRendered);
 
-            // set data attribute to language list (ul).
-            // it must set both `.data()` and `.attr()`. See reference https://stackoverflow.com/a/26022907/128761
-            $('#rdba-languages-navbar-list')
-                .attr('data-defaultLanguage', languages.defaultLanguage)
-                .attr('data-currentLanguage', languages.currentLanguage)
-                .attr('data-languageDetectMethod', languages.languageDetectMethod)
-                .attr('data-languageUrlDefaultVisible', languages.languageUrlDefaultVisible)
-                .attr('data-setLanguageMethod', languages.setLanguage_method)
-                .attr('data-setLanguageUrl', languages.setLanguage_url)
-                .data('defaultLanguage', languages.defaultLanguage)
-                .data('currentLanguage', languages.currentLanguage)
-                .data('languageDetectMethod', languages.languageDetectMethod)
-                .data('languageUrlDefaultVisible', languages.languageUrlDefaultVisible)
-                .data('setLanguageMethod', languages.setLanguage_method)
-                .data('setLanguageUrl', languages.setLanguage_url);
+                // set data attribute to language list (ul).
+                // it must set both `.data()` and `.attr()`. See reference https://stackoverflow.com/a/26022907/128761
+                $('#rdba-languages-navbar-list')
+                    .attr('data-defaultLanguage', languages.defaultLanguage)
+                    .attr('data-currentLanguage', languages.currentLanguage)
+                    .attr('data-languageDetectMethod', languages.languageDetectMethod)
+                    .attr('data-languageUrlDefaultVisible', languages.languageUrlDefaultVisible)
+                    .attr('data-setLanguageMethod', languages.setLanguage_method)
+                    .attr('data-setLanguageUrl', languages.setLanguage_url)
+                    .data('defaultLanguage', languages.defaultLanguage)
+                    .data('currentLanguage', languages.currentLanguage)
+                    .data('languageDetectMethod', languages.languageDetectMethod)
+                    .data('languageUrlDefaultVisible', languages.languageUrlDefaultVisible)
+                    .data('setLanguageMethod', languages.setLanguage_method)
+                    .data('setLanguageUrl', languages.setLanguage_url);
 
-            $('.sm-rdta.navbar').smartmenus('refresh');
-            this.onChangeLanguage();
+                $('.sm-rdta.navbar').smartmenus('refresh');
+                this.onChangeLanguage();
+            }
         }
     }// setLanguages
 
@@ -547,7 +550,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         alertBox += RdbaCommon.renderAlertHtml(alertClass, item.message, false);
                     }
                 });
-                document.querySelector('.rdba-page-alert-placeholder').insertAdjacentHTML('beforeend', alertBox);
+                let pageAlertPlaceholder = document.querySelector('.rdba-page-alert-placeholder');
+                if (pageAlertPlaceholder) {
+                    pageAlertPlaceholder.insertAdjacentHTML('beforeend', alertBox);
+                }
             }
         }
     })// .always
