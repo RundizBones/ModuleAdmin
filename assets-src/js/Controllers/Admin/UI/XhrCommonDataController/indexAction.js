@@ -303,35 +303,38 @@ class RdbaUiXhrCommonDataController {
         // reset sidebar menu items
         $('.sm-rdta.rd-sidebar-item-list').html('');
         // prepare template.
-        let source = document.getElementById('rdba-sidebar-menu-items').innerHTML;
+        let sidebarElement = document.getElementById('rdba-sidebar-menu-items');
+        if (sidebarElement) {
+            let source = sidebarElement.innerHTML;
 
-        Handlebars.registerHelper('ifEquals', function (v1, v2, options) {
-            if (v1 === v2) {
-                return options.fn(this);
-            }
-            return options.inverse(this);
-        });
-
-        let template = Handlebars.compile(source);
-        let htmlRendered = template(urlsMenuItems);
-        $('.sm-rdta.rd-sidebar-item-list').append(htmlRendered);
-
-        // mark current menu item.
-        this.markCurrentMenuItem(urlsMenuItems.menuItems);
-        // recursive mark current item up to root.
-        this.recursiveSetCurrentUp();
-
-        // check sub menu must exists in main menu container otherwise remove it.
-        let allMenuContainer = document.querySelectorAll('.rd-sidebar-item-list [data-mainmenucontainer="true"]');
-        if (allMenuContainer && _.isObject(allMenuContainer)) {
-            allMenuContainer.forEach(function(item, index) {
-                let subMenu = item.querySelector('ul');
-                if (!subMenu) {
-                    // if this menu container (main menu item) has no sub menu.
-                    // remove this main manu item.
-                    item.remove();
+            Handlebars.registerHelper('ifEquals', function (v1, v2, options) {
+                if (v1 === v2) {
+                    return options.fn(this);
                 }
+                return options.inverse(this);
             });
+
+            let template = Handlebars.compile(source);
+            let htmlRendered = template(urlsMenuItems);
+            $('.sm-rdta.rd-sidebar-item-list').append(htmlRendered);
+
+            // mark current menu item.
+            this.markCurrentMenuItem(urlsMenuItems.menuItems);
+            // recursive mark current item up to root.
+            this.recursiveSetCurrentUp();
+
+            // check sub menu must exists in main menu container otherwise remove it.
+            let allMenuContainer = document.querySelectorAll('.rd-sidebar-item-list [data-mainmenucontainer="true"]');
+            if (allMenuContainer && _.isObject(allMenuContainer)) {
+                allMenuContainer.forEach(function(item, index) {
+                    let subMenu = item.querySelector('ul');
+                    if (!subMenu) {
+                        // if this menu container (main menu item) has no sub menu.
+                        // remove this main manu item.
+                        item.remove();
+                    }
+                });
+            }
         }
     }// renderMenuItems
 
