@@ -280,7 +280,12 @@ class RdbaXhrDialog {
         let thisClass = this;
 
         // on closed dialog.
-        document.querySelector(this.dialogIDSelector).addEventListener('rdta.dialog.closed', function handler(event) {
+        let dialogElement = document.querySelector(this.dialogIDSelector);
+        if (!dialogElement) {
+            return ;
+        }
+
+        dialogElement.addEventListener('rdta.dialog.closed', function handler(event) {
             let pageUrl = (RdbaCommon.isset(() => window.location.href) === true ? window.location.href.trim() : '');
 
             if (
