@@ -365,7 +365,7 @@ class RdbaUiXhrCommonDataController {
             // prepare template.
             let navbarElement = document.getElementById('rdba-languages-navbar-item');
             if (navbarElement) {
-                let source = document.getElementById('rdba-languages-navbar-item').innerHTML;
+                let source = navbarElement.innerHTML;
 
                 Handlebars.registerHelper('ifEquals', function (v1, v2, options) {
                     if (v1 === v2) {
@@ -459,23 +459,26 @@ class RdbaUiXhrCommonDataController {
 
         RdbaUIXhrCommonData.userData = userData;
 
-        let source = document.getElementById('rdba-user-navbar-items').innerHTML;
-        let template = Handlebars.compile(source);
-        let htmlRendered = template(userData);
+        let navbarElement = document.getElementById('rdba-user-navbar-items');
+        if (navbarElement) {
+            let source = navbarElement.innerHTML;
+            let template = Handlebars.compile(source);
+            let htmlRendered = template(userData);
 
-        $('#rdba-user-navbar ul').html(htmlRendered);
+            $('#rdba-user-navbar ul').html(htmlRendered);
 
-        if (userData.user_avatar) {
-            let avatarUrl;
-            if (userData.user_avatar.indexOf('//') !== -1) {
-                avatarUrl = userData.user_avatar;
-            } else {
-                avatarUrl = userData.UrlAppBased + '/' + userData.user_avatar;
+            if (userData.user_avatar) {
+                let avatarUrl;
+                if (userData.user_avatar.indexOf('//') !== -1) {
+                    avatarUrl = userData.user_avatar;
+                } else {
+                    avatarUrl = userData.UrlAppBased + '/' + userData.user_avatar;
+                }
+                $('#rdba-user-navbar .rdba-user-icon').replaceWith('<img class="display-picture rdba-user-profilepicture" src="' + avatarUrl + '" alt="">');
             }
-            $('#rdba-user-navbar .rdba-user-icon').replaceWith('<img class="display-picture rdba-user-profilepicture" src="' + avatarUrl + '" alt="">');
-        }
 
-        $('.sm-rdta.navbar').smartmenus('refresh');
+            $('.sm-rdta.navbar').smartmenus('refresh');
+        }
     }// setUserData
 
 
