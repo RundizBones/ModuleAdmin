@@ -2,3 +2,7 @@
  Main layout CSS
 */
 
+
+.rd-template-admin.rdba-empty-layout body {
+    padding-top: 0;
+}

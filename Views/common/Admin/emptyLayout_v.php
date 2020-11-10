@@ -8,6 +8,9 @@
 /* @var $Modules \Rdb\System\Modules */
 /* @var $Views \Rdb\System\Views */
 /* @var $Url \Rdb\System\Libraries\Url */
+if (isset($pageHtmlClasses) && stripos($pageHtmlClasses, 'rdba-empty-layout') === false) {
+    $pageHtmlClasses .= ' rdba-empty-layout';
+}
 ?>
 <?php include dirname(__DIR__) . '/htmlHead_v.php'; ?> 
         <?php
