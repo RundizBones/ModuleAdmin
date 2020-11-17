@@ -712,18 +712,18 @@ class RdbaUsersEditController {
 
 
 document.addEventListener('rdba.users.editing.newinit', function() {
-    // if document loaded.
-    // equivalent to jquery document ready.
+    // listen on new assets loaded.
+    // this will be working on js loaded via AJAX.
     // must use together with `document.addEventListener('DOMContentLoaded')`
-    // because this condition will be working on js loaded via ajax,
-    // but 'DOMContentLoaded' will be working on load the full page.
     RdbaUsersEditController.staticInit();
 });
 document.addEventListener('DOMContentLoaded', function() {
+    // equivalent to jQuery document ready.
+    // this will be working on normal page load (non AJAX).
     RdbaUsersEditController.staticInit();
 }, false);
 document.addEventListener('rdba.users.editing.reinit', function() {
-    // manual trigger initialize class.
+    // listen on re-open ajax dialog (assets is already loaded before).
     // this is required when... user click edit > save > close dialog > click edit other > now it won't load if there is no this listener.
     let rdbaUsersEditController = new RdbaUsersEditController();
     // ajax get form data.
