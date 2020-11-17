@@ -228,7 +228,7 @@ class RdbaXhrDialog {
                     // insert into page.
                     document.head.appendChild(injectCss);
                 } else {
-                    console.log('css ' + cssItem.id + ' was already loaded.');
+                    console.log('css ' + cssItem.id + ' is already loaded.');
                 }
             });
         }
