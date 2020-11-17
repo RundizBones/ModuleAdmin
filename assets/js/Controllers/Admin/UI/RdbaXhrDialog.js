@@ -11,6 +11,13 @@ class RdbaXhrDialog {
         this.dialogIDSelector = '#rdba-listingpage-dialog';
         // dialog initialized event name.
         this.dialogInitEvent = 'rdba.listingpage.editing.init';
+        // dialog new initialized event name (css, js is not already loaded).
+        this.dialogNewInitEvent = 'rdba.listingpage.editing.newinit';
+        // dialog re-initialized event name. (found that css, js is already loaded).
+        this.dialogReInitEvent = 'rdba.listingpage.editing.reinit';
+        // the legacy event property will be remove in v 2.0.
+        // @todo [rdb] Remove this property in v2.0.
+        this.dialogInitEvent = this.dialogReInitEvent;
         // form result placeholder selector. (for displaying alert box).
         this.formResultPlaceholderSelector = '.form-result-placeholder';
 
@@ -180,9 +187,11 @@ class RdbaXhrDialog {
      */
     injectCssAndJs(pageCss, pageJs) {
         let thisClass = this;
+        let promises = [];
+        let dispatchDialogReInit = false;
+        let dispatchDialogNewInit = false;
 
         if (pageJs && typeof(pageJs) === 'object') {
-            let dispatchDialogEvent = false;
 
             pageJs.forEach(function(item, index) {
                 let jsItem = item;
@@ -195,21 +204,27 @@ class RdbaXhrDialog {
                 injectJs.id = jsItem.id;
                 injectJs.src = jsItem.src;
                 injectJs.type = jsItem.type;
+                console.log('trying to load ' + injectJs.id + '.');
 
                 if (!document.querySelector('#' + jsItem.id)) {
                     // if this element is really not found.
+                    // add onload listener
+                    let promiseObj = new Promise(function(resolve) {
+                        injectJs.onload = function() {
+                            console.log('js ' + injectJs.id + ' was loaded.');
+                            dispatchDialogNewInit = true;
+                            return resolve(index);
+                        };
+                    });
+                    promises.push(promiseObj);
                     // insert into page.
                     document.body.appendChild(injectJs);
                 } else {
                     console.log('js ' + jsItem.id + ' is already loaded.');
-                    dispatchDialogEvent = true;
+                    dispatchDialogReInit = true;
+                    promises.push(index);
                 }
-            });
-
-            if (dispatchDialogEvent === true) {
-                let event = new CustomEvent(thisClass.dialogInitEvent);
-                document.dispatchEvent(event);
-            }
+            });// endforEach;
         }
 
         if (pageCss && typeof(pageCss) === 'object') {
@@ -222,16 +237,40 @@ class RdbaXhrDialog {
                 injectCss.rel = cssItem.rel;
                 injectCss.type = cssItem.type;
                 injectCss.href = cssItem.href;
+                console.log('trying to load ' + cssItem.id + '.');
 
                 if (!document.querySelector('#' + cssItem.id)) {
                     // if this element is really not found.
                     // insert into page.
+                    let promiseObj = new Promise(function(resolve) {
+                        injectCss.onload = function() {
+                            console.log('css ' + cssItem.id + ' was loaded.');
+                            dispatchDialogNewInit = true;
+                            return resolve(index);
+                        };
+                    });
+                    promises.push(promiseObj);
                     document.head.appendChild(injectCss);
                 } else {
                     console.log('css ' + cssItem.id + ' is already loaded.');
+                    dispatchDialogReInit = true;
+                    promises.push(index);
                 }
-            });
+            });// endforEach;
         }
+
+        Promise.all(promises)
+        .then(() => {
+            console.log('all css & js injection finished.', promises);
+            if (dispatchDialogReInit === true) {
+                let event = new CustomEvent(thisClass.dialogInitEvent);
+                document.dispatchEvent(event);
+            }
+            if (dispatchDialogNewInit === true) {
+                let event = new CustomEvent(thisClass.dialogNewInitEvent);
+                document.dispatchEvent(event);
+            }
+        });
     }// injectCssAndJs
 
 
