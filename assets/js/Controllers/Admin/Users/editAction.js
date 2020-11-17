@@ -235,6 +235,13 @@ class RdbaUsersEditController {
     listenAvatarUpload() {
         let thisClass = this;
         let editForm = document.querySelector('#rdba-edit-user-form');
+
+        if (!editForm) {
+            // if not in edit page.
+            // do not waste time on this.
+            return ;
+        }
+
         let dropzoneId = 'rdbadmin-select-avatar-dropzone';
         let inputAvatarId = 'user_fields_rdbadmin_uf_avatar';
         let inputAvatarElement = editForm.querySelector('#' + inputAvatarId);
@@ -704,14 +711,14 @@ class RdbaUsersEditController {
 }// RdbaUsersEditController
 
 
-if (document.readyState !== 'loading') {
+document.addEventListener('rdba.users.editing.newinit', function() {
     // if document loaded.
     // equivalent to jquery document ready.
     // must use together with `document.addEventListener('DOMContentLoaded')`
     // because this condition will be working on js loaded via ajax,
     // but 'DOMContentLoaded' will be working on load the full page.
     RdbaUsersEditController.staticInit();
-}
+});
 document.addEventListener('DOMContentLoaded', function() {
     RdbaUsersEditController.staticInit();
 }, false);

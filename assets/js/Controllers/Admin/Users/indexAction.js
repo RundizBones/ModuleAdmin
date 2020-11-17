@@ -296,6 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let rdbaUsersController = new RdbaUsersController();
     let rdbaXhrDialog = new RdbaXhrDialog({
         'dialogIDSelector': '#rdba-users-dialog',
+        'dialogNewInitEvent': 'rdba.users.editing.newinit',
         'dialogReInitEvent': 'rdba.users.editing.reinit',
         'xhrLinksSelector': '.rdba-listpage-addnew, .rdba-listpage-edit, .url-edit-your-account'
     });

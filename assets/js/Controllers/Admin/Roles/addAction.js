@@ -128,14 +128,14 @@ class RdbaRolesAddController {
 }// RdbaRolesAddController
 
 
-if (document.readyState !== 'loading') {
+document.addEventListener('rdba.roles.editing.newinit', function() {
     // if document loaded.
     // equivalent to jquery document ready.
     // must use together with `document.addEventListener('DOMContentLoaded')`
     // because this condition will be working on js loaded via ajax,
     // but 'DOMContentLoaded' will be working on load the full page.
     RdbaRolesAddController.staticInit();
-}
+});
 document.addEventListener('DOMContentLoaded', function() {
     RdbaRolesAddController.staticInit();
 }, false);

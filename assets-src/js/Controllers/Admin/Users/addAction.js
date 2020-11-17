@@ -183,14 +183,14 @@ class RdbaUsersAddController {
 }// RdbaUsersAddController
 
 
-if (document.readyState !== 'loading') {
+document.addEventListener('rdba.users.editing.newinit', function() {
     // if document loaded.
     // equivalent to jquery document ready.
     // must use together with `document.addEventListener('DOMContentLoaded')`
     // because this condition will be working on js loaded via ajax,
     // but 'DOMContentLoaded' will be working on load the full page.
     RdbaUsersAddController.staticInit();
-}
+});
 document.addEventListener('DOMContentLoaded', function() {
     RdbaUsersAddController.staticInit();
 }, false);
