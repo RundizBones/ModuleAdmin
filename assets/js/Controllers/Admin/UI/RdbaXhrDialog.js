@@ -175,6 +175,9 @@ class RdbaXhrDialog {
     /**
      * Insert CSS, JS into main page.
      * 
+     * @link https://stackoverflow.com/q/40808425/128761 Dynamically load JS file from JS.
+     * @link https://stackoverflow.com/q/38362231/128761 Promise in `forEach`.
+     * @link https://stackoverflow.com/q/22519784/128761 Onload with promise.
      * @private This method was called from `ajaxOpenLinkInDialog()`, `listenPopStateControlsDialog()` methods.
      * @param {object} pageCss The object that have got from `document.querySelector()`.
      * @param {object} pageJs The object that have got from `document.querySelector()`.
