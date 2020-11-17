@@ -13,9 +13,6 @@ class RdbaXhrDialog {
         this.dialogNewInitEvent = 'rdba.listingpage.editing.newinit';
         // dialog re-initialized event name. (found that css, js is already loaded).
         this.dialogReInitEvent = 'rdba.listingpage.editing.reinit';
-        // the legacy event property will be remove in v 2.0.
-        // @todo [rdb] Remove this property in v2.0.
-        this.dialogInitEvent = this.dialogReInitEvent;
         // form result placeholder selector. (for displaying alert box).
         this.formResultPlaceholderSelector = '.form-result-placeholder';
 
@@ -261,12 +258,20 @@ class RdbaXhrDialog {
         .then(() => {
             console.log('all css & js injection finished.', promises);
             if (dispatchDialogReInit === true) {
-                let event = new CustomEvent(thisClass.dialogInitEvent);
+                if (typeof(thisClass.dialogInitEvent) !== 'undefined') {
+                    // the legacy event property will be remove in v 2.0.
+                    // @todo [rdb] Remove this property in v2.0.
+                    this.dialogReInitEvent = this.dialogInitEvent;
+                    console.warn('The `dialogInitEvent` property will be remove in v2.0, please update your code by rename to `dialogReInitEvent`.');
+                }
+                let event = new CustomEvent(thisClass.dialogReInitEvent);
                 document.dispatchEvent(event);
+                console.log('fired event ' + thisClass.dialogReInitEvent + '.');
             }
             if (dispatchDialogNewInit === true) {
                 let event = new CustomEvent(thisClass.dialogNewInitEvent);
                 document.dispatchEvent(event);
+                console.log('fired event ' + thisClass.dialogNewInitEvent + '.');
             }
         });
     }// injectCssAndJs
