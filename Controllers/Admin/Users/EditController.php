@@ -339,6 +339,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                                     unset($sendResult['responseStatus']);
                                 }
                                 if (!isset($sendResult['success']) || $sendResult['success'] !== true) {
+                                    // if failed to send confirmation emails to myself.
                                     $output = array_merge($output, $sendResult);
                                     $stopSendEmail = true;
                                     $formValidated = false;
@@ -369,6 +370,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                                 unset($sendResult['responseStatus']);
                             }
                             if (!isset($sendResult['success']) || $sendResult['success'] !== true) {
+                                // if failed to send email but email was changed in db.
                                 $output = array_merge($output, $sendResult);
                                 $formValidated = true;
                             }
@@ -380,7 +382,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                                 $dataFields = array_merge($dataFields, $emailHistory);
                                 unset($emailHistory);
                             }
-                        }
+                        }// endif; notify email changed.
 
                         unset($newEmail, $notifyEmailChanged, $stopSendEmail);
                     }// endif email change from user.
@@ -396,7 +398,12 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
             if (isset($formValidated) && $formValidated === true) {
                 // if form validation passed.
                 // update user to DB. ----------------------------------------------------------
-                $output['updateUsers'] = $UsersDb->update($data, ['user_id' => (int) $user_id]);
+                try {
+                    $output['updateUsers'] = $UsersDb->update($data, ['user_id' => (int) $user_id]);
+                } catch (\Exception $ex) {
+                    $output['errorMessage'] = $ex->getMessage() . '<br>' . PHP_EOL . $ex->getTraceAsString();
+                    $output['updateUsers'] = false;
+                }
 
                 if ($output['updateUsers'] === true) {
                     // if update user in users table was success.
@@ -432,8 +439,8 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                 if (isset($successUpdate) && $successUpdate === true) {
                     // if success.
                     if (
-                            !isset($output['formResultMessage']) ||
-                            (isset($output['formResultMessage']) && empty($output['formResultMessage']))
+                        !isset($output['formResultMessage']) ||
+                        (isset($output['formResultMessage']) && empty($output['formResultMessage']))
                     ) {
                         // if success but no success message.
                         // just display success message.
@@ -451,6 +458,13 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                             $_SESSION['formResult'] = json_encode([($output['formResultStatus'] ?? 'success') => $output['formResultMessage']]);
                             unset($output['formResultMessage'], $output['formResultStatus']);
                         }
+                    }
+                } else {
+                    // if not success.
+                    if (isset($output['errorMessage'])) {
+                        $output['formResultStatus'] = 'error';
+                        $output['formResultMessage'] = $output['errorMessage'];
+                        http_response_code(500);
                     }
                 }
             }// endif; last formvalidation passed.
