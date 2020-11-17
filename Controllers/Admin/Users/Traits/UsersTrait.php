@@ -171,7 +171,7 @@ trait UsersTrait
                     $options['where'] = [
                         'user_login' => $data['user_login'],
                         'users.user_id' => '!= ' . $user_id,
-                        'users.user_deleted' => '*',
+                        'user_deleted' => '*',
                     ];
                     $userData = $UsersDb->listItems($options);
                     unset($options);
@@ -187,6 +187,7 @@ trait UsersTrait
                     $options['where'] = [
                         'user_email' => $data['user_email'],
                         'users.user_id' => '!= ' . $user_id,
+                        'user_deleted' => '*',
                     ];
                     $userData = $UsersDb->listItems($options);
                     unset($options);
