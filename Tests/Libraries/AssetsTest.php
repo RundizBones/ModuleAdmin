@@ -550,10 +550,10 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
 
         $addedAssets = $this->Assets->getAddedAssets();
         $generated = str_replace(["\r\n", "\r", "\n"], '', $this->Assets->generateInlineScript($addedAssets['js']['jquery']));
-        $this->assertEquals('<script id="jquery-inlineScriptAfter" type="text/javascript">function thisIsjustTest() {}</script>', $generated);
+        $this->assertEquals('<script id="jquery-inlineScriptAfter" type="application/javascript">function thisIsjustTest() {}</script>', $generated);
 
         $generated = str_replace(["\r\n", "\r", "\n"], '', $this->Assets->generateInlineScript($addedAssets['js']['jquery'], 'before'));
-        $this->assertEquals('<script id="jquery-inlineScriptBefore" type="text/javascript">function thisIsjustTestJsInlineBefore() {}</script>', $generated);
+        $this->assertEquals('<script id="jquery-inlineScriptBefore" type="application/javascript">function thisIsjustTestJsInlineBefore() {}</script>', $generated);
 
         unset($Url);
     }// testGenerateInlineScript
@@ -583,7 +583,7 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
 
         $addedAssets = $this->Assets->getAddedAssets();
         $generated = str_replace(["\r\n", "\r", "\n"], '', $this->Assets->generateJsObject($addedAssets['js']['jquery']));
-        $this->assertEquals('<script id="jquery-jsObject" type="text/javascript">/* <![CDATA[ */var myJqueryObject = {"name":"TestJQueryObj","version":"3.x.x"};/* ]]> */</script>', $generated);
+        $this->assertEquals('<script id="jquery-jsObject" type="application/javascript">/* <![CDATA[ */var myJqueryObject = {"name":"TestJQueryObj","version":"3.x.x"};/* ]]> */</script>', $generated);
 
         unset($Url);
     }// testGenerateJsObject
@@ -745,24 +745,24 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
         $this->Assets->addJsObject('jquery', 'myJqueryObject', ['name' => 'TestJQueryObj', 'version' => '3.x.x']);
         $renderResult = $this->Assets->renderAssets('js', 'theJsGroup');
         $renderResult = str_replace(["\r\n", "\r", "\n", '  ', '   ', '    '], '', $renderResult);
-        $assert = '<script id="jquery-jsObject" type="text/javascript">
+        $assert = '<script id="jquery-jsObject" type="application/javascript">
         /* <![CDATA[ */
         var myJqueryObject = {"name":"TestJQueryObj","version":"3.x.x"};
         /* ]]> */
         </script>
-        <script id="jquery-inlineScriptBefore" type="text/javascript">
+        <script id="jquery-inlineScriptBefore" type="application/javascript">
         function thisIsjustTestJsInlineBefore() {}
         </script>
-        <script id="jquery-js" type="text/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/jquery.js?v=3.x.x"></script>
-        <script id="jquery-inlineScriptAfter" type="text/javascript">
+        <script id="jquery-js" type="application/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/jquery.js?v=3.x.x"></script>
+        <script id="jquery-inlineScriptAfter" type="application/javascript">
         function thisIsjustTest() {}
         </script>
-        <script id="bootstrap-js" type="text/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/bootstrap.js?v=4.x.x"></script>';
+        <script id="bootstrap-js" type="application/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/bootstrap.js?v=4.x.x"></script>';
         $assert = str_replace(["\r\n", "\r", "\n", '  ', '   ', '    '], '', $assert);
         $this->assertEquals($assert, $renderResult);
 
-        $assert = '<script id="notexists-js" type="text/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/notexists.js?v=1.2"></script>
-        <script id="notexists2-js" type="text/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/notexists2.js?v=1.2"></script>';
+        $assert = '<script id="notexists-js" type="application/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/notexists.js?v=1.2"></script>
+        <script id="notexists2-js" type="application/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/notexists2.js?v=1.2"></script>';
         $assert = str_replace(["\r\n", "\r", "\n", '  ', '   ', '    '], '', $assert);
         $renderResult = $this->Assets->renderAssets('js', 'group1');
         $renderResult = str_replace(["\r\n", "\r", "\n", '  ', '   ', '    '], '', $renderResult);
