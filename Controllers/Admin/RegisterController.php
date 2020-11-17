@@ -636,13 +636,13 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                 // verify username, email must not exists.
                 $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 
-                if (!empty($UsersDb->get(['user_login' => $data['user_login']]))) {
+                if (!empty($UsersDb->get(['user_login' => $data['user_login'], 'user_deleted' => '*']))) {
                     $output['formResultStatus'] = 'error';
                     $errors['user_login']['message'] = __('This username is already in use.');
                     $errors['user_login']['fieldsValidation'] = 'invalid';
                 }
 
-                if (!empty($UsersDb->get(['user_email' => $data['user_email']]))) {
+                if (!empty($UsersDb->get(['user_email' => $data['user_email'], 'user_deleted' => '*']))) {
                     $output['formResultStatus'] = 'error';
                     $errors['user_email']['message'] = __('This email is already in use.');
                     $errors['user_email']['fieldsValidation'] = 'invalid';

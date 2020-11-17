@@ -161,7 +161,13 @@ class AddController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
                 unset($RdbaString);
 
                 // insert user to DB. ----------------------------------------------------------
-                $userId = $UsersDb->add($data);
+                try {
+                    $userId = $UsersDb->add($data);
+                } catch (\Exception $ex) {
+                    $output['errorMessage'] = $ex->getMessage() . '<br>' . PHP_EOL . $ex->getTraceAsString();
+                    $userId = false;
+                }
+
                 if ($userId !== false && $userId > '0') {
                     // if success add user to DB.
                     $successRegister = true;
@@ -226,6 +232,13 @@ class AddController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
                         // if there is success message now.
                         $_SESSION['formResult'] = json_encode([($output['formResultStatus'] ?? 'success') => $output['formResultMessage']]);
                         unset($output['formResultMessage'], $output['formResultStatus']);
+                    }
+                } else {
+                    // if not success.
+                    if (isset($output['errorMessage'])) {
+                        $output['formResultStatus'] = 'error';
+                        $output['formResultMessage'] = $output['errorMessage'];
+                        http_response_code(500);
                     }
                 }// endif;
             }// endif; last formvalidation passed.

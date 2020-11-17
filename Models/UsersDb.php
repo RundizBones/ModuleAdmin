@@ -265,6 +265,9 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
     {
         if (!isset($where['user_deleted'])) {
             $where['user_deleted'] = 0;
+        } elseif ($where['user_deleted'] === '*') {
+            // if user_deleted condition is **any**.
+            unset($where['user_deleted']);
         }
 
         $sql = 'SELECT * FROM `' . $this->Db->tableName('users') . '` WHERE 1';
@@ -363,8 +366,13 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
             } elseif (isset($options['limit']) && $options['limit'] > 100) {
                 $options['limit'] = 100;
             }
-            if (!isset($options['where']['user_deleted']) || !is_numeric($options['where']['user_deleted'])) {
+            if (
+                !isset($options['where']['user_deleted']) || 
+                (!is_numeric($options['where']['user_deleted']) && $options['where']['user_deleted'] !== '*')
+            ) {
                 $options['where']['user_deleted'] = 0;
+            } elseif ($options['where']['user_deleted'] === '*') {
+                unset($options['where']['user_deleted']);
             }
         }
 

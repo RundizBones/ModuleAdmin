@@ -154,12 +154,13 @@ trait UsersTrait
 
             if ($saveType === 'insert') {
                 // if check for insert.
-                if (isset($data['user_login']) && !empty($UsersDb->get(['user_login' => $data['user_login']]))) {
+
+                if (isset($data['user_login']) && !empty($UsersDb->get(['user_login' => $data['user_login'], 'user_deleted' => '*']))) {
                     $errors['user_login']['message'] = __('This username is already in use.');
                     $errors['user_login']['fieldsValidation'] = 'invalid';
                 }
 
-                if (isset($data['user_email']) && !empty($UsersDb->get(['user_email' => $data['user_email']]))) {
+                if (isset($data['user_email']) && !empty($UsersDb->get(['user_email' => $data['user_email'], 'user_deleted' => '*']))) {
                     $errors['user_email']['message'] = __('This email is already in use.');
                     $errors['user_email']['fieldsValidation'] = 'invalid';
                 }
@@ -170,6 +171,7 @@ trait UsersTrait
                     $options['where'] = [
                         'user_login' => $data['user_login'],
                         'users.user_id' => '!= ' . $user_id,
+                        'users.user_deleted' => '*',
                     ];
                     $userData = $UsersDb->listItems($options);
                     unset($options);
