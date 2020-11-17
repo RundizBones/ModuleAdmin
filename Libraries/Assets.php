@@ -583,7 +583,7 @@ class Assets
             if (isset($item['handle'])) {
                 $output .= ' id="' . $item['handle'] . '-inlineScript' . ucfirst($position) . '"';
             }
-            $output .= ' type="text/javascript">'."\n";
+            $output .= ' type="application/javascript">'."\n";
             $output .= $item['inline'][$position]."\n";
             $output .= '</script>'."\n";
         }
@@ -638,7 +638,7 @@ class Assets
             if (isset($item['handle'])) {
                 $output .= ' id="' . $item['handle'] . '-jsObject"';
             }
-            $output .= ' type="text/javascript">'."\n";
+            $output .= ' type="application/javascript">'."\n";
             $output .= '/* <![CDATA[ */'."\n";
             $output .= 'var ' . $jsObjectName . ' = ';
             $output .= json_encode($jsObjects);
@@ -803,7 +803,7 @@ class Assets
         $output .= '<script id="' . $handle . '-js"';
 
         if (isset($item['attributes']) && is_array($item['attributes']) && !array_key_exists('type', $item['attributes'])) {
-            $output .= ' type="text/javascript"';
+            $output .= ' type="application/javascript"';
         }
 
         $output .= ' src="';
