@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let rdbaRolesController = new RdbaRolesController();
     let rdbaXhrDialog = new RdbaXhrDialog({
         'dialogIDSelector': '#rdba-roles-dialog',
-        'dialogInitEvent': 'rdba.roles.editing.init',
+        'dialogReInitEvent': 'rdba.roles.editing.reinit',
         'xhrLinksSelector': '.rdba-listpage-addnew, .rdba-listpage-edit'
     });
     rdbaRolesController.setRdbaXhrDialogObject(rdbaXhrDialog);

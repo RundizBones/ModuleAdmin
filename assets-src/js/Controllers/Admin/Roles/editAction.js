@@ -214,7 +214,7 @@ if (document.readyState !== 'loading') {
 document.addEventListener('DOMContentLoaded', function() {
     RdbaRolesEditController.staticInit();
 }, false);
-document.addEventListener('rdba.roles.editing.init', function() {
+document.addEventListener('rdba.roles.editing.reinit', function() {
     // manual trigger initialize class.
     // this is required when... user click edit > save > close dialog > click edit other > now it won't load if there is no this listener.
     let rdbaRolesEditController = new RdbaRolesEditController();
