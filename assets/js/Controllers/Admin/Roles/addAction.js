@@ -12,6 +12,12 @@ class RdbaRolesAddController {
      * @returns {undefined}
      */
     listenFormSubmit() {
+        if (!document.querySelector('#rdba-add-role-form')) {
+            // if not found target element for the form listening.
+            // do nothing
+            return ;
+        }
+
         let $ = jQuery.noConflict();
 
         document.addEventListener('submit', function(event) {

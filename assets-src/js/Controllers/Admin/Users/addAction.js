@@ -12,6 +12,12 @@ class RdbaUsersAddController {
      * @returns {undefined}
      */
     listenFormSubmit() {
+        if (!document.querySelector('#rdba-add-user-form')) {
+            // if not found target element for the form listening.
+            // do nothing
+            return ;
+        }
+
         let $ = jQuery.noConflict();
 
         document.addEventListener('submit', function(event) {

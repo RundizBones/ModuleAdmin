@@ -504,6 +504,12 @@ class RdbaUsersEditController {
      * @returns {undefined}
      */
     listenFormSubmit() {
+        if (!document.querySelector('#rdba-edit-user-form')) {
+            // if not found target element for the form listening.
+            // do nothing
+            return ;
+        }
+
         document.addEventListener('submit', function(event) {
             if (event.target && event.target.id === 'rdba-edit-user-form') {
                 event.preventDefault();
@@ -548,6 +554,20 @@ class RdbaUsersEditController {
                         if (typeof(response.csrfName) !== 'undefined' && typeof(response.csrfValue) !== 'undefined') {
                             thisForm.querySelector('#rdba-form-csrf-name').value = response.csrfKeyPair[response.csrfName];
                             thisForm.querySelector('#rdba-form-csrf-value').value = response.csrfKeyPair[response.csrfValue];
+                        }
+                    }
+
+                    if (response.redirectBack) {
+                        // if contains redirectBack data.
+                        // user may change email and it was success but failed to send notification email, the error 500 will response and come to this condition.
+                        if (RdbaUsers && RdbaUsers.isInDataTablesPage && RdbaUsers.isInDataTablesPage === true) {
+                            // this is opening in dialog, close the dialog and reload page.
+                            document.querySelector('#rdba-users-dialog [data-dismiss="dialog"]').click();
+                            //window.location.reload();// use datatables reload instead.
+                            jQuery('#usersTable').DataTable().ajax.reload(null, false);
+                        } else {
+                            // this is in its page, redirect to the redirect back url.
+                            window.location.href = response.redirectBack;
                         }
                     }
 

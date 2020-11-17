@@ -93,6 +93,12 @@ class RdbaRolesEditController {
      * @returns {undefined}
      */
     listenFormSubmit() {
+        if (!document.querySelector('#rdba-edit-role-form')) {
+            // if not found target element for the form listening.
+            // do nothing
+            return ;
+        }
+
         document.addEventListener('submit', function(event) {
             if (event.target && event.target.id === 'rdba-edit-role-form') {
                 event.preventDefault();
