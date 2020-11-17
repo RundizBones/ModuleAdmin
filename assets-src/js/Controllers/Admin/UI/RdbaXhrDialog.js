@@ -9,8 +9,6 @@ class RdbaXhrDialog {
     constructor(options) {
         // dialog element ID selector.
         this.dialogIDSelector = '#rdba-listingpage-dialog';
-        // dialog initialized event name.
-        this.dialogInitEvent = 'rdba.listingpage.editing.init';
         // dialog new initialized event name (css, js is not already loaded).
         this.dialogNewInitEvent = 'rdba.listingpage.editing.newinit';
         // dialog re-initialized event name. (found that css, js is already loaded).
