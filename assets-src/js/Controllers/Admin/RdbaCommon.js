@@ -538,6 +538,11 @@ class RdbaCommon {
                 options.responseTargetType = 'response';
                 options.responseType = 'blob';
                 break;
+            case 'script':
+                // @link https://stackoverflow.com/questions/23370892/type-text-ecmascript-vs-type-text-javascript xxxx/ecmascript reference.
+                options.accept = 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript';
+                options.responseTargetType = 'responseText';
+                break;
             case 'text':
             case 'plain':
             default:
