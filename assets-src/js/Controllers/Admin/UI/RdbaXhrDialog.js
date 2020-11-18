@@ -267,12 +267,28 @@ class RdbaXhrDialog {
                     this.dialogReInitEvent = this.dialogInitEvent;
                     console.warn('The `dialogInitEvent` property will be remove in v2.0, please update your code by rename to `dialogReInitEvent`.');
                 }
-                let event = new CustomEvent(thisClass.dialogReInitEvent);
+                let event = new CustomEvent(
+                    thisClass.dialogReInitEvent, 
+                    {
+                        'detail': {
+                        	'rdbaUrl': document.URL,
+                            'rdbaUrlNoDomain': window.location.href.replace(window.location.origin, ''),
+                        }
+                    }
+                );
                 document.dispatchEvent(event);
                 console.log('fired event ' + thisClass.dialogReInitEvent + '.');
             }
             if (dispatchDialogNewInit === true) {
-                let event = new CustomEvent(thisClass.dialogNewInitEvent);
+                let event = new CustomEvent(
+                    thisClass.dialogNewInitEvent, 
+                    {
+                        'detail': {
+                            'rdbaUrl': document.URL,
+                            'rdbaUrlNoDomain': window.location.href.replace(window.location.origin, ''),
+                        }
+                    }
+                );
                 document.dispatchEvent(event);
                 console.log('fired event ' + thisClass.dialogNewInitEvent + '.');
             }
