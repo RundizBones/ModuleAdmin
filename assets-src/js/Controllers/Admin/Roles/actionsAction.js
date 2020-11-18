@@ -134,11 +134,17 @@ class RdbaUserRolesActionsController {
 }// RdbaUserRolesActionsController
 
 
-document.addEventListener('rdba.roles.editing.newinit', function() {
+document.addEventListener('rdba.roles.editing.newinit', function(event) {
     // listen on new assets loaded.
     // this will be working on js loaded via AJAX.
     // must use together with `document.addEventListener('DOMContentLoaded')`
-    RdbaUserRolesActionsController.staticInit();
+    if (
+        RdbaCommon.isset(() => event.detail.rdbaUrlNoDomain) && 
+        event.detail.rdbaUrlNoDomain.includes('/actions') !== false
+    ) {
+        RdbaUserRolesActionsController.staticInit();
+        
+    }
 });
 document.addEventListener('DOMContentLoaded', function() {
     // equivalent to jQuery document ready.

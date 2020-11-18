@@ -93,12 +93,6 @@ class RdbaRolesEditController {
      * @returns {undefined}
      */
     listenFormSubmit() {
-        if (!document.querySelector('#rdba-edit-role-form')) {
-            // if not found target element for the form listening.
-            // do nothing
-            return ;
-        }
-
         document.addEventListener('submit', function(event) {
             if (event.target && event.target.id === 'rdba-edit-role-form') {
                 event.preventDefault();
@@ -209,21 +203,31 @@ class RdbaRolesEditController {
 }// RdbaRolesEditController
 
 
-document.addEventListener('rdba.roles.editing.newinit', function() {
+document.addEventListener('rdba.roles.editing.newinit', function(event) {
     // listen on new assets loaded.
     // this will be working on js loaded via AJAX.
     // must use together with `document.addEventListener('DOMContentLoaded')`
-    RdbaRolesEditController.staticInit();
+    if (
+        RdbaCommon.isset(() => event.detail.rdbaUrlNoDomain) && 
+        event.detail.rdbaUrlNoDomain.includes('/edit') !== false
+    ) {
+        RdbaRolesEditController.staticInit();
+    }
 });
 document.addEventListener('DOMContentLoaded', function() {
     // equivalent to jQuery document ready.
     // this will be working on normal page load (non AJAX).
     RdbaRolesEditController.staticInit();
 }, false);
-document.addEventListener('rdba.roles.editing.reinit', function() {
+document.addEventListener('rdba.roles.editing.reinit', function(event) {
     // listen on re-open ajax dialog (assets is already loaded before).
     // this is required when... user click edit > save > close dialog > click edit other > now it won't load if there is no this listener.
-    let rdbaRolesEditController = new RdbaRolesEditController();
-    // ajax get form data.
-    rdbaRolesEditController.ajaxGetFormData();
+    if (
+        RdbaCommon.isset(() => event.detail.rdbaUrlNoDomain) && 
+        event.detail.rdbaUrlNoDomain.includes('/edit') !== false
+    ) {
+        let rdbaRolesEditController = new RdbaRolesEditController();
+        // ajax get form data.
+        rdbaRolesEditController.ajaxGetFormData();
+    }
 });

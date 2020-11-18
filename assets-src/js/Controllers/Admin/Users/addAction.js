@@ -12,12 +12,6 @@ class RdbaUsersAddController {
      * @returns {undefined}
      */
     listenFormSubmit() {
-        if (!document.querySelector('#rdba-add-user-form')) {
-            // if not found target element for the form listening.
-            // do nothing
-            return ;
-        }
-
         let $ = jQuery.noConflict();
 
         document.addEventListener('submit', function(event) {
@@ -189,11 +183,16 @@ class RdbaUsersAddController {
 }// RdbaUsersAddController
 
 
-document.addEventListener('rdba.users.editing.newinit', function() {
+document.addEventListener('rdba.users.editing.newinit', function(event) {
     // listen on new assets loaded.
     // this will be working on js loaded via AJAX.
     // must use together with `document.addEventListener('DOMContentLoaded')`
-    RdbaUsersAddController.staticInit();
+    if (
+        RdbaCommon.isset(() => event.detail.rdbaUrlNoDomain) && 
+        event.detail.rdbaUrlNoDomain.includes('/add') !== false
+    ) {
+        RdbaUsersAddController.staticInit();
+    }
 });
 document.addEventListener('DOMContentLoaded', function() {
     // equivalent to jQuery document ready.

@@ -12,12 +12,6 @@ class RdbaRolesAddController {
      * @returns {undefined}
      */
     listenFormSubmit() {
-        if (!document.querySelector('#rdba-add-role-form')) {
-            // if not found target element for the form listening.
-            // do nothing
-            return ;
-        }
-
         let $ = jQuery.noConflict();
 
         document.addEventListener('submit', function(event) {
@@ -134,11 +128,16 @@ class RdbaRolesAddController {
 }// RdbaRolesAddController
 
 
-document.addEventListener('rdba.roles.editing.newinit', function() {
+document.addEventListener('rdba.roles.editing.newinit', function(event) {
     // listen on new assets loaded.
     // this will be working on js loaded via AJAX.
     // must use together with `document.addEventListener('DOMContentLoaded')`
-    RdbaRolesAddController.staticInit();
+    if (
+        RdbaCommon.isset(() => event.detail.rdbaUrlNoDomain) && 
+        event.detail.rdbaUrlNoDomain.includes('/add') !== false
+    ) {
+        RdbaRolesAddController.staticInit();
+    }
 });
 document.addEventListener('DOMContentLoaded', function() {
     // equivalent to jQuery document ready.
