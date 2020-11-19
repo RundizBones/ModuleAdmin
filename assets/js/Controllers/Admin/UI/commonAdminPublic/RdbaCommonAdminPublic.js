@@ -6,7 +6,7 @@
 /**
  * JS Admin class that use with the page expose to public.
  * 
- * @since 1.1.0
+ * @since 1.0.12
  */
 class RdbaCommonAdminPublic {
 
