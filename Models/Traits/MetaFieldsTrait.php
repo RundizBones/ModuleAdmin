@@ -78,7 +78,6 @@ trait MetaFieldsTrait
         unset($Serializer);
 
         $PDO = $this->Db->PDO();
-        $PDO->beginTransaction();
         $insertResult = $this->Db->insert($this->tableName, $data);
 
         if ($insertResult === true) {
@@ -90,7 +89,6 @@ trait MetaFieldsTrait
         $this->storageFile = 'object-id-' . $objectId . '-' . $this->tableName . '.php';
         $this->deleteCachedFile();
 
-        $PDO->commit();
         unset($data, $insertResult, $PDO);
 
         return $output;
