@@ -1,5 +1,7 @@
 /**
  * /ui/xhr-common-data controller. For get UI common data via Rest API.
+ * 
+ * This JS class file is for admin logged in pages that use common user interface.
  */
 
 
