@@ -84,7 +84,7 @@ class Securimage {
 
         document.addEventListener('click', function(event) {
             for (let target= event.target; target && target != this; target = target.parentNode) {
-                if (thisClass.audioButtonId && target.matches('#'+thisClass.audioButtonId[0].id)) {
+                if (RdbaCommon.isset(() => thisClass.audioButtonId[0].id) && target.matches('#'+thisClass.audioButtonId[0].id)) {
                     event.preventDefault();
                     if (!thisClass.audioId[0].paused) {
                         // if audio is playing.
@@ -112,7 +112,7 @@ class Securimage {
 
         document.addEventListener('click', function(event) {
             for (let target= event.target; target && target != this; target = target.parentNode) {
-                if (thisClass.reloadButtonId && target.matches('#'+thisClass.reloadButtonId[0].id)) {
+                if (RdbaCommon.isset(() => thisClass.reloadButtonId[0].id) && target.matches('#'+thisClass.reloadButtonId[0].id)) {
                     event.preventDefault();
 
                     thisClass.reloadIconRef.addClass('fa-spin');
