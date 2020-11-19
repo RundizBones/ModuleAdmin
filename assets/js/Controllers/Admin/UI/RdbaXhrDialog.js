@@ -262,8 +262,8 @@ class RdbaXhrDialog {
             console.log('all css & js injection finished.', promises);
             if (dispatchDialogReInit === true) {
                 if (typeof(thisClass.dialogInitEvent) !== 'undefined') {
-                    // the legacy event property will be remove in v 2.0.
-                    // @todo [rdb] Remove this property in v2.0.
+                    // the legacy event property (RdbaXhrDialog.dialogInitEvent) will be remove in v 2.0.
+                    // @todo [rdb] Remove this property (RdbaXhrDialog.dialogInitEvent) in v2.0.
                     this.dialogReInitEvent = this.dialogInitEvent;
                     console.warn('The `dialogInitEvent` property will be remove in v2.0, please update your code by rename to `dialogReInitEvent`.');
                 }
