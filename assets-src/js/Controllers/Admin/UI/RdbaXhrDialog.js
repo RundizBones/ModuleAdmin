@@ -271,7 +271,7 @@ class RdbaXhrDialog {
                     thisClass.dialogReInitEvent, 
                     {
                         'detail': {
-                        	'rdbaUrl': document.URL,
+                            'rdbaUrl': document.URL,
                             'rdbaUrlNoDomain': window.location.href.replace(window.location.origin, ''),
                         }
                     }
