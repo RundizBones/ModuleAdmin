@@ -41,7 +41,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
         $output['tokenValue'] = $this->Input->request('token', null);
         @list($userId, $registerConfirmKey) = explode('::', base64_decode($output['tokenValue']));
         $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
-        $addSince = $UserFieldsDb->get($userId, 'rdbadmin_uf_adduser_waitactivation_since');
+        $addSince = $UserFieldsDb->get((int) $userId, 'rdbadmin_uf_adduser_waitactivation_since');
         if (!empty($addSince)) {
             $output['showSetPasswordFields'] = true;
         }
