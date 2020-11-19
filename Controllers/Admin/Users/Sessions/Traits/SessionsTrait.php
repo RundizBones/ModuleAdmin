@@ -215,7 +215,7 @@ trait SessionsTrait
             $Mail->AltBody = $Mail->html2text($emailMessage);
             unset($emailMessage);
 
-            $Mail->send();
+            $sendMailStatus = $Mail->send();
 
             unset($Mail, $tokenValue);
 
@@ -235,7 +235,26 @@ trait SessionsTrait
             if ($this->Container->has('Logger')) {
                 /* @var $Logger \Rdb\System\Libraries\Logger */
                 $Logger = $this->Container->get('Logger');
-                $Logger->write('modules/rdbadmin/controllers/admin/users/sessions/traits/sessionstrait', 4, 'An email could not be sent. ' . $e->getMessage());
+                if (isset($sendMailStatus) && $sendMailStatus !== true) {
+                    $Logger->write(
+                        'modules/rdbadmin/controllers/admin/users/sessions/traits/sessionstrait', 
+                        4, 
+                        'An email could not be sent. (' . $e->getMessage() . ')', 
+                        [
+                            'sendTo' => $userRow->user_email,
+                            'trace' => $e->getTrace(),
+                        ]
+                    );
+                } else {
+                    $Logger->write(
+                        'modules/rdbadmin/controllers/admin/users/sessions/traits/sessionstrait', 
+                        4, 
+                        'An error has been occur. (' . $e->getMessage() . ')', 
+                        [
+                            'trace' => $e->getTrace(),
+                        ]
+                    );
+                }
                 unset($Logger);
             }
 
@@ -251,7 +270,7 @@ trait SessionsTrait
             $PDO->rollBack();
         }
 
-        unset($Email, $fieldKey);
+        unset($Email, $fieldKey, $sendMailStatus);
         // end send login link to email. ----------------------------------------------------
 
         unset($PDO, $userRow, $UsersDb);
