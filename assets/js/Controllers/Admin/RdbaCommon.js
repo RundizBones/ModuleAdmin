@@ -1,5 +1,7 @@
 /**
  * Common JS class/functions.
+ * 
+ * This is utilities JS class.
  */
 
 
@@ -275,6 +277,8 @@ class RdbaCommon {
     /**
      * Detect on change language and set new language.
      * 
+     * @todo [rdb] Remove this method in v2.0
+     * @deprecated Use `RdbaCommonAdminPublic.listenOnChangeLanguage()` instead.
      * @return {undefined}
      */
     static onChangeLanguage() {

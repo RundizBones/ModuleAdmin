@@ -135,6 +135,11 @@ class ModuleAssets
                     'dependency' => ['rdta', 'lodash'],
                 ],
                 [
+                    'handle' => 'rdbaCommonAdminPublic',
+                    'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/UI/commonAdminPublic/RdbaCommonAdminPublic.js',
+                    'dependency' => ['rdta', 'rdbaCommon'],
+                ],
+                [
                     'handle' => 'rdbaDatatables',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/UI/RdbaDatatables.js',
                     'dependency' => ['rdta', 'datatables', 'lodash', 'handlebars'],
@@ -173,37 +178,37 @@ class ModuleAssets
                 [
                     'handle' => 'rdbaLogin',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/LoginController/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon', 'handlebars', 'captcha'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic', 'handlebars', 'captcha'],
                 ],
                 [
                     'handle' => 'rdbaLoginReset',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/LoginController/resetAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic', 'lodash'],
                 ],
                 [
                     'handle' => 'rdbaLoginMfa',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/LoginController/mfaAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic', 'lodash'],
                 ],
                 [
                     'handle' => 'rdbaForgotLoginPass',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/ForgotLoginPassController/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon', 'captcha'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic', 'captcha'],
                 ],
                 [
                     'handle' => 'rdbaForgotLoginPassReset',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/ForgotLoginPassController/resetAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic'],
                 ],
                 [
                     'handle' => 'rdbaRegister',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/RegisterController/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon', 'captcha'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic', 'captcha'],
                 ],
                 [
                     'handle' => 'rdbaRegisterConfirm',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/RegisterController/confirmAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic'],
                 ],
                 [
                     'handle' => 'rdbaLogout',

@@ -151,5 +151,5 @@ document.addEventListener('DOMContentLoaded', function() {
     rdbaForgotLPController.ajaxSubmit();
 
     // detect language change.
-    RdbaCommon.onChangeLanguage();
+    RdbaCommonAdminPublic.listenOnChangeLanguage();
 }, false);

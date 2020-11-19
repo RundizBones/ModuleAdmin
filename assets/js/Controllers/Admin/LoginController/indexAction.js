@@ -178,5 +178,5 @@ document.addEventListener('DOMContentLoaded', function() {
     rdbaLoginController.ajaxLogin();
 
     // detect language change.
-    RdbaCommon.onChangeLanguage();
+    RdbaCommonAdminPublic.listenOnChangeLanguage();
 }, false);

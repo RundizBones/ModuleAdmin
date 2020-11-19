@@ -108,5 +108,5 @@ document.addEventListener('DOMContentLoaded', function() {
     rdbaRegisterConfirmController.ajaxConfirm();
 
     // detect language change.
-    RdbaCommon.onChangeLanguage();
+    RdbaCommonAdminPublic.listenOnChangeLanguage();
 }, false);

@@ -33,7 +33,7 @@ class RdbaLoginResetController {
                     'url': RdbaLoginReset.loginUrl,
                     'method': RdbaLoginReset.loginMethod,
                     'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
-                    'data': formData,
+                    'data': new URLSearchParams(_.toArray(formData)).toString(),
                     'dataType': 'json'
                 })
                 .catch(function(responseObject) {
@@ -123,7 +123,7 @@ class RdbaLoginResetController {
                     'url': RdbaLoginReset.loginResetUrl,
                     'method': RdbaLoginReset.loginResetMethod,
                     'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
-                    'data': formData,
+                    'data': new URLSearchParams(_.toArray(formData)).toString(),
                     'dataType': 'json'
                 })
                 .catch(function(responseObject) {
@@ -196,5 +196,5 @@ document.addEventListener('DOMContentLoaded', function() {
     rdbaLoginResetController.ajaxLogin();
 
     // detect language change.
-    RdbaCommon.onChangeLanguage();
+    RdbaCommonAdminPublic.listenOnChangeLanguage();
 }, false);

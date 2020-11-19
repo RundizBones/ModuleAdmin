@@ -16,7 +16,10 @@ class RdbaRegisterController {
 
         $('#rdba-register-form .form-group-captcha #captcha-image').attr('src', RdbaRegister.getCaptchaImage + '?id=' + (Math.random() + '').replace('0.', ''));
         $('#rdba-register-form .form-group-captcha #captcha-audio-player-source-wav').attr('src', RdbaRegister.getCaptchaAudio + '?id=' + (Math.random() + '').replace('0.', ''));// require random id.
-        $('#rdba-register-form #captcha-audio-player')[0].load();// required this to be able to play after page load.
+        let captchaAudioPlayer = $('#rdba-register-form #captcha-audio-player')[0];
+        if (captchaAudioPlayer) {
+            captchaAudioPlayer.load();// required this to be able to play after page load.
+        }
 
         let securimage = new Securimage({
             'audioId': $('#captcha-audio-player'),
@@ -146,5 +149,5 @@ document.addEventListener('DOMContentLoaded', function() {
     rdbaRegisterController.ajaxRegister();
 
     // detect language change.
-    RdbaCommon.onChangeLanguage();
+    RdbaCommonAdminPublic.listenOnChangeLanguage();
 }, false);

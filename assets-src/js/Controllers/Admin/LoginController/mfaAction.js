@@ -33,7 +33,7 @@ class RdbaMfaController {
                     'url': RdbaLoginMfa.loginMfaUrl,
                     'method': RdbaLoginMfa.loginMfaMethod,
                     'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
-                    'data': formData,
+                    'data': new URLSearchParams(_.toArray(formData)).toString(),
                     'dataType': 'json'
                 })
                 .catch(function(responseObject) {
@@ -109,4 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ajax submit.
     rdbaMfaController.listenOnFormSubmit();
+
+    // detect language change.
+    RdbaCommonAdminPublic.listenOnChangeLanguage();
 }, false);
