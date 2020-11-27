@@ -99,7 +99,7 @@ class Encryption
      */
     protected function encryptMethodLength(): int
     {
-        $number = filter_var($this->encryptMethod, FILTER_SANITIZE_NUMBER_INT);
+        $number = (int) filter_var($this->encryptMethod, FILTER_SANITIZE_NUMBER_INT);
 
         return intval(abs($number));
     }// encryptMethodLength
