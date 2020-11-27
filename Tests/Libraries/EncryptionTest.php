@@ -21,15 +21,18 @@ class EncryptionTest extends \Rdb\Tests\BaseTestCase
 
         $Encryption->setCipherMethod('AES-128-CBC');
         $encryptedText = $Encryption->encrypt($readableText, $key);
-        $this->assertEquals($readableText, $Encryption->decrypt($encryptedText, $key));
+        $this->assertNotSame($readableText, $encryptedText);
+        $this->assertSame($readableText, $Encryption->decrypt($encryptedText, $key));
 
         $Encryption->setCipherMethod('AES-192-CBC');
         $encryptedText = $Encryption->encrypt($readableText, $key);
-        $this->assertEquals($readableText, $Encryption->decrypt($encryptedText, $key));
+        $this->assertNotSame($readableText, $encryptedText);
+        $this->assertSame($readableText, $Encryption->decrypt($encryptedText, $key));
 
         $Encryption->setCipherMethod('AES-256-CBC');
         $encryptedText = $Encryption->encrypt($readableText, $key);
-        $this->assertEquals($readableText, $Encryption->decrypt($encryptedText, $key));
+        $this->assertNotSame($readableText, $encryptedText);
+        $this->assertSame($readableText, $Encryption->decrypt($encryptedText, $key));
 
         // change key and readable text.
         $key = time();
@@ -37,16 +40,35 @@ class EncryptionTest extends \Rdb\Tests\BaseTestCase
 
         $Encryption->setCipherMethod('AES-128-CBC');
         $encryptedText = $Encryption->encrypt($readableText, $key);
-        $this->assertEquals($readableText, $Encryption->decrypt($encryptedText, $key));
+        $this->assertNotSame($readableText, $encryptedText);
+        $this->assertSame($readableText, $Encryption->decrypt($encryptedText, $key));
 
         $Encryption->setCipherMethod('AES-192-CBC');
         $encryptedText = $Encryption->encrypt($readableText, $key);
-        $this->assertEquals($readableText, $Encryption->decrypt($encryptedText, $key));
+        $this->assertNotSame($readableText, $encryptedText);
+        $this->assertSame($readableText, $Encryption->decrypt($encryptedText, $key));
 
         $Encryption->setCipherMethod('AES-256-CBC');
         $encryptedText = $Encryption->encrypt($readableText, $key);
-        $this->assertEquals($readableText, $Encryption->decrypt($encryptedText, $key));
+        $this->assertNotSame($readableText, $encryptedText);
+        $this->assertSame($readableText, $Encryption->decrypt($encryptedText, $key));
     }// testEncryptDecrypt
+
+
+    public function testEncryptMethodLength()
+    {
+        $Encryption = new EncryptionExtended();
+        $this->assertTrue(is_int($Encryption->encryptMethodLength()));
+
+        $Encryption->setCipherMethod('AES-128-CBC');
+        $this->assertSame(128, $Encryption->encryptMethodLength());
+
+        $Encryption->setCipherMethod('AES-192-CBC');
+        $this->assertSame(192, $Encryption->encryptMethodLength());
+
+        $Encryption->setCipherMethod('AES-256-CBC');
+        $this->assertSame(256, $Encryption->encryptMethodLength());
+    }// testEncryptMethodLength
 
 
 }
