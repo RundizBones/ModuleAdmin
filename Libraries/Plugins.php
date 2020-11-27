@@ -113,7 +113,7 @@ class Plugins
         foreach ($this->callbackHooks[$tag] as $priority => $items) {
             if (is_array($items)) {
                 foreach($items as $idHash => $subItem) {
-                    $result = call_user_func_array($subItem['callback'], $args);
+                    $result = call_user_func_array($subItem['callback'], array_values($args));
                     if (isset($result) && is_array($result)) {
                         $return = \Drupal\Component\Utility\NestedArray::mergeDeep($return, $result);
                     } elseif (isset($result)) {
