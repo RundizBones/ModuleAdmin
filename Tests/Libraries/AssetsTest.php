@@ -7,6 +7,9 @@
 namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
+use Rdb\Modules\RdbAdmin\Tests\PHPUnitFunctions\Arrays;
+
+
 class AssetsTest extends \Rdb\Tests\BaseTestCase
 {
 
@@ -53,7 +56,7 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
     protected $thisModulePath;
 
 
-    public function setup()
+    public function setup(): void
     {
         $this->runApp('GET', '/');
 
@@ -89,7 +92,7 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
     }// setup
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->FileSystem->deleteFolder('', true);
         @rmdir($this->testAssetFolderPath);
@@ -104,96 +107,104 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
 
         $this->Assets->addAsset('js', 'jquery', $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js', [], '3.x.x', [], 'theJsGroup');
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            ['jquery' => [
-                    'handle' => 'jquery',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
-                    'dependency' => [],
-                    'version' => '3.x.x',
-                    'attributes' => [],
-                    'group' => 'theJsGroup',
-                    'inline' => null,
-                    'printed' => false,
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                ['jquery' => [
+                        'handle' => 'jquery',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
+                        'dependency' => [],
+                        'version' => '3.x.x',
+                        'attributes' => [],
+                        'group' => 'theJsGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
                 ],
-            ],
-            $addedAssets['js']
+                $addedAssets['js']
+            ))
         );
         $this->assertCount(1, $addedAssets['js']);
 
         $this->Assets->addAsset('js', 'bootstrap', $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.js', ['jquery'], '4.x.x', [], 'theJsGroup');
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            [
-                'jquery' => [
-                    'handle' => 'jquery',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
-                    'dependency' => [],
-                    'version' => '3.x.x',
-                    'attributes' => [],
-                    'group' => 'theJsGroup',
-                    'inline' => null,
-                    'printed' => false,
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [
+                    'jquery' => [
+                        'handle' => 'jquery',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
+                        'dependency' => [],
+                        'version' => '3.x.x',
+                        'attributes' => [],
+                        'group' => 'theJsGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
+                    'bootstrap' => [
+                        'handle' => 'bootstrap',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.js',
+                        'dependency' => ['jquery'],
+                        'version' => '4.x.x',
+                        'attributes' => [],
+                        'group' => 'theJsGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
                 ],
-                'bootstrap' => [
-                    'handle' => 'bootstrap',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.js',
-                    'dependency' => ['jquery'],
-                    'version' => '4.x.x',
-                    'attributes' => [],
-                    'group' => 'theJsGroup',
-                    'inline' => null,
-                    'printed' => false,
-                ],
-            ],
-            $addedAssets['js']
+                $addedAssets['js']
+            ))
         );
         $this->assertCount(2, $addedAssets['js']);
 
         $this->Assets->addAsset('css', 'bootstrap', $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css', [], '4.x.x', [], 'theCssGroup');
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            [
-                'bootstrap' => [
-                    'handle' => 'bootstrap',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
-                    'dependency' => [],
-                    'version' => '4.x.x',
-                    'attributes' => [],
-                    'group' => 'theCssGroup',
-                    'inline' => null,
-                    'printed' => false,
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [
+                    'bootstrap' => [
+                        'handle' => 'bootstrap',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
+                        'dependency' => [],
+                        'version' => '4.x.x',
+                        'attributes' => [],
+                        'group' => 'theCssGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
                 ],
-            ],
-            $addedAssets['css']
+                $addedAssets['css']
+            ))
         );
         $this->assertCount(1, $addedAssets['css']);
 
         $this->Assets->addAsset('css', 'bootstrap-theme', $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap-theme.css', ['bootstrap'], '1.2.x', [], 'theCssGroup');
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            [
-                'bootstrap' => [
-                    'handle' => 'bootstrap',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
-                    'dependency' => [],
-                    'version' => '4.x.x',
-                    'attributes' => [],
-                    'group' => 'theCssGroup',
-                    'inline' => null,
-                    'printed' => false,
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [
+                    'bootstrap' => [
+                        'handle' => 'bootstrap',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
+                        'dependency' => [],
+                        'version' => '4.x.x',
+                        'attributes' => [],
+                        'group' => 'theCssGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
+                    'bootstrap-theme' => [
+                        'handle' => 'bootstrap-theme',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap-theme.css',
+                        'dependency' => ['bootstrap'],
+                        'version' => '1.2.x',
+                        'attributes' => [],
+                        'group' => 'theCssGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
                 ],
-                'bootstrap-theme' => [
-                    'handle' => 'bootstrap-theme',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap-theme.css',
-                    'dependency' => ['bootstrap'],
-                    'version' => '1.2.x',
-                    'attributes' => [],
-                    'group' => 'theCssGroup',
-                    'inline' => null,
-                    'printed' => false,
-                ],
-            ],
-            $addedAssets['css']
+                $addedAssets['css']
+            ))
         );
         $this->assertCount(2, $addedAssets['css']);
     }// testAddAsset
@@ -209,20 +220,22 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
         $this->Assets->addCssInline('bootstrap', 'body {background-color: white;}');
 
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            [
-                'bootstrap' => [
-                    'handle' => 'bootstrap',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
-                    'dependency' => [],
-                    'version' => true,
-                    'attributes' => [],
-                    'group' => null,
-                    'inline' => 'body {background-color: white;}',
-                    'printed' => false,
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [
+                    'bootstrap' => [
+                        'handle' => 'bootstrap',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
+                        'dependency' => [],
+                        'version' => true,
+                        'attributes' => [],
+                        'group' => null,
+                        'inline' => 'body {background-color: white;}',
+                        'printed' => false,
+                    ],
                 ],
-            ],
-            $addedAssets['css']
+                $addedAssets['css']
+            ))
         );
         $this->assertCount(1, $addedAssets['css']);
     }// testAddCssInline
@@ -239,23 +252,25 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
         $this->Assets->addJsInline('jquery', 'function thisIsjustTestJsInlineBefore() {}', 'before');
 
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            [
-                'jquery' => [
-                    'handle' => 'jquery',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
-                    'dependency' => [],
-                    'version' => true,
-                    'attributes' => [],
-                    'group' => null,
-                    'inline' => [
-                        'after' => 'function thisIsjustTest() {}',
-                        'before' => 'function thisIsjustTestJsInlineBefore() {}',
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [
+                    'jquery' => [
+                        'handle' => 'jquery',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
+                        'dependency' => [],
+                        'version' => true,
+                        'attributes' => [],
+                        'group' => null,
+                        'inline' => [
+                            'after' => 'function thisIsjustTest() {}',
+                            'before' => 'function thisIsjustTestJsInlineBefore() {}',
+                        ],
+                        'printed' => false,
                     ],
-                    'printed' => false,
                 ],
-            ],
-            $addedAssets['js']
+                $addedAssets['js']
+            ))
         );
         $this->assertCount(1, $addedAssets['js']);
     }// testAddJsInline
@@ -271,26 +286,28 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
         $this->Assets->addJsObject('jquery', 'myJqueryObject', ['name' => 'TestJQueryObj', 'version' => '3.x.x']);
 
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            [
-                'jquery' => [
-                    'handle' => 'jquery',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
-                    'dependency' => [],
-                    'version' => true,
-                    'attributes' => [],
-                    'group' => null,
-                    'inline' => null,
-                    'jsobject' => [
-                        'myJqueryObject' => [
-                            'name' => 'TestJQueryObj', 
-                            'version' => '3.x.x',
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [
+                    'jquery' => [
+                        'handle' => 'jquery',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
+                        'dependency' => [],
+                        'version' => true,
+                        'attributes' => [],
+                        'group' => null,
+                        'inline' => null,
+                        'jsobject' => [
+                            'myJqueryObject' => [
+                                'name' => 'TestJQueryObj', 
+                                'version' => '3.x.x',
+                            ],
                         ],
+                        'printed' => false,
                     ],
-                    'printed' => false,
                 ],
-            ],
-            $addedAssets['js']
+                $addedAssets['js']
+            ))
         );
         $this->assertCount(1, $addedAssets['js']);
     }// testAddJsObject
@@ -338,90 +355,96 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
 
         $this->Assets->addMultipleAssets('js', ['bootstrap', 'jquery'], $assetsData);
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            [
-                'jquery' => [
-                    'handle' => 'jquery',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
-                    'dependency' => [],
-                    'version' => '3.x.x',
-                    'attributes' => [],
-                    'group' => 'JsGroup',
-                    'inline' => null,
-                    'printed' => false,
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [
+                    'jquery' => [
+                        'handle' => 'jquery',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js',
+                        'dependency' => [],
+                        'version' => '3.x.x',
+                        'attributes' => [],
+                        'group' => 'JsGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
+                    'bootstrap' => [
+                        'handle' => 'bootstrap',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.js',
+                        'dependency' => ['jquery'],
+                        'version' => '4.x.x',
+                        'attributes' => [],
+                        'group' => 'JsGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
                 ],
-                'bootstrap' => [
-                    'handle' => 'bootstrap',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.js',
-                    'dependency' => ['jquery'],
-                    'version' => '4.x.x',
-                    'attributes' => [],
-                    'group' => 'JsGroup',
-                    'inline' => null,
-                    'printed' => false,
-                ],
-            ],
-            $addedAssets['js']
+                $addedAssets['js']
+            ))
         );
         $this->assertCount(2, $addedAssets['js']);
         $this->assertCount(0, $addedAssets['css']);
 
         $this->Assets->addMultipleAssets('css', ['bootstrap-theme', 'bootstrap'], $assetsData);
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            [
-                'bootstrap' => [
-                    'handle' => 'bootstrap',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
-                    'dependency' => [],
-                    'version' => '4.x.x',
-                    'attributes' => [],
-                    'group' => 'CssGroup',
-                    'inline' => null,
-                    'printed' => false,
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [
+                    'bootstrap' => [
+                        'handle' => 'bootstrap',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
+                        'dependency' => [],
+                        'version' => '4.x.x',
+                        'attributes' => ['data-assetname' => 'bootstrap4', 'data-assetversion' => '4.x.x', 'data-addby' => 'multiple'],
+                        'group' => 'CssGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
+                    'bootstrap-theme' => [
+                        'handle' => 'bootstrap-theme',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap-theme.css',
+                        'dependency' => ['bootstrap'],
+                        'version' => true,
+                        'attributes' => [],
+                        'group' => null,
+                        'inline' => null,
+                        'printed' => false,
+                    ],
                 ],
-                'bootstrap-theme' => [
-                    'handle' => 'bootstrap-theme',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap-theme.css',
-                    'dependency' => ['bootstrap'],
-                    'version' => '1.2.x',
-                    'attributes' => [],
-                    'group' => null,
-                    'inline' => null,
-                    'printed' => false,
-                ],
-            ],
-            $addedAssets['css']
+                $addedAssets['css']
+            ))
         );
         $this->assertCount(2, $addedAssets['css']);
 
         // test for automatically add missed dependency.
         $this->Assets->addMultipleAssets('css', ['bootstrap'], $assetsData);// missed bootstrap-theme dependency.
         $addedAssets = $this->Assets->getAddedAssets();
-        $this->assertArraySubset(
-            [
-                'bootstrap' => [
-                    'handle' => 'bootstrap',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
-                    'dependency' => [],
-                    'version' => '4.x.x',
-                    'attributes' => [],
-                    'group' => 'CssGroup',
-                    'inline' => null,
-                    'printed' => false,
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [
+                    'bootstrap' => [
+                        'handle' => 'bootstrap',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.css',
+                        'dependency' => [],
+                        'version' => '4.x.x',
+                        'attributes' => [],
+                        'group' => 'CssGroup',
+                        'inline' => null,
+                        'printed' => false,
+                    ],
+                    'bootstrap-theme' => [
+                        'handle' => 'bootstrap-theme',
+                        'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap-theme.css',
+                        'dependency' => ['bootstrap'],
+                        'version' => true,
+                        'attributes' => [],
+                        'group' => null,
+                        'inline' => null,
+                        'printed' => false,
+                    ],
                 ],
-                'bootstrap-theme' => [
-                    'handle' => 'bootstrap-theme',
-                    'file' => $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap-theme.css',
-                    'dependency' => ['bootstrap'],
-                    'version' => '1.2.x',
-                    'attributes' => [],
-                    'group' => null,
-                    'inline' => null,
-                    'printed' => false,
-                ],
-            ],
-            $addedAssets['css']
+                $addedAssets['css']
+            ))
         );// assert same as above test
         $this->assertCount(2, $addedAssets['css']);// assert same as above test
     }// testAddMultipleAssets
@@ -605,22 +628,22 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
         $this->assertArrayHasKey('not_exists', $getResult);
         $this->assertCount(2, $getResult['exists']);
         $this->assertCount(0, $getResult['not_exists']);
-        $this->assertArraySubset(['exists' => ['jquery', 'bootstrap']], $getResult);
+        $this->assertTrue(empty(Arrays::array_diff_assoc_recursive(['exists' => ['jquery', 'bootstrap']], $getResult)));
 
         $getResult = $this->Assets->getDependencyExists('css', ['jquery', 'bootstrap']);
         $this->assertArrayHasKey('exists', $getResult);
         $this->assertArrayHasKey('not_exists', $getResult);
         $this->assertCount(1, $getResult['exists']);
         $this->assertCount(1, $getResult['not_exists']);
-        $this->assertArraySubset(['exists' => ['bootstrap'], 'not_exists' => ['jquery']], $getResult);
+        $this->assertTrue(empty(Arrays::array_diff_assoc_recursive(['exists' => ['bootstrap'], 'not_exists' => ['jquery']], $getResult)));
 
         $getResult = $this->Assets->getDependencyExists('js', ['jquery', 'bootstrap4']);
         $this->assertArrayHasKey('exists', $getResult);
         $this->assertArrayHasKey('not_exists', $getResult);
         $this->assertCount(1, $getResult['exists']);
         $this->assertCount(1, $getResult['not_exists']);
-        $this->assertArraySubset(['exists' => ['jquery']], $getResult);
-        $this->assertArraySubset(['not_exists' => ['bootstrap4']], $getResult);
+        $this->assertTrue(empty(Arrays::array_diff_assoc_recursive(['exists' => ['jquery']], $getResult)));
+        $this->assertTrue(empty(Arrays::array_diff_assoc_recursive(['not_exists' => ['bootstrap4']], $getResult)));
     }// testGetDependencyExists
 
 
@@ -678,7 +701,7 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
                 ],
             ],
         ];
-        $this->assertArraySubset($assertCss, $mergedCss);
+        $this->assertTrue(empty(Arrays::array_diff_assoc_recursive($assertCss, $mergedCss)));
         $this->assertSame($assertCss, $mergedCss);
 
         $mergedJs = $this->Assets->mergeAssetsData('js', $assetData1, $assetData2);
@@ -702,7 +725,7 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
                 ],
             ],
         ];
-        $this->assertArraySubset($assertJs, $mergedJs);
+        $this->assertTrue(empty(Arrays::array_diff_assoc_recursive($assertJs, $mergedJs)));
         $this->assertSame($assertJs, $mergedJs);
     }// testMergeAssetsData
 

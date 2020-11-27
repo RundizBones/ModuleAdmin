@@ -11,7 +11,7 @@ class EmailTest extends \Rdb\Tests\BaseTestCase
 {
 
 
-    public function setup()
+    public function setup(): void
     {
         $_SERVER['RUNDIZBONES_LANGUAGE'] = 'th';
 

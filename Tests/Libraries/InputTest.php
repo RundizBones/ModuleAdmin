@@ -3,6 +3,10 @@
 
 namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
+
+use Rdb\Modules\RdbAdmin\Tests\PHPUnitFunctions\Arrays;
+
+
 class InputTest extends \Rdb\Tests\BaseTestCase
 {
 
@@ -13,7 +17,7 @@ class InputTest extends \Rdb\Tests\BaseTestCase
     protected $Input;
 
 
-    public function setup()
+    public function setup(): void
     {
         // reset everything first.
         // due to $_POST contain array with `[]` which is auto increasing its key value everytime this `setup()` was called.
@@ -116,18 +120,26 @@ class InputTest extends \Rdb\Tests\BaseTestCase
         $this->assertEquals('http://mydomain.tld', $this->Input->post('posturl', null, FILTER_SANITIZE_URL));
         $this->assertEquals('me@gmail.com', $this->Input->post('postemail', null, FILTER_SANITIZE_EMAIL));
         $this->assertEquals('me-with-lessthan-sign@gmail.com', $this->Input->post('postinvalidemail', null, FILTER_SANITIZE_EMAIL));
-        $this->assertArraySubset(['a' => 'email1@domain.com', 'b' => 'email2@domain.com'], $this->Input->post('inputarray', [], FILTER_SANITIZE_EMAIL));
-        $this->assertArraySubset(
-            [0 => 10], 
-            $this->Input->post('inputnumstring', '', FILTER_VALIDATE_INT, ['flags' => FILTER_FORCE_ARRAY, 'options' => ['min_range' => 1, 'max_range' => 10]])
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(['a' => 'email1@domain.com', 'b' => 'email2@domain.com'], $this->Input->post('inputarray', [], FILTER_SANITIZE_EMAIL)))
+        );
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                [0 => 10], 
+                $this->Input->post('inputnumstring', '', FILTER_VALIDATE_INT, ['flags' => FILTER_FORCE_ARRAY, 'options' => ['min_range' => 1, 'max_range' => 10]])
+            ))
         );// test with 'flags', 'options' in options argument.
-        $this->assertArraySubset(
-            ['a' => '12,345', 'b' => '2,345', 'c' => ''], 
-            $this->Input->post('inputarraynumstring', '', FILTER_SANITIZE_NUMBER_FLOAT, ['flags' => FILTER_FLAG_ALLOW_THOUSAND])
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                ['a' => '12,345', 'b' => '2,345', 'c' => ''], 
+                $this->Input->post('inputarraynumstring', '', FILTER_SANITIZE_NUMBER_FLOAT, ['flags' => FILTER_FLAG_ALLOW_THOUSAND])
+            ))
         );// test with 'flags', 'options' in options argument.
-        $this->assertArraySubset(
-            $_POST['inputarraynumstring2'],
-            $this->Input->post('inputarraynumstring2', '', FILTER_SANITIZE_NUMBER_FLOAT, ['flags' => FILTER_FLAG_ALLOW_THOUSAND])
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(
+                $_POST['inputarraynumstring2'],
+                $this->Input->post('inputarraynumstring2', '', FILTER_SANITIZE_NUMBER_FLOAT, ['flags' => FILTER_FLAG_ALLOW_THOUSAND])
+            ))
         );// test with invalid value that is array and one of its key is number. it will be return as it is in $_POST without filtered.
     }// testInputPost
 

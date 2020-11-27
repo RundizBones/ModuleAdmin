@@ -17,7 +17,7 @@ class CronTest extends \Rdb\Tests\BaseTestCase
     protected $Container;
 
 
-    public function setup()
+    public function setup(): void
     {
         $this->runApp('GET', '/');
 
@@ -30,7 +30,7 @@ class CronTest extends \Rdb\Tests\BaseTestCase
         $Cron = new CronExtended($this->Container);
 
         $getCallerClassResult = $Cron->checkCallerfromHasRun();
-        $this->assertContains('Tests\\Libraries\\CronTest', $getCallerClassResult);
+        $this->assertStringContainsString('Tests\\Libraries\\CronTest', $getCallerClassResult);
         $this->assertSame(__CLASS__, $getCallerClassResult);
     }// testGetCallerClass
 
@@ -45,14 +45,12 @@ class CronTest extends \Rdb\Tests\BaseTestCase
     }// testGetSecondsBeforeNext
 
 
-    /**
-     * @expectedException DomainException
-     */
     public function testGetSecondsBeforeNextError()
     {
         $Cron = new CronExtended($this->Container);
 
-        $this->assertTrue(is_int($Cron->getSecondsBeforeNext('invalidValue')));
+        $this->expectException(\DomainException::class);
+        $Cron->getSecondsBeforeNext('invalidValue');// will throw an error.
     }// testGetSecondsBeforeNext
 
 

@@ -7,6 +7,9 @@
 namespace Rdb\Modules\RdbAdmin\Tests\Libraries;
 
 
+use Rdb\Modules\RdbAdmin\Tests\PHPUnitFunctions\Arrays;
+
+
 class PluginsTest extends \Rdb\Tests\BaseTestCase
 {
 
@@ -29,7 +32,7 @@ class PluginsTest extends \Rdb\Tests\BaseTestCase
     protected $Plugins;
 
 
-    public function setup()
+    public function setup(): void
     {
         $this->newModule = 'ModuleForTest' . date('YmdHis') . mt_rand(1, 999) . 'M' . round(microtime(true) * 1000);
 
@@ -234,7 +237,7 @@ EOT;
     }// setup
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->FileSystem->deleteFolder($this->newModule, true);
     }// tearDown
@@ -283,7 +286,9 @@ EOT;
         $email = 'adam@domain.tld';
 
         $result = $this->Plugins->doHook('rdbatest.demoaction1', [$name, $email]);
-        $this->assertArraySubset(['hook1(Adam)', 'hook1p1(Adam)', 'hook2(Adam)'], $result);
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive(['hook1(Adam)', 'hook1p1(Adam)', 'hook2(Adam)'], $result))
+        );
 
         $result = $this->Plugins->doHook('rdbatest.demoalter1', [&$name, $email]);
         $this->assertSame('Alter2(Alter1p2(Alter1p1(Alter1(Adam))))', $name);

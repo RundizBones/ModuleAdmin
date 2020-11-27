@@ -11,7 +11,7 @@ class CookieTest extends \Rdb\Tests\BaseTestCase
 {
 
 
-    public function setup()
+    public function setup(): void
     {
         $this->runApp('GET', '/');
         $this->Container = $this->RdbApp->getContainer();

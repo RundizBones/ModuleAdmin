@@ -17,7 +17,7 @@ class CacheTest extends \Rdb\Tests\BaseTestCase
     protected $Cache;
 
 
-    public function setup()
+    public function setup(): void
     {
         $this->runApp('GET', '/');
         $this->Container = $this->RdbApp->getContainer();

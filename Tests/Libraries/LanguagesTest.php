@@ -17,7 +17,7 @@ class LanguagesTest extends \Rdb\Tests\BaseTestCase
     protected $Languages;
 
 
-    public function setup()
+    public function setup(): void
     {
         $_SERVER['RUNDIZBONES_LANGUAGE'] = 'th';
 

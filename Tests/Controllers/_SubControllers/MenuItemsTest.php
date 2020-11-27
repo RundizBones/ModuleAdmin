@@ -7,6 +7,9 @@
 namespace Rdb\Modules\RdbAdmin\Tests\Controllers\SubControllers;
 
 
+use Rdb\Modules\RdbAdmin\Tests\PHPUnitFunctions\Arrays;
+
+
 class MenuItemsTest extends \Rdb\Tests\BaseTestCase
 {
 
@@ -26,7 +29,7 @@ class MenuItemsTest extends \Rdb\Tests\BaseTestCase
     protected $menuItems = [];
 
 
-    public function setup()
+    public function setup(): void
     {
         $this->Container = new \Rdb\System\Container();
         $Modules = new \Rdb\System\Modules($this->Container);
@@ -69,7 +72,7 @@ class MenuItemsTest extends \Rdb\Tests\BaseTestCase
     }// setup
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->menuItems = [];
     }// tearDown
@@ -99,7 +102,11 @@ class MenuItemsTest extends \Rdb\Tests\BaseTestCase
                 'link' => '/admin/pages',
             ],
         ];
-        $this->assertArraySubset($assertItem, $menuItems);
+        $this->assertTrue(is_array($menuItems));
+        $this->assertTrue(is_array($assertItem));
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive($assertItem, $menuItems))
+        );
 
         $additionalMenuItems = [
             5 => [
@@ -120,7 +127,9 @@ class MenuItemsTest extends \Rdb\Tests\BaseTestCase
                 'link' => '/admin/posts',
             ],
         ];
-        $this->assertArraySubset($assertItem, $menuItems);
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive($assertItem, $menuItems))
+        );
         $assert = ['0.0', '5.0', '5.1', '6.0', '100.0'];// assert added and sorted.
         $this->assertSame($assert, array_keys($menuItems));
 
@@ -170,7 +179,9 @@ class MenuItemsTest extends \Rdb\Tests\BaseTestCase
                 'link' => '/admin/users/logins',
             ],
         ];
-        $this->assertArraySubset($assert, $menuItems['100.0']['subMenu']);
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive($assert, $menuItems['100.0']['subMenu']))
+        );
     }// testAddToMenu
 
 
@@ -206,9 +217,13 @@ class MenuItemsTest extends \Rdb\Tests\BaseTestCase
                 ],
             ],
         ];
-        $this->assertArraySubset($assert, $menuItems);
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive($assert, $menuItems))
+        );
         // convert again but still be the same array key, not possible to convert 1 to '1.0' and '1.0.0'. just '1.0'.
-        $this->assertArraySubset($assert, $this->MenuItems->convertMenuArrayKeyToFloat($menuItems));
+        $this->assertTrue(
+            empty(Arrays::array_diff_assoc_recursive($assert, $this->MenuItems->convertMenuArrayKeyToFloat($menuItems)))
+        );
     }// testConvertMenuArrayKeyToFloat
 
 

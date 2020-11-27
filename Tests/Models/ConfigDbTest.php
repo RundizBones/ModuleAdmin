@@ -11,7 +11,7 @@ class ConfigDbTest extends \Rdb\Tests\BaseTestCase
 {
 
 
-    public function setup()
+    public function setup(): void
     {
         $this->Container = new \Rdb\System\Container();
         $this->Container['Config'] = function ($c) {
@@ -29,7 +29,7 @@ class ConfigDbTest extends \Rdb\Tests\BaseTestCase
     }// setup
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->Db->disconnectAll();
     }// tearDown
