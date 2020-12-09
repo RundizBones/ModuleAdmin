@@ -5894,7 +5894,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Rundiz template for admin V.2.1.6
+ * Rundiz template for admin V.2.1.7
  */
 html.rd-template-admin {
   height: 100%
@@ -8246,6 +8246,9 @@ body.rd-modal-open {
 @media(min-width:1000px) {
   .rd-tabs.tabs-vertical {
     display: flex
+  }
+  .rd-tabs.tabs-vertical .rd-tabs-content {
+    flex-grow: 1
   }
   .rd-tabs.tabs-vertical .rd-tabs-nav {
     border-bottom: 0;
