@@ -50,7 +50,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/css/rdta/rdta-bundled.min.css',
-                    'version' => '2.1.6',
+                    'version' => '2.1.9',
                 ],
                 // datatables----------------.
                 [
@@ -93,7 +93,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/js/rdta/rdta-bundled.min.js',
-                    'version' => '2.1.6',
+                    'version' => '2.1.9',
                 ],
                 [
                     'handle' => 'handlebars',
