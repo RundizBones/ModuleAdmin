@@ -5894,7 +5894,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Rundiz template for admin V.2.1.10
+ * Rundiz template for admin V.2.1.11
  */
 html.rd-template-admin {
   height: 100%
@@ -6817,6 +6817,7 @@ a.rd-button.tiny {
 .rd-dropdown li input[type=submit] {
   border: none;
   box-shadow: none;
+  margin: 0;
   text-align: left
 }
 .rd-dropdown li button:active,
