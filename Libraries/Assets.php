@@ -104,7 +104,8 @@ class Assets
         if (stripos($file, '://') === false && stripos($file, '//') !== 0) {
             // if the asset file is local. check that if it exists or not.
             $Url = new \Rdb\System\Libraries\Url($this->Container);
-            $fileRealPath = preg_replace('#' . $Url->getAppBasedPath() . '#', PUBLIC_PATH . '/', $file, 1);
+            $fileRealPath = preg_replace('#^' . preg_quote($Url->getAppBasedPath()) . '#', PUBLIC_PATH . '/', $file, 1);
+            $fileRealPathBeforeNormalize = $fileRealPath;
             $fileRealPath = realpath($fileRealPath);
             if (!is_file($fileRealPath)) {
                 // if asset file is not exists.
@@ -117,11 +118,11 @@ class Assets
                         $caller = $backtrace[0]['file'] . ' line ' . $backtrace[0]['line'];
                     }
                     unset($backtrace);
-                    $Logger->write('modules/rdbadmin/libraries/assets', 3,  'The asset file is not exists! ({handle} => {file})', ['handle' => $handle, 'file' => $file, 'caller' => $caller]);
+                    $Logger->write('modules/rdbadmin/libraries/assets', 3,  'The asset file is not exists! ({handle} => {file})', ['handle' => $handle, 'file' => $file, 'fileRealPath' => $fileRealPathBeforeNormalize, 'caller' => $caller]);
                     unset($caller, $Logger);
                 }
             }
-            unset($fileRealPath, $Url);
+            unset($fileRealPath, $fileRealPathBeforeNormalize, $Url);
         }
 
         $this->addedAssets[$type] = array_merge(
