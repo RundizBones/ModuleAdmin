@@ -297,7 +297,7 @@ select:not([multiple]):not([size]) {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.15.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 .fa,
@@ -5894,7 +5894,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Rundiz template for admin V.2.1.11
+ * Rundiz template for admin V.2.1.12
  */
 html.rd-template-admin {
   height: 100%
@@ -8261,6 +8261,47 @@ body.rd-modal-open {
   position: absolute;
   right: 0;
   top: 0
+}
+/*! Rundiz Template for Admin*/
+/*!
+* ----------------------------------------------------------------------------------------------
+* Rundiz template embeds -- styling responsive embeds elements.
+* ----------------------------------------------------------------------------------------------
+*/
+.rd-embed-responsive {
+  display: block;
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+  width: 100%
+}
+.rd-embed-responsive.rd-embed-responsive21by9::before {
+  padding-top: 42.857143%
+}
+.rd-embed-responsive.rd-embed-responsive16by9::before {
+  padding-top: 56.25%
+}
+.rd-embed-responsive.rd-embed-responsive8by5::before {
+  padding-top: 62.5%
+}
+.rd-embed-responsive.rd-embed-responsive4by3::before {
+  padding-top: 75%
+}
+.rd-embed-responsive.rd-embed-responsive3by2::before {
+  padding-top: 66.66%
+}
+.rd-embed-responsive.rd-embed-responsive1by1::before {
+  padding-top: 100%
+}
+.rd-embed-responsive .rd-embed-responsive-item {
+  border: none;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%
 }
 /*! Rundiz Template for Admin*/
 /*!

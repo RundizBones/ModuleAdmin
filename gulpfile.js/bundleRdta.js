@@ -74,6 +74,7 @@ function bundleRDTA(cb) {
             'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-accordion.min.css',
             'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-alertdialog.min.css',
             'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-dialog.min.css',
+            'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-embeds.min.css',
             'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-tabs.min.css',
         ])
             .pipe(print())
