@@ -163,9 +163,9 @@ function copySortableJS(cb) {
 
     return mergeStream(
         // js files.
-        src('node_modules/sortablejs/dist/**')
+        src('node_modules/sortablejs/*.js')
             .pipe(print())
-            .pipe(dest('assets/vendor/sortablejs/dist/')),
+            .pipe(dest('assets/vendor/sortablejs/')),
         src('node_modules/sortablejs/modular/**')
             .pipe(print())
             .pipe(dest('assets/vendor/sortablejs/modular/')),
