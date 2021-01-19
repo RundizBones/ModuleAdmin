@@ -165,6 +165,7 @@ class Cron
             $Config = $this->Container->get('Config');
             $Config->setModule('RdbAdmin');
             $enableCron = $Config->get('enableCron', 'cron', true);
+            $Config->setModule('');// restore to default.
             unset($Config);
 
             if (is_bool($enableCron)) {

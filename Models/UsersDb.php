@@ -59,6 +59,7 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
         $Config->setModule('RdbAdmin');
         $this->passwordAlgo = $Config->get('algo', 'password', PASSWORD_DEFAULT);
         $this->passwordAlgoOptions = $Config->get('options', 'password', []);
+        $Config->setModule('');// restore to default.
     }// __construct
 
 

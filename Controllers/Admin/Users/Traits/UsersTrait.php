@@ -258,6 +258,8 @@ trait UsersTrait
         }
         unset($decrypted);
 
+        $Config->setModule('');// restore to default.
+
         unset($Config, $Encryption);
 
         return $output;
@@ -289,6 +291,8 @@ trait UsersTrait
 
         $output['readableKey'] = $RdbaString->random($length);
         $output['encryptedKey'] = $Encryption->encrypt($output['readableKey'], $Config->get('rdbaUserFieldsKeys', 'hash'));
+
+        $Config->setModule('');// restore to default.
 
         unset($Config, $Encryption, $RdbaString);
 

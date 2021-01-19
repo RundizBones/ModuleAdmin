@@ -103,6 +103,9 @@ class Cache
             unset($cachePath, $umask);
         }
 
+        // always restore config module to default
+        $Config->setModule('');
+
         unset($Config, $driver);
         return $this->Cache;
     }// __construct

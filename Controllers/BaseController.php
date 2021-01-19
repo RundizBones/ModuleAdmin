@@ -154,6 +154,9 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
                 $Cron->runJobsOnAllModules();
                 unset($Cron);
             }
+
+            $Config->setModule('');// restore to default.
+
             unset($Config);
         }
     }// maybeRunCron

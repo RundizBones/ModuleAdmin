@@ -135,6 +135,7 @@ class UserFieldsDb extends \Rdb\System\Core\Models\BaseModel
         }
         $Config->setModule('RdbAdmin');
         $hashKey = $Config->get('rdbaUserFieldsKeys', 'hash');
+        $Config->setModule('');// restore to default.
         unset($Config);
 
         $Encryption = new \Rdb\Modules\RdbAdmin\Libraries\Encryption();

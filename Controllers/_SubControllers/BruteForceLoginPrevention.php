@@ -355,6 +355,7 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
             // sometime the server time maybe unsync or skew times.
             \Firebase\JWT\JWT::$leeway = 60;// in seconds.
             $secretKey = $Config->get('rdbaDeviceCookieSecret', 'hash');
+            $Config->setModule('');// restore to default.
             unset($Config);
 
             try {
@@ -406,6 +407,8 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                 'sub' => $user_login_email,
             ];
             $encoded = \Firebase\JWT\JWT::encode($token, $secretKey, 'HS512');
+
+            $Config->setModule('');// restore to default.
 
             setcookie($this->deviceCookieName, $encoded, $expires, '/');
         }
@@ -565,6 +568,7 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
             $Config->setModule('RdbAdmin');
 
             $secretKey = $Config->get('rdbaDeviceCookieSecret', 'hash');
+            $Config->setModule('');// restore to default.
             unset($Config);
 
             if (isset($cookieValue['aud']) && isset($cookieValue['exp']) && isset($cookieValue['jti']) && isset($cookieValue['sub'])) {

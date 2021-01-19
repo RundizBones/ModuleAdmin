@@ -312,6 +312,8 @@ class MenuItems
                 $Cache->set($cacheKey, $menuItems, 1 * 60 * 60);// cache for 1 hour.
             }
 
+            $Config->setModule('');// restore to default.
+
             unset($cacheMenuItem, $Config);
         }// endif; cached
 

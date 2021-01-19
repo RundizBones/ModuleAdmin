@@ -298,13 +298,16 @@ trait CacheFileTrait
             $dayOld = ((time()-$fileTs)/60/60/24);
             unset($fileTs);
 
-            if ($dayOld > $Config->get('modelCacheExpire', 'cache', 30)) {
+            $cachedExpires = $Config->get('modelCacheExpire', 'cache', 30);
+            $Config->setModule('');// restore to default module.
+
+            if ($dayOld > $cachedExpires) {
                 // if older than xx days (30 days by default), rebuild cache.
-                unset($Config, $dayOld);
+                unset($cachedExpires, $Config, $dayOld);
                 return true;
             }
 
-            unset($Config, $dayOld);
+            unset($cachedExpires, $Config, $dayOld);
             return false;
         } else {
             // if file is not exists.
