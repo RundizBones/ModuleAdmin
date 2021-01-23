@@ -286,7 +286,7 @@ class Assets
      *                           'file' => (string)'xxx/xxx/xxx.xx', // this is required
      *                           'dependency' => array('the', 'array', 'of', 'handle', 'this', 'asset', 'depend', 'on'),
      *                           'version' => 'x.x.x', // string or boolean
-     *                           'attributes' => array('an', 'array', 'of', 'html', 'attributes', 'for', 'this', 'asset'),
+     *                           'attributes' => array('title' => 'my element title', 'data-name' => 'my data-name attribute'),
      *                           'group' => null, // string or null
      *                       ),
      *                       array(
@@ -300,7 +300,7 @@ class Assets
      *                           'file' => (string)'xxx/xxx/xxx.xx', // this is required
      *                           'dependency' => array('the', 'array', 'of', 'handle', 'this', 'asset', 'depend', 'on'),
      *                           'version' => 'x.x.x', // string or boolean
-     *                           'attributes' => array('an', 'array', 'of', 'html', 'attributes', 'for', 'this', 'asset'),
+     *                           'attributes' => array('title' => 'my element title', 'data-name' => 'my data-name attribute'),
      *                           'group' => null, // string or null
      *                       ),
      *                       array(
