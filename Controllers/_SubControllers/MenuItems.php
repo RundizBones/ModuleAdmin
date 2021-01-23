@@ -70,7 +70,7 @@ class MenuItems
                         $menuItems[$key]['subMenu'] = $this->addToMenu($menuItems[$key]['subMenu'], $additionalMenuItems[$key]['subMenu']);
                         unset($additionalMenuItems[$key]);
                     } else {
-                        // add array key +0.1 to manu item (not sub menu).
+                        // add array key +0.1 to menu item (not sub menu).
                         $newKey = $this->increaseArrayKeyDec($key, $menuItems);
                         $additionalMenuItems[$newKey] = $additionalMenuItems[$key];
                         unset($additionalMenuItems[$key]);
