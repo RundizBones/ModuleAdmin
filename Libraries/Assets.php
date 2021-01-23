@@ -478,56 +478,60 @@ class Assets
     {
         $output = '';
 
-        if (is_array($item)) {
-            if (array_key_exists('file', $item) && is_scalar($item['file'])) {
-                $fileParts = parse_url($item['file']);
-                $fileUrl = $fileParts['path'];
+        if (array_key_exists('file', $item) && is_scalar($item['file'])) {
+            $Url = new \Rdb\System\Libraries\Url();
 
-                if (isset($fileParts['query'])) {
-                    parse_str($fileParts['query'], $queries);
+            $fileParts = parse_url($item['file']);
+
+            if (isset($fileParts['query'])) {
+                parse_str($fileParts['query'], $queries);
+            } else {
+                $queries = [];
+            }
+
+            unset($fileParts['fragment'], $fileParts['query']);// remove ?query and #fragment for build URL without them.
+            $fileUrl = $Url->buildUrl($fileParts);
+
+            if (array_key_exists('version', $item) && $item['version'] !== false) {
+                if (!isset($queries['v'])) {
+                    $queryVersionName = 'v';
                 } else {
-                    $queries = [];
+                    $queryVersionName = 'v_' . hash('sha512', __FILE__);
                 }
 
-                if (array_key_exists('version', $item) && $item['version'] !== false) {
-                    if (!isset($queries['v'])) {
-                        $queryVersionName = 'v';
-                    } else {
-                        $queryVersionName = 'v' . hash('sha512', __FILE__);
-                    }
+                if (!is_string($item['version'])) {
+                    // if file version is set to auto generate.
+                    $queries[$queryVersionName] = date('Ym');
 
-                    if (!is_string($item['version'])) {
-                        // if file version is set to auto generate.
-                        $queries[$queryVersionName] = date('Ym');
+                    // check again for file version that is local and get its modify date.
+                    if (stripos($item['file'], '://') === false && stripos($item['file'], '//') !== 0) {
+                        // if local file
+                        
+                        $fileRealPath = preg_replace('#'.$Url->getAppBasedPath().'#', PUBLIC_PATH . '/', $item['file'], 1);
+                        $fileRealPath = realpath($fileRealPath);
 
-                        // check again for file version that is local and get its modify date.
-                        if (stripos($item['file'], '://') === false && stripos($item['file'], '//') !== 0) {
-                            // if local file
-                            $Url = new \Rdb\System\Libraries\Url();
-                            $fileRealPath = preg_replace('#'.$Url->getAppBasedPath().'#', PUBLIC_PATH . '/', $item['file'], 1);
-                            $fileRealPath = realpath($fileRealPath);
-
-                            if (is_file($fileRealPath)) {
-                                $queries[$queryVersionName] = 'fmt-' . filemtime($fileRealPath);
-                            }
-
-                            unset($fileRealPath, $Url);
+                        if (is_file($fileRealPath)) {
+                            $queries[$queryVersionName] = 'fmt-' . filemtime($fileRealPath);
                         }
-                    } else {
-                        // if version is string
-                        $queries[$queryVersionName] = $item['version'];
+
+                        unset($fileRealPath);
                     }
+                } else {
+                    // if version is string
+                    $queries[$queryVersionName] = $item['version'];
+                }
 
-                    unset($queryVersionName);
-                }// endif; asset version append to url.
+                unset($queryVersionName);
+            }// endif; asset version append to url.
+
+            unset($Url);
+
+            $output = $fileUrl;
+            if (!empty($queries)) {
+                $output .= '?' . http_build_query($queries, null, ini_get('arg_separator.output'), PHP_QUERY_RFC3986);
             }
-        }
-
-        $output = $fileUrl;
-        if (!empty($queries)) {
-            $output .= '?' . http_build_query($queries, null, ini_get('arg_separator.output'), PHP_QUERY_RFC3986);
-        }
-        unset($fileParts, $fileUrl, $queries);
+            unset($fileUrl, $queries);
+        }// endif; array_key_exists('file', $item)
 
         return $output;
     }// generateAssetUrlWithVersion

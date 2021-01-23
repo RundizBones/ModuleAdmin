@@ -513,7 +513,7 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
     public function testGenerateAssetUrlWithVersion()
     {
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__);
+        $publicModuleUrl = $Url->getPublicModuleUrl(__FILE__); // example: /app-path/Modules/MyModule
         unset($Url);
 
         $item['file'] = $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js';
@@ -545,6 +545,18 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
         $item['file'] = $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js?a=b&';
         $item['version'] = '3.x.x';
         $this->assertEquals($item['file'] . 'v=3.x.x', $this->Assets->generateAssetUrlWithVersion($item));// file already end with & sign
+
+        $item['file'] = $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js?v=view';
+        $item['version'] = '3.x.x';
+        $this->assertEquals(
+            $item['file'] . '&v_ee7bb2d456bfb61730220741f8b33eca63cfbd3c7652d9ff1a009592cc1ad7715abf153e89ef8e41a0bee557be5633bdb4464103a81c56e0d8f53abe4c54980e=3.x.x', 
+            $this->Assets->generateAssetUrlWithVersion($item)
+        );// already has v=xxx so it must not overwrite.
+
+        // tests with full URL or CDN. ----------------------------------
+        $item['file'] = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js';
+        $item['version'] = '3.5.1';
+        $this->assertEquals($item['file'] . '?v=3.5.1', $this->Assets->generateAssetUrlWithVersion($item));
     }// testGenerateAssetUrlWithVersion
 
 
