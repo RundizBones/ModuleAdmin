@@ -107,12 +107,69 @@ class WidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
                 'name' => __('DB'),
                 'value' => $PDO->getAttribute(\PDO::ATTR_DRIVER_NAME) . ' ' . $PDO->getAttribute(\PDO::ATTR_SERVER_VERSION),
             ],
+            [
+                'name' => __('Framework'),
+                'value' => __('Version %1$s', $this->systemSummaryGetFrameworkVersion()),
+            ],
         ];
 
         $return['content'] = $this->Views->render('Admin/UI/Widgets/systemSummary_v', $output);
 
         return $return;
     }// systemSummary
+
+
+    /**
+     * Get framework's version.
+     * 
+     * @since 1.1.1
+     * @return string
+     */
+    protected function systemSummaryGetFrameworkVersion(): string
+    {
+        $output = '';
+
+        if (
+            defined('ROOT_PATH') &&
+            is_file(ROOT_PATH . DIRECTORY_SEPARATOR . 'System' . DIRECTORY_SEPARATOR . 'App.php')
+        ) {
+            $File = new \SplFileObject(ROOT_PATH . DIRECTORY_SEPARATOR . 'System' . DIRECTORY_SEPARATOR . 'App.php');
+            $fileContent = '';
+            $i = 0;
+            while (!$File->eof()) {
+                $fileContent .= $File->fgets();
+                $i++;
+                if ($i >= 30) {
+                    // grab only 30 max line is enough.
+                    break;
+                }
+            }
+            $File = null;
+            unset($File, $i);
+            // replace newlines to unix (\n) only.
+            $fileContent = preg_replace('~\R~u', "\n", $fileContent);// https://stackoverflow.com/a/7836692/128761
+
+            preg_match('#(?:\/\*(?:[^*]|(?:\*[^\/]))*\*\/)#iu', $fileContent, $firstDocblock);
+            unset($fileContent);
+            if (isset($firstDocblock[0])) {
+                preg_match_all('#@([0-9a-z\-\_]+) *(.*)\n#iu', $firstDocblock[0], $matches, PREG_SET_ORDER);
+                unset($firstDocblock);
+                if (isset($matches) && is_array($matches)) {
+                    foreach ($matches as $key => $item) {
+                        if (isset($item[1]) && isset($item[2]) && strtolower($item[1]) === 'version') {
+                            unset($matches);
+                            $output = $item[2];
+                            break;
+                        }
+                    }// endforeach;
+                    unset($item, $key);
+                }
+                unset($matches);
+            }
+        }
+
+        return $output;
+    }// systemSummaryGetFrameworkVersion
 
 
     /**

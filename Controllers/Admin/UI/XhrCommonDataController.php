@@ -55,6 +55,7 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
         }
         $File = null;
         unset($File, $i);
+        // replace newlines to unix (\n) only.
         $fileContent = preg_replace('~\R~u', "\n", $fileContent);// https://stackoverflow.com/a/7836692/128761
 
         preg_match('#(?:\/\*(?:[^*]|(?:\*[^\/]))*\*\/)#iu', $fileContent, $firstDocblock);
