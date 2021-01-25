@@ -9,6 +9,12 @@
 
 
 const {dest, series, src} = require('gulp');
+const fs = require('fs');
+const mergeStream =   require('merge-stream');
+const rename = require('gulp-rename');
+const replace = require('gulp-replace');
+const phpFile = './ModuleData/ModuleAssets.php';
+const targetFolder = './ModuleData/';
 
 
 /**
@@ -44,13 +50,11 @@ function getVersionNumberOnly(versionString) {
 
 /**
  * Write packages version to PHP file.
+ * 
+ * Do not use too many `.pipe()` or it will have an error like this.
+ * > MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 end listeners added to [DestroyableTransform]. Use emitter.setMaxListeners() to increase limit
  */
-function writePackagesVersion(cb) {
-    const fs = require('fs');
-    const mergeStream =   require('merge-stream');
-    const rename = require('gulp-rename');
-    const replace = require('gulp-replace');
-
+function writePackagesVersion1(cb) {
     let packageJson = JSON.parse(fs.readFileSync('./package.json'));
     let packageDependencies = (typeof(packageJson.dependencies) !== 'undefined' ? packageJson.dependencies : {});
 
@@ -59,13 +63,10 @@ function writePackagesVersion(cb) {
     let rdtaVersion = packageDependencies['rundiz-template-for-admin'];
     let momentJsVersion = packageDependencies['moment'];
     let lodashVersion = packageDependencies['lodash'];
-    let sortableJsVersion = packageDependencies['sortablejs'];
 
     packageJson = undefined;
     packageDependencies = undefined;
 
-    let phpFile = './ModuleData/ModuleAssets.php';
-    let targetFolder = './ModuleData/';
     let tasks = [];
 
     // make backup
@@ -115,19 +116,45 @@ function writePackagesVersion(cb) {
         lodashVersion = undefined;
     }
 
-    if (typeof(sortableJsVersion) !== 'undefined') {
-        sortableJsVersion = getVersionNumberOnly(sortableJsVersion);
-        let regExp = new RegExp(getRegexPattern('sortableJS'), 'gi');
-        tasks[1].pipe(replace(regExp, '$1$2$3' + sortableJsVersion + '$5$6'))
-        sortableJsVersion = undefined;
-    }
-
     tasks[1].pipe(dest(targetFolder));
 
     return mergeStream(tasks);
-}// writePackagesVersion
+}// writePackagesVersion1
+
+
+/**
+ * Write packages version to PHP file.
+ * 
+ * Do not use too many `.pipe()` or it will have an error like this.
+ * > MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 end listeners added to [DestroyableTransform]. Use emitter.setMaxListeners() to increase limit
+ */
+function writePackagesVersion2(cb) {
+    let packageJson = JSON.parse(fs.readFileSync('./package.json'));
+    let packageDependencies = (typeof(packageJson.dependencies) !== 'undefined' ? packageJson.dependencies : {});
+
+    let sortableJsVersion = packageDependencies['sortablejs'];
+
+    packageJson = undefined;
+    packageDependencies = undefined;
+
+    let tasks = [];
+
+    tasks[0] = src(phpFile);
+
+    if (typeof(sortableJsVersion) !== 'undefined') {
+        sortableJsVersion = getVersionNumberOnly(sortableJsVersion);
+        let regExp = new RegExp(getRegexPattern('sortableJS'), 'gi');
+        tasks[0].pipe(replace(regExp, '$1$2$3' + sortableJsVersion + '$5$6'))
+        sortableJsVersion = undefined;
+    }
+
+    tasks[0].pipe(dest(targetFolder));
+
+    return mergeStream(tasks);
+}// writePackagesVersion2
 
 
 exports.writeVersions = series(
-    writePackagesVersion
+    writePackagesVersion1,
+    writePackagesVersion2
 );
