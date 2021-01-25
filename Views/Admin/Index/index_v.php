@@ -11,7 +11,7 @@
                         </div><!--.rdba-dashboard-container-->
 
                         <template id="rdba-dashboardwidget-rowhero">
-                            <div class="rdba-dashboard-widget-column" data-widgetid="{{id}}">
+                            <div class="rdba-dashboard-widget-item" data-widgetid="{{id}}">
                                 <section id="rdba-dashboard-row-hero-contents-{{id}}" class="rdba-dashboard-row-hero-contents rdba-dashboard-widget-contents{{#if classes}} {{classes}}{{/if}}">
                                     <i class="fas fa-arrows-alt fa-fw drag-icon"></i>
                                     {{{content}}}
@@ -19,7 +19,7 @@
                             </div>
                         </template>
                         <template id="rdba-dashboardwidget-rownormal">
-                            <div class="rdba-dashboard-widget-column" data-widgetid="{{id}}">
+                            <div class="rdba-dashboard-widget-item" data-widgetid="{{id}}">
                                 <section id="rdba-dashboard-column-normal-contents-{{id}}" class="rdba-dashboard-column-normal-contents rdba-dashboard-widget-contents{{#if classes}} {{classes}}{{/if}}">
                                     <i class="fas fa-arrows-alt fa-fw drag-icon"></i>
                                     {{{content}}}

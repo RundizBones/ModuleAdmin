@@ -6,38 +6,23 @@ Admin home (admin dashboard) CSS.
 .rdba-dashboard-row-hero .rdba-dashboard-row-hero-contents {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-.rdba-dashboard-row-hero .rdba-dashboard-widget-column:not(:last-child) {
+.rdba-dashboard-row-hero .rdba-dashboard-widget-item:not(:last-child) {
     margin-bottom: 1.25rem;
 }
 
 
 .rdba-dashboard-row-normal {
-    column-gap: 0;
-    margin-left: -0.625rem;
-    margin-right: -0.625rem;
+    align-items: stretch;
+    column-gap: 1.25rem;
+    display: grid;
+    grid-auto-rows: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
+    row-gap: 1.25rem;
 }
-.rdba-dashboard-row-normal .rdba-dashboard-widget-column {
-    break-inside: avoid;
-    margin-bottom: 1.25rem;
-    overflow: hidden;/* @link https://stackoverflow.com/a/52192567/128761 Fix Firefox, MS Edge did not render correctly. */
-    padding-left: 0.625rem;
-    padding-right: 0.625rem;
+.rdba-dashboard-row-normal .rdba-dashboard-widget-item {
+    border: 1px solid #ddd;
 }
-@media (min-width: 768px) {
-    .rdba-dashboard-row-normal .rdba-dashboard-widget-column {
-        max-width: 100%;
-    }
-}
-@media (min-width: 768px) and (max-width: 1599px) {
-    .rdba-dashboard-row-normal {
-        column-count: 2;
-    }
-}
-@media (min-width: 1600px) {
-    .rdba-dashboard-row-normal {
-        column-count: 4;
-    }
-}
+
 
 .rdba-dashboard-row-normal .rdba-dashboard-widget-contents h1 {
     font-size: 2.05em;
@@ -60,8 +45,7 @@ Admin home (admin dashboard) CSS.
 
 
 .rdba-dashboard-widget-contents {
-    border: 1px solid #ddd;
-    padding: 0.625rem;
+    padding: 0.625rem;/* add padding here to prevent text at bottom overflow parent element. */
     position: relative;
 }
 .rdba-dashboard-widget-contents .drag-icon {
@@ -72,7 +56,7 @@ Admin home (admin dashboard) CSS.
     top: 0.3125rem;
     transition: opacity 0.3s;
 }
-.rdba-dashboard-widget-column:hover .drag-icon {
+.rdba-dashboard-widget-item:hover .drag-icon {
     opacity: 1;
     transition: opacity 0.1s;
 }

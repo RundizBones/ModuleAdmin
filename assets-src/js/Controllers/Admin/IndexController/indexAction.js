@@ -84,10 +84,12 @@ class RdbaIndexController {
                     console.error('Inject JS, CSS error:', event);
                 })
                 .then(function() {
+                    //console.log('injected css, js of widgets.');
                     let event = new Event('rdba.admindashboard.widgets.ready');
                     document.dispatchEvent(event);
                 });
 
+                //console.log('finish render dashboard widgets.');
                 resolve(response);
             });// end XHR
         });
@@ -109,8 +111,16 @@ class RdbaIndexController {
         .then(function() {
             return thisClass.ajaxGetWidgetsHTML();
         })
-        .then(function() {
-            return thisClass.makeWidgetsSortable();
+        ;
+
+        document.addEventListener('rdba.admindashboard.widgets.ready', function(e) {
+            //console.log('widgets ready even initiated.');
+
+            thisClass.makeWidgetsMasonry()
+                .then(function() {
+                    return thisClass.makeWidgetsSortable();
+                })
+            ;
         });
     }// init
 
@@ -169,8 +179,46 @@ class RdbaIndexController {
 
 
     /**
+     * Make dashboard widgets masonry.
+     * 
+     * @private This method was called from `init()` method.
+     * @link https://medium.com/@andybarefoot/a-masonry-style-layout-using-css-grid-8c663d355ebb Original source code.
+     * @returns {Promise}
+     */
+    makeWidgetsMasonry() {
+        let promiseObj = new Promise(function(resolve, reject) {
+            function resizeAllGridItems() {
+                console.log('resizing grid items.');
+                let allItems = document.getElementsByClassName("rdba-dashboard-widget-item");
+                for(let x=0;x<allItems.length;x++){
+                  resizeGridItem(allItems[x]);
+                }
+            }
+
+            function resizeGridItem(item) {
+                let grid = document.getElementsByClassName("rdba-dashboard-row-normal")[0];
+                let rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+                let rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('row-gap'));
+                let rowSpan = Math.ceil((item.querySelector('.rdba-dashboard-widget-contents').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
+                item.style.gridRowEnd = "span " + rowSpan;
+            }
+
+            // this class will be called on dom loaded. let's start
+            resizeAllGridItems();
+            window.addEventListener('resize', resizeAllGridItems);
+
+            resolve();
+            //console.log('finish make widgets masonry.');
+        });
+
+        return promiseObj;
+    }// makeWidgetsMasonry
+
+
+    /**
      * Make widget sortable.
      * 
+     * @private This method was called from `init()` method.
      * @returns {Promise}
      */
     makeWidgetsSortable() {
@@ -182,6 +230,7 @@ class RdbaIndexController {
             sortable(rowHeroElement, 'hero');
 
             resolve();
+            //console.log('finish make widgets sortable.');
         });
 
         return promiseObj;
