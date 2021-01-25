@@ -252,11 +252,6 @@ class RdbaIndexController {
                 'animation': 150,
                 'dataIdAttr': 'data-widgetid',
                 'handle': '.drag-icon',
-                'onEnd': function(event) {
-                    if (event.item && event.item.style) {
-                        event.item.style = '';// remove stuck transform translateZ for sure.
-                    }
-                },
                 'store': {
                     'set': function(sortable) {
                         let sortableArray = sortable.toArray();
