@@ -82,7 +82,7 @@ class PluginsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         }
 
         // set generic values.
-        $output = array_merge($output, $this->getPluginUrlsMethods());
+        $output['urls'] = $this->getPluginUrlsMethods();
 
         $output['pageTitle'] = __('Modules Plugins');
         $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);

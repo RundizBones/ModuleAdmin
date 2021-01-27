@@ -126,10 +126,11 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
 
         // set urls and methods.
         $urlAppBased = $Url->getAppBasedPath(true);
-        $output['getCacheUrl'] = $urlAppBased . '/admin/tools/cache';// display cache tool page, get data via rest api.
-        $output['getCacheMethod'] = 'GET';
-        $output['clearCacheUrl'] = $urlAppBased . '/admin/tools/cache';// clear all cache via rest api.
-        $output['clearCacheMethod'] = 'DELETE';
+        $output['urls'] = [];
+        $output['urls']['getCacheUrl'] = $urlAppBased . '/admin/tools/cache';// display cache tool page, get data via rest api.
+        $output['urls']['getCacheMethod'] = 'GET';
+        $output['urls']['clearCacheUrl'] = $urlAppBased . '/admin/tools/cache';// clear all cache via rest api.
+        $output['urls']['clearCacheMethod'] = 'DELETE';
         unset($urlAppBased);
 
         $output['pageTitle'] = __('Manage cache');
@@ -156,10 +157,10 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
                     'csrfName' => $output['csrfName'],
                     'csrfValue' => $output['csrfValue'],
                     'csrfKeyPair' => $output['csrfKeyPair'],
-                    'getCacheUrl' => $output['getCacheUrl'],
-                    'getCacheMethod' => $output['getCacheMethod'],
-                    'clearCacheUrl' => $output['clearCacheUrl'],
-                    'clearCacheMethod' => $output['clearCacheMethod'],
+                    'getCacheUrl' => $output['urls']['getCacheUrl'],
+                    'getCacheMethod' => $output['urls']['getCacheMethod'],
+                    'clearCacheUrl' => $output['urls']['clearCacheUrl'],
+                    'clearCacheMethod' => $output['urls']['clearCacheMethod'],
                     'txtPleaseSelectCommand' => __('Please choose a command'),
                 ]
             );

@@ -139,7 +139,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
         unset($Csrf);
 
         // set URLs & methods.
-        $output = array_merge($output, $this->getRoleUrlsMethods($userrole_id));
+        $output['urls'] = $this->getRoleUrlsMethods($userrole_id);
 
         $output['userrole_id'] = $userrole_id;
         $output['pageTitle'] = __('Edit role');
