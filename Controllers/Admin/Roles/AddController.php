@@ -137,7 +137,7 @@ class AddController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
         unset($Csrf);
 
         // set URLs & methods.
-        $output = array_merge($output, $this->getRoleUrlsMethods());
+        $output['urls'] = $this->getRoleUrlsMethods();
 
         $output['pageTitle'] = __('Add new role');
         $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);

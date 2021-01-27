@@ -298,12 +298,13 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
 
         // urls & methods
         $urlAppBased = $Url->getAppBasedPath(true);
-        $output['getSettingsUrl'] = $urlAppBased . '/admin/settings';// get settings page, also get data via rest.
-        $output['getSettingsMethod'] = 'GET';
-        $output['editSettingsSubmitUrl'] = $urlAppBased . '/admin/settings';// edit, save settings via rest.
-        $output['editSettingsSubmitMethod'] = 'PATCH';
-        $output['editSettingsTestSmtpConnectionUrl'] = $urlAppBased . '/admin/settings/test-smtp';
-        $output['editSettingsTestSmtpConnectionMethod'] = 'POST';
+        $output['urls'] = [];
+        $output['urls']['getSettingsUrl'] = $urlAppBased . '/admin/settings';// get settings page, also get data via rest.
+        $output['urls']['getSettingsMethod'] = 'GET';
+        $output['urls']['editSettingsSubmitUrl'] = $urlAppBased . '/admin/settings';// edit, save settings via rest.
+        $output['urls']['editSettingsSubmitMethod'] = 'PATCH';
+        $output['urls']['editSettingsTestSmtpConnectionUrl'] = $urlAppBased . '/admin/settings/test-smtp';
+        $output['urls']['editSettingsTestSmtpConnectionMethod'] = 'POST';
         unset($urlAppBased);
 
         if ($this->Input->isNonHtmlAccept() || $this->Input->isXhr()) {
@@ -336,12 +337,12 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                     'csrfName' => $output['csrfName'],
                     'csrfValue' => $output['csrfValue'],
                     'csrfKeyPair' => $output['csrfKeyPair'],
-                    'getSettingsUrl' => $output['getSettingsUrl'],
-                    'getSettingsMethod' => $output['getSettingsMethod'],
-                    'editSettingsSubmitUrl' => $output['editSettingsSubmitUrl'],
-                    'editSettingsSubmitMethod' => $output['editSettingsSubmitMethod'],
-                    'editSettingsTestSmtpConnectionUrl' => $output['editSettingsTestSmtpConnectionUrl'],
-                    'editSettingsTestSmtpConnectionMethod' => $output['editSettingsTestSmtpConnectionMethod'],
+                    'getSettingsUrl' => $output['urls']['getSettingsUrl'],
+                    'getSettingsMethod' => $output['urls']['getSettingsMethod'],
+                    'editSettingsSubmitUrl' => $output['urls']['editSettingsSubmitUrl'],
+                    'editSettingsSubmitMethod' => $output['urls']['editSettingsSubmitMethod'],
+                    'editSettingsTestSmtpConnectionUrl' => $output['urls']['editSettingsTestSmtpConnectionUrl'],
+                    'editSettingsTestSmtpConnectionMethod' => $output['urls']['editSettingsTestSmtpConnectionMethod'],
                 ]
             );
 

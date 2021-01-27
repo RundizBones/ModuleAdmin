@@ -398,7 +398,7 @@ class PermissionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Admi
         }
 
         // set urls and mothods
-        $output = array_merge($output, $this->getPermissionUrlsMethods());
+        $output['urls'] = $this->getPermissionUrlsMethods();
 
         $output['pageTitle'] = __('Manage permissions');
         $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);

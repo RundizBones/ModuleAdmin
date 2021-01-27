@@ -240,7 +240,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         unset($UserRolesDb);
 
         // set URLs & methods.
-        $output = array_merge($output, $this->getRoleUrlsMethods());
+        $output['urls'] = $this->getRoleUrlsMethods();
 
         $output['pageTitle'] = __('Confirmation required');
         $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);
