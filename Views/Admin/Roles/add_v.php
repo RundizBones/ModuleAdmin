@@ -6,7 +6,7 @@
 ?>
                         <h1 class="rdba-page-content-header"><?php echo __('Add new role'); ?></h1>
 
-                        <form id="rdba-add-role-form" class="rd-form horizontal rdba-edit-form" method="<?php echo (isset($addRoleMethod) ? strtolower($addRoleMethod) : 'post'); ?>" action="<?php if (isset($addRoleSubmitUrl)) {echo htmlspecialchars($addRoleSubmitUrl, ENT_QUOTES);} ?>">
+                        <form id="rdba-add-role-form" class="rd-form horizontal rdba-edit-form" method="post" action="">
                             <?php 
                             // use form html CSRF because this page can load via XHR, REST by HTML type and this can reduce double call to get CSRF values in JSON type again.
                             if (
