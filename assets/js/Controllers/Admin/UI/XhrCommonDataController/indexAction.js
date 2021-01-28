@@ -26,11 +26,44 @@ class RdbaUiXhrCommonDataController {
 
 
     /**
+     * Detect on change language on the navbar.
+     * 
+     * @private This method was called from `setLanguages()`.
+     * @returns {undefined}
+     */
+    listenOnChangeLanguageNavbar() {
+        let $ = jQuery.noConflict();
+
+        // detect on navbar listbox.
+        $('#rdba-languages-navbar-list').on('click', 'a', function(e) {
+            e.preventDefault();
+            let thisListbox = $('#rdba-languages-navbar-list');
+            let thisListItem = $(this).closest('li');// $(this) refer to a inside the list (ul).
+
+            $.ajax({
+                'url': thisListbox.data('setLanguageUrl'),
+                'method': thisListbox.data('setLanguageMethod'),
+                data: 'currentUrl=' + RdbaUIXhrCommonData.currentUrl + '&rundizbones-languages=' + thisListItem.data('locale'),
+                dataType: 'json'
+            })
+            .done(function(data, textStatus, jqXHR) {
+                let response = data;
+
+                if (typeof(response.redirectUrl) !== 'undefined') {
+                    window.location.href = response.redirectUrl;
+                }
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error(jqXHR);
+            })
+        });
+    }// listenOnChangeLanguageNavbar
+
+
+    /**
      * Mark current menu item on matched current link.
      * 
-     * This method was called from `renderMenuItems()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `renderMenuItems()`.
      * @param {object} MenuItems
      * @returns {undefined}
      */
@@ -72,9 +105,7 @@ class RdbaUiXhrCommonDataController {
     /**
      * Match URL rule.
      * 
-     * This method was called from `markCurrentMenuItem()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `markCurrentMenuItem()`.
      * @param {string} url The URL.
      * @param {string} rule The rule, for example: /admin/users/* will be match /admin/users/edit, /admin/users/edit/2
      * @returns {Boolean} Return true on success, false on failure.
@@ -82,40 +113,6 @@ class RdbaUiXhrCommonDataController {
     matchUrlRule(url, rule) {
         return new RegExp("^" + rule.split("*").join(".*") + "$").test(url);
     }// matchUrlRule
-
-
-    /**
-     * Detect on change language on the navbar.
-     * 
-     * @returns {undefined}
-     */
-    onChangeLanguage() {
-        let $ = jQuery.noConflict();
-
-        // detect on navbar listbox.
-        $('#rdba-languages-navbar-list').on('click', 'a', function(e) {
-            e.preventDefault();
-            let thisListbox = $('#rdba-languages-navbar-list');
-            let thisListItem = $(this).closest('li');// $(this) refer to a inside the list (ul).
-
-            $.ajax({
-                'url': thisListbox.data('setLanguageUrl'),
-                'method': thisListbox.data('setLanguageMethod'),
-                data: 'currentUrl=' + RdbaUIXhrCommonData.currentUrl + '&rundizbones-languages=' + thisListItem.data('locale'),
-                dataType: 'json'
-            })
-            .done(function(data, textStatus, jqXHR) {
-                let response = data;
-
-                if (typeof(response.redirectUrl) !== 'undefined') {
-                    window.location.href = response.redirectUrl;
-                }
-            })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                console.error(jqXHR);
-            })
-        });
-    }// onChangeLanguage
 
 
     /**
@@ -197,9 +194,7 @@ class RdbaUiXhrCommonDataController {
      * 
      * This method will be trying to call render breadcrumb if it was not set via controller.
      * 
-     * This method was called from `renderMenuItems()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `renderMenuItems()`.
      * @returns {undefined}
      */
     recursiveSetCurrentUp() {
@@ -251,9 +246,7 @@ class RdbaUiXhrCommonDataController {
      * 
      * If breadcrumb did not set via controller, this method will set it from current deepest menu item up to root.
      * 
-     * This method was called from `recursiveSetCurrentUp()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `recursiveSetCurrentUp()`.
      * @param {array} breadcrumb
      * @returns {undefined}
      */
@@ -293,9 +286,7 @@ class RdbaUiXhrCommonDataController {
      * This method mark current in menu item or sub menu item up to root.<br>
      * It is also set the breadcrumb from deepest menu item (If the breadcrumb did not set via controller).
      * 
-     * This method was called from `setUrlsMenuItems()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `setUrlsMenuItems()`.
      * @param {object} urlsMenuItems
      * @returns {undefined}
      */
@@ -400,7 +391,7 @@ class RdbaUiXhrCommonDataController {
                     .data('setLanguageUrl', languages.setLanguage_url);
 
                 $('.sm-rdta.navbar').smartmenus('refresh');
-                this.onChangeLanguage();
+                this.listenOnChangeLanguageNavbar();
             }
         }
     }// setLanguages
