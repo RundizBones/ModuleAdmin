@@ -188,7 +188,7 @@ class RdbaIndexController {
     makeWidgetsMasonry() {
         let promiseObj = new Promise(function(resolve, reject) {
             function resizeAllGridItems() {
-                console.log('resizing grid items.');
+                //console.log('resizing grid items.');
                 let allItems = document.getElementsByClassName("rdba-dashboard-widget-item");
                 for(let x=0;x<allItems.length;x++){
                   resizeGridItem(allItems[x]);
