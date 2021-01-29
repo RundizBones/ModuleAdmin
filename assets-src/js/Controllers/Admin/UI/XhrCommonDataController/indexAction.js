@@ -26,11 +26,245 @@ class RdbaUiXhrCommonDataController {
 
 
     /**
+     * Display page alert message after Ajax get UI common data.
+     * 
+     * @private This method was called from `init()` method.
+     * @param {object} response
+     * @returns {undefined}
+     */
+    ajaxGetUiCommonDataDisplayPageAlertMessage(response) {
+        if (response && typeof(response.pageAlertMessages) !== 'undefined') {
+            let alertClass = '',
+            alertBox = '';
+
+            response.pageAlertMessages.forEach(function(item, index) {
+                if (item.status) {
+                    alertClass = RdbaCommon.getAlertClassFromStatus(item.status);
+                } else {
+                    alertClass = 'alert-warning';
+                }
+                if (item.message) {
+                    alertBox += RdbaCommon.renderAlertHtml(alertClass, item.message, false);
+                }
+            });
+
+            let pageAlertPlaceholder = document.querySelector('.rdba-page-alert-placeholder');
+            if (pageAlertPlaceholder) {
+                pageAlertPlaceholder.insertAdjacentHTML('beforeend', alertBox);
+            }
+        }
+    }// ajaxGetUiCommonDataDisplayPageAlertMessage
+
+
+    /**
+     * Set response data to UI.
+     * 
+     * @private This method was called from `init()` method.
+     * @param {object} response
+     * @returns {undefined}
+     */
+    ajaxGetUiCommonDataSetResponse(response) {
+        if (typeof(response.configDb) === 'object') {
+            // set site config.
+            this.setSiteConfig(response.configDb);
+        }
+
+        if (typeof(response.languages) === 'object') {
+            // set languages list.
+            this.setLanguages(response.languages);
+        }
+
+        if (typeof(response.urlsMenuItems) === 'object') {
+            // set URLs and menu items.
+            this.setUrlsMenuItems(response.urlsMenuItems);
+        }
+
+        if (typeof(response.appVersion) === 'object') {
+            // set app version.
+            this.setAppversion(response.appVersion);
+        }
+
+        if (typeof(response.datatablesTranslation) === 'object') {
+            // set datatables translation.
+            datatablesTranslation = response.datatablesTranslation;
+        }
+    }// ajaxGetUiCommonDataSetResponse
+
+
+    /**
+     * Initialize the class.
+     * 
+     * @link https://stackoverflow.com/a/41443378/128761 Original source code of session storage expiration.
+     * @link https://stackoverflow.com/a/48184777/128761 Original source code of session storage expiration.
+     * @returns {undefined}
+     */
+    init() {
+        let thisClass = this;
+        let $ = jQuery.noConflict();
+
+        let storageName = 'rdbaUiXhrCommonData';
+        let currentDate = new Date();
+        let sessionObject = JSON.parse(sessionStorage.getItem(storageName));
+        let storageData = {};
+
+        if (sessionObject && Date.parse(currentDate) >= Date.parse(sessionObject.expires)) {
+            // if session storage is expired.
+            console.log('session storage name ' + storageName + ' was expired. removing it.');
+            sessionStorage.removeItem(storageName);
+        } else {
+            // if session storage maybe not expired.
+            if (sessionObject) {
+                // if session object was set and not expired, set value to variable to use later.
+                storageData = sessionObject.value;
+            }
+        }
+
+        if (!_.isEmpty(storageData)) {
+            // if storage data was set.
+            //console.log('session storage ' + storageName + ' was set, use this to set UI.', storageData);
+            // use it to render.
+            this.ajaxGetUiCommonDataSetResponse(storageData.response);
+        }
+
+        /**
+         * Get response object (JSON or text) from response data.
+         * 
+         * @param {object|string} response
+         * @returns {object}
+         */
+        function getResponseObject(response) {
+            if (typeof(response) === 'object') {
+                if (typeof(response.responseJSON) !== 'undefined') {
+                    response = response.responseJSON;
+                } else if (typeof(response.responseText) !== 'undefined') {
+                    response = response.responseText;
+                }
+            }
+            if (typeof(response) === 'undefined' || response === null || response === '') {
+                response = {};
+            }
+
+            return response;
+        }// getResponseObject
+
+        // always retrieve data from server using XHR. ---------------------------
+        this.ajaxGetUiCommonData();
+
+        uiXhrCommonData.fail(function(jqXHR, textStatus, errorThrown) {
+            let response = getResponseObject(jqXHR);
+
+            if (
+                typeof (response) !== 'undefined' &&
+                typeof (response.loggedIn) !== 'undefined' &&
+                typeof (response.loginUrlBaseDomain) !== 'undefined' &&
+                typeof (response.loginUrl) !== 'undefined' &&
+                response.loggedIn === false
+            ) {
+                // if not logged in (response from AdminBaseController).
+                // redirect to login page.
+                console.log('not logged in. redirecting to login page.');
+                window.location.href = response.loginUrlBaseDomain + response.loginUrlBase + '?goback=' + encodeURI(window.location.href) + '&fastlogout=true';
+            }
+            // jQuery .ajax.fail will send to .always and end process.
+        })// .fail
+        .always(function(data, textStatus, jqXHR) {
+            let response = getResponseObject(data);
+            //console.log('Ajax get UI common data completed.');
+
+            // if there is any page alert then code the display alert (dismissable = false) here.
+            if (typeof(response) !== 'undefined') {
+                thisClass.ajaxGetUiCommonDataDisplayPageAlertMessage(response);
+            }
+            // in case of success request, .always will be called before .done.
+            // in case of failed request, .always will be called and end process.
+        })// .always
+        .done(function(response, textStatus, jqXHR) {
+            response = getResponseObject(response);
+
+            if (_.isEmpty(storageData)) {
+                // if storage data is not set.
+                // set session storage data here.
+                let expirationMinute = 30;// expires in minutes
+                let expirationDate = new Date(new Date().getTime() + (60000 * expirationMinute));
+                let storageObject = {
+                    'expires': expirationDate,
+                    'value': {response}
+                };
+                sessionStorage.setItem(storageName, JSON.stringify(storageObject));
+            }
+            // jQuery .ajax when success request, .done will be called after .always but before .then
+        })// .done
+        .then(function(response) {
+            if (_.isEmpty(storageData)) {
+                // if storage data is not set.
+                // try to set data from XHR.
+                thisClass.ajaxGetUiCommonDataSetResponse(response);
+            }// endif storageData
+
+            // @todo [rdb] there is no notification system yet.
+            $('#rdba-notification-navbar-list').html('');
+            $('#rdba-notification-navbar').remove();
+
+            // always set user data.
+            if (typeof(response.userData) === 'object') {
+                // set user data.
+                thisClass.setUserData(response.userData);
+            }
+
+            return response;
+        })// .then
+        .then(function(response) {
+            if (typeof(response.userData) === 'object' && typeof(response.urlsMenuItems) === 'object') {
+                // ping logged in and online.
+                thisClass.pingLogin(response.userData, response.urlsMenuItems);
+            }
+
+            return response;
+        })// .then
+        ;// end uiXhrCommonData .ajax
+        // end always retrieve data from server using XHR. ----------------------
+    }// init
+
+
+    /**
+     * Detect on change language on the navbar.
+     * 
+     * @private This method was called from `setLanguages()`.
+     * @returns {undefined}
+     */
+    listenOnChangeLanguageNavbar() {
+        let $ = jQuery.noConflict();
+
+        // detect on navbar listbox.
+        $('#rdba-languages-navbar-list').on('click', 'a', function(e) {
+            e.preventDefault();
+            let thisListbox = $('#rdba-languages-navbar-list');
+            let thisListItem = $(this).closest('li');// $(this) refer to a inside the list (ul).
+
+            $.ajax({
+                'url': thisListbox.data('setLanguageUrl'),
+                'method': thisListbox.data('setLanguageMethod'),
+                data: 'currentUrl=' + RdbaUIXhrCommonData.currentUrl + '&rundizbones-languages=' + thisListItem.data('locale'),
+                dataType: 'json'
+            })
+            .done(function(data, textStatus, jqXHR) {
+                let response = data;
+
+                if (typeof(response.redirectUrl) !== 'undefined') {
+                    window.location.href = response.redirectUrl;
+                }
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error(jqXHR);
+            })
+        });
+    }// listenOnChangeLanguageNavbar
+
+
+    /**
      * Mark current menu item on matched current link.
      * 
-     * This method was called from `renderMenuItems()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `renderMenuItems()`.
      * @param {object} MenuItems
      * @returns {undefined}
      */
@@ -72,9 +306,7 @@ class RdbaUiXhrCommonDataController {
     /**
      * Match URL rule.
      * 
-     * This method was called from `markCurrentMenuItem()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `markCurrentMenuItem()`.
      * @param {string} url The URL.
      * @param {string} rule The rule, for example: /admin/users/* will be match /admin/users/edit, /admin/users/edit/2
      * @returns {Boolean} Return true on success, false on failure.
@@ -82,40 +314,6 @@ class RdbaUiXhrCommonDataController {
     matchUrlRule(url, rule) {
         return new RegExp("^" + rule.split("*").join(".*") + "$").test(url);
     }// matchUrlRule
-
-
-    /**
-     * Detect on change language on the navbar.
-     * 
-     * @returns {undefined}
-     */
-    onChangeLanguage() {
-        let $ = jQuery.noConflict();
-
-        // detect on navbar listbox.
-        $('#rdba-languages-navbar-list').on('click', 'a', function(e) {
-            e.preventDefault();
-            let thisListbox = $('#rdba-languages-navbar-list');
-            let thisListItem = $(this).closest('li');// $(this) refer to a inside the list (ul).
-
-            $.ajax({
-                'url': thisListbox.data('setLanguageUrl'),
-                'method': thisListbox.data('setLanguageMethod'),
-                data: 'currentUrl=' + RdbaUIXhrCommonData.currentUrl + '&rundizbones-languages=' + thisListItem.data('locale'),
-                dataType: 'json'
-            })
-            .done(function(data, textStatus, jqXHR) {
-                let response = data;
-
-                if (typeof(response.redirectUrl) !== 'undefined') {
-                    window.location.href = response.redirectUrl;
-                }
-            })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                console.error(jqXHR);
-            })
-        });
-    }// onChangeLanguage
 
 
     /**
@@ -197,9 +395,7 @@ class RdbaUiXhrCommonDataController {
      * 
      * This method will be trying to call render breadcrumb if it was not set via controller.
      * 
-     * This method was called from `renderMenuItems()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `renderMenuItems()`.
      * @returns {undefined}
      */
     recursiveSetCurrentUp() {
@@ -251,9 +447,7 @@ class RdbaUiXhrCommonDataController {
      * 
      * If breadcrumb did not set via controller, this method will set it from current deepest menu item up to root.
      * 
-     * This method was called from `recursiveSetCurrentUp()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `recursiveSetCurrentUp()`.
      * @param {array} breadcrumb
      * @returns {undefined}
      */
@@ -293,9 +487,7 @@ class RdbaUiXhrCommonDataController {
      * This method mark current in menu item or sub menu item up to root.<br>
      * It is also set the breadcrumb from deepest menu item (If the breadcrumb did not set via controller).
      * 
-     * This method was called from `setUrlsMenuItems()`.
-     * 
-     * @private For access from other method in this class.
+     * @private This method was called from `setUrlsMenuItems()`.
      * @param {object} urlsMenuItems
      * @returns {undefined}
      */
@@ -400,7 +592,7 @@ class RdbaUiXhrCommonDataController {
                     .data('setLanguageUrl', languages.setLanguage_url);
 
                 $('.sm-rdta.navbar').smartmenus('refresh');
-                this.onChangeLanguage();
+                this.listenOnChangeLanguageNavbar();
             }
         }
     }// setLanguages
@@ -499,128 +691,8 @@ var datatablesTranslation = {};
 
 document.addEventListener('DOMContentLoaded', function() {
     let $ = jQuery.noConflict();
-    let rdbaUiXhrCommonData = new RdbaUiXhrCommonDataController;
-    //let xhrDeferred;
-
-    // ajax get UI common data.
-    rdbaUiXhrCommonData.ajaxGetUiCommonData();
-    uiXhrCommonData.fail(function(jqXHR, textStatus, errorThrown) {
-        let response;
-        if (typeof(jqXHR) === 'object' && typeof(jqXHR.responseJSON) !== 'undefined') {
-            response = jqXHR.responseJSON;
-        } else if (typeof(jqXHR) === 'object' && typeof(jqXHR.responseText) !== 'undefined') {
-            response = jqXHR.responseText;
-        } else {
-            response = jqXHR;
-        }
-        if (typeof(response) === 'undefined' || response === null) {
-            response = {};
-        }
-
-        if (
-            typeof(response) !== 'undefined' && 
-            typeof(response.loggedIn) !== 'undefined' && 
-            typeof(response.loginUrlBaseDomain) !== 'undefined' &&
-            typeof(response.loginUrl) !== 'undefined' &&
-            response.loggedIn === false
-        ) {
-            // if not logged in (response from AdminBaseController).
-            // redirect to login page.
-            console.log('not logged in. redirecting to login page.');
-            window.location.href = response.loginUrlBaseDomain + response.loginUrlBase + '?goback=' + encodeURI(window.location.href) + '&fastlogout=true';
-        }
-    })// .fail, it is end here if failed.
-    .always(function(data, textStatus, jqXHR) {
-        let response;
-        if (typeof(data) === 'object' && typeof(data.responseJSON) !== 'undefined') {
-            response = data.responseJSON;
-        } else if (typeof(data) === 'object' && typeof(data.responseText) !== 'undefined') {
-            response = data.responseText;
-        } else {
-            response = data;
-        }
-        if (typeof(response) === 'undefined' || response === null) {
-            response = {};
-        }
-        
-        // if there is any page alert then code the display alert (dismissable = false) here.
-        if (typeof(response) !== 'undefined') {
-            if (typeof(response.pageAlertMessages) !== 'undefined') {
-                let alertClass = '',
-                alertBox = '';
-                response.pageAlertMessages.forEach(function(item, index) {
-                    if (item.status) {
-                        alertClass = RdbaCommon.getAlertClassFromStatus(item.status);
-                    } else {
-                        alertClass = 'alert-warning';
-                    }
-                    if (item.message) {
-                        alertBox += RdbaCommon.renderAlertHtml(alertClass, item.message, false);
-                    }
-                });
-                let pageAlertPlaceholder = document.querySelector('.rdba-page-alert-placeholder');
-                if (pageAlertPlaceholder) {
-                    pageAlertPlaceholder.insertAdjacentHTML('beforeend', alertBox);
-                }
-            }
-        }
-    })// .always
-    .done(function(response, textStatus, jqXHR) {
-        // if there is anything to do before `.then()` when ajax was successfully, write it here.
-    })// .done, it will be called if done and be called before `.then()`.
-    .then(function(response) {
-        if (typeof(response.configDb) === 'object') {
-            // set site config.
-            rdbaUiXhrCommonData.setSiteConfig(response.configDb);
-        }
-
-        if (typeof(response.languages) === 'object') {
-            // set languages list.
-            rdbaUiXhrCommonData.setLanguages(response.languages);
-        }
-
-        // @todo [rdb] there is no notification system yet.
-        $('#rdba-notification-navbar-list').html('');
-        $('#rdba-notification-navbar').remove();
-
-        if (typeof(response.userData) === 'object') {
-            // set user data.
-            rdbaUiXhrCommonData.setUserData(response.userData);
-        }
-
-        if (typeof(response.urlsMenuItems) === 'object') {
-            // set URLs and menu items.
-            rdbaUiXhrCommonData.setUrlsMenuItems(response.urlsMenuItems);
-        }
-
-        if (typeof(response.appVersion) === 'object') {
-            // set app version.
-            rdbaUiXhrCommonData.setAppversion(response.appVersion);
-        }
-
-        if (typeof(response.datatablesTranslation) === 'object') {
-            datatablesTranslation = response.datatablesTranslation;
-        }
-
-        return response;
-    })
-    .then(function(response) {
-        if (typeof(response.userData) === 'object' && typeof(response.urlsMenuItems) === 'object') {
-            // ping logged in and online.
-            rdbaUiXhrCommonData.pingLogin(response.userData, response.urlsMenuItems);
-        }
-
-        return response;
-    })
-    //.then(function() {
-        //var d = new $.Deferred();
-        //setTimeout(function() {
-            // do something
-            //d.resolve('done');
-        //}(xhrDeferred), 1000);
-        //return d.promise();
-    //})// an example of using deferred with normal function that is not ajax.
-    ;
-    // end ajax get common UI data.
+    let rdbaUiXhrCommonDataClass = new RdbaUiXhrCommonDataController;
+    // initialize the class.
+    rdbaUiXhrCommonDataClass.init();
 
 }, false);
