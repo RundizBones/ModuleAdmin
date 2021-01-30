@@ -155,8 +155,6 @@ class Psr4AutoloaderClass
 $Psr4Autoloader = new Psr4AutoloaderClass();
 $Psr4Autoloader->register();
 $Psr4Autoloader->addNamespace('Rdb\\Modules\\RdbAdmin', dirname(__DIR__));
-$Psr4Autoloader->addNamespace('Tests', dirname(dirname(dirname(__DIR__))) . '/Tests');
-$Psr4Autoloader->addNamespace('System', dirname(dirname(dirname(__DIR__))) . '/System');
 
 
 $requiredPhpUnitVersion = '7.0';
