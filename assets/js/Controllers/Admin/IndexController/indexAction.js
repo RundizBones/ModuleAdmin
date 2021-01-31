@@ -114,8 +114,6 @@ class RdbaIndexController {
         ;
 
         document.addEventListener('rdba.admindashboard.widgets.ready', function(e) {
-            //console.log('widgets ready even initiated.');
-
             thisClass.makeWidgetsMasonry()
                 .then(function() {
                     return thisClass.makeWidgetsSortable();
@@ -181,6 +179,7 @@ class RdbaIndexController {
     /**
      * Make dashboard widgets masonry.
      * 
+     * @since 1.1.5
      * @private This method was called from `init()` method.
      * @link https://medium.com/@andybarefoot/a-masonry-style-layout-using-css-grid-8c663d355ebb Original source code.
      * @returns {Promise}

@@ -16,9 +16,25 @@ Admin home (admin dashboard) CSS.
     column-gap: 1.25rem;
     display: grid;
     grid-auto-rows: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+    grid-template-columns: 1fr;
     row-gap: 1.25rem;
 }
+@media(min-width: 840px) and (max-width: 1059px) {
+    .rdba-dashboard-row-normal {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media(min-width: 1060px) and (max-width: 1459px) {
+    .rdba-dashboard-row-normal {
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    }
+}
+@media(min-width: 1460px) {
+    .rdba-dashboard-row-normal {
+        grid-template-columns: repeat(auto-fill, minmax(355px, 1fr));
+    }
+}
+
 .rdba-dashboard-row-normal .rdba-dashboard-widget-item {
     border: 1px solid #ddd;
 }

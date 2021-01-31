@@ -28,6 +28,7 @@ class RdbaUiXhrCommonDataController {
     /**
      * Display page alert message after Ajax get UI common data.
      * 
+     * @since 1.1.5
      * @private This method was called from `init()` method.
      * @param {object} response
      * @returns {undefined}
@@ -59,6 +60,7 @@ class RdbaUiXhrCommonDataController {
     /**
      * Set response data to UI.
      * 
+     * @since 1.1.5
      * @private This method was called from `init()` method.
      * @param {object} response
      * @returns {undefined}
@@ -94,6 +96,7 @@ class RdbaUiXhrCommonDataController {
     /**
      * Initialize the class.
      * 
+     * @since 1.1.5
      * @link https://stackoverflow.com/a/41443378/128761 Original source code of session storage expiration.
      * @link https://stackoverflow.com/a/48184777/128761 Original source code of session storage expiration.
      * @returns {undefined}
@@ -229,6 +232,7 @@ class RdbaUiXhrCommonDataController {
     /**
      * Detect on change language on the navbar.
      * 
+     * @since 1.1.5 Renamed from `onChangeLanguage()`.
      * @private This method was called from `setLanguages()`.
      * @returns {undefined}
      */
