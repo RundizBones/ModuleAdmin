@@ -35,6 +35,7 @@ Admin home (admin dashboard) CSS.
     }
 }
 
+.rdba-dashboard-row-hero .rdba-dashboard-widget-item,
 .rdba-dashboard-row-normal .rdba-dashboard-widget-item {
     border: 1px solid #ddd;
 }
