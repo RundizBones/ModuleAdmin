@@ -248,7 +248,8 @@ class RdbaUiXhrCommonDataController {
             $.ajax({
                 'url': thisListbox.data('setLanguageUrl'),
                 'method': thisListbox.data('setLanguageMethod'),
-                data: 'currentUrl=' + RdbaUIXhrCommonData.currentUrl + '&rundizbones-languages=' + thisListItem.data('locale'),
+                data: 'currentUrl=' + encodeURIComponent(RdbaUIXhrCommonData.currentUrl) 
+                    + '&rundizbones-languages=' + encodeURIComponent(thisListItem.data('locale')),
                 dataType: 'json'
             })
             .done(function(data, textStatus, jqXHR) {
