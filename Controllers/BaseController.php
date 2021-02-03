@@ -81,12 +81,14 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
         $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $default = [];
-        $default[] = 'rdba-page-' . str_replace('/', '_', trim(ltrim($Url->getPath(), '/')));
+        $currentPage = trim(trim($Url->getCurrentUrl(true), '/'));
+        $currentPage = (empty($currentPage) ? '/' : $currentPage);
+        $default[] = 'rdba-page-' . str_replace('/', '_', $currentPage);
         $default[] = 'rdba-class-' . str_replace(['\\', '/'], '_', trim(get_called_class()));
 
         $classes = array_merge($default, $classes);
 
-        unset($default, $Url);
+        unset($currentPage, $default, $Url);
         return implode(' ', $classes);
     }// getPageHtmlClasses
 
