@@ -52,9 +52,19 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
             // if validated token to prevent CSRF.
             unset($_DELETE[$csrfName], $_DELETE[$csrfValue]);
 
-            $Fs = new \Rdb\System\Libraries\FileSystem(STORAGE_PATH . DIRECTORY_SEPARATOR . 'cache');
-            $output['cleared'] = $Fs->deleteFolder('');
-            unset($Fs);
+            $output['cache'] = [];
+            $output['cache']['basePath'] = realpath(STORAGE_PATH . '/cache');
+            $RdbaCache = new \Rdb\Modules\RdbAdmin\Libraries\Cache(
+                $this->Container, 
+                [
+                    'cachePath' => $output['cache']['basePath'],
+                ]
+            );
+            $Cache = $RdbaCache->getCacheObject();
+            $output['cache']['driver'] = $RdbaCache->driver;
+            unset($RdbaCache);
+            $output['cleared'] = $Cache->clear();
+
             if ($output['cleared'] === true) {
                 $output['formResultStatus'] = 'success';
                 $output['formResultMessage'] = __('All cache was cleared.');
