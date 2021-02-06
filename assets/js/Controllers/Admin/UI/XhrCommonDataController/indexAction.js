@@ -109,6 +109,7 @@ class RdbaUiXhrCommonDataController {
         let currentDate = new Date();
         let sessionObject = JSON.parse(sessionStorage.getItem(storageName));
         let storageData = {};
+        let cacheMenuItem;
 
         if (sessionObject && Date.parse(currentDate) >= Date.parse(sessionObject.expires)) {
             // if session storage is expired.
@@ -174,8 +175,12 @@ class RdbaUiXhrCommonDataController {
             let response = getResponseObject(data);
             //console.log('Ajax get UI common data completed.');
 
-            // if there is any page alert then code the display alert (dismissable = false) here.
             if (typeof(response) !== 'undefined') {
+                if (RdbaCommon.isset(() => response.urlsMenuItems.cacheMenuItem)) {
+                    cacheMenuItem = response.urlsMenuItems.cacheMenuItem;
+                }
+                
+                // if there is any page alert then code the display alert (dismissable = false) here.
                 thisClass.ajaxGetUiCommonDataDisplayPageAlertMessage(response);
             }
             // in case of success request, .always will be called before .done.
@@ -184,7 +189,7 @@ class RdbaUiXhrCommonDataController {
         .done(function(response, textStatus, jqXHR) {
             response = getResponseObject(response);
 
-            if (_.isEmpty(storageData)) {
+            if (cacheMenuItem === true && _.isEmpty(storageData)) {
                 // if storage data is not set.
                 // set session storage data here.
                 let expirationMinute = 30;// expires in minutes
@@ -194,6 +199,11 @@ class RdbaUiXhrCommonDataController {
                     'value': {response}
                 };
                 sessionStorage.setItem(storageName, JSON.stringify(storageObject));
+            } else if (cacheMenuItem === false) {
+                // if config was set to no cache menu item.
+                // session storage data for menu item must not set as well.
+                storageData = {};
+                sessionStorage.removeItem(storageName);
             }
             // jQuery .ajax when success request, .done will be called after .always but before .then
         })// .done

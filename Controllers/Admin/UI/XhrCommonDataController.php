@@ -227,6 +227,22 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
 
         $output['menuItems'] = $MenuItems->getMenuItems($this->userSessionCookieData);
 
+        if ($this->Container->has('Config')) {
+            /* @var $Config \Rdb\System\Config */
+            $Config = $this->Container->get('Config');
+            $Config->setModule('RdbAdmin');
+            $cacheMenuItem = $Config->get('cacheMenuItem', 'cache', false);
+            $Config->setModule('');// restore to default.
+            unset($Config);
+        } else {
+            if (defined('APP_ENV') && APP_ENV === 'development') {
+                $cacheMenuItem = false;
+            } else {
+                $cacheMenuItem = true;
+            }
+        }
+        $output['cacheMenuItem'] = (bool) $cacheMenuItem;
+
         unset($MenuItems, $Url);
 
         return $output;
