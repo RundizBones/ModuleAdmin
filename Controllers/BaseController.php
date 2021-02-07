@@ -82,6 +82,7 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
 
         $default = [];
         $currentPage = trim(trim($Url->getCurrentUrl(true), '/'));
+        $currentPage = preg_replace('/[^\w\- \/]+/iu', '', $currentPage);
         $currentPage = (empty($currentPage) ? '/' : $currentPage);
         $default[] = 'rdba-page-' . str_replace('/', '_', $currentPage);
         $default[] = 'rdba-class-' . str_replace(['\\', '/'], '_', trim(get_called_class()));
