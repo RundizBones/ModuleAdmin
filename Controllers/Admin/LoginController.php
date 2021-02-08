@@ -551,7 +551,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         }
         $output['pageTitle'] = __('Login');
         $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);
-        $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages']);
+        $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages', 'rdba-pagehtml-login']);
 
         // remove sensitive info.
         if (isset($output['configDb']['rdbadmin_UserRegister'])) {

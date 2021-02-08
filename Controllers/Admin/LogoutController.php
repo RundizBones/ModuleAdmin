@@ -145,7 +145,7 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 
             $output['pageTitle'] = __('Logout');
             $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle']);
-            $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages']);
+            $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages', 'rdba-pagehtml-logout']);
             $output['urlAdminLogin'] = $output['loginUrl'];
             $output['Assets'] = $Assets;
             $output['Url'] = $Url;

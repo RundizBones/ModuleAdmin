@@ -58,7 +58,7 @@ Also including pages that interact with these pages such as
 }
 
 
-.rdba-page-admin_logout .user-icon-wrapper {
+.rdba-pagehtml-logout .user-icon-wrapper {
     background-color: #333;
     border-radius: 50%;
     color: #f1f1f1;
@@ -69,7 +69,7 @@ Also including pages that interact with these pages such as
     text-align: center;
     width: 80px;
 }
-.rdba-page-admin_logout .user-icon-wrapper .user-icon {
+.rdba-pagehtml-logout .user-icon-wrapper .user-icon {
     font-size: 50px;
     line-height: 80px;
 }

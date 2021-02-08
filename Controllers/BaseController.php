@@ -73,6 +73,8 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
     /**
      * Get page HTML classes.
      * 
+     * @todo [rdb] Remove auto generate class name `rdba-page-`, use new one `rdba-pagehtml-` to prevent duplicate use in many cases. Remove this in v2.0
+     * @todo [rdb] Remove auto generate class name `rdba-class-`, use new one `rdba-calledclass-` to prevent duplicate use in many cases. Remove this in v2.0
      * @param array $classes The classes to set for this html page.
      * @return string Return generated html classes names.
      */
@@ -84,8 +86,10 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
         $currentPage = trim(trim($Url->getCurrentUrl(true), '/'));
         $currentPage = preg_replace('/[^\w\- \/]+/iu', '', $currentPage);
         $currentPage = (empty($currentPage) ? '/' : $currentPage);
-        $default[] = 'rdba-page-' . str_replace('/', '_', $currentPage);
-        $default[] = 'rdba-class-' . str_replace(['\\', '/'], '_', trim(get_called_class()));
+        $default[] = 'rdba-page-' . str_replace('/', '_', $currentPage);// deprecated. remove this html class in v2.0
+        $default[] = 'rdba-pagehtml-' . str_replace('/', '_', $currentPage);
+        $default[] = 'rdba-class-' . str_replace(['\\', '/'], '_', trim(get_called_class()));// deprecated. remove this html class in v2.0
+        $default[] = 'rdba-calledclass-' . str_replace(['\\', '/'], '_', trim(get_called_class()));
 
         $classes = array_merge($default, $classes);
 
