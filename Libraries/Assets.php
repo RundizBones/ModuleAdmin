@@ -719,32 +719,34 @@ class Assets
     /**
      * Merge selected type of assets data.
      * 
+     * The last asset data will be append to the end of previous asset data.
+     * 
      * @param string $type 'css' or 'js'.
-     * @param array $assetsData1 The assets data in array value.
-     * @param array $assetsData2 The assets data in array value.
-     * @return array Return merged assets data 1 and 2.
+     * @param array ...$assetsData The assets data in array value. The array format must contain type as key. Example array('css' => array());
+     * @return array Return merged assets data.
      */
-    public function mergeAssetsData(string $type, array $assetsData1, array $assetsData2): array
+    public function mergeAssetsData(string $type, array ...$assetsData): array
     {
         $type = $this->verifyType($type);
 
-        if (!array_key_exists($type, $assetsData1) && !array_key_exists($type, $assetsData2)) {
-            // if both don't have certain type.
-            return $assetsData1;
-        }
+        $mergedAssetsData = [];
 
-        if (!array_key_exists($type, $assetsData1)) {
-            $assetsData1[$type] = [];
-        }
-        if (!array_key_exists($type, $assetsData2)) {
-            $assetsData2[$type] = [];
-        }
+        foreach ($assetsData as $eachAssetsData) {
+            // prepare data
+            if (!array_key_exists($type, $mergedAssetsData)) {
+                $mergedAssetsData[$type] = [];
+            }
+            if (!array_key_exists($type, $eachAssetsData)) {
+                $eachAssetsData[$type] = [];
+            }
 
-        if (!empty($assetsData2[$type])) {
-            array_push($assetsData1[$type], ...$assetsData2[$type]);
-        }
+            if (!empty($eachAssetsData[$type])) {
+                array_push($mergedAssetsData[$type], ...$eachAssetsData[$type]);
+            }
+        }// endforeach;
+        unset($eachAssetsData);
 
-        return $assetsData1;
+        return $mergedAssetsData;
     }// mergeAssetsData
 
 

@@ -690,6 +690,22 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
                 ],
             ],
         ];
+        $assetData3 = [
+            'css' => [
+                [
+                    'handle' => 'data3',
+                    'file' => '/assets/css/data3.css',
+                    'version' => '1.0',
+                ],
+            ],
+            'js' => [
+                [
+                    'handle' => 'data3',
+                    'file' => '/assets/css/data3.js',
+                    'version' => '1.0',
+                ],
+            ],
+        ];
 
         $mergedCss = $this->Assets->mergeAssetsData('css', $assetData1, $assetData2);
         $assertCss = [
@@ -704,26 +720,12 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
                     'file' => '/assets/js/rdba/rdba.min.css',
                 ],
             ],
-            'js' => [
-                [
-                    'handle' => 'rdta',
-                    'file' => '/assets/js/rdta/rdta-bundled.min.js',
-                    'version' => '2.0',
-                ],
-            ],
         ];
         $this->assertTrue(empty(Arrays::array_diff_assoc_recursive($assertCss, $mergedCss)));
         $this->assertSame($assertCss, $mergedCss);
 
         $mergedJs = $this->Assets->mergeAssetsData('js', $assetData1, $assetData2);
         $assertJs = [
-            'css' => [
-                [
-                    'handle' => 'rdta',
-                    'file' => '/assets/css/rdta/rdta-bundled.min.css',
-                    'version' => '2.0',
-                ],
-            ],
             'js' => [
                 [
                     'handle' => 'rdta',
@@ -733,6 +735,50 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
                 [
                     'handle' => 'rdba',
                     'file' => '/assets/js/rdba/rdba.min.js',
+                ],
+            ],
+        ];
+        $this->assertTrue(empty(Arrays::array_diff_assoc_recursive($assertJs, $mergedJs)));
+        $this->assertSame($assertJs, $mergedJs);
+
+        $mergedCss = $this->Assets->mergeAssetsData('css', $assetData1, $assetData2, $assetData3);
+        $assertCss = [
+            'css' => [
+                [
+                    'handle' => 'rdta',
+                    'file' => '/assets/css/rdta/rdta-bundled.min.css',
+                    'version' => '2.0',
+                ],
+                [
+                    'handle' => 'rdba',
+                    'file' => '/assets/js/rdba/rdba.min.css',
+                ],
+                [
+                    'handle' => 'data3',
+                    'file' => '/assets/css/data3.css',
+                    'version' => '1.0',
+                ],
+            ],
+        ];
+        $this->assertTrue(empty(Arrays::array_diff_assoc_recursive($assertCss, $mergedCss)));
+        $this->assertSame($assertCss, $mergedCss);
+
+        $mergedJs = $this->Assets->mergeAssetsData('js', $assetData1, $assetData2, $assetData3);
+        $assertJs = [
+            'js' => [
+                [
+                    'handle' => 'rdta',
+                    'file' => '/assets/js/rdta/rdta-bundled.min.js',
+                    'version' => '2.0',
+                ],
+                [
+                    'handle' => 'rdba',
+                    'file' => '/assets/js/rdba/rdba.min.js',
+                ],
+                [
+                    'handle' => 'data3',
+                    'file' => '/assets/css/data3.js',
+                    'version' => '1.0',
                 ],
             ],
         ];
