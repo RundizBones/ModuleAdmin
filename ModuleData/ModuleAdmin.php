@@ -150,14 +150,12 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             ],// 0
             100 => [
                 'id' => 'rdbadmin-users',
-                'permission' => [
-                    ['RdbAdminUsers', 'add', 'edit', 'delete', 'list', 'viewLogins', 'deleteLogins'],
-                    ['RdbAdminRoles', 'add', 'edit', 'delete', 'list', 'changePriority'],
-                    ['RdbAdminPermissions', 'managePermissions'],
-                ],
                 'icon' => 'fas fa-users fa-fw',
                 'name' => __('Users'),
                 'link' => $urlBaseWithLang . '/admin/users',
+                'liAttributes' => [
+                    'data-mainmenucontainer' => true,
+                ],
                 'aAttributes' => [
                     'onclick' => 'return false;',
                 ],
