@@ -722,7 +722,7 @@ class Assets
      * The last asset data will be append to the end of previous asset data.
      * 
      * @param string $type 'css' or 'js'.
-     * @param array ...$assetsData The assets data in array value. The array format must contain type as key. Example array('css' => array());
+     * @param array $assetsData The assets data in array value. The array format must contain type as key. Example array('css' => array());
      * @return array Return merged assets data.
      */
     public function mergeAssetsData(string $type, array ...$assetsData): array
