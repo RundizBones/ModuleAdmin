@@ -108,7 +108,7 @@ class WidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
                 'value' => $PDO->getAttribute(\PDO::ATTR_DRIVER_NAME) . ' ' . $PDO->getAttribute(\PDO::ATTR_SERVER_VERSION),
             ],
             [
-                'name' => __('Framework'),
+                'name' => '<a href="https://github.com/RundizBones/framework" target="_blank">' . __('Framework') . '</a>',
                 'value' => __('Version %1$s', $this->systemSummaryGetFrameworkVersion()),
             ],
         ];
