@@ -260,7 +260,19 @@ class RdbaXhrDialog {
         Promise.all(promises)
         .then(() => {
             console.log('all css & js injection finished.', promises);
-            if (dispatchDialogReInit === true) {
+            if (dispatchDialogNewInit === true) {
+                let event = new CustomEvent(
+                    thisClass.dialogNewInitEvent, 
+                    {
+                        'detail': {
+                            'rdbaUrl': document.URL,
+                            'rdbaUrlNoDomain': window.location.href.replace(window.location.origin, ''),
+                        }
+                    }
+                );
+                document.dispatchEvent(event);
+                console.log('fired event ' + thisClass.dialogNewInitEvent + '.');
+            } else if (dispatchDialogReInit === true) {
                 if (typeof(thisClass.dialogInitEvent) !== 'undefined') {
                     // the legacy event property (RdbaXhrDialog.dialogInitEvent) will be remove in v 2.0.
                     // @todo [rdb] Remove this property (RdbaXhrDialog.dialogInitEvent) in v2.0.
@@ -278,19 +290,6 @@ class RdbaXhrDialog {
                 );
                 document.dispatchEvent(event);
                 console.log('fired event ' + thisClass.dialogReInitEvent + '.');
-            }
-            if (dispatchDialogNewInit === true) {
-                let event = new CustomEvent(
-                    thisClass.dialogNewInitEvent, 
-                    {
-                        'detail': {
-                            'rdbaUrl': document.URL,
-                            'rdbaUrlNoDomain': window.location.href.replace(window.location.origin, ''),
-                        }
-                    }
-                );
-                document.dispatchEvent(event);
-                console.log('fired event ' + thisClass.dialogNewInitEvent + '.');
             }
         });
     }// injectCssAndJs
