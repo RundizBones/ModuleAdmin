@@ -302,8 +302,9 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
         $configPrefixes = [];
         foreach ($data as $config_name => $config_value) {
             $configPrefixes[] = $this->getConfigPrefix($config_name);
-            $checkResult = $this->get($config_name, false);
-            if ($checkResult === false) {
+            $defaultCheckValue = date('Y-m-d H:i:s');
+            $checkResult = $this->get($config_name, $defaultCheckValue);
+            if ($checkResult === $defaultCheckValue) {
                 $result = $this->Db->insert($this->Db->tableName('config'), ['config_value' => $config_value, 'config_name' => $config_name]);
             } else {
                 $result = $this->Db->update($this->Db->tableName('config'), ['config_value' => $config_value], ['config_name' => $config_name]);
@@ -311,7 +312,7 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
             if ($result === true) {
                 $i++;
             }
-            unset($checkResult, $result);
+            unset($checkResult, $defaultCheckValue, $result);
         }// endforeach;
         unset($config_name, $config_value);
 
