@@ -302,11 +302,16 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
         $configPrefixes = [];
         foreach ($data as $config_name => $config_value) {
             $configPrefixes[] = $this->getConfigPrefix($config_name);
-            $result = $this->Db->update($this->Db->tableName('config'), ['config_value' => $config_value], ['config_name' => $config_name]);
+            $checkResult = $this->get($config_name, false);
+            if ($checkResult === false) {
+                $result = $this->Db->insert($this->Db->tableName('config'), ['config_value' => $config_value, 'config_name' => $config_name]);
+            } else {
+                $result = $this->Db->update($this->Db->tableName('config'), ['config_value' => $config_value], ['config_name' => $config_name]);
+            }
             if ($result === true) {
                 $i++;
             }
-            unset($result);
+            unset($checkResult, $result);
         }// endforeach;
         unset($config_name, $config_value);
 
