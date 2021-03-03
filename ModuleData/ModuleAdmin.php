@@ -57,7 +57,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             'RdbAdminModulesPlugins' => ['listPlugins', 'managePlugins'],
             'RdbAdminRoles' => ['add', 'edit', 'delete', 'list', 'changePriority'],
             'RdbAdminSettings' => ['changeSettings'],
-            'RdbAdminTools' => ['manageCache'],
+            'RdbAdminTools' => ['manageCache', 'emailTester'],
             'RdbAdminUsers' => ['add', 'edit', 'delete', 'list', 'viewLogins', 'deleteLogins'],// user cannot add or edit or delete users who are in higher role priority or cannot promote user who has same role priority to higher.
         ];
     }// definePermissions
@@ -95,6 +95,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
         $keywords['delete'] = noop__('Delete');
         $keywords['deleteLogins'] = noop__('Delete logins');
         $keywords['edit'] = noop__('Edit');
+        $keywords['emailTester'] = noop__('Email tester');
         $keywords['list'] = noop__('List items');
         $keywords['listPlugins'] = noop__('List plugins');
         $keywords['manageCache'] = noop__('Manage cache');
@@ -251,12 +252,9 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                 'id' => 'rdbadmin-settings',
                 'icon' => 'fas fa-sliders-h fa-fw',
                 'name' => __('Settings'),
-                'link' => '#',
+                'link' => $urlBaseWithLang . '/admin/settings',
                 'liAttributes' => [
                     'data-mainmenucontainer' => true,
-                ],
-                'aAttributes' => [
-                    'onclick' => 'return false;',
                 ],
                 'subMenu' => [
                     0 => [
@@ -288,6 +286,14 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                         ],
                         'name' => __('Manage cache'),
                         'link' => $urlBaseWithLang . '/admin/tools/cache',
+                    ],
+                    1 => [
+                        'id' => 'rdbadmin-tools-emailtester',
+                        'permission' => [
+                            ['RdbAdminTools', 'emailTester'],
+                        ],
+                        'name' => __('Email tester'),
+                        'link' => $urlBaseWithLang . '/admin/tools/email-tester',
                     ],
                 ],
             ],// 103

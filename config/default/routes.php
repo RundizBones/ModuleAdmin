@@ -128,6 +128,12 @@ $Rc->addGroup('/admin', function(\FastRoute\RouteCollector $Rc) {
 
     // /admin/tools/cache REST API (clear cache).
     $Rc->addRoute('DELETE', '/tools/cache', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Tools\\Cache:clear');
+
+    // /admin/tools/email-tester page.
+    $Rc->addRoute('GET', '/tools/email-tester', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Tools\\EmailTester:index');
+
+    // /admin/tools/email-tester REST API (submit test).
+    $Rc->addRoute('POST', '/tools/email-tester', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Tools\\EmailTester:doSendEmail');
     // end admin tools. -----------------------------------------------------------------------------
 
     // the routes that can access publicy. ---------------------------------------------------------

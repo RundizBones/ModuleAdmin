@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2021-01-24 15:36+0700\n"
-"PO-Revision-Date: 2021-01-24 15:36+0700\n"
+"POT-Creation-Date: 2021-03-03 15:46+0700\n"
+"PO-Revision-Date: 2021-03-03 15:47+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -86,12 +86,12 @@ msgstr "ไม่สามารถส่งอีเมลได้."
 #: Controllers/Admin/RegisterController.php:289 Controllers/Admin/RegisterController.php:506
 #: Controllers/Admin/Roles/ActionsController.php:190 Controllers/Admin/Roles/AddController.php:102
 #: Controllers/Admin/Roles/EditController.php:103 Controllers/Admin/Roles/ReorderController.php:126
-#: Controllers/Admin/Settings/SettingsController.php:114 Controllers/Admin/Settings/SettingsController.php:483
-#: Controllers/Admin/Tools/CacheController.php:70 Controllers/Admin/Users/ActionsController.php:210
-#: Controllers/Admin/Users/ActionsController.php:297 Controllers/Admin/Users/ActionsController.php:402
-#: Controllers/Admin/Users/AddController.php:250 Controllers/Admin/Users/AvatarController.php:106
-#: Controllers/Admin/Users/AvatarController.php:278 Controllers/Admin/Users/EditController.php:476
-#: Controllers/Admin/Users/Sessions/SessionsController.php:130
+#: Controllers/Admin/Settings/SettingsController.php:114 Controllers/Admin/Settings/SettingsController.php:484
+#: Controllers/Admin/Tools/CacheController.php:80 Controllers/Admin/Tools/EmailTesterController.php:109
+#: Controllers/Admin/Users/ActionsController.php:210 Controllers/Admin/Users/ActionsController.php:297
+#: Controllers/Admin/Users/ActionsController.php:402 Controllers/Admin/Users/AddController.php:250
+#: Controllers/Admin/Users/AvatarController.php:106 Controllers/Admin/Users/AvatarController.php:278
+#: Controllers/Admin/Users/EditController.php:476 Controllers/Admin/Users/Sessions/SessionsController.php:130
 msgid ""
 "Unable to validate token, please try again. If this problem still occur please reload the page and try again."
 msgstr "ไม่สามารถตรวจสอบโทเคน, โปรดลองอีกครั้ง. ถ้าปัญหานี้ยังอยู่ โปรดโหลดหน้านี้แล้วลองอีกครั้ง."
@@ -173,7 +173,7 @@ msgid_plural "Disable plugins"
 msgstr[0] "ปิดใช้งานปลั๊กอิน"
 
 #: Controllers/Admin/Modules/Plugins/PluginsController.php:87 ModuleData/ModuleAdmin.php:85
-#: ModuleData/ModuleAdmin.php:247
+#: ModuleData/ModuleAdmin.php:246
 msgid "Modules Plugins"
 msgstr "โมดูลปลั๊กอิน"
 
@@ -225,8 +225,8 @@ msgid "Action"
 msgstr "การทำงาน"
 
 #: Controllers/Admin/Permissions/PermissionsController.php:403
-#: Controllers/Admin/Permissions/PermissionsController.php:412 ModuleData/ModuleAdmin.php:101
-#: ModuleData/ModuleAdmin.php:219 Views/Admin/Permissions/index_v.php:7 Views/Admin/Users/index_v.php:71
+#: Controllers/Admin/Permissions/PermissionsController.php:412 ModuleData/ModuleAdmin.php:102
+#: ModuleData/ModuleAdmin.php:218 Views/Admin/Permissions/index_v.php:7 Views/Admin/Users/index_v.php:71
 msgid "Manage permissions"
 msgstr "จัดการการอนุญาต"
 
@@ -235,7 +235,7 @@ msgstr "จัดการการอนุญาต"
 #: Controllers/Admin/Roles/RolesController.php:151 Controllers/Admin/UI/Traits/CommonDataTrait.php:103
 #: Controllers/Admin/Users/ActionsController.php:58 Controllers/Admin/Users/EditController.php:959
 #: Controllers/Admin/Users/PreviousEmailsController.php:63 Controllers/_SubControllers/MenuItems.php:234
-#: ModuleData/ModuleAdmin.php:148 Views/Admin/Index/index_v.php:7
+#: ModuleData/ModuleAdmin.php:149 Views/Admin/Index/index_v.php:7
 msgid "Admin home"
 msgstr "หน้าแรกผู้ดูแล"
 
@@ -411,7 +411,7 @@ msgstr "ต้องการการยืนยัน"
 
 #: Controllers/Admin/Roles/ActionsController.php:254 Controllers/Admin/Roles/AddController.php:151
 #: Controllers/Admin/Roles/EditController.php:154 Controllers/Admin/Roles/RolesController.php:146
-#: Controllers/Admin/Roles/RolesController.php:155 ModuleData/ModuleAdmin.php:207 Views/Admin/Roles/index_v.php:8
+#: Controllers/Admin/Roles/RolesController.php:155 ModuleData/ModuleAdmin.php:206 Views/Admin/Roles/index_v.php:8
 msgid "Manage roles"
 msgstr "จัดการหน้าที่"
 
@@ -482,39 +482,56 @@ msgstr "โปรดกรอกฟอร์มที่จำเป็น."
 msgid "Some setting value has not been update, please reload the page and see what was changed."
 msgstr "การตั้งค่าบางอย่างไม่ถูกอัพเดท, โปรดโหลดหน้านี้ใหม่แล้วดูว่ามีสิ่งใดเปลี่ยนแปลงไปบ้าง."
 
-#: Controllers/Admin/Settings/SettingsController.php:314 ModuleData/ModuleAdmin.php:269
+#: Controllers/Admin/Settings/SettingsController.php:315 ModuleData/ModuleAdmin.php:265
 #: Views/Admin/Settings/index_v.php:8
 msgid "Main settings"
 msgstr "การตั้งค่าหลัก"
 
-#: Controllers/Admin/Settings/SettingsController.php:410
+#: Controllers/Admin/Settings/SettingsController.php:411
 msgid "Unable to test other mail protocol."
 msgstr "ไม่สามารถทดสอบโปรโตคอลอีเมลอื่นๆได้."
 
-#: Controllers/Admin/Settings/SettingsController.php:444 Controllers/Admin/Settings/SettingsController.php:467
+#: Controllers/Admin/Settings/SettingsController.php:445 Controllers/Admin/Settings/SettingsController.php:468
 msgid "An error has been occurred."
 msgstr "มีข้อผิดพลาดเกิดขึ้น."
 
-#: Controllers/Admin/Settings/SettingsController.php:464
+#: Controllers/Admin/Settings/SettingsController.php:465
 msgid "Connection was successfull."
 msgstr "การเชื่อมต่อสำเร็จ."
 
-#: Controllers/Admin/Tools/CacheController.php:60
+#: Controllers/Admin/Tools/CacheController.php:70
 msgid "All cache was cleared."
 msgstr "แคชถูกล้างหมดแล้ว."
 
-#: Controllers/Admin/Tools/CacheController.php:64
+#: Controllers/Admin/Tools/CacheController.php:74
 msgid "Unable to clear cache."
 msgstr "ไม่สามารถล้างแคชได้."
 
-#: Controllers/Admin/Tools/CacheController.php:135 ModuleData/ModuleAdmin.php:100 ModuleData/ModuleAdmin.php:291
+#: Controllers/Admin/Tools/CacheController.php:146 ModuleData/ModuleAdmin.php:101 ModuleData/ModuleAdmin.php:287
 #: Views/Admin/Tools/cache_v.php:8
 msgid "Manage cache"
 msgstr "จัดการแคช"
 
-#: Controllers/Admin/Tools/CacheController.php:163 Views/Admin/Tools/cache_v.php:40
+#: Controllers/Admin/Tools/CacheController.php:174 Views/Admin/Tools/cache_v.php:40
 msgid "Please choose a command"
 msgstr "โปรดเลือกคำสั่ง"
+
+#: Controllers/Admin/Tools/EmailTesterController.php:57
+msgid "Please enter target email."
+msgstr "กรุณากรอกอีเมลปลายทาง."
+
+#: Controllers/Admin/Tools/EmailTesterController.php:70 Controllers/Admin/Tools/EmailTesterController.php:155
+#: ModuleData/ModuleAdmin.php:98 ModuleData/ModuleAdmin.php:295
+msgid "Email tester"
+msgstr "ทดสอบอีเมล"
+
+#: Controllers/Admin/Tools/EmailTesterController.php:81
+msgid "The email was sent successfully."
+msgstr "ส่งอีเมลสำเร็จแล้ว."
+
+#: Controllers/Admin/Tools/EmailTesterController.php:94
+msgid "The email could not be sent."
+msgstr "ไม่สามารถส่งอีเมลได้."
 
 #: Controllers/Admin/UI/Widgets/WidgetsController.php:99
 msgid "PHP"
@@ -532,14 +549,14 @@ msgstr "DB"
 msgid "Framework"
 msgstr "เฟรมเวิร์ค"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:32
-msgid "Administration module for RundizBones"
-msgstr "โมดูลผู้ดูแลสำหรับ RundizBones"
-
-#: Controllers/Admin/UI/XhrCommonDataController.php:70
+#: Controllers/Admin/UI/Widgets/WidgetsController.php:112 Controllers/Admin/UI/XhrCommonDataController.php:70
 #, php-format
 msgid "Version %1$s"
 msgstr "รุ่น %1$s"
+
+#: Controllers/Admin/UI/XhrCommonDataController.php:32
+msgid "Administration module for RundizBones"
+msgstr "โมดูลผู้ดูแลสำหรับ RundizBones"
 
 #: Controllers/Admin/UI/XhrCommonDataController.php:93 Controllers/Admin/UI/XhrCommonDataController.php:103
 msgctxt "translation for datatables."
@@ -581,11 +598,11 @@ msgctxt "translation for datatables."
 msgid "Processing..."
 msgstr "กำลังประมวลผล..."
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:264
+#: Controllers/Admin/UI/XhrCommonDataController.php:280
 msgid "Guest"
 msgstr "ผู้เยี่ยมชม"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:315 Controllers/Admin/UI/XhrDashboardWidgetsController.php:32
+#: Controllers/Admin/UI/XhrCommonDataController.php:331 Controllers/Admin/UI/XhrDashboardWidgetsController.php:32
 msgid "Sorry, this page is for request via XHR, REST API."
 msgstr "ขออภัย, หน้านี้สำหรับ XHR, REST API."
 
@@ -601,7 +618,7 @@ msgstr "ลบบัญชีผู้ใช้ของฉัน"
 
 #: Controllers/Admin/Users/ActionsController.php:62 Controllers/Admin/Users/EditController.php:963
 #: Controllers/Admin/Users/PreviousEmailsController.php:67 ModuleData/ModuleAdmin.php:89
-#: ModuleData/ModuleAdmin.php:159 Views/Admin/Permissions/index_v.php:22
+#: ModuleData/ModuleAdmin.php:155 Views/Admin/Permissions/index_v.php:22
 #: Views/Admin/UI/Widgets/userSummary_v.php:1
 msgid "Users"
 msgstr "ผู้ใช้"
@@ -671,7 +688,7 @@ msgstr "สร้างผู้ใช้ใหม่แล้ว. ผู้ใ�
 msgid "Your user could not confirm account via the link in email."
 msgstr "ผู้ใช้ของคุณไม่สามารถยืนยันบัญชีผู้ใช้ผ่านลิ้งค์ในอีเมลได้."
 
-#: Controllers/Admin/Users/AddController.php:395 ModuleData/ModuleAdmin.php:185
+#: Controllers/Admin/Users/AddController.php:395 ModuleData/ModuleAdmin.php:184
 msgid "Add new user"
 msgstr "เพิ่มผู้ใช้ใหม่"
 
@@ -934,7 +951,7 @@ msgid ""
 "administrator."
 msgstr "ไม่สามารถดึงข้อมูลหน้าที่ของคุณมาตรวจสอบกับหน้าที่ของผู้ใช้ใหม่ได้. ไม่สามารถบันทึกผู้ใช้, โปรดติดต่อผู้ดูแล."
 
-#: Controllers/Admin/Users/UsersController.php:212 ModuleData/ModuleAdmin.php:170 Views/Admin/Users/index_v.php:8
+#: Controllers/Admin/Users/UsersController.php:212 ModuleData/ModuleAdmin.php:169 Views/Admin/Users/index_v.php:8
 msgid "Manage users"
 msgstr "จัดการผู้ใช้"
 
@@ -1001,11 +1018,11 @@ msgstr "การอนุญาต"
 msgid "Roles"
 msgstr "หน้าที่"
 
-#: ModuleData/ModuleAdmin.php:87 ModuleData/ModuleAdmin.php:255
+#: ModuleData/ModuleAdmin.php:87 ModuleData/ModuleAdmin.php:254
 msgid "Settings"
 msgstr "ตั้งค่า"
 
-#: ModuleData/ModuleAdmin.php:88 ModuleData/ModuleAdmin.php:277
+#: ModuleData/ModuleAdmin.php:88 ModuleData/ModuleAdmin.php:273
 msgid "Tools"
 msgstr "เครื่องมือ"
 
@@ -1034,23 +1051,23 @@ msgstr "ลบรายการเข้าสู่ระบบ"
 msgid "Edit"
 msgstr "แก้ไข"
 
-#: ModuleData/ModuleAdmin.php:98
+#: ModuleData/ModuleAdmin.php:99
 msgid "List items"
 msgstr "แสดงรายการ"
 
-#: ModuleData/ModuleAdmin.php:99
+#: ModuleData/ModuleAdmin.php:100
 msgid "List plugins"
 msgstr "แสดงรายการปลั๊กอิน"
 
-#: ModuleData/ModuleAdmin.php:102
+#: ModuleData/ModuleAdmin.php:103
 msgid "Manage plugins"
 msgstr "จัดการปลั๊กอิน"
 
-#: ModuleData/ModuleAdmin.php:103 Views/Admin/Users/edit_v.php:276 Views/Admin/Users/index_v.php:68
+#: ModuleData/ModuleAdmin.php:104 Views/Admin/Users/edit_v.php:276 Views/Admin/Users/index_v.php:68
 msgid "View logins"
 msgstr "ดูรายการเข้าสู่ระบบ"
 
-#: ModuleData/ModuleAdmin.php:233
+#: ModuleData/ModuleAdmin.php:232
 msgid "Modules"
 msgstr "โมดูล"
 
@@ -1100,7 +1117,7 @@ msgid "Captcha text"
 msgstr "ตัวอักษรภาพ"
 
 #: Views/Admin/ForgotLoginPass/index_v.php:51 Views/Admin/ForgotLoginPass/reset_v.php:39
-#: Views/Admin/Login/reset_v.php:40 Views/Admin/Tools/cache_v.php:52
+#: Views/Admin/Login/reset_v.php:40 Views/Admin/Tools/cache_v.php:52 Views/Admin/Tools/emailTester_v.php:24
 msgid "Submit"
 msgstr "ส่งข้อมูล"
 
@@ -1648,6 +1665,10 @@ msgstr "ขนาดไฟล์ทั้งหมด"
 #: Views/Admin/Tools/cache_v.php:33
 msgid "Total files and folders"
 msgstr "จำนวนไฟล์และโฟลเดอร์ทั้งหมด"
+
+#: Views/Admin/Tools/emailTester_v.php:15
+msgid "Target email"
+msgstr "อีเมลปลายทาง"
 
 #: Views/Admin/UI/Widgets/lastLoggedinUsers_v.php:1
 msgid "Last logged in users"

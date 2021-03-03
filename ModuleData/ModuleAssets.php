@@ -323,6 +323,11 @@ class ModuleAssets
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Tools/CacheController.js',
                     'dependency' => ['rdta', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
                 ],
+                [
+                    'handle' => 'rdbaToolsEmailTester',
+                    'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Tools/EmailTesterController.js',
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
+                ],
             ],
         ];
     }// getModuleAssets
