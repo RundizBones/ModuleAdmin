@@ -5,5 +5,7 @@
 .phpdoc
 .phpunit.result.cache
 assets-src/vendor
+config/development
+config/production
 node_modules
 package-lock.json
