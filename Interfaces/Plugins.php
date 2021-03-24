@@ -31,12 +31,14 @@ interface Plugins
 
     /**
      * When plugin is enabled, this method will be called.
+     * Do not echo out in this method or it will not functional.
      */
     public function enable();
 
 
     /**
      * When plugin is disabled, this method will be called.
+     * Do not echo out in this method or it will not functional.
      */
     public function disable();
 
@@ -47,8 +49,7 @@ interface Plugins
      * Example:<pre>
      * $Plugins = $this->Container['Plugins'];
      * $YourClass = new \Rdb\Modules\YourModule\Plugins\YourPlugin\YourPluginClass();
-     * $Plugins->addAction('hook.name', [$YourClass, 'yourActionHook'], 10);
-     * $Plugins->addFilter('hook.name', [$YourClass, 'yourFilterHook'], 10);
+     * $Plugins->addHook('hook.name', [$YourClass, 'yourActionHook'], 10);
      * </pre>
      */
     public function registerHooks();
@@ -56,6 +57,7 @@ interface Plugins
 
     /**
      * Your uninstall action on uninstall or delete a plugin.
+     * Do not echo out in this method or it will not functional.
      */
     public function uninstall();
 
