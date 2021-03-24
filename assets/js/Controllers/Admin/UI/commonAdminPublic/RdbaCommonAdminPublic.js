@@ -36,11 +36,14 @@ class RdbaCommonAdminPublic {
                 let setLanguageUrl = document.getElementById('rdbaSetLanguage_url');
                 let setLanguageMethod = document.getElementById('rdbaSetLanguage_method');
                 let currentUrl = document.getElementById('rdbaCurrentUrl');
+                let currentLanguageID = document.getElementById('rdbaCurrentLanguageID');
 
                 RdbaCommon.XHR({
                     'url': (setLanguageUrl ? setLanguageUrl.value : ''),
                     'method': (setLanguageMethod ? setLanguageMethod.value : ''),
-                    data: 'currentUrl=' + (currentUrl ? currentUrl.value : '') + '&rundizbones-languages=' + languageSelectbox.value,
+                    data: 'currentUrl=' + (currentUrl ? currentUrl.value : '') 
+                        + '&rundizbones-languages=' + languageSelectbox.value 
+                        + '&currentLanguageID=' + (currentLanguageID ? currentLanguageID.value : ''),
                     dataType: 'json'
                 })
                 .catch(function(responseObject) {

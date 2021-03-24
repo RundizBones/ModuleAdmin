@@ -259,7 +259,8 @@ class RdbaUiXhrCommonDataController {
                 'url': thisListbox.data('setLanguageUrl'),
                 'method': thisListbox.data('setLanguageMethod'),
                 data: 'currentUrl=' + encodeURIComponent(RdbaUIXhrCommonData.currentUrl) 
-                    + '&rundizbones-languages=' + encodeURIComponent(thisListItem.data('locale')),
+                    + '&rundizbones-languages=' + encodeURIComponent(thisListItem.data('locale'))
+                    + '&currentLanguageID=' + thisListbox.data('currentLanguage'),
                 dataType: 'json'
             })
             .done(function(data, textStatus, jqXHR) {
