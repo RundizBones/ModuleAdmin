@@ -56,7 +56,7 @@ class ModuleAssets
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/css/datatables-bundled.min.css',
-                    'version' => '1.10.23',
+                    'version' => '1.10.24',
                 ],
                 // end datatables----------.
                 [
@@ -108,7 +108,7 @@ class ModuleAssets
                 [
                     'handle' => 'lodash',
                     'file' => $publicModuleUrl . '/assets/vendor/lodash/lodash.min.js',
-                    'version' => '4.17.20',
+                    'version' => '4.17.21',
                 ],
                 [
                     'handle' => 'sortableJS',
@@ -120,13 +120,13 @@ class ModuleAssets
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/js/datatables-bundled.min.js',
                     'dependency' => ['rdta'],
-                    'version' => '1.10.23',
+                    'version' => '1.10.24',
                 ],
                 [
                     'handle' => 'datatables-plugins-pagination',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/plugins/pagination/input.js',
                     'dependency' => ['rdta', 'datatables'],
-                    'version' => '1.10.23',
+                    'version' => '1.10.24',
                 ],
                 // end datatables----------.
                 [

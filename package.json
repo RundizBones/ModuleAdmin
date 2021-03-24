@@ -14,16 +14,16 @@
     "license": "MIT",
     "repository": {},
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.15.2",
-        "@popperjs/core": "^2.7.0",
+        "@fortawesome/fontawesome-free": "^5.15.3",
+        "@popperjs/core": "^2.9.1",
         "css-element-queries": "^1.2.3",
-        "datatables.net-dt": "^1.10.23",
+        "datatables.net-dt": "^1.10.24",
         "datatables.net-fixedheader-dt": "^3.1.8",
-        "datatables.net-plugins": "^1.10.22",
+        "datatables.net-plugins": "^1.10.24",
         "datatables.net-responsive-dt": "^2.2.7",
         "handlebars": "^4.7.7",
-        "jquery": "^3.5.1",
-        "lodash": "^4.17.20",
+        "jquery": "^3.6.0",
+        "lodash": "^4.17.21",
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.33",
         "rundiz-template-for-admin": "^2.1.14",
@@ -31,7 +31,7 @@
         "smartmenus": "^1.1.1",
         "sortablejs": "^1.13.0",
         "sticky-sidebar": "^3.3.1",
-        "tippy.js": "^6.2.7"
+        "tippy.js": "^6.3.1"
     },
     "devDependencies": {
         "del": "^6.0.0",
@@ -45,7 +45,7 @@
         "gulp-replace": "^1.0.0",
         "gulp-sourcemaps": "^3.0.0",
         "gulp-uglify-es": "^2.0.0",
-        "gulp-zip": "^5.0.2",
+        "gulp-zip": "^5.1.0",
         "merge-stream": "^2.0.0"
     },
     "scripts": {
