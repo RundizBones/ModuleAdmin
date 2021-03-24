@@ -159,7 +159,7 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
             /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
             $Plugins = $this->Container->get('Plugins');
             /*
-             * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\UI->getPageAlertMessages.beforeGetSession
+             * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\UI\XhrCommonDataController->getPageAlertMessages.beforeGetSession
              * PluginHookDescription: Hook before get message from session.
              * PluginHookParam: array $output This argument will be pass by reference, you can alter but variable type must be array. 
              *              The output of alert messages that will be send to browser. 
