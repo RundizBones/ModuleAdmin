@@ -86,7 +86,7 @@ class Input
      * Determine HTTP accept content-type.
      * 
      * @link https://developer.mozilla.org/en-US/docs/Glossary/Quality_values Reference about quality values (xxx/xx;q=0.8 - for example).
-     * @since 1.1.1
+     * @since 1.1.7
      * @return string Return determined content type.
      */
     public function determineAcceptContentType(): string
