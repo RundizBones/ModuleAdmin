@@ -44,7 +44,7 @@ class Csrf
             'prefix' => 'csrf',
             'storage' => null,
             'failureCallable' => null,
-            'storageLimit' => 1,
+            'storageLimit' => 10,
             'strength' => 16,
             'persistentTokenMode' => false,
         ];
@@ -58,7 +58,7 @@ class Csrf
             $options['failureCallable'] = null;
         }
         if (!is_int($options['storageLimit'])) {
-            $options['storageLimit'] = 1;
+            $options['storageLimit'] = 10;
         }
         if (!is_int($options['strength'])) {
             $options['strength'] = 16;
