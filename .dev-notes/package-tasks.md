@@ -8,7 +8,7 @@ This is only run for the first time after cloning the repository.
 * Make sure that you had ever run `npm install` by check at folder **node_modules** must be exists.
 
 ### Before start development.
-This should be run every time before start modify the theme files.
+This should be run every time before start modify the files.
 
 * Manually delete **.backup** folder.
 
