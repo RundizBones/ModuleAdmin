@@ -17,7 +17,8 @@ const copyAssets = require('./copyAssets');
 const pack = require('./pack');
 const versionWriter = require('./versionWriter');
 
-global.rdbPublicModuleAssetsDir = '../../public/Modules/RdbAdmin/assets';
+global.moduleAssetsDir = 'Modules/RdbAdmin/assets';
+global.rdbPublicModuleAssetsDir = '../../public/' + moduleAssetsDir;
 
 
 /**
@@ -31,6 +32,31 @@ async function clean(cb) {
     await del([rdbPublicModuleAssetsDir], {force: true});
     await Promise.all([prepareDirs(cb)]);
 }// clean
+
+
+/**
+ * Get `PUBLIC_PATH` php constant from command line and re-assign to global variable.
+ * 
+ * @since 1.1.7
+ */
+function getPublicPath(cb) {
+    let exec = require('child_process').exec
+
+    exec('php ../../rdb system:constants --name="PUBLIC_PATH"', (err, stdout, stderr) => {
+        // the regular expression pattern of php constant has got from https://www.php.net/manual/en/language.constants.php
+        const regex = /^([a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*)(\s+)[=](\s+)(.+)$/im;
+        let m;
+
+        if ((m = regex.exec(stdout)) !== null) {
+            // The result can be accessed through the `m`-variable.
+            if (typeof(m[4]) === 'string') {
+                global.rdbPublicModuleAssetsDir = m[4] + '/' + moduleAssetsDir;
+                console.log('re-assigned global.rdbPublicModuleAssetsDir: ', rdbPublicModuleAssetsDir);
+            }
+        }
+        cb(err);
+    });
+}// getPublicPath
 
 
 /**
@@ -67,6 +93,7 @@ function watchFileChanged(cb) {
 
 
 exports.default = series(
+    getPublicPath,
     clean,
     parallel(
         copyNodeModules.copyNodeModules
@@ -85,7 +112,15 @@ exports.writeVersions = series(
 
 
 exports.watch = function() {
-    watch('assets-src/**', {events: 'all'}, series(watchFileChanged, copyAssetsSrc.copyAssetsSrcCssJs, copyAssets.copyAssets))
+    watch(
+        'assets-src/**', {events: 'all'}, 
+        series(
+            getPublicPath,
+            watchFileChanged, 
+            copyAssetsSrc.copyAssetsSrcCssJs, 
+            copyAssets.copyAssets
+        )
+    )
 };
 
 

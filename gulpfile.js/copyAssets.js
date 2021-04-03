@@ -8,10 +8,11 @@
 
 const {series, parallel, src, dest} = require('gulp');
 const cache = require('gulp-cached');
+const path = require('path');
 
 
 function copyAssetsToPublic(cb) {
-    console.log('Copying assets to ' + rdbPublicModuleAssetsDir);
+    console.log('Copying assets to ' + path.resolve(rdbPublicModuleAssetsDir));
     return src('assets/**')
         .pipe(cache('copyAssetsToPublic'))
         .pipe(dest(rdbPublicModuleAssetsDir + '/'));
