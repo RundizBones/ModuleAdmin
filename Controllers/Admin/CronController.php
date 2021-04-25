@@ -26,12 +26,17 @@ class CronController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     public function indexAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        $Cron = new \Rdb\Modules\RdbAdmin\Libraries\Cron($this->Container);
-
         $output = [];
-        $output['runnedJobs'] = $Cron->runJobsOnAllModules();
 
-        unset($Cron);
+        if (empty($this->runnedCronResult)) {
+            $Cron = new \Rdb\Modules\RdbAdmin\Libraries\Cron($this->Container);
+
+            $output['runnedJobs'] = $Cron->runJobsOnAllModules();
+
+            unset($Cron);
+        } else {
+            $output['runnedJobs'] = $this->runnedCronResult;
+        }
 
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->get('silence', 'false') === 'true') {

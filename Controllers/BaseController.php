@@ -29,6 +29,17 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
 
 
     /**
+     * @var array Runned cron jobs result. 
+     * This is for use in case that set cron job, cron tab to run by URL.
+     * The `CronController` will be call to this `BaseController`.
+     * So, it is no need to using `Libraries\Cron` class to run jobs again.
+     * Just get the run result from this property.
+     * This property will be set by `maybeRunCron()` method.
+     */
+    protected $runnedCronResult = [];
+
+
+    /**
      * {@inheritDoc}
      */
     public function __construct(\Rdb\System\Container $Container)
@@ -158,7 +169,7 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
             ) {
                 /* @var $Modules \Rdb\System\Modules */
                 $Cron = new \Rdb\Modules\RdbAdmin\Libraries\Cron($this->Container);
-                $Cron->runJobsOnAllModules();
+                $this->runnedCronResult = $Cron->runJobsOnAllModules();
                 unset($Cron);
             }
 
