@@ -33,6 +33,7 @@ class OnceADayJobs extends BaseCronJobs
             Jobs\DeleteExpiredUserRegisterWaitConfirm::execute($this->Container, $this->Db);
             Jobs\DeleteFailedLogins::execute($this->Container, $this->Db);
             Jobs\DeleteSoftDeleteUsers::execute($this->Container, $this->Db);
+            Jobs\DeleteOldLogs::execute($this->Container, $this->Db);// @since 1.1.7
 
             // write cache that this job had already run.
             $cacheTTL = $this->Cron->getSecondsBeforeNext();

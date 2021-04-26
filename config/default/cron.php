@@ -22,4 +22,7 @@ return [
             // every hour 0 * * * *
             // every day 0 0 * * *
     'useServerCron' => false,
+    // auto delete old logs that was created "more than" n days.
+    // set this value to 0 or less will be disabled (do not auto delete).
+    'autoDeleteLogsAfterDays' => 90,
 ];
