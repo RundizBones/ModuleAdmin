@@ -15382,19 +15382,19 @@
 	return $.fn.dataTable;
 }));
 
-/*! FixedHeader 3.1.7
- * ©2009-2020 SpryMedia Ltd - datatables.net/license
+/*! FixedHeader 3.1.8
+ * ©2009-2021 SpryMedia Ltd - datatables.net/license
  */
 
 /**
  * @summary     FixedHeader
  * @description Fix a table's header or footer, so it is always visible while
  *              scrolling
- * @version     3.1.7
+ * @version     3.1.8
  * @file        dataTables.fixedHeader.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
- * @copyright   Copyright 2009-2020 SpryMedia Ltd.
+ * @copyright   Copyright 2009-2021 SpryMedia Ltd.
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -15724,7 +15724,7 @@ $.extend( FixedHeader.prototype, {
 		var get = function ( name ) {
 			return $(name, from)
 				.map( function () {
-					return $(this).width();
+					return $(this).css('width').replace(/[^\d\.]/g, '') * 1;
 				} ).toArray();
 		};
 
@@ -16006,7 +16006,7 @@ $.extend( FixedHeader.prototype, {
  * @type {String}
  * @static
  */
-FixedHeader.version = "3.1.7";
+FixedHeader.version = "3.1.8";
 
 /**
  * Defaults
@@ -16075,7 +16075,7 @@ DataTable.Api.register( 'fixedHeader.enable()', function ( flag ) {
 
 DataTable.Api.register( 'fixedHeader.enabled()', function () {
 	if ( this.context.length ) {
-		var fh = this.content[0]._fixedHeader;
+		var fh = this.context[0]._fixedHeader;
 
 		if ( fh ) {
 			return fh.enabled();
