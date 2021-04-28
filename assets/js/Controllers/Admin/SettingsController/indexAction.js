@@ -190,6 +190,16 @@ class RdbaSettingsController {
                     RdbaSettings.csrfKeyPair = response.csrfKeyPair;
                 }
 
+                // dispatch custom event to let plugins reload their settings.
+                document.dispatchEvent(
+                    new CustomEvent(
+                        'rdbadmin.RdbaSettingsController.updated',
+                        {
+                            bubbles: true,
+                        }
+                    )
+                );
+
                 return Promise.resolve(responseObject);
             })
             .finally(function() {

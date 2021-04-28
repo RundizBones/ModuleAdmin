@@ -19,6 +19,34 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
     use \Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait;
 
 
+    /**
+     * @since 1.1.7
+     * @var \Rdb\Modules\RdbAdmin\Libraries\Plugins
+     */
+    protected $Plugins;
+
+
+    /**
+     * Class constructor.
+     * 
+     * @param \Rdb\System\Container $Container
+     */
+    public function __construct(\Rdb\System\Container $Container)
+    {
+        parent::__construct($Container);
+
+        if ($Container->has('Plugins')) {
+            $this->Plugins = $Container->get('Plugins');
+        }
+    }// __construct
+
+
+    /**
+     * Do update.
+     * 
+     * @global array $_PATCH
+     * @return string
+     */
     public function doUpdateAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
@@ -28,7 +56,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             session_start();
         }
 
-        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
+        $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf(['persistentTokenMode' => true]);
         $Url = new \Rdb\System\Libraries\Url($this->Container);
         $Serializer = new \Rundiz\Serializer\Serializer();
 
@@ -91,6 +119,37 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                     $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
                     $updateResult = $ConfigDb->updateMultipleValues($data);
                     unset($ConfigDb);
+
+                    if (is_object($this->Plugins)) {
+                        /*
+                         * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\SettingsController->doUpdateAction.afterMainUpdate
+                         * PluginHookDescription: Hook after RdbAdmin settings was updated in settings page controller.
+                         * PluginHookParam: associative array:<br>
+                         *              `data` (array) The data to update in RdbAdmin module's settings only.<br>
+                         *              `updateResult` (bool) The main settings updated result.<br>
+                         * PluginHookReturn: None.
+                         * PluginHookSince: 1.1.7
+                         */
+                        $Plugins = $this->Container->get('Plugins');
+                        $updateResultFromHooks = $Plugins->doHook(
+                            __CLASS__ . '->' . __FUNCTION__ . '.afterMainUpdate',
+                            [
+                                'data' => $data,
+                                'updateResult' => $updateResult,
+                            ]
+                        );
+
+                        if (is_array($updateResultFromHooks) && true === $updateResult) {
+                            foreach ($updateResultFromHooks as $eachResult) {
+                                if (false === $eachResult) {
+                                    $updateResult = false;
+                                    break;
+                                }
+                            }// endforeach;
+                            unset($eachResult);
+                        }
+                        unset($updateResultFromHooks);
+                    }// endif; Plugins
                 } catch (\Exception $e) {
                     $output['exceptionMessage'] = $e->getMessage();
                 }
@@ -329,7 +388,11 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             $rdbAdminAssets = $this->getRdbAdminAssets();
             $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
-            $Assets->addMultipleAssets('js', ['rdbaSettings'], $rdbAdminAssets);
+            $Assets->addMultipleAssets(
+                'js', 
+                ['rdbaSettings'], 
+                $rdbAdminAssets
+            );
             $Assets->addJsObject(
                 'rdbaSettings',
                 'RdbaSettings',
@@ -345,6 +408,26 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                     'editSettingsTestSmtpConnectionMethod' => $output['urls']['editSettingsTestSmtpConnectionMethod'],
                 ]
             );
+
+            if (is_object($this->Plugins)) {
+                /*
+                 * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\SettingsController->indexAction.afterAddAssets
+                 * PluginHookDescription: Hook after added assets in settings page controller.
+                 * PluginHookParam: associative array:<br>
+                 *              `Assets` (object) The `\Rdb\Modules\RdbAdmin\Libraries\Assets` class.<br>
+                 *              `rdbAdminAssets` (array) The RdbAdmin module's assets.<br>
+                 * PluginHookReturn: None.
+                 * PluginHookSince: 1.1.7
+                 */
+                $Plugins = $this->Container->get('Plugins');
+                $Plugins->doHook(
+                    __CLASS__ . '->' . __FUNCTION__ . '.afterAddAssets',
+                    [
+                        'Assets' => $Assets,
+                        'rdbAdminAssets' => $rdbAdminAssets,
+                    ]
+                );
+            }// endif; Plugins
 
             $this->setCssAssets($Assets, $rdbAdminAssets);
             $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);

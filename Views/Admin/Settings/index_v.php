@@ -20,6 +20,19 @@
                                     <li><a href="#tab-1"><?php echo __('Website'); ?></a></li>
                                     <li><a href="#tab-2"><?php echo __('User'); ?></a></li>
                                     <li><a href="#tab-3"><?php echo __('Email'); ?></a></li>
+                                    <?php
+                                    /*
+                                     * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsNav.last
+                                     * PluginHookDescription: Hook at last tabs navigation (inside `<ul>` element) in settings views.
+                                     * PluginHookParam: None.
+                                     * PluginHookReturn: None.
+                                     * PluginHookSince: 1.1.7
+                                     */
+                                    $Plugins = $this->Container->get('Plugins');
+                                    $Plugins->doHook(
+                                        'Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsNav.last'
+                                    );
+                                    ?> 
                                 </ul>
                                 <div id="tab-1" class="rd-tabs-content">
                                     <div class="form-group">
@@ -394,6 +407,20 @@
                                         </div>
                                     </div>
                                 </div><!--#tab-3-->
+
+                                <?php
+                                /*
+                                 * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsContent.last
+                                 * PluginHookDescription: Hook at last tabs content in settings views.
+                                 * PluginHookParam: None.
+                                 * PluginHookReturn: None.
+                                 * PluginHookSince: 1.1.7
+                                 */
+                                $Plugins = $this->Container->get('Plugins');
+                                $Plugins->doHook(
+                                    'Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsContent.last'
+                                );
+                                ?> 
                             </div><!--.rd-tabs-->
 
                             <div class="rd-columns-flex-container submit-button-row">
