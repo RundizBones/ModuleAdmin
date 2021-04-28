@@ -341,7 +341,8 @@ trait CacheFileTrait
     /**
      * Reset cache properties.
      * 
-     * This is useful when you call to any methods that have called to `loadCacheData()` method on this trait.
+     * This is useful when you call to any methods that have called to `loadCacheData()` method on this trait.<br>
+     * This method will be reset `storageData`, `storageFile`, `storagePath` properties.
      * 
      * @since 1.1.1
      */
@@ -351,6 +352,21 @@ trait CacheFileTrait
         $this->storageFile = null;
         $this->storagePath = null;
     }// resetCacheProperties
+
+
+    /**
+     * Reset some properties that was used while get the data using `loadCacheData()`.
+     * 
+     * This is useful when you call to extended class that is get a cache data row using `loadCacheData()` and you want to call it again or it is in the loop.<br>
+     * This method will be reset `storageData`, `storageFile` properties.
+     * 
+     * @since 1.1.7
+     */
+    public function resetGetData()
+    {
+        $this->storageData = null;
+        $this->storageFile = null;
+    }// resetGetData
 
 
 }
