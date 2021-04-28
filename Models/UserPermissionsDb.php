@@ -104,14 +104,25 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
         ) {
             // if no identity specified.
             if ($this->Container->has('UsersSessionsTrait')) {
+                // if it was check logged in at admin base controller.
                 $identity['user_id'] = (int) ($this->Container['UsersSessionsTrait']->userSessionCookieData['user_id'] ?? 0);
             } else {
-                $identity['user_id'] = 0;
+                // if it was not check logged in, this maybe because plugin register hook 
+                // ...maybe from admin base constructor -> front base constructor -> register hooks
+                // try to get user id from cookie.
+                $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
+                $Cookie->setEncryption('rdbaLoggedinKey');
+                $cookieData = $Cookie->get('rdbadmin_cookie_users');// contain `user_id`, `user_display_name`, `sessionKey`.
+                if (isset($cookieData['user_id'])) {
+                    $identity['user_id'] = (int) $cookieData['user_id'];
+                } else {
+                    $identity['user_id'] = 0;
+                }
             }
         }
 
         if (!isset($identity['userrole_id']) && isset($identity['user_id'])) {
-            // if userrole_id and user_id was set.
+            // if userrole_id was not set but user_id was set.
             // get user roles data for this user.
             $cacheKey = 'user' . $identity['user_id'] . '.userRoleIDs';
             $cacheKeyRolesData = 'user' . $identity['user_id'] . '.userRoleIDsData';
