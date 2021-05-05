@@ -100,7 +100,8 @@ class Plugins
      * @link https://alanstorm.com/drupal_module_hooks/ How Drupal module/hook works.
      * @param string $tag The name of hook.
      * @param array $args Additional arguments which are passed on to the function hooked. Default is empty.
-     * @return array Return the hooked results. If the plugin that hooked has nothing to return then it will be return empty array.
+     * @return array If there is no plugin hooks then it will be return `$args` argument.<br>
+     *                  If the plugin that hooked has nothing to return then it will be return empty array otherwise it will be return hooked results.
      */
     public function doHook(string $tag, array $args = [])
     {
