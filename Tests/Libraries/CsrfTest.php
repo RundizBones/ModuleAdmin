@@ -19,7 +19,7 @@ class CsrfTest extends \Rdb\Tests\BaseTestCase
             'prefix' => 'csrf',
             'storage' => null,
             'failureCallable' => null,
-            'storageLimit' => 1,
+            'storageLimit' => 10,
             'strength' => 16,
             'persistentTokenMode' => false,
         ];
