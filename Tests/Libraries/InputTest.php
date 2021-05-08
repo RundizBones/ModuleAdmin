@@ -71,14 +71,6 @@ class InputTest extends \Rdb\Tests\BaseTestCase
     }// testInputCookie
 
 
-    public function testDetermineAcceptContentType()
-    {
-        $this->assertEquals('text/html', $this->Input->determineAcceptContentType());// not set http accept.
-        $_SERVER['HTTP_ACCEPT'] = '*/*';
-        $this->assertEquals('text/html', $this->Input->determineAcceptContentType());
-    }// testDetermineAcceptContentType
-
-
     public function testInputGet()
     {
         $this->assertEquals('<div class="myclass">div-element</div>', $this->Input->get('gethtml'));
