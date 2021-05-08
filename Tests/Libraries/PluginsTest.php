@@ -218,7 +218,7 @@ EOT;
         $this->runApp('GET', '/');
         $this->Container = $this->RdbApp->getContainer();
 
-        $Modules = new \Rdb\System\Modules($this->Container);
+        $Modules = new PluginsModulesExtended($this->Container);
         $Modules->registerAutoload();// make getModules() work!
         $this->Container['Modules'] = function ($c) use ($Modules) {
             return $Modules;
