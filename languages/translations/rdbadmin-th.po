@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2021-03-03 15:46+0700\n"
-"PO-Revision-Date: 2021-03-03 15:47+0700\n"
+"POT-Creation-Date: 2021-05-13 13:01+0700\n"
+"PO-Revision-Date: 2021-05-13 13:01+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -86,7 +86,7 @@ msgstr "ไม่สามารถส่งอีเมลได้."
 #: Controllers/Admin/RegisterController.php:289 Controllers/Admin/RegisterController.php:506
 #: Controllers/Admin/Roles/ActionsController.php:190 Controllers/Admin/Roles/AddController.php:102
 #: Controllers/Admin/Roles/EditController.php:103 Controllers/Admin/Roles/ReorderController.php:126
-#: Controllers/Admin/Settings/SettingsController.php:114 Controllers/Admin/Settings/SettingsController.php:484
+#: Controllers/Admin/Settings/SettingsController.php:173 Controllers/Admin/Settings/SettingsController.php:567
 #: Controllers/Admin/Tools/CacheController.php:80 Controllers/Admin/Tools/EmailTesterController.php:109
 #: Controllers/Admin/Users/ActionsController.php:210 Controllers/Admin/Users/ActionsController.php:297
 #: Controllers/Admin/Users/ActionsController.php:402 Controllers/Admin/Users/AddController.php:250
@@ -144,7 +144,7 @@ msgid "Logout"
 msgstr "ออกจากระบบ"
 
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:101 Controllers/Admin/Roles/ReorderController.php:105
-#: Controllers/Admin/Settings/SettingsController.php:100 Controllers/Admin/Users/ActionsController.php:377
+#: Controllers/Admin/Settings/SettingsController.php:159 Controllers/Admin/Users/ActionsController.php:377
 msgid "Updated successfully."
 msgstr "อัพเดทเรียบร้อย."
 
@@ -474,28 +474,28 @@ msgstr "ไม่สามารถอัพเดทหน้าที่ที
 msgid "Not found selected role."
 msgstr "ไม่พบหน้าที่ที่เลือก."
 
-#: Controllers/Admin/Settings/SettingsController.php:81
+#: Controllers/Admin/Settings/SettingsController.php:109
 msgid "Please enter all required fields."
 msgstr "โปรดกรอกฟอร์มที่จำเป็น."
 
-#: Controllers/Admin/Settings/SettingsController.php:104
+#: Controllers/Admin/Settings/SettingsController.php:163
 msgid "Some setting value has not been update, please reload the page and see what was changed."
 msgstr "การตั้งค่าบางอย่างไม่ถูกอัพเดท, โปรดโหลดหน้านี้ใหม่แล้วดูว่ามีสิ่งใดเปลี่ยนแปลงไปบ้าง."
 
-#: Controllers/Admin/Settings/SettingsController.php:315 ModuleData/ModuleAdmin.php:265
+#: Controllers/Admin/Settings/SettingsController.php:374 ModuleData/ModuleAdmin.php:265
 #: Views/Admin/Settings/index_v.php:8
 msgid "Main settings"
 msgstr "การตั้งค่าหลัก"
 
-#: Controllers/Admin/Settings/SettingsController.php:411
+#: Controllers/Admin/Settings/SettingsController.php:494
 msgid "Unable to test other mail protocol."
 msgstr "ไม่สามารถทดสอบโปรโตคอลอีเมลอื่นๆได้."
 
-#: Controllers/Admin/Settings/SettingsController.php:445 Controllers/Admin/Settings/SettingsController.php:468
+#: Controllers/Admin/Settings/SettingsController.php:528 Controllers/Admin/Settings/SettingsController.php:551
 msgid "An error has been occurred."
 msgstr "มีข้อผิดพลาดเกิดขึ้น."
 
-#: Controllers/Admin/Settings/SettingsController.php:465
+#: Controllers/Admin/Settings/SettingsController.php:548
 msgid "Connection was successfull."
 msgstr "การเชื่อมต่อสำเร็จ."
 
@@ -1091,27 +1091,27 @@ msgstr "ชื่อผู้ใช้หรืออีเมล"
 msgid "Email"
 msgstr "อีเมล"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:25 Views/Admin/Login/index_v.php:89 Views/Admin/Login/reset_v.php:102
+#: Views/Admin/ForgotLoginPass/index_v.php:25 Views/Admin/Login/index_v.php:90 Views/Admin/Login/reset_v.php:103
 #: Views/Admin/Register/index_v.php:55
 msgid "Please enter text in the image below."
 msgstr "กรุณากรอกตัวอักษรในภาพด้านล่าง."
 
-#: Views/Admin/ForgotLoginPass/index_v.php:28 Views/Admin/Login/index_v.php:92 Views/Admin/Login/reset_v.php:105
+#: Views/Admin/ForgotLoginPass/index_v.php:28 Views/Admin/Login/index_v.php:93 Views/Admin/Login/reset_v.php:106
 #: Views/Admin/Register/index_v.php:58
 msgid "Captcha"
 msgstr "อักษรภาพ"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:37 Views/Admin/Login/index_v.php:101 Views/Admin/Login/reset_v.php:114
+#: Views/Admin/ForgotLoginPass/index_v.php:37 Views/Admin/Login/index_v.php:102 Views/Admin/Login/reset_v.php:115
 #: Views/Admin/Register/index_v.php:67
 msgid "Get new image"
 msgstr "รับภาพใหม่"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:41 Views/Admin/Login/index_v.php:105 Views/Admin/Login/reset_v.php:118
+#: Views/Admin/ForgotLoginPass/index_v.php:41 Views/Admin/Login/index_v.php:106 Views/Admin/Login/reset_v.php:119
 #: Views/Admin/Register/index_v.php:71
 msgid "Play audio"
 msgstr "เล่นเสียง"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:45 Views/Admin/Login/index_v.php:109 Views/Admin/Login/reset_v.php:122
+#: Views/Admin/ForgotLoginPass/index_v.php:45 Views/Admin/Login/index_v.php:110 Views/Admin/Login/reset_v.php:123
 #: Views/Admin/Register/index_v.php:75
 msgid "Captcha text"
 msgstr "ตัวอักษรภาพ"
@@ -1299,7 +1299,7 @@ msgstr "หน้าที่ที่เลือกอาจจะอยู่
 msgid "Role"
 msgstr "หน้าที่"
 
-#: Views/Admin/Roles/add_v.php:42 Views/Admin/Roles/edit_v.php:60 Views/Admin/Settings/index_v.php:402
+#: Views/Admin/Roles/add_v.php:42 Views/Admin/Roles/edit_v.php:60 Views/Admin/Settings/index_v.php:432
 #: Views/Admin/Users/add_v.php:127 Views/Admin/Users/edit_v.php:253
 msgid "Save"
 msgstr "บันทึก"
@@ -1342,311 +1342,315 @@ msgstr "เว็บไซต์"
 msgid "User"
 msgstr "ผู้ใช้"
 
-#: Views/Admin/Settings/index_v.php:26
+#: Views/Admin/Settings/index_v.php:39
 msgid "Website name"
 msgstr "ชื่อเว็บไซต์"
 
-#: Views/Admin/Settings/index_v.php:32
+#: Views/Admin/Settings/index_v.php:45
 msgid "Timezone"
 msgstr "โซนเวลา"
 
-#: Views/Admin/Settings/index_v.php:54
+#: Views/Admin/Settings/index_v.php:67
 msgid "Number of items per page"
 msgstr "จำนวนรายการต่อหน้า"
 
-#: Views/Admin/Settings/index_v.php:64
+#: Views/Admin/Settings/index_v.php:71
+msgid "Number of items per page in administrator pages."
+msgstr "จำนวนรายการต่อหน้าในหน้าผู้ดูแล."
+
+#: Views/Admin/Settings/index_v.php:80
 msgid "Registration"
 msgstr "การลงทะเบียน"
 
-#: Views/Admin/Settings/index_v.php:69
+#: Views/Admin/Settings/index_v.php:85
 msgid "Anyone can be register"
 msgstr "ทุกคนลงทะเบียนได้"
 
-#: Views/Admin/Settings/index_v.php:77
+#: Views/Admin/Settings/index_v.php:93
 msgid "Send notification email to administrators"
 msgstr "ส่งอีเมลแจ้งเตือนไปยังผู้ดูแล"
 
-#: Views/Admin/Settings/index_v.php:78
+#: Views/Admin/Settings/index_v.php:94
 msgid "A notification email still be sent if registration verification must be done by an administrator."
 msgstr "อีเมลแจ้งเตือนจะยังคงส่งถ้าหากการตรวจสอบลงทะเบียนต้องกระทำโดยผู้ดูแล."
 
-#: Views/Admin/Settings/index_v.php:83
+#: Views/Admin/Settings/index_v.php:99
 msgid "Registration verification"
 msgstr "การตรวจสอบการลงทะเบียน"
 
-#: Views/Admin/Settings/index_v.php:86
+#: Views/Admin/Settings/index_v.php:102
 msgid "No verification"
 msgstr "ไม่ใช้การตรวจสอบ"
 
-#: Views/Admin/Settings/index_v.php:87
+#: Views/Admin/Settings/index_v.php:103
 msgid "Verify by the link in user's email"
 msgstr "ตรวจโดยลิ้งค์ในอีเมลผู้ใช้"
 
-#: Views/Admin/Settings/index_v.php:88
+#: Views/Admin/Settings/index_v.php:104
 msgid "Verify by an administrator"
 msgstr "ตรวจโดยผู้ดูแล"
 
-#: Views/Admin/Settings/index_v.php:93
+#: Views/Admin/Settings/index_v.php:109
 msgid "Registration verification wait time"
 msgstr "ระยะเวลารอตรวจสอบการลงทะเบียน"
 
-#: Views/Admin/Settings/index_v.php:98 Views/Admin/Settings/index_v.php:159 Views/Admin/Settings/index_v.php:175
-#: Views/Admin/Settings/index_v.php:290 Views/Admin/Settings/index_v.php:311
+#: Views/Admin/Settings/index_v.php:114 Views/Admin/Settings/index_v.php:175 Views/Admin/Settings/index_v.php:191
+#: Views/Admin/Settings/index_v.php:306 Views/Admin/Settings/index_v.php:327
 msgid "days"
 msgstr "วัน"
 
-#: Views/Admin/Settings/index_v.php:101
+#: Views/Admin/Settings/index_v.php:117
 msgid ""
 "How many days that user needs to take action to verify their email on register or added a new user by admin?"
 msgstr "ระยะเวลากี่วันที่ผู้ใช้ต้องลงมือกระทำเพื่อตรวจสอบยืนยันอีเมลการลงทะเบียนหรือการถูกเพิ่มผู้ใช้โดยผู้ดูแล?"
 
-#: Views/Admin/Settings/index_v.php:105
+#: Views/Admin/Settings/index_v.php:121
 msgid "Admin notification emails"
 msgstr "อีเมลแจ้งเตือนผู้ดูแล"
 
-#: Views/Admin/Settings/index_v.php:110
+#: Views/Admin/Settings/index_v.php:126
 msgid "The administrator's emails to notify where there is new user registration."
 msgstr "อีเมลผู้ดูแลที่จะแจ้งเตือนเมื่อมีผู้ใช้ลงทะเบียนใหม่."
 
-#: Views/Admin/Settings/index_v.php:112
+#: Views/Admin/Settings/index_v.php:128
 #, php-format
 msgid "Use comma %s to separate multiple emails."
 msgstr "ใช้เครื่องหมายคอมม่า %s เพื่อแยกหลายอีเมล."
 
-#: Views/Admin/Settings/index_v.php:118
+#: Views/Admin/Settings/index_v.php:134
 msgid "Disallowed name"
 msgstr "ไม่อนุญาตชื่อ"
 
-#: Views/Admin/Settings/index_v.php:123
+#: Views/Admin/Settings/index_v.php:139
 msgid "Disallowed name to use in username, email, display name."
 msgstr "ไม่อนุญาตชื่อในชื่อผู้ใช้, อีเมล, ชื่อแสดง."
 
-#: Views/Admin/Settings/index_v.php:125
+#: Views/Admin/Settings/index_v.php:141
 #, php-format
 msgid "Use comma %s to separate multiple names."
 msgstr "ใช้เครื่องหมายคอมม่า %s เพื่อแยกหลายชื่อ."
 
-#: Views/Admin/Settings/index_v.php:127
+#: Views/Admin/Settings/index_v.php:143
 #, php-format
 msgid "Use asterisk %s as wild card in each name."
 msgstr "ใช้เครื่องหมายดอกจัน %s แทนอักขระใดๆก็ตามในแต่ละชื่อ."
 
-#: Views/Admin/Settings/index_v.php:133
+#: Views/Admin/Settings/index_v.php:149
 msgid "Default role"
 msgstr "หน้าที่เริ่มต้น"
 
-#: Views/Admin/Settings/index_v.php:147
+#: Views/Admin/Settings/index_v.php:163
 msgid "Default role to use when user register their account or add new user from administrator page."
 msgstr "หน้าที่เริ่มต้นที่จะใช้เมื่อผู้ใช้ลงทะเบียนสมาชิกหรือเพิ่มผู้ใช้ผ่านหน้าผู้ดูแล."
 
-#: Views/Admin/Settings/index_v.php:152
+#: Views/Admin/Settings/index_v.php:168
 msgid "Login & Security"
 msgstr "การเข้าสู่ระบบ & ความปลอดภัย"
 
-#: Views/Admin/Settings/index_v.php:154
+#: Views/Admin/Settings/index_v.php:170
 msgid "Login length without remember"
 msgstr "ระยะเวลาเข้าสู่ระบบกับการไม่ให้จดจำ"
 
-#: Views/Admin/Settings/index_v.php:164
+#: Views/Admin/Settings/index_v.php:180
 msgid ""
 "Number of days for cookie to be expire when user login without remember option checked. Use zero to keep "
 "session until browser close."
 msgstr "จำนวนวันสำหรับคุกกี้ที่จะหมดอายุเมื่อผู้ใช้เข้าสู่ระบบกับไม่ได้เลือกให้จดจำ. ใช้เลขศูนย์สำหรับให้หมดอายุเมื่อปิดเบราเซอร์."
 
-#: Views/Admin/Settings/index_v.php:170
+#: Views/Admin/Settings/index_v.php:186
 msgid "Login length with remember"
 msgstr "ระยะเวลาเข้าสู่ระบบกับการให้จดจำ"
 
-#: Views/Admin/Settings/index_v.php:180
+#: Views/Admin/Settings/index_v.php:196
 msgid "Number of days for cookie to be expire when user login with remember option checked."
 msgstr "จำนวนวันสำหรับคุกกี้ที่จะหมดอายุเมื่อผู้ใช้เข้าสู่ระบบกับตัวเลือกให้จดจำ."
 
-#: Views/Admin/Settings/index_v.php:186
+#: Views/Admin/Settings/index_v.php:202
 msgid "Login captcha"
 msgstr "อักษรภาพเข้าสู่ระบบ"
 
-#: Views/Admin/Settings/index_v.php:189
+#: Views/Admin/Settings/index_v.php:205
 msgid "Do not use"
 msgstr "ไม่ใช้งาน"
 
-#: Views/Admin/Settings/index_v.php:190
+#: Views/Admin/Settings/index_v.php:206
 msgid "Use until login success"
 msgstr "ใช้จนกระทั่งเข้าสู่ระบบสำเร็จ"
 
-#: Views/Admin/Settings/index_v.php:191
+#: Views/Admin/Settings/index_v.php:207
 msgid "Always use"
 msgstr "ใช้งานเสมอ"
 
-#: Views/Admin/Settings/index_v.php:194
+#: Views/Admin/Settings/index_v.php:210
 msgid ""
 "To use login captcha until login success, the captcha will be skipped until login cookies expired with these "
 "conditions."
 msgstr "การใช้อักษรภาพในการเข้าสู่ระบบจนกระทั่งเข้าสู่ระบบสำเร็จ, อักษรภาพจะถูกข้ามไปจนกระทั่งคุกกี้เข้าสู่ระบบหมดอายุด้วยเงื่อนไขต่อไปนี้."
 
-#: Views/Admin/Settings/index_v.php:195
+#: Views/Admin/Settings/index_v.php:211
 msgid "If user login without remember then it will be expired in one day."
 msgstr "ถ้าผู้ใช้เข้าสู่ระบบโดยไม่ให้จดจำ มันจะหมดอายุในหนึ่งวัน."
 
-#: Views/Admin/Settings/index_v.php:196
+#: Views/Admin/Settings/index_v.php:212
 msgid "If user login with remember then it will be expired within remember length multiply with 6 days."
 msgstr "ถ้าผู้ใช้เข้าสู่ระบบด้วยการให้จดจำ มันจะหมดอายุภายในระยะเวลาจดจำคูณด้วย 6 วัน."
 
-#: Views/Admin/Settings/index_v.php:204
+#: Views/Admin/Settings/index_v.php:220
 msgid "Prevent brute-force attack by IP address"
 msgstr "ป้องกันการสุ่มโจมตีโดยที่อยู่ไอพี"
 
-#: Views/Admin/Settings/index_v.php:212
+#: Views/Admin/Settings/index_v.php:228
 msgid "Prevent brute-force attack by device cookie"
 msgstr "ป้องกันการสุ่มโจมตีโดย device cookie"
 
-#: Views/Admin/Settings/index_v.php:215
+#: Views/Admin/Settings/index_v.php:231
 #, php-format
 msgid "Read more about device cookie at %1$s."
 msgstr "อ่านเพิ่มเติมเกี่ยวกับ device cookie ได้ที่ %1$s."
 
-#: Views/Admin/Settings/index_v.php:220
+#: Views/Admin/Settings/index_v.php:236
 msgid "Maximum login failed"
 msgstr "ล้มเหลวในการเข้าสู่ระบบไม่เกิน"
 
-#: Views/Admin/Settings/index_v.php:225
+#: Views/Admin/Settings/index_v.php:241
 msgctxt "Number of times such as 3 times."
 msgid "times"
 msgstr "ครั้ง"
 
-#: Views/Admin/Settings/index_v.php:230
+#: Views/Admin/Settings/index_v.php:246
 msgid "Maximum of failed login allowed."
 msgstr "จำนวนมากที่สุดที่จะอนุญาตเมื่อเข้าสู่ระบบล้มเหลว."
 
-#: Views/Admin/Settings/index_v.php:232 Views/Admin/Settings/index_v.php:250
+#: Views/Admin/Settings/index_v.php:248 Views/Admin/Settings/index_v.php:266
 msgid "This will work only when one of brute-force option were checked."
 msgstr "นี่จะทำงานเฉพาะตัวเลือกป้องกันการสุ่มโจมตีถูกติ๊ก."
 
-#: Views/Admin/Settings/index_v.php:238
+#: Views/Admin/Settings/index_v.php:254
 msgid "Login failed wait time"
 msgstr "เวลาที่ต้องรอหลังจากเข้าสู่ระบบล้มเหลว"
 
-#: Views/Admin/Settings/index_v.php:243 Views/Admin/Settings/index_v.php:272
+#: Views/Admin/Settings/index_v.php:259 Views/Admin/Settings/index_v.php:288
 msgid "minutes"
 msgstr "นาที"
 
-#: Views/Admin/Settings/index_v.php:248
+#: Views/Admin/Settings/index_v.php:264
 msgid "Wait time in minutes if user reach maximum login failed."
 msgstr "จำนวนนาทีที่รอถ้าผู้ใช้ล้มเหลวในการเข้าสู่ระบบเกินจำนวนที่ระบุ."
 
-#: Views/Admin/Settings/index_v.php:258
+#: Views/Admin/Settings/index_v.php:274
 msgid "Other user settings"
 msgstr "การตั้งค่าผู้ใช้อื่นๆ"
 
-#: Views/Admin/Settings/index_v.php:262
+#: Views/Admin/Settings/index_v.php:278
 msgid "Confirmation is required when users change their email"
 msgstr "ต้องการการยืนยันเมื่อผู้ใช้เปลี่ยนอีเมลของพวกเขา"
 
-#: Views/Admin/Settings/index_v.php:263
+#: Views/Admin/Settings/index_v.php:279
 msgid "A confirmation message with link will be sent to new user's email."
 msgstr "ข้อความและลิ้งค์ยืนยันจะส่งไปยังอีเมลใหม่ของผู้ใช้."
 
-#: Views/Admin/Settings/index_v.php:267
+#: Views/Admin/Settings/index_v.php:283
 msgid "Confirmation wait time"
 msgstr "เวลารอในการยืนยัน"
 
-#: Views/Admin/Settings/index_v.php:277
+#: Views/Admin/Settings/index_v.php:293
 msgid "Number of minutes that a user must take action when waiting for confirmation."
 msgstr "จำนวนนาทีที่ผู้ใช้ต้องลงมือกระทำเมื่อมีการรอการยืนยัน."
 
-#: Views/Admin/Settings/index_v.php:279
+#: Views/Admin/Settings/index_v.php:295
 msgid "Example: reset password, change email, prevent simultaneuos login link, etc."
 msgstr "ตัวอย่าง: ตั้งค่ารหัสผ่านใหม่, เปลี่ยนอีเมล, ลิ้งค์เข้าสู่ระบบป้องกันการเข้าสู่ระบบซ้ำซ้อน, อื่นๆ."
 
-#: Views/Admin/Settings/index_v.php:285
+#: Views/Admin/Settings/index_v.php:301
 msgid "Logins log expiration"
 msgstr "การหมดอายุของบันทึกการเข้าสู่ระบบ"
 
-#: Views/Admin/Settings/index_v.php:294
+#: Views/Admin/Settings/index_v.php:310
 msgid "How many days that user's failed logins data to keep in database?"
 msgstr "บันทึกการเข้าสู่ระบบที่ล้มเหลวของผู้ใช้จะถูกเก็บไว้ในฐานข้อมูลเป็นเวลากี่วัน?"
 
-#: Views/Admin/Settings/index_v.php:301
+#: Views/Admin/Settings/index_v.php:317
 msgid "Allow user to delete their account"
 msgstr "อนุญาตให้ผู้ใช้ลบบัญชีของตน"
 
-#: Views/Admin/Settings/index_v.php:302
+#: Views/Admin/Settings/index_v.php:318
 msgid "If allowed, once account was deleted it will be stay in the database for days before actual deleted."
 msgstr "ถ้าอนุญาต, เมื่อบัญชีผู้ใช้ถูกลบแล้ว มันจะอยู่ในฐานข้อมูลหลายวันก่อนจะถูกลบจริงๆ."
 
-#: Views/Admin/Settings/index_v.php:306
+#: Views/Admin/Settings/index_v.php:322
 msgid "Actual delete user"
 msgstr "ลบผู้ใช้จริง"
 
-#: Views/Admin/Settings/index_v.php:315
+#: Views/Admin/Settings/index_v.php:331
 msgid ""
 "On delete user wether delete themself or by admin, How many days before it gets actual delete from database?"
 msgstr "เมื่อมีการลบผู้ใช้ ไม่ว่าจะโดยผู้ใช้ลบตัวเองหรือโดยผู้ดูแล, จะใช้เวลากี่วันก่อนที่ผู้ใช้นั้นจะถูกลบจริงๆจากฐานข้อมูล?"
 
-#: Views/Admin/Settings/index_v.php:325
+#: Views/Admin/Settings/index_v.php:341
 msgid "Email protocol"
 msgstr "โปรโตคอลอีเมล"
 
-#: Views/Admin/Settings/index_v.php:328
+#: Views/Admin/Settings/index_v.php:344
 msgid "Mail function"
 msgstr "Mail function"
 
-#: Views/Admin/Settings/index_v.php:329
+#: Views/Admin/Settings/index_v.php:345
 msgid "Sendmail function"
 msgstr "Sendmail function"
 
-#: Views/Admin/Settings/index_v.php:330 Views/Admin/Settings/index_v.php:344
+#: Views/Admin/Settings/index_v.php:346 Views/Admin/Settings/index_v.php:360
 msgid "SMTP"
 msgstr "SMTP"
 
-#: Views/Admin/Settings/index_v.php:335
+#: Views/Admin/Settings/index_v.php:351
 msgid "Sendmail"
 msgstr "Sendmail"
 
-#: Views/Admin/Settings/index_v.php:337
+#: Views/Admin/Settings/index_v.php:353
 msgid "Sendmail path"
 msgstr "ตำแหน่งสำหรับโปรแกรม Sendmail"
 
-#: Views/Admin/Settings/index_v.php:346
+#: Views/Admin/Settings/index_v.php:362
 msgid "SMTP host"
 msgstr "SMTP host"
 
-#: Views/Admin/Settings/index_v.php:352
+#: Views/Admin/Settings/index_v.php:368
 msgid "SMTP port"
 msgstr "SMTP port"
 
-#: Views/Admin/Settings/index_v.php:358
+#: Views/Admin/Settings/index_v.php:374
 msgid "SMTP encryption"
 msgstr "การเข้ารหัส SMTP"
 
-#: Views/Admin/Settings/index_v.php:361
+#: Views/Admin/Settings/index_v.php:377
 msgid "No encryption"
 msgstr "ไม่มีการเข้ารหัส"
 
-#: Views/Admin/Settings/index_v.php:362
+#: Views/Admin/Settings/index_v.php:378
 msgid "SSL"
 msgstr "SSL"
 
-#: Views/Admin/Settings/index_v.php:363
+#: Views/Admin/Settings/index_v.php:379
 msgid "TLS"
 msgstr "TLS"
 
-#: Views/Admin/Settings/index_v.php:368
+#: Views/Admin/Settings/index_v.php:384
 msgid "SMTP username"
 msgstr "ชื่อผู้ใช้ SMTP"
 
-#: Views/Admin/Settings/index_v.php:374
+#: Views/Admin/Settings/index_v.php:390
 msgid "SMTP password"
 msgstr "รหัสผ่าน SMTP"
 
-#: Views/Admin/Settings/index_v.php:382
+#: Views/Admin/Settings/index_v.php:398
 msgid "Test connection"
 msgstr "ทดสอบการเชื่อมต่อ"
 
-#: Views/Admin/Settings/index_v.php:388
+#: Views/Admin/Settings/index_v.php:404
 msgid "Sender email"
 msgstr "อีเมลผู้ส่ง"
 
-#: Views/Admin/Settings/index_v.php:392
+#: Views/Admin/Settings/index_v.php:408
 msgid "An email that will be use as sender such as registration verification email."
 msgstr "อีเมลที่จะใช้ในฐานะผู้ส่ง ตัวอย่างเช่นอีเมลตรวจสอบการลงทะเบียน."
 

@@ -67,8 +67,24 @@
                                         <label class="control-label" for="rdbadmin_AdminItemsPerPage"><?php echo __('Number of items per page'); ?></label>
                                         <div class="control-wrapper col-md-3">
                                             <input id="rdbadmin_AdminItemsPerPage" type="number" name="rdbadmin_AdminItemsPerPage" value="" min="1" max="200">
+                                            <div class="form-description">
+                                                <?php echo __('Number of items per page in administrator pages.'); ?>
+                                            </div>
                                         </div>
                                     </div>
+                                    <?php
+                                    /*
+                                     * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsContent.tab-1
+                                     * PluginHookDescription: Hook at the bottom of tabs content in tab 1.
+                                     * PluginHookParam: None.
+                                     * PluginHookReturn: None.
+                                     * PluginHookSince: 1.1.7
+                                     */
+                                    $Plugins = $this->Container->get('Plugins');
+                                    $Plugins->doHook(
+                                        'Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsContent.tab-1'
+                                    );
+                                    ?> 
                                 </div><!--#tab-1-->
 
                                 <div id="tab-2" class="rd-tabs-content">
