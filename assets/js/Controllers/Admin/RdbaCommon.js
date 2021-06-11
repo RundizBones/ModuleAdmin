@@ -503,7 +503,7 @@ class RdbaCommon {
      * @param {object} options. Accepted options: 
      *                                          `url` The request URL.<br>
      *                                          `method` The request method. Default is 'GET'.<br>
-     *                                          `data` The request data.
+     *                                          `data` The request data.<br>
      *                                          `dataType` The data type such as 'json', 'html', 'xml', 'binary', 'blob', 'octet-stream', 'text', 'plain'. Default is 'json'.<br>
      *                                          `responseType` The special response type property for XHR class. Read more at https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType<br>
      *                                          `accept` The custom accept type for response for 'blob', 'binary', 'octet-stream'.<br>
