@@ -562,10 +562,16 @@ class RdbaCommon {
                 Xhr.responseType = options.responseType;
             }
 
+            Xhr.addEventListener('abort', (event) => {
+                reject({'response': '', 'status': (event.currentTarget ? event.currentTarget.status : 'abort'), 'event': event});
+            });
             Xhr.addEventListener('error', function(event) {
                 reject({'response': '', 'status': (event.currentTarget ? event.currentTarget.status : ''), 'event': event});
             });
-            Xhr.addEventListener('loadend', function(event) {
+            Xhr.addEventListener('timeout', (event) => {
+                reject({'response': '', 'status': (event.currentTarget ? event.currentTarget.status : 'timeout'), 'event': event});
+            });
+            Xhr.addEventListener('load', function(event) {
                 let response = (event.currentTarget ? event.currentTarget[options.responseTargetType] : '');
                 if (options.dataType === 'json') {
                     try {
@@ -594,6 +600,8 @@ class RdbaCommon {
                 if (event.currentTarget && event.currentTarget.status >= 200 && event.currentTarget.status < 300) {
                     resolve({'response': response, 'status': event.currentTarget.status, 'event': event, 'headers': headerMap});
                 } else if (event.currentTarget && event.currentTarget.status >= 400 && event.currentTarget.status < 600) {
+                    reject({'response': response, 'status': event.currentTarget.status, 'event': event, 'headers': headerMap});
+                } else {
                     reject({'response': response, 'status': event.currentTarget.status, 'event': event, 'headers': headerMap});
                 }
             });
