@@ -7,8 +7,8 @@ public
     rdbadmin-public/
 ```
 
-### rdbadmin-public folder
+## rdbadmin-public folder
 This folder is for anything that will be serve via web server such as profile pictures uploaded by users. Please do not create any folder with the same name.
 
-#### Reserved file name
+### Reserved file name
  * None - There is no reserved file name inside this folder but please keep this folder untouch.

@@ -12,6 +12,7 @@ If you want to start development using RdbAdmin module, please read following. O
 ## Folder structure
 
 * [Module folder structure](module-folder-structure-for-rdbadmin.md).
+	* [Module Installer](module-installer.md).
 * [Public folder structure](public-folder-structure-for-rdbadmin.md).
 
 ## Controllers
