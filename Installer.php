@@ -1,8 +1,11 @@
 <?php
 /**
- * RdbAdmin module.
- * 
- * The administrator module for RundizBones.
+ * Module Name: RdbAdmin module.
+ * Description: The administrator module for RundizBones framework.
+ * Requires PHP: 7.1.0
+ * Requires Modules: Languages
+ * Author: Vee W.
+ * Gettext Domain: rdbadmin
  * 
  * @package RdbAdmin
  * @version 1.1.7
