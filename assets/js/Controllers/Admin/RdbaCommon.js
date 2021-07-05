@@ -39,9 +39,11 @@ class RdbaCommon {
      * @param {string} status The alert status. Example: 'success', 'error', 'info', 'warning', or can be alert class based on RDTA alert box class name such as 'alert-success', 'alert-danger', etc. Default is 'warning'.
      * @param {bool} dismissable Make alert dismissable if it is `true`, if `false` then it is not. Default is `true`.
      * @param {string} position Fixed position. Accept value 'bottom' or 'top'. Default is 'bottom'.
+     * @param {object} options The options: (since v1.1.8)<br>
+     *                  `autohide` (bool) Set to `false` to disable auto hide. Default is `true`.<br>
      * @returns {undefined}
      */
-    static displayAlertboxFixed(message, status = 'warning', dismissable = true, position = 'bottom') {
+    static displayAlertboxFixed(message, status = 'warning', dismissable = true, position = 'bottom', options = {}) {
         let timeoutAlertFade, timeoutAlertRemove;
 
         // validate argument type is correct.
@@ -53,6 +55,13 @@ class RdbaCommon {
         }
         if (position !== 'top' && position !== 'bottom') {
             position = 'bottom';
+        }
+
+        if (typeof(options) !== 'object') {
+            options = {};
+        }
+        if (options.autohide !== false) {
+            options.autohide = true;
         }
 
         let alertClass = RdbaCommon.getAlertClassFromStatus(status);
@@ -75,18 +84,20 @@ class RdbaCommon {
         clearTimeout(timeoutAlertFade);
         clearTimeout(timeoutAlertRemove);
 
-        // make alert box disappear after few seconds. number of seconds is based on rd-animation fade.
-        timeoutAlertFade = setTimeout(function() {
-            if (document.querySelector('.rd-alertbox.fixed-' + position)) {
-                document.querySelector('.rd-alertbox.fixed-' + position).classList.add('fade-out');
-            }
-        }, 5000);
-        // also remove alert box after disappeared. number of seconds is based on rd-animation fade.
-        timeoutAlertRemove = setTimeout(function() {
-            if (document.querySelector('.rd-alertbox.fixed-' + position)) {
-                document.querySelector('.rd-alertbox.fixed-' + position).remove();
-            }
-        }, 5400);
+        if (options.autohide === true) {
+            // make alert box disappear after few seconds. number of seconds is based on rd-animation fade.
+            timeoutAlertFade = setTimeout(function() {
+                if (document.querySelector('.rd-alertbox.fixed-' + position)) {
+                    document.querySelector('.rd-alertbox.fixed-' + position).classList.add('fade-out');
+                }
+            }, 5000);
+            // also remove alert box after disappeared. number of seconds is based on rd-animation fade.
+            timeoutAlertRemove = setTimeout(function() {
+                if (document.querySelector('.rd-alertbox.fixed-' + position)) {
+                    document.querySelector('.rd-alertbox.fixed-' + position).remove();
+                }
+            }, 5400);
+        }
     }// displayAlertboxFixed
 
 
@@ -98,9 +109,11 @@ class RdbaCommon {
      * @param {string} status The alert status. Example: 'success', 'error', 'info', 'warning', or can be alert class based on RDTA alert box class name such as 'alert-success', 'alert-danger', etc. Default is 'warning'.
      * @param {bool} dismissable Make alert dismissable if it is `true`, if `false` then it is not. Default is `true`.
      * @param {string} position Float position. Accept value 'bottom' or 'top'. Default is 'bottom'.
+     * @param {object} options The options: (since v1.1.8)<br>
+     *                  `autohide` (bool) Set to `false` to disable auto hide. Default is `true`.<br>
      * @returns {undefined}
      */
-    static displayAlertboxFloat(message, status = 'warning', dismissable = true, position = 'bottom') {
+    static displayAlertboxFloat(message, status = 'warning', dismissable = true, position = 'bottom', options = {}) {
         let timeoutAlertFade, timeoutAlertRemove;
 
         // validate argument type is correct.
@@ -112,6 +125,13 @@ class RdbaCommon {
         }
         if (position !== 'top' && position !== 'bottom') {
             position = 'bottom';
+        }
+
+        if (typeof(options) !== 'object') {
+            options = {};
+        }
+        if (options.autohide !== false) {
+            options.autohide = true;
         }
 
         let alertClass = RdbaCommon.getAlertClassFromStatus(status);
@@ -134,18 +154,20 @@ class RdbaCommon {
         clearTimeout(timeoutAlertFade);
         clearTimeout(timeoutAlertRemove);
 
-        // make alert box disappear after few seconds. number of seconds is based on rd-animation fade.
-        timeoutAlertFade = setTimeout(function() {
-            if (document.querySelector('.rd-alertbox.float-' + position)) {
-                document.querySelector('.rd-alertbox.float-' + position).classList.add('fade-out');
-            }
-        }, 5000);
-        // also remove alert box after disappeared. number of seconds is based on rd-animation fade.
-        timeoutAlertRemove = setTimeout(function() {
-            if (document.querySelector('.rd-alertbox.float-' + position)) {
-                document.querySelector('.rd-alertbox.float-' + position).remove();
-            }
-        }, 5400);
+        if (options.autohide === true) {
+            // make alert box disappear after few seconds. number of seconds is based on rd-animation fade.
+            timeoutAlertFade = setTimeout(function() {
+                if (document.querySelector('.rd-alertbox.float-' + position)) {
+                    document.querySelector('.rd-alertbox.float-' + position).classList.add('fade-out');
+                }
+            }, 5000);
+            // also remove alert box after disappeared. number of seconds is based on rd-animation fade.
+            timeoutAlertRemove = setTimeout(function() {
+                if (document.querySelector('.rd-alertbox.float-' + position)) {
+                    document.querySelector('.rd-alertbox.float-' + position).remove();
+                }
+            }, 5400);
+        }
     }// displayAlertboxFloat
 
 
