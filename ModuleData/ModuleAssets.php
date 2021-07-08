@@ -50,13 +50,13 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/css/rdta/rdta-bundled.min.css',
-                    'version' => '2.1.14',
+                    'version' => '2.1.15',
                 ],
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/css/datatables-bundled.min.css',
-                    'version' => '1.10.24',
+                    'version' => '1.10.25',
                 ],
                 // end datatables----------.
                 [
@@ -93,7 +93,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/js/rdta/rdta-bundled.min.js',
-                    'version' => '2.1.14',
+                    'version' => '2.1.15',
                 ],
                 [
                     'handle' => 'handlebars',
@@ -113,20 +113,20 @@ class ModuleAssets
                 [
                     'handle' => 'sortableJS',
                     'file' => $publicModuleUrl . '/assets/vendor/sortablejs/Sortable.min.js',
-                    'version' => '1.13.0',
+                    'version' => '1.14.0',
                 ],
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/js/datatables-bundled.min.js',
                     'dependency' => ['rdta'],
-                    'version' => '1.10.24',
+                    'version' => '1.10.25',
                 ],
                 [
                     'handle' => 'datatables-plugins-pagination',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/plugins/pagination/input.js',
                     'dependency' => ['rdta', 'datatables'],
-                    'version' => '1.10.24',
+                    'version' => '1.10.25',
                 ],
                 // end datatables----------.
                 [
@@ -307,6 +307,12 @@ class ModuleAssets
                 [
                     'handle' => 'rdbaModulesPlugins',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Modules/PluginsController/indexAction.js',
+                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-plugins-pagination', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
+                ],
+                // modules assets
+                [
+                    'handle' => 'rdbaModulesAssets',
+                    'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Modules/AssetsController/indexAction.js',
                     'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-plugins-pagination', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
                 ],
 

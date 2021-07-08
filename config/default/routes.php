@@ -111,6 +111,11 @@ $Rc->addGroup('/admin', function(\FastRoute\RouteCollector $Rc) {
     $Rc->addRoute('PATCH', '/modules/plugins/actions', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Plugins\\Actions:doUpdate');
     // end modules plugins management. --------------------------------------------------------
 
+    // modules assets management. -------------------------------------------------------------
+    $Rc->addRoute('GET', '/modules/assets', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Assets\\Assets:index');
+    $Rc->addRoute('POST', '/modules/assets', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Assets\\Publish:doPublish');
+    // end modules assets management. --------------------------------------------------------
+
     // settings (config) management. -------------------------------------------------------------
     // /admin/settings page + REST API (settings page - get data via REST).
     $Rc->addRoute('GET', '/settings', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\Settings:index');

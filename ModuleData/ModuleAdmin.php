@@ -55,6 +55,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
         return [
             'RdbAdminPermissions' => ['managePermissions'],
             'RdbAdminModulesPlugins' => ['listPlugins', 'managePlugins'],
+            'RdbAdminModulesAssets' => ['publishAssets'],
             'RdbAdminRoles' => ['add', 'edit', 'delete', 'list', 'changePriority'],
             'RdbAdminSettings' => ['changeSettings'],
             'RdbAdminTools' => ['manageCache', 'emailTester'],
@@ -83,6 +84,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
         // pages keywords
         $keywords['RdbAdminPermissions'] = noop__('Permissions');
         $keywords['RdbAdminModulesPlugins'] = noop__('Modules Plugins');
+        $keywords['RdbAdminModulesAssets'] = noop__('Modules Assets');
         $keywords['RdbAdminRoles'] = noop__('Roles');
         $keywords['RdbAdminSettings'] = noop__('Settings');
         $keywords['RdbAdminTools'] = noop__('Tools');
@@ -101,6 +103,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
         $keywords['manageCache'] = noop__('Manage cache');
         $keywords['managePermissions'] = noop__('Manage permissions');
         $keywords['managePlugins'] = noop__('Manage plugins');
+        $keywords['publishAssets'] = noop__('Publish assets to the public');
         $keywords['viewLogins'] = noop__('View logins');
 
         if (!empty($key)) {
@@ -227,6 +230,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                 'id' => 'rdbadmin-modules',
                 'permission' => [
                     ['RdbAdminModulesPlugins', 'listPlugins', 'managePlugins'],
+                    ['RdbAdminModulesAssets', 'publishAssets'],
                 ],
                 'icon' => 'fas fa-cubes fa-fw',
                 'name' => __('Modules'),
@@ -245,6 +249,14 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                         ],
                         'name' => __('Modules Plugins'),
                         'link' => $urlBaseWithLang . '/admin/modules/plugins',
+                    ],
+                    1 => [
+                        'id' => 'rdbadmin-modules-assets',
+                        'permission' => [
+                            ['RdbAdminModulesAssets', 'publishAssets'],
+                        ],
+                        'name' => __('Modules Assets'),
+                        'link' => $urlBaseWithLang . '/admin/modules/assets',
                     ],
                 ],//subMenu
             ],// 101
