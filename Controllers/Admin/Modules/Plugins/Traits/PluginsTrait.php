@@ -19,11 +19,9 @@ trait PluginsTrait
     /**
      * Get URLs and methods about module's plugin pages.
      * 
-     * @param string $moduleSystemName The module folder name.
-     * @param string $pluginSystemName The plugin folder name.
      * @return array Return associative array.
      */
-    protected function getPluginUrlsMethods($moduleSystemName = '', $pluginSystemName = ''): array
+    protected function getPluginUrlsMethods(): array
     {
         $Url = new \Rdb\System\Libraries\Url($this->Container);
         $urlAppBased = $Url->getAppBasedPath(true);
