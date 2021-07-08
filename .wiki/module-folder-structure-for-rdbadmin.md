@@ -15,7 +15,7 @@ ModuleName/
         translations/
             modulename-th.mo
             modulename-th.po
-	Installer.php
+    Installer.php
 ```
 
 ## CronJobs folder

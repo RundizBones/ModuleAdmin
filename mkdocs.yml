@@ -7,6 +7,7 @@ nav:
         - Getting started: getting-started.md
         - Folder structure: 
             - Module folder structure: module-folder-structure-for-rdbadmin.md
+            - Module Installer: module-installer.md
             - Public folder structure: public-folder-structure-for-rdbadmin.md
         - Controllers:
             - Front-end controllers: frontend-controllers.md
