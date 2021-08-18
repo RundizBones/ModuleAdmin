@@ -46,7 +46,7 @@ class Encryption
 
         $cipherText = base64_decode($json['ciphertext']);
 
-        $iterations = intval(abs($json['iterations']));
+        $iterations = intval(abs((int)$json['iterations']));
         if ($iterations <= 0) {
             $iterations = 999;
         }
