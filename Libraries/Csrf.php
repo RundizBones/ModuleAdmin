@@ -33,7 +33,7 @@ class Csrf
      * 
      * @param array $options The associative array with keys:<br>
      *                                      'prefix' (string) For allow create and validate token with difference form actions.<br>
-     *                                      'failureCallable' (callable) allable to be executed if the CSRF validation fails.<br>
+     *                                      'failureCallable' (callable) callable to be executed if the CSRF validation fails.<br>
      *                                      'storageLimit' (int) For limit number of token (re)generate in each request.<br>
      *                                      'strength' (int) Length of token that will be generate.<br>
      *                                      'persistentTokenMode' (bool) Persistent token mode. Set to `true` to not re-generate token every request which is good for ajax, set to `false` (default) for re-generate every request.<br>
