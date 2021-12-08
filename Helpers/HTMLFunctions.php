@@ -22,15 +22,78 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
         return $gmtDatetime;
     }
 
+    $locales = json_decode($_SERVER['RUNDIZBONES_LANGUAGE_LOCALE']);
+    if (is_array($locales)) {
+        $locale = array_values($locales)[0];
+    } elseif (is_scalar($locales)) {
+        $locale = $locales;
+    } else {
+        $locale = null;
+    }
+    unset($locales);
+
     $DateTime = new \DateTime($gmtDatetime, new \DateTimeZone('UTC'));
     $DateTime->setTimezone(new \DateTimeZone($timezone));
     $timestamp = $DateTime->getTimestamp();
 
-    $timezone = $DateTime->format('P');
-    $format = str_replace(['%z', '%Z'], $timezone, $format);
-    unset($timezone);
+    // @todo [rdb] Remove process below and use class `\IntlDateFormatter()` instead in v2.0.
+    $formattedTimezone = $DateTime->format('P');
+    $format = str_replace(['%z', '%Z'], "'" . $formattedTimezone . "'", $format);
+    unset($formattedTimezone);
 
-    return strftime($format, $timestamp);
+    $replaces = [
+        '%a' => 'E',
+        '%A' => 'EEEE',
+        '%d' => 'dd',
+        '%e' => 'd',
+        '%j' => 'D',
+        '%u' => 'e',// not 100% correct
+        '%w' => 'c',// not 100% correct
+        '%U' => 'w',
+        '%V' => 'ww',// not 100% correct
+        '%W' => 'w',// not 100% correct
+        '%b' => 'MMM',
+        '%B' => 'MMMM',
+        '%h' => 'MMM',// alias of %b
+        '%m' => 'MM',
+        '%C' => 'yy',// no replace for this
+        '%g' => 'yy',// no replace for this
+        '%G' => 'Y',// not 100% correct
+        '%y' => 'yy',
+        '%Y' => 'yyyy',
+        '%H' => 'HH',
+        '%k' => 'H',
+        '%I' => 'hh',
+        '%l' => 'h',
+        '%M' => 'mm',
+        '%p' => 'a',
+        '%P' => 'a',// no replace for this
+        '%r' => 'hh:mm:ss a',
+        '%R' => 'HH:mm',
+        '%S' => 'ss',
+        '%T' => 'HH:mm:ss',
+        '%X' => 'HH:mm:ss',// no replace for this
+        '%z' => 'ZZ',
+        '%Z' => 'v',// no replace for this
+        '%c' => 'd/M/YYYY HH:mm:ss',// Buddhist era not converted.
+        '%D' => 'MM/dd/yy',
+        '%F' => 'yyyy-MM-dd',
+        '%s' => '',// no replace for this
+        '%x' => 'd/MM/yyyy',// Buddhist era not converted.
+        '%n' => "\n",
+        '%t' => "\t",
+        '%%' => '%',
+    ];
+    $intlDpattern = preg_replace('/(%%[a-zA-Z])/u', "'$1'", $format);// escape %%x with '%%x'.
+    foreach ($replaces as $strftime => $intl) {
+        $intlDpattern = preg_replace('/(?<!%)(' . $strftime . ')/u', $intl, $intlDpattern);
+    }// endforeach;
+    unset($intl, $strftime);
+
+    $IntlDateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
+    $IntlDateFormatter->setPattern($intlDpattern);
+    unset($intlDpattern);
+    return $IntlDateFormatter->format($timestamp);
 }// rdbaGetDatetime
 
 
