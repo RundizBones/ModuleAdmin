@@ -22,24 +22,17 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
         return $gmtDatetime;
     }
 
-    $locales = json_decode($_SERVER['RUNDIZBONES_LANGUAGE_LOCALE']);
-    if (is_array($locales)) {
-        $locale = array_values($locales)[0];
-    } elseif (is_scalar($locales)) {
-        $locale = $locales;
-    } else {
-        $locale = null;
-    }
-    unset($locales);
+    // get the locale that is already set in System/Middleware/I18n.php
+    $locale = setlocale(LC_ALL, 0);
 
     $DateTime = new \DateTime($gmtDatetime, new \DateTimeZone('UTC'));
     $DateTime->setTimezone(new \DateTimeZone($timezone));
     $timestamp = $DateTime->getTimestamp();
 
-    // @todo [rdb] Remove process below and use class `\IntlDateFormatter()` instead in v2.0.
+    // @todo [rdb] Remove process below and use pattern (format) for class `\IntlDateFormatter()` instead in v2.0.
     $formattedTimezone = $DateTime->format('P');
     $format = str_replace(['%z', '%Z'], "'" . $formattedTimezone . "'", $format);
-    unset($formattedTimezone);
+    unset($DateTime, $formattedTimezone);
 
     $replaces = [
         '%a' => 'E',
@@ -90,6 +83,9 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
     }// endforeach;
     unset($intl, $strftime);
 
+    // use `\IntlDateFormatter`instead of `strftime()` that is deprecated since PHP 8.1
+    // Do not use `\IntlDateFormatter::TRADITIONAL` to prevent some mistake where Buddhist era that is +543 years.
+    // This may affect on some process that use this function to get date/time for processing. Previous code also not convert the year.
     $IntlDateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
     $IntlDateFormatter->setPattern($intlDpattern);
     unset($intlDpattern);
