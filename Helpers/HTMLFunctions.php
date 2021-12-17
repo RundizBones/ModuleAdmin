@@ -28,12 +28,9 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
     $DateTime = new \DateTime($gmtDatetime, new \DateTimeZone('UTC'));
     $DateTime->setTimezone(new \DateTimeZone($timezone));
     $timestamp = $DateTime->getTimestamp();
+    unset($DateTime);
 
     // @todo [rdb] Remove process below and use pattern (format) for class `\IntlDateFormatter()` instead in v2.0.
-    $formattedTimezone = $DateTime->format('P');
-    $format = str_replace(['%z', '%Z'], "'" . $formattedTimezone . "'", $format);
-    unset($DateTime, $formattedTimezone);
-
     $replaces = [
         '%a' => 'E',
         '%A' => 'EEEE',
