@@ -77,9 +77,29 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
         '%t' => "\t",
         '%%' => '%',
     ];
-    $intlDpattern = preg_replace('/(%%[a-zA-Z])/u', "'$1'", $format);// escape %%x with '%%x'.
+    $pattern = $format;
+
+    // replace 1 single quote that is not following visible character or single quote and not follow by single quote or word or number.
+    // example: '
+    // replace with 2 single quotes. example: ''
+    $pattern = preg_replace('/(?<![\'\S])(\')(?![\'\w])/u', "'$1", $pattern);
+    // replace 1 single quote that is not following visible character or single quote and follow by word.
+    // example: 'xx
+    // replace with 2 single quotes. example: ''xx
+    $pattern = preg_replace('/(?<![\'\S])(\')(\w+)/u', "'$1$2", $pattern);
+    // replace 1 single quote that is following word (a-z 0-9) and not follow by single quote.
+    // example: xx'
+    // replace with 2 single quotes. example: xx''
+    $pattern = preg_replace('/([\w]+)(\')(?!\')/u', "$1'$2", $pattern);
+    // replace a-z (include upper case) that is not following %. example xxx.
+    // replace with wrap single quote. example: 'xxx'.
+    $pattern = preg_replace('/(?<![%a-zA-Z])([a-zA-Z]+)/u', "'$1$2'", $pattern);
+
+    // escape %%x with '%%x'.
+    $pattern = preg_replace('/(%%[a-zA-Z]+)/u', "'$1'", $pattern);
+
     foreach ($replaces as $strftime => $intl) {
-        $intlDpattern = preg_replace('/(?<!%)(' . $strftime . ')/u', $intl, $intlDpattern);
+        $pattern = preg_replace('/(?<!%)(' . $strftime . ')/u', $intl, $pattern);
     }// endforeach;
     unset($intl, $strftime);
 
@@ -87,8 +107,8 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
     // Do not use `\IntlDateFormatter::TRADITIONAL` to prevent some mistake where Buddhist era that is +543 years.
     // This may affect on some process that use this function to get date/time for processing. Previous code also not convert the year.
     $IntlDateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
-    $IntlDateFormatter->setPattern($intlDpattern);
-    unset($intlDpattern);
+    $IntlDateFormatter->setPattern($pattern);
+    unset($pattern);
     return $IntlDateFormatter->format($timestamp);
 }// rdbaGetDatetime
 
