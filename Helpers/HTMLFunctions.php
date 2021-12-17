@@ -13,7 +13,7 @@
  * 
  * @param string $gmtDatetime The GMT or UTC date/time.
  * @param string $timezone PHP time zone value.
- * @param string $format Date/time format for use in `strftime()` function except `%z` or `%Z` that will be always the same time zone value.
+ * @param string $format Date/time format for use in `strftime()`.
  * @return string Return formatted date/time to specific time zone.
  */
 function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $format = '%e %B %Y %H:%M:%S %z'): string
