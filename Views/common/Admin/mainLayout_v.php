@@ -91,8 +91,11 @@
                 </div><!--.rd-page-content-->
             </main>
             <footer>
-                <div class="rd-page-footer-left"><a class="rdba-app-name" href="https://github.com/RundizBones/ModuleAdmin" target="_blank"><!--ui/xhr-common-data--></a></div>
-                <div class="rd-page-footer-right rdba-app-version"><!--ui/xhr-common-data--></div>
+                <div class="rd-page-footer-left"></div>
+                <div class="rd-page-footer-right">
+                    <a class="rdba-app-name" href="https://github.com/RundizBones/ModuleAdmin" target="_blank"><!--ui/xhr-common-data--></a>
+                    <span class="rdba-app-version"><!--ui/xhr-common-data--></span>
+                </div>
             </footer> 
         </div><!--.rd-page-wrapper-->
 

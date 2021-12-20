@@ -556,10 +556,14 @@ class RdbaUiXhrCommonDataController {
      * @returns {undefined}
      */
     setAppversion(appVersion) {
-        let $ = jQuery.noConflict();
-
-        $('.rdba-app-name').html(appVersion.name);
-        $('.rdba-app-version').html(appVersion.version);
+        let appNameElement = document.querySelector('.rdba-app-name');
+        if (appNameElement) {
+            appNameElement.innerHTML = appVersion.name;
+        }
+        let appVersionElement = document.querySelector('.rdba-app-version');
+        if (appVersionElement) {
+            appVersionElement.innerHTML = appVersion.version;
+        }
     }// setAppversion
 
 

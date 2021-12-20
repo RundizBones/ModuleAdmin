@@ -3,6 +3,11 @@
 */
 
 
+.rd-page-wrapper > footer a {
+    color: #5aa6f4;
+}
+
+
 .rd-template-admin.rdba-empty-layout body {
     padding-top: 0;
 }
