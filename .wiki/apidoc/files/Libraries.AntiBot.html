@@ -21,54 +21,54 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    <script type="text/javascript">
-    function loadExternalCodeSnippets() {
-        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-            var language = 'php';
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
 
-            var code = document.createElement('code');
-            code.className = 'language-' + language;
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
 
-            pre.textContent = '';
+                pre.textContent = '';
 
-            code.textContent = 'Loading…';
+                code.textContent = 'Loading…';
 
-            pre.appendChild(code);
+                pre.appendChild(code);
 
-            var xhr = new XMLHttpRequest();
+                var xhr = new XMLHttpRequest();
 
-            xhr.open('GET', src, true);
+                xhr.open('GET', src, true);
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
 
-                    if (xhr.status < 400 && xhr.responseText) {
-                        code.textContent = xhr.responseText;
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
 
-                        Prism.highlightElement(code);
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
                     }
-                    else if (xhr.status >= 400) {
-                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                    }
-                    else {
-                        code.textContent = '✖ Error: File does not exist or is empty';
-                    }
-                }
-            };
+                };
 
-            xhr.send(null);
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
         });
-    }
-
-    $(document).ready(function(){
-        loadExternalCodeSnippets();
-    });
-    $('#source-view').on('shown', function () {
-        loadExternalCodeSnippets();
-    })
-</script>
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
 
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
@@ -144,46 +144,46 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1758130667"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-774496929"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1758130667" class="accordion-body collapse in">
+            <div id="namespace-774496929" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-646891433"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-804313680"></a>
                                 <a href="../namespaces/Rdb.html" style="margin-left: 30px; padding-left: 0">Rdb</a>
             </div>
-            <div id="namespace-646891433" class="accordion-body collapse ">
+            <div id="namespace-804313680" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2079627369"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-466381898"></a>
                                 <a href="../namespaces/Rdb.Modules.html" style="margin-left: 30px; padding-left: 0">Modules</a>
             </div>
-            <div id="namespace-2079627369" class="accordion-body collapse ">
+            <div id="namespace-466381898" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-812633984"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-235679399"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.html" style="margin-left: 30px; padding-left: 0">RdbAdmin</a>
             </div>
-            <div id="namespace-812633984" class="accordion-body collapse ">
+            <div id="namespace-235679399" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-784845589"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2008768446"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Console.html" style="margin-left: 30px; padding-left: 0">Console</a>
             </div>
-            <div id="namespace-784845589" class="accordion-body collapse ">
+            <div id="namespace-2008768446" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -200,19 +200,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-491909502"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1286484233"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.html" style="margin-left: 30px; padding-left: 0">Controllers</a>
             </div>
-            <div id="namespace-491909502" class="accordion-body collapse ">
+            <div id="namespace-1286484233" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1764370296"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1272893378"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers._SubControllers.html" style="margin-left: 30px; padding-left: 0">_SubControllers</a>
             </div>
-            <div id="namespace-1764370296" class="accordion-body collapse ">
+            <div id="namespace-1272893378" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -229,37 +229,37 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1961532578"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1371182222"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.html" style="margin-left: 30px; padding-left: 0">Admin</a>
             </div>
-            <div id="namespace-1961532578" class="accordion-body collapse ">
+            <div id="namespace-1371182222" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1220947413"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1810671574"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.html" style="margin-left: 30px; padding-left: 0">Modules</a>
             </div>
-            <div id="namespace-1220947413" class="accordion-body collapse ">
+            <div id="namespace-1810671574" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1394719418"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-955382454"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Assets.html" style="margin-left: 30px; padding-left: 0">Assets</a>
             </div>
-            <div id="namespace-1394719418" class="accordion-body collapse ">
+            <div id="namespace-955382454" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2124338803"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-973614353"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Assets.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
             </div>
-            <div id="namespace-2124338803" class="accordion-body collapse ">
+            <div id="namespace-973614353" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -284,19 +284,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-709310093"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-990764569"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Plugins.html" style="margin-left: 30px; padding-left: 0">Plugins</a>
             </div>
-            <div id="namespace-709310093" class="accordion-body collapse ">
+            <div id="namespace-990764569" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-707100756"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-609860973"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Plugins.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
             </div>
-            <div id="namespace-707100756" class="accordion-body collapse ">
+            <div id="namespace-609860973" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -329,19 +329,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1664079068"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1828010507"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Permissions.html" style="margin-left: 30px; padding-left: 0">Permissions</a>
             </div>
-            <div id="namespace-1664079068" class="accordion-body collapse ">
+            <div id="namespace-1828010507" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2031166729"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1092953002"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Permissions.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
             </div>
-            <div id="namespace-2031166729" class="accordion-body collapse ">
+            <div id="namespace-1092953002" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -366,19 +366,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1855413068"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1294429637"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.html" style="margin-left: 30px; padding-left: 0">Roles</a>
             </div>
-            <div id="namespace-1855413068" class="accordion-body collapse ">
+            <div id="namespace-1294429637" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1427962982"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-603363855"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
             </div>
-            <div id="namespace-1427962982" class="accordion-body collapse ">
+            <div id="namespace-603363855" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -406,10 +406,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1856830088"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1340013555"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.html" style="margin-left: 30px; padding-left: 0">Settings</a>
             </div>
-            <div id="namespace-1856830088" class="accordion-body collapse ">
+            <div id="namespace-1340013555" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -424,10 +424,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-280109745"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1032161661"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Tools.html" style="margin-left: 30px; padding-left: 0">Tools</a>
             </div>
-            <div id="namespace-280109745" class="accordion-body collapse ">
+            <div id="namespace-1032161661" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -443,19 +443,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1489887211"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-176692003"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.html" style="margin-left: 30px; padding-left: 0">UI</a>
             </div>
-            <div id="namespace-1489887211" class="accordion-body collapse ">
+            <div id="namespace-176692003" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-246921813"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1216719901"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
             </div>
-            <div id="namespace-246921813" class="accordion-body collapse ">
+            <div id="namespace-1216719901" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -470,10 +470,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1398400100"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1953366717"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Widgets.html" style="margin-left: 30px; padding-left: 0">Widgets</a>
             </div>
-            <div id="namespace-1398400100" class="accordion-body collapse ">
+            <div id="namespace-1953366717" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -498,28 +498,28 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-774106622"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2046337871"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.html" style="margin-left: 30px; padding-left: 0">Users</a>
             </div>
-            <div id="namespace-774106622" class="accordion-body collapse ">
+            <div id="namespace-2046337871" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-625710913"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1050389012"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.html" style="margin-left: 30px; padding-left: 0">Sessions</a>
             </div>
-            <div id="namespace-625710913" class="accordion-body collapse ">
+            <div id="namespace-1050389012" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1188988897"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-707481734"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
             </div>
-            <div id="namespace-1188988897" class="accordion-body collapse ">
+            <div id="namespace-707481734" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -544,10 +544,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1900633536"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1496021598"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
             </div>
-            <div id="namespace-1900633536" class="accordion-body collapse ">
+            <div id="namespace-1496021598" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -601,19 +601,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-45139436"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1464390969"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.CronJobs.html" style="margin-left: 30px; padding-left: 0">CronJobs</a>
             </div>
-            <div id="namespace-45139436" class="accordion-body collapse ">
+            <div id="namespace-1464390969" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1590225125"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1463930571"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.CronJobs.Jobs.html" style="margin-left: 30px; padding-left: 0">Jobs</a>
             </div>
-            <div id="namespace-1590225125" class="accordion-body collapse ">
+            <div id="namespace-1463930571" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -643,10 +643,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1820811658"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1735891520"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Interfaces.html" style="margin-left: 30px; padding-left: 0">Interfaces</a>
             </div>
-            <div id="namespace-1820811658" class="accordion-body collapse ">
+            <div id="namespace-1735891520" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -663,19 +663,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1158738238"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-312465767"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Libraries.html" style="margin-left: 30px; padding-left: 0">Libraries</a>
             </div>
-            <div id="namespace-1158738238" class="accordion-body collapse ">
+            <div id="namespace-312465767" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1487874556"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-310010229"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Libraries.Extended.html" style="margin-left: 30px; padding-left: 0">Extended</a>
             </div>
-            <div id="namespace-1487874556" class="accordion-body collapse ">
+            <div id="namespace-310010229" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -690,10 +690,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-343938929"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-438381369"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Libraries.SPLIterators.html" style="margin-left: 30px; padding-left: 0">SPLIterators</a>
             </div>
-            <div id="namespace-343938929" class="accordion-body collapse ">
+            <div id="namespace-438381369" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -730,19 +730,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1158194701"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-932055868"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Models.html" style="margin-left: 30px; padding-left: 0">Models</a>
             </div>
-            <div id="namespace-1158194701" class="accordion-body collapse ">
+            <div id="namespace-932055868" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-530270878"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1463957827"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.Models.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
             </div>
-            <div id="namespace-530270878" class="accordion-body collapse ">
+            <div id="namespace-1463957827" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -773,10 +773,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2108389945"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-652685393"></a>
                                 <a href="../namespaces/Rdb.Modules.RdbAdmin.ModuleData.html" style="margin-left: 30px; padding-left: 0">ModuleData</a>
             </div>
-            <div id="namespace-2108389945" class="accordion-body collapse ">
+            <div id="namespace-652685393" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -827,187 +827,60 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content class">
+                <div class="span8 content file">
                     <nav>
-                                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Traits.html">\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits</a> <i class="icon-level-up"></i>
-                                            </nav>
+                                                                    </nav>
+
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+                    <h1><small></small>AntiBot.php</h1>
+                    <p><em></em></p>
+                    
 
-                    <h1><small>\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits</small>UsersEditingTrait</h1>
-                    <p><em>Users editing trait.</em></p>
                     
                     
-                                        
-                    <section id="summary">
-                        <h2>Summary</h2>
-                        <section class="row-fluid heading">
-                            <section class="span4">
-                                <a href="#methods">Methods</a>
-                            </section>
-                            <section class="span4">
-                                <a href="#properties">Properties</a>
-                            </section>
-                            <section class="span4">
-                                <a href="#constants">Constants</a>
-                            </section>
-                        </section>
-                        <section class="row-fluid public">
-                            <section class="span4">
-                                                                    <em>No public methods found</em>
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No public properties found</em>
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No constants found</em>
-                                                            </section>
-                        </section>
-                        <section class="row-fluid protected">
-                            <section class="span4">
-                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Traits.UsersEditingTrait.html#method_isEditingHigherRole" class="">isEditingHigherRole()</a><br />
-                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Traits.UsersEditingTrait.html#method_isMe" class="">isMe()</a><br />
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No protected properties found</em>
-                                                            </section>
-                            <section class="span4">
-                                <em>N/A</em>
-                            </section>
-                        </section>
-                        <section class="row-fluid private">
-                            <section class="span4">
-                                                                    <em>No private methods found</em>
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No private properties found</em>
-                                                            </section>
-                            <section class="span4">
-                                <em>N/A</em>
-                            </section>
-                        </section>
-                    </section>
-                </div>
+                                        <h2>Classes</h2>
+                    <table class="table table-hover">
+                                            <tr>
+                            <td><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.AntiBot.html">AntiBot</a></td>
+                            <td><em>Anti robot class to prevent spam.</em></td>
+                        </tr>
+                                        </table>
+                                    </div>
+
                 <aside class="span4 detailsbar">
-                                        
-                    
                     <dl>
-                        <dt>File</dt>
-                            <dd><a href="../files/Controllers.Admin.Users.Traits.UsersEditingTrait.html"><div class="path-wrapper">Controllers\Admin\Users\Traits\UsersEditingTrait.php</div></a></dd>
-                                                <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Default</div></dd>
-                                                <dt>Class hierarchy</dt>
-                            <dd class="hierarchy">
-                                                                                                                                                                    <div class="namespace-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersEditingTrait</div>
-                            </dd>
-
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
                         
                         
-                        
-                                                
-                                                                        </dl>
+                    </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
-                                        </table>
+                                                    <tr>
+                                <th>
+                                    license
+                                </th>
+                                <td>
+                                                                                                                    <p><a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a> MIT</p>
+                                                                    </td>
+                            </tr>
+                                            </table>
+
                 </aside>
             </div>
 
-                        
-                        
-                                    <a id="methods" name="methods"></a>
-            <div class="row-fluid">
-                <div class="span8 content class"><h2>Methods</h2></div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_isEditingHigherRole" name="method_isEditingHigherRole" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">isEditingHigherRole()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">isEditingHigherRole(string|integer  <span class="argument">$user_id</span>) : boolean</pre>
-                <p><em>Check if target user has higher priority role than a user who is editing them.</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|integer</td>
-                                <td>$user_id </td>
-                                <td><p>The target user ID.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                            &mdash; <p>Return <code>false</code> if not editing higher priority role, return <code>true</code> if yes.</p>
-                                    
-                            </article>
+            
+            
         </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Traits.UsersEditingTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersEditingTrait</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_isMe" name="method_isMe" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">isMe()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">isMe(string|integer  <span class="argument">$user_id</span>) : boolean</pre>
-                <p><em>Check that the specified `$user_id` is me or not.</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|integer</td>
-                                <td>$user_id </td>
-                                <td><p>User ID to check. Cannot leave blank!</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                            &mdash; <p>Return <code>true</code> if it was me, <code>false</code> if not.</p>
-                                    
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Traits.UsersEditingTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersEditingTrait</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">UsersEditingTrait.php</h3>
+            <h3 id="source-view-label"></h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Controllers\Admin\Users\Traits\UsersEditingTrait.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Libraries\AntiBot.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
