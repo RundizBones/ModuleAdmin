@@ -1,6 +1,5 @@
 {
     "require": {
-        "dapphp/securimage": "^3.0",
         "firebase/php-jwt": "^5.0",
         "gettext/gettext": "^4.6",
         "marcj/topsort": "^1.0",

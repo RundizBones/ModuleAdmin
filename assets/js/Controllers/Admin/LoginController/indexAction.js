@@ -79,10 +79,6 @@ class RdbaLoginController {
 
                 // remove login status icon
                 $('.login-status-icon').remove();
-
-                if (RdbaLogin.requireCaptcha === true) {
-                    $('#rdba-login-form #captcha-reload').trigger('click');
-                }
             })
             .always(function(data, textStatus, jqXHR) {
                 let response;
@@ -111,44 +107,6 @@ class RdbaLoginController {
 
 
     /**
-     * Check if require captcha then display it.
-     * 
-     * @returns {undefined}
-     */
-    isRequireCaptcha() {
-        let $ = jQuery.noConflict();
-
-        if (RdbaLogin.requireCaptcha === true) {
-            let source = document.getElementById('captcha-field').innerHTML;
-            let template = Handlebars.compile(source);
-            let html = template(RdbaLogin);
-
-            // display captcha from template tags.
-            $('#rdba-login-form .form-group-captcha').remove();
-            $('#rdba-login-form').find('.form-group-password').after(html);
-            $('#rdba-login-form .form-group-captcha #captcha-image').attr('src', RdbaLogin.getCaptchaImage + '?id=' + (Math.random() + '').replace('0.', ''));
-            $('#rdba-login-form .form-group-captcha #captcha-audio-player-source-wav').attr('src', RdbaLogin.getCaptchaAudio + '?id=' + (Math.random() + '').replace('0.', ''));// require random id.
-
-            let securimage = new Securimage({
-                'audioId': $('#captcha-audio-player'),
-                'audioButtonId': $('#captcha-audio-controls'),
-                'audioIconRef': $('.fontawesome-icon.icon-play-audio'),
-                'captchaImageUrl': RdbaLogin.getCaptchaImage,
-                'captchaAudioUrl': RdbaLogin.getCaptchaAudio,
-                'reloadButtonId': $('#captcha-reload'),
-                'reloadIconRef': $('.fontawesome-icon.icon-reload')
-            });
-            // Listen to audio events and display certain icon.
-            securimage.audioEventsIcons();
-            // On reload new captcha image.
-            securimage.onReload();
-            // On play captcha audio.
-            securimage.onPlay();
-        }
-    }// isRequireCaptcha
-
-
-    /**
      * Show or hide links depend on configurations.
      * 
      * @returns {undefined}
@@ -167,9 +125,6 @@ class RdbaLoginController {
 
 document.addEventListener('DOMContentLoaded', function() {
     let rdbaLoginController = new RdbaLoginController;
-
-    // check if require captcha then display it, otherwise it cannot pass the login process.
-    rdbaLoginController.isRequireCaptcha();
 
     // show or hide links such as register.
     rdbaLoginController.showOrHideLinks();

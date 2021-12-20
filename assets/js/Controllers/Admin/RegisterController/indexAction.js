@@ -7,39 +7,6 @@ class RdbaRegisterController {
 
 
     /**
-     * Activate captcha.
-     * 
-     * @returns {undefined}
-     */
-    activateCaptcha() {
-        let $ = jQuery.noConflict();
-
-        $('#rdba-register-form .form-group-captcha #captcha-image').attr('src', RdbaRegister.getCaptchaImage + '?id=' + (Math.random() + '').replace('0.', ''));
-        $('#rdba-register-form .form-group-captcha #captcha-audio-player-source-wav').attr('src', RdbaRegister.getCaptchaAudio + '?id=' + (Math.random() + '').replace('0.', ''));// require random id.
-        let captchaAudioPlayer = $('#rdba-register-form #captcha-audio-player')[0];
-        if (captchaAudioPlayer) {
-            captchaAudioPlayer.load();// required this to be able to play after page load.
-        }
-
-        let securimage = new Securimage({
-            'audioId': $('#captcha-audio-player'),
-            'audioButtonId': $('#captcha-audio-controls'),
-            'audioIconRef': $('.fontawesome-icon.icon-play-audio'),
-            'captchaImageUrl': RdbaRegister.getCaptchaImage,
-            'captchaAudioUrl': RdbaRegister.getCaptchaAudio,
-            'reloadButtonId': $('#captcha-reload'),
-            'reloadIconRef': $('.fontawesome-icon.icon-reload')
-        });
-        // Listen to audio events and display certain icon.
-        securimage.audioEventsIcons();
-        // On reload new captcha image.
-        securimage.onReload();
-        // On play captcha audio.
-        securimage.onPlay();
-    }// activateCaptcha
-
-
-    /**
      * Ajax submit register form.
      * 
      * @returns {undefined}
@@ -104,9 +71,6 @@ class RdbaRegisterController {
 
                 // remove submit status icon
                 $('.submit-status-icon').remove();
-
-                // trigger reload captcha.
-                $('#rdba-register-form #captcha-reload').trigger('click');
             })
             .always(function(data, textStatus, jqXHR) {
                 let response;
@@ -125,8 +89,6 @@ class RdbaRegisterController {
                     RdbaRegister.csrfKeyPair = response.csrfKeyPair;
                 }
 
-                // trigger reload captcha
-                document.getElementById('captcha-reload').click();// must use .click() instead of jQuery.trigger('click') because event listener use `document.addEventListener()`.
                 // unlock submit button
                 $('.rdba-submit-button').removeAttr('disabled');
                 // remove spinner icon
@@ -141,9 +103,6 @@ class RdbaRegisterController {
 
 document.addEventListener('DOMContentLoaded', function() {
     let rdbaRegisterController = new RdbaRegisterController;
-
-    // activate captcha.
-    rdbaRegisterController.activateCaptcha();
 
     // ajax submit
     rdbaRegisterController.ajaxRegister();

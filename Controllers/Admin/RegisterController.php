@@ -357,9 +357,9 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
             $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 
             // validate the form. --------------------------------------------------------
-            $data['captcha'] = trim($this->Input->post('captcha'));
+            $data['antibot'] = trim($this->Input->post(\Rdb\Modules\RdbAdmin\Libraries\AntiBot::staticGetHoneypotName()));
             $formValidate = $this->doRegisterFormValidation(($output['configDb'] ?? []), $data);
-            unset($data['captcha']);
+            unset($data['antibot']);
 
             if (!empty($formValidate) && isset($formValidate['formResultStatus']) && isset($formValidate['formResultMessage'])) {
                 $formValidated = false;
@@ -581,16 +581,12 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                 $errors['confirm_password']['fieldsValidation'] = 'notmatch';
             }
 
-            // validate captcha.
-            $CaptchaController = new CaptchaController($this->Container);
-            $checkCaptcha = $CaptchaController->doCheckCaptcha(trim($data['captcha']));
-            unset($CaptchaController);
-            if ($checkCaptcha !== true) {
+            // validate honeypot (antibot).
+            if (!empty($data['antibot'])) {
                 $output['formResultStatus'] = 'error';
-                $errors['captcha']['message'] = __('Incorrect captcha code.');
-                $errors['captcha']['fieldsValidation'] = 'invalid';
+                $errors[$_SESSION['honeypotName']]['message'] = __('You have entered incorrect data.');// just showing incorrect.
+                $errors[$_SESSION['honeypotName']]['fieldsValidation'] = 'invalid';
             }
-            unset($checkCaptcha);
 
             // validate disallowed user_login, user_email, user_displayname
             if (
@@ -924,6 +920,11 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
             http_response_code(403);
         }
 
+        // honeypot (antibot)
+        $AntiBot = new \Rdb\Modules\RdbAdmin\Libraries\AntiBot();
+        $output['honeypotName'] = $AntiBot->setAndGetHoneypotName();
+        unset($AntiBot);
+
         $output['loginUrl'] = $Url->getAppBasedPath() . '/admin/login' . $Url->getQuerystring();
         $output['registerUrl'] = $Url->getCurrentUrl() . $Url->getQuerystring();
         $output['registerMethod'] = 'POST';
@@ -965,8 +966,6 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                     'loginUrl' => $output['loginUrl'],
                     'registerUrl' => $output['registerUrl'],
                     'registerMethod' => $output['registerMethod'],
-                    'getCaptchaImage' => $Url->getAppBasedPath() . '/admin/captcha/image',
-                    'getCaptchaAudio' => $Url->getAppBasedPath() . '/admin/captcha/audio',
                     'gobackUrl' => $output['gobackUrl'],
                 ]
             );

@@ -31,6 +31,13 @@
                             <input id="user_password" class="user_password" type="password" name="user_password" value="" maxlength="160" placeholder="<?php echo esc__('Password'); ?>" required="">
                         </div>
                     </div>
+                    <?php // antibot field ?> 
+                    <div class="form-group rd-hidden" aria-hidden="true">
+                        <label class="control-label" for="<?php echo $honeypotName; ?>"><?php echo __('Please skip this field.'); ?></label>
+                        <div class="control-wrapper">
+                            <input id="<?php echo $honeypotName; ?>" class="<?php echo $honeypotName; ?>" type="text" name="<?php echo $honeypotName; ?>" value="" autocomplete="off" maxlength="50">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="control-wrapper">
                             <label>
@@ -84,32 +91,5 @@
                         </div>
                     </div>
                 </div><!--.rdba-language-switch-form-->
-
-                <template id="captcha-field">
-                    <div class="form-group form-group-captcha">
-                        <label class="control-label screen-reader-only" for="captcha" aria-hidden="true"><?php echo __('Please enter text in the image below.'); ?></label>
-                        <div class="control-wrapper">
-                            <div class="text-center">
-                                <img id="captcha-image" class="fluid" alt="<?php echo esc__('Captcha'); ?>">
-                                <div class="rd-hidden">
-                                    <audio id="captcha-audio-player" preload="none">
-                                        <source id="captcha-audio-player-source-wav" type="audio/wav">
-                                    </audio>
-                                </div>
-                                <div class="text-left fa-2x">
-                                    <a id="captcha-reload" href="#" data-target="#captcha-image" tabindex="-1">
-                                        <i class="fontawesome-icon icon-reload fas fa-sync"></i>
-                                        <span class="sronly sr-only screen-reader-only screen-reader-text"><?php echo __('Get new image'); ?></span>
-                                    </a>
-                                    <a id="captcha-audio-controls" href="#" data-target="#captcha-audio-player" tabindex="-1">
-                                        <i class="fontawesome-icon icon-play-audio fas fa-volume-up"></i> 
-                                        <span class="sronly sr-only screen-reader-only screen-reader-text"><?php echo __('Play audio'); ?></span>
-                                    </a>
-                                </div>
-                            </div>
-                            <input id="captcha" class="captcha" type="text" name="captcha" value="" autocomplete="off" maxlength="50" placeholder="<?php echo esc__('Captcha text'); ?>">
-                        </div>
-                    </div>
-                </template>
             </div><!--.column-->
         </div><!--.rd-columns-flex-container-->

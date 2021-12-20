@@ -576,7 +576,6 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
      * * set session key to `$doLoginResult['user']['sessionKey']` array.<br>
      * * update last login to users table.<br>
      * * set login cookie.<br>
-     * * set skip captcha cookie.<br>
      * * set new device cookie (for brute-force attack prevention).<br>
      * * delete brute-force locked-out.<br>
      * * record logins data (user agent, ip, session key, success status, etc).<br>
@@ -642,14 +641,6 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
         // start write cookies -------------------------------------------
         // write login cookie.
         $this->doLoginSuccessSetCookie($doLoginResult, $cookieExpires);
-
-        $SkipCaptchaCookie = new \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\SkipCaptchaCookie($this->Container);
-        if (!$SkipCaptchaCookie->isSkipCaptcha()) {
-            // if there is no skip "require captcha" cookie.
-            // write skip "require captcha" cookie.
-            $SkipCaptchaCookie->issueSkipCaptchaCookie((int) $doLoginResult['user_id'], (int) $cookieExpiresConfig);
-        }
-        unset($SkipCaptchaCookie);
 
         // issue new device cookie to client (Device Cookie based).
         $BruteForceLoginPrevention->issueNewDeviceCookie($userLoginEmail);

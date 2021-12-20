@@ -85,6 +85,11 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
         $output = array_merge($output, $Csrf->createToken());
         unset($Csrf);
 
+        // honeypot (antibot)
+        $AntiBot = new \Rdb\Modules\RdbAdmin\Libraries\AntiBot();
+        $output['honeypotName'] = $AntiBot->setAndGetHoneypotName();
+        unset($AntiBot);
+
         $output['loginUrl'] = $Url->getAppBasedPath() . '/admin/login' . $Url->getQuerystring();
         $output['forgotLoginPassUrl'] = $Url->getCurrentUrl() . $Url->getQuerystring();
         $output['forgotLoginPassMethod'] = 'POST';
@@ -120,8 +125,6 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                     'loginUrl' => $output['loginUrl'],
                     'forgotLoginPassUrl' => $output['forgotLoginPassUrl'],
                     'forgotLoginPassMethod' => $output['forgotLoginPassMethod'],
-                    'getCaptchaImage' => $Url->getAppBasedPath() . '/admin/captcha/image',
-                    'getCaptchaAudio' => $Url->getAppBasedPath() . '/admin/captcha/audio',
                     'gobackUrl' => $output['gobackUrl'],
                 ]
             );
@@ -292,8 +295,6 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                     'loginMethod' => $output['loginMethod'],
                     'forgotLoginPassUrl' => $output['forgotLoginPassResetUrl'],
                     'forgotLoginPassMethod' => $output['forgotLoginPassResetMethod'],
-                    'getCaptchaImage' => $Url->getAppBasedPath() . '/admin/captcha/image',
-                    'getCaptchaAudio' => $Url->getAppBasedPath() . '/admin/captcha/audio',
                     'gobackUrl' => $output['gobackUrl'],
                 ]
             );
@@ -318,7 +319,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
     /**
      * Submit reset password request.
      * 
-     * Verify email and captcha then generate secret key and its expire send to email.<br>
+     * Verify email and then generate secret key and its expire send to email.<br>
      * User have to enter the link in that email to proceed reset password in next step.
      * 
      * @return string
@@ -355,19 +356,19 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                 http_response_code(400);
             } else {
                 // if form validation passed.
-                $CaptchaController = new CaptchaController($this->Container);
-                $checkCaptcha = $CaptchaController->doCheckCaptcha(trim($this->Input->post('captcha')));
-                unset($CaptchaController);
+                $data['antibot'] = trim($this->Input->post(\Rdb\Modules\RdbAdmin\Libraries\AntiBot::staticGetHoneypotName()));
+                $checkAntibot = empty($data['antibot']);
+                unset($data['antibot']);
 
-                if ($checkCaptcha === true) {
+                if ($checkAntibot === true) {
                     $formValidated = true;
                 } else {
                     $formValidated = false;
                     $output['formResultStatus'] = 'error';
-                    $output['formResultMessage'] = __('Incorrect captcha code.');
+                    $output['formResultMessage'] = __('You have entered incorrect data.');// just showing incorrect.
                     http_response_code(400);
                 }
-                unset($checkCaptcha);
+                unset($checkAntibot);
             }
 
             if (isset($formValidated) && $formValidated === true) {
@@ -591,10 +592,6 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                         $output['formResultStatus'] = 'success';
                         $output['formResultMessage'] = __('Success, you can now login using your new password.');
                         $output['forgotLoginPasswordStep2'] = 'success';
-                        $NowDt = new \DateTime();
-                        $NowDt->add(new \DateInterval('PT6H'));
-                        $_SESSION['skipCaptcha'] = $NowDt->format('Y-m-d H:i:s');
-                        unset($NowDt);
                     }
 
                     unset($UsersDb);

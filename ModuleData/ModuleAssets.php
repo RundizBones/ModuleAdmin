@@ -154,11 +154,6 @@ class ModuleAssets
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/UI/RdbaHistoryState.js',
                     'dependency' => ['rdta'],
                 ],
-                [
-                    'handle' => 'captcha',
-                    'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/CaptchaController/Securimage.js',
-                    'dependency' => ['rdta'],
-                ],
 
                 // /ui/xhr-common-data page.
                 [
@@ -178,7 +173,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdbaLogin',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/LoginController/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic', 'handlebars', 'captcha'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic', 'handlebars'],
                 ],
                 [
                     'handle' => 'rdbaLoginReset',
@@ -193,7 +188,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdbaForgotLoginPass',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/ForgotLoginPassController/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic', 'captcha'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic'],
                 ],
                 [
                     'handle' => 'rdbaForgotLoginPassReset',
@@ -203,7 +198,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdbaRegister',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/RegisterController/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic', 'captcha'],
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaCommonAdminPublic'],
                 ],
                 [
                     'handle' => 'rdbaRegisterConfirm',

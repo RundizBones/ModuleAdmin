@@ -250,7 +250,6 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             'rdbadmin_UserRegisterWaitVerification',
             'rdbadmin_UserRegisterDisallowedName',
             'rdbadmin_UserRegisterDefaultRoles',
-            'rdbadmin_UserLoginCaptcha',
             'rdbadmin_UserLoginBruteforcePreventByIp',
             'rdbadmin_UserLoginBruteforcePreventByDc',
             'rdbadmin_UserLoginMaxFail',

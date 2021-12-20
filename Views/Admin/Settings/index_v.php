@@ -212,21 +212,6 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label" for="rdbadmin_UserLoginCaptcha"><?php echo __('Login captcha'); ?></label>
-                                                <div class="control-wrapper">
-                                                    <select id="rdbadmin_UserLoginCaptcha" name="rdbadmin_UserLoginCaptcha">
-                                                        <option value="0"><?php echo esc__('Do not use'); ?></option>
-                                                        <option value="1"><?php echo esc__('Use until login success'); ?></option>
-                                                        <option value="2"><?php echo esc__('Always use'); ?></option>
-                                                    </select>
-                                                    <div class="form-description">
-                                                        <?php echo __('To use login captcha until login success, the captcha will be skipped until login cookies expired with these conditions.'); ?><br>
-                                                        <?php echo __('If user login without remember then it will be expired in one day.'); ?><br>
-                                                        <?php echo __('If user login with remember then it will be expired within remember length multiply with 6 days.'); ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
                                                 <div class="control-wrapper">
                                                     <label>
                                                         <input id="rdbadmin_UserLoginBruteforcePreventByIp" type="checkbox" name="rdbadmin_UserLoginBruteforcePreventByIp" value="1">

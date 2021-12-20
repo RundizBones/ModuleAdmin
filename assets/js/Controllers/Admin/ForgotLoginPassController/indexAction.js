@@ -7,36 +7,6 @@ class RdbaForgotLoginPassController {
 
 
     /**
-     * Activate captcha.
-     * 
-     * @returns {undefined}
-     */
-    activateCaptcha() {
-        let $ = jQuery.noConflict();
-
-        $('#rdba-forgot-form .form-group-captcha #captcha-image').attr('src', RdbaForgotLP.getCaptchaImage + '?id=' + (Math.random() + '').replace('0.', ''));
-        $('#rdba-forgot-form .form-group-captcha #captcha-audio-player-source-wav').attr('src', RdbaForgotLP.getCaptchaAudio + '?id=' + (Math.random() + '').replace('0.', ''));// require random id.
-        $('#rdba-forgot-form #captcha-audio-player')[0].load();// required this to be able to play after page load.
-
-        let securimage = new Securimage({
-            'audioId': $('#captcha-audio-player'),
-            'audioButtonId': $('#captcha-audio-controls'),
-            'audioIconRef': $('.fontawesome-icon.icon-play-audio'),
-            'captchaImageUrl': RdbaForgotLP.getCaptchaImage,
-            'captchaAudioUrl': RdbaForgotLP.getCaptchaAudio,
-            'reloadButtonId': $('#captcha-reload'),
-            'reloadIconRef': $('.fontawesome-icon.icon-reload')
-        });
-        // Listen to audio events and display certain icon.
-        securimage.audioEventsIcons();
-        // On reload new captcha image.
-        securimage.onReload();
-        // On play captcha audio.
-        securimage.onPlay();
-    }// activateCaptcha
-
-
-    /**
      * Ajax submit request reset password.
      * 
      * @returns {undefined}
@@ -108,9 +78,6 @@ class RdbaForgotLoginPassController {
 
                 // remove submit status icon
                 $('.submit-status-icon').remove();
-
-                // trigger reload captcha.
-                $('#rdba-forgot-form #captcha-reload').trigger('click');
             })
             .always(function(data, textStatus, jqXHR) {
                 let response;
@@ -143,9 +110,6 @@ class RdbaForgotLoginPassController {
 
 document.addEventListener('DOMContentLoaded', function() {
     let rdbaForgotLPController = new RdbaForgotLoginPassController();
-
-    // activate captcha.
-    rdbaForgotLPController.activateCaptcha();
 
     // ajax submit
     rdbaForgotLPController.ajaxSubmit();

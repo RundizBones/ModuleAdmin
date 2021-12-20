@@ -33,7 +33,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
      * 
      * This method was called from `doLoginAction()` method.<br>
      * There is `http_response_code()` function call from here.<br>
-     * If login success, it will write cookies here (including skip "require captcha" cookie).
+     * If login success, it will write cookies here (including skip "antibot" cookie if applicable).
      * 
      * @param array $data The form data.
      * @param array $output The output views data.
@@ -199,36 +199,16 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
                     sleep(3);
                 }
 
-                if (isset($_SESSION['skipCaptcha']) && !empty($_SESSION['skipCaptcha'])) {
-                    $NowDt = new \DateTime();
-                    $SkipDt = new \DateTime($_SESSION['skipCaptcha']);
-                    if ($SkipDt >= $NowDt) {
-                        // if there is skip captcha session and it is not expired.
-                        $output['requireCaptcha'] = false;
-                    }
-                    unset($NowDt, $SkipDt, $_SESSION['skipCaptcha']);
-                }
-
-                if (isset($output['requireCaptcha']) && $output['requireCaptcha'] === true) {
-                    // if require captcha.
-                    sleep(2);
-                    $CaptchaController = new CaptchaController($this->Container);
-                    $checkCaptcha = $CaptchaController->doCheckCaptcha(trim($this->Input->post('captcha')));
-                    unset($CaptchaController);
-
-                    if ($checkCaptcha === true) {
-                        $formValidated = true;
-                    } else {
-                        $formValidated = false;
-                        $output['formResultStatus'] = 'error';
-                        $output['formResultMessage'] = __('Incorrect captcha code.');
-                        http_response_code(400);
-                    }
-                    unset($checkCaptcha);
+                $antibot = $this->Input->post(\Rdb\Modules\RdbAdmin\Libraries\AntiBot::staticGetHoneypotName());
+                if (!empty($antibot)) {
+                    $formValidated = false;
+                    $output['formResultStatus'] = 'error';
+                    $output['formResultMessage'] = __('You have entered incorrect data.');// just showing incorrect.
+                    http_response_code(400);
                 } else {
-                    // if not require captcha.
                     $formValidated = true;
                 }
+                unset($antibot);
 
                 // do login process
                 if (isset($formValidated) && $formValidated === true) {
@@ -253,7 +233,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         $output = array_merge($output, $Csrf->createToken());
 
         // display, response part ---------------------------------------------------------------------------------------------
-        unset($CaptchaController);
         return $this->responseAcceptType($output);
     }// doLoginAction
 
@@ -364,10 +343,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
                         $output['formResultStatus'] = 'success';
                         $output['formResultMessage'] = __('Success, you can now login using your new password.');
                         $output['changedPassword'] = true;
-                        $NowDt = new \DateTime();
-                        $NowDt->add(new \DateInterval('PT6H'));
-                        $_SESSION['skipCaptcha'] = $NowDt->format('Y-m-d H:i:s');
-                        unset($NowDt);
                     }
 
                     unset($UsersDb);
@@ -470,7 +445,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         $configNames = [
             'rdbadmin_SiteName',
             'rdbadmin_UserRegister',
-            'rdbadmin_UserLoginCaptcha',
             'rdbadmin_UserLoginBruteforcePreventByIp',
             'rdbadmin_UserLoginBruteforcePreventByDc',
             'rdbadmin_UserLoginMaxFail',
@@ -480,38 +454,18 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         ];
         $configDefaults = [
             '',
-            '0',
+            '0',// rdbadmin_UserRegister
             '1',
             '1',
-            '1',
-            '10',
+            '10',// rdbadmin_UserLoginMaxFail
             '60',
             '0',
-            '20',
+            '20',// rdbadmin_UserLoginRememberLength
         ];
 
         $output = [];
         $output['configDb'] = $ConfigDb->get($configNames, $configDefaults);
         unset($ConfigDb, $configDefaults, $configNames);
-
-        if (
-            isset($output['configDb']['rdbadmin_UserLoginCaptcha']) && 
-            $output['configDb']['rdbadmin_UserLoginCaptcha'] !== '0'
-        ) {
-            // if config require captcha.
-            if ($output['configDb']['rdbadmin_UserLoginCaptcha'] === '2') {
-                // if config is always use captcha
-                $output['requireCaptcha'] = true;
-            } else {
-                // if config is use captcha but can skip after login success.
-                // check if there is skip "require captcha" cookie.
-                $SkipCaptchaCookie = new \Rdb\Modules\RdbAdmin\Controllers\_SubControllers\SkipCaptchaCookie($this->Container);
-                $output['requireCaptcha'] = ($SkipCaptchaCookie->isSkipCaptcha() === true ? false : true);// if there is skip cookie then mark as `false`, otherwise mark as `true`.
-                unset($SkipCaptchaCookie);
-            }
-        } else {
-            $output['requireCaptcha'] = false;
-        }
 
         return $output;
     }// getConfig
@@ -536,6 +490,11 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         $output = [];
         $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
         unset($Csrf);
+
+        // honeypot (antibot)
+        $AntiBot = new \Rdb\Modules\RdbAdmin\Libraries\AntiBot();
+        $output['honeypotName'] = $AntiBot->setAndGetHoneypotName();
+        unset($AntiBot);
 
         $output['loginUrl'] = $Url->getCurrentUrl() . $Url->getQuerystring();
         $output['loginMethod'] = 'POST';
@@ -601,9 +560,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
                     'forgotLoginPassUrl' => $output['forgotLoginPassUrl'],
                     'registerUrl' => $output['registerUrl'],
                     'configDb' => ['rdbadmin_UserRegister' => $output['configDb_rdbadmin_UserRegister']],
-                    'requireCaptcha' => ($output['requireCaptcha'] ?? false),
-                    'getCaptchaImage' => $Url->getAppBasedPath() . '/admin/captcha/image',
-                    'getCaptchaAudio' => $Url->getAppBasedPath() . '/admin/captcha/audio',
                     'gobackUrl' => $output['gobackUrl'],
                 ]
             );
@@ -868,9 +824,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
                     'loginMethod' => $output['loginMethod'],
                     'loginResetUrl' => $output['loginResetUrl'],
                     'loginResetMethod' => $output['loginResetMethod'],
-                    'requireCaptcha' => ($output['requireCaptcha'] ?? false),
-                    'getCaptchaImage' => $Url->getAppBasedPath() . '/admin/captcha/image',
-                    'getCaptchaAudio' => $Url->getAppBasedPath() . '/admin/captcha/audio',
                     'gobackUrl' => $output['gobackUrl'],
                 ]
             );

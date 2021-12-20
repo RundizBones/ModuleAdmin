@@ -142,11 +142,6 @@ $Rc->addGroup('/admin', function(\FastRoute\RouteCollector $Rc) {
     // end admin tools. -----------------------------------------------------------------------------
 
     // the routes that can access publicy. ---------------------------------------------------------
-    // /admin/captcha/image image (captcha image content).
-    $Rc->addRoute('GET', '/captcha/image', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Captcha:image');
-    // /admin/captcha/audio audio (captcha audio content).
-    $Rc->addRoute('GET', '/captcha/audio', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Captcha:audio');
-
     // /admin/login page.
     $Rc->addRoute('GET', '/login', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Login:index');
     // /admin/login REST API (login).
