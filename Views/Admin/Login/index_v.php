@@ -46,6 +46,20 @@
                             </label>
                         </div>
                     </div>
+                    <?php
+                    /*
+                     * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Login\index_v.before.loginbutton
+                     * PluginHookDescription: Hook at before login button in login page.
+                     * PluginHookParam: None.
+                     * PluginHookReturn: None.
+                     * PluginHookSince: 1.2.0
+                     */
+                    $Plugins = $this->Container->get('Plugins');
+                    $Plugins->doHook(
+                        'Rdb\Modules\RdbAdmin\Views\Admin\Login\index_v.before.loginbutton'
+                    );
+                    unset($Plugins);
+                    ?> 
                     <div class="form-group submit-button-row">
                         <div class="control-wrapper">
                             <button class="rd-button primary rdba-login-button" type="submit">

@@ -358,6 +358,33 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
 
             // validate the form. --------------------------------------------------------
             $data['antibot'] = trim($this->Input->post(\Rdb\Modules\RdbAdmin\Libraries\AntiBot::staticGetHoneypotName()));
+
+            $formValidated = true;
+            if (isset($formValidated) && $formValidated === true) {
+                /*
+                 * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\RegisterController->doRegisterAction.beforeFormValidation
+                 * PluginHookDescription: Hook before form validation.
+                 * PluginHookParam: <br>
+                 *      array $data The form input data.<br>
+                 *      array $output This argument will be pass by reference, you can alter but variable type must be array. <br>
+                 *              The output of alert messages that will be send to browser. <br>
+                 *              The format is `array(array('formResultStatus' => 'error', 'formResultMessage' => 'My error message.'), array('formResultStatus' => 'success', 'formResultMessage' => 'Success message.'))`.<br>
+                 *      bool $formValidated The status of form validated. This argument will be pass by reference. Set to `true` if passed, `false` if failed.
+                 * PluginHookSince: 1.2.0
+                 */
+                $originalOutput = $output;
+                $originalFormValidated = $formValidated;
+                $Plugins = $this->Container->get('Plugins');
+                $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.beforeFormValidation', [$data, &$output, &$formValidated]);
+                if (!is_array($output)) {
+                    $output = $originalOutput;
+                }
+                if (!is_bool($formValidated)) {
+                    $formValidated = $originalFormValidated;
+                }
+                unset($originalFormValidated, $originalOutput, $Plugins);
+            }
+
             $formValidate = $this->doRegisterFormValidation(($output['configDb'] ?? []), $data);
             unset($data['antibot']);
 

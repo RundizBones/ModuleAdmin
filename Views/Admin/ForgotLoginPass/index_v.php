@@ -28,6 +28,20 @@
                             <input id="<?php echo $honeypotName; ?>" class="<?php echo $honeypotName; ?>" type="text" name="<?php echo $honeypotName; ?>" value="" autocomplete="off" maxlength="50">
                         </div>
                     </div>
+                    <?php
+                    /*
+                     * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\ForgotLoginPass\index_v.before.submitbutton
+                     * PluginHookDescription: Hook at before submit button in forgot login or password page.
+                     * PluginHookParam: None.
+                     * PluginHookReturn: None.
+                     * PluginHookSince: 1.2.0
+                     */
+                    $Plugins = $this->Container->get('Plugins');
+                    $Plugins->doHook(
+                        'Rdb\Modules\RdbAdmin\Views\Admin\ForgotLoginPass\index_v.before.submitbutton'
+                    );
+                    unset($Plugins);
+                    ?> 
                     <div class="form-group submit-button-row">
                         <div class="control-wrapper">
                             <button class="rd-button primary rdba-submit-button" type="submit">

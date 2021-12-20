@@ -67,7 +67,20 @@
                         }
                         ?> 
                     </div>
-                    <?php }// endif; ?> 
+                    <?php }// endif; 
+                    /*
+                     * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Register\index_v.before.registerbutton
+                     * PluginHookDescription: Hook at before register button in register page.
+                     * PluginHookParam: None.
+                     * PluginHookReturn: None.
+                     * PluginHookSince: 1.2.0
+                     */
+                    $Plugins = $this->Container->get('Plugins');
+                    $Plugins->doHook(
+                        'Rdb\Modules\RdbAdmin\Views\Admin\Register\index_v.before.registerbutton'
+                    );
+                    unset($Plugins);
+                    ?> 
                     <div class="form-group submit-button-row">
                         <div class="control-wrapper">
                             <button class="rd-button primary rdba-submit-button" type="submit">
