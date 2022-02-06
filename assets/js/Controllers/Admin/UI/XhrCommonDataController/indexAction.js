@@ -106,6 +106,7 @@ class RdbaUiXhrCommonDataController {
         let $ = jQuery.noConflict();
 
         let storageName = 'rdbaUiXhrCommonData';
+        storageName += '_' + RdbaUIXhrCommonData.currentLanguage;
         let currentDate = new Date();
         let sessionObject = JSON.parse(sessionStorage.getItem(storageName));
         let storageData = {};
