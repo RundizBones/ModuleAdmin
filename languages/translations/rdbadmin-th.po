@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2021-07-08 16:17+0700\n"
-"PO-Revision-Date: 2021-07-08 16:17+0700\n"
+"POT-Creation-Date: 2022-02-17 20:30+0700\n"
+"PO-Revision-Date: 2022-02-17 20:30+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;d__:2;dn__:2,3;dnp__:2c,3,4;dp__:2c,3;n__:1,2;noop__;np__:1c,2,3;p__:1c,2;esc__;"
 "esc_d__:2;esc_dn__:2,3;esc_dnp__:2c,3,4;esc_dp__:2c,3;esc_n__:1,2;esc_np__:1c,2,3;esc_p__:1c,2\n"
@@ -26,65 +26,65 @@ msgstr ""
 msgid "Access denied!"
 msgstr "ปฏิเสธการเข้าถึง!"
 
-#: Controllers/Admin/ForgotLoginPassController.php:129 Views/Admin/Login/index_v.php:52
+#: Controllers/Admin/ForgotLoginPassController.php:132 Views/Admin/Login/index_v.php:73
 msgid "Forgot username or password?"
 msgstr "ลืมชื่อผู้ใช้หรือรหัสผ่าน?"
 
-#: Controllers/Admin/ForgotLoginPassController.php:219 Controllers/Admin/ForgotLoginPassController.php:227
-#: Controllers/Admin/ForgotLoginPassController.php:255 Controllers/Admin/ForgotLoginPassController.php:608
-#: Controllers/Admin/LoginController.php:381 Controllers/Admin/LoginController.php:793
-#: Controllers/Admin/LoginController.php:801 Controllers/Admin/LoginController.php:830
+#: Controllers/Admin/ForgotLoginPassController.php:222 Controllers/Admin/ForgotLoginPassController.php:230
+#: Controllers/Admin/ForgotLoginPassController.php:258 Controllers/Admin/ForgotLoginPassController.php:630
+#: Controllers/Admin/LoginController.php:381 Controllers/Admin/LoginController.php:774
+#: Controllers/Admin/LoginController.php:782 Controllers/Admin/LoginController.php:811
 #: Controllers/Admin/Users/EditController.php:142
 msgid "Unable to validate token or your token may expired."
 msgstr "ไม่สามารถตรวจสอบโทเคนได้ หรือโทเคนของคุณอาจหมดอายุแล้ว."
 
-#: Controllers/Admin/ForgotLoginPassController.php:303
+#: Controllers/Admin/ForgotLoginPassController.php:304
 msgid "Reset your password"
 msgstr "ตั้งค่ารหัสผ่านใหม่"
 
-#: Controllers/Admin/ForgotLoginPassController.php:351
+#: Controllers/Admin/ForgotLoginPassController.php:352
 msgid "Please enter your email."
 msgstr "กรุณากรอกอีเมลของคุณ."
 
-#: Controllers/Admin/ForgotLoginPassController.php:367 Controllers/Admin/LoginController.php:224
-#: Controllers/Admin/RegisterController.php:590
-msgid "Incorrect captcha code."
-msgstr "อักษรภาพไม่ถูกต้อง."
+#: Controllers/Admin/ForgotLoginPassController.php:368 Controllers/Admin/LoginController.php:206
+#: Controllers/Admin/RegisterController.php:614
+msgid "You have entered incorrect data."
+msgstr "คุณกรอกข้อมูลไม่ถูกต้อง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:386 Controllers/_SubControllers/LoginSubController.php:324
+#: Controllers/Admin/ForgotLoginPassController.php:412 Controllers/_SubControllers/LoginSubController.php:324
 msgid "The email has just been sent recently, please wait and try again later."
 msgstr "อีเมลเพิ่งถูกส่งไม่นานนี้, กรุณารอและลองใหม่ในภายหลัง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:399
+#: Controllers/Admin/ForgotLoginPassController.php:425
 msgid "The email was not found."
 msgstr "ไม่พบอีเมลดังกล่าว."
 
-#: Controllers/Admin/ForgotLoginPassController.php:406 Controllers/_SubControllers/LoginSubController.php:361
+#: Controllers/Admin/ForgotLoginPassController.php:432 Controllers/_SubControllers/LoginSubController.php:361
 #, php-format
 msgid "Your account has been disabled. (%1$s)"
 msgstr "บัญชีผู้ใช้ของคุณถูกระงับการใช้งาน. (%1$s)"
 
-#: Controllers/Admin/ForgotLoginPassController.php:433
+#: Controllers/Admin/ForgotLoginPassController.php:459
 msgid "You had requested to reset your password."
 msgstr "คุณได้ร้องขอตั้งค่ารหัสผ่านใหม่."
 
-#: Controllers/Admin/ForgotLoginPassController.php:453
+#: Controllers/Admin/ForgotLoginPassController.php:479
 msgid "An email has been sent, please check your email and follow instruction."
 msgstr "อีเมลถูกส่งแล้ว, โปรดตรวจอีเมลของคุณและทำตามคำแนะนำ."
 
-#: Controllers/Admin/ForgotLoginPassController.php:457 Controllers/Admin/ForgotLoginPassController.php:463
-#: Controllers/Admin/RegisterController.php:737 Controllers/Admin/RegisterController.php:746
-#: Controllers/Admin/RegisterController.php:845 Controllers/Admin/Users/AddController.php:316
+#: Controllers/Admin/ForgotLoginPassController.php:483 Controllers/Admin/ForgotLoginPassController.php:489
+#: Controllers/Admin/RegisterController.php:760 Controllers/Admin/RegisterController.php:769
+#: Controllers/Admin/RegisterController.php:868 Controllers/Admin/Users/AddController.php:316
 msgid "An email could not be sent."
 msgstr "ไม่สามารถส่งอีเมลได้."
 
-#: Controllers/Admin/ForgotLoginPassController.php:479 Controllers/Admin/ForgotLoginPassController.php:616
-#: Controllers/Admin/LoginController.php:244 Controllers/Admin/LoginController.php:389
+#: Controllers/Admin/ForgotLoginPassController.php:505 Controllers/Admin/ForgotLoginPassController.php:638
+#: Controllers/Admin/LoginController.php:249 Controllers/Admin/LoginController.php:389
 #: Controllers/Admin/LoginController.php:446 Controllers/Admin/LogoutController.php:69
 #: Controllers/Admin/Modules/Assets/PublishController.php:305
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:112
 #: Controllers/Admin/Permissions/EditController.php:84 Controllers/Admin/Permissions/EditController.php:191
-#: Controllers/Admin/RegisterController.php:289 Controllers/Admin/RegisterController.php:506
+#: Controllers/Admin/RegisterController.php:289 Controllers/Admin/RegisterController.php:533
 #: Controllers/Admin/Roles/ActionsController.php:190 Controllers/Admin/Roles/AddController.php:102
 #: Controllers/Admin/Roles/EditController.php:103 Controllers/Admin/Roles/ReorderController.php:126
 #: Controllers/Admin/Settings/SettingsController.php:173 Controllers/Admin/Settings/SettingsController.php:567
@@ -97,19 +97,19 @@ msgid ""
 "Unable to validate token, please try again. If this problem still occur please reload the page and try again."
 msgstr "ไม่สามารถตรวจสอบโทเคน, โปรดลองอีกครั้ง. ถ้าปัญหานี้ยังอยู่ โปรดโหลดหน้านี้แล้วลองอีกครั้ง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:529 Controllers/Admin/LoginController.php:300
+#: Controllers/Admin/ForgotLoginPassController.php:555 Controllers/Admin/LoginController.php:304
 msgid "Please enter your new password."
 msgstr "กรุณากรอกรหัสผ่านใหม่ของคุณ."
 
-#: Controllers/Admin/ForgotLoginPassController.php:538 Controllers/Admin/LoginController.php:309
+#: Controllers/Admin/ForgotLoginPassController.php:564 Controllers/Admin/LoginController.php:313
 msgid "Your new password and confirm does not matched."
 msgstr "รหัสผ่านใหม่ของคุณและรหัสผ่านที่ยืนยันนั้นไม่ตรงกัน."
 
-#: Controllers/Admin/ForgotLoginPassController.php:564 Controllers/Admin/LoginController.php:337
+#: Controllers/Admin/ForgotLoginPassController.php:590 Controllers/Admin/LoginController.php:341
 msgid "Unable to update your new password, please try again."
 msgstr "ไม่สามารถอัปเดทรหัสผ่านใหม่ของคุณได้, โปรดลองอีกครั้ง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:592 Controllers/Admin/LoginController.php:365
+#: Controllers/Admin/ForgotLoginPassController.php:618 Controllers/Admin/LoginController.php:369
 msgid "Success, you can now login using your new password."
 msgstr "สำเร็จ, คุณสามารถเข้าสู่ระบบด้วยรหัสผ่านใหม่นี้ได้แล้ว."
 
@@ -121,13 +121,13 @@ msgstr "หน้าแรกผู้ดูแล"
 msgid "Please enter username and password."
 msgstr "กรุณากรอกชื่อผู้ใช้หรือรหัสผ่าน."
 
-#: Controllers/Admin/LoginController.php:552 Controllers/Admin/LoginController.php:716
-#: Views/Admin/ForgotLoginPass/index_v.php:58 Views/Admin/Login/index_v.php:45
-#: Views/Admin/Register/confirm_v.php:39 Views/Admin/Register/index_v.php:100
+#: Controllers/Admin/LoginController.php:536 Controllers/Admin/LoginController.php:697
+#: Views/Admin/ForgotLoginPass/index_v.php:55 Views/Admin/Login/index_v.php:66
+#: Views/Admin/Register/confirm_v.php:39 Views/Admin/Register/index_v.php:95
 msgid "Login"
 msgstr "เข้าสู่ระบบ"
 
-#: Controllers/Admin/LoginController.php:840
+#: Controllers/Admin/LoginController.php:821
 msgid "Login recovery"
 msgstr "กู้คืนการเข้าสู่ระบบ"
 
@@ -140,7 +140,7 @@ msgid "You are now logged out."
 msgstr "คุณได้ออกจากระบบแล้ว."
 
 #: Controllers/Admin/LogoutController.php:146 Views/Admin/Logout/index_v.php:27
-#: Views/common/Admin/mainLayout_v.php:121
+#: Views/common/Admin/mainLayout_v.php:124
 msgid "Logout"
 msgstr "ออกจากระบบ"
 
@@ -269,7 +269,7 @@ msgstr "จัดการการอนุญาต"
 
 #: Controllers/Admin/Permissions/PermissionsController.php:408 Controllers/Admin/Roles/ActionsController.php:250
 #: Controllers/Admin/Roles/AddController.php:147 Controllers/Admin/Roles/EditController.php:150
-#: Controllers/Admin/Roles/RolesController.php:151 Controllers/Admin/UI/Traits/CommonDataTrait.php:103
+#: Controllers/Admin/Roles/RolesController.php:151 Controllers/Admin/UI/Traits/CommonDataTrait.php:105
 #: Controllers/Admin/Users/ActionsController.php:58 Controllers/Admin/Users/EditController.php:959
 #: Controllers/Admin/Users/PreviousEmailsController.php:63 Controllers/_SubControllers/MenuItems.php:234
 #: ModuleData/ModuleAdmin.php:152 Views/Admin/Index/index_v.php:7
@@ -308,11 +308,11 @@ msgstr "ยืนยันสมัครสมาชิก"
 msgid "Please set your password."
 msgstr "กรุณากำหนดรหัสผ่านของคุณ."
 
-#: Controllers/Admin/RegisterController.php:178 Controllers/Admin/RegisterController.php:580
+#: Controllers/Admin/RegisterController.php:178 Controllers/Admin/RegisterController.php:607
 msgid "Your password and confirm does not matched."
 msgstr "รหัสผ่านของคุณและรหัสผ่านที่ยืนยันนั้นไม่ตรงกัน."
 
-#: Controllers/Admin/RegisterController.php:187 Controllers/Admin/RegisterController.php:388
+#: Controllers/Admin/RegisterController.php:187 Controllers/Admin/RegisterController.php:415
 #: Controllers/Admin/Users/AddController.php:138 Controllers/Admin/Users/EditController.php:281
 msgid "The password hashing was error, please contact administrator."
 msgstr "มีข้อผิดพลาดในการเก็บรหัสผ่าน, โปรดติดต่อผู้ดูแล."
@@ -334,102 +334,102 @@ msgstr "สำเร็จ, คุณสามารถใช้ชื่อผ�
 msgid "The registration was already confirmed."
 msgstr "การสมัครสมาชิกได้รับการยืนยันแล้ว."
 
-#: Controllers/Admin/RegisterController.php:327 Controllers/Admin/RegisterController.php:923
+#: Controllers/Admin/RegisterController.php:327 Controllers/Admin/RegisterController.php:946
 msgid "Access denied! The registration is currently disabled."
 msgstr "ปฏิเสธการเข้าถึง! ยังไม่เปิดใช้งานการลงทะเบียนสมัครสมาชิก."
 
-#: Controllers/Admin/RegisterController.php:491
+#: Controllers/Admin/RegisterController.php:518
 msgid "Your registration was success!"
 msgstr "การสมัครสมาชิกของคุณสำเร็จแล้ว!"
 
-#: Controllers/Admin/RegisterController.php:491
+#: Controllers/Admin/RegisterController.php:518
 msgid "You can use your username and password to login now."
 msgstr "คุณสามารถใช้ชื่อผู้ใช้และรหัสผ่านเข้าสู่ระบบได้เลย."
 
-#: Controllers/Admin/RegisterController.php:546
+#: Controllers/Admin/RegisterController.php:573
 msgid "Please fill all required form."
 msgstr "โปรดกรอกฟอร์มที่จำเป็น."
 
-#: Controllers/Admin/RegisterController.php:558 Controllers/Admin/Users/Traits/UsersTrait.php:54
+#: Controllers/Admin/RegisterController.php:585 Controllers/Admin/Users/Traits/UsersTrait.php:54
 msgid "Please enter a valid username."
 msgstr "กรุณากรอกชื่อผู้ใช้ที่ถูกต้อง."
 
-#: Controllers/Admin/RegisterController.php:565 Controllers/Admin/Users/Traits/UsersTrait.php:69
+#: Controllers/Admin/RegisterController.php:592 Controllers/Admin/Users/Traits/UsersTrait.php:69
 msgid "Please enter your correct email."
 msgstr "โปรดกรอกอีเมลที่ถูกต้อง."
 
-#: Controllers/Admin/RegisterController.php:572 Controllers/Admin/Users/Traits/UsersTrait.php:89
+#: Controllers/Admin/RegisterController.php:599 Controllers/Admin/Users/Traits/UsersTrait.php:89
 msgid "Username and password could not be same."
 msgstr "ชื่อผู้ใช้และรหัสผ่านไม่สามารถเหมือนกันได้."
 
-#: Controllers/Admin/RegisterController.php:610
+#: Controllers/Admin/RegisterController.php:633
 msgid "Disallowed username."
 msgstr "ไม่อนุญาตชื่อผู้ใช้."
 
-#: Controllers/Admin/RegisterController.php:621
+#: Controllers/Admin/RegisterController.php:644
 msgid "Disallowed email."
 msgstr "ไม่อนุญาตอีเมล."
 
-#: Controllers/Admin/RegisterController.php:626
+#: Controllers/Admin/RegisterController.php:649
 msgid "Disallowed display name."
 msgstr "ไม่อนุญาตชื่อแสดง."
 
-#: Controllers/Admin/RegisterController.php:641 Controllers/Admin/Users/Traits/UsersTrait.php:159
+#: Controllers/Admin/RegisterController.php:664 Controllers/Admin/Users/Traits/UsersTrait.php:159
 #: Controllers/Admin/Users/Traits/UsersTrait.php:179
 msgid "This username is already in use."
 msgstr "ชื่อผู้ใช้นี้มีคนใช้อยู่แล้ว."
 
-#: Controllers/Admin/RegisterController.php:647 Controllers/Admin/Users/Traits/UsersTrait.php:164
+#: Controllers/Admin/RegisterController.php:670 Controllers/Admin/Users/Traits/UsersTrait.php:164
 #: Controllers/Admin/Users/Traits/UsersTrait.php:195
 msgid "This email is already in use."
 msgstr "อีเมลนี้มีคนใช้อยู่แล้ว."
 
-#: Controllers/Admin/RegisterController.php:712 Models/UsersDb.php:580 Views/Admin/Roles/actions_v.php:7
+#: Controllers/Admin/RegisterController.php:735 Models/UsersDb.php:580 Views/Admin/Roles/actions_v.php:7
 #: Views/Admin/Users/actions_v.php:7
 msgid "Confirmation required."
 msgstr "ต้องการการยืนยัน."
 
-#: Controllers/Admin/RegisterController.php:731
+#: Controllers/Admin/RegisterController.php:754
 msgid "Success! Your registration needs confirmation, please open your email and follow instruction."
 msgstr "สำเร็จ! การสมัครสมาชิกของคุณต้องการการยืนยัน, โปรดเปิดอีเมลของคุณและทำตามคำแนะนำ."
 
-#: Controllers/Admin/RegisterController.php:736 Controllers/Admin/RegisterController.php:745
-#: Controllers/Admin/RegisterController.php:844
+#: Controllers/Admin/RegisterController.php:759 Controllers/Admin/RegisterController.php:768
+#: Controllers/Admin/RegisterController.php:867
 msgid "Your registration was successfull."
 msgstr "การสมัครสมาชิกสำเร็จแล้ว."
 
-#: Controllers/Admin/RegisterController.php:738 Controllers/Admin/RegisterController.php:747
-#: Controllers/Admin/RegisterController.php:846
+#: Controllers/Admin/RegisterController.php:761 Controllers/Admin/RegisterController.php:770
+#: Controllers/Admin/RegisterController.php:869
 msgid "Please contact administrator to confirm your account."
 msgstr "โปรดติดต่อผู้ดูแลเพื่อยืนยันบัญชีผู้ใช้ของคุณ."
 
-#: Controllers/Admin/RegisterController.php:790
+#: Controllers/Admin/RegisterController.php:813
 msgid "There is a user registration."
 msgstr "มีผู้ใช้สมัครสมาชิก."
 
-#: Controllers/Admin/RegisterController.php:790
+#: Controllers/Admin/RegisterController.php:813
 msgid "Action required."
 msgstr "ต้องมีการดำเนินการ."
 
-#: Controllers/Admin/RegisterController.php:797
+#: Controllers/Admin/RegisterController.php:820
 msgid "The user needs administrator to confirm their registration."
 msgstr "ผู้ใช้ต้องการผู้ดูแลยืนยันการสมัครสมาชิก."
 
-#: Controllers/Admin/RegisterController.php:797
+#: Controllers/Admin/RegisterController.php:820
 #, php-format
 msgid "Please go to %1$sadministrator page%2$s."
 msgstr "โปรดไปยัง%1$sหน้าผู้ดูแล%2$s."
 
-#: Controllers/Admin/RegisterController.php:799
+#: Controllers/Admin/RegisterController.php:822
 #, php-format
 msgid "Go to %1$sadministrator page%2$s."
 msgstr "ไปยัง%1$sหน้าผู้ดูแล%2$s."
 
-#: Controllers/Admin/RegisterController.php:816
+#: Controllers/Admin/RegisterController.php:839
 msgid "Success! You have to wait for administrator to confirm your registration."
 msgstr "สำเร็จ! คุณต้องรอผู้ดูแลยืนยันการสมัครสมาชิกของคุณ."
 
-#: Controllers/Admin/RegisterController.php:938 Views/Admin/Login/index_v.php:53
+#: Controllers/Admin/RegisterController.php:966 Views/Admin/Login/index_v.php:74
 msgid "Create new account"
 msgstr "สร้างบัญชีผู้ใช้ใหม่"
 
@@ -644,7 +644,7 @@ msgid "Sorry, this page is for request via XHR, REST API."
 msgstr "ขออภัย, หน้านี้สำหรับ XHR, REST API."
 
 #: Controllers/Admin/UI/XhrDashboardWidgetsController.php:216
-#: Controllers/_SubControllers/BruteForceLoginPrevention.php:287
+#: Controllers/_SubControllers/BruteForceLoginPrevention.php:294
 msgid "Please reload the page and try again."
 msgstr "กรุณาโหลดหน้านี้แล้วลองใหม่อีกครั้ง."
 
@@ -992,9 +992,9 @@ msgstr "ไม่สามารถดึงข้อมูลหน้าที
 msgid "Manage users"
 msgstr "จัดการผู้ใช้"
 
-#: Controllers/_SubControllers/BruteForceLoginPrevention.php:176
-#: Controllers/_SubControllers/BruteForceLoginPrevention.php:242
-#: Controllers/_SubControllers/BruteForceLoginPrevention.php:271
+#: Controllers/_SubControllers/BruteForceLoginPrevention.php:183
+#: Controllers/_SubControllers/BruteForceLoginPrevention.php:249
+#: Controllers/_SubControllers/BruteForceLoginPrevention.php:278
 #, php-format
 msgid ""
 "You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try again in %3$s."
@@ -1017,28 +1017,28 @@ msgstr "คุณได้กรอกแล้วมากกว่า %d ค�
 msgid "The username or password is incorrect."
 msgstr "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง."
 
-#: Controllers/_SubControllers/LoginSubController.php:670
+#: Controllers/_SubControllers/LoginSubController.php:661
 msgid "Login successfully."
 msgstr "เข้าสู่ระบบเรียบร้อย."
 
-#: Controllers/_SubControllers/LoginSubController.php:719
+#: Controllers/_SubControllers/LoginSubController.php:710
 msgid "The 2 step verification code email has just been sent recently, please wait and try again later."
 msgstr "อีเมลรหัสขั้นตอนที่ 2 เพิ่งถูกส่งไม่นานนี้, กรุณารอและลองใหม่ในภายหลัง."
 
-#: Controllers/_SubControllers/LoginSubController.php:754 Views/Admin/Login/mfa_v.php:19
+#: Controllers/_SubControllers/LoginSubController.php:745 Views/Admin/Login/mfa_v.php:19
 #: Views/Admin/Login/mfa_v.php:21
 msgid "2 Step verification code"
 msgstr "รหัสการตรวจสอบ 2 ขั้นตอน"
 
-#: Controllers/_SubControllers/LoginSubController.php:774
+#: Controllers/_SubControllers/LoginSubController.php:765
 msgid "2 Step verification code was sent successfully, please enter the code you recieved."
 msgstr "รหัสยืนยัน 2 ขั้นตอนถูกส่งเรียบร้อยแล้ว. โปรดกรอกรหัสที่คุณได้รับ."
 
-#: Controllers/_SubControllers/LoginSubController.php:798
+#: Controllers/_SubControllers/LoginSubController.php:789
 msgid "A 2 step verification email could not be sent."
 msgstr "อีเมลตรวจสอบ 2 ขั้นตอนไม่สามารถส่งได้."
 
-#: Helpers/HTMLFunctions.php:73
+#: Helpers/HTMLFunctions.php:149
 msgid "Close"
 msgstr "ปิด"
 
@@ -1132,39 +1132,19 @@ msgstr "ชื่อผู้ใช้หรืออีเมล"
 msgid "Email"
 msgstr "อีเมล"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:25 Views/Admin/Login/index_v.php:90 Views/Admin/Login/reset_v.php:103
+#: Views/Admin/ForgotLoginPass/index_v.php:26 Views/Admin/Login/index_v.php:36
 #: Views/Admin/Register/index_v.php:55
-msgid "Please enter text in the image below."
-msgstr "กรุณากรอกตัวอักษรในภาพด้านล่าง."
+msgid "Please skip this field."
+msgstr "โปรดข้ามฟิลด์นี้."
 
-#: Views/Admin/ForgotLoginPass/index_v.php:28 Views/Admin/Login/index_v.php:93 Views/Admin/Login/reset_v.php:106
-#: Views/Admin/Register/index_v.php:58
-msgid "Captcha"
-msgstr "อักษรภาพ"
-
-#: Views/Admin/ForgotLoginPass/index_v.php:37 Views/Admin/Login/index_v.php:102 Views/Admin/Login/reset_v.php:115
-#: Views/Admin/Register/index_v.php:67
-msgid "Get new image"
-msgstr "รับภาพใหม่"
-
-#: Views/Admin/ForgotLoginPass/index_v.php:41 Views/Admin/Login/index_v.php:106 Views/Admin/Login/reset_v.php:119
-#: Views/Admin/Register/index_v.php:71
-msgid "Play audio"
-msgstr "เล่นเสียง"
-
-#: Views/Admin/ForgotLoginPass/index_v.php:45 Views/Admin/Login/index_v.php:110 Views/Admin/Login/reset_v.php:123
-#: Views/Admin/Register/index_v.php:75
-msgid "Captcha text"
-msgstr "ตัวอักษรภาพ"
-
-#: Views/Admin/ForgotLoginPass/index_v.php:51 Views/Admin/ForgotLoginPass/reset_v.php:39
+#: Views/Admin/ForgotLoginPass/index_v.php:48 Views/Admin/ForgotLoginPass/reset_v.php:39
 #: Views/Admin/Login/reset_v.php:40 Views/Admin/Tools/cache_v.php:52 Views/Admin/Tools/emailTester_v.php:24
 msgid "Submit"
 msgstr "ส่งข้อมูล"
 
-#: Views/Admin/ForgotLoginPass/index_v.php:65 Views/Admin/ForgotLoginPass/reset_v.php:72
-#: Views/Admin/Login/index_v.php:60 Views/Admin/Login/mfa_v.php:37 Views/Admin/Login/reset_v.php:73
-#: Views/Admin/Register/confirm_v.php:46 Views/Admin/Register/index_v.php:107
+#: Views/Admin/ForgotLoginPass/index_v.php:62 Views/Admin/ForgotLoginPass/reset_v.php:72
+#: Views/Admin/Login/index_v.php:81 Views/Admin/Login/mfa_v.php:37 Views/Admin/Login/reset_v.php:73
+#: Views/Admin/Register/confirm_v.php:46 Views/Admin/Register/index_v.php:102
 msgid "Change language"
 msgstr "เปลี่ยนภาษา"
 
@@ -1193,7 +1173,7 @@ msgstr "ดำเนินการเข้าสู่ระบบต่อไ
 msgid "Password"
 msgstr "รหัสผ่าน"
 
-#: Views/Admin/Login/index_v.php:38
+#: Views/Admin/Login/index_v.php:45
 msgid "Remember me"
 msgstr "จดจำฉันไว้"
 
@@ -1321,15 +1301,15 @@ msgstr "ยืนยันรหัสผ่าน"
 msgid "Confirm"
 msgstr "ยืนยัน"
 
-#: Views/Admin/Register/index_v.php:82
+#: Views/Admin/Register/index_v.php:64
 msgid "The confirmation email will be sent to you and you have to click on confirm link in your email."
 msgstr "อีเมลยืนยันจะส่งไปหาคุณและคุณต้องคลิกลิ้งค์ยืนยันในอีเมลของคุณ."
 
-#: Views/Admin/Register/index_v.php:84
+#: Views/Admin/Register/index_v.php:66
 msgid "You have to wait for administrator to confirm your registration."
 msgstr "คุณต้องรอผู้ดูแลทำการยืนยันสมัครสมาชิก."
 
-#: Views/Admin/Register/index_v.php:92
+#: Views/Admin/Register/index_v.php:87
 msgid "Register"
 msgstr "ลงทะเบียน"
 
@@ -1417,142 +1397,125 @@ msgstr "จำนวนรายการต่อหน้า"
 msgid "Number of items per page in administrator pages."
 msgstr "จำนวนรายการต่อหน้าในหน้าผู้ดูแล."
 
-#: Views/Admin/Settings/index_v.php:93
+#: Views/Admin/Settings/index_v.php:76
+msgid "Allow origins"
+msgstr "แหล่งที่อนุญาต"
+
+#: Views/Admin/Settings/index_v.php:82
+#, php-format
+msgid ""
+"The %1$s header to be sent to client. To set multiple origins, separate them with comma (%2$s) and the system "
+"will be use one per header."
+msgstr ""
+"ส่วนหัว %1$s จะถูกส่งไปยังไคลเอนท์.  การตั้งค่าแหล่งที่มาหลายแหล่ง ให้แยกด้วยเครื่องหมายจุลภาค (%2$s) "
+"แล้วระบบจะนำไปใช้หนึ่งรายการต่อหัว."
+
+#: Views/Admin/Settings/index_v.php:108
 msgid "Registration"
 msgstr "การลงทะเบียน"
 
-#: Views/Admin/Settings/index_v.php:98
+#: Views/Admin/Settings/index_v.php:113
 msgid "Anyone can be register"
 msgstr "ทุกคนลงทะเบียนได้"
 
-#: Views/Admin/Settings/index_v.php:106
+#: Views/Admin/Settings/index_v.php:121
 msgid "Send notification email to administrators"
 msgstr "ส่งอีเมลแจ้งเตือนไปยังผู้ดูแล"
 
-#: Views/Admin/Settings/index_v.php:107
+#: Views/Admin/Settings/index_v.php:122
 msgid "A notification email still be sent if registration verification must be done by an administrator."
 msgstr "อีเมลแจ้งเตือนจะยังคงส่งถ้าหากการตรวจสอบลงทะเบียนต้องกระทำโดยผู้ดูแล."
 
-#: Views/Admin/Settings/index_v.php:112
+#: Views/Admin/Settings/index_v.php:127
 msgid "Registration verification"
 msgstr "การตรวจสอบการลงทะเบียน"
 
-#: Views/Admin/Settings/index_v.php:115
+#: Views/Admin/Settings/index_v.php:130
 msgid "No verification"
 msgstr "ไม่ใช้การตรวจสอบ"
 
-#: Views/Admin/Settings/index_v.php:116
+#: Views/Admin/Settings/index_v.php:131
 msgid "Verify by the link in user's email"
 msgstr "ตรวจโดยลิ้งค์ในอีเมลผู้ใช้"
 
-#: Views/Admin/Settings/index_v.php:117
+#: Views/Admin/Settings/index_v.php:132
 msgid "Verify by an administrator"
 msgstr "ตรวจโดยผู้ดูแล"
 
-#: Views/Admin/Settings/index_v.php:122
+#: Views/Admin/Settings/index_v.php:137
 msgid "Registration verification wait time"
 msgstr "ระยะเวลารอตรวจสอบการลงทะเบียน"
 
-#: Views/Admin/Settings/index_v.php:127 Views/Admin/Settings/index_v.php:188 Views/Admin/Settings/index_v.php:204
+#: Views/Admin/Settings/index_v.php:142 Views/Admin/Settings/index_v.php:203 Views/Admin/Settings/index_v.php:219
 #: Views/Admin/Settings/index_v.php:319 Views/Admin/Settings/index_v.php:340
 msgid "days"
 msgstr "วัน"
 
-#: Views/Admin/Settings/index_v.php:130
+#: Views/Admin/Settings/index_v.php:145
 msgid ""
 "How many days that user needs to take action to verify their email on register or added a new user by admin?"
 msgstr "ระยะเวลากี่วันที่ผู้ใช้ต้องลงมือกระทำเพื่อตรวจสอบยืนยันอีเมลการลงทะเบียนหรือการถูกเพิ่มผู้ใช้โดยผู้ดูแล?"
 
-#: Views/Admin/Settings/index_v.php:134
+#: Views/Admin/Settings/index_v.php:149
 msgid "Admin notification emails"
 msgstr "อีเมลแจ้งเตือนผู้ดูแล"
 
-#: Views/Admin/Settings/index_v.php:139
+#: Views/Admin/Settings/index_v.php:154
 msgid "The administrator's emails to notify where there is new user registration."
 msgstr "อีเมลผู้ดูแลที่จะแจ้งเตือนเมื่อมีผู้ใช้ลงทะเบียนใหม่."
 
-#: Views/Admin/Settings/index_v.php:141
+#: Views/Admin/Settings/index_v.php:156
 #, php-format
 msgid "Use comma %s to separate multiple emails."
 msgstr "ใช้เครื่องหมายคอมม่า %s เพื่อแยกหลายอีเมล."
 
-#: Views/Admin/Settings/index_v.php:147
+#: Views/Admin/Settings/index_v.php:162
 msgid "Disallowed name"
 msgstr "ไม่อนุญาตชื่อ"
 
-#: Views/Admin/Settings/index_v.php:152
+#: Views/Admin/Settings/index_v.php:167
 msgid "Disallowed name to use in username, email, display name."
 msgstr "ไม่อนุญาตชื่อในชื่อผู้ใช้, อีเมล, ชื่อแสดง."
 
-#: Views/Admin/Settings/index_v.php:154
+#: Views/Admin/Settings/index_v.php:169
 #, php-format
 msgid "Use comma %s to separate multiple names."
 msgstr "ใช้เครื่องหมายคอมม่า %s เพื่อแยกหลายชื่อ."
 
-#: Views/Admin/Settings/index_v.php:156
+#: Views/Admin/Settings/index_v.php:171
 #, php-format
 msgid "Use asterisk %s as wild card in each name."
 msgstr "ใช้เครื่องหมายดอกจัน %s แทนอักขระใดๆก็ตามในแต่ละชื่อ."
 
-#: Views/Admin/Settings/index_v.php:162
+#: Views/Admin/Settings/index_v.php:177
 msgid "Default role"
 msgstr "หน้าที่เริ่มต้น"
 
-#: Views/Admin/Settings/index_v.php:176
+#: Views/Admin/Settings/index_v.php:191
 msgid "Default role to use when user register their account or add new user from administrator page."
 msgstr "หน้าที่เริ่มต้นที่จะใช้เมื่อผู้ใช้ลงทะเบียนสมาชิกหรือเพิ่มผู้ใช้ผ่านหน้าผู้ดูแล."
 
-#: Views/Admin/Settings/index_v.php:181
+#: Views/Admin/Settings/index_v.php:196
 msgid "Login & Security"
 msgstr "การเข้าสู่ระบบ & ความปลอดภัย"
 
-#: Views/Admin/Settings/index_v.php:183
+#: Views/Admin/Settings/index_v.php:198
 msgid "Login length without remember"
 msgstr "ระยะเวลาเข้าสู่ระบบกับการไม่ให้จดจำ"
 
-#: Views/Admin/Settings/index_v.php:193
+#: Views/Admin/Settings/index_v.php:208
 msgid ""
 "Number of days for cookie to be expire when user login without remember option checked. Use zero to keep "
 "session until browser close."
 msgstr "จำนวนวันสำหรับคุกกี้ที่จะหมดอายุเมื่อผู้ใช้เข้าสู่ระบบกับไม่ได้เลือกให้จดจำ. ใช้เลขศูนย์สำหรับให้หมดอายุเมื่อปิดเบราเซอร์."
 
-#: Views/Admin/Settings/index_v.php:199
+#: Views/Admin/Settings/index_v.php:214
 msgid "Login length with remember"
 msgstr "ระยะเวลาเข้าสู่ระบบกับการให้จดจำ"
 
-#: Views/Admin/Settings/index_v.php:209
+#: Views/Admin/Settings/index_v.php:224
 msgid "Number of days for cookie to be expire when user login with remember option checked."
 msgstr "จำนวนวันสำหรับคุกกี้ที่จะหมดอายุเมื่อผู้ใช้เข้าสู่ระบบกับตัวเลือกให้จดจำ."
-
-#: Views/Admin/Settings/index_v.php:215
-msgid "Login captcha"
-msgstr "อักษรภาพเข้าสู่ระบบ"
-
-#: Views/Admin/Settings/index_v.php:218
-msgid "Do not use"
-msgstr "ไม่ใช้งาน"
-
-#: Views/Admin/Settings/index_v.php:219
-msgid "Use until login success"
-msgstr "ใช้จนกระทั่งเข้าสู่ระบบสำเร็จ"
-
-#: Views/Admin/Settings/index_v.php:220
-msgid "Always use"
-msgstr "ใช้งานเสมอ"
-
-#: Views/Admin/Settings/index_v.php:223
-msgid ""
-"To use login captcha until login success, the captcha will be skipped until login cookies expired with these "
-"conditions."
-msgstr "การใช้อักษรภาพในการเข้าสู่ระบบจนกระทั่งเข้าสู่ระบบสำเร็จ, อักษรภาพจะถูกข้ามไปจนกระทั่งคุกกี้เข้าสู่ระบบหมดอายุด้วยเงื่อนไขต่อไปนี้."
-
-#: Views/Admin/Settings/index_v.php:224
-msgid "If user login without remember then it will be expired in one day."
-msgstr "ถ้าผู้ใช้เข้าสู่ระบบโดยไม่ให้จดจำ มันจะหมดอายุในหนึ่งวัน."
-
-#: Views/Admin/Settings/index_v.php:225
-msgid "If user login with remember then it will be expired within remember length multiply with 6 days."
-msgstr "ถ้าผู้ใช้เข้าสู่ระบบด้วยการให้จดจำ มันจะหมดอายุภายในระยะเวลาจดจำคูณด้วย 6 วัน."
 
 #: Views/Admin/Settings/index_v.php:233
 msgid "Prevent brute-force attack by IP address"
@@ -1967,14 +1930,56 @@ msgstr "ปรับแสดงเมนูด้านข้าง"
 msgid "Expane/collapse menu"
 msgstr "ขยาย/ย่อเมนู"
 
-#: Views/common/Admin/mainLayout_v.php:119
+#: Views/common/Admin/mainLayout_v.php:122
 #, php-format
 msgid "Hello, %1$s"
 msgstr "สวัสดี, %1$s"
 
-#: Views/common/Admin/mainLayout_v.php:120
+#: Views/common/Admin/mainLayout_v.php:123
 msgid "Edit your account"
 msgstr "แก้ไขบัญชีผู้ใช้ของคุณ"
+
+#~ msgid "Incorrect captcha code."
+#~ msgstr "อักษรภาพไม่ถูกต้อง."
+
+#~ msgid "Please enter text in the image below."
+#~ msgstr "กรุณากรอกตัวอักษรในภาพด้านล่าง."
+
+#~ msgid "Captcha"
+#~ msgstr "อักษรภาพ"
+
+#~ msgid "Get new image"
+#~ msgstr "รับภาพใหม่"
+
+#~ msgid "Play audio"
+#~ msgstr "เล่นเสียง"
+
+#~ msgid "Captcha text"
+#~ msgstr "ตัวอักษรภาพ"
+
+#~ msgid "Login captcha"
+#~ msgstr "อักษรภาพเข้าสู่ระบบ"
+
+#~ msgid "Do not use"
+#~ msgstr "ไม่ใช้งาน"
+
+#~ msgid "Use until login success"
+#~ msgstr "ใช้จนกระทั่งเข้าสู่ระบบสำเร็จ"
+
+#~ msgid "Always use"
+#~ msgstr "ใช้งานเสมอ"
+
+#~ msgid ""
+#~ "To use login captcha until login success, the captcha will be skipped until login cookies expired with "
+#~ "these conditions."
+#~ msgstr ""
+#~ "การใช้อักษรภาพในการเข้าสู่ระบบจนกระทั่งเข้าสู่ระบบสำเร็จ, อักษรภาพจะถูกข้ามไปจนกระทั่งคุกกี้เข้าสู่ระบบหมดอายุด้วยเงื่อนไขต่อไปนี้."
+
+#~ msgid "If user login without remember then it will be expired in one day."
+#~ msgstr "ถ้าผู้ใช้เข้าสู่ระบบโดยไม่ให้จดจำ มันจะหมดอายุในหนึ่งวัน."
+
+#~ msgid "If user login with remember then it will be expired within remember length multiply with 6 days."
+#~ msgstr "ถ้าผู้ใช้เข้าสู่ระบบด้วยการให้จดจำ มันจะหมดอายุภายในระยะเวลาจดจำคูณด้วย 6 วัน."
 
 #~ msgid "Make a copy to public folder."
 #~ msgstr "ทำซ้ำไปยังโฟลเดอร์สาธารณะ."

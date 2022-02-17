@@ -181,6 +181,28 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
 
 
     /**
+     * {@inheritDoc}
+     */
+    public function responseJson($output): string
+    {
+        $this->setHeaderAllowOrigin();
+
+        return parent::responseJson($output);
+    }// responseJson
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function responseXml($output): string
+    {
+        $this->setHeaderAllowOrigin();
+
+        return parent::responseXml($output);
+    }// responseXml
+
+
+    /**
      * Setup basic PHP configurations such as default timezone.
      */
     protected function setBasicConfig()
@@ -200,7 +222,45 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
         date_default_timezone_set($configValues['rdbadmin_SiteTimezone']);
 
         unset($configValues);
-    }// setBasicConfig
+    }// setBasicConfig'
+
+
+    /**
+     * Set header allow origin for CORS.
+     */
+    protected function setHeaderAllowOrigin()
+    {
+        if (!headers_sent()) {
+            $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
+            $allowOrigins = $ConfigDb->get('rdbadmin_SiteAllowOrigins');
+            unset($ConfigDb);
+
+            if (!empty($allowOrigins)) {
+                $allowOriginsArray = array_map('trim', explode(',', $allowOrigins));
+                $headers = array_change_key_case(apache_request_headers());
+                if (isset($headers['origin']) && is_array($allowOriginsArray)) {
+                    foreach ($allowOriginsArray as $allowOrigin) {
+                        $allowOrigin = strtolower(trim($allowOrigin));
+                        if (strtolower(trim($headers['origin'])) === $allowOrigin) {
+                            // if found allowed origin matched the request origin.
+                            break;
+                        }
+                    }// endforeach;
+                } elseif (is_array($allowOriginsArray)) {
+                    $allowOriginsArray = array_values($allowOriginsArray);
+                    $allowOrigin = array_shift($allowOriginsArray);
+                    $allowOrigin = strtolower(trim($allowOrigin));
+                }
+                unset($allowOriginsArray, $headers);
+            }
+            unset($allowOrigins);
+
+            if (isset($allowOrigin)) {
+                header('Access-Control-Allow-Origin: ' . $allowOrigin);
+                unset($allowOrigin);
+            }
+        }
+    }// setHeaderAllowOrigin
 
 
 }

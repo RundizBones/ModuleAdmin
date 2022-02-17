@@ -72,6 +72,21 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="rdbadmin_SiteAllowOrigins"><?php echo __('Allow origins'); ?></label>
+                                        <div class="control-wrapper">
+                                            <input id="rdbadmin_SiteAllowOrigins" type="text" name="rdbadmin_SiteAllowOrigins" value="" maxlength="500">
+                                            <div class="form-description">
+                                                <?php 
+                                                printf(
+                                                    __('The %1$s header to be sent to client. To set multiple origins, separate them with comma (%2$s) and the system will be use one per header.'),
+                                                    '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><code>Access-Control-Allow-Origin</code></a>',
+                                                    '<code>,</code>'
+                                                );
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <?php
                                     /*
                                      * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsContent.tab-1

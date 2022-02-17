@@ -243,6 +243,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         return [
             'rdbadmin_SiteName',
             'rdbadmin_SiteTimezone',
+            'rdbadmin_SiteAllowOrigins',
             'rdbadmin_UserRegister',
             'rdbadmin_UserRegisterNotifyAdmin',
             'rdbadmin_UserRegisterNotifyAdminEmails',

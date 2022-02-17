@@ -35,11 +35,13 @@ trait CommonDataTrait
             'rdbadmin_SiteName',
             'rdbadmin_SiteTimezone',
             'rdbadmin_AdminItemsPerPage',
+            'rdbadmin_SiteAllowOrigins',
         ];
         $configDefaults = [
             '',
             'Asia/Bangkok',
             '20',
+            '',
         ];
 
         $output = $ConfigDb->get($configNames, $configDefaults);
