@@ -11,11 +11,12 @@
 namespace Rdb\Modules\RdbAdmin\Console;
 
 
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
+use \Symfony\Component\Console\Command\Command;
+use \Symfony\Component\Console\Question\ConfirmationQuestion;
+use \Symfony\Component\Console\Input\InputArgument;
+use \Symfony\Component\Console\Input\InputInterface;
+use \Symfony\Component\Console\Input\InputOption;
+use \Symfony\Component\Console\Output\OutputInterface;
 use \Symfony\Component\Console\Style\SymfonyStyle;
 
 
@@ -173,26 +174,32 @@ class CreateAdminController extends \Rdb\System\Core\Console\BaseConsole
             unset($questionMsg);
 
             if (!preg_match('#^y#i', $answer)) {
-                return ;
+                return 1;
             } else {
                 $sourceFile = realpath(__DIR__ . '/CreateModuleTemplate/Controllers/Admin/IndexController.pht');
                 if (!is_file($sourceFile) || !is_string($sourceFile) || empty($sourceFile)) {
                     $Io->error('Unable to find source controller file.');
-                    return ;
+                    return 1;
                 }
 
                 // create controller parent folder if not exists.
                 if ($this->createControllerParentFolderIfNotExists($controllerRelatePath, $Output, $Io) === false) {
-                    return ;
+                    return 0;
                 }
 
                 // copy controller template to destination.
                 if ($this->copyFile($sourceFile, $controllerFullPath, $Output, $Io) === false) {
-                    return ;
+                    return 0;
                 }
 
                 if ($this->rewriteContents($moduleName, $controllerRelatePath, $Output, $Io) === true) {
                     $Io->success('Finished. You can start write your controller at ' . $controllerFullPath . '.');
+
+                    if (defined('Command::SUCCESS')) {
+                        return Command::SUCCESS;
+                    } else {
+                        return 0;
+                    }
                 }
             }
 
@@ -202,6 +209,12 @@ class CreateAdminController extends \Rdb\System\Core\Console\BaseConsole
         unset($controllerFullPath, $controllerName, $controllerRelatePath, $moduleName, $validated);
 
         unset($Io);
+
+        if (defined('Command::FAILURE')) {
+            return Command::FAILURE;
+        } else {
+            return 1;
+        }
     }// execute
 
 

@@ -11,10 +11,11 @@
 namespace Rdb\Modules\RdbAdmin\Console;
 
 
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
+use \Symfony\Component\Console\Command\Command;
+use \Symfony\Component\Console\Input\InputArgument;
+use \Symfony\Component\Console\Input\InputInterface;
+use \Symfony\Component\Console\Input\InputOption;
+use \Symfony\Component\Console\Output\OutputInterface;
 use \Symfony\Component\Console\Style\SymfonyStyle;
 
 
@@ -171,9 +172,21 @@ class CreateModule extends \Rdb\System\Core\Console\BaseConsole
             }
 
             $Io->success('Finished. Please check that your module is working by access the URL http://<your-domain>/<rundizbones-install-dir>/admin/' . strtolower($this->moduleName) . ' from your browser.');
+
+            if (defined('Command::SUCCESS')) {
+                return Command::SUCCESS;
+            } else {
+                return 0;
+            }
         }
 
         unset($Io);
+
+        if (defined('Command::FAILURE')) {
+            return Command::FAILURE;
+        } else {
+            return 1;
+        }
     }// execute
 
 
