@@ -8,13 +8,19 @@ namespace Rdb\Modules\RdbAdmin\Libraries;
 
 
 /**
- * Languages class that work as connector to oscarotero/gettext class.
+ * Languages class that work as connector to Packagist vendor's class.
  * 
  * @since 0.1
- * @link https://github.com/oscarotero/Gettext Gettext class document.
+ * @link https://github.com/phpmyadmin/motranslator Packagist vendor's class document.
  */
 class Languages
 {
+
+
+    /**
+     * Default domain is set to 'rdbadmin' and will be use when none specify.
+     */
+    const DEFAULT_DOMAIN = 'rdbadmin';
 
 
     /**
@@ -30,15 +36,21 @@ class Languages
 
 
     /**
+     * @var array Loaded domains
+     */
+    protected $domains = [];
+
+
+    /**
      * @var array The text domains that was registered via registerTextDomain() method.
      */
     protected $registeredTextDomains = [];
 
 
     /**
-     * @var \Gettext\Translator
+     * @var \Rdb\Modules\RdbAdmin\Libraries\Languages
      */
-    protected $Translator;
+    public static $staticThis;
 
 
     /**
@@ -53,8 +65,6 @@ class Languages
         } else {
             $this->Container = new \Rdb\System\Container();
         }
-
-        $this->Translator = new \Gettext\Translator();
     }// __construct
 
 
@@ -74,6 +84,8 @@ class Languages
             $Logger = $this->Container->get('Logger');
         }
 
+        $directory = rtrim(rtrim($directory, '/'), '\\');// remove trailing slash (+back slash).
+
         if (empty($directory)) {
             if (is_array($this->registeredTextDomains) && array_key_exists($domain, $this->registeredTextDomains)) {
                 $directory = $this->registeredTextDomains[$domain];
@@ -88,24 +100,25 @@ class Languages
 
         if ($this->currentTextDomain === $domain) {
             // if already loaded translation.
-            $this->Translator->register();
+            $this->getHelpers();
             return true;
         }
 
-        $directory = rtrim(rtrim($directory, '/'), '\\');
         $moFile = $directory . DIRECTORY_SEPARATOR . $domain . '-' . $_SERVER['RUNDIZBONES_LANGUAGE'] . '.mo';
 
+        if (!isset($this->domains[$_SERVER['RUNDIZBONES_LANGUAGE']])) {
+            $this->domains[$_SERVER['RUNDIZBONES_LANGUAGE']] = [];
+        }
+
+        if (!isset($this->domains[$_SERVER['RUNDIZBONES_LANGUAGE']][$domain])) {
+            $Translator = new \PhpMyAdmin\MoTranslator\Translator($moFile);
+            $this->domains[$_SERVER['RUNDIZBONES_LANGUAGE']][$domain] = $Translator;
+            unset($Translator);
+        }
+
         if (is_file($moFile)) {
-            $Translations = new \Gettext\Translations();
-            $Translations->addFromMoFile($moFile);
-            $Translations->setDomain($domain);
-            $this->Translator->loadTranslations($Translations);
-            unset($Translations);
-
             $this->currentTextDomain = $domain;
-            unset($moFile);
-
-            $this->Translator->register();
+            $this->getHelpers();
             return true;
         } else {
             if (isset($Logger)) {
@@ -116,7 +129,7 @@ class Languages
         // if translation file was not found, return `false` and not throw any error at all.
         // this is for devs can be use the message from source code directly without translation.
         unset($Logger, $moFile);
-        $this->Translator->register();
+        $this->getHelpers();
         return false;
     }// bindTextDomain
 
@@ -124,10 +137,13 @@ class Languages
     /**
      * Get helpers functions.
      * 
+     * This method will be called automatically once call to `bindTextDomain()`.
+     * 
      * @return $this
      */
     public function getHelpers()
     {
+        static::$staticThis = $this;
         include_once dirname(__DIR__) . '/Helpers/LanguagesFunctions.php';
         return $this;
     }// getHelpers
@@ -136,11 +152,25 @@ class Languages
     /**
      * Get `Translator` object.
      * 
-     * @return \Gettext\Translator
+     * @return \PhpMyAdmin\MoTranslator\Translator
      */
-    public function getTranslator() : \Gettext\Translator
+    public function getTranslator(string $domain = '') : \PhpMyAdmin\MoTranslator\Translator
     {
-        return $this->Translator;
+        if ('' === $domain) {
+            if (isset($this->domains[$_SERVER['RUNDIZBONES_LANGUAGE']][static::DEFAULT_DOMAIN])) {
+                $domain = static::DEFAULT_DOMAIN;
+            } else {
+                $domain = $this->currentTextDomain;
+            }
+        }
+
+        if (!isset($this->domains[$_SERVER['RUNDIZBONES_LANGUAGE']][$domain])) {
+            // if never bind text domain before.
+            // just use new translator with file that is not found.
+            return new \PhpMyAdmin\MoTranslator\Translator('');
+        }
+
+        return $this->domains[$_SERVER['RUNDIZBONES_LANGUAGE']][$domain];
     }// getTranslator
 
 
@@ -148,7 +178,8 @@ class Languages
      * Register text domain.
      * 
      * @param string $domain The text domain. Example: 'mymodule'.
-     * @param string $directory The full path to folder that contain translations (mo file). Example: '/var/www/Modules/MyModule/languages/translations'.
+     * @param string $directory The full path to folder that contain translations (mo file). No trailing slash or back slash.
+     *      Example: '/var/www/Modules/MyModule/languages/translations'.
      */
     protected function registerTextDomain(string $domain, string $directory)
     {
@@ -157,7 +188,7 @@ class Languages
         }
 
         if (!array_key_exists($domain, $this->registeredTextDomains)) {
-            $this->registeredTextDomains = array_merge($this->registeredTextDomains, [$domain => rtrim(rtrim($directory, '/'), '\\') . DIRECTORY_SEPARATOR]);
+            $this->registeredTextDomains[$domain] = $directory;
         }
     }// registerTextDomain
 

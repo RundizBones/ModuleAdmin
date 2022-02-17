@@ -139,7 +139,6 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             'rdbadmin', 
             dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'RdbAdmin' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'translations'
         );
-        $Languages->getHelpers();
 
         $urlBaseWithLang = $Url->getAppBasedPath(true);
         $urlBase = $Url->getAppBasedPath();

@@ -19,7 +19,7 @@
                 <form id="rdba-loginreset-form" class="page-form-body rd-form" action="<?php if (isset($loginResetUrl)) {echo htmlspecialchars($loginResetUrl, ENT_QUOTES);} ?>" method="<?php echo (isset($loginResetMethod) ? strtolower($loginResetMethod) : 'post'); ?>">
                     <div class="form-group">
                         <p class="control-wrapper">
-                            <?php echo __('Your account: %1$s', '<strong>' . ($user_email ?? '') . '</strong>'); ?>
+                            <?php echo sprintf(__('Your account: %1$s'), '<strong>' . ($user_email ?? '') . '</strong>'); ?>
                         </p>
                     </div>
                     <div class="form-group">

@@ -5,7 +5,7 @@
 /* @var $Url \Rdb\System\Libraries\Url */
 ?>
                         <h1 class="rdba-page-content-header"><?php echo __('Previous emails'); ?></h1>
-                        <p><?php echo __('Previously used emails of the user %s.', '<a href="' . ($editUserUrl ?? '') . '"><strong id="user_login"></strong></a>') ?></p>
+                        <p><?php echo sprintf(__('Previously used emails of the user %s.'), '<a href="' . ($editUserUrl ?? '') . '"><strong id="user_login"></strong></a>') ?></p>
 
                         <div class="form-result-placeholder"></div>
 

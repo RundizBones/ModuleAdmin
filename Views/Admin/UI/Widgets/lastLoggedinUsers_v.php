@@ -1,5 +1,5 @@
 <h1><?php echo __('Last logged in users'); ?></h1>
-<p><?php echo __('Last %1$d logged in users.', ($limitUsers ?? 5)); ?></p>
+<p><?php echo sprintf(__('Last %1$d logged in users.'), ($limitUsers ?? 5)); ?></p>
 <div class="rd-datatable-wrapper">
     <table class="rd-datatable h-border">
         <thead>

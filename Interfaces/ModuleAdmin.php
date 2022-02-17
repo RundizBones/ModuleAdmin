@@ -165,7 +165,6 @@ interface ModuleAdmin
      *     &#039;rdbadmin&#039;, 
      *     MODULE_PATH . DIRECTORY_SEPARATOR . &#039;RdbAdmin&#039; . DIRECTORY_SEPARATOR . &#039;languages&#039; . DIRECTORY_SEPARATOR . &#039;translations&#039;
      * );
-     * $Languages-&gt;getTranslator()-&gt;register();
      * $keywords = [];
      * $keywords[&#039;RdbAdminUsers&#039;] = noop__(&#039;Users&#039;);
      * if (!empty($key)) {

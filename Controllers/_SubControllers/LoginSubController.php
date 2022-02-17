@@ -183,7 +183,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                 if ($submitTime > 3) {
                     $messageAlert = [];
                     $messageAlert[] = $output['formResultMessage'];
-                    $messageAlert[] = __('You had submitted more than %d times, please try to login again.', 3);
+                    $messageAlert[] = sprintf(__('You had submitted more than %d times, please try to login again.'), 3);
                     $output['formResultMessage'] = $messageAlert;
                     unset($messageAlert);
                 }

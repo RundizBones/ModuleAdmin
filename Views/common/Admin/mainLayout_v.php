@@ -119,7 +119,7 @@
             {{/each}}
         </script>
         <template id="rdba-user-navbar-items">
-            <li><a><?php echo __('Hello, %1$s', '<span class="display-name">{{user_display_name}}</span>'); ?></a></li>
+            <li><a><?php echo sprintf(__('Hello, %1$s'), '<span class="display-name">{{user_display_name}}</span>'); ?></a></li>
             <li><a class="url-edit-your-account" href="{{UrlEditUser}}"><?php echo __('Edit your account'); ?></a></li>
             <li><a class="url-logout" href="{{UrlLogout}}"><?php echo __('Logout'); ?></a></li>
         </template>

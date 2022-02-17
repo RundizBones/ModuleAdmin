@@ -94,7 +94,6 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output = array_merge($output, $Csrf->createToken());

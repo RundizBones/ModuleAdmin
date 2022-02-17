@@ -510,7 +510,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
@@ -664,7 +663,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         if (!isset($_SESSION['user_id'])) {
             // if no login success before.
@@ -756,7 +754,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output = array_merge($output, $this->getConfig(), $Csrf->createToken());

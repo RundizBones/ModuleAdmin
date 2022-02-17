@@ -27,7 +27,6 @@ class MyFrontController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             'modulename', 
             MODULE_PATH . DIRECTORY_SEPARATOR . 'ModuleName' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'translations'
         );
-        $this->Languages->getHelpers();
 
         $output = [];
         $output['pageTitle'] = d__('modulename', 'My module front-end');

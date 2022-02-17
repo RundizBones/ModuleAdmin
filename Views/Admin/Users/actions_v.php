@@ -33,7 +33,7 @@
                             <h3><?php if (isset($actionText)) {echo $actionText;} ?></h3>
                             <?php 
                             if (isset($action) && $action === 'delete') {
-                                echo renderAlertHtml(__('Please note that this will be mark the users as deleted, the marked users will be really deleted after %1$d days.', 30), 'alert-warning', false);
+                                echo renderAlertHtml(sprintf(__('Please note that this will be mark the users as deleted, the marked users will be really deleted after %1$d days.'), 30), 'alert-warning', false);
                             }//endif; 
                             ?> 
                             <?php if (isset($listUsers['items']) && is_array($listUsers['items'])) { ?> 

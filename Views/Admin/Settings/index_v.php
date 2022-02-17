@@ -153,7 +153,7 @@
                                                         <?php 
                                                         echo __('The administrator\'s emails to notify where there is new user registration.'); 
                                                         echo ' ';
-                                                        echo __('Use comma %s to separate multiple emails.', '(<code>,</code>)');
+                                                        echo sprintf(__('Use comma %s to separate multiple emails.'), '(<code>,</code>)');
                                                         ?> 
                                                     </div>
                                                 </div>
@@ -166,9 +166,9 @@
                                                         <?php
                                                         echo __('Disallowed name to use in username, email, display name.');
                                                         echo ' ';
-                                                        echo __('Use comma %s to separate multiple names.', '(<code>,</code>)');
+                                                        echo sprintf(__('Use comma %s to separate multiple names.'), '(<code>,</code>)');
                                                         echo ' ';
-                                                        echo __('Use asterisk %s as wild card in each name.', '(<code>*</code>)');
+                                                        echo sprintf(__('Use asterisk %s as wild card in each name.'), '(<code>*</code>)');
                                                         ?> 
                                                     </div>
                                                 </div>
@@ -241,7 +241,7 @@
                                                         <?php echo __('Prevent brute-force attack by device cookie'); ?> 
                                                     </label>
                                                     <div class="form-description">
-                                                        <?php echo __('Read more about device cookie at %1$s.', '<a href="https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies" target="owasp">OWASP</a>'); ?> 
+                                                        <?php echo sprintf(__('Read more about device cookie at %1$s.'), '<a href="https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies" target="owasp">OWASP</a>'); ?> 
                                                     </div>
                                                 </div>
                                             </div>

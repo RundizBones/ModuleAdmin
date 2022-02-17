@@ -33,8 +33,6 @@ class RolesController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminRoles', ['add', 'edit', 'delete', 'list', 'changePriority']);
 
-        $this->Languages->getHelpers();
-
         // get a role data.
         $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $where = [];
@@ -120,7 +118,6 @@ class RolesController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output['configDb'] = $this->getConfigDb();

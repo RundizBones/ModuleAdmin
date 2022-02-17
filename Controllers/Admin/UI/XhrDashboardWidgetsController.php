@@ -24,8 +24,6 @@ class XhrDashboardWidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Ad
     public function indexAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        $this->Languages->getHelpers();
-
         if (!$this->Input->isNonHtmlAccept() && !$this->Input->isXhr()) {
             // if not custom HTTP accept.
             http_response_code(403);

@@ -573,7 +573,6 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
                 'rdbadmin', 
                 dirname(__DIR__) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'translations'
             );
-            $Languages->getHelpers();
         }
 
         $statusTexts = [

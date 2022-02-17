@@ -33,7 +33,6 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
@@ -262,7 +261,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
 
                     $Url = new \Rdb\System\Libraries\Url($this->Container);
                     $output['formResultStatus'] = 'success';
-                    $output['formResultMessage'] = __('Success, you can use your username and password to login now. Go to %1$slogin page%2$s.', '<a href="' . $Url->getAppBasedPath() . '/admin/login' . '">', '</a>');
+                    $output['formResultMessage'] = sprintf(__('Success, you can use your username and password to login now. Go to %1$slogin page%2$s.'), '<a href="' . $Url->getAppBasedPath() . '/admin/login' . '">', '</a>');
                     unset($Url);
                 }// endif;
 
@@ -817,9 +816,9 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                 $replaces['%registersince%'] = $data['user_create'];
                 $replaces['%registersince_gmt%'] = $data['user_create_gmt'];
                 if (isset($registerVerification) && $registerVerification == '2') {
-                    $replaces['%userneedsadminconfirm%'] = __('The user needs administrator to confirm their registration.') . ' ' . __('Please go to %1$sadministrator page%2$s.', '<a href="' . $Url->getDomainProtocol() . $Url->getAppBasedPath() . '/admin' . '">', '</a>');
+                    $replaces['%userneedsadminconfirm%'] = __('The user needs administrator to confirm their registration.') . ' ' . sprintf(__('Please go to %1$sadministrator page%2$s.'), '<a href="' . $Url->getDomainProtocol() . $Url->getAppBasedPath() . '/admin' . '">', '</a>');
                 } else {
-                    $replaces['%userneedsadminconfirm%'] = __('Go to %1$sadministrator page%2$s.', '<a href="' . $Url->getDomainProtocol() . $Url->getAppBasedPath() . '/admin' . '">', '</a>');
+                    $replaces['%userneedsadminconfirm%'] = sprintf(__('Go to %1$sadministrator page%2$s.'), '<a href="' . $Url->getDomainProtocol() . $Url->getAppBasedPath() . '/admin' . '">', '</a>');
                 }
                 $emailMessage = $Email->getMessage('RdbAdmin', 'AdminNotifyUserRegister', $replaces);
                 unset($replaces);
@@ -934,7 +933,6 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output = array_merge($output, $this->getConfig(), $Csrf->createToken());

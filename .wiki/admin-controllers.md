@@ -29,7 +29,6 @@ class MyAdminController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
             'modulename', 
             MODULE_PATH . DIRECTORY_SEPARATOR . 'ModuleName' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'translations'
         );
-        $this->Languages->getHelpers();
 
         $output = [];
         $output['configDb'] = $this->getConfigDb();

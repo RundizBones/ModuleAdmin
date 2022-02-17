@@ -67,7 +67,7 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
                 foreach ($matches as $key => $item) {
                     if (isset($item[1]) && isset($item[2]) && strtolower($item[1]) === 'version') {
                         unset($matches);
-                        $output['version'] = __('Version %1$s', $item[2]);
+                        $output['version'] = sprintf(__('Version %1$s'), $item[2]);
                         break;
                     }
                 }// endforeach;
@@ -323,8 +323,6 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
     public function indexAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        $this->Languages->getHelpers();
-
         if (!$this->Input->isNonHtmlAccept() && !$this->Input->isXhr()) {
             // if not custom HTTP accept.
             http_response_code(403);

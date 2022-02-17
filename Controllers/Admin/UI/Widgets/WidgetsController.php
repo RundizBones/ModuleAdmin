@@ -22,8 +22,6 @@ class WidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
     public function __construct(\Rdb\System\Container $Container)
     {
         parent::__construct($Container);
-
-        $this->Languages->getHelpers();
     }// __construct
 
 
@@ -109,7 +107,7 @@ class WidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
             ],
             [
                 'name' => '<a href="https://github.com/RundizBones/framework" target="_blank">' . __('Framework') . '</a>',
-                'value' => __('Version %1$s', $this->systemSummaryGetFrameworkVersion()),
+                'value' => sprintf(__('Version %1$s'), $this->systemSummaryGetFrameworkVersion()),
             ],
         ];
 

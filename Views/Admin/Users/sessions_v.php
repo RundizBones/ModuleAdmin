@@ -5,7 +5,7 @@
 /* @var $Url \Rdb\System\Libraries\Url */
 ?>
                         <h1 class="rdba-page-content-header"><?php echo __('Login sessions'); ?></h1>
-                        <p><?php echo __('Login sessions of the user %s.', '<a href="' . ($editUserUrl ?? '') . '"><strong id="user_login"></strong></a>') ?></p>
+                        <p><?php echo sprintf(__('Login sessions of the user %s.'), '<a href="' . ($editUserUrl ?? '') . '"><strong id="user_login"></strong></a>') ?></p>
 
                         <form id="rdba-loginsessions-form" class="rdba-datatables-form">
                             <div class="form-result-placeholder"></div>

@@ -348,7 +348,6 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output['configDb'] = $this->getConfigDb();

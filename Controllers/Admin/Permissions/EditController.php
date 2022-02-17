@@ -74,7 +74,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                 if (isset($output['deleted']) && $output['deleted'] === true) {
                     $output['cleared'] = true;
                     $output['alertDialog'] = true;
-                    $output['formResultMessage'] = __('All permissions for %1$s module were cleared successfully.', strip_tags($module_system_name));
+                    $output['formResultMessage'] = sprintf(__('All permissions for %1$s module were cleared successfully.'), strip_tags($module_system_name));
                     http_response_code(200);
                 }
             }

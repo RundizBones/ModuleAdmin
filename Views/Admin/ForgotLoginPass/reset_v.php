@@ -18,7 +18,7 @@
                 <form id="rdba-forgot-form-reset" class="page-form-body rd-form" action="<?php if (isset($forgotLoginPassResetUrl)) {echo htmlspecialchars($forgotLoginPassResetUrl, ENT_QUOTES);} ?>" method="<?php echo (isset($forgotLoginPassResetMethod) ? strtolower($forgotLoginPassResetMethod) : 'post'); ?>">
                     <div class="form-group">
                         <p class="control-wrapper">
-                            <?php echo __('Your account: %1$s', '<strong>' . ($user_email ?? '') . '</strong>'); ?>
+                            <?php echo sprintf(__('Your account: %1$s'), '<strong>' . ($user_email ?? '') . '</strong>'); ?>
                         </p>
                     </div>
                     <div class="form-group">

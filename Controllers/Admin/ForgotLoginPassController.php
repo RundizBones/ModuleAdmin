@@ -79,7 +79,6 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output = array_merge($output, $Csrf->createToken());
@@ -203,7 +202,6 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output = array_merge($output, $Csrf->createToken());

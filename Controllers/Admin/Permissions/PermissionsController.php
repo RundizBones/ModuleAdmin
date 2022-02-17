@@ -352,7 +352,6 @@ class PermissionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Admi
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf(['persistentTokenMode' => true]);// use persistent for ajax save on click can be multiple click  at a time.
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $this->Languages->getHelpers();
 
         $output = [];
         $output['configDb'] = $this->getConfigDb();
