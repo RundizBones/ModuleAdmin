@@ -427,7 +427,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                         if ($result->user_status != '1') {
                             // if user is disabled.
                             $output['formResultStatus'] = 'error';
-                            $output['formResultMessage'] = __('Your account has been disabled. (%1$s)', __($result->user_statustext));
+                            $output['formResultMessage'] = sprintf(__('Your account has been disabled. (%1$s)'), __($result->user_statustext));
                             http_response_code(403);
                         } else {
                             // if user is enabled.
