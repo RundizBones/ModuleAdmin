@@ -18,7 +18,8 @@
   -moz-tab-size: 4;
   tab-size: 4;
   -webkit-tap-highlight-color: transparent;
-  -webkit-text-size-adjust: 100%
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%
 }
 :where(body) {
   margin: 0
@@ -72,7 +73,7 @@
 }
 :where(table) {
   border-collapse: collapse;
-  border-color: inherit;
+  border-color: currentColor;
   text-indent: 0
 }
 :where(button,input,select) {
@@ -133,9 +134,6 @@
 :where([aria-busy=true i]) {
   cursor: progress
 }
-:where([aria-controls]) {
-  cursor: pointer
-}
 :where([aria-disabled=true i],[disabled]) {
   cursor: not-allowed
 }
@@ -166,6 +164,7 @@ samp {
   padding: .25em .375em
 }
 :where(select) {
+  -webkit-appearance: none;
   appearance: none;
   background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4'%3E%3Cpath d='M4 0h6L7 4'/%3E%3C/svg%3E") no-repeat right center/1em;
   border-radius: 0;
