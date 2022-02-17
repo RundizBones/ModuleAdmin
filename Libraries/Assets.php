@@ -528,7 +528,7 @@ class Assets
 
             $output = $fileUrl;
             if (!empty($queries)) {
-                $output .= '?' . http_build_query($queries, null, ini_get('arg_separator.output'), PHP_QUERY_RFC3986);
+                $output .= '?' . http_build_query($queries, '', ini_get('arg_separator.output'), PHP_QUERY_RFC3986);
             }
             unset($fileUrl, $queries);
         }// endif; array_key_exists('file', $item)
