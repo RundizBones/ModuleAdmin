@@ -23,16 +23,16 @@ class SlimGuard extends \Slim\Csrf\Guard
     /**
      * {@inheritDoc}
      */
-    public function enforceStorageLimit()
+    public function enforceStorageLimit(): void
     {
-        return parent::enforceStorageLimit();
+        parent::enforceStorageLimit();
     }// enforceStorageLimit
 
 
     /**
      * {@inheritDoc}
      */
-    public function generateToken()
+    public function generateToken(): array
     {
         // this extended method fix generate token that was set to persistent mode but it always re-generate.
         if ($this->persistentTokenMode) {

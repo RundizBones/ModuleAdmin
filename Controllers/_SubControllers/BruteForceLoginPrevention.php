@@ -89,6 +89,13 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
 
 
     /**
+     * @var string JWT algorithm.
+     * @see \Firebase\JWT\JWT::decode()
+     */
+    protected $jwtAlgo = 'HS512';
+
+
+    /**
      * {@inheritDoc}
      * 
      * @param array $configDb The configuration values in DB.
@@ -359,7 +366,7 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
             unset($Config);
 
             try {
-                $decoded = (array) \Firebase\JWT\JWT::decode($cookieValue, $secretKey, ['HS256', 'HS512']);
+                $decoded = (array) \Firebase\JWT\JWT::decode($cookieValue, new \Firebase\JWT\Key($secretKey, $this->jwtAlgo));
             } catch (\Exception $ex) {
                 $this->deviceCookieError = 'Error: ' . $ex->getMessage();
                 return [];
@@ -406,7 +413,7 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                 'jti' => $this->deviceCookieSignature,
                 'sub' => $user_login_email,
             ];
-            $encoded = \Firebase\JWT\JWT::encode($token, $secretKey, 'HS512');
+            $encoded = \Firebase\JWT\JWT::encode($token, $secretKey, $this->jwtAlgo);
 
             $Config->setModule('');// restore to default.
 
