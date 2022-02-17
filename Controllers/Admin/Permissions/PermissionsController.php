@@ -436,7 +436,7 @@ class PermissionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Admi
                     'permissionFor' => $output['permissionFor'],
                     'permissionForUserId' => $output['permissionForUserId'],
                     'permissionModule' => $output['permissionModule'],
-                    'txtAreYouSureClear' => __('Are you sure to clear all permissions for selected module (%s)?', $output['permissionModule']) . 
+                    'txtAreYouSureClear' => sprintf(__('Are you sure to clear all permissions for selected module (%s)?'), $output['permissionModule']) . 
                         "\n" . 
                         __('This cannot be undone, any users that are in the highest role priority will always have full control.'),
                     'txtLoading' => __('Loading &hellip;'),
