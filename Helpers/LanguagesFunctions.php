@@ -17,6 +17,10 @@ if (!function_exists('__')) {
      */
     function __(string $msgid): string
     {
+        if ('' === $msgid) {
+            return $msgid;
+        }
+
         /* @var $Languages \Rdb\Modules\RdbAdmin\Libraries\Languages */
         $Languages = \Rdb\Modules\RdbAdmin\Libraries\Languages::$staticThis;
         return $Languages->getTranslator()->gettext($msgid);
@@ -34,6 +38,10 @@ if (!function_exists('d__')) {
      */
     function d__(string $domain, string $msgid): string
     {
+        if ('' === $msgid) {
+            return $msgid;
+        }
+
         /* @var $Languages \Rdb\Modules\RdbAdmin\Libraries\Languages */
         $Languages = \Rdb\Modules\RdbAdmin\Libraries\Languages::$staticThis;
         return $Languages->getTranslator($domain)->gettext(
@@ -55,6 +63,10 @@ if (!function_exists('dn__')) {
      */
     function dn__(string $domain, string $msgid, string $msgidPlural, int $number): string
     {
+        if ('' === $msgid) {
+            return $msgid;
+        }
+
         /* @var $Languages \Rdb\Modules\RdbAdmin\Libraries\Languages */
         $Languages = \Rdb\Modules\RdbAdmin\Libraries\Languages::$staticThis;
         return $Languages->getTranslator($domain)->ngettext(
@@ -79,6 +91,10 @@ if (!function_exists('dnp__')) {
      */
     function dnp__(string $domain, string $msgctxt, string $msgid, string $msgidPlural, int $number): string
     {
+        if ('' === $msgid) {
+            return $msgid;
+        }
+
         /* @var $Languages \Rdb\Modules\RdbAdmin\Libraries\Languages */
         $Languages = \Rdb\Modules\RdbAdmin\Libraries\Languages::$staticThis;
         return $Languages->getTranslator($domain)->npgettext(
@@ -102,6 +118,10 @@ if (!function_exists('p__')) {
      */
     function p__(string $msgctxt, string $msgid): string
     {
+        if ('' === $msgid) {
+            return $msgid;
+        }
+
         /* @var $Languages \Rdb\Modules\RdbAdmin\Libraries\Languages */
         $Languages = \Rdb\Modules\RdbAdmin\Libraries\Languages::$staticThis;
         return $Languages->getTranslator()->pgettext(
@@ -123,6 +143,10 @@ if (!function_exists('dp__')) {
      */
     function dp__(string $domain, string $msgctxt, string $msgid): string
     {
+        if ('' === $msgid) {
+            return $msgid;
+        }
+
         /* @var $Languages \Rdb\Modules\RdbAdmin\Libraries\Languages */
         $Languages = \Rdb\Modules\RdbAdmin\Libraries\Languages::$staticThis;
         return $Languages->getTranslator($domain)->pgettext(
@@ -144,6 +168,10 @@ if (!function_exists('n__')) {
      */
     function n__(string $msgid, string $msgidPlural, int $number): string
     {
+        if ('' === $msgid) {
+            return $msgid;
+        }
+
         /* @var $Languages \Rdb\Modules\RdbAdmin\Libraries\Languages */
         $Languages = \Rdb\Modules\RdbAdmin\Libraries\Languages::$staticThis;
         return $Languages->getTranslator()->ngettext(
@@ -167,6 +195,10 @@ if (!function_exists('np__')) {
      */
     function np__(string $msgctxt, string $msgid, string $msgidPlural, int $number): string
     {
+        if ('' === $msgid) {
+            return $msgid;
+        }
+
         /* @var $Languages \Rdb\Modules\RdbAdmin\Libraries\Languages */
         $Languages = \Rdb\Modules\RdbAdmin\Libraries\Languages::$staticThis;
         return $Languages->getTranslator()->npgettext(
