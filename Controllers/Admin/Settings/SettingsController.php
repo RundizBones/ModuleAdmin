@@ -476,11 +476,11 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
 
             // prepare data
             $data = [];
-            $data['rdbadmin_MailProtocol'] = trim($this->Input->post('rdbadmin_MailProtocol', '', FILTER_SANITIZE_STRING));
-            $data['rdbadmin_MailPath'] = trim($this->Input->post('rdbadmin_MailPath', '', FILTER_SANITIZE_STRING));
-            $data['rdbadmin_MailSmtpHost'] = trim($this->Input->post('rdbadmin_MailSmtpHost', '', FILTER_SANITIZE_STRING));
+            $data['rdbadmin_MailProtocol'] = strip_tags(trim($this->Input->post('rdbadmin_MailProtocol', '')));
+            $data['rdbadmin_MailPath'] = htmlspecialchars(trim($this->Input->post('rdbadmin_MailPath', '')), ENT_QUOTES);
+            $data['rdbadmin_MailSmtpHost'] = htmlspecialchars(trim($this->Input->post('rdbadmin_MailSmtpHost', '')), ENT_QUOTES);
             $data['rdbadmin_MailSmtpPort'] = trim($this->Input->post('rdbadmin_MailSmtpPort', '', FILTER_SANITIZE_NUMBER_INT));
-            $data['rdbadmin_MailSmtpSecure'] = trim($this->Input->post('rdbadmin_MailSmtpSecure', '', FILTER_SANITIZE_STRING));
+            $data['rdbadmin_MailSmtpSecure'] = strip_tags(trim($this->Input->post('rdbadmin_MailSmtpSecure', '')));
             $data['rdbadmin_MailSmtpUser'] = trim($this->Input->post('rdbadmin_MailSmtpUser'));
             $data['rdbadmin_MailSmtpPass'] = trim($this->Input->post('rdbadmin_MailSmtpPass'));
             if (empty($data['rdbadmin_MailSmtpPort'])) {
