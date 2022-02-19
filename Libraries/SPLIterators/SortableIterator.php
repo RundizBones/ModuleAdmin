@@ -86,7 +86,7 @@ class SortableIterator implements \IteratorAggregate
     /**
      * @return \Traversable
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         if (1 === $this->sort) {
             return $this->iterator;
