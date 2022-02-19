@@ -179,8 +179,10 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                 $output['totalFailed'] = $bfIpBasedFailedCount;
                 $output['failedTime'] = $bfIpBasedFailedTime;
                 $output['waitUntil'] = date('Y-m-d H:i:s', time()+($configMaxFailedWait * 60));
-                $output['errorMessage'] = __(
-                    'You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try again in %3$s.', 
+                $output['errorMessage'] = sprintf(
+                    __(
+                        'You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try again in %3$s.'
+                    ), 
                     $configMaxFailed, 
                     $configMaxFailedWait, 
                     $output['waitUntil']
@@ -245,8 +247,10 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                     } else {
                         $output['waitUntil'] = date('Y-m-d H:i:s', time()+($configMaxFailedWait * 60));
                     }
-                    $output['errorMessage'] = __(
-                        'You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try again in %3$s.', 
+                    $output['errorMessage'] = sprintf(
+                        __(
+                            'You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try again in %3$s.'
+                        ), 
                         $configMaxFailed, 
                         $configMaxFailedWait, 
                         $output['waitUntil']
@@ -274,8 +278,10 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                     } else {
                         $output['waitUntil'] = date('Y-m-d H:i:s', time()+($configMaxFailedWait * 60));
                     }
-                    $output['errorMessage'] = __(
-                        'You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try again in %3$s.', 
+                    $output['errorMessage'] = sprintf(
+                        __(
+                            'You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try again in %3$s.'
+                        ), 
                         $configMaxFailed, 
                         $configMaxFailedWait, 
                         $output['waitUntil']

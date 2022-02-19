@@ -359,7 +359,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                         $doLoginResult['userStatusText'] = '';
                     }
                     $untranslatedMessage = noop__('Your account has been disabled. (%1$s)');
-                    $output['formResultMessage'] = __($untranslatedMessage, __($doLoginResult['userStatusText']));
+                    $output['formResultMessage'] = sprintf(__($untranslatedMessage), __($doLoginResult['userStatusText']));
                     http_response_code(403);
                     break;
                 case $UsersDb::LOGIN_ERR_USERPASSWORD_INCORRECT;
