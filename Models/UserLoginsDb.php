@@ -599,7 +599,7 @@ class UserLoginsDb extends \Rdb\System\Core\Models\BaseModel
         $Input = new \Rdb\Modules\RdbAdmin\Libraries\Input();
 
         $defaults = [
-            'userlogin_ua' => $Input->server('HTTP_USER_AGENT', null, FILTER_SANITIZE_STRING),
+            'userlogin_ua' => htmlspecialchars($Input->server('HTTP_USER_AGENT', null), ENT_QUOTES),
             'userlogin_ip' => $Input->server('REMOTE_ADDR', null, FILTER_VALIDATE_IP),
             'userlogin_date' => date('Y-m-d H:i:s'),
             'userlogin_date_gmt' => gmdate('Y-m-d H:i:s'),

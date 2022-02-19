@@ -57,7 +57,7 @@ class InputTest extends \Rdb\Tests\BaseTestCase
     public function testFilterRegexp()
     {
         $this->assertSame('div class=myclassdiv-element/div', $this->Input->filterRegexp($this->Input->get('gethtml')));
-        $this->assertSame('div-element', $this->Input->filterRegexp($this->Input->get('gethtml', '', FILTER_SANITIZE_STRING)));
+        $this->assertSame('div-element', $this->Input->filterRegexp(strip_tags($this->Input->get('gethtml', ''))));
 
         $inputString = '0123456789 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ~!@#$%^&*()_+`-=[]\\{}|;\':",./<>? กขคงจฉช À Ω һ Ջ ت ڹ ন ບ ᡚ ᴩ Ⅻ ✅ 㯹 ㇸ 𝘈 𞢖 𞤤 𞥖 𞸇 𞺨 🅗 🆗 🛕 🪕 🩰';
         $assertString = '0123456789 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ~!@#$%^&*()_+`-=[]\\{}|;:,./? กขคงจฉช À Ω һ Ջ ت ڹ ন ບ ᡚ ᴩ Ⅻ ✅ 㯹 ㇸ 𝘈 𞢖 𞤤 𞥖 𞸇 𞺨 🅗 🆗 🛕 🪕 🩰';
@@ -75,8 +75,8 @@ class InputTest extends \Rdb\Tests\BaseTestCase
     {
         $this->assertEquals('<div class="myclass">div-element</div>', $this->Input->get('gethtml'));
         $this->assertEquals('&lt;div class=&quot;myclass&quot;&gt;div-element&lt;/div&gt;', $this->Input->get('gethtml', null, FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $this->assertEquals('div-element', $this->Input->get('gethtml', null, FILTER_SANITIZE_STRING));
-        $this->assertEquals('just text', $this->Input->get('getstring', null, FILTER_SANITIZE_STRING));
+        $this->assertEquals('div-element', strip_tags($this->Input->get('gethtml', null)));
+        $this->assertEquals('just text', strip_tags($this->Input->get('getstring', null)));
         $this->assertEquals(123, $this->Input->get('getint', null, FILTER_SANITIZE_NUMBER_INT));
     }// testInputGet
 
