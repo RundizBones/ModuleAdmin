@@ -183,7 +183,7 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
     /**
      * {@inheritDoc}
      */
-    public function responseJson($output): string
+    protected function responseJson($output): string
     {
         $this->setHeaderAllowOrigin();
 
@@ -194,7 +194,7 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
     /**
      * {@inheritDoc}
      */
-    public function responseXml($output): string
+    protected function responseXml($output): string
     {
         $this->setHeaderAllowOrigin();
 
