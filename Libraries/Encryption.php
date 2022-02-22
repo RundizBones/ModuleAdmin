@@ -35,11 +35,22 @@ class Encryption
      */
     public function decrypt(string $encryptedString, string $key)
     {
-        $json = json_decode(base64_decode($encryptedString), true);
+        $json = json_decode((string) base64_decode($encryptedString), true);
+
+        // check array keys must exists to prevent errors.
+        if (
+            !is_array($json) || 
+            !array_key_exists('salt', $json) || 
+            !array_key_exists('iv', $json) ||
+            !array_key_exists('ciphertext', $json) ||
+            !array_key_exists('iterations', $json)
+        ) {
+            return null;
+        }
 
         try {
-            $salt = hex2bin($json["salt"]);
-            $iv = hex2bin($json["iv"]);
+            $salt = hex2bin($json['salt']);
+            $iv = hex2bin($json['iv']);
         } catch (\Exception $e) {
             return null;
         }
