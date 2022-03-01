@@ -17860,3 +17860,5 @@ $(document).on( 'preInit.dt.dtr', function (e, settings, json) {
 
 return Responsive;
 }));
+
+//# sourceMappingURL=datatables-bundled.js.map

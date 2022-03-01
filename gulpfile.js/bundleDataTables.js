@@ -10,6 +10,26 @@
 
 const {series, parallel, src, dest} = require('gulp');
 const print = require('gulp-print').default;
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+
+
+/**
+ * JS files to concat.
+ */
+const jsToConcat = [
+    'node_modules/datatables.net/js/jquery.dataTables.js',
+    'node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.js',
+    'node_modules/datatables.net-responsive/js/dataTables.responsive.js',
+];
+/**
+ * CSS files to concat
+ */
+const cssToConcat = [
+    'node_modules/datatables.net-dt/css/jquery.dataTables.css',
+    'node_modules/datatables.net-fixedheader-dt/css/fixedHeader.dataTables.css',
+    'node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css',
+];
 
 
 /**
@@ -18,25 +38,20 @@ const print = require('gulp-print').default;
  * This is not yet minify.
  */
 function bundleDataTables(cb) {
-    const concat = require('gulp-concat');
     const mergeStream =   require('merge-stream');
     const header = require('gulp-header');
 
     return mergeStream(
-        src([
-            'node_modules/datatables.net/js/jquery.dataTables.js',
-            'node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.js',
-            'node_modules/datatables.net-responsive/js/dataTables.responsive.js',
-        ])
-            .pipe(print())
+        src(jsToConcat, {
+            base: 'node_modules/'
+        })
+            .pipe(sourcemaps.init({loadMaps: true}))
             .pipe(concat('datatables-bundled.js'))
+            .pipe(sourcemaps.write('.'))
             .pipe(dest('assets/vendor/datatables.net/js/'))
             .pipe(print()),
-        src([
-            'node_modules/datatables.net-dt/css/jquery.dataTables.css',
-            'node_modules/datatables.net-fixedheader-dt/css/fixedHeader.dataTables.css',
-            'node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css',
-        ])
+
+        src(cssToConcat)
             .pipe(print())
             .pipe(concat('datatables-bundled.css'))
             .pipe(dest('assets/vendor/datatables.net/css/'))
@@ -52,16 +67,22 @@ function minifyDataTablesJs(cb) {
     const rename = require("gulp-rename");
     const uglify = require('gulp-uglify-es').default;
 
-    return src('assets/vendor/datatables.net/js/datatables-bundled.js')
-        .pipe(print())
-        .pipe(rename('datatables-bundled.min.js'))
-        .pipe(uglify({
-            output: {
-                comments: false
-            }
-        }))
-        .pipe(dest('assets/vendor/datatables.net/js/'))
-        .pipe(print());
+    return src(jsToConcat, {
+            base: 'node_modules/'
+        })
+            .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(concat('datatables-bundled.js'))
+            .pipe(uglify({
+                output: {
+                    comments: false
+                }
+            }))
+            .pipe(rename(function (path) {
+                path.basename += ".min";
+            }))
+            .pipe(sourcemaps.write('.'))
+            .pipe(dest('assets/vendor/datatables.net/js/'))
+            .pipe(print());
 }// minifyDataTablesJs
 
 
