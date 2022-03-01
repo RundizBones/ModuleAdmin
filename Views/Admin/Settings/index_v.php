@@ -118,6 +118,13 @@
                                                         30,
                                                         80
                                                     );
+                                                    echo '<br>' . PHP_EOL;
+                                                    printf(
+                                                        __('To access REST API with key, use one of these headers: %1$s or use method %2$s body parameter %3$s.'),
+                                                        '<code>Authorization</code>, <code>X-Authorization</code>',
+                                                        '<code>POST</code>',
+                                                        '<code>rdba-api-key</code>'
+                                                    );
                                                     ?> 
                                                 </div>
                                             </div>
