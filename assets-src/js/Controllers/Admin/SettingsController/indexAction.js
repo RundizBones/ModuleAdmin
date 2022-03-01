@@ -227,6 +227,7 @@ class RdbaSettingsController {
     /**
      * Listen on regenerate API key button.
      * 
+     * @since 1.2.1
      * @returns {undefined}
      */
     listenOnRegenerateAPIKey() {
