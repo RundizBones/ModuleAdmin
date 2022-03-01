@@ -6,45 +6,37 @@
 class RdbaSettingsController {
 
 
+    constructor() {
+        this.settingsFormIdSelector = '#rdba-settings-form';
+    }// constructor
+
+
     /**
      * AJAX get form data.
      * 
      * @returns {Promise}
      */
     ajaxGetFormData() {
+        let thisClass = this;
         let $ = jQuery.noConflict();
 
-        let promiseObj = new Promise(function(resolve, reject) {
+        let promiseObj = new Promise((resolve, reject) => {
             RdbaCommon.XHR({
                 'url': RdbaSettings.getSettingsUrl,
                 'method': RdbaSettings.getSettingsMethod,
                 'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'dataType': 'json',
             })
-            .catch(function(responseObject) {
-                console.error(responseObject);
-                let response = (responseObject ? responseObject.response : {});
-
-                if (typeof(response) !== 'undefined') {
-                    if (typeof(response.formResultMessage) !== 'undefined') {
-                        let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
-                        let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
-                        document.querySelector('.form-result-placeholder').innerHTML = alertBox;
-                    }
-                }
-
-                reject(response);
-            })
-            .then(function(responseObject) {
+            .then((responseObject) => {
                 let response = (responseObject ? responseObject.response : {});
 
                 if (RdbaCommon.isset(() => response.configData) && _.isArray(response.configData)) {
-                    response.configData.forEach(function(item, index) {
+                    response.configData.forEach((item, index) => {
                         if (
                             RdbaCommon.isset(() => item.config_name) && 
                             RdbaCommon.isset(() => item.config_value)
                         ) {
-                            let thisInputElement = document.querySelector('#rdba-settings-form #' + item.config_name);
+                            let thisInputElement = document.querySelector(thisClass.settingsFormIdSelector + ' #' + item.config_name);
                             if (thisInputElement) {
                                 if (thisInputElement.type.toLowerCase() === 'checkbox') {
                                     if (thisInputElement.value == item.config_value) {
@@ -60,10 +52,10 @@ class RdbaSettingsController {
                                 // if default roles setting.
                                 let defaultRoles = item.config_value.split(',');
                                 // set multiple values.
-                                defaultRoles.forEach(function(item) {
+                                defaultRoles.forEach((item) => {
                                     let roleValue = item.trim();
                                     if (roleValue) {
-                                        let defaultRolesSelectbox = document.querySelector('#rdba-settings-form #rdbadmin_UserRegisterDefaultRoles option[value="' + roleValue + '"]');
+                                        let defaultRolesSelectbox = document.querySelector(thisClass.settingsFormIdSelector + ' #rdbadmin_UserRegisterDefaultRoles option[value="' + roleValue + '"]');
                                         defaultRolesSelectbox.selected = true;
                                     }
                                 });
@@ -71,7 +63,7 @@ class RdbaSettingsController {
                         }// endif isset item.xxx
 
                         if (RdbaCommon.isset(() => item.config_description)) {
-                            let thisInputElement = document.querySelector('#rdba-settings-form #' + item.config_name);
+                            let thisInputElement = document.querySelector(thisClass.settingsFormIdSelector + ' #' + item.config_name);
                             let parentFormGroupElement = $(thisInputElement).parents('.form-group')[0];
                             if (parentFormGroupElement) {
                                 parentFormGroupElement.dataset.configdescription = RdbaCommon.escapeHtml(RdbaCommon.stripTags(item.config_description));
@@ -85,6 +77,20 @@ class RdbaSettingsController {
                 }
 
                 resolve(response);
+            })
+            .catch((responseObject) => {
+                console.error(responseObject);
+                let response = (responseObject ? responseObject.response : {});
+
+                if (typeof(response) !== 'undefined') {
+                    if (typeof(response.formResultMessage) !== 'undefined') {
+                        let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
+                        let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
+                        document.querySelector('.form-result-placeholder').innerHTML = alertBox;
+                    }
+                }
+
+                reject(response);
             });// end XHR
         });// end new Promise();
 
@@ -103,10 +109,12 @@ class RdbaSettingsController {
 
         // wait for UI XHR common data finished then start working.
         $.when(uiXhrCommonData)
-        .then(function() {
+        .then(() => {
+            // reset the form before call to ajax. this is to prevent Firefox form cache.
+            document.querySelector(thisClass.settingsFormIdSelector).reset();
             return thisClass.ajaxGetFormData();
         })
-        .then(function() {
+        .then(() => {
             return thisClass.listenOnSearchSettings();
         })
         ;
@@ -118,6 +126,8 @@ class RdbaSettingsController {
 
         // listen on test smtp connection.
         this.listenOnTestSmtpConnection();
+        // listen on click regenerate API key.
+        this.listenOnRegenerateAPIKey();
     }// init
 
 
@@ -127,8 +137,8 @@ class RdbaSettingsController {
      * @returns {undefined}
      */
     listenOnFormSubmit() {
-        let settingsForm = document.querySelector('#rdba-settings-form');
-        settingsForm.addEventListener('submit', function(event) {
+        let settingsForm = document.querySelector(this.settingsFormIdSelector);
+        settingsForm.addEventListener('submit', (event) => {
             event.preventDefault();
 
             // reset form result placeholder
@@ -143,7 +153,7 @@ class RdbaSettingsController {
             formData.append(RdbaSettings.csrfValue, RdbaSettings.csrfKeyPair[RdbaSettings.csrfValue]);
 
             // make sure that unchecked check box is send zero value instead of nothing.
-            settingsForm.querySelectorAll('input[type="checkbox"]').forEach(function(item, index) {
+            settingsForm.querySelectorAll('input[type="checkbox"]').forEach((item, index) => {
                 if (item.checked === false && item.name && item.value == '1') {
                     // if checkbox is not checked and contains name and value is '1'. this means its value should be '0'.
                     // append name and value '0' to form object.
@@ -158,25 +168,7 @@ class RdbaSettingsController {
                 'data': new URLSearchParams(_.toArray(formData)).toString(),
                 'dataType': 'json'
             })
-            .catch(function(responseObject) {
-                // XHR failed.
-                let response = responseObject.response;
-                console.error(responseObject);
-
-                if (response.formResultMessage) {
-                    RDTAAlertDialog.alert({
-                        'html': response.formResultMessage,
-                        'type': 'danger'
-                    });
-                }
-
-                if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
-                    RdbaSettings.csrfKeyPair = response.csrfKeyPair;
-                }
-
-                return Promise.reject(responseObject);
-            })
-            .then(function(responseObject) {
+            .then((responseObject) => {
                 // XHR success.
                 let response = responseObject.response;
 
@@ -202,14 +194,72 @@ class RdbaSettingsController {
 
                 return Promise.resolve(responseObject);
             })
-            .finally(function() {
+            .catch((responseObject) => {
+                // XHR failed.
+                let response = responseObject.response;
+                console.error(responseObject);
+
+                if (response.formResultMessage) {
+                    RDTAAlertDialog.alert({
+                        'html': response.formResultMessage,
+                        'type': 'danger'
+                    });
+                }
+
+                if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                    RdbaSettings.csrfKeyPair = response.csrfKeyPair;
+                }
+
+                return Promise.reject(responseObject);
+            })
+            .catch((responseObject) => {})
+            .finally(() => {
                 // remove loading icon
                 settingsForm.querySelector('.loading-icon').remove();
                 // unlock submit button
                 settingsForm.querySelector('.rdba-submit-button').removeAttribute('disabled');
+                return Promise.resolve();
             });
         });
     }// listenOnFormSubmit
+
+
+    /**
+     * Listen on regenerate API key button.
+     * 
+     * @returns {undefined}
+     */
+    listenOnRegenerateAPIKey() {
+        let regenerateBtn = document.querySelector('#rdbadmin_SiteRegenerateAPIKey');
+        let thisClass = this;
+        let targetInput = document.querySelector('#rdbadmin_SiteAPIKey');
+
+        document.addEventListener('click', (event) => {
+            let thisButton;
+            if (RdbaCommon.isset(() => event.currentTarget.activeElement)) {
+                thisButton = event.currentTarget.activeElement;
+            } else {
+                thisButton = event.target;
+            }
+
+            if (thisButton === regenerateBtn) {
+                event.preventDefault();
+
+                let result = '';
+                let characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                let generateLength = 40;
+                let charactersLength = characters.length;
+                for (var i = 0; i < generateLength; i++) {
+                    result += characters.charAt(
+                        Math.floor(
+                            Math.random() * charactersLength
+                        )
+                    );
+                }
+                targetInput.value = result;
+            }
+        });
+    }// listenOnRegenerateAPIKey
 
 
     /**
@@ -218,14 +268,15 @@ class RdbaSettingsController {
      * @returns {Promise}
      */
     listenOnSearchSettings() {
-        let promiseObj = new Promise(function(resolve, reject) {
-            document.addEventListener('keyup', function(event) {
+        let thisClass = this;
+        let promiseObj = new Promise((resolve, reject) => {
+            document.addEventListener('keyup', (event) => {
                 if (RdbaCommon.isset(() => event.currentTarget.activeElement.id) && event.currentTarget.activeElement.id === 'rdba-search-settings-input') {
                     event.preventDefault();
                     let inputSearchElement = (RdbaCommon.isset(() => event.currentTarget.activeElement) ? event.currentTarget.activeElement : {});
                     let timer = 0;
                     clearTimeout(timer);
-                    timer = setTimeout(function() {
+                    timer = setTimeout(() => {
                         search(inputSearchElement);
                     }, 1000);
                 }
@@ -244,17 +295,17 @@ class RdbaSettingsController {
          * @returns {undefined}
          */
         function search(inputSearchElement) {
-            let formGroupElements = document.querySelectorAll('#rdba-settings-form .form-group');
+            let formGroupElements = document.querySelectorAll(thisClass.settingsFormIdSelector + ' .form-group');
 
             if (!inputSearchElement.value || inputSearchElement.value === null || inputSearchElement.value.trim() === '') {
                 //console.log('reset `.form-group` from hidden.');
-                formGroupElements.forEach(function(item, index) {
+                formGroupElements.forEach((item, index) => {
                     item.classList.remove('rd-hidden');
                 });
                 return false;
             }
 
-            formGroupElements.forEach(function(item, index) {
+            formGroupElements.forEach((item, index) => {
                 let configDescription = ''
                 if (RdbaCommon.isset(() => item.dataset.configdescription)) {
                     configDescription = item.dataset.configdescription;
@@ -291,7 +342,7 @@ class RdbaSettingsController {
     listenOnSearchSubmit() {
         let searchForm = document.querySelector('#rdba-search-settings-form');
         if (searchForm) {
-            searchForm.addEventListener('submit', function(event) {
+            searchForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 //console.log('prevented search form submit.');
             });
@@ -305,12 +356,12 @@ class RdbaSettingsController {
      * @returns {undefined}
      */
     listenOnTestSmtpConnection() {
-        let settingsForm = document.querySelector('#rdba-settings-form');
+        let settingsForm = document.querySelector(this.settingsFormIdSelector);
         let testSmtpButton = document.querySelector('#rdbadmin_MailSmtpTestConnectionButton');
         let testSmtpResultPlaceholder = document.querySelector('#rdbadmin_MailSmtpTestConnectionResultPlaceholder');
 
         if (testSmtpButton && testSmtpResultPlaceholder) {
-            testSmtpButton.addEventListener('click', function(event) {
+            testSmtpButton.addEventListener('click', (event) => {
                 event.preventDefault();
 
                 // reset result placeholder
@@ -331,29 +382,7 @@ class RdbaSettingsController {
                     'data': new URLSearchParams(_.toArray(formData)).toString(),
                     'dataType': 'json'
                 })
-                 .catch(function(responseObject) {
-                    // XHR failed.
-                    let response = responseObject.response;
-                    console.error(responseObject);
-
-                    if (response && response.debugMessage) {
-                        testSmtpResultPlaceholder.insertAdjacentHTML('beforeend', response.debugMessage);
-                    }
-
-                    if (response.formResultMessage) {
-                        RDTAAlertDialog.alert({
-                            'html': response.formResultMessage,
-                            'type': 'danger'
-                        });
-                    }
-
-                    if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
-                        RdbaSettings.csrfKeyPair = response.csrfKeyPair;
-                    }
-
-                    return Promise.reject(responseObject);
-                })
-                .then(function(responseObject) {
+                .then((responseObject) => {
                     // XHR success.
                     let response = responseObject.response;
 
@@ -376,7 +405,30 @@ class RdbaSettingsController {
 
                     return Promise.resolve(responseObject);
                 })
-                .finally(function() {
+                .catch((responseObject) => {
+                    // XHR failed.
+                    let response = responseObject.response;
+                    console.error(responseObject);
+
+                    if (response && response.debugMessage) {
+                        testSmtpResultPlaceholder.insertAdjacentHTML('beforeend', response.debugMessage);
+                    }
+
+                    if (response.formResultMessage) {
+                        RDTAAlertDialog.alert({
+                            'html': response.formResultMessage,
+                            'type': 'danger'
+                        });
+                    }
+
+                    if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                        RdbaSettings.csrfKeyPair = response.csrfKeyPair;
+                    }
+
+                    return Promise.reject(responseObject);
+                })
+                .catch((responseObject) => {})
+                .finally(() => {
                     // remove loading icon
                     testSmtpResultPlaceholder.querySelector('.loading-icon').remove();
                     // unlock submit button
@@ -390,7 +442,7 @@ class RdbaSettingsController {
 }// RdbaSettingsController
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     let rdbaSettingsController = new RdbaSettingsController();
 
     // initialize class.

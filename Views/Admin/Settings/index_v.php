@@ -72,22 +72,63 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label" for="rdbadmin_SiteAllowOrigins"><?php echo __('Allow origins'); ?></label>
-                                        <div class="control-wrapper">
-                                            <input id="rdbadmin_SiteAllowOrigins" type="text" name="rdbadmin_SiteAllowOrigins" value="" maxlength="500">
-                                            <div class="form-description">
-                                                <?php 
-                                                printf(
-                                                    __('The %1$s header to be sent to client. To set multiple origins, separate them with comma (%2$s) and the system will be use one per header.'),
-                                                    '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><code>Access-Control-Allow-Origin</code></a>' .
-                                                    ' <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><i class="fas fa-external-link-alt"></i></a>',
-                                                    '<code>,</code>'
-                                                );
-                                                ?>
+
+                                    <fieldset>
+                                        <legend><?php echo __('API access'); ?></legend>
+                                        <div class="form-group">
+                                            <label class="control-label" for="rdbadmin_SiteAllowOrigins"><?php echo __('Allow origins'); ?></label>
+                                            <div class="control-wrapper">
+                                                <input id="rdbadmin_SiteAllowOrigins" type="text" name="rdbadmin_SiteAllowOrigins" value="" maxlength="500">
+                                                <div class="form-description">
+                                                    <?php 
+                                                    printf(
+                                                        __('The %1$s header to be sent to client. To set multiple origins, separate them with comma (%2$s) and the system will be use one per header.'),
+                                                        '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><code>Access-Control-Allow-Origin</code></a>' .
+                                                        ' <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><i class="fas fa-external-link-alt"></i></a>',
+                                                        '<code>,</code>'
+                                                    );
+                                                    ?>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="rdbadmin_SiteAPILimitAccess"><?php echo __('Limited access to API'); ?></label>
+                                            <div class="control-wrapper">
+                                                <label>
+                                                    <input id="rdbadmin_SiteAPILimitAccess" type="checkbox" name="rdbadmin_SiteAPILimitAccess" value="1">
+                                                    <?php echo __('Require API key to access via REST API.'); ?> 
+                                                </label>
+                                                <div class="form-description">
+                                                    <?php
+                                                    echo __('If you limited access via REST API, the API key is required.');
+                                                    ?> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="rdbadmin_SiteAPIKey"><?php echo __('API key'); ?></label>
+                                            <div class="control-wrapper">
+                                                <input id="rdbadmin_SiteAPIKey" type="text" name="rdbadmin_SiteAPIKey" value="" maxlength="200">
+                                                <div class="form-description">
+                                                    <?php
+                                                    echo __('The API key to access via REST API.');
+                                                    echo ' ';
+                                                    printf(
+                                                        __('Recommended %1$d to %2$d characters long, contain letters, numbers, and/or special characters without space.'),
+                                                        30,
+                                                        80
+                                                    );
+                                                    ?> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label"></label>
+                                            <div class="control-wrapper">
+                                                <button id="rdbadmin_SiteRegenerateAPIKey" class="rd-button" type="button"><?php echo __('Regenerate API key'); ?></button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                     <?php
                                     /*
                                      * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsContent.tab-1

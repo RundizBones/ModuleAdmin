@@ -28,6 +28,8 @@ INSERT INTO `%$config%` (`config_name`, `config_value`, `config_description`) VA
 ('rdbadmin_SiteName', 'RundizBones', 'Website name.'),
 ('rdbadmin_SiteTimezone', 'Asia/Bangkok', 'Website timezone.'),
 ('rdbadmin_SiteAllowOrigins', '', 'Allow origins for CORS.'),
+('rdbadmin_SiteAPILimitAccess', '0', '0 to not limited access, 1 to limited access and required API key.'),
+('rdbadmin_SiteAPIKey', '', 'API key to access via REST API.'),
 ('rdbadmin_UserRegister', '0', '0 to not allowed register (add by admin only), 1 to allowed.'),
 ('rdbadmin_UserRegisterNotifyAdmin', '0', 'Send email to notify admin when new member registered? 0=no, 1=yes.'),
 ('rdbadmin_UserRegisterNotifyAdminEmails', '', 'The emails of administrator to notify when new member registered. Use comma (,) to add more than one.'),

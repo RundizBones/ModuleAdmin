@@ -110,6 +110,23 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                 http_response_code(400);
                 $formValidated = false;
             }
+
+            if (!isset($data['rdbadmin_SiteAPILimitAccess']) || $data['rdbadmin_SiteAPILimitAccess'] !== '1') {
+                $data['rdbadmin_SiteAPILimitAccess'] = '0';
+            }
+            if (
+                $formValidated === true &&
+                $data['rdbadmin_SiteAPILimitAccess'] === '1' && 
+                (
+                    !isset($data['rdbadmin_SiteAPIKey']) ||
+                    empty($data['rdbadmin_SiteAPIKey'])
+                )
+            ) {
+                $output['formResultStatus'] = 'error';
+                $output['formResultMessage'] = __('Please enter API key.');
+                http_response_code(400);
+                $formValidated = false;
+            }
             // end form validation. ------------------------------------------------------------------------
 
             if (isset($formValidated) && $formValidated === true) {
@@ -244,6 +261,8 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             'rdbadmin_SiteName',
             'rdbadmin_SiteTimezone',
             'rdbadmin_SiteAllowOrigins',
+            'rdbadmin_SiteAPILimitAccess',
+            'rdbadmin_SiteAPIKey',
             'rdbadmin_UserRegister',
             'rdbadmin_UserRegisterNotifyAdmin',
             'rdbadmin_UserRegisterNotifyAdminEmails',
