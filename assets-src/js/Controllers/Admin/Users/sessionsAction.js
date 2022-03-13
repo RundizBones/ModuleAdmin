@@ -44,7 +44,7 @@ class RdtaSessionsController extends RdbaDatatables {
             // reset form result placeholder
             thisForm.querySelector('.form-result-placeholder').innerHTML = '';
             // add spinner icon
-            thisForm.querySelector('.rdba-submit-button').insertAdjacentHTML('beforeend', ' <i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+            thisForm.querySelector('.rdba-submit-button').insertAdjacentHTML('beforeend', ' <i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
             // lock submit button
             thisForm.querySelector('.rdba-submit-button').setAttribute('disabled', 'disabled');
 
@@ -204,16 +204,16 @@ class RdtaSessionsController extends RdbaDatatables {
                         'render': function(data, type, row, meta) {
                             if (row.userlogin_result) {
                                 if (row.userlogin_result === '1') {
-                                    return '<i class="far fa-check-circle" aria-label="'+RdbaCommon.escapeHtml(RdbaUserSessions.txtSucceeded)+'"></i> <span class="screen-reader-only">'+RdbaUserSessions.txtSucceeded+'</span>';
+                                    return '<i class="fa-regular fa-circle-check" aria-label="'+RdbaCommon.escapeHtml(RdbaUserSessions.txtSucceeded)+'"></i> <span class="screen-reader-only">'+RdbaUserSessions.txtSucceeded+'</span>';
                                 } else {
-                                    var output = '<i class="fas fa-ban" aria-label="'+RdbaCommon.escapeHtml(RdbaUserSessions.txtFailed)+'"></i> <span class="screen-reader-only">'+RdbaUserSessions.txtFailed+'</span>';
+                                    var output = '<i class="fa-solid fa-ban" aria-label="'+RdbaCommon.escapeHtml(RdbaUserSessions.txtFailed)+'"></i> <span class="screen-reader-only">'+RdbaUserSessions.txtFailed+'</span>';
                                     if (row.userlogin_result_text_withdata) {
                                         output += ' <span title="' + RdbaCommon.escapeHtml(row.userlogin_result_text_withdata) + '">' + RdbaCommon.truncateString(row.userlogin_result_text_withdata, 50) + '</span>';
                                     }
                                     return output;
                                 }
                             } else {
-                                return '<i class="far fa-question-circle" aria-label="'+RdbaCommon.escapeHtml(RdbaUserSessions.txtUnknow)+'"></i> <span class="screen-reader-only">'+RdbaUserSessions.txtUnknow+'</span>';
+                                return '<i class="fa-regular fa-circle-question" aria-label="'+RdbaCommon.escapeHtml(RdbaUserSessions.txtUnknow)+'"></i> <span class="screen-reader-only">'+RdbaUserSessions.txtUnknow+'</span>';
                             }
                         }
                     },

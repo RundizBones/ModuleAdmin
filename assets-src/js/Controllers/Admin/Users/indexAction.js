@@ -133,16 +133,16 @@ class RdbaUsersController extends RdbaDatatables {
                         'render': function(data, type, row, meta) {
                             if (typeof(row.user_status) !== 'undefined') {
                                 if (row.user_status === '1') {
-                                    return '<i class="far fa-check-circle" aria-label="'+RdbaCommon.escapeHtml(RdbaUsers.txtEnabled)+'"></i> <span class="screen-reader-only">'+RdbaUsers.txtEnabled+'</span>';
+                                    return '<i class="fa-regular fa-circle-check" aria-label="'+RdbaCommon.escapeHtml(RdbaUsers.txtEnabled)+'"></i> <span class="screen-reader-only">'+RdbaUsers.txtEnabled+'</span>';
                                 } else {
-                                    var output = '<i class="fas fa-ban" aria-label="'+RdbaCommon.escapeHtml(RdbaUsers.txtDisabled)+'"></i> <span class="screen-reader-only">'+RdbaUsers.txtDisabled+'</span>';
+                                    var output = '<i class="fa-solid fa-ban" aria-label="'+RdbaCommon.escapeHtml(RdbaUsers.txtDisabled)+'"></i> <span class="screen-reader-only">'+RdbaUsers.txtDisabled+'</span>';
                                     if (typeof(row.user_statustext) !== 'undefined' && row.user_statustext !== null) {
                                         output += ' <span title="' + RdbaCommon.escapeHtml(row.user_statustext) + '">' + RdbaCommon.truncateString(row.user_statustext, 20) + '</span>';
                                     }
                                     return output;
                                 }
                             } else {
-                                return '<i class="far fa-question-circle" aria-label="'+RdbaCommon.escapeHtml(RdbaUsers.txtUnknow)+'"></i> <span class="screen-reader-only">'+RdbaUsers.txtUnknow+'</span>';
+                                return '<i class="fa-regular fa-circle-question" aria-label="'+RdbaCommon.escapeHtml(RdbaUsers.txtUnknow)+'"></i> <span class="screen-reader-only">'+RdbaUsers.txtUnknow+'</span>';
                             }
                         }
                     },

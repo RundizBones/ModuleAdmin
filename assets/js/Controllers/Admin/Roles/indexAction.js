@@ -92,11 +92,11 @@ class RdbaRolesController extends RdbaDatatables {
                             let sortableIcon = '';
                             if (row && row.restrictedPriority === true) {
                                 sortableIcon = '<span class="fa-stack fa-xs fa-fw sortable-icon sortable-handle">\n\
-                                    <i class="fas fa-arrows-alt-v fa-stack-1x"></i>\n\
-                                    <i class="fas fa-ban fa-stack-2x"></i>\n\
+                                    <i class="fa-solid fa-up-down fa-stack-1x"></i>\n\
+                                    <i class="fa-solid fa-ban fa-stack-2x"></i>\n\
                                 </span>';
                             } else {
-                                sortableIcon = '<i class="fas fa-arrows-alt-v fa-fw sortable-icon sortable-handle"></i> ';
+                                sortableIcon = '<i class="fa-solid fa-up-down fa-fw sortable-icon sortable-handle"></i> ';
                             }
                             let html = sortableIcon + data + template(row);
                             return html;

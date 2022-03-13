@@ -11,7 +11,7 @@
 
                 <form id="rdba-logout-form" class="page-form-body rd-form" action="<?php if (isset($logoutUrl)) {echo htmlspecialchars($logoutUrl, ENT_QUOTES);} ?>" method="<?php echo (isset($logoutMethod) ? strtolower($logoutMethod) : 'post') ?>">
                     <div class="user-icon-wrapper">
-                        <i class="fas fa-user user-icon" aria-hidden="true"></i>
+                        <i class="fa-solid fa-user user-icon" aria-hidden="true"></i>
                     </div>
                     <div class="form-group">
                         <div class="control-wrapper">

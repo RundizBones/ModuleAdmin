@@ -309,7 +309,7 @@ class RdbaUsersEditController {
                     inputAvatarElement = event.target;// force get new data. (prevent re-open dialog and this action will not working).
 
                     // add loading icon.
-                    uploadStatusPlaceholder.innerHTML = '<i class="fas fa-spinner fa-pulse loading-icon"></i> ' + RdbaUsers.txtUploading;
+                    uploadStatusPlaceholder.innerHTML = '<i class="fa-solid fa-spinner fa-pulse loading-icon"></i> ' + RdbaUsers.txtUploading;
                     // lock submit button
                     editForm.querySelector('.rdba-submit-button').setAttribute('disabled', 'disabled');
 
@@ -421,7 +421,7 @@ class RdbaUsersEditController {
                         let deleteStatusPlaceholder = editForm.querySelector('#rdbadmin-delete-avatar-status-placeholder');
 
                         // add loading icon.
-                        deleteStatusPlaceholder.innerHTML = '<i class="fas fa-spinner fa-pulse loading-icon"></i> ';
+                        deleteStatusPlaceholder.innerHTML = '<i class="fa-solid fa-spinner fa-pulse loading-icon"></i> ';
                         // lock delete button
                         deleteButton.setAttribute('disabled', 'disabled');
 
@@ -513,7 +513,7 @@ class RdbaUsersEditController {
                 // reset form result placeholder
                 thisForm.querySelector('.form-result-placeholder').innerHTML = '';
                 // add spinner icon
-                thisForm.querySelector('.submit-button-row .control-wrapper').insertAdjacentHTML('beforeend', '<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+                thisForm.querySelector('.submit-button-row .control-wrapper').insertAdjacentHTML('beforeend', '<i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
                 // lock submit button
                 thisForm.querySelector('.rdba-submit-button').setAttribute('disabled', 'disabled');
 

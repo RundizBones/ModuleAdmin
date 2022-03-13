@@ -21,7 +21,7 @@ class RdbaForgotLoginPassController {
             $('.form-result-placeholder').html('');
             // add spinner icon
             $('.submit-status-icon').remove();
-            $('.submit-button-row .control-wrapper').append('<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+            $('.submit-button-row .control-wrapper').append('<i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
             // lock submit button
             $('.rdba-submit-button').attr('disabled', 'disabled');
 
@@ -46,7 +46,7 @@ class RdbaForgotLoginPassController {
 
                 // add success icon on submit success.
                 $('.submit-status-icon').remove();
-                $('.submit-button-row .control-wrapper').append('<i class="fas fa-check fa-fw submit-status-icon" aria-hidden="true"></i>');
+                $('.submit-button-row .control-wrapper').append('<i class="fa-solid fa-check fa-fw submit-status-icon" aria-hidden="true"></i>');
 
                 if (typeof(response.forgotLoginPasswordStep1) !== 'undefined' && response.forgotLoginPasswordStep1 === 'success') {
                     setTimeout(function() {

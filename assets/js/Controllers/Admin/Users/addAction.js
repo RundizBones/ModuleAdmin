@@ -29,7 +29,7 @@ class RdbaUsersAddController {
                 // reset form result placeholder
                 thisForm.querySelector('.form-result-placeholder').innerHTML = '';
                 // add spinner icon
-                thisForm.querySelector('.submit-button-row .control-wrapper').insertAdjacentHTML('beforeend', '<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+                thisForm.querySelector('.submit-button-row .control-wrapper').insertAdjacentHTML('beforeend', '<i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
                 // lock submit button
                 thisForm.querySelector('.rdba-submit-button').setAttribute('disabled', 'disabled');
 

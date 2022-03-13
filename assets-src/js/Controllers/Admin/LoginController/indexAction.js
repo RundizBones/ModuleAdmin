@@ -21,7 +21,7 @@ class RdbaLoginController {
             $('.form-result-placeholder').html('');
             // add spinner icon
             $('.login-status-icon').remove();
-            $('.submit-button-row .control-wrapper').append('<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+            $('.submit-button-row .control-wrapper').append('<i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
             // lock login button
             $('.rdba-login-button').attr('disabled', 'disabled');
 
@@ -47,7 +47,7 @@ class RdbaLoginController {
 
                 // add success icon on login success.
                 $('.login-status-icon').remove();
-                $('.submit-button-row .control-wrapper').append('<i class="fas fa-check fa-fw login-status-icon" aria-hidden="true"></i>');
+                $('.submit-button-row .control-wrapper').append('<i class="fa-solid fa-check fa-fw login-status-icon" aria-hidden="true"></i>');
 
                 if (typeof(response.loggedIn) !== 'undefined' && response.loggedIn === true) {
                     // if login really success, redirect.

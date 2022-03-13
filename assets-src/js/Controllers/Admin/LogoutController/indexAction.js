@@ -22,7 +22,7 @@ class RdbaLogoutController {
             $('.form-result-placeholder').html('');
             // add loggint out message.
             let loggingOutClass = RdbaCommon.getAlertClassFromStatus('info');
-            let loggintOutMsg = RdbaCommon.renderAlertHtml(loggingOutClass, '<i class="fas fa-spinner fa-pulse"></i> ' + RdbaLogout.txtLoggintOut);
+            let loggintOutMsg = RdbaCommon.renderAlertHtml(loggingOutClass, '<i class="fa-solid fa-spinner fa-pulse"></i> ' + RdbaLogout.txtLoggintOut);
             $('.form-result-placeholder').html(loggintOutMsg);
             // lock submit button
             $('.rdba-submit-button').attr('disabled', 'disabled');
@@ -33,7 +33,7 @@ class RdbaLogoutController {
                 let response = data;
 
                 let alertClass = RdbaCommon.getAlertClassFromStatus('success');
-                let alertBox = RdbaCommon.renderAlertHtml(alertClass, '<i class="fas fa-sign-out-alt"></i> ' + RdbaLogout.txtYouLoggedOut);
+                let alertBox = RdbaCommon.renderAlertHtml(alertClass, '<i class="fa-solid fa-right-from-bracket"></i> ' + RdbaLogout.txtYouLoggedOut);
                 $('.form-result-placeholder').html(alertBox);
 
                 if (response.loggedOut === true) {

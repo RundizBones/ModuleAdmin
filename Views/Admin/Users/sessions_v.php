@@ -50,7 +50,7 @@
                                 <div class="rd-button-group">
                                     <button id="rdba-datatables-filter-button" class="rdba-datatables-filter-button rd-button" type="button"><?php echo __('Filter'); ?></button>
                                     <button class="rd-button dropdown-toggler" type="button" data-placement="bottom right">
-                                        <i class="fas fa-caret-down"></i>
+                                        <i class="fa-solid fa-caret-down"></i>
                                         <span class="sr-only"><?php echo __('More'); ?></span>
                                     </button>
                                     <ul class="rd-dropdown">

@@ -144,7 +144,7 @@ class RdbaSettingsController {
             // reset form result placeholder
             settingsForm.querySelector('.form-result-placeholder').innerHTML = '';
             // add spinner icon
-            settingsForm.querySelector('.submit-button-row .submit-button-wrapper').insertAdjacentHTML('beforeend', '<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+            settingsForm.querySelector('.submit-button-row .submit-button-wrapper').insertAdjacentHTML('beforeend', '<i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
             // lock submit button
             settingsForm.querySelector('.rdba-submit-button').setAttribute('disabled', 'disabled');
 
@@ -368,7 +368,7 @@ class RdbaSettingsController {
                 // reset result placeholder
                 testSmtpResultPlaceholder.innerHTML = '';
                 // add spinner icon
-                testSmtpResultPlaceholder.insertAdjacentHTML('beforeend', '<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+                testSmtpResultPlaceholder.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
                 // lock submit button
                 testSmtpButton.setAttribute('disabled', 'disabled');
 

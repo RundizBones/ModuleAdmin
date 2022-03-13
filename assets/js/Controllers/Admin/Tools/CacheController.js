@@ -110,7 +110,7 @@ class RdbaCacheController {
                 // reset form result placeholder
                 cacheForm.querySelector('.form-result-placeholder').innerHTML = '';
                 // add spinner icon
-                cacheForm.querySelector('.submit-button-row .submit-button-wrapper').insertAdjacentHTML('beforeend', '<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+                cacheForm.querySelector('.submit-button-row .submit-button-wrapper').insertAdjacentHTML('beforeend', '<i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
                 // lock submit button
                 cacheForm.querySelector('.rdba-submit-button').setAttribute('disabled', 'disabled');
 

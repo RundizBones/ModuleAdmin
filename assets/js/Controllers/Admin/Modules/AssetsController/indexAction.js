@@ -82,7 +82,7 @@ class RdbaAssetsController extends RdbaDatatables {
                             let module_name = RdbaCommon.escapeHtml(data);
                             let output = '<label for="module-' + row.id + '">';
                             if (row.enabled === false) {
-                                output += '<i class="fas fa-ban"></i> ' + module_name;
+                                output += '<i class="fa-solid fa-ban"></i> ' + module_name;
                             } else {
                                 output += module_name;
                             }
@@ -241,7 +241,7 @@ class RdbaAssetsController extends RdbaDatatables {
             // reset form result placeholder
             thisForm.querySelector('.form-result-placeholder').innerHTML = '';
             // add spinner icon
-            thisForm.querySelector('.action-status-placeholder').insertAdjacentHTML('beforeend', '<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+            thisForm.querySelector('.action-status-placeholder').insertAdjacentHTML('beforeend', '<i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
             // lock button
             submitBtn.setAttribute('disabled', 'disabled');
 

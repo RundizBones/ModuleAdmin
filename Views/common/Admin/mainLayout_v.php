@@ -12,23 +12,23 @@
 <?php include dirname(__DIR__) . '/htmlHead_v.php'; ?> 
         <header class="rd-navbar">
             <button class="rd-sidebar-toggler" data-target=".rd-page-wrapper" title="<?php echo esc__('Toggle side bar menu'); ?>">
-                <i class="fas fa-bars fa-fw"></i> 
+                <i class="fa-solid fa-bars fa-fw"></i> 
                 <span class="screen-reader-only" aria-hidden="true"><?php echo __('Toggle side bar menu'); ?></span>
             </button>
             <div class="rd-site-brand"><a href=""><?php echo __('Loading &hellip;'); ?></a></div><!--.rd-site-brand-->
             <nav class="nav-right">
                 <ul class="sm sm-rdta navbar">
-                    <li id="rdba-languages-navbar"><a href="#" onclick="return false;"><i class="fas fa-globe fa-fw"></i></a>
+                    <li id="rdba-languages-navbar"><a href="#" onclick="return false;"><i class="fa-solid fa-globe fa-fw"></i></a>
                         <ul id="rdba-languages-navbar-list">
                             <li><a><?php echo __('Loading &hellip;'); ?></a></li>
                         </ul>
                     </li>
-                    <li id="rdba-notification-navbar"><a href="#" onclick="return false;"><i class="fas fa-bell fa-fw"></i></a>
+                    <li id="rdba-notification-navbar"><a href="#" onclick="return false;"><i class="fa-solid fa-bell fa-fw"></i></a>
                         <ul id="rdba-notification-navbar-list">
                             <li><a><?php echo __('Loading &hellip;'); ?></a></li>
                         </ul>
                     </li>
-                    <li id="rdba-user-navbar" class="user"><a href="#" onclick="return false;"><i class="far fa-user-circle rdba-user-icon"></i></a>
+                    <li id="rdba-user-navbar" class="user"><a href="#" onclick="return false;"><i class="fa-regular fa-circle-user rdba-user-icon"></i></a>
                         <ul id="rdba-user-navbar-list">
                             <li><a><?php echo __('Loading &hellip;'); ?></a></li>
                         </ul>
@@ -42,12 +42,12 @@
             <section class="rd-sidebar">
                 <div class="rd-sidebar-inner">
                     <ul class="rd-sidebar-item-list sm sm-vertical sm-rdta">
-                        <li><a href="#" onclick="return false;"><i class="sidebar-icon fas fa-spinner fa-pulse"></i> <span class="rd-sidebar-menu-text"><?php echo __('Loading &hellip;'); ?></span></a></li>
+                        <li><a href="#" onclick="return false;"><i class="sidebar-icon fa-solid fa-spinner fa-pulse"></i> <span class="rd-sidebar-menu-text"><?php echo __('Loading &hellip;'); ?></span></a></li>
                     </ul>
                     <ul class="rd-sidebar-item-list rd-sidebar-expand-collapse-controls">
                         <li>
                             <a data-target=".rd-page-wrapper" title="<?php echo esc__('Expane/collapse menu'); ?>">
-                                <i class="sidebar-icon faicon fas fa-chevron-left fa-fw" data-toggle-icon="fa-chevron-left fa-chevron-right"></i> 
+                                <i class="sidebar-icon faicon fa-solid fa-chevron-left fa-fw" data-toggle-icon="fa-chevron-left fa-chevron-right"></i> 
                                 <span class="screen-reader-only" aria-hidden="true"><?php echo __('Expane/collapse menu'); ?></span>
                             </a>
                             <hr>

@@ -21,7 +21,7 @@ class RdbaRegisterConfirmController {
             $('.form-result-placeholder').html('');
             // add spinner icon
             $('.submit-status-icon').remove();
-            $('.submit-button-row .control-wrapper').append('<i class="fas fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
+            $('.submit-button-row .control-wrapper').append('<i class="fa-solid fa-spinner fa-pulse fa-fw loading-icon" aria-hidden="true"></i>');
             // lock submit button
             $('.rdba-submit-button').attr('disabled', 'disabled');
 
@@ -46,7 +46,7 @@ class RdbaRegisterConfirmController {
 
                 // add success icon.
                 $('.submit-status-icon').remove();
-                $('.submit-button-row .control-wrapper').append('<i class="fas fa-check fa-fw submit-status-icon" aria-hidden="true"></i>');
+                $('.submit-button-row .control-wrapper').append('<i class="fa-solid fa-check fa-fw submit-status-icon" aria-hidden="true"></i>');
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 let response;

@@ -156,8 +156,8 @@ class RdbAdminPermissionsController {
                     return false;
                 }
 
-                let actingIcon = '<i class="fas fa-spinner fa-pulse fa-fw process-icon"></i>';
-                let savedIcon = '<i class="fas fa-check fa-fw process-icon"></i>';
+                let actingIcon = '<i class="fa-solid fa-spinner fa-pulse fa-fw process-icon"></i>';
+                let savedIcon = '<i class="fa-solid fa-check fa-fw process-icon"></i>';
 
                 // add saving in progress icon (loading icon).
                 if (checkboxElement) {

@@ -8,7 +8,7 @@
                             <?php echo __('Manage users'); ?> 
                             <?php if (isset($permissions['add']) && $permissions['add'] === true) { ?> 
                             <a class="rd-button rdba-listpage-addnew" href="<?php echo $Url->getAppBasedPath(true) . '/admin/users/add' ?>">
-                                <i class="fas fa-plus-circle"></i> <?php echo __('Add'); ?>
+                                <i class="fa-solid fa-circle-plus"></i> <?php echo __('Add'); ?>
                             </a>
                             <?php }// endif; ?> 
                         </h1>
@@ -50,7 +50,7 @@
                                 <div class="rd-dialog-header">
                                     <h4 id="rdba-users-dialog-label" class="rd-dialog-title"></h4>
                                     <button class="rd-dialog-close" type="button" aria-label="Close" data-dismiss="dialog">
-                                        <i class="fas fa-times" aria-hidden="true"></i>
+                                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                                     </button>
                                 </div>
                                 <div class="rd-dialog-body">
@@ -99,7 +99,7 @@
                                 <div class="rd-button-group">
                                     <button id="rdba-datatables-filter-button" class="rdba-datatables-filter-button rd-button" type="button"><?php echo __('Filter'); ?></button>
                                     <button class="rd-button dropdown-toggler" type="button" data-placement="bottom right">
-                                        <i class="fas fa-caret-down"></i>
+                                        <i class="fa-solid fa-caret-down"></i>
                                         <span class="sr-only"><?php echo __('More'); ?></span>
                                     </button>
                                     <ul class="rd-dropdown">

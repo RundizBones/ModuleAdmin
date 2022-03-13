@@ -230,7 +230,7 @@ class MenuItems
                     0 => [
                         'id' => 'rdbadmin-home',
                         'permission' => [],
-                        'icon' => 'fas fa-tachometer-alt fa-fw',
+                        'icon' => 'fa-solid fa-gauge-high fa-fw',
                         'name' => __('Admin home'),
                         'link' => $Url->getAppBasedPath(true) . '/admin',
                     ],

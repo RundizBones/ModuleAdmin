@@ -84,7 +84,7 @@
                                                     printf(
                                                         __('The %1$s header to be sent to client. To set multiple origins, separate them with comma (%2$s) and the system will be use one per header.'),
                                                         '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><code>Access-Control-Allow-Origin</code></a>' .
-                                                        ' <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><i class="fas fa-external-link-alt"></i></a>',
+                                                        ' <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><i class="fa-solid fa-up-right-from-square"></i></a>',
                                                         '<code>,</code>'
                                                     );
                                                     ?>

@@ -147,13 +147,13 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             0 => [
                 'id' => 'rdbadmin-home',
                 'permission' => [],
-                'icon' => 'fas fa-tachometer-alt fa-fw',
+                'icon' => 'fa-solid fa-gauge-high fa-fw',
                 'name' => __('Admin home'),
                 'link' => $urlBaseWithLang . '/admin',
             ],// 0
             100 => [
                 'id' => 'rdbadmin-users',
-                'icon' => 'fas fa-users fa-fw',
+                'icon' => 'fa-solid fa-users fa-fw',
                 'name' => __('Users'),
                 'link' => $urlBaseWithLang . '/admin/users',
                 'liAttributes' => [
@@ -231,7 +231,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                     ['RdbAdminModulesPlugins', 'listPlugins', 'managePlugins'],
                     ['RdbAdminModulesAssets', 'publishAssets'],
                 ],
-                'icon' => 'fas fa-cubes fa-fw',
+                'icon' => 'fa-solid fa-cubes fa-fw',
                 'name' => __('Modules'),
                 'link' => '#',
                 'liAttributes' => [
@@ -261,7 +261,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             ],// 101
             102 => [
                 'id' => 'rdbadmin-settings',
-                'icon' => 'fas fa-sliders-h fa-fw',
+                'icon' => 'fa-solid fa-sliders fa-fw',
                 'name' => __('Settings'),
                 'link' => $urlBaseWithLang . '/admin/settings',
                 'liAttributes' => [
@@ -280,7 +280,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             ],// 102
             103 => [
                 'id' => 'rdbadmin-tools',
-                'icon' => 'fas fa-tools fa-fw',
+                'icon' => 'fa-solid fa-screwdriver-wrench fa-fw',
                 'name' => __('Tools'),
                 'link' => '#',
                 'liAttributes' => [
