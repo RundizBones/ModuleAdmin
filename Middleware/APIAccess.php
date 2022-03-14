@@ -59,17 +59,19 @@ class APIAccess
     protected function getRequestAPIKey(): string
     {
         $headers = apache_request_headers();
-        if (isset($headers['Authorization'])) {
+        $requestAPIKey = '';
+        if ((!isset($requestAPIKey) || empty($requestAPIKey)) && isset($headers['Authorization'])) {
             $requestAPIKey = $headers['Authorization'];
-        } elseif (isset($headers['X-Authorization'])) {
+        }
+        if ((!isset($requestAPIKey) || empty($requestAPIKey)) && isset($headers['X-Authorization'])) {
             $requestAPIKey = $headers['X-Authorization'];
-        } elseif (isset($_POST['rdba-api-key'])) {
+        }
+        unset($headers);
+
+        if ((!isset($requestAPIKey) || empty($requestAPIKey)) && isset($_POST['rdba-api-key'])) {
             $requestAPIKey = $_POST['rdba-api-key'];
-        } else {
-            $requestAPIKey = '';
         }
 
-        unset($headers);
         return trim($requestAPIKey);
     }// getRequestAPIKey
 
