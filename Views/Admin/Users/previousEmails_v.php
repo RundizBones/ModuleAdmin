@@ -17,15 +17,13 @@
                                         <th><?php echo __('Changed date'); ?></th>
                                     </tr>
                                 </thead>
+                                <tbody></tbody>
                                 <tfoot>
                                     <tr>
                                         <th class="column-primary"><?php echo __('Email'); ?></th>
                                         <th><?php echo __('Changed date'); ?></th>
                                     </tr>
                                 </tfoot>
-                                <tbody>
-                                    
-                                </tbody>
                             </table>
                         </div><!--.rd-datatable-wrapper-->
 

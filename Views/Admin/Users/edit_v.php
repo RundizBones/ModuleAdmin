@@ -288,17 +288,17 @@
                                                 <th><?php echo __('Changed date'); ?></th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center" colspan="2"><a href="<?php echo $Url->getAppBasedPath(true) . '/admin/users/' . ($user_id ?? '') . '/previous-emails'; ?>"><?php echo __('View all'); ?></a></td>
+                                            </tr>
+                                        </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th><?php echo __('Email'); ?></th>
                                                 <th><?php echo __('Changed date'); ?></th>
                                             </tr>
                                         </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center" colspan="2"><a href="<?php echo $Url->getAppBasedPath(true) . '/admin/users/' . ($user_id ?? '') . '/previous-emails'; ?>"><?php echo __('View all'); ?></a></td>
-                                            </tr>
-                                        </tbody>
                                     </table>
                                 </div><!--.rd-datatable-wrapper-->
                                 <template id="list-email-changed-history-table-row-template">
