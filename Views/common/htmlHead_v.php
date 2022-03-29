@@ -22,4 +22,4 @@
 
         <?php echo $Assets->renderAssets('css'); ?> 
     </head>
-    <body ontouchstart="">
+    <body>
