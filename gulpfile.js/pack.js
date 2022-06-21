@@ -40,6 +40,14 @@ function packDist(cb) {
     if (isProduction === true) {
         targetDirs = [
             './**',
+            '!./.backup/**',
+            '!./.dev-notes/**',
+            '!./.dist/**',
+            '!./.git/**',
+            '!./.phpdoc/**',
+            '!./.wiki/**',
+            '!./.git*',
+            '!./.phpunit*',
             '!assets-src/**',
             '!config/development/**',
             '!config/production/**',
@@ -71,10 +79,11 @@ function packDist(cb) {
         targetDirs = [
             './**',
             '.*/**',
-            '!.backup/**',
-            '!.git/**',
-            '!.phpdoc/**',
-            '!.dist/**',
+            '!./.backup/**',
+            '!./.dist/**',
+            '!./.git/**',
+            '!./.phpdoc/**',
+            '!./.phpunit*',
             '!config/development/**',
             '!config/production/**',
             '!node_modules/**',
@@ -88,7 +97,7 @@ function packDist(cb) {
         zipFileName = 'RdbAdmin dev.zip';
     }
 
-    return src(targetDirs, { base : "." })
+    return src(targetDirs, { base : ".", dot: true })
         .pipe(print())
         .pipe(zip(zipFileName))
         .pipe(dest('.dist/'));
