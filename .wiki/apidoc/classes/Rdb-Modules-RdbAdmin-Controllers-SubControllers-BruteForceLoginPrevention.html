@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/template.css">
+    <link rel="icon" href="../images/favicon.ico"/>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.4.6/fuse.min.js"></script>
+    <script src="../js/search.js"></script>
+    <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+<header class="phpdocumentor-top-header"></header>
+<header class="phpdocumentor-header">
+    <section class="phpdocumentor-section">
+        <h1 class="phpdocumentor-title">Documentation</h1>
+    </section>
+</header>
+<main class="phpdocumentor">
+    <div class="phpdocumentor-section">
+        <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h1 class="phpdocumentor-sidebar__category-header">Search</h1>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <h1 class="phpdocumentor-sidebar__category-header">Namespaces</h1>
+            <h2 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/rdb.html"><abbr title="\Rdb">Rdb</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                                    <li><a href="../namespaces/rdb-modules.html"><abbr title="\Rdb\Modules">Modules</abbr></a></li>
+                            </ul>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/tests.html"><abbr title="\Tests">Tests</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                                    <li><a href="../namespaces/tests-rdb.html"><abbr title="\Tests\Rdb">Rdb</abbr></a></li>
+                                    <li><a href="../namespaces/tests-rdbadmin.html"><abbr title="\Tests\RdbAdmin">RdbAdmin</abbr></a></li>
+                            </ul>
+            
+        <h1 class="phpdocumentor-sidebar__category-header">Packages</h1>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/Default.html"><abbr title="\Default">Default</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                    </ul>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/RdbAdmin.html"><abbr title="\RdbAdmin">RdbAdmin</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                    </ul>
+        
+    <h1 class="phpdocumentor-sidebar__category-header">Reports</h1>
+        <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h2>
+</aside>
+
+        <div class="nine phpdocumentor-columns phpdocumentor-content">
+            <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/rdb.html">Rdb</a></li>
+                    <li><a href="../namespaces/rdb-modules.html">Modules</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin.html">RdbAdmin</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-controllers.html">Controllers</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-controllers-subcontrollers.html">_SubControllers</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            BruteForceLoginPrevention
+                            <span class="phpdocumentor-class__extends">
+                    extends <abbr title="\Rdb\Modules\RdbAdmin\Controllers\BaseController">BaseController</abbr>
+                </span>
+                                        <div class="phpdocumentor-element__package">
+                    in
+                    <ul class="phpdocumentor-breadcrumbs">
+                                                    <li><a href="../packages/Default.html">Default</a></li>
+                                            </ul>
+                </div>
+                                            </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">15</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary">Brute-force attack on login prevention.</p>
+        <section class="phpdocumentor-class__description"></section>
+
+        <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_Cache">$Cache</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\Psr\SimpleCache\CacheInterface">CacheInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_configDb">$configDb</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_cacheBasedPath">$cacheBasedPath</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_cacheNameFailCount">$cacheNameFailCount</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_cacheNameFailTime">$cacheNameFailTime</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_deviceCookieError">$deviceCookieError</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_deviceCookieExpire">$deviceCookieExpire</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_deviceCookieName">$deviceCookieName</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_deviceCookieSignature">$deviceCookieSignature</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_deviceCookieValue">$deviceCookieValue</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#property_jwtAlgo">$jwtAlgo</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                                                                <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#method___construct">__construct()</a></th>
+                    <td class="phpdocumentor-cell">{@inheritDoc}</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#method___get">__get()</a></th>
+                    <td class="phpdocumentor-cell">Magic __get</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#method_checkBruteForceStatus">checkBruteForceStatus()</a></th>
+                    <td class="phpdocumentor-cell">Check for brute-force status.</td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#method_deleteBruteForceIpStatus">deleteBruteForceIpStatus()</a></th>
+                    <td class="phpdocumentor-cell">Delete brute-force locked based on IP.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#method_getDeviceCookie">getDeviceCookie()</a></th>
+                    <td class="phpdocumentor-cell">Get device cookie and decode it.</td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#method_issueNewDeviceCookie">issueNewDeviceCookie()</a></th>
+                    <td class="phpdocumentor-cell">Issue new device cookie to user’s client</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#method_registerFailedAuth">registerFailedAuth()</a></th>
+                    <td class="phpdocumentor-cell">Register failed authentication.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#method_removeDeviceCookie">removeDeviceCookie()</a></th>
+                    <td class="phpdocumentor-cell">Remove a device cookie.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-SubControllers-BruteForceLoginPrevention.html#method_validateDeviceCookie">validateDeviceCookie()</a></th>
+                    <td class="phpdocumentor-cell">Validate device cookie.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                                            </table>
+
+        
+                    <section>
+                <h3 class="phpdocumentor-properties__header">Properties</h3>
+                                    <a id="property_Cache"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$Cache</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">22</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\Psr\SimpleCache\CacheInterface">CacheInterface</abbr></span>
+        <span class="phpdocumentor-signature__name">$Cache</span>
+            </code>
+    </article>
+                                    <a id="property_configDb"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$configDb</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">28</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$configDb</span>
+         = <span class="phpdocumentor-signature__default-value">[]</span>    </code>
+    </article>
+                                    <a id="property_cacheBasedPath"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$cacheBasedPath</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">34</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$cacheBasedPath</span>
+         = <span class="phpdocumentor-signature__default-value">STORAGE_PATH . &#039;/cache/Modules/RdbAdmin/Controllers/_SubControllers/BruteForceLoginPrevention&#039;</span>    </code>
+    </article>
+                                    <a id="property_cacheNameFailCount"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$cacheNameFailCount</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">52</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$cacheNameFailCount</span>
+            </code>
+    </article>
+                                    <a id="property_cacheNameFailTime"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$cacheNameFailTime</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">58</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$cacheNameFailTime</span>
+            </code>
+    </article>
+                                    <a id="property_deviceCookieError"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$deviceCookieError</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">64</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$deviceCookieError</span>
+            </code>
+    </article>
+                                    <a id="property_deviceCookieExpire"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$deviceCookieExpire</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">70</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$deviceCookieExpire</span>
+         = <span class="phpdocumentor-signature__default-value">730</span>    </code>
+    </article>
+                                    <a id="property_deviceCookieName"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$deviceCookieName</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">76</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$deviceCookieName</span>
+         = <span class="phpdocumentor-signature__default-value">&#039;rdbadmin_cookie_devicecookie&#039;</span>    </code>
+    </article>
+                                    <a id="property_deviceCookieSignature"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$deviceCookieSignature</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">82</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__name">$deviceCookieSignature</span>
+            </code>
+    </article>
+                                    <a id="property_deviceCookieValue"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$deviceCookieValue</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">88</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$deviceCookieValue</span>
+         = <span class="phpdocumentor-signature__default-value">[]</span>    </code>
+    </article>
+                                    <a id="property_jwtAlgo"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$jwtAlgo</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">95</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$jwtAlgo</span>
+         = <span class="phpdocumentor-signature__default-value">&#039;HS512&#039;</span>    </code>
+    </article>
+                                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method___construct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__construct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">103</span>
+    </aside>
+        <p class="phpdocumentor-summary">{@inheritDoc}</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__construct</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$Container</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Rdb\System\Container">Container</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$configDb</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$Container</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Rdb\System\Container">Container</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$configDb</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The configuration values in DB.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method___get"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__get()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">130</span>
+    </aside>
+        <p class="phpdocumentor-summary">Magic __get</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__get</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$name</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$name</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_checkBruteForceStatus"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">checkBruteForceStatus()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">155</span>
+    </aside>
+        <p class="phpdocumentor-summary">Check for brute-force status.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">checkBruteForceStatus</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$user_login_email</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">array</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Call this method before check login credentials. Check the return array key that <code class="prettyprint">status</code> must be <code class="prettyprint">authenticate</code> only.
+Otherwise show the error message to user.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$user_login_email</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The input login identity (username or email depend on how system use it).</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return associative array with these keys.<br>
+<code class="prettyprint">status</code> will be <code class="prettyprint">authenticate</code> on success or no problem, <code class="prettyprint">reject</code> if there is a problem, <code class="prettyprint">rejectvalid</code> if there is valid device cookie but enter incorrect credentials.<br>
+In case of <code class="prettyprint">rejectvalid</code> I recommend to send login link with special token to user's email.<br>
+<code class="prettyprint">totalFailed</code> (may exists or not) Total failed count.<br>
+<code class="prettyprint">failedTime</code> (may exists or not) The latest failed timestamp.<br>
+<code class="prettyprint">waitUntil</code> (for failed status such as <code class="prettyprint">reject</code>, <code class="prettyprint">rejectvalid</code>) The date/time format for wait until it gets unlocked.<br>
+<code class="prettyprint">errorMessage</code> (for failed status such as <code class="prettyprint">reject</code>, <code class="prettyprint">rejectvalid</code>) The error message.<br>
+<code class="prettyprint">statusCode</code> (may exists or not) The HTTP response status code.
+<code class="prettyprint">resultBy</code> (only visible on development mode) Result by which protection. It can be 'ipBase', 'deviceCookie'.</p></span>
+            
+</article>
+                                    <a id="method_deleteBruteForceIpStatus"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">deleteBruteForceIpStatus()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">340</span>
+    </aside>
+        <p class="phpdocumentor-summary">Delete brute-force locked based on IP.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">deleteBruteForceIpStatus</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Call this method once login success.</p></section>
+    
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getDeviceCookie"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getDeviceCookie()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">353</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get device cookie and decode it.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">getDeviceCookie</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">array</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Once get the cookie and decode successfully, you can access the data from return value or via <code class="prettyprint">deviceCookieValue</code> property.</p></section>
+    
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return array content of device cookie. If it is not exists or something wrong then it will return empty array.</p></span>
+            
+</article>
+                                    <a id="method_issueNewDeviceCookie"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">issueNewDeviceCookie()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">399</span>
+    </aside>
+        <p class="phpdocumentor-summary">Issue new device cookie to user’s client</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">issueNewDeviceCookie</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$user_login_email</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Call this method once login success.<br>
+This method will send the set cookie header to client.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$user_login_email</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The input login identity (username or email depend on how system use it).</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_registerFailedAuth"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">registerFailedAuth()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">442</span>
+    </aside>
+        <p class="phpdocumentor-summary">Register failed authentication.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">registerFailedAuth</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$data</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Call this method once login failed.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$data</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The associative array with these data.<br>
+<code class="prettyprint">user_id</code> If in case that found user_login or email.<br>
+<code class="prettyprint">user_login_email</code> User login (username) or email. Depend on how login system use this identity. Use for validate device cookie only.<br>
+<code class="prettyprint">userlogin_result_text</code> Login result text (for record login failed).<br>
+<code class="prettyprint">userlogin_result_text_data</code> For replace placeholder in <code class="prettyprint">userlogin_result_text</code> if present.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_removeDeviceCookie"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">removeDeviceCookie()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">552</span>
+    </aside>
+        <p class="phpdocumentor-summary">Remove a device cookie.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">removeDeviceCookie</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Send set cookie header to client that it is expired.</p></section>
+    
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_validateDeviceCookie"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">validateDeviceCookie()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/_SubControllers/BruteForceLoginPrevention.php"><a href="../files/controllers-subcontrollers-bruteforceloginprevention.html"><abbr title="Controllers/_SubControllers/BruteForceLoginPrevention.php">BruteForceLoginPrevention.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">567</span>
+    </aside>
+        <p class="phpdocumentor-summary">Validate device cookie.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">validateDeviceCookie</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$userLoginEmail</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method will call <code class="prettyprint">getDeviceCookie()</code> method which is allow you to access device cookie value via <code class="prettyprint">deviceCookieValue</code> property.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$userLoginEmail</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+        <dl class="phpdocumentor-tag-list">
+                                                <dt class="phpdocumentor-tag-list__entry">
+                        <span class="phpdocumentor-tag__name">partam</span>
+                    </dt>
+                    <dd class="phpdocumentor-tag-list__definition"><section class="phpdocumentor-description"><p>string $userLoginEmail The input login identity (username or email depend on how system use it).</p></section></dd>
+                                    </dl>
+    
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return <code class="prettyprint">true</code> if device cookie is correct and the <code class="prettyprint">login</code> contain in the cookie is matched the user who is trying to authenticate. Return <code class="prettyprint">false</code> for otherwise.</p></span>
+            
+</article>
+                                                            </section>
+            </article>
+            <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                <h2>Search results</h2>
+                <ul class="phpdocumentor-search-results__entries">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

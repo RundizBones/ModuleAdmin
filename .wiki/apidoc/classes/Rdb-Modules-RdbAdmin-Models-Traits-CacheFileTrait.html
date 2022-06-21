@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/template.css">
+    <link rel="icon" href="../images/favicon.ico"/>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.4.6/fuse.min.js"></script>
+    <script src="../js/search.js"></script>
+    <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+<header class="phpdocumentor-top-header"></header>
+<header class="phpdocumentor-header">
+    <section class="phpdocumentor-section">
+        <h1 class="phpdocumentor-title">Documentation</h1>
+    </section>
+</header>
+<main class="phpdocumentor">
+    <div class="phpdocumentor-section">
+        <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h1 class="phpdocumentor-sidebar__category-header">Search</h1>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <h1 class="phpdocumentor-sidebar__category-header">Namespaces</h1>
+            <h2 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/rdb.html"><abbr title="\Rdb">Rdb</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                                    <li><a href="../namespaces/rdb-modules.html"><abbr title="\Rdb\Modules">Modules</abbr></a></li>
+                            </ul>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/tests.html"><abbr title="\Tests">Tests</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                                    <li><a href="../namespaces/tests-rdb.html"><abbr title="\Tests\Rdb">Rdb</abbr></a></li>
+                                    <li><a href="../namespaces/tests-rdbadmin.html"><abbr title="\Tests\RdbAdmin">RdbAdmin</abbr></a></li>
+                            </ul>
+            
+        <h1 class="phpdocumentor-sidebar__category-header">Packages</h1>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/Default.html"><abbr title="\Default">Default</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                    </ul>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/RdbAdmin.html"><abbr title="\RdbAdmin">RdbAdmin</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                    </ul>
+        
+    <h1 class="phpdocumentor-sidebar__category-header">Reports</h1>
+        <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h2>
+</aside>
+
+        <div class="nine phpdocumentor-columns phpdocumentor-content">
+            <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/rdb.html">Rdb</a></li>
+                    <li><a href="../namespaces/rdb-modules.html">Modules</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin.html">RdbAdmin</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-models.html">Models</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-models-traits.html">Traits</a></li>
+            </ul>
+
+    <h2 class="phpdocumentor-content__title">
+        CacheFileTrait
+            </h2>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">81</span>
+    </aside>
+
+    <p class="phpdocumentor-trait__summary">Build cache data for model.</p>
+    <section class="phpdocumentor-trait__description"><p>To use cache data, call to <code class="prettyprint">loadCacheData([$this, 'yourBuildCacheContent'])</code>.<br>
+Example:</p>
+<pre class="prettyprint">
+// To use cache data with your build cache content.
+class MyModel extends \Rdb\System\Core\Models\BaseModel
+{
+     public function __construct(\Rdb\System\Container $Container)
+     {
+         $this->storageFile = 'mymodel-db.php';
+         $this->beginCacheFileTrait($Container);
+     }
+
+     public function myBuildCacheContent()
+     {
+         $sql = 'SELECT * FROM `' . $this->Db->tableName('mytable') . '`';
+         $Pdo = $this->Db->PDO();
+         $Sth = $Pdo->prepare($sql);
+         $Sth->execute();
+         $result = $Sth->fetchAll();
+         $Sth->closeCursor();
+
+         $output = '<?php' . PHP_EOL;
+         $output .= 'return [' . PHP_EOL;
+         foreach ($result as $row) {
+             $output .= '\'' . $row->config_name . '\' => \'' . $row->config_value . '\',';'
+         }
+         $output .= '];' . PHP_EOL;
+         return $output;
+     }
+
+     public function getData($name, $default = null)
+     {
+         $this->loadCacheData([$this, 'myBuildCacheContent']);
+         print_r($this->storageData);
+     }
+}
+
+// To use auto generated build cache content.
+class MyModel extends \Rdb\Modules\RdbAdmin\Models\BaseModel
+{
+     public function __construct(\Rdb\System\Container $Container)
+     {
+         $this->storageFile = 'mymodel-db.php';
+         $this->beginCacheFileTrait($Container);
+     }
+
+     public function myBuildCacheContent()
+     {
+         $sql = 'SELECT * FROM `' . $this->Db->tableName('mytable') . '`';
+         $Pdo = $this->Db->PDO();
+         $Sth = $Pdo->prepare($sql);
+         $Sth->execute();
+         $result = $Sth->fetchAll();
+         $Sth->closeCursor();
+
+         return $this->buildCacheContentFromResult($result);
+     }
+
+     public function getData($name, $default = null)
+     {
+         $this->loadCacheData([$this, 'myBuildCacheContent']);
+         print_r($this->storageData);
+     }
+}
+</pre></section>
+
+    <h3>Table of Contents</h3>
+    <table class="phpdocumentor-table_of_contents">
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#property_FileSystem">$FileSystem</a></th>
+                <td class="phpdocumentor-cell"></td>
+                <td class="phpdocumentor-cell">\Rdb\System\Libraries\FileSystem</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#property_storageData">$storageData</a></th>
+                <td class="phpdocumentor-cell"></td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#property_storageFile">$storageFile</a></th>
+                <td class="phpdocumentor-cell"></td>
+                <td class="phpdocumentor-cell">string</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#property_storagePath">$storagePath</a></th>
+                <td class="phpdocumentor-cell"></td>
+                <td class="phpdocumentor-cell">string</td>
+            </tr>
+                                            <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#method_beginCacheFileTrait">beginCacheFileTrait()</a></th>
+                <td class="phpdocumentor-cell">Trait initialize method.</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#method_buildCacheContentFromResult">buildCacheContentFromResult()</a></th>
+                <td class="phpdocumentor-cell">Buld cache content from result that got from `PDOStatement::fetchAll()`.</td>
+                <td class="phpdocumentor-cell">string</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#method_buildCacheFile">buildCacheFile()</a></th>
+                <td class="phpdocumentor-cell">Build the cache file.</td>
+                <td class="phpdocumentor-cell">bool</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#method_deleteCachedFile">deleteCachedFile()</a></th>
+                <td class="phpdocumentor-cell">Delete the file that were built and cached.</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#method_getCacheFilePath">getCacheFilePath()</a></th>
+                <td class="phpdocumentor-cell">Get full path to cache file.</td>
+                <td class="phpdocumentor-cell">string</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#method_isNeedRebuildCache">isNeedRebuildCache()</a></th>
+                <td class="phpdocumentor-cell">Check if it is needed to rebuild the cache file.</td>
+                <td class="phpdocumentor-cell">bool</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#method_loadCacheData">loadCacheData()</a></th>
+                <td class="phpdocumentor-cell">Load the cache file data into class property. (`storageData`).</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#method_resetCacheProperties">resetCacheProperties()</a></th>
+                <td class="phpdocumentor-cell">Reset cache properties.</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-CacheFileTrait.html#method_resetGetData">resetGetData()</a></th>
+                <td class="phpdocumentor-cell">Reset some properties that was used while get the data using `loadCacheData()`.</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                            </table>
+
+            <section>
+            <h3 class="phpdocumentor-properties__header">Properties</h3>
+                            <a id="property_FileSystem"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$FileSystem</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">88</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\Rdb\System\Libraries\FileSystem">FileSystem</abbr></span>
+        <span class="phpdocumentor-signature__name">$FileSystem</span>
+            </code>
+    </article>
+                            <a id="property_storageData"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$storageData</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">94</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__name">$storageData</span>
+            </code>
+    </article>
+                            <a id="property_storageFile"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$storageFile</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">100</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$storageFile</span>
+            </code>
+    </article>
+                            <a id="property_storagePath"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$storagePath</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">108</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$storagePath</span>
+            </code>
+    </article>
+                                            </section>
+    
+            <section>
+            <h3 class="phpdocumentor-methods__header">Methods</h3>
+                            <a id="method_beginCacheFileTrait"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">beginCacheFileTrait()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">118</span>
+    </aside>
+        <p class="phpdocumentor-summary">Trait initialize method.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">beginCacheFileTrait</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$Container</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Rdb\System\Container">Container</abbr></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method must be called before it can be working.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$Container</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Rdb\System\Container">Container</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The DI container class.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                            <a id="method_buildCacheContentFromResult"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildCacheContentFromResult()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">162</span>
+    </aside>
+        <p class="phpdocumentor-summary">Buld cache content from result that got from `PDOStatement::fetchAll()`.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">buildCacheContentFromResult</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$result</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$formatMethod</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;serialize&#039;</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$result</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The result from <code class="prettyprint">PDOStatement::fetchAll()</code>.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$formatMethod</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;serialize&#039;</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The format option. Value can be 'array', 'json_array', 'replace_setstate', 'serialize'.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return generated content ready for cache.</p></span>
+            
+</article>
+                            <a id="method_buildCacheFile"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--private
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildCacheFile()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">195</span>
+    </aside>
+        <p class="phpdocumentor-summary">Build the cache file.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                                <span class="phpdocumentor-signature__name">buildCacheFile</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$content</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method was called from <code class="prettyprint">getCacheFilePath()</code>.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$content</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The file content to build cache. This content should be array or object from db in php data that is ready to access.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return true on success build cache file.</p></span>
+            
+</article>
+                            <a id="method_deleteCachedFile"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">deleteCachedFile()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">228</span>
+    </aside>
+        <p class="phpdocumentor-summary">Delete the file that were built and cached.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">deleteCachedFile</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method was called from <code class="prettyprint">buildCacheFile()</code>.</p></section>
+    
+    
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+        <dl class="phpdocumentor-tag-list">
+                                                <dt class="phpdocumentor-tag-list__entry">
+                        <span class="phpdocumentor-tag__name">throws</span>
+                    </dt>
+                    <dd class="phpdocumentor-tag-list__definition"><section class="phpdocumentor-description"><p>exception if the file is exists and really cannot delete.</p></section></dd>
+                                    </dl>
+    
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                            <a id="method_getCacheFilePath"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--private
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getCacheFilePath()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">259</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get full path to cache file.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                                <span class="phpdocumentor-signature__name">getCacheFilePath</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$BuildContent</span> :
+                <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method was called from <code class="prettyprint">loadCacheData()</code>.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$BuildContent</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The callback array to build content if needed.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return full path to cache file. Return empty string if cache file was not found and unable to build.</p></span>
+            
+</article>
+                            <a id="method_isNeedRebuildCache"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--private
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">isNeedRebuildCache()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">284</span>
+    </aside>
+        <p class="phpdocumentor-summary">Check if it is needed to rebuild the cache file.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                                <span class="phpdocumentor-signature__name">isNeedRebuildCache</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method was called from <code class="prettyprint">getCacheFilePath()</code>.</p></section>
+    
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return <code class="prettyprint">true</code> if it is need to build, rebuild the cache file, return <code class="prettyprint">false</code> if it is not.</p></span>
+            
+</article>
+                            <a id="method_loadCacheData"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">loadCacheData()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">329</span>
+    </aside>
+        <p class="phpdocumentor-summary">Load the cache file data into class property. (`storageData`).</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">loadCacheData</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$BuildContent</span> :
+                <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Also build it if it is not exists or too old (expired).</p>
+<p>You can access cache data via <code class="prettyprint">storageData</code> property.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$BuildContent</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The callback array to build content if needed. Example: <code class="prettyprint">[$this, 'buildCacheContent']</code>.
+The callback must return content string of generated php data for write to cache.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                            <a id="method_resetCacheProperties"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">resetCacheProperties()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">349</span>
+    </aside>
+        <p class="phpdocumentor-summary">Reset cache properties.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">resetCacheProperties</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This is useful when you call to any methods that have called to <code class="prettyprint">loadCacheData()</code> method on this trait.<br>
+This method will be reset <code class="prettyprint">storageData</code>, <code class="prettyprint">storageFile</code>, <code class="prettyprint">storagePath</code> properties.</p></section>
+    
+    
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+        <dl class="phpdocumentor-tag-list">
+                                                <dt class="phpdocumentor-tag-list__entry">
+                        <span class="phpdocumentor-tag__name">since</span>
+                    </dt>
+                    <dd class="phpdocumentor-tag-list__definition"><section class="phpdocumentor-description"></section></dd>
+                                    </dl>
+    
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                            <a id="method_resetGetData"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">resetGetData()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/CacheFileTrait.php"><a href="../files/models-traits-cachefiletrait.html"><abbr title="Models/Traits/CacheFileTrait.php">CacheFileTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">365</span>
+    </aside>
+        <p class="phpdocumentor-summary">Reset some properties that was used while get the data using `loadCacheData()`.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">resetGetData</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This is useful when you call to extended class that is get a cache data row using <code class="prettyprint">loadCacheData()</code> and you want to call it again or it is in the loop.<br>
+This method will be reset <code class="prettyprint">storageData</code>, <code class="prettyprint">storageFile</code> properties.</p></section>
+    
+    
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+        <dl class="phpdocumentor-tag-list">
+                                                <dt class="phpdocumentor-tag-list__entry">
+                        <span class="phpdocumentor-tag__name">since</span>
+                    </dt>
+                    <dd class="phpdocumentor-tag-list__definition"><section class="phpdocumentor-description"></section></dd>
+                                    </dl>
+    
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                            </section>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                <h2>Search results</h2>
+                <ul class="phpdocumentor-search-results__entries">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

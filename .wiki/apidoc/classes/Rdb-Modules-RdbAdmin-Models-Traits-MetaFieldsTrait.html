@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/template.css">
+    <link rel="icon" href="../images/favicon.ico"/>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.4.6/fuse.min.js"></script>
+    <script src="../js/search.js"></script>
+    <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+<header class="phpdocumentor-top-header"></header>
+<header class="phpdocumentor-header">
+    <section class="phpdocumentor-section">
+        <h1 class="phpdocumentor-title">Documentation</h1>
+    </section>
+</header>
+<main class="phpdocumentor">
+    <div class="phpdocumentor-section">
+        <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h1 class="phpdocumentor-sidebar__category-header">Search</h1>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <h1 class="phpdocumentor-sidebar__category-header">Namespaces</h1>
+            <h2 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/rdb.html"><abbr title="\Rdb">Rdb</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                                    <li><a href="../namespaces/rdb-modules.html"><abbr title="\Rdb\Modules">Modules</abbr></a></li>
+                            </ul>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/tests.html"><abbr title="\Tests">Tests</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                                    <li><a href="../namespaces/tests-rdb.html"><abbr title="\Tests\Rdb">Rdb</abbr></a></li>
+                                    <li><a href="../namespaces/tests-rdbadmin.html"><abbr title="\Tests\RdbAdmin">RdbAdmin</abbr></a></li>
+                            </ul>
+            
+        <h1 class="phpdocumentor-sidebar__category-header">Packages</h1>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/Default.html"><abbr title="\Default">Default</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                    </ul>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/RdbAdmin.html"><abbr title="\RdbAdmin">RdbAdmin</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                    </ul>
+        
+    <h1 class="phpdocumentor-sidebar__category-header">Reports</h1>
+        <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h2>
+</aside>
+
+        <div class="nine phpdocumentor-columns phpdocumentor-content">
+            <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/rdb.html">Rdb</a></li>
+                    <li><a href="../namespaces/rdb-modules.html">Modules</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin.html">RdbAdmin</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-models.html">Models</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-models-traits.html">Traits</a></li>
+            </ul>
+
+    <h2 class="phpdocumentor-content__title">
+        MetaFieldsTrait
+            </h2>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">23</span>
+    </aside>
+
+    <p class="phpdocumentor-trait__summary">Working with create/read/update/delete meta fields tables.</p>
+    <section class="phpdocumentor-trait__description"><p>To use meta fields trait, set these properties and method properly in class constructor.</p>
+<pre class="prettyprint">
+$this->storagePath = STORAGE_PATH . '/cache/Modules/MyModule/Models/my_table_fields';
+$this->tableName = mytable';
+$this->objectIdName = 'mytable_object_id';
+$this->beginMetaFieldsTrait($Container);
+</pre>
+<p>And then it will be able to call <code class="prettyprint">getFields()</code>, <code class="prettyprint">addFieldsData()</code>, <code class="prettyprint">updateFieldsData()</code>, <code class="prettyprint">deleteFieldsData()</code> methods.</p></section>
+
+    <h3>Table of Contents</h3>
+    <table class="phpdocumentor-table_of_contents">
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#property_getFieldsNoData">$getFieldsNoData</a></th>
+                <td class="phpdocumentor-cell"></td>
+                <td class="phpdocumentor-cell">bool</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#property_objectId">$objectId</a></th>
+                <td class="phpdocumentor-cell"></td>
+                <td class="phpdocumentor-cell">int</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#property_objectIdName">$objectIdName</a></th>
+                <td class="phpdocumentor-cell"></td>
+                <td class="phpdocumentor-cell">string</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#property_tableName">$tableName</a></th>
+                <td class="phpdocumentor-cell"></td>
+                <td class="phpdocumentor-cell">string</td>
+            </tr>
+                                            <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#method_addFieldsData">addFieldsData()</a></th>
+                <td class="phpdocumentor-cell">Add meta field data.</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#method_beginMetaFieldsTrait">beginMetaFieldsTrait()</a></th>
+                <td class="phpdocumentor-cell">Trait initialize method.</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#method_buildCacheContent">buildCacheContent()</a></th>
+                <td class="phpdocumentor-cell">Get DB result and build cache content.</td>
+                <td class="phpdocumentor-cell">string</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#method_deleteAllFieldsData">deleteAllFieldsData()</a></th>
+                <td class="phpdocumentor-cell">Delete all fields for specific object ID.</td>
+                <td class="phpdocumentor-cell">bool</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#method_deleteFieldsData">deleteFieldsData()</a></th>
+                <td class="phpdocumentor-cell">Delete meta field data.</td>
+                <td class="phpdocumentor-cell">bool</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#method_getFields">getFields()</a></th>
+                <td class="phpdocumentor-cell">Get meta fields data by conditions.</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#method_getFieldsNoCache">getFieldsNoCache()</a></th>
+                <td class="phpdocumentor-cell">Get meta fields data by conditions but no cache.</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#method_updateFieldsData">updateFieldsData()</a></th>
+                <td class="phpdocumentor-cell">Update meta field data.</td>
+                <td class="phpdocumentor-cell">mixed</td>
+            </tr>
+                            </table>
+
+            <section>
+            <h3 class="phpdocumentor-properties__header">Properties</h3>
+                            <a id="property_getFieldsNoData"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$getFieldsNoData</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">34</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">bool</span>
+        <span class="phpdocumentor-signature__name">$getFieldsNoData</span>
+         = <span class="phpdocumentor-signature__default-value">false</span>    </code>
+    </article>
+                            <a id="property_objectId"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$objectId</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">40</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$objectId</span>
+            </code>
+    </article>
+                            <a id="property_objectIdName"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$objectIdName</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">46</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$objectIdName</span>
+            </code>
+    </article>
+                            <a id="property_tableName"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$tableName</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">52</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$tableName</span>
+            </code>
+    </article>
+                                            </section>
+    
+            <section>
+            <h3 class="phpdocumentor-methods__header">Methods</h3>
+                            <a id="method_addFieldsData"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">addFieldsData()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">66</span>
+    </aside>
+        <p class="phpdocumentor-summary">Add meta field data.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">addFieldsData</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$objectId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$field_name</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$field_value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$field_description</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method is not recommended to call it directly, please call to <code class="prettyprint">updateFieldsData()</code> method instead and if the data is not exists, it will be call this method automatically.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$objectId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Object ID.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$field_name</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Field name.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$field_value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Field value. If it is no scalar then it will be serialize automatically.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$field_description</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Field description.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return insert ID on success, or <code class="prettyprint">false</code> if failure.</p></span>
+            
+</article>
+                            <a id="method_beginMetaFieldsTrait"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">beginMetaFieldsTrait()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">105</span>
+    </aside>
+        <p class="phpdocumentor-summary">Trait initialize method.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">beginMetaFieldsTrait</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$Container</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Rdb\System\Container">Container</abbr></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method must be called before it can be working.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$Container</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Rdb\System\Container">Container</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The DI container class.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                            <a id="method_buildCacheContent"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildCacheContent()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">118</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get DB result and build cache content.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">buildCacheContent</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method must be public to be able to called from other method/class.</p></section>
+    
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return generated data in php language that is ready to use as cache.</p></span>
+            
+</article>
+                            <a id="method_deleteAllFieldsData"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">deleteAllFieldsData()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">141</span>
+    </aside>
+        <p class="phpdocumentor-summary">Delete all fields for specific object ID.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">deleteAllFieldsData</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$objectId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Also delete cached data.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$objectId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Object ID.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return <code class="prettyprint">true</code> on success, <code class="prettyprint">false</code> for otherwise.</p></span>
+            
+</article>
+                            <a id="method_deleteFieldsData"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">deleteFieldsData()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">168</span>
+    </aside>
+        <p class="phpdocumentor-summary">Delete meta field data.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">deleteFieldsData</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$objectId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$field_name</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Also delete cached data.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$objectId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Object ID.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$field_name</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Field name.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return <code class="prettyprint">true</code> on success, <code class="prettyprint">false</code> for otherwise.</p></span>
+            
+</article>
+                            <a id="method_getFields"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getFields()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">196</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get meta fields data by conditions.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">getFields</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$objectId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$field_name</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$objectId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The object ID.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$field_name</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The field name to search in. If this is empty then it will return all.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return a single row of field or all rows depend on field name to search. If it was not found then return null.<br>
+The return value may be unserialize if it is not scalar and not <code class="prettyprint">null</code>.<br>
+You can call to property <code class="prettyprint">getFieldsNoData</code> (boolean) to check that are there any data or value from this method.</p></span>
+            
+</article>
+                            <a id="method_getFieldsNoCache"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getFieldsNoCache()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">246</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get meta fields data by conditions but no cache.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">getFieldsNoCache</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$objectId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$field_name</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This method work the same as <code class="prettyprint">getFields()</code> method but connect to DB without cache to make very sure that data is really exists.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$objectId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The object ID.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$field_name</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The field name to search in. If this is empty then it will return all.</p></section></dd>
+                    </dl>
+    
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+        <dl class="phpdocumentor-tag-list">
+                                                <dt class="phpdocumentor-tag-list__entry">
+                        <span class="phpdocumentor-tag__name">see</span>
+                    </dt>
+                    <dd class="phpdocumentor-tag-list__definition"><section class="phpdocumentor-description"></section></dd>
+                                                                <dt class="phpdocumentor-tag-list__entry">
+                        <span class="phpdocumentor-tag__name">since</span>
+                    </dt>
+                    <dd class="phpdocumentor-tag-list__definition"><section class="phpdocumentor-description"></section></dd>
+                                    </dl>
+    
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return a single row of field or all rows depend on field name to search. If it was not found then return null.<br>
+The return value may be unserialize if it is not scalar and not <code class="prettyprint">null</code>.<br>
+You can call to property <code class="prettyprint">getFieldsNoData</code> (boolean) to check that are there any data or value from this method.</p></span>
+            
+</article>
+                            <a id="method_updateFieldsData"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">updateFieldsData()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Models/Traits/MetaFieldsTrait.php"><a href="../files/models-traits-metafieldstrait.html"><abbr title="Models/Traits/MetaFieldsTrait.php">MetaFieldsTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">296</span>
+    </aside>
+        <p class="phpdocumentor-summary">Update meta field data.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">updateFieldsData</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$objectId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$field_name</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$field_value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$field_description</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$previousValue</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This will be add if the data is not exists.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$objectId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Object ID.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$field_name</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Field name.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$field_value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Field value. If field value is not scalar then it will be serialize automatically.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$field_description</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Field description. Set to <code class="prettyprint">false</code> to not change.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$previousValue</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Previous field value to check that it must be matched, otherwise it will not be update and return <code class="prettyprint">false</code>. Set this to <code class="prettyprint">false</code> to skip checking.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return meta field ID if it use add method, return <code class="prettyprint">true</code> if update success, <code class="prettyprint">false</code> for otherwise.</p></span>
+            
+</article>
+                                            </section>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                <h2>Search results</h2>
+                <ul class="phpdocumentor-search-results__entries">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/template.css">
+    <link rel="icon" href="../images/favicon.ico"/>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.4.6/fuse.min.js"></script>
+    <script src="../js/search.js"></script>
+    <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+<header class="phpdocumentor-top-header"></header>
+<header class="phpdocumentor-header">
+    <section class="phpdocumentor-section">
+        <h1 class="phpdocumentor-title">Documentation</h1>
+    </section>
+</header>
+<main class="phpdocumentor">
+    <div class="phpdocumentor-section">
+        <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h1 class="phpdocumentor-sidebar__category-header">Search</h1>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <h1 class="phpdocumentor-sidebar__category-header">Namespaces</h1>
+            <h2 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/rdb.html"><abbr title="\Rdb">Rdb</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                                    <li><a href="../namespaces/rdb-modules.html"><abbr title="\Rdb\Modules">Modules</abbr></a></li>
+                            </ul>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/tests.html"><abbr title="\Tests">Tests</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                                    <li><a href="../namespaces/tests-rdb.html"><abbr title="\Tests\Rdb">Rdb</abbr></a></li>
+                                    <li><a href="../namespaces/tests-rdbadmin.html"><abbr title="\Tests\RdbAdmin">RdbAdmin</abbr></a></li>
+                            </ul>
+            
+        <h1 class="phpdocumentor-sidebar__category-header">Packages</h1>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/Default.html"><abbr title="\Default">Default</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                    </ul>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/RdbAdmin.html"><abbr title="\RdbAdmin">RdbAdmin</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                    </ul>
+        
+    <h1 class="phpdocumentor-sidebar__category-header">Reports</h1>
+        <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h2>
+</aside>
+
+        <div class="nine phpdocumentor-columns phpdocumentor-content">
+            <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/rdb.html">Rdb</a></li>
+                    <li><a href="../namespaces/rdb-modules.html">Modules</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin.html">RdbAdmin</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-controllers.html">Controllers</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-controllers-admin.html">Admin</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-controllers-admin-users.html">Users</a></li>
+                    <li><a href="../namespaces/rdb-modules-rdbadmin-controllers-admin-users-traits.html">Traits</a></li>
+            </ul>
+
+    <h2 class="phpdocumentor-content__title">
+        UsersEditingTrait
+            </h2>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/Admin/Users/Traits/UsersEditingTrait.php"><a href="../files/controllers-admin-users-traits-userseditingtrait.html"><abbr title="Controllers/Admin/Users/Traits/UsersEditingTrait.php">UsersEditingTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">13</span>
+    </aside>
+
+    <p class="phpdocumentor-trait__summary">Users editing trait.</p>
+    <section class="phpdocumentor-trait__description"></section>
+
+    <h3>Table of Contents</h3>
+    <table class="phpdocumentor-table_of_contents">
+                                            <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Users-Traits-UsersEditingTrait.html#method_isEditingHigherRole">isEditingHigherRole()</a></th>
+                <td class="phpdocumentor-cell">Check if target user has higher priority role than a user who is editing them.</td>
+                <td class="phpdocumentor-cell">bool</td>
+            </tr>
+                    <tr>
+                <th class="phpdocumentor-heading"><a href="../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Users-Traits-UsersEditingTrait.html#method_isMe">isMe()</a></th>
+                <td class="phpdocumentor-cell">Check that the specified `$user_id` is me or not.</td>
+                <td class="phpdocumentor-cell">bool</td>
+            </tr>
+                            </table>
+
+    
+            <section>
+            <h3 class="phpdocumentor-methods__header">Methods</h3>
+                            <a id="method_isEditingHigherRole"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">isEditingHigherRole()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/Admin/Users/Traits/UsersEditingTrait.php"><a href="../files/controllers-admin-users-traits-userseditingtrait.html"><abbr title="Controllers/Admin/Users/Traits/UsersEditingTrait.php">UsersEditingTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">23</span>
+    </aside>
+        <p class="phpdocumentor-summary">Check if target user has higher priority role than a user who is editing them.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">isEditingHigherRole</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$user_id</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$user_id</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The target user ID.</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return <code class="prettyprint">false</code> if not editing higher priority role, return <code class="prettyprint">true</code> if yes.</p></span>
+            
+</article>
+                            <a id="method_isMe"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">isMe()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="Controllers/Admin/Users/Traits/UsersEditingTrait.php"><a href="../files/controllers-admin-users-traits-userseditingtrait.html"><abbr title="Controllers/Admin/Users/Traits/UsersEditingTrait.php">UsersEditingTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">88</span>
+    </aside>
+        <p class="phpdocumentor-summary">Check that the specified `$user_id` is me or not.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">isMe</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$user_id</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$user_id</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>User ID to check. Cannot leave blank!</p></section></dd>
+                    </dl>
+    
+        
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Return <code class="prettyprint">true</code> if it was me, <code class="prettyprint">false</code> if not.</p></span>
+            
+</article>
+                                            </section>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                <h2>Search results</h2>
+                <ul class="phpdocumentor-search-results__entries">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
