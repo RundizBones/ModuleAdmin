@@ -1,15 +1,9 @@
 {
     "name": "rundizbones-admin-module",
-    "version": "1.2.2",
+    "version": "1.0.0",
     "description": "Admin module for RundizBones framework.",
+    "private": true,
     "main": "gulpfile.js",
-    "keywords": [
-        "admin_module",
-        "admin",
-        "backoffice",
-        "backend",
-        "rundizbones"
-    ],
     "author": "Vee W.",
     "license": "MIT",
     "repository": {},
@@ -46,7 +40,6 @@
         "gulp-replace": "^1.1.3",
         "gulp-sourcemaps": "^3.0.0",
         "gulp-uglify-es": "^3.0.0",
-        "gulp-zip": "^5.1.0",
         "merge-stream": "^2.0.0"
     },
     "scripts": {

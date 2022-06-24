@@ -14,7 +14,6 @@ const bundleMoment = require('./bundleMoment');
 const copyNodeModules = require('./copyNodeModules');
 const copyAssetsSrc = require('./copyAssetsSrc');
 const copyAssets = require('./copyAssets');
-const pack = require('./pack');
 const versionWriter = require('./versionWriter');
 
 global.moduleAssetsDir = 'Modules/RdbAdmin/assets';
@@ -122,8 +121,3 @@ exports.watch = function() {
         )
     )
 };
-
-
-exports.pack = series(
-    pack.pack
-);
