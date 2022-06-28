@@ -51,12 +51,12 @@ class AddController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             // if validated token to prevent CSRF.
             // prepare data for checking.
             $data = [];
-            $data['user_login'] = trim($this->Input->post('user_login', null));
-            $data['user_email'] = trim($this->Input->post('user_email', null));// no filter email here, it will be validate later.
-            $data['user_password'] = trim($this->Input->post('user_password', null));
-            $data['user_display_name'] = trim($this->Input->post('user_display_name', null));
+            $data['user_login'] = trim($this->Input->post('user_login'));
+            $data['user_email'] = trim($this->Input->post('user_email'));// no filter email here, it will be validate later.
+            $data['user_password'] = trim($this->Input->post('user_password'));
+            $data['user_display_name'] = trim($this->Input->post('user_display_name'));
             $data['user_status'] = intval(trim($this->Input->post('user_status', 0)));
-            $data['user_statustext'] = trim($this->Input->post('user_statustext', null));
+            $data['user_statustext'] = trim($this->Input->post('user_statustext'));
 
             $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
 

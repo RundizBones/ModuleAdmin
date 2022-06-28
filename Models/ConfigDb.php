@@ -97,7 +97,8 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
 
         if (is_array($result)) {
             foreach ($result as $row) {
-                $output .= '    // ' . str_replace(array("\r\n", "\r", "\n"), '', $row->config_description) . PHP_EOL .
+                $configDescription = ($row->config_description ?? '');
+                $output .= '    // ' . str_replace(array("\r\n", "\r", "\n"), '', $configDescription) . PHP_EOL .
                     '    (object) [' . PHP_EOL;
                 if (is_object($row)) {
                     foreach ($row as $fieldName => $fieldValue) {
@@ -107,7 +108,7 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
                 }
                 $output .= '    ],' . PHP_EOL;
             }// endforeach;
-            unset($row);
+            unset($configDescription, $row);
         }
 
         unset($result);

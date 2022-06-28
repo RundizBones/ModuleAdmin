@@ -61,7 +61,7 @@ class RdbaString
      * @param string $characters The allowed characters.
      * @return string Return generated random string.
      */
-    public function randomUnicode(int $length = 10, string $characters = null): string
+    public function randomUnicode(int $length = 10, string $characters = ''): string
     {
         if (trim($characters) == null) {
             // if set null to characters

@@ -269,7 +269,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
 
             if (isset($formValidated) && $formValidated === true && array_key_exists('user_password', $data)) {
                 // if form validation passed.
-                if (!empty(trim($data['user_password']))) {
+                if (!is_null($data['user_password']) && !empty(trim($data['user_password']))) {
                     // if password is not empty (it is changing).
                     // try to hash the password if it will be success.
                     // hash password. -----------------------------------------------------------
