@@ -50,13 +50,13 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/css/rdta/rdta-bundled.min.css',
-                    'version' => '2.2.1',
+                    'version' => '2.2.2',
                 ],
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/css/datatables-bundled.min.css',
-                    'version' => '1.11.4',
+                    'version' => '1.12.1',
                 ],
                 // end datatables----------.
                 [
@@ -93,7 +93,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/js/rdta/rdta-bundled.min.js',
-                    'version' => '2.2.1',
+                    'version' => '2.2.2',
                 ],
                 [
                     'handle' => 'handlebars',
@@ -103,7 +103,7 @@ class ModuleAssets
                 [
                     'handle' => 'moment.js',
                     'file' => $publicModuleUrl . '/assets/vendor/moment/moment-bundled.min.js',
-                    'version' => '2.29.1',
+                    'version' => '2.29.3',
                 ],
                 [
                     'handle' => 'lodash',
@@ -113,20 +113,20 @@ class ModuleAssets
                 [
                     'handle' => 'sortableJS',
                     'file' => $publicModuleUrl . '/assets/vendor/sortablejs/Sortable.min.js',
-                    'version' => '1.14.0',
+                    'version' => '1.15.0',
                 ],
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/js/datatables-bundled.min.js',
                     'dependency' => ['rdta'],
-                    'version' => '1.11.4',
+                    'version' => '1.12.1',
                 ],
                 [
                     'handle' => 'datatables-plugins-pagination',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/plugins/pagination/input.js',
                     'dependency' => ['rdta', 'datatables'],
-                    'version' => '1.11.4',
+                    'version' => '1.12.1',
                 ],
                 // end datatables----------.
                 [
