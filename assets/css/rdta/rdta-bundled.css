@@ -179,7 +179,7 @@ samp {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2022 Fonticons, Inc.
  */
@@ -773,6 +773,18 @@ samp {
 .fa-anchor:before {
   content: "\f13d"
 }
+.fa-anchor-circle-check:before {
+  content: "\e4aa"
+}
+.fa-anchor-circle-exclamation:before {
+  content: "\e4ab"
+}
+.fa-anchor-circle-xmark:before {
+  content: "\e4ac"
+}
+.fa-anchor-lock:before {
+  content: "\e4ad"
+}
 .fa-angle-down:before {
   content: "\f107"
 }
@@ -838,6 +850,12 @@ samp {
 .fa-sort-amount-down-alt:before {
   content: "\f884"
 }
+.fa-arrow-down-up-across-line:before {
+  content: "\e4af"
+}
+.fa-arrow-down-up-lock:before {
+  content: "\e4b0"
+}
 .fa-arrow-down-wide-short:before,
 .fa-sort-amount-asc:before,
 .fa-sort-amount-down:before {
@@ -877,6 +895,9 @@ samp {
 .fa-arrow-right-to-bracket:before,
 .fa-sign-in:before {
   content: "\f090"
+}
+.fa-arrow-right-to-city:before {
+  content: "\e4b3"
 }
 .fa-arrow-left-rotate:before,
 .fa-arrow-rotate-back:before,
@@ -923,9 +944,18 @@ samp {
 .fa-arrow-up-from-bracket:before {
   content: "\e09a"
 }
+.fa-arrow-up-from-ground-water:before {
+  content: "\e4b5"
+}
+.fa-arrow-up-from-water-pump:before {
+  content: "\e4b6"
+}
 .fa-arrow-up-long:before,
 .fa-long-arrow-up:before {
   content: "\f176"
+}
+.fa-arrow-up-right-dots:before {
+  content: "\e4b7"
 }
 .fa-arrow-up-right-from-square:before,
 .fa-external-link:before {
@@ -943,14 +973,44 @@ samp {
 .fa-sort-alpha-up-alt:before {
   content: "\f882"
 }
+.fa-arrows-down-to-line:before {
+  content: "\e4b8"
+}
+.fa-arrows-down-to-people:before {
+  content: "\e4b9"
+}
 .fa-arrows-h:before,
 .fa-arrows-left-right:before {
   content: "\f07e"
+}
+.fa-arrows-left-right-to-line:before {
+  content: "\e4ba"
 }
 .fa-arrows-rotate:before,
 .fa-refresh:before,
 .fa-sync:before {
   content: "\f021"
+}
+.fa-arrows-spin:before {
+  content: "\e4bb"
+}
+.fa-arrows-split-up-and-left:before {
+  content: "\e4bc"
+}
+.fa-arrows-to-circle:before {
+  content: "\e4bd"
+}
+.fa-arrows-to-dot:before {
+  content: "\e4be"
+}
+.fa-arrows-to-eye:before {
+  content: "\e4bf"
+}
+.fa-arrows-turn-right:before {
+  content: "\e4c0"
+}
+.fa-arrows-turn-to-dots:before {
+  content: "\e4c1"
 }
 .fa-arrows-up-down:before,
 .fa-arrows-v:before {
@@ -959,6 +1019,9 @@ samp {
 .fa-arrows-up-down-left-right:before,
 .fa-arrows:before {
   content: "\f047"
+}
+.fa-arrows-up-to-line:before {
+  content: "\e4c2"
 }
 .fa-asterisk:before {
   content: "\2a"
@@ -1161,6 +1224,9 @@ samp {
 .fa-book-bible:before {
   content: "\f647"
 }
+.fa-book-bookmark:before {
+  content: "\e0bb"
+}
 .fa-book-journal-whills:before,
 .fa-journal-whills:before {
   content: "\f66a"
@@ -1196,6 +1262,21 @@ samp {
 .fa-border-top-left:before {
   content: "\f853"
 }
+.fa-bore-hole:before {
+  content: "\e4c3"
+}
+.fa-bottle-droplet:before {
+  content: "\e4c4"
+}
+.fa-bottle-water:before {
+  content: "\e4c5"
+}
+.fa-bowl-food:before {
+  content: "\e4c6"
+}
+.fa-bowl-rice:before {
+  content: "\e2eb"
+}
 .fa-bowling-ball:before {
   content: "\f436"
 }
@@ -1211,6 +1292,9 @@ samp {
 }
 .fa-box-tissue:before {
   content: "\e05b"
+}
+.fa-boxes-packing:before {
+  content: "\e4c7"
 }
 .fa-boxes-alt:before,
 .fa-boxes-stacked:before,
@@ -1229,6 +1313,24 @@ samp {
 .fa-bread-slice:before {
   content: "\f7ec"
 }
+.fa-bridge:before {
+  content: "\e4c8"
+}
+.fa-bridge-circle-check:before {
+  content: "\e4c9"
+}
+.fa-bridge-circle-exclamation:before {
+  content: "\e4ca"
+}
+.fa-bridge-circle-xmark:before {
+  content: "\e4cb"
+}
+.fa-bridge-lock:before {
+  content: "\e4cc"
+}
+.fa-bridge-water:before {
+  content: "\e4ce"
+}
 .fa-briefcase:before {
   content: "\f0b1"
 }
@@ -1246,14 +1348,32 @@ samp {
 .fa-brush:before {
   content: "\f55d"
 }
+.fa-bucket:before {
+  content: "\e4cf"
+}
 .fa-bug:before {
   content: "\f188"
 }
 .fa-bug-slash:before {
   content: "\e490"
 }
+.fa-bugs:before {
+  content: "\e4d0"
+}
 .fa-building:before {
   content: "\f1ad"
+}
+.fa-building-circle-arrow-right:before {
+  content: "\e4d1"
+}
+.fa-building-circle-check:before {
+  content: "\e4d2"
+}
+.fa-building-circle-exclamation:before {
+  content: "\e4d3"
+}
+.fa-building-circle-xmark:before {
+  content: "\e4d4"
 }
 .fa-bank:before,
 .fa-building-columns:before,
@@ -1261,6 +1381,27 @@ samp {
 .fa-museum:before,
 .fa-university:before {
   content: "\f19c"
+}
+.fa-building-flag:before {
+  content: "\e4d5"
+}
+.fa-building-lock:before {
+  content: "\e4d6"
+}
+.fa-building-ngo:before {
+  content: "\e4d7"
+}
+.fa-building-shield:before {
+  content: "\e4d8"
+}
+.fa-building-un:before {
+  content: "\e4d9"
+}
+.fa-building-user:before {
+  content: "\e4da"
+}
+.fa-building-wheat:before {
+  content: "\e4db"
 }
 .fa-bullhorn:before {
   content: "\f0a1"
@@ -1271,6 +1412,9 @@ samp {
 .fa-burger:before,
 .fa-hamburger:before {
   content: "\f805"
+}
+.fa-burst:before {
+  content: "\e4dc"
 }
 .fa-bus:before {
   content: "\f207"
@@ -1350,8 +1494,12 @@ samp {
 .fa-car-battery:before {
   content: "\f5df"
 }
+.fa-car-burst:before,
 .fa-car-crash:before {
   content: "\f5e1"
+}
+.fa-car-on:before {
+  content: "\e4dd"
 }
 .fa-car-alt:before,
 .fa-car-rear:before {
@@ -1359,6 +1507,9 @@ samp {
 }
 .fa-car-side:before {
   content: "\f5e4"
+}
+.fa-car-tunnel:before {
+  content: "\e4de"
 }
 .fa-caravan:before {
   content: "\f8ff"
@@ -1451,6 +1602,9 @@ samp {
 .fa-pie-chart:before {
   content: "\f200"
 }
+.fa-chart-simple:before {
+  content: "\e473"
+}
 .fa-check:before {
   content: "\f00c"
 }
@@ -1502,6 +1656,18 @@ samp {
 }
 .fa-child:before {
   content: "\f1ae"
+}
+.fa-child-dress:before {
+  content: "\e59c"
+}
+.fa-child-reaching:before {
+  content: "\e59d"
+}
+.fa-child-rifle:before {
+  content: "\e4e0"
+}
+.fa-children:before {
+  content: "\e4e1"
 }
 .fa-church:before {
   content: "\f51d"
@@ -1581,6 +1747,9 @@ samp {
 .fa-minus-circle:before {
   content: "\f056"
 }
+.fa-circle-nodes:before {
+  content: "\e4e2"
+}
 .fa-circle-notch:before {
   content: "\f1ce"
 }
@@ -1640,6 +1809,12 @@ samp {
 .fa-clipboard-list:before {
   content: "\f46d"
 }
+.fa-clipboard-question:before {
+  content: "\e4e3"
+}
+.fa-clipboard-user:before {
+  content: "\f7f3"
+}
 .fa-clock-four:before,
 .fa-clock:before {
   content: "\f017"
@@ -1667,6 +1842,10 @@ samp {
 .fa-cloud-upload:before {
   content: "\f0ee"
 }
+.fa-cloud-bolt:before,
+.fa-thunderstorm:before {
+  content: "\f76c"
+}
 .fa-cloud-meatball:before {
   content: "\f73b"
 }
@@ -1681,6 +1860,9 @@ samp {
 }
 .fa-cloud-showers-heavy:before {
   content: "\f740"
+}
+.fa-cloud-showers-water:before {
+  content: "\e4e4"
 }
 .fa-cloud-sun:before {
   content: "\f6c4"
@@ -1757,6 +1939,9 @@ samp {
 .fa-compress:before {
   content: "\f066"
 }
+.fa-computer:before {
+  content: "\e4e5"
+}
 .fa-computer-mouse:before,
 .fa-mouse:before {
   content: "\f8cc"
@@ -1775,6 +1960,9 @@ samp {
 }
 .fa-couch:before {
   content: "\f4b8"
+}
+.fa-cow:before {
+  content: "\f6c8"
 }
 .fa-credit-card-alt:before,
 .fa-credit-card:before {
@@ -1810,6 +1998,9 @@ samp {
 }
 .fa-cubes:before {
   content: "\f1b3"
+}
+.fa-cubes-stacked:before {
+  content: "\e4e6"
 }
 .fa-d:before {
   content: "\44"
@@ -1880,6 +2071,9 @@ samp {
 }
 .fa-disease:before {
   content: "\f7fa"
+}
+.fa-display:before {
+  content: "\e163"
 }
 .fa-divide:before {
   content: "\f529"
@@ -2012,6 +2206,9 @@ samp {
 .fa-envelope:before {
   content: "\f0e0"
 }
+.fa-envelope-circle-check:before {
+  content: "\e4e8"
+}
 .fa-envelope-open:before {
   content: "\f2b6"
 }
@@ -2041,6 +2238,9 @@ samp {
 }
 .fa-expand:before {
   content: "\f065"
+}
+.fa-explosion:before {
+  content: "\e4e9"
 }
 .fa-eye:before {
   content: "\f06e"
@@ -2210,6 +2410,9 @@ samp {
 .fa-faucet:before {
   content: "\e005"
 }
+.fa-faucet-drip:before {
+  content: "\e006"
+}
 .fa-fax:before {
   content: "\f1ac"
 }
@@ -2219,6 +2422,9 @@ samp {
 .fa-feather-alt:before,
 .fa-feather-pointed:before {
   content: "\f56b"
+}
+.fa-ferry:before {
+  content: "\e4ea"
 }
 .fa-file:before {
   content: "\f15b"
@@ -2233,6 +2439,24 @@ samp {
 }
 .fa-file-audio:before {
   content: "\f1c7"
+}
+.fa-file-circle-check:before {
+  content: "\e493"
+}
+.fa-file-circle-exclamation:before {
+  content: "\e4eb"
+}
+.fa-file-circle-minus:before {
+  content: "\e4ed"
+}
+.fa-file-circle-plus:before {
+  content: "\e4ee"
+}
+.fa-file-circle-question:before {
+  content: "\e4ef"
+}
+.fa-file-circle-xmark:before {
+  content: "\e494"
 }
 .fa-file-code:before {
   content: "\f1c9"
@@ -2274,11 +2498,18 @@ samp {
 .fa-file-pdf:before {
   content: "\f1c1"
 }
+.fa-file-edit:before,
+.fa-file-pen:before {
+  content: "\f31c"
+}
 .fa-file-powerpoint:before {
   content: "\f1c4"
 }
 .fa-file-prescription:before {
   content: "\f572"
+}
+.fa-file-shield:before {
+  content: "\e4f0"
 }
 .fa-file-signature:before {
   content: "\f573"
@@ -2322,6 +2553,9 @@ samp {
 .fa-fire:before {
   content: "\f06d"
 }
+.fa-fire-burner:before {
+  content: "\e4f1"
+}
 .fa-fire-extinguisher:before {
   content: "\f134"
 }
@@ -2336,6 +2570,9 @@ samp {
 .fa-fish:before {
   content: "\f578"
 }
+.fa-fish-fins:before {
+  content: "\e4f2"
+}
 .fa-flag:before {
   content: "\f024"
 }
@@ -2348,6 +2585,9 @@ samp {
 .fa-flask:before {
   content: "\f0c3"
 }
+.fa-flask-vial:before {
+  content: "\e4f3"
+}
 .fa-floppy-disk:before,
 .fa-save:before {
   content: "\f0c7"
@@ -2355,8 +2595,12 @@ samp {
 .fa-florin-sign:before {
   content: "\e184"
 }
+.fa-folder-blank:before,
 .fa-folder:before {
   content: "\f07b"
+}
+.fa-folder-closed:before {
+  content: "\e185"
 }
 .fa-folder-minus:before {
   content: "\f65d"
@@ -2456,6 +2700,12 @@ samp {
 .fa-gifts:before {
   content: "\f79c"
 }
+.fa-glass-water:before {
+  content: "\e4f4"
+}
+.fa-glass-water-droplet:before {
+  content: "\e4f5"
+}
 .fa-glasses:before {
   content: "\f530"
 }
@@ -2491,6 +2741,9 @@ samp {
 }
 .fa-grip-vertical:before {
   content: "\f58e"
+}
+.fa-group-arrows-rotate:before {
+  content: "\e4f6"
 }
 .fa-guarani-sign:before {
   content: "\e19a"
@@ -2537,6 +2790,9 @@ samp {
 .fa-hand-holding-water:before {
   content: "\f4c1"
 }
+.fa-hand-holding-hand:before {
+  content: "\e4f7"
+}
 .fa-hand-holding-heart:before {
   content: "\f4be"
 }
@@ -2576,6 +2832,9 @@ samp {
 .fa-hand-spock:before {
   content: "\f259"
 }
+.fa-handcuffs:before {
+  content: "\e4f8"
+}
 .fa-hands:before,
 .fa-sign-language:before,
 .fa-signing:before {
@@ -2587,6 +2846,9 @@ samp {
 .fa-hands-asl-interpreting:before {
   content: "\f2a3"
 }
+.fa-hands-bound:before {
+  content: "\e4f9"
+}
 .fa-hands-bubbles:before,
 .fa-hands-wash:before {
   content: "\e05e"
@@ -2596,6 +2858,12 @@ samp {
 }
 .fa-hands-holding:before {
   content: "\f4c2"
+}
+.fa-hands-holding-child:before {
+  content: "\e4fa"
+}
+.fa-hands-holding-circle:before {
+  content: "\e4fb"
 }
 .fa-hands-praying:before,
 .fa-praying-hands:before {
@@ -2607,6 +2875,10 @@ samp {
 .fa-hands-helping:before,
 .fa-handshake-angle:before {
   content: "\f4c4"
+}
+.fa-handshake-alt:before,
+.fa-handshake-simple:before {
+  content: "\f4c6"
 }
 .fa-handshake-alt-slash:before,
 .fa-handshake-simple-slash:before {
@@ -2663,6 +2935,24 @@ samp {
 .fa-heart:before {
   content: "\f004"
 }
+.fa-heart-circle-bolt:before {
+  content: "\e4fc"
+}
+.fa-heart-circle-check:before {
+  content: "\e4fd"
+}
+.fa-heart-circle-exclamation:before {
+  content: "\e4fe"
+}
+.fa-heart-circle-minus:before {
+  content: "\e4ff"
+}
+.fa-heart-circle-plus:before {
+  content: "\e500"
+}
+.fa-heart-circle-xmark:before {
+  content: "\e501"
+}
 .fa-heart-broken:before,
 .fa-heart-crack:before {
   content: "\f7a9"
@@ -2674,13 +2964,25 @@ samp {
 .fa-helicopter:before {
   content: "\f533"
 }
+.fa-helicopter-symbol:before {
+  content: "\e502"
+}
 .fa-hard-hat:before,
 .fa-hat-hard:before,
 .fa-helmet-safety:before {
   content: "\f807"
 }
+.fa-helmet-un:before {
+  content: "\e503"
+}
 .fa-highlighter:before {
   content: "\f591"
+}
+.fa-hill-avalanche:before {
+  content: "\e507"
+}
+.fa-hill-rockslide:before {
+  content: "\e508"
 }
 .fa-hippo:before {
   content: "\f6ed"
@@ -2755,15 +3057,57 @@ samp {
 .fa-house-chimney-window:before {
   content: "\e00d"
 }
+.fa-house-circle-check:before {
+  content: "\e509"
+}
+.fa-house-circle-exclamation:before {
+  content: "\e50a"
+}
+.fa-house-circle-xmark:before {
+  content: "\e50b"
+}
 .fa-house-crack:before {
   content: "\e3b1"
+}
+.fa-house-fire:before {
+  content: "\e50c"
+}
+.fa-house-flag:before {
+  content: "\e50d"
+}
+.fa-house-flood-water:before {
+  content: "\e50e"
+}
+.fa-house-flood-water-circle-arrow-right:before {
+  content: "\e50f"
 }
 .fa-house-laptop:before,
 .fa-laptop-house:before {
   content: "\e066"
 }
+.fa-house-lock:before {
+  content: "\e510"
+}
 .fa-house-medical:before {
   content: "\e3b2"
+}
+.fa-house-medical-circle-check:before {
+  content: "\e511"
+}
+.fa-house-medical-circle-exclamation:before {
+  content: "\e512"
+}
+.fa-house-medical-circle-xmark:before {
+  content: "\e513"
+}
+.fa-house-medical-flag:before {
+  content: "\e514"
+}
+.fa-house-signal:before {
+  content: "\e012"
+}
+.fa-house-tsunami:before {
+  content: "\e515"
 }
 .fa-home-user:before,
 .fa-house-user:before {
@@ -2772,6 +3116,9 @@ samp {
 .fa-hryvnia-sign:before,
 .fa-hryvnia:before {
   content: "\f6f2"
+}
+.fa-hurricane:before {
+  content: "\f751"
 }
 .fa-i:before {
   content: "\49"
@@ -2839,6 +3186,12 @@ samp {
 .fa-j:before {
   content: "\4a"
 }
+.fa-jar:before {
+  content: "\e516"
+}
+.fa-jar-wheat:before {
+  content: "\e517"
+}
 .fa-jedi:before {
   content: "\f669"
 }
@@ -2846,8 +3199,14 @@ samp {
 .fa-jet-fighter:before {
   content: "\f0fb"
 }
+.fa-jet-fighter-up:before {
+  content: "\e518"
+}
 .fa-joint:before {
   content: "\f595"
+}
+.fa-jug-detergent:before {
+  content: "\e519"
 }
 .fa-k:before {
   content: "\4b"
@@ -2871,14 +3230,27 @@ samp {
 .fa-kit-medical:before {
   content: "\f479"
 }
+.fa-kitchen-set:before {
+  content: "\e51a"
+}
 .fa-kiwi-bird:before {
   content: "\f535"
 }
 .fa-l:before {
   content: "\4c"
 }
+.fa-land-mine-on:before {
+  content: "\e51b"
+}
 .fa-landmark:before {
   content: "\f66f"
+}
+.fa-landmark-alt:before,
+.fa-landmark-dome:before {
+  content: "\f752"
+}
+.fa-landmark-flag:before {
+  content: "\e51c"
 }
 .fa-language:before {
   content: "\f1ab"
@@ -2888,6 +3260,9 @@ samp {
 }
 .fa-laptop-code:before {
   content: "\f5fc"
+}
+.fa-laptop-file:before {
+  content: "\e51d"
 }
 .fa-laptop-medical:before {
   content: "\f812"
@@ -2923,6 +3298,9 @@ samp {
 }
 .fa-lightbulb:before {
   content: "\f0eb"
+}
+.fa-lines-leaning:before {
+  content: "\e51e"
 }
 .fa-chain:before,
 .fa-link:before {
@@ -2972,11 +3350,17 @@ samp {
 .fa-map-marker:before {
   content: "\f041"
 }
+.fa-location-pin-lock:before {
+  content: "\e51f"
+}
 .fa-lock:before {
   content: "\f023"
 }
 .fa-lock-open:before {
   content: "\f3c1"
+}
+.fa-locust:before {
+  content: "\e520"
 }
 .fa-lungs:before {
   content: "\f604"
@@ -2993,6 +3377,12 @@ samp {
 .fa-magnifying-glass:before,
 .fa-search:before {
   content: "\f002"
+}
+.fa-magnifying-glass-arrow-right:before {
+  content: "\e521"
+}
+.fa-magnifying-glass-chart:before {
+  content: "\e522"
 }
 .fa-magnifying-glass-dollar:before,
 .fa-search-dollar:before {
@@ -3036,6 +3426,9 @@ samp {
 .fa-mars-and-venus:before {
   content: "\f224"
 }
+.fa-mars-and-venus-burst:before {
+  content: "\e523"
+}
 .fa-mars-double:before {
   content: "\f227"
 }
@@ -3068,9 +3461,15 @@ samp {
 .fa-mask-face:before {
   content: "\e1d7"
 }
+.fa-mask-ventilator:before {
+  content: "\e524"
+}
 .fa-masks-theater:before,
 .fa-theater-masks:before {
   content: "\f630"
+}
+.fa-mattress-pillow:before {
+  content: "\e525"
 }
 .fa-expand-arrows-alt:before,
 .fa-maximize:before {
@@ -3137,6 +3536,13 @@ samp {
 .fa-mobile-button:before {
   content: "\f10b"
 }
+.fa-mobile-retro:before {
+  content: "\e527"
+}
+.fa-mobile-android-alt:before,
+.fa-mobile-screen:before {
+  content: "\f3cf"
+}
 .fa-mobile-alt:before,
 .fa-mobile-screen-button:before {
   content: "\f3cd"
@@ -3152,8 +3558,20 @@ samp {
 .fa-money-bill-wave-alt:before {
   content: "\f53b"
 }
+.fa-money-bill-transfer:before {
+  content: "\e528"
+}
+.fa-money-bill-trend-up:before {
+  content: "\e529"
+}
 .fa-money-bill-wave:before {
   content: "\f53a"
+}
+.fa-money-bill-wheat:before {
+  content: "\e52a"
+}
+.fa-money-bills:before {
+  content: "\e1f3"
 }
 .fa-money-check:before {
   content: "\f53c"
@@ -3174,11 +3592,26 @@ samp {
 .fa-mosque:before {
   content: "\f678"
 }
+.fa-mosquito:before {
+  content: "\e52b"
+}
+.fa-mosquito-net:before {
+  content: "\e52c"
+}
 .fa-motorcycle:before {
   content: "\f21c"
 }
+.fa-mound:before {
+  content: "\e52d"
+}
 .fa-mountain:before {
   content: "\f6fc"
+}
+.fa-mountain-city:before {
+  content: "\e52e"
+}
+.fa-mountain-sun:before {
+  content: "\e52f"
 }
 .fa-mug-hot:before {
   content: "\f7b6"
@@ -3226,6 +3659,9 @@ samp {
 }
 .fa-oil-can:before {
   content: "\f613"
+}
+.fa-oil-well:before {
+  content: "\e532"
 }
 .fa-om:before {
   content: "\f679"
@@ -3320,6 +3756,21 @@ samp {
 .fa-people-carry:before {
   content: "\f4ce"
 }
+.fa-people-group:before {
+  content: "\e533"
+}
+.fa-people-line:before {
+  content: "\e534"
+}
+.fa-people-pulling:before {
+  content: "\e535"
+}
+.fa-people-robbery:before {
+  content: "\e536"
+}
+.fa-people-roof:before {
+  content: "\e537"
+}
 .fa-pepper-hot:before {
   content: "\f816"
 }
@@ -3331,12 +3782,52 @@ samp {
 .fa-person:before {
   content: "\f183"
 }
+.fa-person-arrow-down-to-line:before {
+  content: "\e538"
+}
+.fa-person-arrow-up-from-line:before {
+  content: "\e539"
+}
 .fa-biking:before,
 .fa-person-biking:before {
   content: "\f84a"
 }
 .fa-person-booth:before {
   content: "\f756"
+}
+.fa-person-breastfeeding:before {
+  content: "\e53a"
+}
+.fa-person-burst:before {
+  content: "\e53b"
+}
+.fa-person-cane:before {
+  content: "\e53c"
+}
+.fa-person-chalkboard:before {
+  content: "\e53d"
+}
+.fa-person-circle-check:before {
+  content: "\e53e"
+}
+.fa-person-circle-exclamation:before {
+  content: "\e53f"
+}
+.fa-person-circle-minus:before {
+  content: "\e540"
+}
+.fa-person-circle-plus:before {
+  content: "\e541"
+}
+.fa-person-circle-question:before {
+  content: "\e542"
+}
+.fa-person-circle-xmark:before {
+  content: "\e543"
+}
+.fa-digging:before,
+.fa-person-digging:before {
+  content: "\f85e"
 }
 .fa-diagnoses:before,
 .fa-person-dots-from-line:before {
@@ -3346,17 +3837,56 @@ samp {
 .fa-person-dress:before {
   content: "\f182"
 }
+.fa-person-dress-burst:before {
+  content: "\e544"
+}
+.fa-person-drowning:before {
+  content: "\e545"
+}
+.fa-person-falling:before {
+  content: "\e546"
+}
+.fa-person-falling-burst:before {
+  content: "\e547"
+}
+.fa-person-half-dress:before {
+  content: "\e548"
+}
+.fa-person-harassing:before {
+  content: "\e549"
+}
 .fa-hiking:before,
 .fa-person-hiking:before {
   content: "\f6ec"
+}
+.fa-person-military-pointing:before {
+  content: "\e54a"
+}
+.fa-person-military-rifle:before {
+  content: "\e54b"
+}
+.fa-person-military-to-person:before {
+  content: "\e54c"
 }
 .fa-person-praying:before,
 .fa-pray:before {
   content: "\f683"
 }
+.fa-person-pregnant:before {
+  content: "\e31e"
+}
+.fa-person-rays:before {
+  content: "\e54d"
+}
+.fa-person-rifle:before {
+  content: "\e54e"
+}
 .fa-person-running:before,
 .fa-running:before {
   content: "\f70c"
+}
+.fa-person-shelter:before {
+  content: "\e54f"
 }
 .fa-person-skating:before,
 .fa-skating:before {
@@ -3378,9 +3908,24 @@ samp {
 .fa-swimmer:before {
   content: "\f5c4"
 }
+.fa-person-through-window:before {
+  content: "\e433"
+}
 .fa-person-walking:before,
 .fa-walking:before {
   content: "\f554"
+}
+.fa-person-walking-arrow-loop-left:before {
+  content: "\e551"
+}
+.fa-person-walking-arrow-right:before {
+  content: "\e552"
+}
+.fa-person-walking-dashed-line-arrow-right:before {
+  content: "\e553"
+}
+.fa-person-walking-luggage:before {
+  content: "\e554"
 }
 .fa-blind:before,
 .fa-person-walking-with-cane:before {
@@ -3428,17 +3973,56 @@ samp {
 .fa-plane-arrival:before {
   content: "\f5af"
 }
+.fa-plane-circle-check:before {
+  content: "\e555"
+}
+.fa-plane-circle-exclamation:before {
+  content: "\e556"
+}
+.fa-plane-circle-xmark:before {
+  content: "\e557"
+}
 .fa-plane-departure:before {
   content: "\f5b0"
 }
+.fa-plane-lock:before {
+  content: "\e558"
+}
 .fa-plane-slash:before {
   content: "\e069"
+}
+.fa-plane-up:before {
+  content: "\e22d"
+}
+.fa-plant-wilt:before {
+  content: "\e43b"
+}
+.fa-plate-wheat:before {
+  content: "\e55a"
 }
 .fa-play:before {
   content: "\f04b"
 }
 .fa-plug:before {
   content: "\f1e6"
+}
+.fa-plug-circle-bolt:before {
+  content: "\e55b"
+}
+.fa-plug-circle-check:before {
+  content: "\e55c"
+}
+.fa-plug-circle-exclamation:before {
+  content: "\e55d"
+}
+.fa-plug-circle-minus:before {
+  content: "\e55e"
+}
+.fa-plug-circle-plus:before {
+  content: "\e55f"
+}
+.fa-plug-circle-xmark:before {
+  content: "\e560"
 }
 .fa-add:before,
 .fa-plus:before {
@@ -3508,8 +4092,14 @@ samp {
 .fa-radiation:before {
   content: "\f7b9"
 }
+.fa-radio:before {
+  content: "\f8d7"
+}
 .fa-rainbow:before {
   content: "\f75b"
+}
+.fa-ranking-star:before {
+  content: "\e561"
 }
 .fa-receipt:before {
   content: "\f543"
@@ -3582,6 +4172,27 @@ samp {
 .fa-road:before {
   content: "\f018"
 }
+.fa-road-barrier:before {
+  content: "\e562"
+}
+.fa-road-bridge:before {
+  content: "\e563"
+}
+.fa-road-circle-check:before {
+  content: "\e564"
+}
+.fa-road-circle-exclamation:before {
+  content: "\e565"
+}
+.fa-road-circle-xmark:before {
+  content: "\e566"
+}
+.fa-road-lock:before {
+  content: "\e567"
+}
+.fa-road-spikes:before {
+  content: "\e568"
+}
 .fa-robot:before {
   content: "\f544"
 }
@@ -3616,6 +4227,9 @@ samp {
 .fa-ruble:before {
   content: "\f158"
 }
+.fa-rug:before {
+  content: "\e569"
+}
 .fa-ruler:before {
   content: "\f545"
 }
@@ -3637,6 +4251,12 @@ samp {
 }
 .fa-s:before {
   content: "\53"
+}
+.fa-sack-dollar:before {
+  content: "\f81d"
+}
+.fa-sack-xmark:before {
+  content: "\e56a"
 }
 .fa-sailboat:before {
   content: "\e445"
@@ -3661,6 +4281,21 @@ samp {
 }
 .fa-school:before {
   content: "\f549"
+}
+.fa-school-circle-check:before {
+  content: "\e56b"
+}
+.fa-school-circle-exclamation:before {
+  content: "\e56c"
+}
+.fa-school-circle-xmark:before {
+  content: "\e56d"
+}
+.fa-school-flag:before {
+  content: "\e56e"
+}
+.fa-school-lock:before {
+  content: "\e56f"
 }
 .fa-cut:before,
 .fa-scissors:before {
@@ -3710,6 +4345,9 @@ samp {
 .fa-share-nodes:before {
   content: "\f1e0"
 }
+.fa-sheet-plastic:before {
+  content: "\e571"
+}
 .fa-ils:before,
 .fa-shekel-sign:before,
 .fa-shekel:before,
@@ -3717,12 +4355,22 @@ samp {
 .fa-sheqel:before {
   content: "\f20b"
 }
+.fa-shield-blank:before,
 .fa-shield:before {
   content: "\f132"
 }
+.fa-shield-cat:before {
+  content: "\e572"
+}
+.fa-shield-dog:before {
+  content: "\e573"
+}
 .fa-shield-alt:before,
-.fa-shield-blank:before {
+.fa-shield-halved:before {
   content: "\f3ed"
+}
+.fa-shield-heart:before {
+  content: "\e574"
 }
 .fa-shield-virus:before {
   content: "\e06c"
@@ -3741,6 +4389,9 @@ samp {
 .fa-shop:before,
 .fa-store-alt:before {
   content: "\f54f"
+}
+.fa-shop-lock:before {
+  content: "\e4a5"
 }
 .fa-shop-slash:before,
 .fa-store-alt-slash:before {
@@ -3909,6 +4560,9 @@ samp {
 .fa-square-minus:before {
   content: "\f146"
 }
+.fa-square-nfi:before {
+  content: "\e576"
+}
 .fa-parking:before,
 .fa-square-parking:before {
   content: "\f540"
@@ -3917,6 +4571,9 @@ samp {
 .fa-pencil-square:before,
 .fa-square-pen:before {
   content: "\f14b"
+}
+.fa-square-person-confined:before {
+  content: "\e577"
 }
 .fa-phone-square:before,
 .fa-square-phone:before {
@@ -3954,10 +4611,19 @@ samp {
 .fa-square-up-right:before {
   content: "\f360"
 }
+.fa-square-virus:before {
+  content: "\e578"
+}
 .fa-square-xmark:before,
 .fa-times-square:before,
 .fa-xmark-square:before {
   content: "\f2d3"
+}
+.fa-rod-asclepius:before,
+.fa-rod-snake:before,
+.fa-staff-aesculapius:before,
+.fa-staff-snake:before {
+  content: "\e579"
 }
 .fa-stairs:before {
   content: "\e289"
@@ -4032,6 +4698,9 @@ samp {
 .fa-sun:before {
   content: "\f185"
 }
+.fa-sun-plant-wilt:before {
+  content: "\e57a"
+}
 .fa-superscript:before {
   content: "\f12b"
 }
@@ -4098,6 +4767,12 @@ samp {
 .fa-tape:before {
   content: "\f4db"
 }
+.fa-tarp:before {
+  content: "\e57b"
+}
+.fa-tarp-droplet:before {
+  content: "\e57c"
+}
 .fa-cab:before,
 .fa-taxi:before {
   content: "\f1ba"
@@ -4107,6 +4782,14 @@ samp {
 }
 .fa-teeth-open:before {
   content: "\f62f"
+}
+.fa-temperature-arrow-down:before,
+.fa-temperature-down:before {
+  content: "\e03f"
+}
+.fa-temperature-arrow-up:before,
+.fa-temperature-up:before {
+  content: "\e040"
 }
 .fa-temperature-0:before,
 .fa-temperature-empty:before,
@@ -4147,6 +4830,24 @@ samp {
 .fa-tenge-sign:before,
 .fa-tenge:before {
   content: "\f7d7"
+}
+.fa-tent:before {
+  content: "\e57d"
+}
+.fa-tent-arrow-down-to-line:before {
+  content: "\e57e"
+}
+.fa-tent-arrow-left-right:before {
+  content: "\e57f"
+}
+.fa-tent-arrow-turn-left:before {
+  content: "\e580"
+}
+.fa-tent-arrows-down:before {
+  content: "\e581"
+}
+.fa-tents:before {
+  content: "\e582"
 }
 .fa-terminal:before {
   content: "\f120"
@@ -4199,6 +4900,12 @@ samp {
 .fa-toilet-paper-slash:before {
   content: "\e072"
 }
+.fa-toilet-portable:before {
+  content: "\e583"
+}
+.fa-toilets-portable:before {
+  content: "\e584"
+}
 .fa-toolbox:before {
   content: "\f552"
 }
@@ -4208,9 +4915,18 @@ samp {
 .fa-torii-gate:before {
   content: "\f6a1"
 }
+.fa-tornado:before {
+  content: "\f76f"
+}
 .fa-broadcast-tower:before,
 .fa-tower-broadcast:before {
   content: "\f519"
+}
+.fa-tower-cell:before {
+  content: "\e585"
+}
+.fa-tower-observation:before {
+  content: "\e586"
 }
 .fa-tractor:before {
   content: "\f722"
@@ -4257,6 +4973,9 @@ samp {
 .fa-tree:before {
   content: "\f1bb"
 }
+.fa-tree-city:before {
+  content: "\e587"
+}
 .fa-exclamation-triangle:before,
 .fa-triangle-exclamation:before,
 .fa-warning:before {
@@ -4265,12 +4984,33 @@ samp {
 .fa-trophy:before {
   content: "\f091"
 }
+.fa-trowel:before {
+  content: "\e589"
+}
+.fa-trowel-bricks:before {
+  content: "\e58a"
+}
 .fa-truck:before {
   content: "\f0d1"
+}
+.fa-truck-arrow-right:before {
+  content: "\e58b"
+}
+.fa-truck-droplet:before {
+  content: "\e58c"
 }
 .fa-shipping-fast:before,
 .fa-truck-fast:before {
   content: "\f48b"
+}
+.fa-truck-field:before {
+  content: "\e58d"
+}
+.fa-truck-field-un:before {
+  content: "\e58e"
+}
+.fa-truck-front:before {
+  content: "\e2b7"
 }
 .fa-ambulance:before,
 .fa-truck-medical:before {
@@ -4284,6 +5024,9 @@ samp {
 }
 .fa-truck-pickup:before {
   content: "\f63c"
+}
+.fa-truck-plane:before {
+  content: "\e58f"
 }
 .fa-truck-loading:before,
 .fa-truck-ramp-box:before {
@@ -4435,12 +5178,27 @@ samp {
 .fa-users:before {
   content: "\f0c0"
 }
+.fa-users-between-lines:before {
+  content: "\e591"
+}
 .fa-users-cog:before,
 .fa-users-gear:before {
   content: "\f509"
 }
+.fa-users-line:before {
+  content: "\e592"
+}
+.fa-users-rays:before {
+  content: "\e593"
+}
+.fa-users-rectangle:before {
+  content: "\e594"
+}
 .fa-users-slash:before {
   content: "\e073"
+}
+.fa-users-viewfinder:before {
+  content: "\e595"
 }
 .fa-cutlery:before,
 .fa-utensils:before {
@@ -4477,6 +5235,12 @@ samp {
 .fa-vial:before {
   content: "\f492"
 }
+.fa-vial-circle-check:before {
+  content: "\e596"
+}
+.fa-vial-virus:before {
+  content: "\e597"
+}
 .fa-vials:before {
   content: "\f493"
 }
@@ -4508,6 +5272,9 @@ samp {
 .fa-voicemail:before {
   content: "\f897"
 }
+.fa-volcano:before {
+  content: "\f770"
+}
 .fa-volleyball-ball:before,
 .fa-volleyball:before {
   content: "\f45f"
@@ -4533,6 +5300,9 @@ samp {
 }
 .fa-w:before {
   content: "\57"
+}
+.fa-walkie-talkie:before {
+  content: "\f8ef"
 }
 .fa-wallet:before {
   content: "\f555"
@@ -4569,8 +5339,19 @@ samp {
 .fa-weight:before {
   content: "\f496"
 }
+.fa-wheat-alt:before,
+.fa-wheat-awn:before {
+  content: "\e2cd"
+}
+.fa-wheat-awn-circle-exclamation:before {
+  content: "\e598"
+}
 .fa-wheelchair:before {
   content: "\f193"
+}
+.fa-wheelchair-alt:before,
+.fa-wheelchair-move:before {
+  content: "\e2ce"
 }
 .fa-glass-whiskey:before,
 .fa-whiskey-glass:before {
@@ -4608,6 +5389,9 @@ samp {
 .fa-won:before {
   content: "\f159"
 }
+.fa-worm:before {
+  content: "\e599"
+}
 .fa-wrench:before {
   content: "\f0ad"
 }
@@ -4623,6 +5407,9 @@ samp {
 .fa-times:before,
 .fa-xmark:before {
   content: "\f00d"
+}
+.fa-xmarks-lines:before {
+  content: "\e59a"
 }
 .fa-y:before {
   content: "\59"
@@ -5481,6 +6268,12 @@ samp {
 .fa-neos:before {
   content: "\f612"
 }
+.fa-nfc-directional:before {
+  content: "\e530"
+}
+.fa-nfc-symbol:before {
+  content: "\e531"
+}
 .fa-nimblr:before {
   content: "\f5a8"
 }
@@ -5684,6 +6477,9 @@ samp {
 }
 .fa-schlix:before {
   content: "\f3ea"
+}
+.fa-screenpal:before {
+  content: "\e570"
 }
 .fa-scribd:before {
   content: "\f28a"
@@ -6396,6 +7192,7 @@ samp {
 :root {
   --basic-focus-color: rgba(153, 153, 153, 0.35);
   --form-focus-color: rgba(255, 182, 0, 0.35);
+  --form-invalid-border-color: #bc0000;
   --page-background-color: #FFF;
   --page-text-color: #333;
   --block-background-color: #eee;
@@ -6904,6 +7701,32 @@ input[type=week][readonly] {
   color: var(--text-disabled-color);
   cursor: not-allowed
 }
+input[type=date].rd-input-invalid,
+input[type=date]:invalid,
+input[type=datetime-local].rd-input-invalid,
+input[type=datetime-local]:invalid,
+input[type=email].rd-input-invalid,
+input[type=email]:invalid,
+input[type=month].rd-input-invalid,
+input[type=month]:invalid,
+input[type=number].rd-input-invalid,
+input[type=number]:invalid,
+input[type=password].rd-input-invalid,
+input[type=password]:invalid,
+input[type=search].rd-input-invalid,
+input[type=search]:invalid,
+input[type=tel].rd-input-invalid,
+input[type=tel]:invalid,
+input[type=text].rd-input-invalid,
+input[type=text]:invalid,
+input[type=time].rd-input-invalid,
+input[type=time]:invalid,
+input[type=url].rd-input-invalid,
+input[type=url]:invalid,
+input[type=week].rd-input-invalid,
+input[type=week]:invalid {
+  border-color: var(--form-invalid-border-color)
+}
 input[type=color] {
   cursor: pointer;
   border: 1px solid var(--block-border-color);
@@ -6937,6 +7760,12 @@ input[type=radio][disabled],
 input[type=radio][readonly] {
   background-color: var(--block-background-color);
   cursor: not-allowed
+}
+input[type=checkbox].rd-input-invalid,
+input[type=checkbox]:invalid,
+input[type=radio].rd-input-invalid,
+input[type=radio]:invalid {
+  border-color: var(--form-invalid-border-color)
 }
 input[type=checkbox]:checked {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e")
@@ -6995,6 +7824,7 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+  background-color: var(--page-background-color);
   border: 1px solid var(--block-border-color);
   border-radius: 0;
   font-family: inherit;
@@ -7007,6 +7837,14 @@ select[readonly] {
   background-color: var(--block-background-color);
   color: var(--text-disabled-color);
   cursor: not-allowed
+}
+select.rd-input-invalid,
+select:invalid {
+  border-color: var(--form-invalid-border-color)
+}
+select optgroup,
+select option {
+  background-color: var(--page-background-color)
 }
 select:not([multiple]) {
   height: 2.152em
@@ -7030,6 +7868,10 @@ textarea[readonly] {
   color: var(--text-disabled-color);
   cursor: not-allowed
 }
+textarea.rd-input-invalid,
+textarea:invalid {
+  border-color: var(--form-invalid-border-color)
+}
 .rd-inputfile {
   overflow: hidden;
   position: relative;
@@ -7038,6 +7880,9 @@ textarea[readonly] {
 .rd-inputfile:active,
 .rd-inputfile:focus {
   outline: 3px solid var(--form-focus-color)
+}
+.rd-inputfile.rd-input-invalid {
+  border-color: var(--form-invalid-border-color)!important
 }
 .rd-inputfile input[type=file] {
   display: block;
@@ -7151,7 +7996,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 /*! Rundiz Template for Admin*/
 /*!
- * Rundiz template for admin V.2.2.1
+ * Rundiz template for admin V.2.2.2
  */
 :root {
   --background-primary-disabled-color: #97c3ea;
