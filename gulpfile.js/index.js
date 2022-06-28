@@ -39,22 +39,32 @@ async function clean(cb) {
  * @since 1.1.7
  */
 function getPublicPath(cb) {
-    let exec = require('child_process').exec
+    const argv = require('yargs').argv;
+    const exec = require('node:child_process').exec;
 
-    exec('php ../../rdb system:constants --name="PUBLIC_PATH"', (err, stdout, stderr) => {
-        // the regular expression pattern of php constant has got from https://www.php.net/manual/en/language.constants.php
-        const regex = /^([a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*)(\s+)[=](\s+)(.+)$/im;
-        let m;
+    if (typeof(argv.publicPath) === 'string' && argv.publicPath !== '') {
+        let publicPath = argv.publicPath;
+        publicPath = publicPath.replace(/\\/g, '/');// normalize path for glob. replace \ to /
+        publicPath = publicPath.replace(/\"|\'$/, '');// trim quote(s) at end.
+        global.rdbPublicModuleAssetsDir = publicPath + '/' + moduleAssetsDir;
+        console.log('re-assigned global.rdbPublicModuleAssetsDir from `--pupublicPath` argument: ', rdbPublicModuleAssetsDir);
+        cb();
+    } else {
+        exec('php ../../rdb system:constants --name="PUBLIC_PATH"', (err, stdout, stderr) => {
+            // the regular expression pattern of php constant has got from https://www.php.net/manual/en/language.constants.php
+            const regex = /^([a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*)(\s+)[=](\s+)(.+)$/im;
+            let m;
 
-        if ((m = regex.exec(stdout)) !== null) {
-            // The result can be accessed through the `m`-variable.
-            if (typeof(m[4]) === 'string') {
-                global.rdbPublicModuleAssetsDir = m[4] + '/' + moduleAssetsDir;
-                console.log('re-assigned global.rdbPublicModuleAssetsDir: ', rdbPublicModuleAssetsDir);
+            if ((m = regex.exec(stdout)) !== null) {
+                // The result can be accessed through the `m`-variable.
+                if (typeof(m[4]) === 'string') {
+                    global.rdbPublicModuleAssetsDir = m[4] + '/' + moduleAssetsDir;
+                    console.log('re-assigned global.rdbPublicModuleAssetsDir: ', rdbPublicModuleAssetsDir);
+                }
             }
-        }
-        cb(err);
-    });
+            cb(err);
+        });
+    }
 }// getPublicPath
 
 
@@ -91,6 +101,7 @@ function watchFileChanged(cb) {
 }// watchFileChanged
 
 
+// exports. =============================================================
 exports.default = series(
     getPublicPath,
     clean,
