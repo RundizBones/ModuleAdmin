@@ -47,7 +47,7 @@ function getPublicPath(cb) {
         publicPath = publicPath.replace(/\\/g, '/');// normalize path for glob. replace \ to /
         publicPath = publicPath.replace(/\"|\'$/, '');// trim quote(s) at end.
         global.rdbPublicModuleAssetsDir = publicPath + '/' + moduleAssetsDir;
-        console.log('re-assigned global.rdbPublicModuleAssetsDir from `--pupublicPath` argument: ', rdbPublicModuleAssetsDir);
+        console.log('re-assigned global.rdbPublicModuleAssetsDir from `--publicPath` argument: ', rdbPublicModuleAssetsDir);
         cb();
     } else {
         exec('php ../../rdb system:constants --name="PUBLIC_PATH"', (err, stdout, stderr) => {
