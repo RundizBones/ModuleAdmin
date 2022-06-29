@@ -41,9 +41,11 @@ async function clean(cb) {
 function getPublicPath(cb) {
     const argv = require('yargs').argv;
     const exec = require('node:child_process').exec;
+    const path = require('path');
 
     if (typeof(argv.publicPath) === 'string' && argv.publicPath !== '') {
         let publicPath = argv.publicPath;
+        publicPath = path.resolve(publicPath);// trim trailing slash.
         publicPath = publicPath.replace(/\\/g, '/');// normalize path for glob. replace \ to /
         publicPath = publicPath.replace(/\"|\'$/, '');// trim quote(s) at end.
         global.rdbPublicModuleAssetsDir = publicPath + '/' + moduleAssetsDir;
