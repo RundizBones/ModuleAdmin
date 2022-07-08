@@ -4,6 +4,7 @@
 .dist
 .phpdoc
 .phpunit.result.cache
+.vscode
 assets-src/vendor
 config/development
 config/production
