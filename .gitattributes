@@ -50,6 +50,7 @@ Tests export-ignore
 assets-src export-ignore
 gulpfile.js export-ignore
 node_modules export-ignore
+node_tasks export-ignore
 package.json export-ignore
 package-lock.json export-ignore
 phpdoc.xml export-ignore
