@@ -8,7 +8,7 @@
  * Gettext Domain: rdbadmin
  * 
  * @package RdbAdmin
- * @version 1.2.2
+ * @version 1.2.3
  * @license http://opensource.org/licenses/MIT MIT
  */
 
