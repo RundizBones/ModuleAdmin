@@ -103,7 +103,7 @@ class ModuleAssets
                 [
                     'handle' => 'moment.js',
                     'file' => $publicModuleUrl . '/assets/vendor/moment/moment-bundled.min.js',
-                    'version' => '2.29.3',
+                    'version' => '2.29.4',
                 ],
                 [
                     'handle' => 'lodash',
