@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "Admin module for RundizBones framework.",
     "private": true,
-    "main": "gulpfile.js",
+    "type": "module",
+    "main": "node_tasks/index.js",
     "author": "Vee W.",
     "license": "MIT",
     "repository": {},
@@ -28,25 +29,20 @@
         "tippy.js": "^6.3.7"
     },
     "devDependencies": {
+        "chokidar": "^3.5.3",
+        "clean-css": "^5.3.0",
+        "cli-color": "^2.0.3",
+        "concat-with-sourcemaps": "^1.1.0",
         "del": "^6.1.1",
-        "gulp": "^4.0.2",
-        "gulp-cached": "^1.1.1",
-        "gulp-clean-css": "^4.3.0",
-        "gulp-concat": "^2.6.1",
-        "gulp-exec": "^5.0.0",
-        "gulp-header": "^2.0.9",
-        "gulp-print": "^5.0.2",
-        "gulp-rename": "^2.0.0",
-        "gulp-replace": "^1.1.3",
-        "gulp-sourcemaps": "^3.0.0",
-        "gulp-uglify-es": "^3.0.0",
-        "merge-stream": "^2.0.0"
+        "globby": "^13.1.2",
+        "terser": "^5.14.1",
+        "uglify-js": "^3.16.2",
+        "yargs": "^17.5.1"
     },
     "scripts": {
-        "build": "gulp",
-        "pack": "gulp pack",
-        "writeVersions": "gulp writeVersions",
-        "watch": "gulp watch",
+        "build": "node node_tasks/index.js build",
+        "writeVersions": "node node_tasks/index.js writeVersions",
+        "watch": "node node_tasks/index.js watch",
         "test": "echo \"Error: no test specified\" && exit 1"
     }
 }
