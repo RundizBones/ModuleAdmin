@@ -1,0 +1,158 @@
+{
+    "moduleName": "RdbAdmin",
+    "moduleAssetsDir": "Modules/RdbAdmin/assets",
+    "clean": {
+        "targets": [
+            {
+                "patterns": "assets",
+                "options": {
+                }
+            }
+        ],
+        "publicModuleAssets": true
+    },
+    "copyNodePackages": [
+        {
+            "patterns": "node_modules/datatables.net-dt/images/**",
+            "destination": "assets/vendor/datatables.net/images"
+        },
+        {
+            "patterns": "node_modules/datatables.net/License.txt",
+            "destination": "assets/vendor/datatables.net"
+        },
+        {
+            "patterns": "node_modules/datatables.net-plugins/pagination/**",
+            "destination": "assets/vendor/datatables.net/plugins/pagination"
+        },
+
+        {
+            "patterns": "node_modules/@fortawesome/fontawesome-free/webfonts/**",
+            "destination": "assets/css/webfonts"
+        },
+        {
+            "patterns": "node_modules/@fortawesome/fontawesome-free/LICENSE.txt",
+            "rename": "fontawesome-license.txt",
+            "destination": "assets/vendor/"
+        },
+
+        {
+            "patterns": "node_modules/handlebars/dist/**",
+            "destination": "assets/vendor/handlebars"
+        },
+        {
+            "patterns": "node_modules/handlebars/LICENSE",
+            "destination": "assets/vendor/handlebars"
+        },
+
+        {
+            "patterns": "node_modules/jquery/LICENSE.txt",
+            "rename": "jquery-license.txt",
+            "destination": "assets/vendor"
+        },
+
+        {
+            "patterns": "node_modules/lodash/lodash*.js",
+            "destination": "assets/vendor/lodash"
+        },
+        {
+            "patterns": "node_modules/lodash/LICENSE",
+            "destination": "assets/vendor/lodash"
+        },
+
+        {
+            "patterns": "node_modules/moment/LICENSE",
+            "destination": "assets/vendor/moment"
+        },
+        {
+            "patterns": "node_modules/moment-timezone/LICENSE",
+            "destination": "assets/vendor/moment/timezone"
+        },
+
+        {
+            "patterns": "node_modules/rundiz-template-for-admin/assets/css/sanitize/LICENSE.md",
+            "rename": "sanitize-license.md",
+            "destination": "assets/vendor"
+        },
+        {
+            "patterns": "node_modules/@popperjs/core/README*",
+            "rename": "popper-readme.md",
+            "destination": "assets/vendor"
+        },
+        {
+            "patterns": "node_modules/rundiz-template-for-admin/assets/js/smartmenus/LICENSE*",
+            "rename": "smartmenus-license.txt",
+            "destination": "assets/vendor"
+        },
+        {
+            "patterns": "node_modules/rundiz-template-for-admin/assets/js/sticky-sidebar/LICENSE.md",
+            "rename": "sticky-sidebar-license.md",
+            "destination": "assets/vendor"
+        },
+        {
+            "patterns": "node_modules/rundiz-template-for-admin/assets/js/resize-sensor/ResizeSensor-license",
+            "rename": "resizesensor-license.txt",
+            "destination": "assets/vendor"
+        },
+
+        {
+            "patterns": "node_modules/sortablejs/*.js",
+            "destination": "assets/vendor/sortablejs"
+        },
+        {
+            "patterns": "node_modules/sortablejs/LICENSE",
+            "destination": "assets/vendor/sortablejs"
+        },
+        {
+            "patterns": "node_modules/sortablejs/modular/**",
+            "destination": "assets/vendor/sortablejs/modular"
+        }
+    ],
+    "bundleAssets": [
+        "config/bundleMoment.mjs",
+        "config/bundleDt.mjs",
+        "config/bundleRdta.mjs"
+    ],
+    "copyAssetsSrc": [
+        "config/copyAssetsSrc.mjs"
+    ],
+    "copyAssetsToPublic": true,
+    "writeVersions": [
+        {
+            "nodePackage": "datatables.net-dt",
+            "phpHandlesRegex": [
+                "datatables",
+                "datatables\\-plugins\\-pagination"
+            ]
+        },
+        {
+            "nodePackage": "handlebars",
+            "phpHandlesRegex": [
+                "handlebars"
+            ]
+        },
+        {
+            "nodePackage": "rundiz-template-for-admin",
+            "phpHandlesRegex": [
+                "rdta"
+            ]
+        },
+        {
+            "nodePackage": "moment",
+            "phpHandlesRegex": [
+                "moment.js"
+            ]
+        },
+        {
+            "nodePackage": "lodash",
+            "phpHandlesRegex": [
+                "lodash"
+            ]
+        },
+        {
+            "nodePackage": "sortablejs",
+            "phpHandlesRegex": [
+                "sortablejs"
+            ]
+        }
+    ]
+}
