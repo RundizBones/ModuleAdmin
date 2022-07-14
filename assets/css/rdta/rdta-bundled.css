@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/*! Rundiz Template for Admin*/
 *,
 ::after,
 ::before {
@@ -39,7 +38,7 @@
   list-style-type: none;
   padding: 0
 }
-:where(navli)::before {
+:where(nav li)::before {
   content: "\200B";
   float: left
 }
@@ -128,7 +127,7 @@
 :where(dialog:not([open])) {
   display: none
 }
-:where(details>summary:first-of-type) {
+:where(details > summary:first-of-type) {
   display: list-item
 }
 :where([aria-busy=true i]) {
@@ -144,7 +143,6 @@
   clip: rect(0,0,0,0);
   position: absolute
 }
-/*! Rundiz Template for Admin*/
 html {
   font-family: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"
 }
@@ -154,7 +152,6 @@ pre,
 samp {
   font-family: ui-monospace,Menlo,Consolas,"Roboto Mono","Ubuntu Monospace","Noto Mono","Oxygen Mono","Liberation Mono",monospace,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"
 }
-/*! Rundiz Template for Admin*/
 :where(button,input,select,textarea) {
   background-color: transparent;
   border: 1px solid WindowFrame;
@@ -177,7 +174,6 @@ samp {
   border-width: 0;
   padding: 0
 }
-/*! Rundiz Template for Admin*/
 /*!
  * Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -6924,7 +6920,6 @@ samp {
   src: url(../webfonts/fa-v4compatibility.woff2) format("woff2"),url(../webfonts/fa-v4compatibility.ttf) format("truetype");
   unicode-range: u+f041,u+f047,u+f065-f066,u+f07d-f07e,u+f080,u+f08b,u+f08e,u+f090,u+f09a,u+f0ac,u+f0ae,u+f0b2,u+f0d0,u+f0d6,u+f0e4,u+f0ec,u+f10a-f10b,u+f123,u+f13e,u+f148-f149,u+f14c,u+f156,u+f15e,u+f160-f161,u+f163,u+f175-f178,u+f195,u+f1f8,u+f219,u+f250,u+f252,u+f27a
 }
-/*! Rundiz Template for Admin*/
 .sm {
   box-sizing: border-box;
   position: relative;
@@ -6974,7 +6969,7 @@ samp {
   content: "";
   display: block;
   height: 0;
-  font: 0/0 serif;
+  font: 0px/0 serif;
   clear: both;
   overflow: hidden
 }
@@ -6983,7 +6978,6 @@ samp {
 .sm ::before {
   box-sizing: inherit
 }
-/*! Rundiz Template for Admin*/
 /*!
  * Smartmenus style in Rundiz template for admin
  * 
@@ -7185,7 +7179,6 @@ samp {
     white-space: nowrap
   }
 }
-/*! Rundiz Template for Admin*/
 /*!
  * Rundiz template typography and form
  */
@@ -7937,7 +7930,7 @@ input[type=range]::-webkit-slider-thumb {
   width: 15px
 }
 input[type=range]::-moz-range-track {
-  animate: .2s;
+  animate: 0.2s;
   background: #ddd;
   border: 0 solid #000;
   border-radius: 0;
@@ -7946,7 +7939,7 @@ input[type=range]::-moz-range-track {
   height: 3px
 }
 input[type=range]::-webkit-slider-runnable-track {
-  animate: .2s;
+  animate: 0.2s;
   background: #ddd;
   border: 0 solid #000;
   border-radius: 0;
@@ -7958,7 +7951,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: #ddd
 }
 input[type=range]::-ms-track {
-  animate: .2s;
+  animate: 0.2s;
   background: 0 0;
   border-color: transparent;
   color: transparent;
@@ -7994,7 +7987,6 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
   background: #ddd
 }
-/*! Rundiz Template for Admin*/
 /*!
  * Rundiz template for admin V.2.2.2
  */
@@ -8073,7 +8065,7 @@ html.rd-template-admin {
 }
 .rd-page-wrapper {
   display: grid;
-  grid-template-columns: 0 auto;
+  grid-template-columns: 0px auto;
   grid-template-rows: auto;
   min-height: calc(100vh - var(--navbar-height_mobilescreen));
   position: relative
@@ -9640,7 +9632,6 @@ a.text-color-white:visited {
 .text-transform-capitalize {
   text-transform: capitalize
 }
-/*! Rundiz Template for Admin*/
 /*!
 * ----------------------------------------------------------------------------------------------
 * Rundiz template columns flex -- for put columns layout inside the main page layout.
@@ -10113,7 +10104,6 @@ a.text-color-white:visited {
     margin-left: 100%
   }
 }
-/*! Rundiz Template for Admin*/
 /*!
 * ----------------------------------------------------------------------------------------------
 * Rundiz template accordion -- styling accordion elements.
@@ -10164,7 +10154,6 @@ ol.rd-accordion,
 ul.rd-accordion {
   list-style: none
 }
-/*! Rundiz Template for Admin*/
 /*!
 * ----------------------------------------------------------------------------------------------
 * Rundiz template alert dialog -- styling alert dialog elements.
@@ -10306,7 +10295,6 @@ body.rd-alertdialog-modal-open {
   right: 0;
   top: 0
 }
-/*! Rundiz Template for Admin*/
 /*!
 * ----------------------------------------------------------------------------------------------
 * Rundiz template dialog -- styling dialog elements.
@@ -10415,7 +10403,6 @@ body.rd-modal-open {
   right: 0;
   top: 0
 }
-/*! Rundiz Template for Admin*/
 /*!
 * ----------------------------------------------------------------------------------------------
 * Rundiz template embeds -- styling responsive embeds elements.
@@ -10459,7 +10446,6 @@ body.rd-modal-open {
 .rd-embed-responsive1by1 {
   --aspect-ratio: calc((1 / 1) * 100%)
 }
-/*! Rundiz Template for Admin*/
 /*!
 * ----------------------------------------------------------------------------------------------
 * Rundiz template tabs -- styling tabs elements.
