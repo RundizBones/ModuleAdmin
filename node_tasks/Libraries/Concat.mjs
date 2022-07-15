@@ -11,6 +11,7 @@ import CleanCSS from "clean-css";
 import ConcatSM from 'concat-with-sourcemaps';
 import fs from 'node:fs';
 import fsPromise from 'node:fs/promises';
+import {minify as MinJS} from 'terser';
 import path from 'node:path';
 // import this app's useful class.
 import TextStyles from './TextStyles.mjs';
@@ -119,6 +120,56 @@ export default class Concat extends BasedBundler {
             this._sourceMapContent = output.sourceMap.toString();
         }
     }// cleanCSS
+
+
+    /**
+     * Clean or beautify JS.
+     * 
+     * @link https://www.npmjs.com/package/terser This class is depend on terser package.
+     * @param {Object} options Terser options. See https://www.npmjs.com/package/terser#user-content-minify-options
+     */
+    async cleanJS(options = {}) {
+        if (typeof(options) !== 'object') {
+            throw new Error('The argument `options` must be object.');
+        }
+
+        if (this._processed !== true) {
+            throw new Error('Unable to call `cleanJS()` without calling `concat()` method before.');
+        }
+
+        let inputSourcemap = false;
+        if (this.sourceMap === true) {
+            inputSourcemap = {
+                filename: this.#destinationFile,// for set `"file": "dest.xx"` in .map file.
+                content: this._sourceMapContent,
+            };
+        }
+
+        const defaults = {
+            compress: false,
+            format: {
+                braces: true,
+                keep_numbers: true,
+                keep_quoted_props: true,
+                semicolons: true,
+            },
+            keep_classnames: true,
+            keep_fnames: true,
+            mangle: false,
+            sourceMap: inputSourcemap,
+        }
+        options = {
+            ...defaults,
+            ...options,
+        }
+
+        const minJS = await MinJS(this._content.toString(), options);
+
+        this._content = new Buffer.from(minJS.code);
+        if (this.sourceMap === true) {
+            this._sourceMapContent = (minJS?.map ? minJS.map.toString() : '');
+        }
+    }// cleanJS
 
 
     /**

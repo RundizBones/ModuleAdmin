@@ -107,7 +107,7 @@ export default class BundleRdta {
             }
         });
         await concat.concat('rdta-bundled.css');
-        concat.cleanCSS();
+        await concat.cleanCSS();
         return concat.writeFile(this.destCSSFolder)
         .then((result) => {
             console.log('    Concatenated file: ' + result.file);
@@ -130,6 +130,7 @@ export default class BundleRdta {
             }
         });
         await concat.concat('rdta-bundled.js');
+        await concat.cleanJS();
         return concat.writeFile(this.destJSFolder)
         .then((result) => {
             console.log('    Concatenated file: ' + result.file);
