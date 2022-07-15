@@ -28,12 +28,6 @@ export default class Concat extends BasedBundler {
 
 
     /**
-     * @type {string} The destination file name only.
-     */
-    #destinationFile;
-
-
-    /**
      * @type {string} The string that should separate files. Default is `'\n'`.
      */
     separator = '\n';
@@ -140,7 +134,7 @@ export default class Concat extends BasedBundler {
         let inputSourcemap = false;
         if (this.sourceMap === true) {
             inputSourcemap = {
-                filename: this.#destinationFile,// for set `"file": "dest.xx"` in .map file.
+                filename: this._destinationFile,// for set `"file": "dest.xx"` in .map file.
                 content: this._sourceMapContent,
             };
         }
@@ -184,7 +178,7 @@ export default class Concat extends BasedBundler {
         }
 
         if (typeof(destinationFile) === 'string') {
-            this.#destinationFile = destinationFile;
+            this._destinationFile = destinationFile;
         }
 
         const ConcatObj = new ConcatSM(this.sourceMap, destinationFile, this.separator);
@@ -228,10 +222,10 @@ export default class Concat extends BasedBundler {
         }
 
         if (this.sourceMap === true) {
-            this.appendSourceMapComment(this.#destinationFile);
+            this.appendSourceMapComment(this._destinationFile);
         }
 
-        const destFullPath = path.resolve(MODULE_DIR, destinationPath, this.#destinationFile);
+        const destFullPath = path.resolve(MODULE_DIR, destinationPath, this._destinationFile);
         this._prepareFolderIfNotExists(path.dirname(destFullPath));
 
         return fsPromise.writeFile(destFullPath, this._content)

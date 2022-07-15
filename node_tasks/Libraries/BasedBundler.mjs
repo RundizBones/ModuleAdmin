@@ -9,6 +9,7 @@
 
 
 import {Buffer} from 'node:buffer';
+import ConcatSM from 'concat-with-sourcemaps';
 import fs from 'node:fs';
 import fsPromise from 'node:fs/promises';
 import path from 'node:path';
@@ -70,6 +71,31 @@ export default class BasedBundler {
             this._content = Buffer.concat([this._content, Buffer.from(sourceMapComment)]);
         }
     }// appendSourceMapComment
+
+
+    /**
+     * Prepend header to destination asset.
+     * 
+     * @param {string} text The header text.
+     */
+    header(text) {
+        if (typeof(text) !== 'string') {
+            throw new Error('The `text` argument must be string.');
+        }
+
+        if (this._processed !== true) {
+            throw new Error('Unable to call `header()` without calling `concat()` method before.');
+        }
+
+        const ConcatObj = new ConcatSM(true, this._destinationFile);
+        // add header
+        ConcatObj.add(null, Buffer.from(text));
+        // add current content
+        ConcatObj.add(this._destinationFile, this._content, this._sourceMapContent);
+
+        this._content = ConcatObj.content;
+        this._sourceMapContent = ConcatObj.sourceMap;
+    }// header
 
 
     /**

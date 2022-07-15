@@ -108,6 +108,7 @@ export default class BundleRdta {
         });
         await concat.concat('rdta-bundled.css');
         await concat.cleanCSS();
+        await concat.header(this.headerString);
         return concat.writeFile(this.destCSSFolder)
         .then((result) => {
             console.log('    Concatenated file: ' + result.file);
@@ -131,6 +132,7 @@ export default class BundleRdta {
         });
         await concat.concat('rdta-bundled.js');
         await concat.cleanJS();
+        await concat.header(this.headerString);
         return concat.writeFile(this.destJSFolder)
         .then((result) => {
             console.log('    Concatenated file: ' + result.file);
@@ -153,6 +155,7 @@ export default class BundleRdta {
             }
         });
         await minCSS.minify('rdta-bundled.min.css');
+        await minCSS.header(this.headerString);
         return minCSS.writeFile(this.destCSSFolder)
         .then((result) => {
             console.log('    Minified file: ' + result.file);
@@ -175,6 +178,7 @@ export default class BundleRdta {
             }
         });
         await minJS.minify('rdta-bundled.min.js');
+        await minJS.header(this.headerString);
         return minJS.writeFile(this.destJSFolder)
         .then((result) => {
             console.log('    Minified file: ' + result.file);
