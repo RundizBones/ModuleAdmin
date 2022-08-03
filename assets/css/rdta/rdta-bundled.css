@@ -177,7 +177,7 @@ samp {
   padding: 0
 }
 /*!
- * Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2022 Fonticons, Inc.
  */
@@ -1073,7 +1073,8 @@ samp {
 .fa-shopping-bag:before {
   content: "\f290"
 }
-.fa-bahai:before {
+.fa-bahai:before,
+.fa-haykal:before {
   content: "\f666"
 }
 .fa-baht-sign:before {
@@ -1246,6 +1247,10 @@ samp {
 .fa-book-dead:before,
 .fa-book-skull:before {
   content: "\f6b7"
+}
+.fa-book-tanakh:before,
+.fa-tanakh:before {
+  content: "\f827"
 }
 .fa-bookmark:before {
   content: "\f02e"
@@ -1427,6 +1432,10 @@ samp {
 }
 .fa-c:before {
   content: "\43"
+}
+.fa-cable-car:before,
+.fa-tram:before {
+  content: "\f7da"
 }
 .fa-birthday-cake:before,
 .fa-cake-candles:before,
@@ -2439,7 +2448,7 @@ samp {
   content: "\f1c7"
 }
 .fa-file-circle-check:before {
-  content: "\e493"
+  content: "\e5a0"
 }
 .fa-file-circle-exclamation:before {
   content: "\e4eb"
@@ -2448,13 +2457,13 @@ samp {
   content: "\e4ed"
 }
 .fa-file-circle-plus:before {
-  content: "\e4ee"
+  content: "\e494"
 }
 .fa-file-circle-question:before {
   content: "\e4ef"
 }
 .fa-file-circle-xmark:before {
-  content: "\e494"
+  content: "\e5a1"
 }
 .fa-file-code:before {
   content: "\f1c9"
@@ -3015,17 +3024,17 @@ samp {
 .fa-hotel:before {
   content: "\f594"
 }
-.fa-hourglass-2:before,
-.fa-hourglass-half:before,
+.fa-hourglass-empty:before,
 .fa-hourglass:before {
   content: "\f254"
-}
-.fa-hourglass-empty:before {
-  content: "\f252"
 }
 .fa-hourglass-3:before,
 .fa-hourglass-end:before {
   content: "\f253"
+}
+.fa-hourglass-2:before,
+.fa-hourglass-half:before {
+  content: "\f252"
 }
 .fa-hourglass-1:before,
 .fa-hourglass-start:before {
@@ -3639,6 +3648,9 @@ samp {
 .fa-not-equal:before {
   content: "\f53e"
 }
+.fa-notdef:before {
+  content: "\e1fe"
+}
 .fa-note-sticky:before,
 .fa-sticky-note:before {
   content: "\f249"
@@ -3907,7 +3919,7 @@ samp {
   content: "\f5c4"
 }
 .fa-person-through-window:before {
-  content: "\e433"
+  content: "\e5a9"
 }
 .fa-person-walking:before,
 .fa-walking:before {
@@ -3993,7 +4005,7 @@ samp {
   content: "\e22d"
 }
 .fa-plant-wilt:before {
-  content: "\e43b"
+  content: "\e5aa"
 }
 .fa-plate-wheat:before {
   content: "\e55a"
@@ -4629,6 +4641,9 @@ samp {
 .fa-stamp:before {
   content: "\f5bf"
 }
+.fa-stapler:before {
+  content: "\e5af"
+}
 .fa-star:before {
   content: "\f005"
 }
@@ -4945,9 +4960,8 @@ samp {
 .fa-train-subway:before {
   content: "\f239"
 }
-.fa-train-tram:before,
-.fa-tram:before {
-  content: "\f7da"
+.fa-train-tram:before {
+  content: "\e5b4"
 }
 .fa-transgender-alt:before,
 .fa-transgender:before {
@@ -5555,9 +5569,6 @@ samp {
 .fa-behance:before {
   content: "\f1b4"
 }
-.fa-behance-square:before {
-  content: "\f1b5"
-}
 .fa-bilibili:before {
   content: "\e3d9"
 }
@@ -5807,9 +5818,6 @@ samp {
 .fa-dribbble:before {
   content: "\f17d"
 }
-.fa-dribbble-square:before {
-  content: "\f397"
-}
 .fa-dropbox:before {
   content: "\f16b"
 }
@@ -5869,9 +5877,6 @@ samp {
 }
 .fa-facebook-messenger:before {
   content: "\f39f"
-}
-.fa-facebook-square:before {
-  content: "\f082"
 }
 .fa-fantasy-flight-games:before {
   content: "\f6dc"
@@ -5962,17 +5967,11 @@ samp {
 .fa-git-alt:before {
   content: "\f841"
 }
-.fa-git-square:before {
-  content: "\f1d2"
-}
 .fa-github:before {
   content: "\f09b"
 }
 .fa-github-alt:before {
   content: "\f113"
-}
-.fa-github-square:before {
-  content: "\f092"
 }
 .fa-gitkraken:before {
   content: "\f3a6"
@@ -6019,9 +6018,6 @@ samp {
 .fa-google-plus-g:before {
   content: "\f0d5"
 }
-.fa-google-plus-square:before {
-  content: "\f0d4"
-}
 .fa-google-wallet:before {
   content: "\f1ee"
 }
@@ -6045,9 +6041,6 @@ samp {
 }
 .fa-hacker-news:before {
   content: "\f1d4"
-}
-.fa-hacker-news-square:before {
-  content: "\f3af"
 }
 .fa-hackerrank:before {
   content: "\f5f7"
@@ -6090,9 +6083,6 @@ samp {
 }
 .fa-instagram:before {
   content: "\f16d"
-}
-.fa-instagram-square:before {
-  content: "\e055"
 }
 .fa-instalod:before {
   content: "\e081"
@@ -6139,9 +6129,6 @@ samp {
 .fa-js:before {
   content: "\f3b8"
 }
-.fa-js-square:before {
-  content: "\f3b9"
-}
 .fa-jsfiddle:before {
   content: "\f1cc"
 }
@@ -6168,9 +6155,6 @@ samp {
 }
 .fa-lastfm:before {
   content: "\f202"
-}
-.fa-lastfm-square:before {
-  content: "\f203"
 }
 .fa-leanpub:before {
   content: "\f212"
@@ -6236,6 +6220,9 @@ samp {
 .fa-mendeley:before {
   content: "\f7b3"
 }
+.fa-meta:before {
+  content: "\e49b"
+}
 .fa-microblog:before {
   content: "\e01a"
 }
@@ -6295,9 +6282,6 @@ samp {
 }
 .fa-odnoklassniki:before {
   content: "\f263"
-}
-.fa-odnoklassniki-square:before {
-  content: "\f264"
 }
 .fa-old-republic:before {
   content: "\f510"
@@ -6368,17 +6352,11 @@ samp {
 .fa-pied-piper-pp:before {
   content: "\f1a7"
 }
-.fa-pied-piper-square:before {
-  content: "\e01e"
-}
 .fa-pinterest:before {
   content: "\f0d2"
 }
 .fa-pinterest-p:before {
   content: "\f231"
-}
-.fa-pinterest-square:before {
-  content: "\f0d3"
 }
 .fa-pix:before {
   content: "\e43a"
@@ -6433,9 +6411,6 @@ samp {
 }
 .fa-reddit-alien:before {
   content: "\f281"
-}
-.fa-reddit-square:before {
-  content: "\f1a2"
 }
 .fa-redhat:before {
   content: "\f7bc"
@@ -6535,14 +6510,14 @@ samp {
 .fa-snapchat:before {
   content: "\f2ab"
 }
-.fa-snapchat-square:before {
-  content: "\f2ad"
-}
 .fa-soundcloud:before {
   content: "\f1be"
 }
 .fa-sourcetree:before {
   content: "\f7d3"
+}
+.fa-space-awesome:before {
+  content: "\e5ac"
 }
 .fa-speakap:before {
   content: "\f3f3"
@@ -6553,12 +6528,108 @@ samp {
 .fa-spotify:before {
   content: "\f1bc"
 }
+.fa-behance-square:before,
+.fa-square-behance:before {
+  content: "\f1b5"
+}
+.fa-dribbble-square:before,
+.fa-square-dribbble:before {
+  content: "\f397"
+}
+.fa-facebook-square:before,
+.fa-square-facebook:before {
+  content: "\f082"
+}
 .fa-square-font-awesome:before {
-  content: "\f425"
+  content: "\e5ad"
 }
 .fa-font-awesome-alt:before,
 .fa-square-font-awesome-stroke:before {
   content: "\f35c"
+}
+.fa-git-square:before,
+.fa-square-git:before {
+  content: "\f1d2"
+}
+.fa-github-square:before,
+.fa-square-github:before {
+  content: "\f092"
+}
+.fa-gitlab-square:before,
+.fa-square-gitlab:before {
+  content: "\e5ae"
+}
+.fa-google-plus-square:before,
+.fa-square-google-plus:before {
+  content: "\f0d4"
+}
+.fa-hacker-news-square:before,
+.fa-square-hacker-news:before {
+  content: "\f3af"
+}
+.fa-instagram-square:before,
+.fa-square-instagram:before {
+  content: "\e055"
+}
+.fa-js-square:before,
+.fa-square-js:before {
+  content: "\f3b9"
+}
+.fa-lastfm-square:before,
+.fa-square-lastfm:before {
+  content: "\f203"
+}
+.fa-odnoklassniki-square:before,
+.fa-square-odnoklassniki:before {
+  content: "\f264"
+}
+.fa-pied-piper-square:before,
+.fa-square-pied-piper:before {
+  content: "\e01e"
+}
+.fa-pinterest-square:before,
+.fa-square-pinterest:before {
+  content: "\f0d3"
+}
+.fa-reddit-square:before,
+.fa-square-reddit:before {
+  content: "\f1a2"
+}
+.fa-snapchat-square:before,
+.fa-square-snapchat:before {
+  content: "\f2ad"
+}
+.fa-square-steam:before,
+.fa-steam-square:before {
+  content: "\f1b7"
+}
+.fa-square-tumblr:before,
+.fa-tumblr-square:before {
+  content: "\f174"
+}
+.fa-square-twitter:before,
+.fa-twitter-square:before {
+  content: "\f081"
+}
+.fa-square-viadeo:before,
+.fa-viadeo-square:before {
+  content: "\f2aa"
+}
+.fa-square-vimeo:before,
+.fa-vimeo-square:before {
+  content: "\f194"
+}
+.fa-square-whatsapp:before,
+.fa-whatsapp-square:before {
+  content: "\f40c"
+}
+.fa-square-xing:before,
+.fa-xing-square:before {
+  content: "\f169"
+}
+.fa-square-youtube:before,
+.fa-youtube-square:before {
+  content: "\f431"
 }
 .fa-squarespace:before {
   content: "\f5be"
@@ -6577,9 +6648,6 @@ samp {
 }
 .fa-steam:before {
   content: "\f1b6"
-}
-.fa-steam-square:before {
-  content: "\f1b7"
 }
 .fa-steam-symbol:before {
   content: "\f3f6"
@@ -6654,17 +6722,11 @@ samp {
 .fa-tumblr:before {
   content: "\f173"
 }
-.fa-tumblr-square:before {
-  content: "\f174"
-}
 .fa-twitch:before {
   content: "\f1e8"
 }
 .fa-twitter:before {
   content: "\f099"
-}
-.fa-twitter-square:before {
-  content: "\f081"
 }
 .fa-typo3:before {
   content: "\f42b"
@@ -6717,17 +6779,11 @@ samp {
 .fa-viadeo:before {
   content: "\f2a9"
 }
-.fa-viadeo-square:before {
-  content: "\f2aa"
-}
 .fa-viber:before {
   content: "\f409"
 }
 .fa-vimeo:before {
   content: "\f40a"
-}
-.fa-vimeo-square:before {
-  content: "\f194"
 }
 .fa-vimeo-v:before {
   content: "\f27d"
@@ -6761,9 +6817,6 @@ samp {
 }
 .fa-whatsapp:before {
   content: "\f232"
-}
-.fa-whatsapp-square:before {
-  content: "\f40c"
 }
 .fa-whmcs:before {
   content: "\f40d"
@@ -6805,6 +6858,7 @@ samp {
 .fa-wpforms:before {
   content: "\f298"
 }
+.fa-rendact:before,
 .fa-wpressr:before {
   content: "\f3e4"
 }
@@ -6813,9 +6867,6 @@ samp {
 }
 .fa-xing:before {
   content: "\f168"
-}
-.fa-xing-square:before {
-  content: "\f169"
 }
 .fa-y-combinator:before {
   content: "\f23b"
@@ -6843,9 +6894,6 @@ samp {
 }
 .fa-youtube:before {
   content: "\f167"
-}
-.fa-youtube-square:before {
-  content: "\f431"
 }
 .fa-zhihu:before {
   content: "\f63f"
@@ -6920,7 +6968,7 @@ samp {
   font-family: FontAwesome;
   font-display: block;
   src: url(../webfonts/fa-v4compatibility.woff2) format("woff2"),url(../webfonts/fa-v4compatibility.ttf) format("truetype");
-  unicode-range: u+f041,u+f047,u+f065-f066,u+f07d-f07e,u+f080,u+f08b,u+f08e,u+f090,u+f09a,u+f0ac,u+f0ae,u+f0b2,u+f0d0,u+f0d6,u+f0e4,u+f0ec,u+f10a-f10b,u+f123,u+f13e,u+f148-f149,u+f14c,u+f156,u+f15e,u+f160-f161,u+f163,u+f175-f178,u+f195,u+f1f8,u+f219,u+f250,u+f252,u+f27a
+  unicode-range: u+f041,u+f047,u+f065-f066,u+f07d-f07e,u+f080,u+f08b,u+f08e,u+f090,u+f09a,u+f0ac,u+f0ae,u+f0b2,u+f0d0,u+f0d6,u+f0e4,u+f0ec,u+f10a-f10b,u+f123,u+f13e,u+f148-f149,u+f14c,u+f156,u+f15e,u+f160-f161,u+f163,u+f175-f178,u+f195,u+f1f8,u+f219,u+f27a
 }
 .sm {
   box-sizing: border-box;
@@ -7837,10 +7885,6 @@ select.rd-input-invalid,
 select:invalid {
   border-color: var(--form-invalid-border-color)
 }
-select optgroup,
-select option {
-  background-color: var(--page-background-color)
-}
 select:not([multiple]) {
   height: 2.152em
 }
@@ -7990,7 +8034,7 @@ input[type=range]:focus::-ms-fill-upper {
   background: #ddd
 }
 /*!
- * Rundiz template for admin V.2.2.2
+ * Rundiz template for admin V.2.2.3
  */
 :root {
   --background-primary-disabled-color: #97c3ea;
@@ -10210,7 +10254,7 @@ body.rd-alertdialog-modal-open {
   padding: 1em
 }
 .rd-alertdialog .rd-dialog-close {
-  background-color: transparent;
+  background-color: rgba(0,0,0,0);
   border: none;
   box-shadow: none;
   margin: 0 0 0 auto
@@ -10351,7 +10395,7 @@ body.rd-modal-open {
   padding: 1em
 }
 .rd-dialog .rd-dialog-close {
-  background-color: transparent;
+  background-color: rgba(0,0,0,0);
   border: none;
   box-shadow: none;
   margin: 0 0 0 auto
