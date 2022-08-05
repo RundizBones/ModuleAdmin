@@ -20,7 +20,7 @@ import {publicSetter} from './Tasks/publicSetter.mjs';
 
 
 export const command = 'watch';
-export const describe = 'Watch asset files such as CSS, JS, images changed and copy to public folder in the end.';
+export const describe = 'Watch asset files such as CSS, JS, images changed and maybe copy asset-src to assets folder first (depend on config file) then copy assets to public folder in the end.';
 export const builder = (yargs) => {
     return yargs.options({
         'public': {
