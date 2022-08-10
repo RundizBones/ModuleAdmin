@@ -121,13 +121,20 @@ export const watcher = class Watcher {
     watch() {
         console.log(TextStyles.taskHeader('Watch module\'s asset files changes.'));
 
+        const watchPatterns = ['assets-src/**'];
         const watcher = FS.watch(
-            ['assets-src/**'], 
+            watchPatterns, 
             {
                 cwd: MODULE_DIR,
             }
         );
 
+        watcher.on('ready', () => {
+            const watchedList = watcher.getWatched();
+            if (typeof(watchedList) !== 'object' || (typeof(watchedList) && Object.entries(watchedList).length <= 0)) {
+                console.warn('  ' + TextStyles.txtWarning('There is nothing to watch on this patterns.'), watchPatterns);
+            }
+        });
         watcher.on('all', async (event, file, stats) => {
             await this.#displayFileChanged(event, file, MODULE_DIR);
             await this.#applyChanges(event, file);
