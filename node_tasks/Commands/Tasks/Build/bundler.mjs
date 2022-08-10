@@ -49,6 +49,8 @@ export const bundler = class Bundler {
             if (fs.existsSync(fullPathConfigJS)) {
                 const {default: bundlerClass} = await import(url.pathToFileURL(fullPathConfigJS));
                 await bundlerClass.run();
+            } else {
+                console.warn('  ' + TextStyles.txtWarning('Warning: The file ' + fullPathConfigJS + ' is not exists.'));
             }
         }// endfor;
 
