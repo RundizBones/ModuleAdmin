@@ -20,6 +20,22 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
 
 
     /**
+     * @var array Config value that must be save as `null` if it is empty.
+     */
+    const configValueNullOnEmpty = [
+        'rdbadmin_AdminItemsPerPage',
+        'rdbadmin_UserConfirmWait',
+        'rdbadmin_UserDeleteSelfKeep',
+        'rdbadmin_UserLoginLogsKeep',
+        'rdbadmin_UserLoginMaxFail',
+        'rdbadmin_UserLoginMaxFailWait',
+        'rdbadmin_UserLoginNotRememberLength',
+        'rdbadmin_UserLoginRememberLength',
+        'rdbadmin_UserRegisterWaitVerification',
+    ];
+
+
+    /**
      * @since 1.1.7
      * @var \Rdb\Modules\RdbAdmin\Libraries\Plugins
      */
@@ -87,6 +103,9 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                 if (isset($data[$configName]) && is_scalar($data[$configName])) {
                     // if string, number, scalar...
                     $data[$configName] = trim($data[$configName]);
+                    if ($data[$configName] === '' && in_array($configName, static::configValueNullOnEmpty)) {
+                        $data[$configName] = null;
+                    }
                 } else {
                     // if anything else... (array, object, null or anything non scalar).
                     if ($configName === 'rdbadmin_UserRegisterDefaultRoles' && isset($data[$configName])) {
