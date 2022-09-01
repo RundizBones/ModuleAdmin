@@ -303,17 +303,23 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
         $configPrefixes = [];
         foreach ($data as $config_name => $config_value) {
             $configPrefixes[] = $this->getConfigPrefix($config_name);
-            $defaultCheckValue = date('Y-m-d H:i:s');
-            $checkResult = $this->get($config_name, $defaultCheckValue);
-            if ($checkResult === $defaultCheckValue) {
+            $sql = 'SELECT `config_name` FROM `' . $this->Db->tableName('config') . '` WHERE `config_name` = :config_name';
+            $Sth = $this->Db->PDO()->prepare($sql);
+            $Sth->bindValue(':config_name', $config_name);
+            $Sth->execute();
+            $checkResult = $Sth->fetchObject();
+            $Sth->closeCursor();
+            unset($sql, $Sth);
+            if (empty($checkResult) || is_null($checkResult) || !is_object($checkResult)) {
                 $result = $this->Db->insert($this->Db->tableName('config'), ['config_value' => $config_value, 'config_name' => $config_name]);
             } else {
                 $result = $this->Db->update($this->Db->tableName('config'), ['config_value' => $config_value], ['config_name' => $config_name]);
             }
+
             if ($result === true) {
                 $i++;
             }
-            unset($checkResult, $defaultCheckValue, $result);
+            unset($checkResult,  $result);
         }// endforeach;
         unset($config_name, $config_value);
 
