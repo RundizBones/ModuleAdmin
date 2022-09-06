@@ -131,7 +131,7 @@ export const watcher = class Watcher {
 
         watcher.on('ready', () => {
             const watchedList = watcher.getWatched();
-            if (typeof(watchedList) !== 'object' || (typeof(watchedList) && Object.entries(watchedList).length <= 0)) {
+            if (typeof(watchedList) !== 'object' || (typeof(watchedList) === 'object' && Object.entries(watchedList).length <= 0)) {
                 console.warn('  ' + TextStyles.txtWarning('There is nothing to watch on this patterns.'), watchPatterns);
             }
         });
