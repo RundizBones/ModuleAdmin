@@ -6,11 +6,12 @@
 'use strict';
 
 
-import fs from 'node:fs';
 import path from 'node:path';
-// import this app's useful class.
-import FS from '../Libraries/FS.mjs';
-import TextStyles from '../Libraries/TextStyles.mjs';
+import url from 'node:url';
+// import libraries.
+const {default: FS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/FS.js"));
+const {default: Paths} = await import(url.pathToFileURL(RDBDEV_APPDIR + '/app/Libraries/Paths.js'));
+const {default: TextStyles} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/TextStyles.js"));
 
 
 export default class CopyAssetsSrc {
@@ -122,10 +123,14 @@ export default class CopyAssetsSrc {
      * @returns {Promise} Return `Promise` object.
      */
     static async #doCopy(globPatterns, eachFile, assetsDest) {
-        const fileResultParent = await this.#getResultParent(globPatterns);
-        const relativeName = path.relative(fileResultParent, eachFile);
-        const sourcePath = path.resolve(MODULE_DIR, eachFile);
-        const destPath = path.resolve(MODULE_DIR, assetsDest, relativeName);
+        const sourcePath = path.resolve(MSW_DIR, eachFile);
+        const destPath = path.resolve(MSW_DIR,
+            Paths.replaceDestinationFolder(
+                eachFile, 
+                assetsDest, 
+                globPatterns
+            )
+        );
 
         if (FS.isExactSame(sourcePath, destPath)) {
             // if source and destination are the exactly same.
@@ -133,12 +138,11 @@ export default class CopyAssetsSrc {
             return Promise.resolve();
         }
 
-        return FS.copyFileDir(sourcePath, destPath)
-        .then(() => {
-            console.log('    >> ' + sourcePath);
-            console.log('      Copied to -> ' + destPath);
-            return Promise.resolve();
-        });// end promise;
+        FS.cpSync(sourcePath, destPath);
+
+        console.log('    >> ' + sourcePath);
+        console.log('      Copied to -> ' + destPath);
+        return Promise.resolve();
     }// doCopy
 
 
@@ -154,7 +158,7 @@ export default class CopyAssetsSrc {
         const filesResult = await FS.glob(
             patterns, {
                 absolute: false,
-                cwd: MODULE_DIR,
+                cwd: MSW_DIR,
             }
         );
 
@@ -163,38 +167,6 @@ export default class CopyAssetsSrc {
         }
         return [];
     }// getFilesResult
-
-
-    /**
-     * Get result's parent for use in replace and find only relative result from the patterns.
-     * 
-     * Example: patterns are 'assets-src/css/**'  
-     * The result of files can be 'assets-src/css/folder/style.css'  
-     * The result that will be return is 'folder'.
-     * 
-     * @async
-     * @private This method was called from `doCopy()`.
-     * @param {string|string[]} patterns Glob patterns.
-     * @returns {string} Return retrieved parent of this pattern.
-     */
-    static async #getResultParent(patterns) {
-        const filesResult1lv = await FS.glob(
-            patterns,
-            {
-                absolute: false,
-                cwd: MODULE_DIR,
-                deep: 1,
-            }
-        );
-
-        let fileResultParent = '';
-        for (let eachFile in filesResult1lv) {
-            fileResultParent = path.dirname(filesResult1lv[eachFile]);
-            break;
-        }
-
-        return fileResultParent;
-    }// getResultParent
 
 
     /**

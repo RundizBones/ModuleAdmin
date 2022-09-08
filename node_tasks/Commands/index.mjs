@@ -13,7 +13,7 @@ import * as exprcmd from './expr.mjs';
 
 
 export const commands = [
-    buildcmd,
+    //buildcmd,
     watchcmd,
     writeVersionCmd,
     exprcmd,

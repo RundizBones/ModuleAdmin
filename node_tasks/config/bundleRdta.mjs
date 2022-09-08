@@ -8,10 +8,11 @@
 'use strict';
 
 
-// import this app's useful class.
-import Concat from "../Libraries/Concat.mjs";
-import MinCSS from "../Libraries/MinCss.mjs";
-import MinJS from '../Libraries/MinJS.mjs';
+import url from 'node:url';
+// import libraries.
+const {default: Concat} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/Concat.mjs"));
+const {default: MinCSS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/MinCSS.mjs"));
+const {default: MinJS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/MinJS.mjs"));
 
 
 const cssFiles = [

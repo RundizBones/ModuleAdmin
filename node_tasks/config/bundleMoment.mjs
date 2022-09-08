@@ -8,9 +8,10 @@
 'use strict';
 
 
-// import based class.
-import Concat from "../Libraries/Concat.mjs";
-import MinJS from '../Libraries/MinJS.mjs';
+import url from 'node:url';
+// import libraries.
+const {default: Concat} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/Concat.mjs"));
+const {default: MinJS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/MinJS.mjs"));
 
 
 const jsFiles = [
