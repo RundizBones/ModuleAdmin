@@ -116,6 +116,11 @@
         "config/copyAssetsSrc.mjs"
     ],
     "copyAssetsToPublic": true,
+    "watch": {
+        "copyAssetsSrc": [
+            "config/watcherCopyAssetsSrc.mjs"
+        ]
+    },
     "writeVersions": [
         {
             "nodePackage": "datatables.net-dt",
