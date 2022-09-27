@@ -32,7 +32,7 @@ class AddController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['add']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -375,7 +375,7 @@ class AddController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['add']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

@@ -33,7 +33,7 @@ class SessionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['deleteLogins']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -213,7 +213,7 @@ class SessionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['viewLogins']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

@@ -346,7 +346,7 @@ class PermissionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Admi
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminPermissions', ['managePermissions']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

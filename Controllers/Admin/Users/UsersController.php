@@ -63,7 +63,7 @@ class UsersController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
             $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['add', 'edit', 'delete', 'list', 'viewLogins']);
         }
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -177,7 +177,7 @@ class UsersController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['add', 'edit', 'delete', 'list', 'viewLogins']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_cache_limiter('private_no_expire');
             session_start();
         }

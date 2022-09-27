@@ -140,7 +140,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     public function doLoginAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -270,7 +270,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     public function doLoginResetAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -410,7 +410,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     public function doMfaAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -504,7 +504,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     public function indexAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -657,7 +657,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     public function mfaAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -748,7 +748,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     public function resetAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

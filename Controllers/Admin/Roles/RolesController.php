@@ -111,7 +111,7 @@ class RolesController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminRoles', ['add', 'edit', 'delete', 'list', 'changePriority']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_cache_limiter('private_no_expire');
             session_start();
         }

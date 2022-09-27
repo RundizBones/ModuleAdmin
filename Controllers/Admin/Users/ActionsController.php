@@ -32,7 +32,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         // processing part ----------------------------------------------------------------------------------------------------
         // no need permission check
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -132,7 +132,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['delete']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -229,7 +229,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         // processing part ----------------------------------------------------------------------------------------------------
         // no need to check permission.
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -316,7 +316,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['edit']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -419,7 +419,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['edit', 'delete']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

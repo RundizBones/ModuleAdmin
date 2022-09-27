@@ -110,7 +110,7 @@ abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\Bas
                 exit();
             } else {
                 // if normal web page request.
-                if (session_id() === '') {
+                if (session_status() === PHP_SESSION_NONE) {
                     session_start();
                 }
 

@@ -29,7 +29,7 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminTools', ['manageCache']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -101,7 +101,7 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminTools', ['manageCache']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

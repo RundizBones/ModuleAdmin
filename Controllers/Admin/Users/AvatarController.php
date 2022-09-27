@@ -37,7 +37,7 @@ class AvatarController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBase
             $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['edit']);
         }
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -159,7 +159,7 @@ class AvatarController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBase
             $this->checkPermission('RdbAdmin', 'RdbAdminUsers', ['edit']);
         }
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

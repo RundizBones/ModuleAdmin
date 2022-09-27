@@ -157,7 +157,7 @@ class XhrDashboardWidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Ad
     public function saveOrderAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

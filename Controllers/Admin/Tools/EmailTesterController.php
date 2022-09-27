@@ -26,7 +26,7 @@ class EmailTesterController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Admi
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminTools', ['emailTester']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -130,7 +130,7 @@ class EmailTesterController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Admi
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminTools', ['emailTester']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

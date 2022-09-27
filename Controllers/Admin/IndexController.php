@@ -27,7 +27,7 @@ class IndexController extends AdminBaseController
     public function indexAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

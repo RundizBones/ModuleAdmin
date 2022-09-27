@@ -46,7 +46,7 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     public function doLogoutAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
@@ -88,7 +88,7 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     public function indexAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

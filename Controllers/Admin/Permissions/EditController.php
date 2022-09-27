@@ -34,7 +34,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminPermissions', ['managePermissions']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -106,7 +106,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminPermissions', ['managePermissions']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

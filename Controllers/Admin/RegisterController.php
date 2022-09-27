@@ -27,7 +27,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
     public function confirmAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -113,7 +113,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
     public function doConfirmAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -310,7 +310,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
     public function doRegisterAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -927,7 +927,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
     public function indexAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

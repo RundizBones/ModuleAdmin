@@ -30,7 +30,7 @@ class ReorderController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminRoles', ['changePriority']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

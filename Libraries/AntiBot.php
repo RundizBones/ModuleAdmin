@@ -33,7 +33,7 @@ class AntiBot
      */
     public function getHoneypotName(): string
     {
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -53,7 +53,7 @@ class AntiBot
      */
     public function setAndGetHoneypotName(array $allowedNames = []): string
     {
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 

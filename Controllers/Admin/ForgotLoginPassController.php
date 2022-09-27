@@ -73,7 +73,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
     public function indexAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -196,7 +196,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
     public function resetAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -325,7 +325,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
     public function submitRequestAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -522,7 +522,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
     public function submitResetAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
