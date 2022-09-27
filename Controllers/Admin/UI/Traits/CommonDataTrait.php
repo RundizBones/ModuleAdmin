@@ -36,11 +36,13 @@ trait CommonDataTrait
             'rdbadmin_SiteTimezone',
             'rdbadmin_AdminItemsPerPage',
             'rdbadmin_SiteAllowOrigins',
+            'rdbadmin_SiteFavicon',
         ];
         $configDefaults = [
             '',
             'Asia/Bangkok',
             '20',
+            '',
             '',
         ];
 

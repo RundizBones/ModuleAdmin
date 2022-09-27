@@ -5,6 +5,7 @@
 // Some of these variables also useful while you writing the code in the IDE, it will be show the drop down helper for you.
 
 /* @var $Assets \Rdb\Modules\RdbAdmin\Libraries\Assets */
+/* @var $Container \Rdb\System\Container */
 /* @var $Url \Rdb\System\Libraries\Url */
 /* @var $Views \Rdb\System\Views */
 // End doc helper ---------------------------------------------------------------------------
@@ -20,6 +21,10 @@
         }
         ?></title>
 
-        <?php echo $Assets->renderAssets('css'); ?> 
+        <?php 
+        echo $Assets->renderAssets('css'); 
+        include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
+        echo "\n" . renderFaviconHtml($Container, $configDb['rdbadmin_SiteFavicon']);
+        ?> 
     </head>
     <body>

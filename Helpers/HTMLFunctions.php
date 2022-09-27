@@ -200,3 +200,97 @@ function renderBreadcrumbHtml(array $breadcrumb): string
 
     return $output;
 }// renderBreadcrumbHtml
+
+
+/**
+ * Render favicon HTML.
+ * 
+ * @link https://stackoverflow.com/questions/48956465/favicon-standard-2022-svg-ico-png-and-dimensions Reference.
+ * @param string $faviconPath
+ * @return string
+ */
+function renderFaviconHtml(\Rdb\System\Container $Container, string $faviconPath): string
+{
+    if (empty($faviconPath)) {
+        return '';
+    }
+
+    $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
+        $Container, 
+        [
+            'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Helpers/HTMLFunctions/' . __FUNCTION__,
+        ]
+    ))->getCacheObject();
+    $cacheKey = 'faviconHTML';
+    $cacheExpire = (15 * 24 * 60 * 60);// 15 days
+
+    if ($Cache->has($cacheKey)) {
+        unset($cacheExpire);
+        return $Cache->get($cacheKey)
+            . '        <!--cached favicon HTML-->' . PHP_EOL;
+    } else {;
+        $output = '';
+        $Url = new \Rdb\System\Libraries\Url($Container);
+        $fullPublicUrl = $Url->getDomainProtocol();
+        $publicUrl = $Url->getPublicUrl();
+        if ($publicUrl !== '') {
+            $fullPublicUrl .= '/' . $publicUrl;
+        }
+        unset($publicUrl, $Url);
+
+        $fileExtension = pathinfo($faviconPath, PATHINFO_EXTENSION);
+        $faviconPathNoExt = preg_replace('/.' . $fileExtension . '$/iu', '', $faviconPath);
+        $publicPath = str_replace(['\\', DIRECTORY_SEPARATOR], '/', PUBLIC_PATH);
+        $filesSearch = glob(
+             $publicPath . '/' . $faviconPathNoExt . '*.' . $fileExtension
+        );
+        if (is_array($filesSearch)) {
+            foreach ($filesSearch as $eachFile) {
+                if (is_file($eachFile)) {
+                    $fileNameOnly = pathinfo($eachFile, PATHINFO_FILENAME);// no extension and path, just file name.
+                    $fileNameExp = explode('_', $fileNameOnly);
+                    $fileNameNumberWidthHeight = $fileNameExp[(count($fileNameExp) - 1)];
+                    if (
+                        str_contains($fileNameNumberWidthHeight, 'x')
+                    ) {
+                        // found nnxnn in file name.
+                        $numberExp = explode('x', $fileNameNumberWidthHeight);
+                        if (
+                            isset($numberExp[0]) && 
+                            isset($numberExp[1]) && 
+                            is_numeric($numberExp[0]) && 
+                            is_numeric($numberExp[1])
+                        ) {
+                            // if found number in file name.
+                            $finfo = new finfo();
+                            $mimeType = $finfo->file($eachFile, FILEINFO_MIME_TYPE);
+                            unset($finfo);
+                            $faviconRelPath = str_replace($publicPath . '/', '', $eachFile);
+
+                            if ($numberExp[0] <= 48 || $numberExp[0] == 192) {
+                                $output .= str_repeat(' ', 8);
+                                $output .= '<link rel="icon" type="' . $mimeType . '" sizes="' . $fileNameNumberWidthHeight . '" href="' . $fullPublicUrl . '/' . $faviconRelPath . '">' . PHP_EOL;
+                            } elseif ($numberExp[0] == 180) {
+                                $output .= str_repeat(' ', 8);
+                                $output .= '<link rel="apple-touch-icon" sizes="' . $fileNameNumberWidthHeight . '" href="' . $fullPublicUrl . '/' . $faviconRelPath . '">' . PHP_EOL;
+                            } elseif ($numberExp[0] == 270) {
+                                $output .= str_repeat(' ', 8);
+                                $output .= '<meta name="msapplication-TileImage" content="' . $fullPublicUrl . '/' . $faviconRelPath . '" />' . PHP_EOL;
+                            }
+
+                            unset($faviconRelPath, $mimeType);
+                        }
+                        unset($numberExp);
+                    }
+                    unset($fileNameExp, $fileNameOnly, $fileNameNumberWidthHeight);
+                }
+            }// endforeach;
+            unset($eachFile);
+        }
+        unset($fileExtension, $faviconPathNoExt, $filesSearch, $fullPublicUrl, $publicPath);
+
+        $Cache->set($cacheKey, $output, $cacheExpire);
+        unset($Cache, $cacheExpire, $cacheKey);
+        return $output;
+    }
+}// renderFaviconHtml
