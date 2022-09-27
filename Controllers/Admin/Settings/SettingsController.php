@@ -68,7 +68,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminSettings', ['changeSettings']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -282,6 +282,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             'rdbadmin_SiteAllowOrigins',
             'rdbadmin_SiteAPILimitAccess',
             'rdbadmin_SiteAPIKey',
+            'rdbadmin_SiteFavicon',
             'rdbadmin_UserRegister',
             'rdbadmin_UserRegisterNotifyAdmin',
             'rdbadmin_UserRegisterNotifyAdminEmails',
@@ -380,7 +381,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminSettings', ['changeSettings']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -395,12 +396,17 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         // urls & methods
         $urlAppBased = $Url->getAppBasedPath(true);
         $output['urls'] = [];
+        $output['urls']['publicUrl'] = $Url->getPublicUrl();
         $output['urls']['getSettingsUrl'] = $urlAppBased . '/admin/settings';// get settings page, also get data via rest.
         $output['urls']['getSettingsMethod'] = 'GET';
         $output['urls']['editSettingsSubmitUrl'] = $urlAppBased . '/admin/settings';// edit, save settings via rest.
         $output['urls']['editSettingsSubmitMethod'] = 'PATCH';
         $output['urls']['editSettingsTestSmtpConnectionUrl'] = $urlAppBased . '/admin/settings/test-smtp';
         $output['urls']['editSettingsTestSmtpConnectionMethod'] = 'POST';
+        $output['urls']['uploadFaviconUrl'] = $urlAppBased . '/admin/settings/favicon';
+        $output['urls']['uploadFaviconMethod'] = 'POST';
+        $output['urls']['deleteFaviconUrl'] = $urlAppBased . '/admin/settings/favicon';
+        $output['urls']['deleteFaviconMethod'] = 'DELETE';
         unset($urlAppBased);
 
         if ($this->Input->isNonHtmlAccept() || $this->Input->isXhr()) {
@@ -414,6 +420,9 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         $output['timezones'] = $this->getTimezones();
         $output['listRoles'] = $this->getRoles();
 
+        $output['favicon']['recommendedSize'] = FaviconController::recommendedSize();
+        $output['favicon']['allowedFileExtensions'] = implode(',', array_map(function($value) {return '.' . $value;}, FaviconController::allowedFileExtensions()));
+
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->isNonHtmlAccept() || $this->Input->isXhr()) {
             // if custom HTTP accept, response content.
@@ -426,6 +435,11 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             $Assets = new \Rdb\Modules\RdbAdmin\Libraries\Assets($this->Container);
 
             $Assets->addMultipleAssets(
+                'css',
+                ['rdbaSettingsFavicon'],
+                $rdbAdminAssets
+            );
+            $Assets->addMultipleAssets(
                 'js', 
                 ['rdbaSettings'], 
                 $rdbAdminAssets
@@ -437,12 +451,10 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                     'csrfName' => $output['csrfName'],
                     'csrfValue' => $output['csrfValue'],
                     'csrfKeyPair' => $output['csrfKeyPair'],
-                    'getSettingsUrl' => $output['urls']['getSettingsUrl'],
-                    'getSettingsMethod' => $output['urls']['getSettingsMethod'],
-                    'editSettingsSubmitUrl' => $output['urls']['editSettingsSubmitUrl'],
-                    'editSettingsSubmitMethod' => $output['urls']['editSettingsSubmitMethod'],
-                    'editSettingsTestSmtpConnectionUrl' => $output['urls']['editSettingsTestSmtpConnectionUrl'],
-                    'editSettingsTestSmtpConnectionMethod' => $output['urls']['editSettingsTestSmtpConnectionMethod'],
+                    'urls' => $output['urls'],
+                    'txtConfirmDelete' => __('Are you sure to delete? This action cannot be undone.'),
+                    'txtPleaseChooseOneFile' => __('Please choose one file.'),
+                    'txtUploading' => __('Uploading.'),
                 ]
             );
 
@@ -492,13 +504,12 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminSettings', ['changeSettings']);
 
-        if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
-        $Serializer = new \Rundiz\Serializer\Serializer();
 
         $output = [];
         $output['configDb'] = $this->getConfigDb();
@@ -610,7 +621,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         $output = array_merge($output, $Csrf->createToken());
 
         // display, response part ---------------------------------------------------------------------------------------------
-        unset($Csrf, $Serializer, $Url);
+        unset($Csrf, $Url);
         return $this->responseAcceptType($output);
     }// testSmtpAction
 

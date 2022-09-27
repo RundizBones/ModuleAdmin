@@ -87,6 +87,13 @@ class ModuleAssets
                         'class' => 'ajaxInjectCss'
                     ],
                 ],
+
+                // settings
+                [
+                    'handle' => 'rdbaSettingsFavicon',
+                    'file' => $publicModuleUrl . '/assets/css/Controllers/Admin/Settings/FaviconController.css',
+                    'dependency' => ['rdta'],
+                ],
             ],
 
             'js' => [
@@ -314,8 +321,12 @@ class ModuleAssets
                 // settings
                 [
                     'handle' => 'rdbaSettings',
-                    'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/SettingsController/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
+                    'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Settings/SettingsController.js',
+                    'dependency' => ['rdta', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash', 'rdbaSettingsFavicon'],
+                ],
+                [
+                    'handle' => 'rdbaSettingsFavicon',
+                    'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Settings/FaviconController.js',
                 ],
 
                 // tools

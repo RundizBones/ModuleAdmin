@@ -22,8 +22,8 @@ class RdbaSettingsController {
 
         let promiseObj = new Promise((resolve, reject) => {
             RdbaCommon.XHR({
-                'url': RdbaSettings.getSettingsUrl,
-                'method': RdbaSettings.getSettingsMethod,
+                'url': RdbaSettings.urls.getSettingsUrl,
+                'method': RdbaSettings.urls.getSettingsMethod,
                 'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'dataType': 'json',
             })
@@ -43,6 +43,9 @@ class RdbaSettingsController {
                                         thisInputElement.checked = true;
                                         //console.log('mark ' + key + ' as checked.');
                                     }
+                                } else if (thisInputElement.type.toLowerCase() === 'file') {
+                                    // if it is input type file.
+                                    // don't work here. this is for prevent errors only.
                                 } else {
                                     thisInputElement.value = item.config_value;
                                 }
@@ -59,6 +62,12 @@ class RdbaSettingsController {
                                         defaultRolesSelectbox.selected = true;
                                     }
                                 });
+                            }
+
+                            if (item.config_name === 'rdbadmin_SiteFavicon' && item.config_value) {
+                                // if favicon.
+                                let rdbaSettingsFaviconController = new RdbaSettingsFaviconController();
+                                rdbaSettingsFaviconController.displayFavicon(RdbaSettings.urls.publicUrl + '/' + item.config_value);
                             }
                         }// endif isset item.xxx
 
@@ -162,8 +171,8 @@ class RdbaSettingsController {
             });
 
             RdbaCommon.XHR({
-                'url': RdbaSettings.editSettingsSubmitUrl,
-                'method': RdbaSettings.editSettingsSubmitMethod,
+                'url': RdbaSettings.urls.editSettingsSubmitUrl,
+                'method': RdbaSettings.urls.editSettingsSubmitMethod,
                 'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'data': new URLSearchParams(_.toArray(formData)).toString(),
                 'dataType': 'json'
@@ -377,8 +386,8 @@ class RdbaSettingsController {
                 formData.append(RdbaSettings.csrfValue, RdbaSettings.csrfKeyPair[RdbaSettings.csrfValue]);
 
                 RdbaCommon.XHR({
-                    'url': RdbaSettings.editSettingsTestSmtpConnectionUrl,
-                    'method': RdbaSettings.editSettingsTestSmtpConnectionMethod,
+                    'url': RdbaSettings.urls.editSettingsTestSmtpConnectionUrl,
+                    'method': RdbaSettings.urls.editSettingsTestSmtpConnectionMethod,
                     'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                     'data': new URLSearchParams(_.toArray(formData)).toString(),
                     'dataType': 'json'

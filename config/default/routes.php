@@ -125,6 +125,10 @@ $Rc->addGroup('/admin', function(\FastRoute\RouteCollector $Rc) {
 
     // /admin/settings/test-smtp REST API.
     $Rc->addRoute('POST', '/settings/test-smtp', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\Settings:testSmtp');
+
+    // /admin/settings/favicon REST API (upload, change new favicon).
+    $Rc->addRoute('POST', '/settings/favicon', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\Favicon:update');
+    $Rc->addRoute('DELETE', '/settings/favicon', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\Favicon:delete');
     // end settings (config) management. --------------------------------------------------------
 
     // admin tools. ----------------------------------------------------------------------------------

@@ -72,6 +72,32 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="rdbadmin_SiteFavicon"><?php echo __('Favicon'); ?></label>
+                                        <div class="control-wrapper">
+                                            <div id="current-favicon-preview"></div>
+                                            <button id="prog-delete-favicon-button" class="prog-delete-favicon-button rd-hidden rd-button danger" type="button">
+                                                <i class="fa-solid fa-trash"></i>
+                                                <?php echo __('Delete this favicon'); ?> 
+                                            </button>
+                                            <div id="rdbadmin-favicon-dropzone" class="rdbadmin-favicon-dropzone rdbadmin-file-dropzone" title="<?php echo esc__('Drop a file into this area to start upload.'); ?>">
+                                                <span id="rdbadmin-favicon-choose-files-button" class="rd-button info rd-inputfile rdbadmin-button-upload-file" tabindex="0">
+                                                    <span class="label"><i class="fa-solid fa-file-arrow-up"></i> <?php echo __('Choose a file'); ?></span>
+                                                    <input id="rdbadmin_SiteFavicon" type="file" name="rdbadmin_SiteFavicon" tabindex="-1" accept="<?php echo ($favicon['allowedFileExtensions'] ?? '.ico,.gif,.png'); ?>">
+                                                </span>
+                                                <span id="rdbadmin-favicon-upload-status-placeholder"></span>
+                                                <div id="rdbadmin-favicon-dropzone-description" class="form-description">
+                                                    <?php 
+                                                    echo __('Click on choose a file or drop a file here to start upload.'); 
+                                                    echo ' ';
+                                                    printf(__('Max file size %s.'), ini_get('upload_max_filesize')); 
+                                                    echo ' ';
+                                                    printf(__('Recommended image size is %1$s pixels.'), ($favicon['recommendedSize'] ?? '512x512'));
+                                                    ?> 
+                                                </div>
+                                            </div><!--#rdbadmin-favicon-dropzone-->
+                                        </div>
+                                    </div>
 
                                     <fieldset>
                                         <legend><?php echo __('API access'); ?></legend>
