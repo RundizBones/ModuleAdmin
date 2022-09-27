@@ -35,7 +35,7 @@ class FaviconController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         [32, 32],
         [180, 180],
         [192, 192],
-        [310, 310],
+        [270, 270],
     ];
 
     const maxImgWidth = 2048;
