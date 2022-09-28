@@ -206,6 +206,7 @@ function renderBreadcrumbHtml(array $breadcrumb): string
  * Render favicon HTML.
  * 
  * @link https://stackoverflow.com/questions/48956465/favicon-standard-2022-svg-ico-png-and-dimensions Reference.
+ * @since 1.2.4
  * @param string $faviconPath
  * @return string
  */
