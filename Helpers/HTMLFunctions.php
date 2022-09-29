@@ -222,7 +222,7 @@ function renderFaviconHtml(\Rdb\System\Container $Container, string $faviconPath
             'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Helpers/HTMLFunctions/' . __FUNCTION__,
         ]
     ))->getCacheObject();
-    $cacheKey = 'faviconHTML';
+    $cacheKey = 'faviconHTML_' . $faviconPath;
     $cacheExpire = (15 * 24 * 60 * 60);// 15 days
 
     if ($Cache->has($cacheKey)) {
