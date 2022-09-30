@@ -72,12 +72,37 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
 
         unset($csrfName, $csrfValue);
         // generate new token for re-submit the form continueously without reload the page.
-        $output = array_merge($output, $Csrf->createToken());
+        $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
 
         // display, response part ---------------------------------------------------------------------------------------------
         unset($Csrf);
         return $this->responseAcceptType($output);
     }// doLogoutAction
+
+
+    /**
+     * Get common use configuration between methods.
+     * 
+     * @return array
+     */
+    protected function getConfig(): array
+    {
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $configNames = [
+            'rdbadmin_SiteName',
+            'rdbadmin_SiteFavicon',
+        ];
+        $configDefaults = [
+            '',
+            '',
+        ];
+
+        $output = [];
+        $output['configDb'] = $ConfigDb->get($configNames, $configDefaults);
+        unset($ConfigDb, $configDefaults, $configNames);
+
+        return $output;
+    }// getConfig
 
 
     /**
@@ -96,7 +121,7 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
-        $output = array_merge($output, $Csrf->createToken());
+        $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
 
         if (isset($_GET['fastLogout']) && $_GET['fastLogout'] === 'true') {
             // if fast logout.
@@ -112,6 +137,9 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         }
         $output['logoutUrl'] = $Url->getCurrentUrl() . $Url->getQuerystring();
         $output['logoutMethod'] = 'DELETE';
+
+        // remove sensitive info.
+        $output = $this->removeSensitiveCfgInfo($output);
 
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->isNonHtmlAccept()) {
@@ -155,6 +183,29 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             return $this->Views->render('common/Admin/emptyLayout_v', $output);
         }
     }// indexAction
+
+
+    /**
+     * Remove sensitive config info that contains non-site configuration.
+     * 
+     * @param array $output The output array that contain `configDb` array key.
+     * @return array Return removed sensitive info.
+     */
+    private function removeSensitiveCfgInfo(array $output)
+    {
+        if (isset($output['configDb']) && is_array($output['configDb'])) {
+            foreach ($output['configDb'] as $cfgKey => $cfgValue) {
+                if (stripos($cfgKey, 'rdbadmin_Site') === false) {
+                    // if non site config.
+                    // remove it.
+                    unset($output['configDb'][$cfgKey]);
+                }
+            }// endforeach;
+            unset($cfgKey, $cfgValue);
+        }
+
+        return $output;
+    }// removeSensitiveCfgInfo
 
 
 }
