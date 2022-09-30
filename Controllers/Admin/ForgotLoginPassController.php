@@ -66,6 +66,31 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
 
 
     /**
+     * Get common use configuration between methods.
+     * 
+     * @return array
+     */
+    protected function getConfig(): array
+    {
+        $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
+        $configNames = [
+            'rdbadmin_SiteName',
+            'rdbadmin_SiteFavicon',
+        ];
+        $configDefaults = [
+            '',
+            '',
+        ];
+
+        $output = [];
+        $output['configDb'] = $ConfigDb->get($configNames, $configDefaults);
+        unset($ConfigDb, $configDefaults, $configNames);
+
+        return $output;
+    }// getConfig
+
+
+    /**
      * Display forgot login & password page.
      * 
      * @return string
@@ -81,7 +106,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
         $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
-        $output = array_merge($output, $Csrf->createToken());
+        $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
         unset($Csrf);
 
         // honeypot (antibot)
@@ -100,6 +125,9 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
         } else {
             $output['gobackUrl'] = strip_tags($output['gobackUrl']);
         }
+
+        // remove sensitive info.
+        $output = $this->removeSensitiveCfgInfo($output);
 
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->isNonHtmlAccept()) {
@@ -189,6 +217,29 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
 
 
     /**
+     * Remove sensitive config info that contains non-site configuration.
+     * 
+     * @param array $output The output array that contain `configDb` array key.
+     * @return array Return removed sensitive info.
+     */
+    private function removeSensitiveCfgInfo(array $output)
+    {
+        if (isset($output['configDb']) && is_array($output['configDb'])) {
+            foreach ($output['configDb'] as $cfgKey => $cfgValue) {
+                if (stripos($cfgKey, 'rdbadmin_Site') === false) {
+                    // if non site config.
+                    // remove it.
+                    unset($output['configDb'][$cfgKey]);
+                }
+            }// endforeach;
+            unset($cfgKey, $cfgValue);
+        }
+
+        return $output;
+    }// removeSensitiveCfgInfo
+
+
+    /**
      * Display new password form fields page.
      * 
      * @return string
@@ -204,7 +255,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
         $Url = new \Rdb\System\Libraries\Url($this->Container);
 
         $output = [];
-        $output = array_merge($output, $Csrf->createToken());
+        $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
         unset($Csrf);
 
         $tokenValue = $this->Input->request('token', null);
@@ -270,6 +321,9 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
         } else {
             $output['gobackUrl'] = strip_tags($output['gobackUrl']);
         }
+
+        // remove sensitive info.
+        $output = $this->removeSensitiveCfgInfo($output);
 
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->isNonHtmlAccept()) {
@@ -506,7 +560,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
 
         unset($csrfName, $csrfValue);
         // generate new token for re-submit the form continueously without reload the page.
-        $output = array_merge($output, $Csrf->createToken());
+        $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
 
         // display, response part ---------------------------------------------------------------------------------------------
         unset($Csrf);
@@ -639,7 +693,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
 
         unset($csrfName, $csrfValue);
         // generate new token for re-submit the form continueously without reload the page.
-        $output = array_merge($output, $Csrf->createToken());
+        $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
 
         // display, response part ---------------------------------------------------------------------------------------------
         unset($Csrf);

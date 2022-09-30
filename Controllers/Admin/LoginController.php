@@ -251,7 +251,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         }
 
         // remove sensitive info.
-        unset($output['configDb']);
+        $output = $this->removeSensitiveCfgInfo($output);
 
         unset($csrfName, $csrfValue);
         // generate new token for re-submit the form continueously without reload the page.
@@ -439,7 +439,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             );
 
             // clear sensitive data.
-            unset($output['configDb']);
+            $output = $this->removeSensitiveCfgInfo($output);
         } else {
             // if unable to validate token.
             $output['formResultStatus'] = 'error';
@@ -469,6 +469,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $configNames = [
             'rdbadmin_SiteName',
+            'rdbadmin_SiteFavicon',
             'rdbadmin_UserRegister',
             'rdbadmin_UserLoginBruteforcePreventByIp',
             'rdbadmin_UserLoginBruteforcePreventByDc',
@@ -478,6 +479,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             'rdbadmin_UserLoginRememberLength',
         ];
         $configDefaults = [
+            '',
             '',
             '0',// rdbadmin_UserRegister
             '1',
@@ -536,13 +538,10 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);
         $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages', 'rdba-pagehtml-login']);
 
-        // remove sensitive info.
-        if (isset($output['configDb']['rdbadmin_UserRegister'])) {
-            $output['configDb_rdbadmin_UserRegister'] = $output['configDb']['rdbadmin_UserRegister'];
-        } else {
-            $output['configDb_rdbadmin_UserRegister'] = '0';
+        // set required config if not exists.
+        if (!isset($output['configDb']['rdbadmin_UserRegister'])) {
+            $output['configDb']['rdbadmin_UserRegister'] = '0';
         }
-        unset($output['configDb']);
 
         // display page alert message if exists.
         if (isset($_SESSION['loginPageAlertMessage'])) {
@@ -558,6 +557,11 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             }
             unset($_SESSION['loginPageAlertMessage'], $pageAlertMessage);
         }
+
+        // store special config value into variable before remove.
+        $rdbadmin_UserRegister = ($output['configDb']['rdbadmin_UserRegister'] ?? '0');
+        // remove sensitive info.
+        $output = $this->removeSensitiveCfgInfo($output);
 
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->isNonHtmlAccept()) {
@@ -583,7 +587,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
                     'loginMethod' => $output['loginMethod'],
                     'forgotLoginPassUrl' => $output['forgotLoginPassUrl'],
                     'registerUrl' => $output['registerUrl'],
-                    'configDb' => ['rdbadmin_UserRegister' => $output['configDb_rdbadmin_UserRegister']],
+                    'configDb' => ['rdbadmin_UserRegister' => $rdbadmin_UserRegister],
                     'gobackUrl' => $output['gobackUrl'],
                 ]
             );
@@ -596,7 +600,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Login/index_v', $output);
 
-            unset($Assets, $MyModuleAssets, $Url);
+            unset($Assets, $MyModuleAssets, $rdbadmin_UserRegister, $Url);
             return $this->Views->render('common/Admin/emptyLayout_v', $output);
         }
     }// indexAction
@@ -696,7 +700,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle'], $output['configDb']['rdbadmin_SiteName']);
         $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages']);
         // remove sensitive info
-        unset($output['configDb']);
+        $output = $this->removeSensitiveCfgInfo($output);
 
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->isNonHtmlAccept()) {
@@ -736,6 +740,29 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             return $this->Views->render('common/Admin/emptyLayout_v', $output);
         }
     }// mfaAction
+
+
+    /**
+     * Remove sensitive config info that contains non-site configuration.
+     * 
+     * @param array $output The output array that contain `configDb` array key.
+     * @return array Return removed sensitive info.
+     */
+    private function removeSensitiveCfgInfo(array $output)
+    {
+        if (isset($output['configDb']) && is_array($output['configDb'])) {
+            foreach ($output['configDb'] as $cfgKey => $cfgValue) {
+                if (stripos($cfgKey, 'rdbadmin_Site') === false) {
+                    // if non site config.
+                    // remove it.
+                    unset($output['configDb'][$cfgKey]);
+                }
+            }// endforeach;
+            unset($cfgKey, $cfgValue);
+        }
+
+        return $output;
+    }// removeSensitiveCfgInfo
 
 
     /**
@@ -820,7 +847,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages']);
 
         // remove sensitive info.
-        unset($output['configDb']);
+        $output = $this->removeSensitiveCfgInfo($output);
 
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->isNonHtmlAccept()) {

@@ -63,7 +63,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
         $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages']);
 
         // remove sensitive info.
-        unset($output['configDb']);
+        $output = $this->removeSensitiveCfgInfo($output);
 
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->isNonHtmlAccept()) {
@@ -290,7 +290,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
         }
 
         // remove sensitive info.
-        unset($output['configDb']);
+        $output = $this->removeSensitiveCfgInfo($output);
 
         unset($csrfName, $csrfValue);
         // generate new token for re-submit the form continueously without reload the page.
@@ -534,7 +534,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
         }
 
         // remove sensitive info.
-        unset($output['configDb']);
+        $output = $this->removeSensitiveCfgInfo($output);
 
         unset($csrfName, $csrfValue, $userRegister);
         // generate new token for re-submit the form continueously without reload the page.
@@ -894,6 +894,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
         $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $configNames = [
             'rdbadmin_SiteName',
+            'rdbadmin_SiteFavicon',
             'rdbadmin_UserRegister',
             'rdbadmin_UserRegisterNotifyAdmin',
             'rdbadmin_UserRegisterNotifyAdminEmails',
@@ -902,6 +903,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
             'rdbadmin_UserRegisterDefaultRoles',
         ];
         $configDefaults = [
+            '',
             '',
             '0',
             '0',
@@ -966,7 +968,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
         $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages']);
 
         // remove sensitive info.
-        unset($output['configDb']);
+        $output = $this->removeSensitiveCfgInfo($output);
 
         // display, response part ---------------------------------------------------------------------------------------------
         if ($this->Input->isNonHtmlAccept()) {
@@ -1050,6 +1052,29 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
 
         return false;
     }// isUserProxy
+
+
+    /**
+     * Remove sensitive config info that contains non-site configuration.
+     * 
+     * @param array $output The output array that contain `configDb` array key.
+     * @return array Return removed sensitive info.
+     */
+    private function removeSensitiveCfgInfo(array $output)
+    {
+        if (isset($output['configDb']) && is_array($output['configDb'])) {
+            foreach ($output['configDb'] as $cfgKey => $cfgValue) {
+                if (stripos($cfgKey, 'rdbadmin_Site') === false) {
+                    // if non site config.
+                    // remove it.
+                    unset($output['configDb'][$cfgKey]);
+                }
+            }// endforeach;
+            unset($cfgKey, $cfgValue);
+        }
+
+        return $output;
+    }// removeSensitiveCfgInfo
 
 
 }
