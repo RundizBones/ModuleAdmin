@@ -23,8 +23,10 @@
 
         <?php 
         echo $Assets->renderAssets('css'); 
-        include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
-        echo "\n" . renderFaviconHtml($Container, $configDb['rdbadmin_SiteFavicon']);
+        if (isset($configDb['rdbadmin_SiteFavicon'])) {
+            include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
+            echo "\n" . renderFaviconHtml($Container, $configDb['rdbadmin_SiteFavicon']);
+        }
         ?> 
     </head>
     <body>
