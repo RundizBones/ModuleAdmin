@@ -745,6 +745,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
     /**
      * Remove sensitive config info that contains non-site configuration.
      * 
+     * @since 1.2.5
      * @param array $output The output array that contain `configDb` array key.
      * @return array Return removed sensitive info.
      */
