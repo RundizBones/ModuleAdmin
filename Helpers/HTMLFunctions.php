@@ -246,6 +246,7 @@ function renderFaviconHtml(\Rdb\System\Container $Container, string $faviconPath
              $publicPath . '/' . $faviconPathNoExt . '*.' . $fileExtension
         );
         if (is_array($filesSearch)) {
+            asort($filesSearch, SORT_NATURAL);
             foreach ($filesSearch as $eachFile) {
                 if (is_file($eachFile)) {
                     $fileNameOnly = pathinfo($eachFile, PATHINFO_FILENAME);// no extension and path, just file name.
