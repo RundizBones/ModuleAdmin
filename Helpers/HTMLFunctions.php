@@ -229,7 +229,7 @@ function renderFaviconHtml(\Rdb\System\Container $Container, string $faviconPath
         unset($cacheExpire);
         return $Cache->get($cacheKey)
             . '        <!--cached favicon HTML-->' . PHP_EOL;
-    } else {;
+    } else {
         $output = '';
         $Url = new \Rdb\System\Libraries\Url($Container);
         $fullPublicUrl = $Url->getDomainProtocol();
