@@ -119,7 +119,23 @@ class Plugins
                         // it is incorrect functional so warn the developers.
                         $classString = '';
                         if (is_array($subItem['callback']) && isset($subItem['callback'][0]) && isset($subItem['callback'][1])) {
-                            $classString = $subItem['callback'][0] . '::' . $subItem['callback'][1];
+                            $classType = gettype($subItem['callback'][0]);
+                            if ($classType === 'object') {
+                                $classString = get_class($subItem['callback'][0]);
+                            } elseif ($classType === 'string') {
+                                $classString = $subItem['callback'][0];
+                            }
+                            unset($classType);
+
+                            $classString .= '::';
+
+                            $methodType = gettype($subItem['callback'][1]);
+                            if ($methodType === 'string') {
+                                $classString .= $subItem['callback'][1] . '()';
+                            }
+                            unset($methodType);
+                        } elseif (is_string($subItem['callback'])) {
+                            $classString = $subItem['callback'] . '()';
                         }
                         trigger_error('One of plugin that running this hook (' . $tag . ') return null. (Class name ' . $classString . '.)', E_USER_WARNING);
                         unset($classString);
