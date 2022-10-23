@@ -94,6 +94,49 @@ class Plugins
 
 
     /**
+     * Alter the data use callback function that have been added to a hook.
+     * 
+     * @link https://developer.wordpress.org/reference/functions/apply_filters/ Argument description copied from WordPress.
+     * @since 1.2.5
+     * @param string $tag
+     * @param mixed $data The data to alter.
+     * @param mixed $args Additional parameters to pass to callback functions.
+     * @return mixed The altered data after hooked all functions are applied to it.
+     */
+    public function doAlter(string $tag, $data, ...$args)
+    {
+        if (!isset($this->callbackHooks[$tag])) {
+            return $data;
+        }
+
+        foreach ($this->callbackHooks[$tag] as $priority => $items) {
+            if (is_array($items)) {
+                foreach($items as $idHash => $subItem) {
+                    array_unshift($args, $data);// put $data to front of $args.
+                    $result = call_user_func_array($subItem['callback'], $args);
+                    if (is_null($result)) {
+                        // if this hook return nothing.
+                        // it is incorrect functional so warn the developers.
+                        $classString = '';
+                        if (is_array($subItem['callback']) && isset($subItem['callback'][0]) && isset($subItem['callback'][1])) {
+                            $classString = $subItem['callback'][0] . '::' . $subItem['callback'][1];
+                        }
+                        trigger_error('One of plugin that running this hook (' . $tag . ') return null. (Class name ' . $classString . '.)', E_USER_WARNING);
+                        unset($classString);
+                    }
+                    $args = array_slice($args, 1);// now remove first array of $args which is $data out.
+                    $data = $result;
+                }// endforeach;
+                unset($idHash, $result, $subItem);
+            }
+        }// endforeach;
+        unset($items, $priority);
+
+        return $data;
+    }// doAlter
+
+
+    /**
      * Calls the callback function that have been added to a hook.
      * 
      * @link https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Extension!ModuleHandler.php/function/ModuleHandler%3A%3AinvokeAll/ Copied from Drupal.

@@ -102,11 +102,15 @@ class %PLUGIN% implements \Rdb\Modules\RdbAdmin\Interfaces\Plugins
         \$Plugins->addHook('rdbatest.demoaction1', [\$%PLUGIN%PlugInContentSubClass, 'demoAction2'], 11);
         \$Plugins->addHook('rdbatest.demoaction2', [\$%PLUGIN%PlugInContentSubClass, 'demoAction2'], 10);
 
-        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter1'], 10);
-        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter1p1'], 11);
-        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter1p2'], 11);
-        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter2'], 12);
-        \$Plugins->addHook('rdbatest.demoalter2', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter2'], 10);
+        \$Plugins->addHook('rdbatest.demoactionalterargsbyref1', [\$%PLUGIN%PlugInContentSubClass, 'demoActionAlterArgsByRef1'], 10);
+        \$Plugins->addHook('rdbatest.demoactionalterargsbyref1', [\$%PLUGIN%PlugInContentSubClass, 'demoActionAlterArgsByRef1p1'], 11);
+        \$Plugins->addHook('rdbatest.demoactionalterargsbyref1', [\$%PLUGIN%PlugInContentSubClass, 'demoActionAlterArgsByRef1p2'], 11);
+        \$Plugins->addHook('rdbatest.demoactionalterargsbyref1', [\$%PLUGIN%PlugInContentSubClass, 'demoActionAlterArgsByRef2'], 12);
+        \$Plugins->addHook('rdbatest.demoactionalterargsbyref2', [\$%PLUGIN%PlugInContentSubClass, 'demoActionAlterArgsByRef2'], 10);
+
+        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter1Before'], 10);
+        \$Plugins->addHook('rdbatest.demoalter1', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter1After'], 10);
+        \$Plugins->addHook('rdbatest.demoalter2', [\$%PLUGIN%PlugInContentSubClass, 'demoAlter2MultiArgs'], 10);
     }// registerHooks
 
 
@@ -170,28 +174,62 @@ class %PLUGIN%PlugInContentSubClass
     }
 
 
-    public function demoAlter1(&\$name, \$email, \$website = '')
+    public function demoActionAlterArgsByRef1(&\$name, \$email, \$website = '')
     {
         \$name = 'Alter1(' . \$name . ')';
     }
 
 
-    public function demoAlter1p1(&\$name, \$email, \$website = '')
+    public function demoActionAlterArgsByRef1p1(&\$name, \$email, \$website = '')
     {
         \$name = 'Alter1p1(' . \$name . ')';
     }
 
 
-    public function demoAlter1p2(&\$name, \$email, \$website = '')
+    public function demoActionAlterArgsByRef1p2(&\$name, \$email, \$website = '')
     {
         \$name = 'Alter1p2(' . \$name . ')';
     }
 
 
-    public function demoAlter2(&\$name, \$email, \$website = '')
+    public function demoActionAlterArgsByRef2(&\$name, \$email, \$website = '')
     {
         \$name = 'Alter2(' . \$name . ')';
         return ['name' => \$name, 'email' => \$email];
+    }
+
+
+    public function demoAlter1Before(\$name)
+    {
+        return 'before::' . \$name;
+    }
+
+
+    public function demoAlter1After(\$name)
+    {
+        return \$name . '::after';
+    }
+
+
+    public function demoAlter2MultiArgs(\$name, \$lastname = '', array \$address = [], array \$phones = [])
+    {
+        if (empty(\$lastname) || empty(\$address) || empty(\$phones)) {
+            throw new \Exception('The other arguments are empty.');// help unit test to verify that these arguments must be specified.
+        }
+
+        if (count(\$address) < 3) {
+            throw new \Exception('The address argument must have 3 or more values.');
+        }
+
+        if (count(\$phones) < 2) {
+            throw new \Exception('The phones argument must have 2 or more values.');
+        }
+
+        if (!array_key_exists('addr1', \$address)) {
+            throw new \Exception('The address argument must have addr1 key in it.');
+        }
+
+        return \$name . ' Connor';
     }
 
 
@@ -265,19 +303,42 @@ EOT;
         }
         $this->assertEquals(3, $countHook);// number of hook functions added.
 
-        $this->assertTrue(isset($callbackHooks['rdbatest.demoalter1']));
-        $this->assertTrue(isset($callbackHooks['rdbatest.demoalter2']));
+        $this->assertTrue(isset($callbackHooks['rdbatest.demoactionalterargsbyref1']));
+        $this->assertTrue(isset($callbackHooks['rdbatest.demoactionalterargsbyref2']));
         $this->assertGreaterThanOrEqual(4, $callbackHooks);
-        $this->assertEquals(3, count($callbackHooks['rdbatest.demoalter1']));// number of priorities in use.
-        $this->assertEquals(1, count($callbackHooks['rdbatest.demoalter2']));// number of priorities in use.
+        $this->assertEquals(3, count($callbackHooks['rdbatest.demoactionalterargsbyref1']));// number of priorities in use.
+        $this->assertEquals(1, count($callbackHooks['rdbatest.demoactionalterargsbyref2']));// number of priorities in use.
         $countHook = 0;
-        foreach ($callbackHooks['rdbatest.demoalter1'] as $priority => $items) {
+        foreach ($callbackHooks['rdbatest.demoactionalterargsbyref1'] as $priority => $items) {
             foreach ($items as $idHash => $subItems) {
                 $countHook++;
             }
         }
         $this->assertEquals(4, $countHook);// number of hook functions added.
     }// testAddHook
+
+
+    public function testDoAlter()
+    {
+        $name = 'Adam';
+        $name = $this->Plugins->doAlter('rdbatest.demoalter1', $name);// 1 argument
+        $this->assertStringStartsWith('before::', $name);
+        $this->assertStringEndsWith('::after', $name);
+
+        $name = 'John';
+        $lastname = 'Doe';
+        $address = [
+            'addr1' => '123 village, road, district',
+            'province' => 'Bangkok',
+            'country' => 'Thailand',
+        ];
+        $phones = [
+            '021234567',
+            '027654321',
+        ];
+        $this->assertSame('John Connor', $this->Plugins->doAlter('rdbatest.demoalter2', $name, $lastname, $address, $phones));
+        $this->assertSame('Doe', $lastname);// must not change.
+    }// testDoAlter
 
 
     public function testDoHook()
@@ -290,7 +351,7 @@ EOT;
             empty(Arrays::array_diff_assoc_recursive(['hook1(Adam)', 'hook1p1(Adam)', 'hook2(Adam)'], $result))
         );
 
-        $result = $this->Plugins->doHook('rdbatest.demoalter1', [&$name, $email]);
+        $result = $this->Plugins->doHook('rdbatest.demoactionalterargsbyref1', [&$name, $email]);
         $this->assertSame('Alter2(Alter1p2(Alter1p1(Alter1(Adam))))', $name);
     }// testDoHook
 
@@ -321,7 +382,9 @@ EOT;
         $this->assertEquals(12, $this->Plugins->hasHook('hook.name2', ['Class', 'method']));
 
         $this->assertTrue($this->Plugins->hasHook('rdbatest.demoaction1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoactionalterargsbyref1'));
         $this->assertTrue($this->Plugins->hasHook('rdbatest.demoalter1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoalter2'));
     }// testHasHook
 
 
@@ -432,13 +495,13 @@ EOT;
         $this->assertEquals(11, $this->Plugins->hasHook('rdbatest.demoaction1', [$Demo1Plug, 'demoAction1p1']));
 
         // check that has another hooks.
-        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoalter1'));
-        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoalter2'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoactionalterargsbyref1'));
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoactionalterargsbyref2'));
 
-        $this->Plugins->removeAllHooks('rdbatest.demoalter1', false);// remove all filters without any priority care.
+        $this->Plugins->removeAllHooks('rdbatest.demoactionalterargsbyref1', false);// remove all filters without any priority care.
 
-        $this->assertFalse($this->Plugins->hasHook('rdbatest.demoalter1'));// there are no filters left on this hook name.
-        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoalter2'));
+        $this->assertFalse($this->Plugins->hasHook('rdbatest.demoactionalterargsbyref1'));// there are no filters left on this hook name.
+        $this->assertTrue($this->Plugins->hasHook('rdbatest.demoactionalterargsbyref2'));
     }// testRemoveAllHooks
 
 
