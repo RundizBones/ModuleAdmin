@@ -212,6 +212,9 @@ class RdbaModulesController extends RdbaDatatables {
                 let modulesLocation = [];
                 let moduleSystemNameArray = [];
                 event.target.querySelectorAll('input[type="checkbox"][name="module_id[]"]:checked').forEach(function(item, index) {
+                    if (item.disabled === true) {
+                        return ;
+                    }
                     modulesIdArray.push(item.value);
                     modulesLocation.push(item.dataset.moduleLocation);
                     moduleSystemNameArray.push(item.dataset.moduleSystemName);
