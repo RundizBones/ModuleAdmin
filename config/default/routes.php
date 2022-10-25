@@ -106,15 +106,19 @@ $Rc->addGroup('/admin', function(\FastRoute\RouteCollector $Rc) {
     $Rc->addRoute('DELETE', '/permissions/{module_system_name}', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Permissions\\Edit:doClear');
     // end permissions management. -------------------------------------------------------------
 
-    // modules plugins management. -------------------------------------------------------------
+    // modules management. ----------------------------------------------------------------------
+    // modules management page.
+    $Rc->addRoute('GET', '/modules', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Modules:index');
+    $Rc->addRoute('PATCH', '/modules/actions', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Actions:doUpdate');
+
+    // modules plugins management.
     $Rc->addRoute('GET', '/modules/plugins', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Plugins\\Plugins:index');
     $Rc->addRoute('PATCH', '/modules/plugins/actions', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Plugins\\Actions:doUpdate');
-    // end modules plugins management. --------------------------------------------------------
 
-    // modules assets management. -------------------------------------------------------------
+    // modules assets management.
     $Rc->addRoute('GET', '/modules/assets', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Assets\\Assets:index');
     $Rc->addRoute('POST', '/modules/assets', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Assets\\Publish:doPublish');
-    // end modules assets management. --------------------------------------------------------
+    // end modules management. -----------------------------------------------------------------
 
     // settings (config) management. -------------------------------------------------------------
     // /admin/settings page + REST API (settings page - get data via REST).

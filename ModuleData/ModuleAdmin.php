@@ -54,6 +54,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
     {
         return [
             'RdbAdminPermissions' => ['managePermissions'],
+            'RdbAdminModules' => ['list', 'manageModules'],
             'RdbAdminModulesPlugins' => ['listPlugins', 'managePlugins'],
             'RdbAdminModulesAssets' => ['publishAssets'],
             'RdbAdminRoles' => ['add', 'edit', 'delete', 'list', 'changePriority'],
@@ -83,6 +84,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
 
         // pages keywords
         $keywords['RdbAdminPermissions'] = noop__('Permissions');
+        $keywords['RdbAdminModules'] = noop__('Modules');
         $keywords['RdbAdminModulesPlugins'] = noop__('Modules Plugins');
         $keywords['RdbAdminModulesAssets'] = noop__('Modules Assets');
         $keywords['RdbAdminRoles'] = noop__('Roles');
@@ -101,6 +103,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
         $keywords['list'] = noop__('List items');
         $keywords['listPlugins'] = noop__('List plugins');
         $keywords['manageCache'] = noop__('Manage cache');
+        $keywords['manageModules'] = noop__('Manage modules');
         $keywords['managePermissions'] = noop__('Manage permissions');
         $keywords['managePlugins'] = noop__('Manage plugins');
         $keywords['publishAssets'] = noop__('Publish assets to the public');
@@ -158,9 +161,6 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                 'link' => $urlBaseWithLang . '/admin/users',
                 'liAttributes' => [
                     'data-mainmenucontainer' => true,
-                ],
-                'aAttributes' => [
-                    'onclick' => 'return false;',
                 ],
                 'subMenu' => [
                     0 => [
@@ -228,20 +228,26 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             101 => [
                 'id' => 'rdbadmin-modules',
                 'permission' => [
+                    ['RdbAdminModules', 'list', 'manageModules'],
                     ['RdbAdminModulesPlugins', 'listPlugins', 'managePlugins'],
                     ['RdbAdminModulesAssets', 'publishAssets'],
                 ],
                 'icon' => 'fa-solid fa-cubes fa-fw',
                 'name' => __('Modules'),
-                'link' => '#',
+                'link' => $urlBaseWithLang . '/admin/modules',
                 'liAttributes' => [
                     'data-mainmenucontainer' => true,
                 ],
-                'aAttributes' => [
-                    'onclick' => 'return false;',
-                ],
                 'subMenu' => [
                     0 => [
+                        'id' => 'rdbadmin-modules-list',
+                        'permission' => [
+                            ['RdbAdminModules', 'list', 'manageModules'],
+                        ],
+                        'name' => __('Modules'),
+                        'link' => $urlBaseWithLang . '/admin/modules',
+                    ],
+                    1 => [
                         'id' => 'rdbadmin-modules-listplugins',
                         'permission' => [
                             ['RdbAdminModulesPlugins', 'listPlugins', 'managePlugins'],
@@ -249,7 +255,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                         'name' => __('Modules Plugins'),
                         'link' => $urlBaseWithLang . '/admin/modules/plugins',
                     ],
-                    1 => [
+                    2 => [
                         'id' => 'rdbadmin-modules-assets',
                         'permission' => [
                             ['RdbAdminModulesAssets', 'publishAssets'],

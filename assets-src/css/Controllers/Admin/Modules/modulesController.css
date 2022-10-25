@@ -1,0 +1,16 @@
+/* Modules management CSS */
+
+
+table.dataTable tr.module-disabled,
+tr.module-disabled {
+    background-color: #f5f5f5;
+}
+
+
+.data-secondary-row {
+    font-size: 0.70em;
+    line-height: 1.948em;
+}
+.data-secondary-row > span + span::before {
+  content: ' \00a0 | \00a0 ';
+}

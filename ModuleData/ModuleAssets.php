@@ -88,6 +88,13 @@ class ModuleAssets
                     ],
                 ],
 
+                // modules
+                [
+                    'handle' => 'rdbaModules',
+                    'file' => $publicModuleUrl . '/assets/css/Controllers/Admin/Modules/modulesController.css',
+                    'dependency' => ['rdta'],
+                ],
+
                 // settings
                 [
                     'handle' => 'rdbaSettingsFavicon',
@@ -305,6 +312,12 @@ class ModuleAssets
                     'dependency' => ['rdta', 'rdbaCommon', 'rdbaUiXhrCommonData', 'handlebars', 'lodash'],
                 ],
 
+                // modules management
+                [
+                    'handle' => 'rdbaModules',
+                    'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Modules/modulesController.js',
+                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-plugins-pagination', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
+                ],
                 // modules plugins
                 [
                     'handle' => 'rdbaModulesPlugins',
