@@ -27,8 +27,8 @@ class RdbaCommon {
      * @returns {undefined}
      */
     static dataTableCheckboxToggler(jQueryObject, thisObj) {
-        jQueryObject.find('input[type="checkbox"]').attr('checked', thisObj.is(':checked'));
-        jQueryObject.find('input[type="checkbox"]').prop('checked', thisObj.is(':checked'));
+        jQueryObject.find('input[type="checkbox"]:not([disabled]').attr('checked', thisObj.is(':checked'));
+        jQueryObject.find('input[type="checkbox"]:not([disabled]').prop('checked', thisObj.is(':checked'));
     }// dataTableCheckboxToggler
 
 
