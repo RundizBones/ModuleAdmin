@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2022-10-25 16:02+0700\n"
-"PO-Revision-Date: 2022-10-25 16:02+0700\n"
+"POT-Creation-Date: 2022-10-25 17:24+0700\n"
+"PO-Revision-Date: 2022-10-25 17:25+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -82,7 +82,7 @@ msgstr "ไม่สามารถส่งอีเมลได้."
 #: Controllers/Admin/ForgotLoginPassController.php:559 Controllers/Admin/ForgotLoginPassController.php:692
 #: Controllers/Admin/LoginController.php:249 Controllers/Admin/LoginController.php:389
 #: Controllers/Admin/LoginController.php:446 Controllers/Admin/LogoutController.php:69
-#: Controllers/Admin/Modules/Assets/PublishController.php:304
+#: Controllers/Admin/Modules/ActionsController.php:93 Controllers/Admin/Modules/Assets/PublishController.php:304
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:111
 #: Controllers/Admin/Permissions/EditController.php:84 Controllers/Admin/Permissions/EditController.php:191
 #: Controllers/Admin/RegisterController.php:288 Controllers/Admin/RegisterController.php:532
@@ -146,6 +146,33 @@ msgstr "คุณได้ออกจากระบบแล้ว."
 msgid "Logout"
 msgstr "ออกจากระบบ"
 
+#: Controllers/Admin/Modules/ActionsController.php:82 Controllers/Admin/Modules/Plugins/ActionsController.php:100
+#: Controllers/Admin/Roles/ReorderController.php:105 Controllers/Admin/Settings/SettingsController.php:195
+#: Controllers/Admin/Users/ActionsController.php:373
+msgid "Updated successfully."
+msgstr "อัพเดทเรียบร้อย."
+
+#: Controllers/Admin/Modules/ActionsController.php:140 Controllers/Admin/Modules/Assets/AssetsController.php:153
+#: Controllers/Admin/Modules/Assets/PublishController.php:267 Controllers/Admin/Modules/ModulesController.php:121
+msgid "Please select at least one module."
+msgstr "โปรดเลือกอย่างน้อยหนึ่งโมดูล."
+
+#: Controllers/Admin/Modules/ActionsController.php:148
+#, php-format
+msgid "You couldn't modify current module via web based (%1$s)."
+msgstr "คุณไม่สามารถปรับแต่งโมดูลปัจจุบันผ่านหน้าเว็บได้ (%1$s)."
+
+#: Controllers/Admin/Modules/ActionsController.php:157 Controllers/Admin/Modules/Assets/AssetsController.php:152
+#: Controllers/Admin/Modules/ModulesController.php:120
+#: Controllers/Admin/Modules/Plugins/ActionsController.php:161
+#: Controllers/Admin/Modules/Plugins/ActionsController.php:176
+#: Controllers/Admin/Modules/Plugins/PluginsController.php:121 Controllers/Admin/Roles/ActionsController.php:355
+#: Controllers/Admin/Roles/RolesController.php:180 Controllers/Admin/Users/ActionsController.php:540
+#: Controllers/Admin/Users/ActionsController.php:566 Controllers/Admin/Users/Sessions/SessionsController.php:77
+#: Controllers/Admin/Users/Sessions/SessionsController.php:266 Controllers/Admin/Users/UsersController.php:250
+msgid "Please select an action."
+msgstr "โปรดเลือกการทำงาน."
+
 #: Controllers/Admin/Modules/Assets/AssetsController.php:108 ModuleData/ModuleAdmin.php:89
 #: ModuleData/ModuleAdmin.php:263
 msgid "Modules Assets"
@@ -176,21 +203,6 @@ msgstr "ปิดใช้งาน"
 msgid "Enabled"
 msgstr "เปิดใช้งาน"
 
-#: Controllers/Admin/Modules/Assets/AssetsController.php:152 Controllers/Admin/Modules/ModulesController.php:120
-#: Controllers/Admin/Modules/Plugins/ActionsController.php:161
-#: Controllers/Admin/Modules/Plugins/ActionsController.php:176
-#: Controllers/Admin/Modules/Plugins/PluginsController.php:121 Controllers/Admin/Roles/ActionsController.php:355
-#: Controllers/Admin/Roles/RolesController.php:180 Controllers/Admin/Users/ActionsController.php:540
-#: Controllers/Admin/Users/ActionsController.php:566 Controllers/Admin/Users/Sessions/SessionsController.php:77
-#: Controllers/Admin/Users/Sessions/SessionsController.php:266 Controllers/Admin/Users/UsersController.php:250
-msgid "Please select an action."
-msgstr "โปรดเลือกการทำงาน."
-
-#: Controllers/Admin/Modules/Assets/AssetsController.php:153
-#: Controllers/Admin/Modules/Assets/PublishController.php:267 Controllers/Admin/Modules/ModulesController.php:121
-msgid "Please select at least one module."
-msgstr "โปรดเลือกอย่างน้อยหนึ่งโมดูล."
-
 #: Controllers/Admin/Modules/Assets/PublishController.php:259
 msgid "Invalid form action"
 msgstr "การทำงานของฟอร์มไม่ถูกต้อง"
@@ -204,11 +216,6 @@ msgstr "สำเร็จ. ผลลัพธ์ถูกบันทึกอ�
 #: ModuleData/ModuleAdmin.php:236 ModuleData/ModuleAdmin.php:247
 msgid "Modules"
 msgstr "โมดูล"
-
-#: Controllers/Admin/Modules/Plugins/ActionsController.php:100 Controllers/Admin/Roles/ReorderController.php:105
-#: Controllers/Admin/Settings/SettingsController.php:195 Controllers/Admin/Users/ActionsController.php:373
-msgid "Updated successfully."
-msgstr "อัพเดทเรียบร้อย."
 
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:154
 #: Controllers/Admin/Modules/Plugins/PluginsController.php:122
