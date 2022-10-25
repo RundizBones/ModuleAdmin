@@ -286,7 +286,7 @@ class RdbaSettingsFaviconController {
         let deleteFaviconBtn = document.getElementById('prog-delete-favicon-button');
 
         if (imgSrc !== '') {
-            previewElement.innerHTML = '<a href="' + imgSrc + '" target="_blnak"><img class="rdbadmin-favicon-preview" src="' + imgSrc + '" alt=""></a>';
+            previewElement.innerHTML = '<a href="' + imgSrc + '" target="_blnak"><img class="rdbadmin-favicon-preview fluid" src="' + imgSrc + '" alt=""></a>';
             deleteFaviconBtn.classList.remove('rd-hidden');
         } else {
             previewElement.innerHTML = '';
