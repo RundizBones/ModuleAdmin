@@ -98,7 +98,7 @@ class Plugins
      * 
      * @link https://developer.wordpress.org/reference/functions/apply_filters/ Argument description copied from WordPress.
      * @since 1.2.5
-     * @param string $tag
+     * @param string $tag The name of hook.
      * @param mixed $data The data to alter.
      * @param mixed $args Additional parameters to pass to callback functions.
      * @return mixed The altered data after hooked all functions are applied to it.
