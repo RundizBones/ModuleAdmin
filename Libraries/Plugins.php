@@ -414,6 +414,21 @@ class Plugins
 
         if (isset($enabledPlugins['items']) && is_array($enabledPlugins['items'])) {
             foreach ($enabledPlugins['items'] as $plugin) {
+                $traces = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 30);
+                foreach ($traces as $trace) {
+                    if (isset($trace['file']) && $trace['file'] === __FILE__) {
+                        // if found this file means it called infinitely. 
+                        // for example: base controller call this method
+                        // -> each plugin register hooks and then initialize new controller class
+                        // -> each controller extends base controller
+                        // -> base controller call this method (again)
+                        // -> each plugin register hooks and then initialize new controller class and so on.
+                        // now, stop it by break the loop.
+                        break 2;
+                    }
+                }// endforeach;
+                unset($trace, $traces);
+
                 if (isset($plugin['plugin_class']) && !in_array($plugin['plugin_class'], $this->pluginsRegisteredHooks)) {
                     $PluginObject = new $plugin['plugin_class']($this->Container);
                     call_user_func([$PluginObject, 'registerHooks']);
