@@ -127,7 +127,7 @@ trait UsersTrait
                 if (isset($listSelectedRoles['items']) && is_array($listSelectedRoles['items'])) {
                     foreach ($listSelectedRoles['items'] as $row) {
                         if ($row->userrole_priority < $myRoles->userrole_priority) {
-                            $errors['user_roles']['message'] = __('You cannot set new user\'s role that is higher that you.') . 
+                            $errors['user_roles']['message'] = __('You cannot set new user\'s role that is higher than you.') . 
                                 ' (' . sprintf(__('%1$s has higher priority than %2$s'), '<strong>' . $row->userrole_name . '</strong>', '<strong>' . $myRoles->userrole_name . '</strong>') . ')';
                             $errors['user_roles']['fieldsValidation'] = 'invalid';
                         }

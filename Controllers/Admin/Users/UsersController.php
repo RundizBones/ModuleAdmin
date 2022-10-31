@@ -101,11 +101,17 @@ class UsersController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
             unset($options, $usersRoles, $UsersRolesDb);
 
             $output['user'] = $userRow;
+
+            $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+            $output['permissions'] = [];
+            $output['permissions']['changeRoles'] = $UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'changeRoles');
+            unset($UserPermissionsDb);
         } else {
             http_response_code(404);
             $output['formResultStatus'] = 'error';
             $output['formResultMessage'] = __('Not found selected user.');
             $output['user'] = null;
+            $output['permissions'] = [];
         }
         unset($userRow);
 
@@ -217,6 +223,7 @@ class UsersController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
         $output['permissions']['edit'] = $UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'edit');
         $output['permissions']['delete'] = $UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'delete');
         $output['permissions']['viewLogins'] = $UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'viewLogins');
+        $output['permissions']['changeRoles'] = $UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'changeRoles');
         $output['permissions']['managePermissions'] = $UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminPermissions', 'managePermissions');
         unset($UserPermissionsDb);
 

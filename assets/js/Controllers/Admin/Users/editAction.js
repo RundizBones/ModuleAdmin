@@ -28,36 +28,6 @@ class RdbaUsersEditController {
             'url': RdbaUsers.getUserUrlBase + '/' + document.getElementById('user_id').value,
             'method': RdbaUsers.getUserMethod
         })
-        .catch(function(responseObject) {
-            console.error(responseObject);
-            let response = (responseObject ? responseObject.response : {});
-
-            if (typeof(response) !== 'undefined') {
-                if (typeof(response.formResultMessage) !== 'undefined') {
-                    let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
-                    let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
-                    document.querySelector('.form-result-placeholder').innerHTML = alertBox;
-                }
-            }
-
-            if (responseObject && responseObject.status && responseObject.status === 404) {
-                // if not found.
-                // disable form.
-                let form = document.getElementById('rdba-edit-user-form');
-                let formElements = (form ? form.elements : []);
-                for (var i = 0, len = formElements.length; i < len; ++i) {
-                    formElements[i].disabled = true;
-                }
-            }
-
-            if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
-                RdbaUsers.csrfKeyPair = response.csrfKeyPair;
-                if (typeof(response.csrfName) !== 'undefined' && typeof(response.csrfValue) !== 'undefined') {
-                    editForm.querySelector('#rdba-form-csrf-name').value = response.csrfKeyPair[response.csrfName];
-                    editForm.querySelector('#rdba-form-csrf-value').value = response.csrfKeyPair[response.csrfValue];
-                }
-            }
-        })
         .then(function(responseObject) {
             let response = (responseObject ? responseObject.response : {});
             let user = (response.user ? response.user : {});
@@ -161,8 +131,9 @@ class RdbaUsersEditController {
 
             // set roles field.
             if (user.users_roles) {
-                let selectOptions = Array.from(document.querySelectorAll('#user_roles option'));
-                user.users_roles.forEach(function(item, index) {
+                let user_rolesSelect = document.getElementById('user_roles');
+                let selectOptions = Array.from(user_rolesSelect.querySelectorAll('option'));
+                user.users_roles.forEach((item, index) => {
                     if (item.userrole_id) {
                         let findSelectOptions = selectOptions.find(c => c.value == item.userrole_id);
                         if (findSelectOptions) {
@@ -170,6 +141,38 @@ class RdbaUsersEditController {
                         }
                     }
                 });
+
+                // check permission for changable roles for this user.
+                if (response?.permissions?.changeRoles === false) {
+                    // if this user's permission is unable to change their roles.
+                    // set readonly to select box.
+                    user_rolesSelect.readOnly = true;
+                    user_rolesSelect.setAttribute('readonly', 'readonly');
+                    // hide select box.
+                    user_rolesSelect.classList.add('rd-hidden');
+                    // set roles as display only.
+                    let rolesDisplayHTML = '<div id="roles-displayonly">';
+                    let roleNames = [];
+                    user.users_roles.forEach((item) => {
+                        roleNames.push(item.userrole_name);
+                    });
+                    rolesDisplayHTML += roleNames.join(', ');
+                    rolesDisplayHTML += '</div>';
+                    document.querySelector('#role-form-group .control-wrapper').insertAdjacentHTML('beforeend', rolesDisplayHTML);
+                    // hide required form field text.
+                    document.getElementById('role-required-formfield-txt')?.classList?.add('rd-hidden');
+                } else {
+                    // if this user's permission is be able to change their roles.
+                    // remove readonly from select box.
+                    user_rolesSelect.readOnly = false;
+                    user_rolesSelect.removeAttribute('readonly');
+                    // un-hide select box.
+                    user_rolesSelect.classList.remove('rd-hidden');
+                    // remove display only roles.
+                    document.getElementById('roles-displayonly')?.remove();
+                    // restore required form field text.
+                    document.getElementById('role-required-formfield-txt')?.classList?.remove('rd-hidden');
+                }
             }
 
             if (user.user_status === '0') {
@@ -180,6 +183,36 @@ class RdbaUsersEditController {
                 RdbaUsers.csrfKeyPair = response.csrfKeyPair;
                 if (typeof(response.csrfName) !== 'undefined' && typeof(response.csrfValue) !== 'undefined') {
                     //console.log('new token was set during get form data.', response.csrfKeyPair);
+                    editForm.querySelector('#rdba-form-csrf-name').value = response.csrfKeyPair[response.csrfName];
+                    editForm.querySelector('#rdba-form-csrf-value').value = response.csrfKeyPair[response.csrfValue];
+                }
+            }
+        })
+        .catch(function(responseObject) {
+            console.error(responseObject);
+            let response = (responseObject ? responseObject.response : {});
+
+            if (typeof(response) !== 'undefined') {
+                if (typeof(response.formResultMessage) !== 'undefined') {
+                    let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
+                    let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
+                    document.querySelector('.form-result-placeholder').innerHTML = alertBox;
+                }
+            }
+
+            if (responseObject && responseObject.status && responseObject.status === 404) {
+                // if not found.
+                // disable form.
+                let form = document.getElementById('rdba-edit-user-form');
+                let formElements = (form ? form.elements : []);
+                for (var i = 0, len = formElements.length; i < len; ++i) {
+                    formElements[i].disabled = true;
+                }
+            }
+
+            if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                RdbaUsers.csrfKeyPair = response.csrfKeyPair;
+                if (typeof(response.csrfName) !== 'undefined' && typeof(response.csrfValue) !== 'undefined') {
                     editForm.querySelector('#rdba-form-csrf-name').value = response.csrfKeyPair[response.csrfName];
                     editForm.querySelector('#rdba-form-csrf-value').value = response.csrfKeyPair[response.csrfValue];
                 }

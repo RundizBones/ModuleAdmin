@@ -169,6 +169,8 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
+        
+        $user_id = (int) $user_id;
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
@@ -194,7 +196,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
             // prepare data for checking.
             $data = $this->doUpdateGetData();
             $dataFields = $this->doUpdateGetDataFields();
-            $dataUsersRoles = $this->doUpdateGetDataUsersRoles();
+            $dataUsersRoles = $this->doUpdateGetDataUsersRoles($user_id);
 
             // remove fields that is unable to update manually.
             $this->doUpdateRemoveUnUpdatableDataFields($dataFields);
@@ -423,10 +425,19 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                     }
 
                     // update roles.
-                    $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
-                    $output['updateUsersRoles'] = $UsersRolesDb->update((int) $user_id, ($dataUsersRoles['roleIds'] ?? []));
+                    $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+                    if ($UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'changeRoles')) {
+                        // if there is permission to change roles.
+                        $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+                        $output['updateUsersRoles'] = $UsersRolesDb->update((int) $user_id, ($dataUsersRoles['roleIds'] ?? []));
+                        unset($UsersRolesDb);
+                    } else {
+                        // if there is NO permission to change roles.
+                        $output['updateUsersRoles'] = false;
+                    }
+                    unset($UserPermissionsDb);
 
-                    unset($UserFieldsDb, $UsersRolesDb);
+                    unset($UserFieldsDb);
                 }
 
                 if (defined('APP_ENV') && APP_ENV === 'development') {
@@ -625,13 +636,36 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
      * This method was called from `doUpdateAction()` method.
      * 
      * @global array $_PATCH
+     * @param int $user_id Selected user ID.
      * @return array
      */
-    protected function doUpdateGetDataUsersRoles(): array
+    protected function doUpdateGetDataUsersRoles(int $user_id): array
     {
         global $_PATCH;
 
         $dataUsersRoles = [];
+
+        $UserPermissionsDb = new \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb($this->Container);
+        if (!$UserPermissionsDb->checkPermission('RdbAdmin', 'RdbAdminUsers', 'changeRoles')) {
+            // if there is no permission to change roles.
+            // retrieve data from DB and set as selected values (no change).
+            $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+            $options = [];
+            $options['where'] = ['user_id' => (int) $user_id];
+            $options['unlimited'] = true;
+            $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
+            $usersRoles = $UsersRolesDb->listItems($options);
+            if (isset($usersRoles['items'])) {
+                foreach ($usersRoles['items'] as $usersRole) {
+                    $dataUsersRoles['roleIds'][] = $usersRole->userrole_id;
+                }// endforeach;
+                unset($usersRole);
+            }
+            unset($options, $UsersRolesDb);
+            unset($UserPermissionsDb);
+            return $dataUsersRoles;
+        }
+        unset($UserPermissionsDb);
 
         if (isset($_PATCH['user_roles']) && !empty($_PATCH['user_roles'])) {
             $dataUsersRoles['roleIds'] = $_PATCH['user_roles'];
@@ -671,6 +705,8 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
      * Remove unchangable data.
      * 
      * Remove data that contain column name that must not be update.<br>
+     * Or remove data that there is no this column name in `users` table.
+     * 
      * This method was called from `doUpdateAction()` method.
      * 
      * @param array $data

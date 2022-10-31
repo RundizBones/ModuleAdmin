@@ -86,31 +86,35 @@
                                 </div>
                             </div>
 
-                            <h3><?php echo __('Roles and status'); ?></h3>
-                            <div class="form-group">
-                                <label class="control-label" for="user_roles"><?php echo __('Role'); ?> <em>*</em></label>
-                                <div class="control-wrapper">
-                                    <select id="user_roles" name="user_roles[]" multiple="" size="3" required="">
-                                        <?php 
-                                        if (!isset($user_roles)) {
-                                            $user_roles = [];
-                                        }
+                            <div id="role-form-group">
+                                <h3><?php echo __('Roles'); ?></h3>
+                                <div class="form-group">
+                                    <label class="control-label" for="user_roles"><?php echo __('Role'); ?> <em id="role-required-formfield-txt">*</em></label>
+                                    <div class="control-wrapper">
+                                        <select id="user_roles" name="user_roles[]" multiple="" size="3" required="">
+                                            <?php 
+                                            if (!isset($user_roles)) {
+                                                $user_roles = [];
+                                            }
 
-                                        if (isset($listRoles['items']) && is_array($listRoles['items'])) {
-                                            foreach ($listRoles['items'] as $row) {
-                                                echo '<option value="' . $row->userrole_id . '"';
-                                                echo \Rdb\System\Libraries\Form::staticSetSelected($row->userrole_id, $user_roles);
-                                                echo '>';
-                                                echo $row->userrole_name;
-                                                echo '</option>' . PHP_EOL;
-                                            }// endforeach;
-                                            unset($row);
-                                        }
-                                        unset($listRoles, $user_roles);
-                                        ?> 
-                                    </select>
+                                            if (isset($listRoles['items']) && is_array($listRoles['items'])) {
+                                                foreach ($listRoles['items'] as $row) {
+                                                    echo '<option value="' . $row->userrole_id . '"';
+                                                    echo \Rdb\System\Libraries\Form::staticSetSelected($row->userrole_id, $user_roles);
+                                                    echo '>';
+                                                    echo $row->userrole_name;
+                                                    echo '</option>' . PHP_EOL;
+                                                }// endforeach;
+                                                unset($row);
+                                            }
+                                            unset($listRoles, $user_roles);
+                                            ?> 
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                            </div><!--#role-form-group-->
+
+                            <h3><?php echo __('Status'); ?></h3>
                             <div id="form-group-user_status" class="form-group">
                                 <label class="control-label" for="user_status"><?php echo __('Status'); ?></label>
                                 <div class="control-wrapper">

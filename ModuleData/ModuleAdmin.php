@@ -60,7 +60,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             'RdbAdminRoles' => ['add', 'edit', 'delete', 'list', 'changePriority'],
             'RdbAdminSettings' => ['changeSettings'],
             'RdbAdminTools' => ['manageCache', 'emailTester'],
-            'RdbAdminUsers' => ['add', 'edit', 'delete', 'list', 'viewLogins', 'deleteLogins'],// user cannot add or edit or delete users who are in higher role priority or cannot promote user who has same role priority to higher.
+            'RdbAdminUsers' => ['add', 'edit', 'delete', 'list', 'viewLogins', 'deleteLogins', 'changeRoles'],// user cannot add or edit or delete users who are in higher role priority or cannot promote user who has same role priority to higher.
         ];
     }// definePermissions
 
@@ -96,6 +96,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
         $keywords['add'] = noop__('Add');
         $keywords['changeSettings'] = noop__('Change settings');
         $keywords['changePriority'] = noop__('Change priority');
+        $keywords['changeRoles'] = noop__('Change roles');
         $keywords['delete'] = noop__('Delete');
         $keywords['deleteLogins'] = noop__('Delete logins');
         $keywords['edit'] = noop__('Edit');
