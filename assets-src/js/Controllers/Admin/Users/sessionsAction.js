@@ -324,8 +324,8 @@ class RdtaSessionsController extends RdbaDatatables {
 
                 if (formValidated === true) {
                     let formData = 'userlogin_ids=' + userLoginIdArray.join(',') + '&action=' + selectAction.value;
-                    formData += '&' + RdbaUserSessions.csrfName + '=' + RdbaUserSessions.csrfKeyPair[RdbaUserSessions.csrfName];
-                    formData += '&' + RdbaUserSessions.csrfValue + '=' + RdbaUserSessions.csrfKeyPair[RdbaUserSessions.csrfValue];
+                    formData += '&' + RdbaUserSessions.csrfName + '=' + encodeURIComponent(RdbaUserSessions.csrfKeyPair[RdbaUserSessions.csrfName]);
+                    formData += '&' + RdbaUserSessions.csrfValue + '=' + encodeURIComponent(RdbaUserSessions.csrfKeyPair[RdbaUserSessions.csrfValue]);
                     thisClass.ajaxDeleteSessions(formData);
                 }
             }

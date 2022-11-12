@@ -26,8 +26,8 @@ class RdbaRegisterController {
             $('.rdba-submit-button').attr('disabled', 'disabled');
 
             let formData = $(this).serialize();
-            formData += '&' + RdbaRegister.csrfName + '=' + RdbaRegister.csrfKeyPair[RdbaRegister.csrfName];
-            formData += '&' + RdbaRegister.csrfValue + '=' + RdbaRegister.csrfKeyPair[RdbaRegister.csrfValue];
+            formData += '&' + RdbaRegister.csrfName + '=' + encodeURIComponent(RdbaRegister.csrfKeyPair[RdbaRegister.csrfName]);
+            formData += '&' + RdbaRegister.csrfValue + '=' + encodeURIComponent(RdbaRegister.csrfKeyPair[RdbaRegister.csrfValue]);
 
             $.ajax({
                 url: RdbaRegister.registerUrl,

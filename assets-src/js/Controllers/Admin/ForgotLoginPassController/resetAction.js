@@ -25,8 +25,8 @@ class RdbaForgotLoginPassResetController {
             $('.rdba-submit-button').attr('disabled', 'disabled');
 
             let formData = $(this).serialize();
-            formData += '&' + RdbaForgotLPR.csrfName + '=' + RdbaForgotLPR.csrfKeyPair[RdbaForgotLPR.csrfName];
-            formData += '&' + RdbaForgotLPR.csrfValue + '=' + RdbaForgotLPR.csrfKeyPair[RdbaForgotLPR.csrfValue];
+            formData += '&' + RdbaForgotLPR.csrfName + '=' + encodeURIComponent(RdbaForgotLPR.csrfKeyPair[RdbaForgotLPR.csrfName]);
+            formData += '&' + RdbaForgotLPR.csrfValue + '=' + encodeURIComponent(RdbaForgotLPR.csrfKeyPair[RdbaForgotLPR.csrfValue]);
 
             $.ajax({
                 url: RdbaForgotLPR.loginUrl,
@@ -123,8 +123,8 @@ class RdbaForgotLoginPassResetController {
             $('#user_password').val($('#new_password').val());
 
             let formData = $(this).serialize();
-            formData += '&' + RdbaForgotLPR.csrfName + '=' + RdbaForgotLPR.csrfKeyPair[RdbaForgotLPR.csrfName];
-            formData += '&' + RdbaForgotLPR.csrfValue + '=' + RdbaForgotLPR.csrfKeyPair[RdbaForgotLPR.csrfValue];
+            formData += '&' + RdbaForgotLPR.csrfName + '=' + encodeURIComponent(RdbaForgotLPR.csrfKeyPair[RdbaForgotLPR.csrfName]);
+            formData += '&' + RdbaForgotLPR.csrfValue + '=' + encodeURIComponent(RdbaForgotLPR.csrfKeyPair[RdbaForgotLPR.csrfValue]);
 
             $.ajax({
                 url: RdbaForgotLPR.forgotLoginPassUrl,

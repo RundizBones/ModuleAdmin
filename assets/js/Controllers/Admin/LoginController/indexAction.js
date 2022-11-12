@@ -26,9 +26,9 @@ class RdbaLoginController {
             $('.rdba-login-button').attr('disabled', 'disabled');
 
             let formData = $(this).serialize();
-            formData += '&' + RdbaLogin.csrfName + '=' + RdbaLogin.csrfKeyPair[RdbaLogin.csrfName];
-            formData += '&' + RdbaLogin.csrfValue + '=' + RdbaLogin.csrfKeyPair[RdbaLogin.csrfValue];
-            formData += '&gobackUrl=' + RdbaLogin.gobackUrl;
+            formData += '&' + RdbaLogin.csrfName + '=' + encodeURIComponent(RdbaLogin.csrfKeyPair[RdbaLogin.csrfName]);
+            formData += '&' + RdbaLogin.csrfValue + '=' + encodeURIComponent(RdbaLogin.csrfKeyPair[RdbaLogin.csrfValue]);
+            formData += '&gobackUrl=' + encodeURIComponent(RdbaLogin.gobackUrl);
 
             $.ajax({
                 url: RdbaLogin.loginUrl,

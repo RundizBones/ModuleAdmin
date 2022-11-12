@@ -260,8 +260,8 @@ class RdbaIndexController {
                         }
 
                         let formData = 'updateData=' + JSON.stringify(sortable.toArray());
-                        formData += '&' + RdbaAdminIndex.csrfName + '=' + RdbaAdminIndex.csrfKeyPair[RdbaAdminIndex.csrfName];
-                        formData += '&' + RdbaAdminIndex.csrfValue + '=' + RdbaAdminIndex.csrfKeyPair[RdbaAdminIndex.csrfValue];
+                        formData += '&' + RdbaAdminIndex.csrfName + '=' + encodeURIComponent(RdbaAdminIndex.csrfKeyPair[RdbaAdminIndex.csrfName]);
+                        formData += '&' + RdbaAdminIndex.csrfValue + '=' + encodeURIComponent(RdbaAdminIndex.csrfKeyPair[RdbaAdminIndex.csrfValue]);
                         formData += '&widgetsType=' + widgetsType
 
                         RdbaCommon.XHR({

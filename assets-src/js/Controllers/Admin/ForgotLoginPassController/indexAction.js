@@ -26,8 +26,8 @@ class RdbaForgotLoginPassController {
             $('.rdba-submit-button').attr('disabled', 'disabled');
 
             let formData = $(this).serialize();
-            formData += '&' + RdbaForgotLP.csrfName + '=' + RdbaForgotLP.csrfKeyPair[RdbaForgotLP.csrfName];
-            formData += '&' + RdbaForgotLP.csrfValue + '=' + RdbaForgotLP.csrfKeyPair[RdbaForgotLP.csrfValue];
+            formData += '&' + RdbaForgotLP.csrfName + '=' + encodeURIComponent(RdbaForgotLP.csrfKeyPair[RdbaForgotLP.csrfName]);
+            formData += '&' + RdbaForgotLP.csrfValue + '=' + encodeURIComponent(RdbaForgotLP.csrfKeyPair[RdbaForgotLP.csrfValue]);
 
             $.ajax({
                 url: RdbaForgotLP.forgotLoginPassUrl,
