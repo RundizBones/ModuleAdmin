@@ -78,7 +78,6 @@ class Csrf
 
         $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
         $this->CsrfClass = new Extended\SlimGuard($responseFactory, $prefix, $storage, $failureCallable, $storageLimit, $strength, $persistentTokenMode);
-        $this->CsrfClass->enforceStorageLimit();
     }// __construct
 
 
