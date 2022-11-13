@@ -1,6 +1,26 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\ModuleData\\ModuleAssets",
+            "name": "ModuleAssets",
+            "summary": "Module\u0020assets\u0020data.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-ModuleData-ModuleAssets.html"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\ModuleData\\ModuleAssets\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-ModuleData-ModuleAssets.html#method___construct"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\ModuleData\\ModuleAssets\u003A\u003AgetModuleAssets\u0028\u0029",
+            "name": "getModuleAssets",
+            "summary": "Get\u0020module\u0027s\u0020assets\u0020list.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-ModuleData-ModuleAssets.html#method_getModuleAssets"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\ModuleData\\ModuleAssets\u003A\u003A\u0024Container",
+            "name": "Container",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-ModuleData-ModuleAssets.html#property_Container"
+        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\_SubControllers\\BruteForceLoginPrevention",
             "name": "BruteForceLoginPrevention",
             "summary": "Brute\u002Dforce\u0020attack\u0020on\u0020login\u0020prevention.",
@@ -261,6 +281,11 @@ Search.appendIndex(
             "summary": "Generate\u0020reset\u0020password\u0020key\u0020if\u0020not\u0020exists\u0020or\u0020expired.",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-ForgotLoginPassController.html#method_generateResetPasswordKey"
         },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\ForgotLoginPassController\u003A\u003AgetConfig\u0028\u0029",
+            "name": "getConfig",
+            "summary": "Get\u0020common\u0020use\u0020configuration\u0020between\u0020methods.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-ForgotLoginPassController.html#method_getConfig"
+        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\ForgotLoginPassController\u003A\u003AindexAction\u0028\u0029",
             "name": "indexAction",
             "summary": "Display\u0020forgot\u0020login\u0020\u0026\u0020password\u0020page.",
@@ -270,6 +295,11 @@ Search.appendIndex(
             "name": "isUserProxy",
             "summary": "Check\u0020if\u0020user\u0020is\u0020using\u0020proxy.",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-ForgotLoginPassController.html#method_isUserProxy"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\ForgotLoginPassController\u003A\u003AremoveSensitiveCfgInfo\u0028\u0029",
+            "name": "removeSensitiveCfgInfo",
+            "summary": "Remove\u0020sensitive\u0020config\u0020info\u0020that\u0020contains\u0020non\u002Dsite\u0020configuration.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-ForgotLoginPassController.html#method_removeSensitiveCfgInfo"
         },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\ForgotLoginPassController\u003A\u003AresetAction\u0028\u0029",
             "name": "resetAction",
@@ -351,6 +381,11 @@ Search.appendIndex(
             "summary": "Display\u00202\u0020step\u0020verification\u0020page.",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-LoginController.html#method_mfaAction"
         },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\LoginController\u003A\u003AremoveSensitiveCfgInfo\u0028\u0029",
+            "name": "removeSensitiveCfgInfo",
+            "summary": "Remove\u0020sensitive\u0020config\u0020info\u0020that\u0020contains\u0020non\u002Dsite\u0020configuration.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-LoginController.html#method_removeSensitiveCfgInfo"
+        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\LoginController\u003A\u003AresetAction\u0028\u0029",
             "name": "resetAction",
             "summary": "Login\u0020one\u0020time\u0020after\u0020account\u0020locked\u0020due\u0020to\u0020user\u0027s\u0020setting\u0020about\u0020simultaneous\u0020login\u0020to\u0020log\u0020all\u0020out.",
@@ -381,10 +416,35 @@ Search.appendIndex(
             "summary": "Rest\u0020API\u0020do\u0020logout.",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-LogoutController.html#method_doLogoutAction"
         },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\LogoutController\u003A\u003AgetConfig\u0028\u0029",
+            "name": "getConfig",
+            "summary": "Get\u0020common\u0020use\u0020configuration\u0020between\u0020methods.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-LogoutController.html#method_getConfig"
+        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\LogoutController\u003A\u003AindexAction\u0028\u0029",
             "name": "indexAction",
             "summary": "Logout\u0020page.",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-LogoutController.html#method_indexAction"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\LogoutController\u003A\u003AremoveSensitiveCfgInfo\u0028\u0029",
+            "name": "removeSensitiveCfgInfo",
+            "summary": "Remove\u0020sensitive\u0020config\u0020info\u0020that\u0020contains\u0020non\u002Dsite\u0020configuration.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-LogoutController.html#method_removeSensitiveCfgInfo"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\ActionsController",
+            "name": "ActionsController",
+            "summary": "Modules\u0020actions\u0020controller.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-ActionsController.html"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\ActionsController\u003A\u003AdoUpdateAction\u0028\u0029",
+            "name": "doUpdateAction",
+            "summary": "Do\u0020update\u0020action\u0020on\u0020selected\u0020modules.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-ActionsController.html#method_doUpdateAction"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\ActionsController\u003A\u003AvalidateActions\u0028\u0029",
+            "name": "validateActions",
+            "summary": "Validate\u0020form\u0020actions.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-ActionsController.html#method_validateActions"
         },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Assets\\AssetsController",
             "name": "AssetsController",
@@ -446,6 +506,21 @@ Search.appendIndex(
             "summary": "Get\u0020module\u0027s\u0020assets\u0020URLs\u0020and\u0020methods.",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-Assets-Traits-AssetsTrait.html#method_getMAssetsUrlsMethods"
         },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\ModulesController",
+            "name": "ModulesController",
+            "summary": "Modules\u0020management\u0020controller.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-ModulesController.html"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\ModulesController\u003A\u003AgetModules\u0028\u0029",
+            "name": "getModules",
+            "summary": "Get\u0020all\u0020modules\u0020\u0028including\u0020enabled\u0020and\u0020disabled\u0029.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-ModulesController.html#method_getModules"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\ModulesController\u003A\u003AindexAction\u0028\u0029",
+            "name": "indexAction",
+            "summary": "Modules\u0020list\u0020page.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-ModulesController.html#method_indexAction"
+        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Plugins\\ActionsController",
             "name": "ActionsController",
             "summary": "Plugins\u0020actions\u0020controller",
@@ -485,6 +560,16 @@ Search.appendIndex(
             "name": "getPluginUrlsMethods",
             "summary": "Get\u0020URLs\u0020and\u0020methods\u0020about\u0020module\u0027s\u0020plugin\u0020pages.",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-Plugins-Traits-PluginsTrait.html#method_getPluginUrlsMethods"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Traits\\ModulesTrait",
+            "name": "ModulesTrait",
+            "summary": "Modules\u0020trait.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-Traits-ModulesTrait.html"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Traits\\ModulesTrait\u003A\u003AgetModuleUrlsMethods\u0028\u0029",
+            "name": "getModuleUrlsMethods",
+            "summary": "Get\u0020URLs\u0020and\u0020methods\u0020about\u0020module\u0027s\u0020management\u0020pages.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Modules-Traits-ModulesTrait.html#method_getModuleUrlsMethods"
         },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Permissions\\EditController",
             "name": "EditController",
@@ -591,6 +676,11 @@ Search.appendIndex(
             "summary": "Check\u0020if\u0020user\u0020is\u0020using\u0020proxy.",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-RegisterController.html#method_isUserProxy"
         },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\RegisterController\u003A\u003AremoveSensitiveCfgInfo\u0028\u0029",
+            "name": "removeSensitiveCfgInfo",
+            "summary": "Remove\u0020sensitive\u0020config\u0020info\u0020that\u0020contains\u0020non\u002Dsite\u0020configuration.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-RegisterController.html#method_removeSensitiveCfgInfo"
+        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Roles\\ActionsController",
             "name": "ActionsController",
             "summary": "Bulk\u0020actions\u0020roles\u0020controller.",
@@ -691,6 +781,91 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Roles-Traits-RolesTrait.html#property_selectedRoles"
         },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController",
+            "name": "FaviconController",
+            "summary": "Favicon\u0020settings.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#method___construct"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AallowedFileExtensions",
+            "name": "allowedFileExtensions",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#constant_allowedFileExtensions"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AdeleteAction\u0028\u0029",
+            "name": "deleteAction",
+            "summary": "Delete\u0020favicon.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#method_deleteAction"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AdeleteFile\u0028\u0029",
+            "name": "deleteFile",
+            "summary": "Delete\u0020selected\u0020file\u0020with\u0020all\u0020resizes\u0020file\u0020names.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#method_deleteFile"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AdeletePreviousFavicon\u0028\u0029",
+            "name": "deletePreviousFavicon",
+            "summary": "Delete\u0020previous\u0020favicon.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#method_deletePreviousFavicon"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AmoveUploadedFile\u0028\u0029",
+            "name": "moveUploadedFile",
+            "summary": "Move\u0020uploaded\u0020file.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#method_moveUploadedFile"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AprepareRdbAdminPublicFolder\u0028\u0029",
+            "name": "prepareRdbAdminPublicFolder",
+            "summary": "Prepare\u0020\u0027rdbadmin\u002Dpublic\u0027\u0020folder\u0020on\u0020public\u0020path\u0020\u0028root\u0020web\u0029.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#method_prepareRdbAdminPublicFolder"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003ArecommendedSize\u0028\u0029",
+            "name": "recommendedSize",
+            "summary": "Get\u0020recommended\u0020size.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#method_recommendedSize"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AresizeImage\u0028\u0029",
+            "name": "resizeImage",
+            "summary": "Resize\u0020image.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#method_resizeImage"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AupdateAction\u0028\u0029",
+            "name": "updateAction",
+            "summary": "Upload,\u0020change\u0020favicon.",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#method_updateAction"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AimageSizes",
+            "name": "imageSizes",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#constant_imageSizes"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AmaxImgWidth",
+            "name": "maxImgWidth",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#constant_maxImgWidth"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AorigImgWidth",
+            "name": "origImgWidth",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#constant_origImgWidth"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AmaxImgHeight",
+            "name": "maxImgHeight",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#constant_maxImgHeight"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AorigImgHeight",
+            "name": "origImgHeight",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#constant_origImgHeight"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\FaviconController\u003A\u003AfaviconFolderContainer",
+            "name": "faviconFolderContainer",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-FaviconController.html#constant_faviconFolderContainer"
+        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\SettingsController",
             "name": "SettingsController",
             "summary": "Settings\u0020controller.",
@@ -735,6 +910,11 @@ Search.appendIndex(
             "name": "testSmtpAction",
             "summary": "Test\u0020SMTP\u0020connection.",
             "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-SettingsController.html#method_testSmtpAction"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\SettingsController\u003A\u003AconfigValueNullOnEmpty",
+            "name": "configValueNullOnEmpty",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Controllers-Admin-Settings-SettingsController.html#constant_configValueNullOnEmpty"
         },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Settings\\SettingsController\u003A\u003A\u0024Plugins",
             "name": "Plugins",
@@ -1506,6 +1686,21 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/Rdb-Modules-RdbAdmin-Models-Traits-MetaFieldsTrait.html#property_tableName"
         },                {
+            "fqsen": "\\assetUrl\u0028\u0029",
+            "name": "assetUrl",
+            "summary": "Render\u0020asset\u0020URL\u0020with\u0020version\u0020querystring\u0020append.\u0020By\u0020default\u0020it\u0020will\u0020be\u0020use\u0020file\u0020modify\u0020time\u0020as\u0020version\u0020qurey\u0020string.",
+            "url": "../namespaces/default.html#function_assetUrl"
+        },                {
+            "fqsen": "\\indent\u0028\u0029",
+            "name": "indent",
+            "summary": "Generate\u0020indent\u0020by\u00204\u0020spaces\u0020per\u00201\u0020indent.",
+            "url": "../namespaces/default.html#function_indent"
+        },                {
+            "fqsen": "\\renderBreadcrumb\u0028\u0029",
+            "name": "renderBreadcrumb",
+            "summary": "Render\u0020breadcrumb\u0020HTML.",
+            "url": "../namespaces/default.html#function_renderBreadcrumb"
+        },                {
             "fqsen": "\\AddMoreUserConfigurations",
             "name": "AddMoreUserConfigurations",
             "summary": "",
@@ -1520,6 +1715,21 @@ Search.appendIndex(
             "name": "down",
             "summary": "Migrate\u0020down.",
             "url": "../classes/AddMoreUserConfigurations.html#method_down"
+        },                {
+            "fqsen": "\\AddFaviconConfiguration",
+            "name": "AddFaviconConfiguration",
+            "summary": "",
+            "url": "../classes/AddFaviconConfiguration.html"
+        },                {
+            "fqsen": "\\AddFaviconConfiguration\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "Migrate\u0020up.",
+            "url": "../classes/AddFaviconConfiguration.html#method_up"
+        },                {
+            "fqsen": "\\AddFaviconConfiguration\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "Migrate\u0020down.",
+            "url": "../classes/AddFaviconConfiguration.html#method_down"
         },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Tests\\Controllers\\_SubControllers\\MenuItemsExtended",
             "name": "MenuItemsExtended",
@@ -2141,6 +2351,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/Rdb-Modules-RdbAdmin-Tests-Libraries-PluginsTest.html#method_testAddHook"
         },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Tests\\Libraries\\PluginsTest\u003A\u003AtestDoAlter\u0028\u0029",
+            "name": "testDoAlter",
+            "summary": "",
+            "url": "../classes/Rdb-Modules-RdbAdmin-Tests-Libraries-PluginsTest.html#method_testDoAlter"
+        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Tests\\Libraries\\PluginsTest\u003A\u003AtestDoHook\u0028\u0029",
             "name": "testDoHook",
             "summary": "",
@@ -2296,6 +2511,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../namespaces/default.html"
         },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\ModuleData",
+            "name": "ModuleData",
+            "summary": "",
+            "url": "../namespaces/rdb-modules-rdbadmin-moduledata.html"
+        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\_SubControllers",
             "name": "_SubControllers",
             "summary": "",
@@ -2311,15 +2531,15 @@ Search.appendIndex(
             "summary": "",
             "url": "../namespaces/rdb-modules-rdbadmin-controllers-admin.html"
         },                {
-            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Assets",
-            "name": "Assets",
-            "summary": "",
-            "url": "../namespaces/rdb-modules-rdbadmin-controllers-admin-modules-assets.html"
-        },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules",
             "name": "Modules",
             "summary": "",
             "url": "../namespaces/rdb-modules-rdbadmin-controllers-admin-modules.html"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Assets",
+            "name": "Assets",
+            "summary": "",
+            "url": "../namespaces/rdb-modules-rdbadmin-controllers-admin-modules-assets.html"
         },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Assets\\Traits",
             "name": "Traits",
@@ -2335,6 +2555,11 @@ Search.appendIndex(
             "name": "Traits",
             "summary": "",
             "url": "../namespaces/rdb-modules-rdbadmin-controllers-admin-modules-plugins-traits.html"
+        },                {
+            "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Traits",
+            "name": "Traits",
+            "summary": "",
+            "url": "../namespaces/rdb-modules-rdbadmin-controllers-admin-modules-traits.html"
         },                {
             "fqsen": "\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Permissions",
             "name": "Permissions",

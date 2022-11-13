@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>RdbAdmin Module</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">RdbAdmin Module</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/Rdb.html">\Rdb</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">198</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1186644438"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1186644438" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2024616704"></a>
+                                <a href="../namespaces/Rdb.html" style="margin-left: 30px; padding-left: 0">Rdb</a>
+            </div>
+            <div id="namespace-2024616704" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1583194187"></a>
+                                <a href="../namespaces/Rdb.Modules.html" style="margin-left: 30px; padding-left: 0">Modules</a>
+            </div>
+            <div id="namespace-1583194187" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1566790232"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.html" style="margin-left: 30px; padding-left: 0">RdbAdmin</a>
+            </div>
+            <div id="namespace-1566790232" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1345833819"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Console.html" style="margin-left: 30px; padding-left: 0">Console</a>
+            </div>
+            <div id="namespace-1345833819" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Console.CreateAdminController.html">CreateAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Console.CreateModule.html">CreateModule</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Console.Cron.html">Cron</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1931713602"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.html" style="margin-left: 30px; padding-left: 0">Controllers</a>
+            </div>
+            <div id="namespace-1931713602" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-396892405"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers._SubControllers.html" style="margin-left: 30px; padding-left: 0">_SubControllers</a>
+            </div>
+            <div id="namespace-396892405" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers._SubControllers.BruteForceLoginPrevention.html">BruteForceLoginPrevention</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers._SubControllers.LoginSubController.html">LoginSubController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers._SubControllers.MenuItems.html">MenuItems</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-30873671"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.html" style="margin-left: 30px; padding-left: 0">Admin</a>
+            </div>
+            <div id="namespace-30873671" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-423271220"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.html" style="margin-left: 30px; padding-left: 0">Modules</a>
+            </div>
+            <div id="namespace-423271220" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1219257779"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Assets.html" style="margin-left: 30px; padding-left: 0">Assets</a>
+            </div>
+            <div id="namespace-1219257779" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1274982357"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Assets.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1274982357" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Assets.Traits.AssetsTrait.html">AssetsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Assets.AssetsController.html">AssetsController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Assets.PublishController.html">PublishController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2059990271"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Plugins.html" style="margin-left: 30px; padding-left: 0">Plugins</a>
+            </div>
+            <div id="namespace-2059990271" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1875410757"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Plugins.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1875410757" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Plugins.Traits.PluginsTrait.html">PluginsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Plugins.ActionsController.html">ActionsController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Plugins.PluginsController.html">PluginsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1404526000"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1404526000" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.Traits.ModulesTrait.html">ModulesTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.ActionsController.html">ActionsController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Modules.ModulesController.html">ModulesController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-906407764"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Permissions.html" style="margin-left: 30px; padding-left: 0">Permissions</a>
+            </div>
+            <div id="namespace-906407764" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2035707831"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Permissions.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-2035707831" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Permissions.Traits.PermissionsTrait.html">PermissionsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Permissions.EditController.html">EditController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Permissions.PermissionsController.html">PermissionsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1719014163"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.html" style="margin-left: 30px; padding-left: 0">Roles</a>
+            </div>
+            <div id="namespace-1719014163" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1726669331"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1726669331" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.Traits.RolesTrait.html">RolesTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.ActionsController.html">ActionsController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.AddController.html">AddController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.EditController.html">EditController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.ReorderController.html">ReorderController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Roles.RolesController.html">RolesController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-863495865"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.html" style="margin-left: 30px; padding-left: 0">Settings</a>
+            </div>
+            <div id="namespace-863495865" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html">FaviconController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.SettingsController.html">SettingsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1148856131"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Tools.html" style="margin-left: 30px; padding-left: 0">Tools</a>
+            </div>
+            <div id="namespace-1148856131" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Tools.CacheController.html">CacheController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Tools.EmailTesterController.html">EmailTesterController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-336487296"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.html" style="margin-left: 30px; padding-left: 0">UI</a>
+            </div>
+            <div id="namespace-336487296" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1562686246"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1562686246" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html">CommonDataTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-909429176"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Widgets.html" style="margin-left: 30px; padding-left: 0">Widgets</a>
+            </div>
+            <div id="namespace-909429176" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Widgets.WidgetsController.html">WidgetsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.XhrCommonDataController.html">XhrCommonDataController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.XhrDashboardWidgetsController.html">XhrDashboardWidgetsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-464481026"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.html" style="margin-left: 30px; padding-left: 0">Users</a>
+            </div>
+            <div id="namespace-464481026" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-403023555"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.html" style="margin-left: 30px; padding-left: 0">Sessions</a>
+            </div>
+            <div id="namespace-403023555" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-947588317"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-947588317" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html">SessionsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.PingController.html">PingController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.SessionsController.html">SessionsController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1446506192"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1446506192" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Traits.UsersEditingTrait.html">UsersEditingTrait</a></li>
+                                                    <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Traits.UsersTrait.html">UsersTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.ActionsController.html">ActionsController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.AddController.html">AddController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.AvatarController.html">AvatarController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.EditController.html">EditController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.PreviousEmailsController.html">PreviousEmailsController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.UsersController.html">UsersController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html">AdminBaseController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.CronController.html">CronController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.ForgotLoginPassController.html">ForgotLoginPassController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.IndexController.html">IndexController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.LoginController.html">LoginController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.LogoutController.html">LogoutController</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.RegisterController.html">RegisterController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html">BaseController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-121624555"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.CronJobs.html" style="margin-left: 30px; padding-left: 0">CronJobs</a>
+            </div>
+            <div id="namespace-121624555" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1709001435"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.CronJobs.Jobs.html" style="margin-left: 30px; padding-left: 0">Jobs</a>
+            </div>
+            <div id="namespace-1709001435" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.CronJobs.Jobs.DeleteExpiredDcLockout.html">DeleteExpiredDcLockout</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.CronJobs.Jobs.DeleteExpiredLogins.html">DeleteExpiredLogins</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.CronJobs.Jobs.DeleteExpiredUserRegisterWaitConfirm.html">DeleteExpiredUserRegisterWaitConfirm</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.CronJobs.Jobs.DeleteFailedLogins.html">DeleteFailedLogins</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.CronJobs.Jobs.DeleteOldLogs.html">DeleteOldLogs</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.CronJobs.Jobs.DeleteSoftDeleteUsers.html">DeleteSoftDeleteUsers</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.CronJobs.BaseCronJobs.html">BaseCronJobs</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.CronJobs.OnceADayJobs.html">OnceADayJobs</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1395893761"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Interfaces.html" style="margin-left: 30px; padding-left: 0">Interfaces</a>
+            </div>
+            <div id="namespace-1395893761" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Rdb.Modules.RdbAdmin.Interfaces.CronJobs.html">CronJobs</a></li>
+                                                    <li class="interface"><a href="../classes/Rdb.Modules.RdbAdmin.Interfaces.ModuleAdmin.html">ModuleAdmin</a></li>
+                                                    <li class="interface"><a href="../classes/Rdb.Modules.RdbAdmin.Interfaces.Plugins.html">Plugins</a></li>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-895103926"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Libraries.html" style="margin-left: 30px; padding-left: 0">Libraries</a>
+            </div>
+            <div id="namespace-895103926" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-725470047"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Libraries.Extended.html" style="margin-left: 30px; padding-left: 0">Extended</a>
+            </div>
+            <div id="namespace-725470047" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Extended.SlimGuard.html">SlimGuard</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1791100243"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Libraries.SPLIterators.html" style="margin-left: 30px; padding-left: 0">SPLIterators</a>
+            </div>
+            <div id="namespace-1791100243" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.SPLIterators.FilterOnlyDir.html">FilterOnlyDir</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.AntiBot.html">AntiBot</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Assets.html">Assets</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Cache.html">Cache</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Cookie.html">Cookie</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Cron.html">Cron</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Csrf.html">Csrf</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.DataTablesJs.html">DataTablesJs</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Email.html">Email</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Encryption.html">Encryption</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Gravatar.html">Gravatar</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Input.html">Input</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Languages.html">Languages</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Modules.html">Modules</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Plugins.html">Plugins</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.RdbaString.html">RdbaString</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1620047038"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Middleware.html" style="margin-left: 30px; padding-left: 0">Middleware</a>
+            </div>
+            <div id="namespace-1620047038" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Middleware.APIAccess.html">APIAccess</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-923802502"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Models.html" style="margin-left: 30px; padding-left: 0">Models</a>
+            </div>
+            <div id="namespace-923802502" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1530969271"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Models.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-1530969271" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Models.Traits.CacheFileTrait.html">CacheFileTrait</a></li>
+                                                    <li class="trait"><a href="../classes/Rdb.Modules.RdbAdmin.Models.Traits.MetaFieldsTrait.html">MetaFieldsTrait</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Models.ConfigDb.html">ConfigDb</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Models.UserFieldsDb.html">UserFieldsDb</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Models.UserLoginsDb.html">UserLoginsDb</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Models.UserPermissionsDb.html">UserPermissionsDb</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Models.UserRolesDb.html">UserRolesDb</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Models.UsersDb.html">UsersDb</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Models.UsersRolesDb.html">UsersRolesDb</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1646449541"></a>
+                                <a href="../namespaces/Rdb.Modules.RdbAdmin.ModuleData.html" style="margin-left: 30px; padding-left: 0">ModuleData</a>
+            </div>
+            <div id="namespace-1646449541" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.ModuleData.ModuleAdmin.html">ModuleAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.ModuleData.ModuleAssets.html">ModuleAssets</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Rdb.Modules.RdbAdmin.Installer.html">Installer</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.html">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings</small>FaviconController</h1>
+                    <p><em>Favicon settings.</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method_allowedFileExtensions" class="">allowedFileExtensions()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method_deleteAction" class="">deleteAction()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method_recommendedSize" class="">recommendedSize()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method_updateAction" class="">updateAction()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#constant_allowedFileExtensions" class="">allowedFileExtensions</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#constant_imageSizes" class="">imageSizes</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#constant_maxImgWidth" class="">maxImgWidth</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#constant_origImgWidth" class="">origImgWidth</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#constant_maxImgHeight" class="">maxImgHeight</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#constant_origImgHeight" class="">origImgHeight</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#constant_faviconFolderContainer" class="">faviconFolderContainer</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html#method_getConfigDb" class="">getConfigDb()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html#method_setCssAssets" class="">setCssAssets()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html#method_setJsAssetsAndObject" class="">setJsAssetsAndObject()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html#method_checkLogin" class="">checkLogin()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html#method_checkPermission" class="">checkPermission()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html#method_getRdbAdminAssets" class="">getRdbAdminAssets()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html#method_isUserLoggedIn" class="">isUserLoggedIn()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html#method_sessionTraitLogoutAll" class="">sessionTraitLogoutAll()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#method_getPageHtmlClasses" class="">getPageHtmlClasses()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#method_getPageHtmlTitle" class="">getPageHtmlTitle()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#method_maybeRunCron" class="">maybeRunCron()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#method_responseJson" class="">responseJson()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#method_responseXml" class="">responseXml()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#method_setBasicConfig" class="">setBasicConfig()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#method_setHeaderAllowOrigin" class="">setHeaderAllowOrigin()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method_deleteFile" class="">deleteFile()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method_deletePreviousFavicon" class="">deletePreviousFavicon()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method_moveUploadedFile" class="">moveUploadedFile()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method_prepareRdbAdminPublicFolder" class="">prepareRdbAdminPublicFolder()</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html#method_resizeImage" class="">resizeImage()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html#property_totalLoggedInSessions" class="">$totalLoggedInSessions</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html#property_userSessionCookieData" class="">$userSessionCookieData</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#property_Input" class="">$Input</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#property_Languages" class="">$Languages</a><br />
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html#property_runnedCronResult" class="">$runnedCronResult</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html#method_sessionTraitLogoutPreviousSessions" class="">sessionTraitLogoutPreviousSessions()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">Controllers\Admin\Settings\FaviconController.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                        <div class="namespace-wrapper">\Rdb\System\Core\Controllers\BaseController</div>
+                                                                    
+                                        <div class="namespace-wrapper"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html">\Rdb\Modules\RdbAdmin\Controllers\BaseController</a></div>
+                                                                    
+                                        <div class="namespace-wrapper"><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html">\Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController</a></div>
+                                                                                                    <div class="namespace-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div>
+                            </dd>
+
+                        
+                                                                                    <dt>Uses traits</dt>
+                                                        <dd>
+                                <a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html">                                    <div class="namespace-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait</div>
+                                </a>                            </dd>
+                        
+                        
+                                                                            <dt>See also</dt>
+                                                                                        <dd><a href="https://en.wikipedia.org/wiki/Favicon"><span class="namespace-wrapper">Reference.</span></a></dd>
+                                                            <dd><a href="https://stackoverflow.com/questions/48956465/favicon-standard-2022-svg-ico-png-and-dimensions"><span class="namespace-wrapper">Reference.</span></a></dd>
+                                                            <dd><a href="https://learn.microsoft.com/th-th/previous-versions/windows/internet-explorer/ie-developer/samples/dn455106(v=vs.85)"><span class="namespace-wrapper">For MS Edge.</span></a></dd>
+                                                                            
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                since
+                            </th>
+                            <td>
+                                                                    1.2.4                                    
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_allowedFileExtensions" name="constant_allowedFileExtensions" class="anchor"></a>
+            <article id="constant_allowedFileExtensions" class="constant">
+                <h3 class="">allowedFileExtensions</h3>
+                <pre class="signature">allowedFileExtensions = array(&#039;ico&#039;, &#039;gif&#039;, &#039;png&#039;) : array</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_imageSizes" name="constant_imageSizes" class="anchor"></a>
+            <article id="constant_imageSizes" class="constant">
+                <h3 class="">imageSizes</h3>
+                <pre class="signature">imageSizes = array(array(16, 16), array(32, 32), array(180, 180), array(192, 192), array(270, 270)) : array</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_maxImgWidth" name="constant_maxImgWidth" class="anchor"></a>
+            <article id="constant_maxImgWidth" class="constant">
+                <h3 class="">maxImgWidth</h3>
+                <pre class="signature">maxImgWidth = 2048</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_origImgWidth" name="constant_origImgWidth" class="anchor"></a>
+            <article id="constant_origImgWidth" class="constant">
+                <h3 class="">origImgWidth</h3>
+                <pre class="signature">origImgWidth = 512 : integer</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_maxImgHeight" name="constant_maxImgHeight" class="anchor"></a>
+            <article id="constant_maxImgHeight" class="constant">
+                <h3 class="">maxImgHeight</h3>
+                <pre class="signature">maxImgHeight = 2048</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_origImgHeight" name="constant_origImgHeight" class="anchor"></a>
+            <article id="constant_origImgHeight" class="constant">
+                <h3 class="">origImgHeight</h3>
+                <pre class="signature">origImgHeight = 512 : integer</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_faviconFolderContainer" name="constant_faviconFolderContainer" class="anchor"></a>
+            <article id="constant_faviconFolderContainer" class="constant">
+                <h3 class="">faviconFolderContainer</h3>
+                <pre class="signature">faviconFolderContainer = &#039;rdbadmin-public/favicon&#039; : string</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_totalLoggedInSessions" name="property_totalLoggedInSessions" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$totalLoggedInSessions</h3>
+                <pre class="signature">$totalLoggedInSessions : integer</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                &mdash; The number of sessions that found this user logged in. This property is able to access after called to `isUserLoggedIn()` method.                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Sessions\Traits\SessionsTrait</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_userSessionCookieData" name="property_userSessionCookieData" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$userSessionCookieData</h3>
+                <pre class="signature">$userSessionCookieData : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; The cookie data of logged in user. This property is able to access after called to `isUserLoggedIn()` method.                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Sessions\Traits\SessionsTrait</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_Input" name="property_Input" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$Input</h3>
+                <pre class="signature">$Input : \Rdb\Modules\RdbAdmin\Libraries\Input</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Input.html">\Rdb\Modules\RdbAdmin\Libraries\Input</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_Languages" name="property_Languages" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$Languages</h3>
+                <pre class="signature">$Languages : \Rdb\Modules\RdbAdmin\Libraries\Languages</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Languages.html">\Rdb\Modules\RdbAdmin\Libraries\Languages</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_runnedCronResult" name="property_runnedCronResult" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$runnedCronResult</h3>
+                <pre class="signature">$runnedCronResult : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; Runned cron jobs result. 
+This is for use in case that set cron job, cron tab to run by URL.
+The `CronController` will be call to this `BaseController`.
+So, it is no need to using `Libraries\Cron` class to run jobs again.
+Just get the run result from this property.
+This property will be set by `maybeRunCron()` method.                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(\Rdb\System\Container  <span class="argument">$Container</span>) </pre>
+                <p><em>Class constructor.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Rdb\System\Container</td>
+                                <td>$Container </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_allowedFileExtensions" name="method_allowedFileExtensions" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">allowedFileExtensions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">allowedFileExtensions() : array</pre>
+                <p><em>Get allowed file extensions for favicon.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Return file extensions of allowed favicon.</p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_deleteAction" name="method_deleteAction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">deleteAction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deleteAction() : string</pre>
+                <p><em>Delete favicon.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_recommendedSize" name="method_recommendedSize" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">recommendedSize()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">recommendedSize() : string</pre>
+                <p><em>Get recommended size.</em></p>
+                <p>Use in views page.</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Recommended size.</p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_updateAction" name="method_updateAction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">updateAction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">updateAction() : string</pre>
+                <p><em>Upload, change favicon.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getConfigDb" name="method_getConfigDb" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">getConfigDb()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getConfigDb() : array</pre>
+                <p><em>Get config from DB.</em></p>
+                <p>This will get commonly used between admin controllers with these data.</p>
+<pre>
+rdbadmin_SiteName,
+rdbadmin_SiteTimezone,
+rdbadmin_AdminItemsPerPage,
+</pre>
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setCssAssets" name="method_setCssAssets" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">setCssAssets()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setCssAssets(\Rdb\Modules\RdbAdmin\Libraries\Assets  <span class="argument">$Assets</span>, array  <span class="argument">$assetsData</span>) </pre>
+                <p><em>Set CSS assets for common admin pages.</em></p>
+                <p>This is required to make basic admin pages working correctly.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Assets.html">\Rdb\Modules\RdbAdmin\Libraries\Assets</a></td>
+                                <td>$Assets </td>
+                                <td><p>The Assets class.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$assetsData </td>
+                                <td><p>The assets data. Please read more on <code>\Rdb\Modules\RdbAdmin\Libraries\Assets::addMultipleAssets()</code>.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setJsAssetsAndObject" name="method_setJsAssetsAndObject" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">setJsAssetsAndObject()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setJsAssetsAndObject(\Rdb\Modules\RdbAdmin\Libraries\Assets  <span class="argument">$Assets</span>, array  <span class="argument">$assetsData</span>) </pre>
+                <p><em>Set JS assets and its object for XHR common data.</em></p>
+                <p>This is required to make basic admin pages working correctly.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Rdb.Modules.RdbAdmin.Libraries.Assets.html">\Rdb\Modules\RdbAdmin\Libraries\Assets</a></td>
+                                <td>$Assets </td>
+                                <td><p>The Assets class.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$assetsData </td>
+                                <td><p>The assets data. Please read more on <code>\Rdb\Modules\RdbAdmin\Libraries\Assets::addMultipleAssets()</code>.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.UI.Traits.CommonDataTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\UI\Traits\CommonDataTrait</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_checkLogin" name="method_checkLogin" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">checkLogin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">checkLogin() </pre>
+                <p><em>Check for logged in, if not then redirect to login page.</em></p>
+                
+
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_checkPermission" name="method_checkPermission" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">checkPermission()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">checkPermission(string  <span class="argument">$moduleSystemName</span>, string  <span class="argument">$page</span>, string|array  <span class="argument">$action</span>, array  <span class="argument">$identity = array()</span>) </pre>
+                <p><em>Check permission and (redirect OR response error message).</em></p>
+                <p>This will be redirect user to /admin page if request from web page.<br>
+This will be response error message if request via REST API or AJAX.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$moduleSystemName </td>
+                                <td><p>The module (module system name or folder name) to check.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$page </td>
+                                <td><p>The page name to check.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|array</td>
+                                <td>$action </td>
+                                <td><p>The action(s) on that page. Use string if check for single action, use array if check for multiple actions.<br>
+If checking for multiple actions, any single action matched with certain module, page will be return <code>true</code>.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$identity </td>
+                                <td><p>The associative array of identity.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">\Rdb\Modules\RdbAdmin\Models\UserPermissionsDb::checkPermission();</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getRdbAdminAssets" name="method_getRdbAdminAssets" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">getRdbAdminAssets()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getRdbAdminAssets() : array</pre>
+                <p><em>Get RdbAdmin module&#039;s assets.</em></p>
+                <p>These contain the assets that is required for admin page to work.</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Return associative array with 'css' and 'js' in keys.</p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.AdminBaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_isUserLoggedIn" name="method_isUserLoggedIn" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">isUserLoggedIn()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isUserLoggedIn(integer  <span class="argument">$user_id = null</span>, string  <span class="argument">$userlogin_session_key = &#039;&#039;</span>) : boolean</pre>
+                <p><em>Check if user is logged in.</em></p>
+                <p>After called this method and it was <code>true</code> then you can access total sessions via <code>totalLoggedInSessions</code> property.<br>
+After called this method and cookie is valid then you can access cookie data via <code>userSessionCookieData</code> property.<br>
+If there is simultaneous login and user's setting is something that is not allowed (such as logout previous, logout all), it will be process here.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$user_id </td>
+                                <td><p>The user ID. Set to <code>null</code> (default) to auto detect from cookie.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$userlogin_session_key </td>
+                                <td><p>The logged in session key. Set to empty string (default) to auto detect from cookie.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Return <code>true</code> if logged in, <code>false</code> for not.</p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Sessions\Traits\SessionsTrait</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_sessionTraitLogoutAll" name="method_sessionTraitLogoutAll" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">sessionTraitLogoutAll()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">sessionTraitLogoutAll(integer  <span class="argument">$user_id</span>, \Rdb\Modules\RdbAdmin\Models\UserLoginsDb  <span class="argument">$UserLoginsDb</span>, \Rdb\Modules\RdbAdmin\Models\UserFieldsDb  <span class="argument">$UserFieldsDb</span>) </pre>
+                <p><em>Logout all succeeded login sessions, lock user account, send login link to user&#039;s email.</em></p>
+                <p>This method also set cache that email was sent recently.<br>
+This method was called from <code>isUserLoggedIn()</code>.<br>
+This method was called from <code>LoginController-&gt;doLogin()</code>.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$user_id </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Rdb.Modules.RdbAdmin.Models.UserLoginsDb.html">\Rdb\Modules\RdbAdmin\Models\UserLoginsDb</a></td>
+                                <td>$UserLoginsDb </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Rdb.Modules.RdbAdmin.Models.UserFieldsDb.html">\Rdb\Modules\RdbAdmin\Models\UserFieldsDb</a></td>
+                                <td>$UserFieldsDb </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Sessions\Traits\SessionsTrait</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getPageHtmlClasses" name="method_getPageHtmlClasses" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">getPageHtmlClasses()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getPageHtmlClasses(array  <span class="argument">$classes = array()</span>) : string</pre>
+                <p><em>Get page HTML classes.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$classes </td>
+                                <td><p>The classes to set for this html page.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Return generated html classes names.</p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                                                            <p>[rdb] Remove auto generate class name <code>rdba-page-</code>, use new one <code>rdba-pagehtml-</code> to prevent duplicate use in many cases. Remove this in v2.0</p>
+                                                                                            <p>[rdb] Remove auto generate class name <code>rdba-class-</code>, use new one <code>rdba-calledclass-</code> to prevent duplicate use in many cases. Remove this in v2.0</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getPageHtmlTitle" name="method_getPageHtmlTitle" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">getPageHtmlTitle()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getPageHtmlTitle(string  <span class="argument">$title</span>, string|null|false  <span class="argument">$siteName = false</span>) : string</pre>
+                <p><em>Get page HTML title including site name if it was set.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$title </td>
+                                <td><p>The site title.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|null|false</td>
+                                <td>$siteName </td>
+                                <td><p>Site name should be string.<br>
+Set to empty string or <code>null</code> will not include the site name.<br>
+Set to <code>false</code> to automatic get the site name from config DB.</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InvalidArgumentException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_maybeRunCron" name="method_maybeRunCron" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">maybeRunCron()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">maybeRunCron() </pre>
+                <p><em>Maybe run cron job if config is set to not use server cron.</em></p>
+                
+
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_responseJson" name="method_responseJson" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">responseJson()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">responseJson(  <span class="argument">$output</span>) </pre>
+                <p><em>{@inheritDoc}</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$output </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_responseXml" name="method_responseXml" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">responseXml()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">responseXml(  <span class="argument">$output</span>) </pre>
+                <p><em>{@inheritDoc}</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$output </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setBasicConfig" name="method_setBasicConfig" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">setBasicConfig()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setBasicConfig() </pre>
+                <p><em>Setup basic PHP configurations such as default timezone.</em></p>
+                
+
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setHeaderAllowOrigin" name="method_setHeaderAllowOrigin" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">setHeaderAllowOrigin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setHeaderAllowOrigin() </pre>
+                <p><em>Set header allow origin for CORS.</em></p>
+                
+
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.BaseController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\BaseController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_deleteFile" name="method_deleteFile" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">deleteFile()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deleteFile(string  <span class="argument">$filePath</span>) : array</pre>
+                <p><em>Delete selected file with all resizes file names.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$filePath </td>
+                                <td><p>Relative image path from public path (root web). Not begins with slash.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Return associative array with keys:<br>
+<code>result</code> (array) The associative array where key is file name found in search with glob pattern. The value is boolean where it is result of <code>unlink()</code>.<br>
+<code>allDeleted</code> (bool) It is <code>true</code> if all file size names were deleted, <code>false</code> for otherwise.<br></p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_deletePreviousFavicon" name="method_deletePreviousFavicon" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">deletePreviousFavicon()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deletePreviousFavicon(boolean  <span class="argument">$updateToEmpty = false</span>) : array</pre>
+                <p><em>Delete previous favicon.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$updateToEmpty </td>
+                                <td><p>Set to <code>true</code> to update this config value in DB to empty. Set to <code>false</code> for update nothing.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Return associative array with keys:<br>
+<code>deleteFileResult</code> (array) The result from <code>deleteFile()</code> method. Only exists if found config value and not empty.<br>
+<code>noPreviousValueToDelete</code> (bool) It will be <code>true</code> if there is no previous config value to delete.<br>
+<code>updateToEmptyResult</code> (bool) The result from update command. Only exists if <code>$updateToEmpty</code> attribute is set to <code>true</code>.<br></p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_moveUploadedFile" name="method_moveUploadedFile" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">moveUploadedFile()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">moveUploadedFile() : array</pre>
+                <p><em>Move uploaded file.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Return associative array with keys:<br>
+<code>formValidated</code> (bool) Form validated. The value will be <code>true</code> on validated all passed, but will be <code>false</code> if contain errors.<br>
+If only uploaded success, the following array keys exists.<br>
+<code>uploadData</code> (array) The uploaded data. See <code>Rundiz\Upload\Upload::getUploadedData()</code>.<br>
+<code>newName</code> (string) The new file name with extension, no path.<br>
+<code>fullPathNewName</code> (string) The full path to new file name.<br>
+<code>relPathNewName</code> (string) The relative path from public path (root web). Directory separator is forward slash (/).<br></p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_prepareRdbAdminPublicFolder" name="method_prepareRdbAdminPublicFolder" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">prepareRdbAdminPublicFolder()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">prepareRdbAdminPublicFolder() </pre>
+                <p><em>Prepare &#039;rdbadmin-public&#039; folder on public path (root web).</em></p>
+                
+
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_resizeImage" name="method_resizeImage" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">resizeImage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">resizeImage(string  <span class="argument">$filePath</span>) : array</pre>
+                <p><em>Resize image.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$filePath </td>
+                                <td><p>Relative image path from public path (root web). Not begins with slash.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Return associative array with keys:<br>
+<code>resizeResult</code> (bool) Resize result. If success or no resize work it will be <code>true</code>, otherwise it will be <code>false</code>.<br>
+Array key that exists only success.<br>
+<code>resizedFiles</code> (array) Contain resized file names from smallest to largest and then uploaded size. If no resize work then it will be return only uploaded where same as <code>filePath</code> attribute.<br>
+The array key of <code>resizedFiles</code> is width x height for resizes and <code>'upload'</code> for uploaded size.<br>
+Array keys that exists only failure.<br>
+<code>formResultStatus</code> (string) The form result status.<br>
+<code>formResultMessage</code> (string) The form result message.<br></p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Settings.FaviconController.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\FaviconController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_sessionTraitLogoutPreviousSessions" name="method_sessionTraitLogoutPreviousSessions" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">sessionTraitLogoutPreviousSessions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">sessionTraitLogoutPreviousSessions(integer  <span class="argument">$user_id</span>, \Rdb\Modules\RdbAdmin\Models\UserLoginsDb  <span class="argument">$UserLoginsDb</span>) </pre>
+                <p><em>Logout all sessions before latest succeeded login. (logout only succeeded login).</em></p>
+                <p>This method was called from <code>isUserLoggedIn()</code>.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$user_id </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Rdb.Modules.RdbAdmin.Models.UserLoginsDb.html">\Rdb\Modules\RdbAdmin\Models\UserLoginsDb</a></td>
+                                <td>$UserLoginsDb </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Rdb.Modules.RdbAdmin.Controllers.Admin.Users.Sessions.Traits.SessionsTrait.html"><div class="path-wrapper">\Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Sessions\Traits\SessionsTrait</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">FaviconController.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Controllers\Admin\Settings\FaviconController.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/Rdb.html">\Rdb</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on November 13th, 2022 at 18:33.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
