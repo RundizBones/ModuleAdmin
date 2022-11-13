@@ -24,6 +24,7 @@ class RdtaSessionsController extends RdbaDatatables {
     /**
      * Ajax delete logins sessions.
      * 
+     * @private This method was called from `listenFormSubmit()`.
      * @param {string} data
      * @returns {undefined}
      */
@@ -323,9 +324,12 @@ class RdtaSessionsController extends RdbaDatatables {
                 }
 
                 if (formValidated === true) {
-                    let formData = 'userlogin_ids=' + userLoginIdArray.join(',') + '&action=' + selectAction.value;
-                    formData += '&' + RdbaUserSessions.csrfName + '=' + encodeURIComponent(RdbaUserSessions.csrfKeyPair[RdbaUserSessions.csrfName]);
-                    formData += '&' + RdbaUserSessions.csrfValue + '=' + encodeURIComponent(RdbaUserSessions.csrfKeyPair[RdbaUserSessions.csrfValue]);
+                    let formData = new FormData();
+                    formData.append('userlogin_ids', userLoginIdArray.join(','));
+                    formData.append('action', selectAction.value);
+                    formData.append(RdbaUserSessions.csrfName, RdbaUserSessions.csrfKeyPair[RdbaUserSessions.csrfName]);
+                    formData.append(RdbaUserSessions.csrfValue, RdbaUserSessions.csrfKeyPair[RdbaUserSessions.csrfValue]);
+                    formData = new URLSearchParams(formData).toString();
                     thisClass.ajaxDeleteSessions(formData);
                 }
             }

@@ -259,16 +259,17 @@ class RdbaIndexController {
                             return ;
                         }
 
-                        let formData = 'updateData=' + JSON.stringify(sortable.toArray());
-                        formData += '&' + RdbaAdminIndex.csrfName + '=' + encodeURIComponent(RdbaAdminIndex.csrfKeyPair[RdbaAdminIndex.csrfName]);
-                        formData += '&' + RdbaAdminIndex.csrfValue + '=' + encodeURIComponent(RdbaAdminIndex.csrfKeyPair[RdbaAdminIndex.csrfValue]);
-                        formData += '&widgetsType=' + widgetsType
+                        let formData = new FormData();
+                        formData.append('updateData', JSON.stringify(sortable.toArray()));
+                        formData.append('widgetsType', widgetsType);
+                        formData.append(RdbaAdminIndex.csrfName, RdbaAdminIndex.csrfKeyPair[RdbaAdminIndex.csrfName]);
+                        formData.append(RdbaAdminIndex.csrfValue, RdbaAdminIndex.csrfKeyPair[RdbaAdminIndex.csrfValue]);
 
                         RdbaCommon.XHR({
                             'url': RdbaAdminIndex.orderDashboardWidgetsUrl,
                             'method': RdbaAdminIndex.orderDashboardWidgetsMethod,
                             'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
-                            'data': formData,
+                            'data': new URLSearchParams(formData).toString(),
                             'dataType': 'json'
                         })
                         .catch(function(responseObject) {

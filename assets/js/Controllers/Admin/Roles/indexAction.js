@@ -296,9 +296,11 @@ class RdbaRolesController extends RdbaDatatables {
                         return ;
                     }
 
-                    let formData = 'updateData=' + JSON.stringify(sortable.toArray());
-                    formData += '&' + RdbaRoles.csrfName + '=' + encodeURIComponent(RdbaRoles.csrfKeyPair[RdbaRoles.csrfName]);
-                    formData += '&' + RdbaRoles.csrfValue + '=' + encodeURIComponent(RdbaRoles.csrfKeyPair[RdbaRoles.csrfValue]);
+                    let formData = new FormData();
+                    formData.append('updateData', JSON.stringify(sortable.toArray()));
+                    formData.append(RdbaRoles.csrfName, RdbaRoles.csrfKeyPair[RdbaRoles.csrfName]);
+                    formData.append(RdbaRoles.csrfValue, RdbaRoles.csrfKeyPair[RdbaRoles.csrfValue]);
+                    formData = new URLSearchParams(formData).toString();
 
                     // reset form result placeholder.
                     $('.form-result-placeholder').html('');

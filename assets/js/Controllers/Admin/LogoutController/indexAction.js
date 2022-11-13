@@ -111,9 +111,10 @@ class RdbaLogoutController {
     doLogout() {
         let $ = jQuery.noConflict();
 
-        let formData = $('#rdba-logout-form').serialize();
-            formData += '&' + RdbaLogout.csrfName + '=' + encodeURIComponent(RdbaLogout.csrfKeyPair[RdbaLogout.csrfName]);
-            formData += '&' + RdbaLogout.csrfValue + '=' + encodeURIComponent(RdbaLogout.csrfKeyPair[RdbaLogout.csrfValue]);
+        let formData = new FormData(document.querySelector('#rdba-logout-form'));
+        formData.append(RdbaLogout.csrfName, RdbaLogout.csrfKeyPair[RdbaLogout.csrfName]);
+        formData.append(RdbaLogout.csrfValue, RdbaLogout.csrfKeyPair[RdbaLogout.csrfValue]);
+        formData = new URLSearchParams(formData).toString();
 
         return $.ajax({
             url: RdbaLogout.logoutUrl,
