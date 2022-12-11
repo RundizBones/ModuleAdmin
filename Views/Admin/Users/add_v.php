@@ -63,7 +63,7 @@
                                 <div class="control-wrapper">
                                     <select id="user_roles" name="user_roles[]" multiple="" size="3" required="">
                                         <?php 
-                                        if (isset($configDb['rdbadmin_UserRegisterDefaultRoles'])) {
+                                        if (isset($configDb['rdbadmin_UserRegisterDefaultRoles']) && is_scalar($configDb['rdbadmin_UserRegisterDefaultRoles'])) {
                                             $roles = explode(',', $configDb['rdbadmin_UserRegisterDefaultRoles']);
                                             $roles = array_map('trim', $roles);
                                         } else {

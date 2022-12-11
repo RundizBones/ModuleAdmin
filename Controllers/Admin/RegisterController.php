@@ -467,7 +467,11 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                     }
 
                     // add default role.
-                    if (isset($output['configDb']['rdbadmin_UserRegisterDefaultRoles']) && !empty($output['configDb']['rdbadmin_UserRegisterDefaultRoles'])) {
+                    if (
+                        isset($output['configDb']['rdbadmin_UserRegisterDefaultRoles']) && 
+                        is_scalar($output['configDb']['rdbadmin_UserRegisterDefaultRoles']) &&
+                        !empty($output['configDb']['rdbadmin_UserRegisterDefaultRoles'])
+                    ) {
                         $defaultRoles = explode(',', $output['configDb']['rdbadmin_UserRegisterDefaultRoles']);
 
                         if (!is_array($defaultRoles) || empty($defaultRoles)) {
@@ -785,6 +789,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
             &&
             (
                 isset($output['configDb']['rdbadmin_UserRegisterNotifyAdminEmails']) &&
+                is_scalar($output['configDb']['rdbadmin_UserRegisterNotifyAdminEmails']) &&
                 !empty($output['configDb']['rdbadmin_UserRegisterNotifyAdminEmails'])
             )// notify admin emails are not empty
         ) {

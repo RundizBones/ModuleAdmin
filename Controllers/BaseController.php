@@ -235,7 +235,7 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
             $allowOrigins = $ConfigDb->get('rdbadmin_SiteAllowOrigins');
             unset($ConfigDb);
 
-            if (!empty($allowOrigins)) {
+            if (is_scalar($allowOrigins) && !empty($allowOrigins)) {
                 $allowOriginsArray = array_map('trim', explode(',', $allowOrigins));
                 $headers = array_change_key_case(apache_request_headers());
                 if (isset($headers['origin']) && is_array($allowOriginsArray)) {

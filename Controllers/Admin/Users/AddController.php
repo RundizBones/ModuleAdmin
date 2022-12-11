@@ -94,7 +94,11 @@ class AddController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             $dataUsersRoles = [];
             $dataUsersRoles['roleIds'] = $this->Input->post('user_roles');
 
-            if (empty($dataUsersRoles['roleIds'])) {
+            if (
+                isset($output['configDb']['rdbadmin_UserRegisterDefaultRoles']) &&
+                is_scalar($output['configDb']['rdbadmin_UserRegisterDefaultRoles']) &&
+                empty($dataUsersRoles['roleIds'])
+            ) {
                 $configDefaultRoles = explode(',', $output['configDb']['rdbadmin_UserRegisterDefaultRoles']);
                 $configDefaultRoles = array_map('trim', $configDefaultRoles);
                 $dataUsersRoles['roleIds'] = $configDefaultRoles;

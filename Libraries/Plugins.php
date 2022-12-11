@@ -320,6 +320,10 @@ class Plugins
                     if (is_array($modulePlugins)) {
                         foreach ($modulePlugins as $modulePlugin) {
                             // loop each plugin inside this module.
+                            if (!is_scalar($modulePlugin)) {
+                                continue;
+                            }
+
                             // $modulePlugin is already included $moduleSystemName . '/Plugins/'
                             $expModulePlugin = explode('/', str_replace(['\\', '/'], '/', $modulePlugin));
                             $modulePluginSystemName = $expModulePlugin[(count($expModulePlugin) - 1)];

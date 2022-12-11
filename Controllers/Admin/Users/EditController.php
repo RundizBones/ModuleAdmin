@@ -800,7 +800,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                 $Mail->Subject = __('Email changed');
             }
 
-            if (isset($options['admin_email'])) {
+            if (isset($options['admin_email']) && is_scalar($options['admin_email'])) {
                 $explodeAdminEmail = explode(',', $options['admin_email']);
                 $explodeAdminEmail = array_map('trim', $explodeAdminEmail);
                 if (is_array($explodeAdminEmail) && isset($explodeAdminEmail[0])) {

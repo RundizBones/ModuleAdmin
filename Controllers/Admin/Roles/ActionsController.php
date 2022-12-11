@@ -382,7 +382,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
                 $output['deleteUserDefaultRoleIds'] = [];
 
                 // check that deleting user default roles.
-                if (!empty($userRegisterDefaultRoles)) {
+                if (is_scalar($userRegisterDefaultRoles) && !empty($userRegisterDefaultRoles)) {
                     $userRegisterDefaultRolesArray = explode(',', $userRegisterDefaultRoles);
                     if (is_array($userRegisterDefaultRolesArray)) {
                         $userRegisterDefaultRolesArray = array_map('trim', $userRegisterDefaultRolesArray);

@@ -102,7 +102,7 @@ class Modules
                 'module_name' => (isset($moduleName[1]) ? trim($moduleName[1]) : $moduleSystemName),
                 'module_description' => (isset($Description[1]) ? trim($Description[1]) : ''),
                 'module_requires_php' => (isset($requiresPhp[1]) ? trim($requiresPhp[1]) : ''),
-                'module_requires_modules' => (isset($requiresModules[1]) ? explode(',', $requiresModules[1]) : []),
+                'module_requires_modules' => (isset($requiresModules[1]) && is_scalar($requiresModules[1]) ? explode(',', $requiresModules[1]) : []),
                 'module_author' => (isset($author[1]) ? trim($author[1]) : ''),
                 'module_gettext_domain' => (isset($gettextDomain[1]) ? trim($gettextDomain[1]) : ''),
                 'module_version' => (isset($version['version']) ? trim($version['version']) : ''),

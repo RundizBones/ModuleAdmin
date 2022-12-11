@@ -253,6 +253,7 @@ function renderFaviconHtml(\Rdb\System\Container $Container, string $faviconPath
                     $fileNameExp = explode('_', $fileNameOnly);
                     $fileNameNumberWidthHeight = $fileNameExp[(count($fileNameExp) - 1)];
                     if (
+                        is_scalar($fileNameNumberWidthHeight) &&
                         str_contains($fileNameNumberWidthHeight, 'x')
                     ) {
                         // found nnxnn in file name.

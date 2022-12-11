@@ -338,6 +338,10 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             $lastRegion = '';
             if (is_array($timezones)) {
                 foreach ($timezones as $key => $timezone) {
+                    if (!is_scalar($timezone)) {
+                        continue;
+                    }
+
                     $DateTimeZone = new \DateTimeZone($timezone);
                     $expTimezone = explode('/', $timezone);
                     if (isset($expTimezone[0])) {
