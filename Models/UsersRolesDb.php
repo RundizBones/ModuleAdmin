@@ -23,6 +23,12 @@ class UsersRolesDb extends \Rdb\System\Core\Models\BaseModel
 
 
     /**
+     * @var array Debug update for internal use in `update()` method. This added to prevent "creation of dynamic property is deprecated" error.
+     */
+    protected $debugUpdate = [];
+
+
+    /**
      * Add user to roles.
      * 
      * Also verify that user ID exists, role ID(s) are exists before add.<br>
