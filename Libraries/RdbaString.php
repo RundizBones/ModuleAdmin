@@ -99,7 +99,7 @@ class RdbaString
         $displayname = trim($displayname);
 
         // remove special characters. "(),:;<>@[\]
-        $specialChars = preg_quote('"(),:;<>@[\]');
+        $specialChars = preg_quote('"(),:;<>@[\]', '#');
         $displayname = preg_replace('#[' . $specialChars . ']+#', '', $displayname);
         unset($specialChars);
 
@@ -129,7 +129,7 @@ class RdbaString
         $username = preg_replace('#\s+#', '', $username);
 
         // remove special characters. "(),:;<>@[\]
-        $specialChars = preg_quote('"(),:;<>@[\]');
+        $specialChars = preg_quote('"(),:;<>@[\]', '#');
         $username = preg_replace('#[' . $specialChars . ']+#', '', $username);
         unset($specialChars);
 
