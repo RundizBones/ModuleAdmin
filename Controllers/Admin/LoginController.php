@@ -213,7 +213,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
                 if (isset($formValidated) && $formValidated === true) {
                     /*
                      * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\LoginController->doLoginAction.beforeDoLogin
-                     * PluginHookDescription: Hook after form validated, before do login.
+                     * PluginHookDescription: Hook on login page, after form validated, before do login.
                      * PluginHookParam: <br>
                      *      array $data The form input data.<br>
                      *      array $output This argument will be pass by reference, you can alter but variable type must be array. <br>

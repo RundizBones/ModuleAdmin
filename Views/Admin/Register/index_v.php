@@ -70,7 +70,7 @@
                     <?php }// endif; 
                     /*
                      * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Register\index_v.before.registerbutton
-                     * PluginHookDescription: Hook at before register button in register page.
+                     * PluginHookDescription: Hook on register page, before display register button.
                      * PluginHookParam: None.
                      * PluginHookReturn: None.
                      * PluginHookSince: 1.2.0

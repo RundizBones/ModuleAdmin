@@ -362,7 +362,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
             if (isset($formValidated) && $formValidated === true) {
                 /*
                  * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\RegisterController->doRegisterAction.beforeFormValidation
-                 * PluginHookDescription: Hook before form validation.
+                 * PluginHookDescription: Hook on register page, before form validation.
                  * PluginHookParam: <br>
                  *      array $data The form input data.<br>
                  *      array $output This argument will be pass by reference, you can alter but variable type must be array. <br>

@@ -74,6 +74,13 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
             };
         }
         $Plugins->registerAllPluginsHooks();
+        /*
+         * PluginHook: Rdb\Modules\RdbAdmin\Controllers\BaseController->__construct.registeredAllPlugins
+         * PluginHookDescription: Runs after registered all plugins hooks.
+         * PluginHookParam: None.
+         * PluginHookSince: 1.2.6
+         */
+        $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.registeredAllPlugins');
         unset($Plugins);
 
         // maybe run cron job.

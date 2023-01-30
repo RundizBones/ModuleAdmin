@@ -25,7 +25,7 @@ $Plugins = $this->Container->get('Plugins');
                                     <?php
                                     /*
                                      * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsNav.last
-                                     * PluginHookDescription: Hook at last tabs navigation (inside `<ul>` element) in settings views.
+                                     * PluginHookDescription: Hook after last tabs navigation (inside `<ul>` element) in settings views.
                                      * PluginHookParam: None.
                                      * PluginHookReturn: None.
                                      * PluginHookSince: 1.1.7
@@ -502,7 +502,7 @@ $Plugins = $this->Container->get('Plugins');
                                 <?php
                                 /*
                                  * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsContent.last
-                                 * PluginHookDescription: Hook at last tabs content in settings views.
+                                 * PluginHookDescription: Hook after last tabs content (inside `<div class="rd-tabs">`) in settings views.
                                  * PluginHookParam: None.
                                  * PluginHookReturn: None.
                                  * PluginHookSince: 1.1.7

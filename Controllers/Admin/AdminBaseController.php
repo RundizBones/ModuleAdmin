@@ -23,6 +23,17 @@ abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\Bas
     {
         parent::__construct($Container);
 
+        /*
+         * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController->__construct.adminInit
+         * PluginHookDescription: Runs at beginning of `AdminBaseController`.
+         * PluginHookParam: None.
+         * PluginHookSince: 1.2.6
+         */
+        /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+        $Plugins = $this->Container->get('Plugins');
+        $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.adminInit');
+        unset($Plugins);
+
         // check admin login. always check admin login to redirect user to /admin/login page.
         $this->checkLogin();
     }// __construct

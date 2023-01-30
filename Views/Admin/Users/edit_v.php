@@ -203,10 +203,18 @@
                                 $Plugins = $this->Container->get('Plugins');
                                 /*
                                  * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\Users\EditController->indexAction.bottomOtherInfo
-                                 * PluginHookDescription: Hook to display contents at the bottom of other info section.
+                                 * PluginHookDescription: Hook on edit user page, at the bottom of other info section.
                                  * PluginHookSince: 0.2.4
+                                 * @todo[tdb] Remove this hook on v2.0. Use the hook below instead.
                                  */
                                 $Plugins->doHook($this->controllerMethod.'.bottomOtherInfo');
+
+                                /*
+                                 * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Users\edit_v.bottomOtherInfo
+                                 * PluginHookDescription: Hook on edit user page, at the bottom of other info section.
+                                 * PluginHookSince: 1.2.6
+                                 */
+                                $Plugins->doHook('Rdb\Modules\RdbAdmin\Views\Admin\Users\edit_v.bottomOtherInfo');
                                 unset($Plugins);
                             }
                             /*<div class="form-group">

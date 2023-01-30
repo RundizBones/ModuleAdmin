@@ -428,7 +428,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
             if (isset($formValidated) && $formValidated === true) {
                 /*
                  * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\ForgotLoginPassController->submitRequestAction.beforeCheckUser
-                 * PluginHookDescription: Hook after form validated, before check user exists.
+                 * PluginHookDescription: Hook on forgot login or password page, after form validated, before check user exists.
                  * PluginHookParam: <br>
                  *      array $data The form input data.<br>
                  *      array $output This argument will be pass by reference, you can alter but variable type must be array. <br>

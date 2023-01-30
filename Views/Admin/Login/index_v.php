@@ -49,7 +49,7 @@
                     <?php
                     /*
                      * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Login\index_v.before.loginbutton
-                     * PluginHookDescription: Hook at before login button in login page.
+                     * PluginHookDescription: Hook on login page, before display login button.
                      * PluginHookParam: None.
                      * PluginHookReturn: None.
                      * PluginHookSince: 1.2.0

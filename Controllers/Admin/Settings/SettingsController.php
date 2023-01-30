@@ -466,7 +466,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             if (is_object($this->Plugins)) {
                 /*
                  * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\SettingsController->indexAction.afterAddAssets
-                 * PluginHookDescription: Hook after added assets in settings page controller.
+                 * PluginHookDescription: Hook after added assets (such as CSS, JS) in settings page controller.
                  * PluginHookParam: <br>
                  *              `Assets` (object) The `\Rdb\Modules\RdbAdmin\Libraries\Assets` class.<br>
                  *              `rdbAdminAssets` (array) The RdbAdmin module's assets.<br>

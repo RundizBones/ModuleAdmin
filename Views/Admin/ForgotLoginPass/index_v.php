@@ -31,7 +31,7 @@
                     <?php
                     /*
                      * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\ForgotLoginPass\index_v.before.submitbutton
-                     * PluginHookDescription: Hook at before submit button in forgot login or password page.
+                     * PluginHookDescription: Hook on forgot login page, before display submit button.
                      * PluginHookParam: None.
                      * PluginHookReturn: None.
                      * PluginHookSince: 1.2.0
