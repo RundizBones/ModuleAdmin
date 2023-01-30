@@ -1,10 +1,10 @@
-# Plugins actions order
+# Plugins actions reference
 
-These actions are display by execute order.
+The plugin actions hook reference.
 
 ## Typical requests
-These actions are called for both logged in and non logged in users.  
-Not all actions are called on every pages.
+These actions can be called for both logged in and non logged in users.  
+The action in a table below display by execute order.
 
 | Hook name | Description |
 |--------------|---------------|
@@ -32,7 +32,7 @@ Not all actions are called on every pages.
 
 ## Admin pages
 These actions are called for logged in users that is able to access **/admin** pages only. Or the pages that extends `Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController`.  
-Not all actions are called on every pages.
+The actions in a table below display by execute order. Not all actions are called on every pages.
 
 | Hook name | Description |
 |--------------|---------------|

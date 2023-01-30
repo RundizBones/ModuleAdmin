@@ -28,7 +28,7 @@ If you want to start development using RdbAdmin module, please read following. O
 
 ## Plugins
 * [Plugins introduction](plugins-introduction.md).
-* [Plugins actions order](plugins-actions-order.md).
+* [Plugins actions reference](plugins-actions-reference.md).
 
 ---
 
