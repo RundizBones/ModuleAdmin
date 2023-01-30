@@ -28,5 +28,6 @@ mkdocs.yml
 package.json
 package-lock.json
 phpdoc.xml
+phpdoc3.xml
 phpunit.xml
 readme.md
