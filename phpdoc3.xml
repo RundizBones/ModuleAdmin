@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor
+        configVersion="3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://www.phpdoc.org"
+>
+    <title><![CDATA[RdbAdmin Module]]></title>
+    <paths>
+        <cache>.phpdoc/cache</cache>
+        <output>.wiki/apidoc</output>
+    </paths>
+    <version number="latest">
+        <api>
+            <ignore>
+                <path>.backup/**/*</path>
+                <path>\.backup/**/*</path>
+                <path>\\.backup/**/*</path>
+                <path>assets*/**/*</path>
+                <path>config/**/*</path>
+                <path>languages/**/*</path>
+                <path>node_modules/**/*</path>
+                <path>node_tasks/**/*</path>
+                <path>phinxdb/**/*</path>
+                <path>Test*/**/*</path>
+            </ignore>
+        </api>
+    </version>
+</phpdocumentor>
