@@ -78,6 +78,17 @@
                     ?></div><!--.rdba-page-alert-placeholder-->
                     <div class="rdba-page-content-wrapper">
                         <?php
+                        /*
+                         * PluginHook: Modules/RdbAdmin/Views/common/Admin/mainLayout_v.php.before_pageContent
+                         * PluginHookDescription: Hook before render `$pageContent`.
+                         * PluginHookParam: None.<br>
+                         * PluginHookSince: 1.2.6
+                         */
+                        /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+                        $Plugins = $this->Container->get('Plugins');
+                        $Plugins->doHook('Modules/RdbAdmin/Views/common/Admin/mainLayout_v.php.before_pageContent');
+                        unset($Plugins);
+
                         if (isset($pageContent) && is_scalar($pageContent)) {
                             echo "\n\n";
                             echo '<!--begins main layout page content-->'."\n";

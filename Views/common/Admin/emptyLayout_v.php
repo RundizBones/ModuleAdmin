@@ -16,6 +16,18 @@ if (isset($pageHtmlClasses) && stripos($pageHtmlClasses, 'rdba-empty-layout') ==
         <?php
         if (isset($pageContent)) {
             echo "\n\n";
+
+            /*
+             * PluginHook: Modules/RdbAdmin/Views/common/Admin/emptyLayout_v.php.before_pageContent
+             * PluginHookDescription: Hook before render `$pageContent`.
+             * PluginHookParam: None.<br>
+             * PluginHookSince: 1.2.6
+             */
+            /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+            $Plugins = $this->Container->get('Plugins');
+            $Plugins->doHook('Modules/RdbAdmin/Views/common/Admin/emptyLayout_v.php.before_pageContent');
+            unset($Plugins);
+
             echo '<!--begins main layout page content-->'."\n";
             echo $pageContent."\n";
             echo '<!--end main layout page content-->'."\n";
