@@ -79,7 +79,7 @@ class AntiBot
     /**
      * Get honeypot name.
      * 
-     * @see `getHoneypotName()` method.
+     * @see getHoneypotName() Calling to this method as non static.
      * @return string
      */
     public static function staticGetHoneypotName(): string

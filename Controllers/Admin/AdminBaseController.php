@@ -91,7 +91,7 @@ abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\Bas
      * @param string|array $action The action(s) on that page. Use string if check for single action, use array if check for multiple actions.<br>
      *                                              If checking for multiple actions, any single action matched with certain module, page will be return `true`.
      * @param array $identity The associative array of identity.
-     * @see \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb::checkPermission();
+     * @see \Rdb\Modules\RdbAdmin\Models\UserPermissionsDb::checkPermission() For reference.
      */
     protected function checkPermission(string $moduleSystemName, string $page, $action, array $identity = [])
     {

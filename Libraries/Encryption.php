@@ -106,7 +106,7 @@ class Encryption
     /**
      * Get encrypt method length number (128, 192, 256).
      * 
-     * @return integer.
+     * @return int
      */
     protected function encryptMethodLength(): int
     {
