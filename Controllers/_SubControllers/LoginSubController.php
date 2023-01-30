@@ -637,6 +637,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
             $recordLoginsData['userlogin_expire_date_gmt'] = gmdate('Y-m-d H:i:s', $DateTime->getTimestamp());
             unset($DateTime);
         }
+        $doLoginResult['user']['cookieExpireGMT'] = $recordLoginsData['userlogin_expire_date_gmt'];
 
         // start write cookies -------------------------------------------
         // write login cookie.
