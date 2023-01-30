@@ -41,6 +41,7 @@ To edit files in **assets-src** folder such as CSS, JS, please run the following
 
 ## Before publish or commit.
 * Update version number in **Installer.php** file.
-* Run command `phpdoc2` or using phpDocumentor 2. (API doc is no need to generate every commit, just when there are changes on release.)
+* Run command `phpdoc2` for using phpDocumentor 2. (API doc is no need to generate every commit, just when there are changes on release.)
+  * Or use `phpdoc3 --config=phpdoc3.xml` for using phpDocumentor 3.
 * Run update version number again from the command in section **Update version number of packages**.
 * Run external pack command `rdbdev pack --module RdbAdmin --packtype=dev prod` to pack files and folders into a zip file.
