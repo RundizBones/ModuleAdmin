@@ -88,6 +88,17 @@ abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\Bas
             unset($domainProtocol, $redirectUrl, $Url);
             exit();
         }
+
+        /*
+         * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController->checkLogin.afterCheckLoggedIn
+         * PluginHookDescription: Runs in `checkLogin()` method, after check that user is logged in.
+         * PluginHookParam: None.
+         * PluginHookSince: 1.2.6
+         */
+        /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+        $Plugins = $this->Container->get('Plugins');
+        $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.afterCheckLoggedIn');
+        unset($Plugins);
     }// checkLogin
 
 

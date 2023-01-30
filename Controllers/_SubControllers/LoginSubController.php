@@ -426,7 +426,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
      * @param array $doLoginResult The check login result that have got from `\Rdb\Modules\RdbAdmin\Models\UsersDb->checkLogin()` method.
      * @param int $cookieExpires The time the cookie expires. This is a Unix timestamp so is in number of seconds since the epoch. In other words, you'll most likely set this with the time() function plus the number of seconds before you want it to expire.
      */
-    protected function doLoginSuccessSetCookie(array $doLoginResult, int $cookieExpires)
+    public function doLoginSuccessSetCookie(array $doLoginResult, int $cookieExpires)
     {
         $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
         $Cookie->setEncryption('rdbaLoggedinKey');

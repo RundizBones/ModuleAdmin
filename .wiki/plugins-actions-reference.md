@@ -38,6 +38,7 @@ The actions in a table below display by execute order. Not all actions are calle
 |--------------|---------------|
 | `Rdb\Modules\RdbAdmin\Controllers\BaseController->__construct.registeredAllPlugins` | Runs after registered all plugins hooks. |
 | `Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController->__construct.adminInit` | Runs at beginning of `AdminBaseController`. |
+| `Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController->checkLogin.afterCheckLoggedIn` | Runs in `checkLogin()` method, after check that user is logged in. |
 | `Rdb\Modules\RdbAdmin\Views\common\Admin\emptyLayout_v.before_pageContent` | Hook on empty page layout, before render `$pageContent`. | 
 | `Rdb\Modules\RdbAdmin\Views\common\Admin\mainLayout_v.before_pageContent` | Hook on main page layout, before render `$pageContent`. |
 
