@@ -37,7 +37,7 @@ You only need this folder if you want to use its feature.
  * ModuleAdmin.php
 
 ## Plugins folder
-This folder is for store any plugins that can be hook into any actions, filters. Each of plugin must has its own folder and PHP file.<br>
+This folder is for store any plugins that can be hook into any actions, alters. Each of plugin must has its own folder and PHP file.<br>
 For example, You have more than one plugins in a single module and their names are **UserHooks**, **SettingHooks**.<br>
 The PHP file of each plugin should be **UserHooks/UserHooks.php**, **SettingHooks/SettingHooks.php**.
 

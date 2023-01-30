@@ -15,4 +15,9 @@ nav:
         - Models: models.md
         - Views:
             - Admin: admin-views.md
+        - Plugins:
+            - Plugins introduction: plugins-introduction.md
+            - Plugins actions order: plugins-actions-order.md
 plugins: []
+theme:
+    name: material
