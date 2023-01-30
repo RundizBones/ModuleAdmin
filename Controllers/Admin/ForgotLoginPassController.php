@@ -439,6 +439,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                  */
                 $originalOutput = $output;
                 $originalFormValidated = $formValidated;
+                /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
                 $Plugins = $this->Container->get('Plugins');
                 $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.beforeCheckUser', [$data, &$output, &$formValidated]);
                 if (!is_array($output)) {

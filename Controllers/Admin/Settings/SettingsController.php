@@ -166,6 +166,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                          * PluginHookReturn: None.
                          * PluginHookSince: 1.1.7
                          */
+                        /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
                         $Plugins = $this->Container->get('Plugins');
                         $updateResultFromHooks = $Plugins->doHook(
                             __CLASS__ . '->' . __FUNCTION__ . '.afterMainUpdate',

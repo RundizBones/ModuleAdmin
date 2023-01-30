@@ -3,6 +3,8 @@
 /* @var $Modules \Rdb\System\Modules */
 /* @var $Views \Rdb\System\Views */
 /* @var $Url \Rdb\System\Libraries\Url */
+/* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+$Plugins = $this->Container->get('Plugins');
 ?>
                         <h1 class="rdba-page-content-header">
                             <?php echo __('Main settings'); ?> 
@@ -28,7 +30,6 @@
                                      * PluginHookReturn: None.
                                      * PluginHookSince: 1.1.7
                                      */
-                                    $Plugins = $this->Container->get('Plugins');
                                     $Plugins->doHook(
                                         'Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsNav.last'
                                     );
@@ -170,7 +171,6 @@
                                      * PluginHookReturn: None.
                                      * PluginHookSince: 1.1.7
                                      */
-                                    $Plugins = $this->Container->get('Plugins');
                                     $Plugins->doHook(
                                         'Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsContent.tab-1'
                                     );
@@ -507,10 +507,10 @@
                                  * PluginHookReturn: None.
                                  * PluginHookSince: 1.1.7
                                  */
-                                $Plugins = $this->Container->get('Plugins');
                                 $Plugins->doHook(
                                     'Rdb\Modules\RdbAdmin\Views\Admin\Settings\index_v.settings.tabsContent.last'
                                 );
+                                unset($Plugins);
                                 ?> 
                             </div><!--.rd-tabs-->
 

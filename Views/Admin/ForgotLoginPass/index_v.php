@@ -36,6 +36,7 @@
                      * PluginHookReturn: None.
                      * PluginHookSince: 1.2.0
                      */
+                    /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
                     $Plugins = $this->Container->get('Plugins');
                     $Plugins->doHook(
                         'Rdb\Modules\RdbAdmin\Views\Admin\ForgotLoginPass\index_v.before.submitbutton'

@@ -373,6 +373,7 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                  */
                 $originalOutput = $output;
                 $originalFormValidated = $formValidated;
+                /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
                 $Plugins = $this->Container->get('Plugins');
                 $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.beforeFormValidation', [$data, &$output, &$formValidated]);
                 if (!is_array($output)) {

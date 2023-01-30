@@ -224,6 +224,7 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
                      */
                     $originalOutput = $output;
                     $originalFormValidated = $formValidated;
+                    /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
                     $Plugins = $this->Container->get('Plugins');
                     $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.beforeDoLogin', [$data, &$output, &$formValidated]);
                     if (!is_array($output)) {
