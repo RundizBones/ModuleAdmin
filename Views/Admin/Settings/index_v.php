@@ -270,7 +270,7 @@ $Plugins = $this->Container->get('Plugins');
 
                                             <h2><?php echo __('Login & Security'); ?></h2>
                                             <div class="form-group">
-                                                <label class="control-label" for="rdbadmin_UserLoginNotRememberLength"><?php echo __('Login length without remember'); ?></label>
+                                                <label class="control-label" for="rdbadmin_UserLoginNotRememberLength"><?php echo __('Login time period without remember'); ?></label>
                                                 <div class="control-wrapper">
                                                     <div class="rd-input-group">
                                                         <input id="rdbadmin_UserLoginNotRememberLength" class="rd-input-control" type="number" name="rdbadmin_UserLoginNotRememberLength" value="" min="0">
@@ -286,7 +286,7 @@ $Plugins = $this->Container->get('Plugins');
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label" for="rdbadmin_UserLoginRememberLength"><?php echo __('Login length with remember'); ?></label>
+                                                <label class="control-label" for="rdbadmin_UserLoginRememberLength"><?php echo __('Login time period with remember'); ?></label>
                                                 <div class="control-wrapper">
                                                     <div class="rd-input-group">
                                                         <input id="rdbadmin_UserLoginRememberLength" class="rd-input-control" type="number" name="rdbadmin_UserLoginRememberLength" value="" min="1">
