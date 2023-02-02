@@ -11,7 +11,7 @@ import url from 'node:url';
 // import libraries.
 const {default: FS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/FS.js"));
 const {default: Paths} = await import(url.pathToFileURL(RDBDEV_APPDIR + '/app/Libraries/Paths.js'));
-const {default: TextStyles} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/TextStyles.js"));
+const {default: TextStyles} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/TextStyles.mjs"));
 
 
 export default class CopyAssetsSrc {
