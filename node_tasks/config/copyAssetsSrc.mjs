@@ -10,7 +10,7 @@ import path from 'node:path';
 import url from 'node:url';
 // import libraries.
 const {default: FS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/FS.js"));
-const {default: Paths} = await import(url.pathToFileURL(RDBDEV_APPDIR + '/app/Libraries/Paths.js'));
+const {default: Paths} = await import(url.pathToFileURL(RDBDEV_APPDIR + '/app/Libraries/Paths.mjs'));
 const {default: TextStyles} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/TextStyles.mjs"));
 
 
