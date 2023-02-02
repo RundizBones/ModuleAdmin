@@ -10,9 +10,9 @@
 
 import url from 'node:url';
 // import libraries.
-const {default: Concat} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/Concat.mjs"));
-const {default: MinCSS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/MinCSS.mjs"));
-const {default: MinJS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Libraries/MinJS.mjs"));
+const {default: Concat} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/RdbDev/Libraries/Concat.mjs"));
+const {default: MinCSS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/RdbDev/Libraries/MinCSS.mjs"));
+const {default: MinJS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/RdbDev/Libraries/MinJS.mjs"));
 
 
 const cssFiles = [
