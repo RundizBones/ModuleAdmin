@@ -104,7 +104,10 @@ class Assets
         if (stripos($file, '://') === false && stripos($file, '//') !== 0) {
             // if the asset file is local. check that if it exists or not.
             $Url = new \Rdb\System\Libraries\Url($this->Container);
-            $fileRealPath = preg_replace('#^' . preg_quote($Url->getAppBasedPath(), '#') . '#', PUBLIC_PATH . '/', $file, 1);
+            $appBasePath = $Url->getAppBasedPath();
+            // remove `/index.php` from app based path. due to `$Url->getAppBasedPath()` can return path WITH `/index.php` so remove it.
+            $appBasePath = preg_replace('#\/index\.php$#i', '', $appBasePath);
+            $fileRealPath = preg_replace('#^' . preg_quote($appBasePath, '#') . '#', PUBLIC_PATH . '/', $file, 1);
             $fileRealPathBeforeNormalize = $fileRealPath;
             $fileRealPath = realpath($fileRealPath);
             if (!is_file($fileRealPath)) {
