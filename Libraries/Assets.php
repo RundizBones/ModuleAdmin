@@ -107,6 +107,7 @@ class Assets
             $appBasePath = $Url->getAppBasedPath();
             // remove `/index.php` from app based path. due to `$Url->getAppBasedPath()` can return path WITH `/index.php` so remove it.
             $appBasePath = preg_replace('#\/index\.php$#i', '', $appBasePath);
+            // replace app based path (begining of the URL) to be full public path.
             $fileRealPath = preg_replace('#^' . preg_quote($appBasePath, '#') . '#', PUBLIC_PATH . '/', $file, 1);
             $fileRealPathBeforeNormalize = $fileRealPath;
             $fileRealPath = realpath($fileRealPath);
@@ -125,7 +126,7 @@ class Assets
                     unset($caller, $Logger);
                 }
             }
-            unset($fileRealPath, $fileRealPathBeforeNormalize, $Url);
+            unset($appBasePath, $fileRealPath, $fileRealPathBeforeNormalize, $Url);
         }
 
         $this->addedAssets[$type] = array_merge(
