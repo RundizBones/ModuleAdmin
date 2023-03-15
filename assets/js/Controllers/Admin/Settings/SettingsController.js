@@ -160,6 +160,7 @@ class RdbaSettingsController {
             let formData = new FormData(settingsForm);
             formData.append(RdbaSettings.csrfName, RdbaSettings.csrfKeyPair[RdbaSettings.csrfName]);
             formData.append(RdbaSettings.csrfValue, RdbaSettings.csrfKeyPair[RdbaSettings.csrfValue]);
+            formData.delete('rdbadmin_SiteFavicon');
 
             // make sure that unchecked check box is send zero value instead of nothing.
             settingsForm.querySelectorAll('input[type="checkbox"]').forEach((item, index) => {
