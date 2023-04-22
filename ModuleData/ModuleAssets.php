@@ -50,13 +50,13 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/css/rdta/rdta-bundled.min.css',
-                    'version' => '2.2.3',
+                    'version' => '2.2.4',
                 ],
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/css/datatables-bundled.min.css',
-                    'version' => '1.12.1',
+                    'version' => '1.13.4',
                 ],
                 // end datatables----------.
                 [
@@ -107,7 +107,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/js/rdta/rdta-bundled.min.js',
-                    'version' => '2.2.3',
+                    'version' => '2.2.4',
                 ],
                 [
                     'handle' => 'handlebars',
@@ -134,13 +134,13 @@ class ModuleAssets
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/js/datatables-bundled.min.js',
                     'dependency' => ['rdta'],
-                    'version' => '1.12.1',
+                    'version' => '1.13.4',
                 ],
                 [
                     'handle' => 'datatables-plugins-pagination',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/plugins/pagination/input.js',
                     'dependency' => ['rdta', 'datatables'],
-                    'version' => '1.12.1',
+                    'version' => '1.13.4',
                 ],
                 // end datatables----------.
                 [

@@ -177,9 +177,9 @@ samp {
   padding: 0
 }
 /*!
- * Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- * Copyright 2022 Fonticons, Inc.
+ * Copyright 2023 Fonticons, Inc.
  */
 .fa {
   font-family: var(--fa-style-family,"Font Awesome 6 Free");
@@ -431,7 +431,9 @@ samp {
     animation-duration: 1ms;
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
+    -webkit-transition-delay: 0s;
     transition-delay: 0s;
+    -webkit-transition-duration: 0s;
     transition-duration: 0s
   }
 }
@@ -1538,6 +1540,9 @@ samp {
 }
 .fa-v:before {
   content: "\56"
+}
+.fa-bangladeshi-taka-sign:before {
+  content: "\e2e6"
 }
 .fa-bicycle:before {
   content: "\f206"
@@ -3634,9 +3639,6 @@ samp {
 .fa-subtract:before {
   content: "\f068"
 }
-.fa-child-rifle:before {
-  content: "\e4e0"
-}
 .fa-chess:before {
   content: "\f439"
 }
@@ -4514,6 +4516,10 @@ samp {
 .fa-share-square:before {
   content: "\f14d"
 }
+.fa-child-combatant:before,
+.fa-child-rifle:before {
+  content: "\e4e0"
+}
 .fa-gun:before {
   content: "\e19b"
 }
@@ -4656,6 +4662,9 @@ samp {
 }
 .fa-hand-lizard:before {
   content: "\f258"
+}
+.fa-notdef:before {
+  content: "\e1fe"
 }
 .fa-disease:before {
   content: "\f7fa"
@@ -6775,12 +6784,18 @@ samp {
 .fa-internet-explorer:before {
   content: "\f26b"
 }
+.fa-stubber:before {
+  content: "\e5c7"
+}
 .fa-telegram-plane:before,
 .fa-telegram:before {
   content: "\f2c6"
 }
 .fa-old-republic:before {
   content: "\f510"
+}
+.fa-odysee:before {
+  content: "\e5c6"
 }
 .fa-square-whatsapp:before,
 .fa-whatsapp-square:before {
@@ -8037,7 +8052,7 @@ input[type=range]:focus::-ms-fill-upper {
   background: #ddd
 }
 /*!
- * Rundiz template for admin V.2.2.3
+ * Rundiz template for admin V.2.2.4
  */
 :root {
   --background-primary-disabled-color: #97c3ea;
