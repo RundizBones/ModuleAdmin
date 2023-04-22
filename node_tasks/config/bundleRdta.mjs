@@ -8,6 +8,8 @@
 'use strict';
 
 
+import fs from 'node:fs';
+import path from 'node:path';
 import url from 'node:url';
 // import libraries.
 const {default: Concat} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/RdbDev/Libraries/Concat.mjs"));
@@ -108,7 +110,7 @@ export default class BundleRdta {
             }
         });
         await concat.concat('rdta-bundled.css');
-        await concat.cleanCSS();
+        await concat.cleanCSS({sourceMapInlineSources: true});
         await concat.header(this.headerString);
         return concat.writeFile(this.destCSSFolder)
         .then((result) => {
@@ -153,6 +155,7 @@ export default class BundleRdta {
             sourceFiles: this.cssFiles,
             options: {
                 sourceMap: true,
+                sourceMapInlineSources: true,
             }
         });
         await minCSS.minify('rdta-bundled.min.css');
