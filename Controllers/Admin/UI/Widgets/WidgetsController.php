@@ -57,8 +57,9 @@ class WidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
                 `users`.`user_display_name`
             FROM `' . $userLoginsTable . '` AS `user_logins`
             INNER JOIN `' . $usersTable . '` AS `users` ON `user_logins`.`user_id` = `users`.`user_id`
-            WHERE `userlogin_result` = 1 AND `userlogin_expire_date` >= NOW()
-            GROUP BY `user_logins`.`user_id`
+            WHERE `userlogin_result` = 1 
+                AND `userlogin_expire_date` >= NOW()
+                AND `userlogin_id` IN (SELECT MAX(`userlogin_id`) FROM `' . $userLoginsTable . '` GROUP BY `user_id`)
             ORDER BY `userlogin_id` DESC
             LIMIT 0, ' . $output['limitUsers'];
         $Sth = $PDO->prepare($sql);
