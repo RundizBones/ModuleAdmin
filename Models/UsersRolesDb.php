@@ -233,6 +233,7 @@ class UsersRolesDb extends \Rdb\System\Core\Models\BaseModel
      * If option `userrole_id` is set but without `isHigherOrEquals` option to `true`, it will be checking for the same role ID number only.<br>
      * If with `isHigherOrEquals` option to `true`, it will be checking with priority that must equals or higher (lower number).
      * 
+     * @since 1.2.7
      * @param int $currentUserId The current user ID.
      * @param array $options Associative array:<br>
      *      `userrole_id` (int) The user role ID. The `userrole_id` or `userrole_priority` is required. If both are set, the `userrole_priority` will be use.<br>
