@@ -26,6 +26,8 @@ trait UsersEditingTrait
             // if target user_id is not number.
             // return true to prevent user from editing.
             return true;
+        } else {
+            $user_id = (int) $user_id;
         }
 
         if (
@@ -33,46 +35,10 @@ trait UsersEditingTrait
             is_array($this->userSessionCookieData) && 
             array_key_exists('user_id', $this->userSessionCookieData)
         ) {
+            // if there is required property and array.
             $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
-            $options = [];
-            $options['where']['user_id'] = $this->userSessionCookieData['user_id'];
-            $options['limit'] = 1;
-            $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
-            $myRoles = $UsersRolesDb->listItems($options);
-            unset($options);
-
-            if (isset($myRoles['items'])) {
-                $myRoles = array_shift($myRoles['items']);
-
-                $options = [];
-                $options['where']['user_id'] = $user_id;
-                $targetRoles = $UsersRolesDb->listItems($options);
-                unset($options);
-
-                if (isset($targetRoles['items']) && is_array($targetRoles['items']) && isset($targetRoles['total'])) {
-                    $i = 0;
-                    foreach ($targetRoles['items'] as $row) {
-                        if ($row->userrole_priority < $myRoles->userrole_priority) {
-                            // if target user's role is higher priority than user who is editing.
-                            // return true to prevent user from editing.
-                            unset($myRoles, $row, $targetRoles, $UsersRolesDb);
-                            return true;
-                        }
-                        $i++;
-                    }// endforeach;
-                    unset($row);
-
-                    if (isset($i) && $i == $targetRoles['total']) {
-                        unset($myRoles, $targetRoles, $UsersRolesDb);
-                        return false;
-                    }
-                }
-
-                unset($targetRoles);
-            }
-
-            unset($myRoles, $UsersRolesDb);
-        }
+            return $UsersRolesDb->isEditingHigherRole((int) $this->userSessionCookieData['user_id'], $user_id);
+        }// endif; there is required property and array.
 
         // return true to prevent user from editing.
         return true;
