@@ -156,6 +156,10 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
         // verify that this user role is highest priority. -------------------------------------------------------------
         if (isset($identity['userrole_id']) && is_array($identity['userrole_id'])) {
             // if userrole_id was set.
+            if (!isset($cacheKeyRolesData)) {
+                $cacheKeyRolesData = 'userRoles' . json_encode($identity['userrole_id']) . '.userRoleIDsData';
+            }
+
             if (!$Cache->has($cacheKeyRolesData)) {
                 $UsersRolesDb = new UsersRolesDb($this->Container);
                 $options = [];
