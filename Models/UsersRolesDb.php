@@ -226,6 +226,102 @@ class UsersRolesDb extends \Rdb\System\Core\Models\BaseModel
 
 
     /**
+     * Check if current user is in selected role or may be higher priority (depend on options).
+     * 
+     * If option `userrole_priority` and `userrole_id` both are set, the `userrole_priority` will be use for checking.
+     * 
+     * If option `userrole_id` is set but without `isHigherOrEquals` option to `true`, it will be checking for the same role ID number only.<br>
+     * If with `isHigherOrEquals` option to `true`, it will be checking with priority that must equals or higher (lower number).
+     * 
+     * @param int $currentUserId The current user ID.
+     * @param array $options Associative array:<br>
+     *      `userrole_id` (int) The user role ID. The `userrole_id` or `userrole_priority` is required. If both are set, the `userrole_priority` will be use.<br>
+     *      `userrole_priority` (int) The user role priority number. The `userrole_id` or `userrole_priority` is required. If both are set, the `userrole_priority` will be use.<br>
+     *      `isHigherOrEquals` (bool) Set to `true` to check for higher or equal priority with destination role option. Default is `false`.<br>
+     * @return bool Return `true` if current user is in selected role (or may be higher). Return `false` for otherwise.
+     * @throws \InvalidArgumentException Throws the error if not found required options key.
+     */
+    public function isInRole(int $currentUserId, array $options = []): bool
+    {
+        if (!isset($options['userrole_id']) && !isset($options['userrole_priority'])) {
+            // if no option about `userrole_id` or `userrole_priority` at all.
+            // can't verify that.
+            throw new \InvalidArgumentException('The `options` argument required `userrole_id` or `userrole_priority` key.');
+        }
+
+        $listOptions = [];
+        $listOptions['where'] = [
+            'users_roles.user_id' => $currentUserId,
+        ];
+        $listUsRs = $this->listItems($listOptions);
+        unset($listOptions);
+
+        // set target role's priority. -----------------------------------
+        if (isset($options['userrole_id'])) {
+            // if there is `userrole_id` option.
+            // get its data for check role's priority.
+            $UserRolesDb = new UserRolesDb($this->Container);
+            $roleResult = $UserRolesDb->get(['userrole_id' => $options['userrole_id']]);
+            unset($UserRolesDb);
+
+            if (is_object($roleResult) && !empty($roleResult)) {
+                $targetRolePriority = $roleResult->userrole_priority;
+            }
+            unset($roleResult);
+        }
+        // end set target role's priority. ------------------------------
+
+        if (isset($listUsRs['items']) && is_array($listUsRs['items'])) {
+            foreach ($listUsRs['items'] as $userRoleRow) {
+                if (isset($options['userrole_priority'])) {
+                    // if there is option role to check for priority.
+                    if (
+                        isset($options['isHigherOrEquals']) && 
+                        $options['isHigherOrEquals'] === true &&
+                        $userRoleRow->userrole_priority <= $options['userrole_priority']
+                    ) {
+                        // if options is mark to check higher or equals priority.
+                        // AND role's priority in DB is higher or equals to expected. 
+                        // (use `<=` to compare because lower number is higher priority).
+                        return true;
+                    } else {
+                        // if there is no option to check higher or quals.
+                        // just check for equals only.
+                        if ($userRoleRow->userrole_priority == $options['userrole_priority']) {
+                            return true;
+                        }
+                    }// endif; there is option to check higher or quals or just equals only.
+                } elseif (isset($options['userrole_id'])) {
+                    // if there is option role to check for the role id.
+                    if (
+                        isset($options['isHigherOrEquals']) && 
+                        $options['isHigherOrEquals'] === true &&
+                        isset($targetRolePriority) &&
+                        $userRoleRow->userrole_priority <= $targetRolePriority
+                    ) {
+                        // if options is mark to check higher or equals priority.
+                        // AND role's priority in DB is higher or equals to expected. 
+                        // (use `<=` to compare because lower number is higher priority).
+                        return true;
+                    } else {
+                        if ($userRoleRow->userrole_id == $options['userrole_id']) {
+                            // if this user's has the selected role ID.
+                            // this is DIFFERENT than above, it is not check for same or equals priority which may be different role ID but it is checking for same role ID.
+                            return true;
+                        }
+                    }
+                    unset($targetRolePriority);
+                }// endif; option role to check.
+            }// endforeach;
+            unset($userRoleRow);
+        }
+        unset($listUsRs, $targetRolePriority);
+
+        return false;
+    }// isInRole
+
+
+    /**
      * List user's roles items.
      * 
      * @param array $options The associative array options. Available options keys:<br>

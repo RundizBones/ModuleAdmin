@@ -15,6 +15,13 @@ class UsersRolesDbTest extends \Rdb\Tests\BaseTestCase
      * @var int The ID of higher role than normal role.
      */
     protected $higherRoleId = -1;
+    protected $higherRoleId2 = -1;
+
+
+    /**
+     * @var int The priority of role that is higher than normal. The normal role (member) has priority 9999.
+     */
+    protected $higherRolePriority = 50;
 
 
     /**
@@ -27,6 +34,12 @@ class UsersRolesDbTest extends \Rdb\Tests\BaseTestCase
      * @var int The ID of normal role level. Typically it is 3 which is 'member'.
      */
     protected $normalRoleId = 3;
+
+
+    /**
+     * @var int The priority of role that is normal role (member), default is 9999.
+     */
+    protected $normalRolePriority = 9999;
 
 
     /**
@@ -55,11 +68,21 @@ class UsersRolesDbTest extends \Rdb\Tests\BaseTestCase
         $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $this->higherRoleId = $UserRolesDb->add([
             'userrole_name' => 'higherThanMember_for_test' . time() . uniqid(),
-            'userrole_priority' => 10,
         ]);
         if (is_numeric($this->higherRoleId)) {
             $this->higherRoleId = (int) $this->higherRoleId;
         }
+        // update role priority because it is not possible to set when add.
+        $UserRolesDb->update(['userrole_priority' => $this->higherRolePriority], ['userrole_id' => $this->higherRoleId]);
+
+        $this->higherRoleId2 = $UserRolesDb->add([
+            'userrole_name' => 'higherThanMember_role2_for_test' . time() . uniqid(),
+        ]);
+        if (is_numeric($this->higherRoleId2)) {
+            $this->higherRoleId2 = (int) $this->higherRoleId2;
+        }
+        // update role priority because it is not possible to set when add.
+        $UserRolesDb->update(['userrole_priority' => $this->higherRolePriority], ['userrole_id' => $this->higherRoleId2]);
         unset($UserRolesDb);
         // end setup roles. -----------------------------------
         // setup users. ---------------------------------------
@@ -99,6 +122,7 @@ class UsersRolesDbTest extends \Rdb\Tests\BaseTestCase
         $UsersDb = new \Rdb\Modules\RdbAdmin\Models\UsersDb($this->Container);
         $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $UserRolesDb->delete([$this->higherRoleId]);
+        $UserRolesDb->delete([$this->higherRoleId2]);
         $UsersDb->delete($this->higherUserId);
         $UsersDb->delete($this->normalUserId);
         unset($UsersDb, $UserRolesDb);
@@ -106,6 +130,17 @@ class UsersRolesDbTest extends \Rdb\Tests\BaseTestCase
 
         $this->Db->disconnectAll();
     }// tearDown
+
+
+    public function testMakeSureAddRoleMatchPriority()
+    {
+        $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
+        $higherRole1Result = $UserRolesDb->get(['userrole_id' => $this->higherRoleId]);
+        $this->assertSame($this->higherRolePriority, (int) $higherRole1Result->userrole_priority);
+        $higherRole2Result = $UserRolesDb->get(['userrole_id' => $this->higherRoleId2]);
+        $this->assertSame($this->higherRolePriority, (int) $higherRole2Result->userrole_priority);
+        unset($higherRole1Result, $higherRole2Result, $UserRolesDb);
+    }// testMakeSureAddRoleMatchPriority
 
 
     public function testIsEditingHigherRole()
@@ -120,6 +155,36 @@ class UsersRolesDbTest extends \Rdb\Tests\BaseTestCase
         $this->assertFalse($UsersRolesDb->isEditingHigherRole($this->higherUserId, $this->normalUserId));
         unset($UsersRolesDb);
     }// testIsEditingHigherRole
+
+
+    public function testIsInRole()
+    {
+        $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
+        // check by priority. --------------------------------------
+        // yes, this user has same priority.
+        $this->assertTrue($UsersRolesDb->isInRole($this->higherUserId, ['userrole_priority' => $this->higherRolePriority]));
+        $this->assertTrue($UsersRolesDb->isInRole($this->normalUserId, ['userrole_priority' => $this->normalRolePriority]));
+        // yes, this user has higher or equals priority.
+        $this->assertTrue($UsersRolesDb->isInRole($this->higherUserId, ['userrole_priority' => $this->higherRolePriority, 'isHigherOrEquals' => true]));
+        $this->assertTrue($UsersRolesDb->isInRole($this->higherUserId, ['userrole_priority' => $this->normalRolePriority, 'isHigherOrEquals' => true]));
+        $this->assertTrue($UsersRolesDb->isInRole($this->normalUserId, ['userrole_priority' => $this->normalRolePriority, 'isHigherOrEquals' => true]));
+        // no, this user has lower priority.
+        $this->assertFalse($UsersRolesDb->isInRole($this->normalUserId, ['userrole_priority' => $this->higherRolePriority]));
+        $this->assertFalse($UsersRolesDb->isInRole($this->normalUserId, ['userrole_priority' => $this->higherRolePriority, 'isHigherOrEquals' => true]));
+
+        // check by role id. -----------------------------------------
+        // yes, this user has same role id.
+        $this->assertTrue($UsersRolesDb->isInRole($this->higherUserId, ['userrole_id' => $this->higherRoleId]));
+        // no, this user has not same role id (even same priority). this is because it doesn't check with higher or equals priority.
+        $this->assertFalse($UsersRolesDb->isInRole($this->higherUserId, ['userrole_id' => $this->higherRoleId2]));
+        // yes, this user has higher or equals priority. this is because check with `isHigherOrEquals` option.
+        $this->assertTrue($UsersRolesDb->isInRole($this->higherUserId, ['userrole_id' => $this->higherRoleId2, 'isHigherOrEquals' => true]));
+        // no, this user has not the same role id.
+        $this->assertFalse($UsersRolesDb->isInRole($this->higherUserId, ['userrole_id' => $this->normalRolePriority]));
+        // no, this user has not the same role id. however with `isHigherOrEquals` option to `true`, the target role's priority is till lower.
+        $this->assertFalse($UsersRolesDb->isInRole($this->higherUserId, ['userrole_id' => $this->normalRolePriority, 'isHigherOrEquals' => true]));
+        unset($UsersRolesDb);
+    }// testIsInRole
 
 
 }
