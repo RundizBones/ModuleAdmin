@@ -22,6 +22,9 @@ class SessionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
     use \Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersTrait;
 
 
+    use \Rdb\Modules\RdbAdmin\Controllers\Admin\Users\Traits\UsersEditingTrait;
+
+
     /**
      * Do delete login sessions via REST.
      * 
@@ -40,6 +43,7 @@ class SessionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
 
+        $user_id = (int) $user_id;
         $output = [];
         $output['configDb'] = $this->getConfigDb();
         list($csrfName, $csrfValue) = $Csrf->getTokenNameValueKey(true);
@@ -60,15 +64,13 @@ class SessionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             $userlogin_ids = $this->Input->delete('userlogin_ids');
 
             $formValidated = false;
-            $UsersRolesDb = new \Rdb\Modules\RdbAdmin\Models\UsersRolesDb($this->Container);
-            if ($UsersRolesDb->isEditingHigherRole((int) ($this->userSessionCookieData['user_id'] ?? 0), (int) $user_id)) {
+            if ($this->isEditingHigherRole($user_id)) {
                 http_response_code(403);
                 $output['formResultStatus'] = 'error';
                 $output['formResultMessage'] = __('Unable to edit user who has higher priority role than you.');
             } else {
                 $formValidated = true;
             }
-            unset($UsersRolesDb);
 
             if ($formValidated === true) {
                 if (is_null($action) || $action === '') {
