@@ -142,7 +142,8 @@
         {
             "nodePackage": "rundiz-template-for-admin",
             "phpHandlesRegex": [
-                "rdta"
+                "rdta",
+                "rdta\\-components\\-[\\w\\d\\-_]+"
             ]
         },
         {
