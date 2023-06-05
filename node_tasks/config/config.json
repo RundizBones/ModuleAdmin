@@ -69,6 +69,11 @@
         },
 
         {
+            "patterns": "node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-datatables-js.min.css*",
+            "rename": "sanitize-license.md",
+            "destination": "assets/css/rdta/components"
+        },
+        {
             "patterns": "node_modules/rundiz-template-for-admin/assets/css/sanitize/LICENSE.md",
             "rename": "sanitize-license.md",
             "destination": "assets/vendor"

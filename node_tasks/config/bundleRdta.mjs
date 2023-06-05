@@ -32,6 +32,7 @@ const cssFiles = [
     // RDTA additional components. -------------
     'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-accordion.min.css',
     'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-alertdialog.min.css',
+    // keep rdta-datatables-js.min.css away until updated in RdbAdmin module to supported it and not conflict with one from module itself.
     'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-dialog.min.css',
     'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-embeds.min.css',
     'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-tabs.min.css',
