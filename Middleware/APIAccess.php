@@ -146,23 +146,24 @@ class APIAccess
     protected function isSamsSite(): bool
     {
         $origin = ($_SERVER['HTTP_ORIGIN'] ?? null);// http[s]://domain.tld (currently work on Chrome only)
-        $domain = (strtolower(($_SERVER['HTTPS'] ?? '')) === 'on' ? 'https://' : 'http://') . ($_SERVER['HTTP_HOST'] ?? null);
+        $domainProtocol = (strtolower(($_SERVER['HTTPS'] ?? '')) === 'on' ? 'https://' : 'http://') . ($_SERVER['HTTP_HOST'] ?? '');
+        $referrerDomain = parse_url(($_SERVER['HTTP_REFERER'] ?? ''), PHP_URL_HOST);
+        $currentDomain = parse_url('http://' . ($_SERVER['HTTP_HOST'] ?? ''), PHP_URL_HOST);
+
         if (
             (
-                isset($_SERVER['HTTP_REFERER']) &&
-                isset($_SERVER['HTTP_HOST']) &&
-                strtolower(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)) === strtolower($_SERVER['HTTP_HOST']) 
+                strtolower($referrerDomain) === strtolower($currentDomain) 
             ) ||
             (
                 isset($origin) &&
-                $origin === $domain
+                $origin === $domainProtocol
             )
         ) {
             // if from same site.
-            unset($domain, $origin);
+            unset($currentDomain, $domainProtocol, $origin, $referrerDomain);
             return true;
         }
-        unset($domain, $origin);
+        unset($currentDomain, $domainProtocol, $origin, $referrerDomain);
 
         return false;
     }// isSamsSite
