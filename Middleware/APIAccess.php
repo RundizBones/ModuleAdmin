@@ -148,7 +148,13 @@ class APIAccess
         $origin = ($_SERVER['HTTP_ORIGIN'] ?? null);// http[s]://domain.tld (currently work on Chrome only)
         $domainProtocol = (strtolower(($_SERVER['HTTPS'] ?? '')) === 'on' ? 'https://' : 'http://') . ($_SERVER['HTTP_HOST'] ?? '');
         $referrerDomain = parse_url(($_SERVER['HTTP_REFERER'] ?? ''), PHP_URL_HOST);
+        if (!is_string($referrerDomain)) {
+            $referrerDomain = '';
+        }
         $currentDomain = parse_url('http://' . ($_SERVER['HTTP_HOST'] ?? ''), PHP_URL_HOST);
+        if (!is_string($currentDomain)) {
+            $currentDomain = '';
+        }
 
         if (
             (
