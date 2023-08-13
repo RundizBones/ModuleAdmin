@@ -158,6 +158,7 @@ class APIAccess
 
         if (
             (
+                $currentDomain !== '' &&
                 strtolower($referrerDomain) === strtolower($currentDomain) 
             ) ||
             (
