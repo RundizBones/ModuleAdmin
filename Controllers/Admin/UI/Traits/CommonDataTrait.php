@@ -111,10 +111,10 @@ trait CommonDataTrait
                 'currentLocale' => (isset($_SERVER['RUNDIZBONES_LANGUAGE_LOCALE']) ? json_decode($_SERVER['RUNDIZBONES_LANGUAGE_LOCALE'], true) : []),
                 'configDb' => $this->getConfigDb(),
                 'paginationSymbol' => [
-                    'first' => '&laquo;',
-                    'last' => '&raquo;',
-                    'previous' => '&lsaquo;',
-                    'next' => '&rsaquo;',
+                    'first' => '<i class="fa-solid fa-backward-step fontawesome-icon"></i>',
+                    'last' => '<i class="fa-solid fa-forward-step fontawesome-icon"></i>',
+                    'previous' => '<i class="fa-solid fa-caret-left fontawesome-icon"></i>',
+                    'next' => '<i class="fa-solid fa-caret-right fontawesome-icon"></i>',
                 ],
                 'userData' => new \stdClass(),
             ]
