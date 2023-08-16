@@ -40,6 +40,8 @@ class RdbaDatatables {
 
         // Result controls wrapper selector that appears in `datatablesDOM` property.
         this.resultControlsDOMWrapperSelector = '.rdba-datatables-result-controls';
+        // The class name of result controls of filter/search.
+        this.resultControlsFilterSearchClassName = 'rdba-datatables-result-filtersearch';
         // Result controls wrapper selector of pagination that appears in `datatablesDOM` property.
         this.resultControlsPaginationDOMWrapperSelector = '.rdba-datatables-result-pagination';
         // Template ID that contain pagination. The selector should begins with # mark.
@@ -50,11 +52,42 @@ class RdbaDatatables {
         if (typeof(options) === 'object') {
             _.defaults(options, this);
         }
+
+        // Listen pagination events using event delegation.
+        this.#listenPaginationEvents();
     }// constructor
 
 
     /**
-     * Add actions controls (bulk actions).
+     * Listen pagination events such as keydown (Enter) and prevent it.
+     * 
+     * This will be call once use event delegation.  
+     * This method was called from `constructor()`.
+     * 
+     * @since 1.2.8
+     * @returns {undefined}
+     */
+    #listenPaginationEvents() {
+        // listen on keydown (Enter) and prevent form submit where enter in pagination input.
+        document.addEventListener('keydown', (event) => {
+            const thisTarget = event.target;
+            if (
+                thisTarget.classList.contains('paginate_input') &&
+                (
+                    (event?.key === 'Enter' || event?.key === 'NumpadEnter')
+                    ||
+                    (event?.code === 'Enter' || event?.code === 'NumpadEnter')
+                )
+            ) {
+                // if found pagination input and key is enter.
+                event.preventDefault();
+            }// endif; found pagination input and key is enter.
+        });
+    }// #listenPaginationEvents
+
+
+    /**
+     * Add actions controls (bulk actions) to the actions controls element.
      * 
      * @private This method was called from the method that initialize the datatables.
      * @param {object} data
@@ -77,7 +110,7 @@ class RdbaDatatables {
 
 
     /**
-     * Add custom result controls (filter, search).
+     * Add custom result controls (filter, search) to the controls element.
      * 
      * @private This method was called from the method that initialize the datatables.
      * @param {object} data
@@ -87,6 +120,12 @@ class RdbaDatatables {
         let resultControlsTemplate = document.querySelector(this.resultControlsTemplateSelector);
         if (resultControlsTemplate) {
             let source = resultControlsTemplate.innerHTML;
+            // add custom required class to filter, search element. ------------
+            const div = document.createElement('div');
+            div.innerHTML = source;
+            div?.firstElementChild?.classList.add(this.resultControlsFilterSearchClassName);
+            source = div.innerHTML;
+            // end add custom required class to filter, search element. --------
             let template = Handlebars.compile(source);
 
             let controlsElement = document.querySelector(this.resultControlsDOMWrapperSelector);
@@ -103,45 +142,81 @@ class RdbaDatatables {
      * Add custom result controls event.
      * 
      * This method was called from the method that initialize the datatables, after the table has been drawn.<br>
-     * This will listen on key up for input, and add custom search box to server request.
+     * This will listen on **Enter** key inside filter form, and call data table search use filter search box (`dataTable.search('keyword').draw()`).
      * 
      * @private This method was called from the method that initialize the datatables.
-     * @param {object} dataTable
+     * @param {object} dataTable The data table object.
      * @returns {undefined}
      */
     addCustomResultControlsEvents(dataTable) {
-        let $ = jQuery.noConflict();
         let thisClass = this;
 
-        // listen on keyup to search/filter.
-        $(thisClass.resultControlsDOMWrapperSelector).off('keydown');
-        $(thisClass.resultControlsDOMWrapperSelector).on('keydown', thisClass.inputFilterSearchSelector, function(e) {
-            if (
-                (
-                    typeof(e.key) !== 'undefined' && 
-                    (e.key === 'Enter' || e.key === 'NumpadEnter')
-                ) ||
-                (
-                    typeof(e.code) !== 'undefined' && 
-                    (e.code === 'Enter' || e.code === 'NumpadEnter')
-                )
-            ) {
-                e.preventDefault();
-                $(thisClass.inputFilterButtonSelector).trigger('click');
-            }
-        });
+        /**
+         * Enter key to click event handler.
+         * 
+         * @since 1.2.8
+         * @param {object} event
+         * @returns {undefined}
+         */
+        function enterToClickFilter(event) {
+            const thisTarget = event.target;
+            let isEnter = false;
+            if (thisTarget.closest(thisClass.resultControlsDOMWrapperSelector)) {
+                // if found selector of result control area (filter, search, maybe pagination input).
+                if (
+                    (event?.key === 'Enter' || event?.key === 'NumpadEnter')
+                    ||
+                    (event?.code === 'Enter' || event?.code === 'NumpadEnter')
+                ) {
+                    // if user hit enter in result controls area (filter area, pagination input).
+                    // prevent submit.
+                    event.preventDefault();
+                    isEnter = true;
+                }// endif; enter
+            }// endif; found selector of result control area where this event is started.
 
-        // add custom search input into search query on click filter button.
-        $(thisClass.resultControlsDOMWrapperSelector).off('click');
-        $(thisClass.resultControlsDOMWrapperSelector).on('click', thisClass.inputFilterButtonSelector, function(e) {
-            e.preventDefault();
-            let searchValue = $(thisClass.inputFilterSearchSelector).val();
-            if (typeof(searchValue) !== 'undefined') {
-                dataTable.search(searchValue).draw();
-            } else {
-                console.warn('the search input could not be found. ' + thisClass.inputFilterSearchSelector);
-            }
-        });
+            if (true === isEnter && thisTarget.closest('.' + thisClass.resultControlsFilterSearchClassName)) {
+                // if found filter, search area from where this event is started.
+                // trigger click on filter button.
+                document.querySelector(thisClass.inputFilterButtonSelector).click();
+            }// endif; found filter, search area from where this event is started.
+        }// enterToClickFilter
+
+        // listen on enter to anything in filter form.
+        document.removeEventListener('keydown', enterToClickFilter, {'capture': false});
+        document.addEventListener('keydown', enterToClickFilter, {'capture': false});
+
+        /**
+         * Click filter button to search DataTable.
+         * 
+         * Add custom search value to DataTable `search()` and re-draw the table.
+         * 
+         * @since 1.2.8
+         * @param {object} event
+         * @returns {undefined}
+         */
+        function clickFilterToSearchDT(event) {
+            const thisTarget = event.target;
+            if (thisTarget.closest(thisClass.inputFilterButtonSelector)) {
+                // if found selector of filter button.
+                event.preventDefault();
+                const searchValue = document.querySelector(thisClass.inputFilterSearchSelector)?.value;
+                if (typeof(searchValue) === 'string') {
+                    // if found search (filter) input value and correct type.
+                    // remove all listened events in this method.
+                    document.removeEventListener('keydown', enterToClickFilter, {'capture': false});
+                    document.removeEventListener('click', clickFilterToSearchDT, {'capture': false});
+                    // call DataTable search and draw.
+                    dataTable.search(searchValue).draw();
+                } else {
+                    console.warn('the search input could not be found. ' + thisClass.inputFilterSearchSelector);
+                }
+            }// endif; found selector of filter button.
+        }// clickFilterToSearchDT
+
+        // listen on click to filter button.
+        document.removeEventListener('click', clickFilterToSearchDT, {'capture': false});
+        document.addEventListener('click', clickFilterToSearchDT, {'capture': false});
     }// addCustomResultControlsEvents
 
 
