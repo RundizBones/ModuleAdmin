@@ -258,6 +258,82 @@ class RdbaCommon {
 
 
     /**
+     * Internationalize date/time format.
+     * 
+     * @since 1.2.9
+     * @param {object} options The options.
+     * @param {object} options.moment (required) The moment.js object.
+     * @param {string} options.inputDateGmt (required) The input date/time in UTC (GMT 0) value. Recommend format is `YYYY-MM-DD HH:MM:SS` or RFC2822 or ISO date.
+     * @param {string} options.siteTimezone (optional) The site timezone that have got from `RdbaUIXhrCommonData.configDb.rdbadmin_SiteTimezone`. Default is 'Asia/Bangkok'.
+     * @param {string|string[]} options.locales (optional) The framework's locales that have got from `RdbaUIXhrCommonData.currentLocale`. This can be omit if you already set it in moment.js.
+     * @param {object} options.intlDateTimeOptions (optional) The `Intl.DateTimeFormat()` options.  
+     *      See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat for more details.
+     * @param {boolean} options.appendTZNumber (optional) Set to `true` to append time zone in number (example +07:00). Default is `true`.
+     * @returns {undefined}
+     */
+    static intlDateTime(options = {}) {
+        let moment;
+        if (typeof(options?.moment) === 'function') {
+            moment = options.moment;
+        } else {
+            throw new Error('The option `moment` is required.');
+        }
+
+        let inputDateGmt;
+        if (typeof(options?.inputDateGmt) === 'string') {
+            inputDateGmt = options.inputDateGmt;
+        } else {
+            throw new Error('The option `inputDateGmt` is required.');
+        }
+
+        let siteTimezone = 'Asia/Bangkok';
+        if (typeof(options?.siteTimezone) === 'string' && options.siteTimezone !== '') {
+            siteTimezone = options.siteTimezone;
+        }
+
+        if (options?.locales) {
+            moment.locale(options.locales);
+        }
+
+        const currentLocale = moment.locale();
+        let intlDateTimeOptions = {
+            'day': 'numeric',
+            'hour': '2-digit',
+            'minute': '2-digit',
+            'month': 'short',
+            'second': '2-digit',
+            'year': 'numeric',
+        };
+        if (typeof(options?.intlDateTimeOptions) === 'object') {
+            intlDateTimeOptions = options.intlDateTimeOptions;
+        }
+
+        let appendTZNumber = true;
+        if (options?.appendTZNumber === false) {
+            appendTZNumber = false;
+        }
+
+        const IntlDate = new Intl.DateTimeFormat(currentLocale, intlDateTimeOptions);
+        let inputDateUtcIso8601 = inputDateGmt;
+        const momentObj = moment(inputDateGmt + 'Z');
+        if (momentObj.isValid()) {
+            momentObj.tz(siteTimezone);
+            inputDateUtcIso8601 = momentObj.format('YYYY-MM-DDTHH:mm:ssZ');
+        }
+
+        const DateObj = new Date(inputDateUtcIso8601);
+        let output = '';
+        if (!isNaN(DateObj)) {
+            output = IntlDate.format(DateObj);
+        }
+        if (appendTZNumber === true && momentObj.isValid()) {
+            output += ' ' + momentObj.format('Z');
+        }
+        return output;
+    }// intlDateTime
+
+
+    /**
      * Isset in JS.
      * 
      * When calling this, it must be call with function wrapped the object/variable.<br>
