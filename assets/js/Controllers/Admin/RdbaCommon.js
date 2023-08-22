@@ -303,6 +303,7 @@ class RdbaCommon {
             'month': 'short',
             'second': '2-digit',
             'year': 'numeric',
+            'timeZone': siteTimezone,
         };
         if (typeof(options?.intlDateTimeOptions) === 'object') {
             intlDateTimeOptions = options.intlDateTimeOptions;
