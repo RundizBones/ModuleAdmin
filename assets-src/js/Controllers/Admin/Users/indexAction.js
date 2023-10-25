@@ -62,7 +62,7 @@ class RdbaUsersController extends RdbaDatatables {
                         'targets': [0, 1]
                     },
                     {
-                        'className': 'control',
+                        'className': 'dtr-control',
                         'data': 'user_id',
                         'targets': 0,
                         'render': function () {
