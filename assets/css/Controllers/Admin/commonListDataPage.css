@@ -239,28 +239,39 @@ table.rdba-datatables-js thead .sorting_desc::after {
 
 /* datatables responsive (expand/collapse) icons */
 table.dataTable.dtr-column > tbody > tr > td.control::before, 
-table.dataTable.dtr-column > tbody > tr > th.control::before {
+table.dataTable.dtr-column > tbody > tr > th.control::before,
+table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, 
+table.dataTable.dtr-column > tbody > tr > th.dtr-control::before {
     background-color: transparent;
     border: none;
     border-radius: 50%;
     box-shadow: none;
     color: inherit;
     content: '\f0d7';
+    cursor: pointer;
+    display: block;
     font-family: 'Font Awesome 5 Free';
     font-size: 1rem;
     font-weight: 900;
+    height: 1.3em;
+    line-height: 1.3em;
+    text-align: center;
+    width: 1.3em;
 }
 table.dataTable.dtr-column > tbody > tr > td.control:hover::before, 
-table.dataTable.dtr-column > tbody > tr > th.control:hover::before {
-    box-shadow: 0 0 3px #444;
+table.dataTable.dtr-column > tbody > tr > th.control:hover::before,
+table.dataTable.dtr-column > tbody > tr > td.dtr-control:hover::before, 
+table.dataTable.dtr-column > tbody > tr > th.dtr-control:hover::before {
+    box-shadow: 0 0 0 1px #09a0bb, 0 0 3px 2px #c4ebf2;
 }
 
-table.dataTable.dtr-column > tbody > tr.parent td.control:before,
-table.dataTable.dtr-column > tbody > tr.parent th.control:before {
+table.dataTable.dtr-column > tbody > tr.dt-hasChild td.control:before,
+table.dataTable.dtr-column > tbody > tr.dt-hasChild th.control:before,
+table.dataTable.dtr-column > tbody > tr.dt-hasChild td.dtr-control:before,
+table.dataTable.dtr-column > tbody > tr.dt-hasChild th.dtr-control:before {
     background-color: transparent;
     border: none;
     border-radius: 50%;
-    box-shadow: 0 0 3px #444;
     color: inherit;
     content: '\f0d8';
     font-family: 'Font Awesome 5 Free';
