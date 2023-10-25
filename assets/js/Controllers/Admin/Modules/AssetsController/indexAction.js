@@ -50,7 +50,7 @@ class RdbaAssetsController extends RdbaDatatables {
                         'targets': [0, 1, 2, 3, 4, 5]
                     },
                     {
-                        'className': 'control',
+                        'className': 'dtr-control',
                         'data': 'id',
                         'targets': 0,
                         'render': function () {

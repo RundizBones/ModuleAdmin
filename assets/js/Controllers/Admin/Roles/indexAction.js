@@ -58,7 +58,7 @@ class RdbaRolesController extends RdbaDatatables {
                         'targets': [0, 1]
                     },
                     {
-                        'className': 'control',
+                        'className': 'dtr-control',
                         'data': 'userrole_id',
                         'targets': 0,
                         'render': function (data, type, row, meta) {

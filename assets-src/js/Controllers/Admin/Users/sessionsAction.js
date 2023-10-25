@@ -155,7 +155,7 @@ class RdtaSessionsController extends RdbaDatatables {
                         'targets': [0, 1]
                     },
                     {
-                        'className': 'control',
+                        'className': 'dtr-control',
                         'data': 'userlogin_id',
                         'targets': 0,
                         'render': function () {
