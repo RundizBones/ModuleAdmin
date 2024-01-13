@@ -123,8 +123,8 @@ export default class CopyAssetsSrc {
      * @returns {Promise} Return `Promise` object.
      */
     static async #doCopy(globPatterns, eachFile, assetsDest) {
-        const sourcePath = path.resolve(MSW_DIR, eachFile);
-        const destPath = path.resolve(MSW_DIR,
+        const sourcePath = path.resolve(CW_DIR, eachFile);
+        const destPath = path.resolve(CW_DIR,
             Paths.replaceDestinationFolder(
                 eachFile, 
                 assetsDest, 
@@ -158,7 +158,7 @@ export default class CopyAssetsSrc {
         const filesResult = await FS.glob(
             patterns, {
                 absolute: false,
-                cwd: MSW_DIR,
+                cwd: CW_DIR,
             }
         );
 
