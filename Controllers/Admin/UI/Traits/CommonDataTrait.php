@@ -117,6 +117,11 @@ trait CommonDataTrait
                     'next' => '<i class="fa-solid fa-caret-right fontawesome-icon"></i>',
                 ],
                 'userData' => new \stdClass(),
+                'urls' => [
+                    'baseUrl' => $Url->getAppBasedPath(),
+                    'baseUrlRaw' => $Url->getAppBasedPath(true),
+                    'publicUrl' => $Url->getPublicUrl(),
+                ],
             ]
         );
     }// setJsAssetsAndObject
