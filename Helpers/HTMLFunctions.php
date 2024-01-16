@@ -103,8 +103,14 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
     // use `\IntlDateFormatter`instead of `strftime()` that is deprecated since PHP 8.1
     // Do not use `\IntlDateFormatter::TRADITIONAL` to prevent some mistake where Buddhist era that is +543 years.
     // This may affect on some process that use this function to get date/time for processing. Previous code also not convert the year.
-    $IntlDateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
-    $IntlDateFormatter->setPattern($pattern);
+    try {
+        $IntlDateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
+        $IntlDateFormatter->setPattern($pattern);
+    } catch (\Exception|\Error $err) {
+        error_log($err);
+        $IntlDateFormatter = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
+        $IntlDateFormatter->setPattern($pattern);
+    }
     unset($pattern);
     return $IntlDateFormatter->format($timestamp);
 }// rdbaGetDatetime
