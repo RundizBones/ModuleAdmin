@@ -111,7 +111,7 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
         // let's try again.
         try {
             // try again with configuration directly by get the first locale value.
-            $localesString = ($_SERVER['RUNDIZBONES_LANGUAGE_LOCALE'] ?? '[]');
+            $localesString = json_decode(($_SERVER['RUNDIZBONES_LANGUAGE_LOCALE'] ?? '[]'));
             $IntlDateFormatter = new \IntlDateFormatter($localesString[0], \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
             $IntlDateFormatter->setPattern($pattern);
             unset($localesString);
