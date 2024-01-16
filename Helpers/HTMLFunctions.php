@@ -22,9 +22,6 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
         return $gmtDatetime;
     }
 
-    // get the locale that is already set in System/Middleware/I18n.php
-    $locale = setlocale(LC_ALL, 0);
-
     $DateTime = new \DateTime($gmtDatetime, new \DateTimeZone('UTC'));
     $DateTime->setTimezone(new \DateTimeZone($timezone));
     $timestamp = $DateTime->getTimestamp();
@@ -104,23 +101,41 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
     // Do not use `\IntlDateFormatter::TRADITIONAL` to prevent some mistake where Buddhist era that is +543 years.
     // This may affect on some process that use this function to get date/time for processing. Previous code also not convert the year.
     try {
-        $IntlDateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
-        $IntlDateFormatter->setPattern($pattern);
+        // Try to use locales specified in the config/language.php file directly.
+        // This config values will be set to `$_SERVER` variable in framework's middleware (i18n).
+        // Don't use `setlocale()` due to some server did not install any locale and will cause the errors.
+        $localesString = json_decode(($_SERVER['RUNDIZBONES_LANGUAGE_LOCALE'] ?? '[]'));
+
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $foundWorkingLocale = false;
+            foreach ($localesString as $eachLocale) {
+                try {
+                    $IntlDateFormatter = new \IntlDateFormatter($eachLocale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
+                    $IntlDateFormatter->setPattern($pattern);
+                    // run to this means no error occur. mark as found working locale and breaks the loop.
+                    $foundWorkingLocale = true;
+                    break;
+                } catch (\Exception|\Error $err) {
+                    // just prevent error while trying each locale.
+                }
+            }// endforeach;
+            unset($eachLocale);
+
+            if (false === $foundWorkingLocale) {
+                // if not found any working locale.
+                throw new \Exception('Unable to find usable locale in a configuration file (language.php).');
+            }// endif; check found working locale.
+            unset($foundWorkingLocale);
+        } else {
+            throw new \Exception('Unable to decode JSON for `RUNDIZBONES_LANGUAGE_LOCALE`.');
+        }// endif; json error
+
+        unset($localesString);
     } catch (\Exception|\Error $err) {
-        // in this case the server might not set locales that supported, so `setlocale()` will return something very wrong and cause error.
-        // let's try again.
-        try {
-            // try again with configuration directly by get the first locale value.
-            $localesString = json_decode(($_SERVER['RUNDIZBONES_LANGUAGE_LOCALE'] ?? '[]'));
-            $IntlDateFormatter = new \IntlDateFormatter(($localesString[0] ?? 'unknown'), \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
-            $IntlDateFormatter->setPattern($pattern);
-            unset($localesString);
-        } catch (\Exception|\Error $err) {
-            // in this case, it means there is problem with configuration. developers need attention about this.
-            error_log($err);
-            $IntlDateFormatter = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
-            $IntlDateFormatter->setPattern($pattern);
-        }// endtry;
+        // In this case, it means there is a problem with configuration. Developers need attention about this.
+        error_log($err);
+        $IntlDateFormatter = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
+        $IntlDateFormatter->setPattern($pattern);
     }// endtry;
     unset($pattern);
     return $IntlDateFormatter->format($timestamp);
