@@ -107,10 +107,21 @@ function rdbaGetDatetime(string $gmtDatetime, string $timezone = '', string $for
         $IntlDateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
         $IntlDateFormatter->setPattern($pattern);
     } catch (\Exception|\Error $err) {
-        error_log($err);
-        $IntlDateFormatter = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
-        $IntlDateFormatter->setPattern($pattern);
-    }
+        // in this case the server might not set locales that supported, so `setlocale()` will return something very wrong and cause error.
+        // let's try again.
+        try {
+            // try again with configuration directly by get the first locale value.
+            $localesString = ($_SERVER['RUNDIZBONES_LANGUAGE_LOCALE'] ?? '[]');
+            $IntlDateFormatter = new \IntlDateFormatter($localesString[0], \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
+            $IntlDateFormatter->setPattern($pattern);
+            unset($localesString);
+        } catch (\Exception|\Error $err) {
+            // in this case, it means there is problem with configuration. developers need attention about this.
+            error_log($err);
+            $IntlDateFormatter = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $timezone);
+            $IntlDateFormatter->setPattern($pattern);
+        }// endtry;
+    }// endtry;
     unset($pattern);
     return $IntlDateFormatter->format($timestamp);
 }// rdbaGetDatetime
