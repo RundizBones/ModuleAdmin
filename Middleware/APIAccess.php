@@ -50,7 +50,7 @@ class APIAccess
 
 
     /**
-     * Get request header and POST body API key.
+     * Get API key from requested headers, or POST body, or GET query string.
      * 
      * This will be trim empty space on the edge of the key.
      * 
@@ -59,17 +59,20 @@ class APIAccess
     protected function getRequestAPIKey(): string
     {
         $headers = apache_request_headers();
+        $headers = array_change_key_case($headers, CASE_LOWER);
         $requestAPIKey = '';
-        if ((!isset($requestAPIKey) || empty($requestAPIKey)) && isset($headers['Authorization'])) {
-            $requestAPIKey = $headers['Authorization'];
+        if (isset($headers['authorization'])) {
+            $requestAPIKey = $headers['authorization'];
         }
-        if ((!isset($requestAPIKey) || empty($requestAPIKey)) && isset($headers['X-Authorization'])) {
-            $requestAPIKey = $headers['X-Authorization'];
+        if (empty($requestAPIKey) && isset($headers['x-authorization'])) {
+            // if **still not found** `Authorization` header key or it has no value.
+            // the `Authorization` header can be empty so this `if` cannot be `elseif` to let it double check.
+            $requestAPIKey = $headers['x-authorization'];
         }
         unset($headers);
 
-        if ((!isset($requestAPIKey) || empty($requestAPIKey)) && isset($_POST['rdba-api-key'])) {
-            $requestAPIKey = $_POST['rdba-api-key'];
+        if ((!isset($requestAPIKey) || empty($requestAPIKey)) && isset($_REQUEST['rdba-api-key'])) {
+            $requestAPIKey = $_REQUEST['rdba-api-key'];
         }
 
         return trim($requestAPIKey);

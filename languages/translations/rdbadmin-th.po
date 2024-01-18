@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2023-02-01 09:03+0700\n"
-"PO-Revision-Date: 2023-02-01 09:04+0700\n"
+"POT-Creation-Date: 2024-01-18 22:37+0700\n"
+"PO-Revision-Date: 2024-01-18 22:39+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;d__:2;dn__:2,3;dnp__:2c,3,4;dp__:2c,3;n__:1,2;noop__;np__:1c,2,3;p__:1c,2;esc__;"
@@ -26,7 +26,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-7: .backup\n"
 
 #: Controllers/Admin/AdminBaseController.php:130 Controllers/Admin/AdminBaseController.php:142
-#: Middleware/APIAccess.php:130
+#: Middleware/APIAccess.php:133
 msgid "Access denied!"
 msgstr "ปฏิเสธการเข้าถึง!"
 
@@ -97,7 +97,7 @@ msgstr "ไม่สามารถส่งอีเมลได้."
 #: Controllers/Admin/Users/ActionsController.php:208 Controllers/Admin/Users/ActionsController.php:294
 #: Controllers/Admin/Users/ActionsController.php:398 Controllers/Admin/Users/AddController.php:254
 #: Controllers/Admin/Users/AvatarController.php:106 Controllers/Admin/Users/AvatarController.php:278
-#: Controllers/Admin/Users/EditController.php:487 Controllers/Admin/Users/Sessions/SessionsController.php:129
+#: Controllers/Admin/Users/EditController.php:487 Controllers/Admin/Users/Sessions/SessionsController.php:131
 msgid ""
 "Unable to validate token, please try again. If this problem still occur please reload the page and try again."
 msgstr "ไม่สามารถตรวจสอบโทเคน, โปรดลองอีกครั้ง. ถ้าปัญหานี้ยังอยู่ โปรดโหลดหน้านี้แล้วลองอีกครั้ง."
@@ -171,8 +171,8 @@ msgstr "คุณไม่สามารถปรับแต่งโมดู
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:176
 #: Controllers/Admin/Modules/Plugins/PluginsController.php:121 Controllers/Admin/Roles/ActionsController.php:355
 #: Controllers/Admin/Roles/RolesController.php:180 Controllers/Admin/Users/ActionsController.php:540
-#: Controllers/Admin/Users/ActionsController.php:566 Controllers/Admin/Users/Sessions/SessionsController.php:77
-#: Controllers/Admin/Users/Sessions/SessionsController.php:266 Controllers/Admin/Users/UsersController.php:257
+#: Controllers/Admin/Users/ActionsController.php:566 Controllers/Admin/Users/Sessions/SessionsController.php:79
+#: Controllers/Admin/Users/Sessions/SessionsController.php:268 Controllers/Admin/Users/UsersController.php:257
 msgid "Please select an action."
 msgstr "โปรดเลือกการทำงาน."
 
@@ -256,7 +256,7 @@ msgstr "ไม่สามารถปรับปรุงได้. โปร�
 
 #: Controllers/Admin/Permissions/EditController.php:230 Controllers/Admin/Roles/ActionsController.php:172
 #: Controllers/Admin/Users/ActionsController.php:183 Controllers/Admin/Users/ActionsController.php:275
-#: Controllers/Admin/Users/Sessions/SessionsController.php:122
+#: Controllers/Admin/Users/Sessions/SessionsController.php:124
 msgid "Deleted successfully."
 msgstr "ลบสำเร็จ."
 
@@ -288,7 +288,7 @@ msgstr "จัดการการอนุญาต"
 #: Controllers/Admin/Roles/AddController.php:146 Controllers/Admin/Roles/EditController.php:149
 #: Controllers/Admin/Roles/RolesController.php:148 Controllers/Admin/UI/Traits/CommonDataTrait.php:107
 #: Controllers/Admin/Users/ActionsController.php:57 Controllers/Admin/Users/EditController.php:994
-#: Controllers/Admin/Users/PreviousEmailsController.php:62 Controllers/_SubControllers/MenuItems.php:234
+#: Controllers/Admin/Users/PreviousEmailsController.php:65 Controllers/_SubControllers/MenuItems.php:234
 #: ModuleData/ModuleAdmin.php:155 Views/Admin/Index/index_v.php:7
 msgid "Admin home"
 msgstr "หน้าแรกผู้ดูแล"
@@ -607,23 +607,23 @@ msgstr "ส่งอีเมลสำเร็จแล้ว."
 msgid "The email could not be sent."
 msgstr "ไม่สามารถส่งอีเมลได้."
 
-#: Controllers/Admin/UI/Widgets/WidgetsController.php:97
+#: Controllers/Admin/UI/Widgets/WidgetsController.php:98
 msgid "PHP"
 msgstr "PHP"
 
-#: Controllers/Admin/UI/Widgets/WidgetsController.php:101
+#: Controllers/Admin/UI/Widgets/WidgetsController.php:102
 msgid "OS"
 msgstr "OS"
 
-#: Controllers/Admin/UI/Widgets/WidgetsController.php:105
+#: Controllers/Admin/UI/Widgets/WidgetsController.php:106
 msgid "DB"
 msgstr "DB"
 
-#: Controllers/Admin/UI/Widgets/WidgetsController.php:109
+#: Controllers/Admin/UI/Widgets/WidgetsController.php:110
 msgid "Framework"
 msgstr "เฟรมเวิร์ค"
 
-#: Controllers/Admin/UI/Widgets/WidgetsController.php:110 Controllers/Admin/UI/XhrCommonDataController.php:70
+#: Controllers/Admin/UI/Widgets/WidgetsController.php:111 Controllers/Admin/UI/XhrCommonDataController.php:70
 #, php-format
 msgid "Version %1$s"
 msgstr "รุ่น %1$s"
@@ -691,7 +691,7 @@ msgid "Delete my account"
 msgstr "ลบบัญชีผู้ใช้ของฉัน"
 
 #: Controllers/Admin/Users/ActionsController.php:61 Controllers/Admin/Users/EditController.php:998
-#: Controllers/Admin/Users/PreviousEmailsController.php:66 ModuleData/ModuleAdmin.php:93
+#: Controllers/Admin/Users/PreviousEmailsController.php:69 ModuleData/ModuleAdmin.php:93
 #: ModuleData/ModuleAdmin.php:161 Views/Admin/Permissions/index_v.php:22
 #: Views/Admin/UI/Widgets/userSummary_v.php:1
 msgid "Users"
@@ -699,7 +699,7 @@ msgstr "ผู้ใช้"
 
 #: Controllers/Admin/Users/ActionsController.php:65 Controllers/Admin/Users/AddController.php:229
 #: Controllers/Admin/Users/EditController.php:989 Controllers/Admin/Users/EditController.php:1002
-#: Controllers/Admin/Users/PreviousEmailsController.php:70 Views/Admin/Users/edit_v.php:8
+#: Controllers/Admin/Users/PreviousEmailsController.php:73 Views/Admin/Users/edit_v.php:8
 msgid "Edit user"
 msgstr "แก้ไขผู้ใช้"
 
@@ -741,8 +741,8 @@ msgstr "ไม่สามารถแก้ไขผู้ใช้ guest."
 
 #: Controllers/Admin/Users/ActionsController.php:613 Controllers/Admin/Users/AvatarController.php:71
 #: Controllers/Admin/Users/AvatarController.php:191 Controllers/Admin/Users/EditController.php:266
-#: Controllers/Admin/Users/EditController.php:1010 Controllers/Admin/Users/PreviousEmailsController.php:40
-#: Controllers/Admin/Users/Sessions/SessionsController.php:67
+#: Controllers/Admin/Users/EditController.php:1010 Controllers/Admin/Users/PreviousEmailsController.php:43
+#: Controllers/Admin/Users/Sessions/SessionsController.php:70
 msgid "Unable to edit user who has higher priority role than you."
 msgstr "ไม่สามารถแก้ไขผู้ใช้ที่มีหน้าที่สูงกว่าคุณได้."
 
@@ -927,8 +927,8 @@ msgstr "คุณสามารถเลือกได้เพียงไฟ
 msgid "Uploading"
 msgstr "กำลังอัพโหลด"
 
-#: Controllers/Admin/Users/PreviousEmailsController.php:57
-#: Controllers/Admin/Users/PreviousEmailsController.php:74 Views/Admin/Users/edit_v.php:294
+#: Controllers/Admin/Users/PreviousEmailsController.php:60
+#: Controllers/Admin/Users/PreviousEmailsController.php:77 Views/Admin/Users/edit_v.php:294
 #: Views/Admin/Users/previousEmails_v.php:7
 msgid "Previous emails"
 msgstr "อีเมลที่ใช้ก่อนหน้า"
@@ -938,41 +938,41 @@ msgstr "อีเมลที่ใช้ก่อนหน้า"
 msgid "Your session has been expired, please go to %1$slogin page%2$s."
 msgstr "เซสชั่นของคุณหมดอายุแล้ว, โปรดไปยัง%1$sหน้าเข้าสู่ระบบ%2$s."
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:82
-#: Controllers/Admin/Users/Sessions/SessionsController.php:267
+#: Controllers/Admin/Users/Sessions/SessionsController.php:84
+#: Controllers/Admin/Users/Sessions/SessionsController.php:269
 msgid "Please select at least one session."
 msgstr "โปรดเลือกอย่างน้อยหนึ่งเซสชั่น."
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:237 Views/Admin/Users/sessions_v.php:7
+#: Controllers/Admin/Users/Sessions/SessionsController.php:239 Views/Admin/Users/sessions_v.php:7
 msgid "Login sessions"
 msgstr "รายการเข้าสู่ระบบ"
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:262
+#: Controllers/Admin/Users/Sessions/SessionsController.php:264
 msgid "Are you sure to delete?"
 msgstr "คุณแน่ใจหรือไม่ที่จะลบ?"
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:262
-#: Controllers/Admin/Users/Sessions/SessionsController.php:263
+#: Controllers/Admin/Users/Sessions/SessionsController.php:264
+#: Controllers/Admin/Users/Sessions/SessionsController.php:265
 msgid "This cannot be undone."
 msgstr "นี่จะไม่สามารถเลิกกระทำได้."
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:263
+#: Controllers/Admin/Users/Sessions/SessionsController.php:265
 msgid "Are you sure to delete them ALL?"
 msgstr "คุณแน่ใจหรือไม่ที่จะลบ**ทั้งหมด**?"
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:264
+#: Controllers/Admin/Users/Sessions/SessionsController.php:266
 msgid "Current session"
 msgstr "เซสชั่นปัจจุบัน"
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:265 Views/Admin/Users/sessions_v.php:42
+#: Controllers/Admin/Users/Sessions/SessionsController.php:267 Views/Admin/Users/sessions_v.php:42
 msgid "Failed"
 msgstr "ล้มเหลว"
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:268 Views/Admin/Users/sessions_v.php:43
+#: Controllers/Admin/Users/Sessions/SessionsController.php:270 Views/Admin/Users/sessions_v.php:43
 msgid "Succeeded"
 msgstr "สำเร็จ"
 
-#: Controllers/Admin/Users/Sessions/SessionsController.php:269 Controllers/Admin/Users/UsersController.php:260
+#: Controllers/Admin/Users/Sessions/SessionsController.php:271 Controllers/Admin/Users/UsersController.php:260
 msgid "Unknow"
 msgstr "ไม่ทราบ"
 
@@ -1075,11 +1075,11 @@ msgstr "รหัสยืนยัน 2 ขั้นตอนถูกส่ง
 msgid "A 2 step verification email could not be sent."
 msgstr "อีเมลตรวจสอบ 2 ขั้นตอนไม่สามารถส่งได้."
 
-#: Helpers/HTMLFunctions.php:149
+#: Helpers/HTMLFunctions.php:181
 msgid "Close"
 msgstr "ปิด"
 
-#: Middleware/APIAccess.php:130
+#: Middleware/APIAccess.php:133
 msgid "The API key does not matched."
 msgstr "กุญแจ API ไม่ตรงกัน."
 
@@ -1538,8 +1538,12 @@ msgstr "แนะนำให้มีความยาวอักขระ %1
 
 #: Views/Admin/Settings/index_v.php:150
 #, php-format
-msgid "To access REST API with key, use one of these headers: %1$s or use method %2$s body parameter %3$s."
-msgstr "การเรียกใช้ REST API พร้อมด้วยกุญแจ, ใช้หนึ่งในส่วนหัวเหล่านี้: %1$s หรือใช้เมธอด %2$s กับพารามิเตอร์ %3$s."
+msgid ""
+"To access REST API with key, use one of these headers: %1$s or use method %2$s body, or use query string "
+"parameter %3$s."
+msgstr ""
+"การเรียกใช้ REST API พร้อมด้วยกุญแจ, ใช้หนึ่งในส่วนหัวเหล่านี้: %1$s หรือใช้ข้อมูลในเมธอด %2$s, หรือใช้ query string กับพารามิเตอร์ "
+"%3$s."
 
 #: Views/Admin/Settings/index_v.php:162
 msgid "Regenerate API key"
