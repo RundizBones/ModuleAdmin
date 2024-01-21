@@ -12,6 +12,9 @@ namespace Rdb\Modules\RdbAdmin\Libraries;
  * 
  * @since 0.1
  * @link https://github.com/phpmyadmin/motranslator Packagist vendor's class document.
+ * @property-read string $currentTextDomain Currently loaded text domain.
+ * @property-read array $domains Loaded domains
+ * @property-read array $registeredTextDomains  The text domains that was registered via `registerTextDomain()` method.
  */
 class Languages
 {
@@ -42,7 +45,7 @@ class Languages
 
 
     /**
-     * @var array The text domains that was registered via registerTextDomain() method.
+     * @var array The text domains that was registered via `registerTextDomain()` method.
      */
     protected $registeredTextDomains = [];
 
@@ -66,6 +69,26 @@ class Languages
             $this->Container = new \Rdb\System\Container();
         }
     }// __construct
+
+
+    /**
+     * Magic get.
+     * 
+     * @since 1.2.9
+     * @param string $name
+     */
+    public function __get(string $name)
+    {
+        $allowedProps = [
+            'currentTextDomain',
+            'domains',
+            'registeredTextDomains',
+        ];
+
+        if (in_array($name, $allowedProps) && property_exists($this, $name)) {
+            return $this->{$name};
+        }
+    }// __get
 
 
     /**
