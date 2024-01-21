@@ -11,8 +11,9 @@ namespace Rdb\Modules\RdbAdmin\Libraries;
  * Plugins class.
  * 
  * @since 0.2.4
- * @property-read array $pluginsRegisteredHooks The array of plugin classes that was registered hooks.
  * @property-read array $callbackHooks The array of callback hooks. The format is `[$tag][$priority][$idHash]['callback' => 'callbackFunctionOrClass']`.
+ * @property-read array $didHooks The array of did callback hooks. The format is `[$tag][$priority][$idHash]['did' => true];
+ * @property-read array $pluginsRegisteredHooks The array of plugin classes that was registered hooks.
  */
 class Plugins
 {
@@ -22,6 +23,12 @@ class Plugins
      * @var array The array of callback hooks. The format is `[$tag][$priority][$idHash]['callback' => 'callbackFunctionOrClass']`.
      */
     protected $callbackHooks = [];
+
+
+    /**
+     * @var array The array of did callback hooks. The format is `[$tag][$priority][$idHash]['did' => true];
+     */
+    protected $didHooks = [];
 
 
     /**
@@ -52,9 +59,14 @@ class Plugins
      * 
      * @param string $name
      */
-    public function __get($name)
+    public function __get(string $name)
     {
-        if (property_exists($this, $name)) {
+        $allowedProps = [
+            'callbackHooks',
+            'pluginsRegisteredHooks',
+        ];
+
+        if (in_array($name, $allowedProps) && property_exists($this, $name)) {
             return $this->{$name};
         }
     }// __get
@@ -174,6 +186,7 @@ class Plugins
             if (is_array($items)) {
                 foreach($items as $idHash => $subItem) {
                     $result = call_user_func_array($subItem['callback'], array_values($args));
+                    $this->didHooks[$tag][$priority][$idHash]['did'] = true;
                     if (isset($result) && is_array($result)) {
                         $return = \Drupal\Component\Utility\NestedArray::mergeDeep($return, $result);
                     } elseif (isset($result)) {

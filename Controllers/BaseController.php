@@ -51,15 +51,12 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
 
         $this->Input = new \Rdb\Modules\RdbAdmin\Libraries\Input($Container);
 
-        $Languages = new \Rdb\Modules\RdbAdmin\Libraries\Languages($Container);
         if (!$this->Container->has('Languages')) {
-            $this->Container['Languages'] = function ($c) use ($Languages) {
-                return $Languages;
+            $this->Container['Languages'] = function ($c) {
+                return new \Rdb\Modules\RdbAdmin\Libraries\Languages($this->Container);
             };
         }
-        unset($Languages);
-
-        $this->Languages = $this->Container['Languages'];
+        $this->Languages = $this->Container->get('Languages');
         $this->Languages->bindTextDomain(
             'rdbadmin', 
             dirname(__DIR__) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'translations'
@@ -67,13 +64,16 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
 
         // initialize plugin class.
         // @since 0.2.4
-        $Plugins = new \Rdb\Modules\RdbAdmin\Libraries\Plugins($Container);
         if (!$this->Container->has('Plugins')) {
-            $this->Container['Plugins'] = function ($c) use ($Plugins) {
-                return $Plugins;
+            $this->Container['Plugins'] = function ($c) {
+                return new \Rdb\Modules\RdbAdmin\Libraries\Plugins($this->Container);
             };
         }
-        $Plugins->registerAllPluginsHooks();
+        /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+        $Plugins = $this->Container->get('Plugins');
+        if (!$this->isModuleExcute()) {
+            $Plugins->registerAllPluginsHooks();
+        }
         /*
          * PluginHook: Rdb\Modules\RdbAdmin\Controllers\BaseController->__construct.registeredAllPlugins
          * PluginHookDescription: Runs after registered all plugins hooks.
@@ -152,18 +152,26 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
 
 
     /**
+     * Check if current call is `Modules->execute()`
+     * 
+     * This method was called from `maybeRunCron()`, `__construct()`.
+     * 
+     * @since 1.2.9
+     * @return bool Return `true` if it is, `false` if it is not.
+     */
+    private function isModuleExcute(): bool
+    {
+        return (isset($_SERVER['RUNDIZBONES_MODULEEXECUTE']) && 'true' === $_SERVER['RUNDIZBONES_MODULEEXECUTE']);
+    }// isModuleExcute
+
+
+    /**
      * Maybe run cron job if config is set to not use server cron.
      */
     protected function maybeRunCron()
     {
         if (
-            (
-                !isset($_SERVER['RUNDIZBONES_MODULEEXECUTE']) || 
-                (
-                    isset($_SERVER['RUNDIZBONES_MODULEEXECUTE']) && 
-                    $_SERVER['RUNDIZBONES_MODULEEXECUTE'] !== 'true'
-                )
-            ) &&
+            !$this->isModuleExcute() &&
             $this->Container->has('Config')
         ) {
             /* @var $Config \Rdb\System\Config */

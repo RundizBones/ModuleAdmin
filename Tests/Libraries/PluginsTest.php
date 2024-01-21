@@ -263,14 +263,12 @@ EOT;
         };
         unset($Modules);
 
-        $this->Plugins = new PluginsExtended($this->Container);
-        $Plugins = $this->Plugins;
         if (!$this->Container->has('Plugins')) {
-            $this->Container['Plugins'] = function ($c) use ($Plugins) {
-                return $Plugins;
+            $this->Container['Plugins'] = function ($c) {
+                return new PluginsExtended($this->Container);
             };
         }
-        unset($Plugins);
+        $this->Plugins = $this->Container->get('Plugins');
         $this->Plugins->registerAllPluginsHooks();
     }// setup
 
