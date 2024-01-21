@@ -54,6 +54,20 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         if ($Container->has('Plugins')) {
             $this->Plugins = $Container->get('Plugins');
         }
+
+        /*
+        * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\SettingsController->__construct
+        * PluginHookDescription: Hook after RdbAdmin settings class and constructor method is being called.  
+         *      You can use this to bind text domain while plugin have hooks to this controller and views.
+        * PluginHookParam: None.
+        * PluginHookReturn: None.
+        * PluginHookSince: 1.2.9
+        */
+       $this->Plugins->doHook(
+           __CLASS__ . '->' . __FUNCTION__,
+           [
+           ]
+       );
     }// __construct
 
 
