@@ -18,6 +18,8 @@ namespace Rdb\Modules\RdbAdmin\Libraries;
  * That's all the basic usage.
  * 
  * @since 0.1
+ * @property-read array $addedAssets Contain the associative array with `js`, `css` keys and its asset files that was added.
+ * @property-read array $assetsSorted Contain the associative array with `css`, `js` keys and its value is boolean for checking before do topological sort.
  */
 class Assets
 {
@@ -50,6 +52,22 @@ class Assets
     {
         $this->Container = $Container;
     }// __construct
+
+
+    /**
+     * Magic get.
+     * 
+     * @since 1.2.9
+     * @param string $name
+     */
+    public function __get(string $name)
+    {
+        $allowedAccessProps = ['addedAssets', 'assetsSorted'];
+
+        if (in_array($name, $allowedAccessProps)) {
+            return $this->{$name};
+        }
+    }// __get
 
 
     /**
