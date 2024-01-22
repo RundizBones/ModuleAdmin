@@ -123,7 +123,7 @@ trait CacheFileTrait
 
         if (empty($this->storagePath) || !is_string($this->storagePath)) {
             if ($Container->has('Modules')) {
-                $Module = $Container['Modules']->getCurrentModule();
+                $Module = $Container->get('Modules')->getCurrentModule();
             } else {
                 if (function_exists('get_called_class')) {
                     $calledClass = str_replace('/', '\\', get_called_class());

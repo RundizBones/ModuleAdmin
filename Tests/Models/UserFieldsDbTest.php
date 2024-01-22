@@ -21,7 +21,7 @@ class UserFieldsDbTest extends \Rdb\Tests\BaseTestCase
             return new \Rdb\System\Libraries\Db($c);
         };
 
-        $this->Db = $this->Container['Db'];
+        $this->Db = $this->Container->get('Db');
 
         if ($this->Db->currentConnectionKey() === null) {
             $this->markTestIncomplete('Unable to connect to DB.');

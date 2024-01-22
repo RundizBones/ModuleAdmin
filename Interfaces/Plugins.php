@@ -47,7 +47,7 @@ interface Plugins
      * Register action and/or filter hooks.
      * 
      * Example:<pre>
-     * $Plugins = $this->Container['Plugins'];
+     * $Plugins = $this->Container->get('Plugins');
      * $YourClass = new \Rdb\Modules\YourModule\Plugins\YourPlugin\YourPluginClass();
      * $Plugins->addHook('hook.name', [$YourClass, 'yourActionHook'], 10);
      * </pre>

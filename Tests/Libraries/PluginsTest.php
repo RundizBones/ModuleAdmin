@@ -94,7 +94,7 @@ class %PLUGIN% implements \Rdb\Modules\RdbAdmin\Interfaces\Plugins
     public function registerHooks()
     {
         /* @var \$Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
-        \$Plugins = \$this->Container['Plugins'];
+        \$Plugins = \$this->Container->get('Plugins');
         \$%PLUGIN%PlugInContentSubClass = new %PLUGIN%PlugInContentSubClass(\$this->Container);
 
         \$Plugins->addHook('rdbatest.demoaction1', [\$%PLUGIN%PlugInContentSubClass, 'demoAction1'], 10);
