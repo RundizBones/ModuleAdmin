@@ -593,6 +593,7 @@ class Assets
      * 
      * This method was called from `renderAssets()` method.
      * 
+     * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type#attribute_is_not_set_default_an_empty_string_or_a_javascript_mime_type The classic script type should be omit by default.
      * @param array $item The item should have "inline" in array key.
      * @param string $position The position is "before", "after".
      * @return string Return generated in-line JavaScript.
@@ -610,7 +611,7 @@ class Assets
             if (isset($item['handle'])) {
                 $output .= ' id="' . $item['handle'] . '-inlineScript' . ucfirst($position) . '"';
             }
-            $output .= ' type="application/javascript">'."\n";
+            $output .= '>'."\n";
             $output .= $item['inline'][$position]."\n";
             $output .= '</script>'."\n";
         }
@@ -650,6 +651,7 @@ class Assets
      * 
      * This method was called from `renderAssets()` method.
      * 
+     * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type#attribute_is_not_set_default_an_empty_string_or_a_javascript_mime_type The classic script type should be omit by default.
      * @param array $item The item should have `jsobject` in array key.
      * @return string Return generated JS object.
      */
@@ -665,7 +667,7 @@ class Assets
             if (isset($item['handle'])) {
                 $output .= ' id="' . $item['handle'] . '-jsObject"';
             }
-            $output .= ' type="application/javascript">'."\n";
+            $output .= '>'."\n";
             $output .= '/* <![CDATA[ */'."\n";
             $output .= 'var ' . $jsObjectName . ' = ';
             $output .= json_encode($jsObjects);
@@ -820,6 +822,7 @@ class Assets
     /**
      * Render individual asset (JS).
      * 
+     * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type#attribute_is_not_set_default_an_empty_string_or_a_javascript_mime_type The classic script type should be omit by default.
      * @param string $handle The handle name.
      * @param array $item The array item.
      * @return string Return rendered HTML.
@@ -830,10 +833,6 @@ class Assets
         $output .= $this->generateJsObject($item);
         $output .= $this->generateInlineScript($item, 'before');
         $output .= '<script id="' . $handle . '-js"';
-
-        if (isset($item['attributes']) && is_array($item['attributes']) && !array_key_exists('type', $item['attributes'])) {
-            $output .= ' type="application/javascript"';
-        }
 
         $output .= ' src="';
         $output .= htmlspecialchars($this->generateAssetUrlWithVersion($item), ENT_QUOTES);

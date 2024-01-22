@@ -77,6 +77,7 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
         $this->FileSystem->createFile('bootstrap.js', 'test only');
         $this->FileSystem->createFile('bootstrap.css', 'test only');
         $this->FileSystem->createFile('bootstrap-theme.css', 'test only');
+        $this->FileSystem->createFile('module.js', 'test only');
 
         $this->Container = new \Rdb\System\Container();
         $Modules = new \Rdb\System\Modules($this->Container);
@@ -584,10 +585,10 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
 
         $addedAssets = $this->Assets->getAddedAssets();
         $generated = str_replace(["\r\n", "\r", "\n"], '', $this->Assets->generateInlineScript($addedAssets['js']['jquery']));
-        $this->assertEquals('<script id="jquery-inlineScriptAfter" type="application/javascript">function thisIsjustTest() {}</script>', $generated);
+        $this->assertEquals('<script id="jquery-inlineScriptAfter">function thisIsjustTest() {}</script>', $generated);
 
         $generated = str_replace(["\r\n", "\r", "\n"], '', $this->Assets->generateInlineScript($addedAssets['js']['jquery'], 'before'));
-        $this->assertEquals('<script id="jquery-inlineScriptBefore" type="application/javascript">function thisIsjustTestJsInlineBefore() {}</script>', $generated);
+        $this->assertEquals('<script id="jquery-inlineScriptBefore">function thisIsjustTestJsInlineBefore() {}</script>', $generated);
 
         unset($Url);
     }// testGenerateInlineScript
@@ -617,7 +618,7 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
 
         $addedAssets = $this->Assets->getAddedAssets();
         $generated = str_replace(["\r\n", "\r", "\n"], '', $this->Assets->generateJsObject($addedAssets['js']['jquery']));
-        $this->assertEquals('<script id="jquery-jsObject" type="application/javascript">/* <![CDATA[ */var myJqueryObject = {"name":"TestJQueryObj","version":"3.x.x"};/* ]]> */</script>', $generated);
+        $this->assertEquals('<script id="jquery-jsObject">/* <![CDATA[ */var myJqueryObject = {"name":"TestJQueryObj","version":"3.x.x"};/* ]]> */</script>', $generated);
 
         unset($Url);
     }// testGenerateJsObject
@@ -820,29 +821,31 @@ class AssetsTest extends \Rdb\Tests\BaseTestCase
         $this->Assets->addAsset('js', 'notexists2', $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/notexists2.js', ['jquery'], '1.2', [], 'group1');
         $this->Assets->addAsset('js', 'jquery', $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/jquery.js', [], '3.x.x', [], 'theJsGroup');
         $this->Assets->addAsset('js', 'bootstrap', $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/bootstrap.js', ['jquery'], '4.x.x', [], 'theJsGroup');
+        $this->Assets->addAsset('js', 'module', $publicModuleUrl . '/assets/' . $this->testAssetFolderName . '/module.js', [], '2.3.4', ['type' => 'module'], 'theJsGroup');
         $this->Assets->addJsInline('jquery', 'function thisIsjustTest() {}', 'after');
         $this->Assets->addJsInline('jquery', 'function thisIsjustTestJsInlineBefore() {}', 'before');
         $this->Assets->addJsObject('jquery', 'myJqueryObject', ['name' => 'TestJQueryObj', 'version' => '3.x.x']);
         $renderResult = $this->Assets->renderAssets('js', 'theJsGroup');
         $renderResult = str_replace(["\r\n", "\r", "\n", '  ', '   ', '    '], '', $renderResult);
-        $assert = '<script id="jquery-jsObject" type="application/javascript">
+        $assert = '<script id="jquery-jsObject">
         /* <![CDATA[ */
         var myJqueryObject = {"name":"TestJQueryObj","version":"3.x.x"};
         /* ]]> */
         </script>
-        <script id="jquery-inlineScriptBefore" type="application/javascript">
+        <script id="jquery-inlineScriptBefore">
         function thisIsjustTestJsInlineBefore() {}
         </script>
-        <script id="jquery-js" type="application/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/jquery.js?v=3.x.x"></script>
-        <script id="jquery-inlineScriptAfter" type="application/javascript">
+        <script id="jquery-js" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/jquery.js?v=3.x.x"></script>
+        <script id="jquery-inlineScriptAfter">
         function thisIsjustTest() {}
         </script>
-        <script id="bootstrap-js" type="application/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/bootstrap.js?v=4.x.x"></script>';
+        <script id="bootstrap-js" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/bootstrap.js?v=4.x.x"></script>
+        <script id="module-js" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/module.js?v=2.3.4" type="module"></script>';
         $assert = str_replace(["\r\n", "\r", "\n", '  ', '   ', '    '], '', $assert);
         $this->assertEquals($assert, $renderResult);
 
-        $assert = '<script id="notexists-js" type="application/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/notexists.js?v=1.2"></script>
-        <script id="notexists2-js" type="application/javascript" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/notexists2.js?v=1.2"></script>';
+        $assert = '<script id="notexists-js" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/notexists.js?v=1.2"></script>
+        <script id="notexists2-js" src="/Modules/RdbAdmin/assets/' . $this->testAssetFolderName . '/notexists2.js?v=1.2"></script>';
         $assert = str_replace(["\r\n", "\r", "\n", '  ', '   ', '    '], '', $assert);
         $renderResult = $this->Assets->renderAssets('js', 'group1');
         $renderResult = str_replace(["\r\n", "\r", "\n", '  ', '   ', '    '], '', $renderResult);
