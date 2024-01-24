@@ -37,6 +37,15 @@ class Cache
     /**
      * Class constructor.
      * 
+     * Example usage:<pre>
+     * $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
+     *     $this->Container, 
+     *     [
+     *         'cachePath' => STORAGE_PATH . '/cache/Modules/YOUR_MODULE/YOUR_PATH',
+     *     ]
+     * ))->getCacheObject();
+     * </pre>
+     * 
      * @param \Rdb\System\Container $Container The DI container.
      * @param array $options Additional options or configuration in associative array.
      *                                      For file system, it accept 'cachePath', 'umask' array keys.
