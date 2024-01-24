@@ -267,7 +267,7 @@ function renderFaviconHtml(\Rdb\System\Container $Container, string $faviconPath
         $fullPublicUrl = $Url->getDomainProtocol();
         $publicUrl = $Url->getPublicUrl();
         if ($publicUrl !== '') {
-            $fullPublicUrl .= '/' . $publicUrl;
+            $fullPublicUrl .= $publicUrl;
         }
         unset($publicUrl, $Url);
 
