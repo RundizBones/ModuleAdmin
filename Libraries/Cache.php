@@ -75,12 +75,12 @@ class Cache
                 try {
                     $result = $MemcacheObject->getStats();
                     if ($driver === 'memcache' && $result !== false) {
-                        $this->Cache = new Extended\RundizSimpleCache\Memcache($MemcacheObject);
+                        $this->Cache = new Extended\RundizSimpleCache\Memcache($MemcacheObject, ($options['cachePath'] ?? ''));
                         $this->driver = $driver;
                     } elseif ($driver === 'memcached') {
                         foreach ($result as $key => $item) {
                             if (isset($item['pid']) && $item['pid'] > 0) {
-                                $this->Cache = new Extended\RundizSimpleCache\Memcached($MemcacheObject);
+                                $this->Cache = new Extended\RundizSimpleCache\Memcached($MemcacheObject, ($options['cachePath'] ?? ''));
                                 $this->driver = $driver;
                                 break;
                             }

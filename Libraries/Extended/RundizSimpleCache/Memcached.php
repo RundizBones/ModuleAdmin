@@ -31,11 +31,14 @@ class Memcached extends \Rundiz\SimpleCache\Drivers\Memcached implements CacheIn
     /**
      * Class constructor
      * 
+     * @param \Memcached $Memcached Memcached class.
      * @param string $cachePath This will be use as Memcached cache key prefix.
      * @throws \Exception 
      */
-    public function __construct(string $cachePath = '')
+    public function __construct(\Memcached $Memcached, string $cachePath = '')
     {
+        parent::__construct($Memcached);
+
         if (is_string($cachePath) && $cachePath !== '') {
             $cachePath = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $cachePath);
             $this->memcachePrefix = str_replace(ROOT_PATH . DIRECTORY_SEPARATOR, '', $cachePath) . '__';

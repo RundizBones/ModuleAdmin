@@ -31,11 +31,14 @@ class Memcache extends \Rundiz\SimpleCache\Drivers\Memcache implements CacheInte
     /**
      * Class constructor
      * 
+     * @param \Memcache $memcache Memcache class.
      * @param string $cachePath This will be use as Memcache cache key prefix.
      * @throws \Exception 
      */
-    public function __construct(string $cachePath = '')
+    public function __construct(\Memcache $memcache, string $cachePath = '')
     {
+        parent::__construct($memcache);
+
         if (is_string($cachePath) && $cachePath !== '') {
             $cachePath = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $cachePath);
             $this->memcachePrefix = str_replace(ROOT_PATH . DIRECTORY_SEPARATOR, '', $cachePath) . '__';
