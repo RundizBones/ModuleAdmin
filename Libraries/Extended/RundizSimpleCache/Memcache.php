@@ -69,7 +69,9 @@ class Memcache extends \Rundiz\SimpleCache\Drivers\Memcache implements CacheInte
      */
     public function has($key): bool
     {
-        return parent::has($this->memcachePrefix . $key);
+        $flags = false;
+        $this->Memcache->get($this->memcachePrefix . $key, $flags);
+        return ($flags !== false);
     }// has
 
 

@@ -69,7 +69,12 @@ class Memcached extends \Rundiz\SimpleCache\Drivers\Memcached implements CacheIn
      */
     public function has($key): bool
     {
-        return parent::has($this->memcachePrefix . $key);
+        $result = $this->Memcached->get($this->memcachePrefix . $key);
+
+        if ($result === false && $this->Memcached->getResultCode() === \Memcached::RES_NOTFOUND) {
+            return false;
+        }
+        return true;
     }// has
 
 

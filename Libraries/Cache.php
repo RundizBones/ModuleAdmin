@@ -88,8 +88,9 @@ class Cache
                         unset($item, $key);
                     }
                     unset($result);
-                } catch (\Exception $ex) {
-                    // memcache, or memcached failed to connect.
+                } catch (\Exception|\Error $err) {
+                    // In this case, it means there is a problem with configuration. Developers need attention about this.
+                    error_log($err);
                 }
             }
             unset($MemcacheObject);
