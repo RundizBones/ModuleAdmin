@@ -67,7 +67,7 @@ class Cache
         $driver = $Config->get('driver', 'cache', 'filesystem');
 
         if ($driver === 'apcu' && function_exists('apcu_fetch')) {
-            $this->Cache = new \Rundiz\SimpleCache\Drivers\Apcu();
+            $this->Cache = new Extended\RundizSimpleCache\Apcu(($options['cachePath'] ?? ''));
             $this->driver = $driver;
         } elseif ($driver === 'memcache' || $driver === 'memcached') {
             $MemcacheObject = $Config->get('memcacheConfig', 'cache', null);
@@ -75,12 +75,12 @@ class Cache
                 try {
                     $result = $MemcacheObject->getStats();
                     if ($driver === 'memcache' && $result !== false) {
-                        $this->Cache = new \Rundiz\SimpleCache\Drivers\Memcache($MemcacheObject);
+                        $this->Cache = new Extended\RundizSimpleCache\Memcache($MemcacheObject);
                         $this->driver = $driver;
                     } elseif ($driver === 'memcached') {
                         foreach ($result as $key => $item) {
                             if (isset($item['pid']) && $item['pid'] > 0) {
-                                $this->Cache = new \Rundiz\SimpleCache\Drivers\Memcached($MemcacheObject);
+                                $this->Cache = new Extended\RundizSimpleCache\Memcached($MemcacheObject);
                                 $this->driver = $driver;
                                 break;
                             }
