@@ -47,11 +47,31 @@ class Memcached extends \Rundiz\SimpleCache\Drivers\Memcached implements CacheIn
 
 
     /**
+     * Trim out long cache key from the beginning if it is too longer than Memcached can accept (250).
+     * 
+     * @param string $key The cache key included prefix.
+     * @return string Return trimmed cache key from the beginning.
+     */
+    private function trimLongKey($key): string
+    {
+        if (strlen($key) >= 249) {
+            if (mb_strlen($key) !== strlen($key)) {
+                $key = md5($key);
+            } else {
+                $key = substr($key, strlen($key) - 249);
+            }
+        }
+
+        return $key;
+    }// trimLongKey
+
+
+    /**
      * {@inheritDoc}
      */
     public function delete($key): bool
     {
-        return parent::delete($this->memcachePrefix . $key);
+        return parent::delete($this->trimLongKey($this->memcachePrefix . $key));
     }// delete
 
 
@@ -60,7 +80,7 @@ class Memcached extends \Rundiz\SimpleCache\Drivers\Memcached implements CacheIn
      */
     public function get($key, $default = null)
     {
-        return parent::get($this->memcachePrefix . $key, $default);
+        return parent::get($this->trimLongKey($this->memcachePrefix . $key), $default);
     }// get
 
 
@@ -69,7 +89,7 @@ class Memcached extends \Rundiz\SimpleCache\Drivers\Memcached implements CacheIn
      */
     public function has($key): bool
     {
-        $result = $this->Memcached->get($this->memcachePrefix . $key);
+        $result = $this->Memcached->get($this->trimLongKey($this->memcachePrefix . $key));
 
         if ($result === false && $this->Memcached->getResultCode() === \Memcached::RES_NOTFOUND) {
             return false;
@@ -83,7 +103,7 @@ class Memcached extends \Rundiz\SimpleCache\Drivers\Memcached implements CacheIn
      */
     public function set($key, $value, $ttl = null): bool
     {
-        return parent::set($this->memcachePrefix . $key, $value, $ttl);
+        return parent::set($this->trimLongKey($this->memcachePrefix . $key), $value, $ttl);
     }// set
 
 
