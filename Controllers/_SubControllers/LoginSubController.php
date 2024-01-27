@@ -39,6 +39,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
             ]
         ))->getCacheObject();
+        // The cache key below will be set and delete only in this controller.
         $cacheKey = '2faSubmitRetries_' . $user_id;
         $Cache->delete($cacheKey);
 
@@ -48,6 +49,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
             ]
         ))->getCacheObject();
+        // The cache key below will be set and delete only in this controller.
         $cacheKey = '2faEmailCodeSent_' . $user_id;
         $Cache->delete($cacheKey);
 
@@ -149,6 +151,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                     'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
                 ]
             ))->getCacheObject();
+            // The cache key below will be set and delete only in this controller.
             $cacheKey = '2faSubmitRetries_' . $user_id;
 
             if ($Cache->has($cacheKey) && $Cache->get($cacheKey, 0) > 3) {
@@ -699,6 +702,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
             ]
         ))->getCacheObject();
         $user_id = (int) $doLoginResult['user_id'];
+        // The cache key below will be set and delete only in this controller.
         $cacheKey = '2faEmailCodeSent_' . $user_id;
 
         if ($Cache->has($cacheKey)) {

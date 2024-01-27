@@ -17,6 +17,24 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
 
 
     /**
+     * @var string Cache key for permission module data of certain module and page. This cache key will be set and delete only in this model.
+     */
+    protected $cachKeyPermissionModuleData = 'permissionsModuleData.%module_system_name%.%permission_page%';
+
+
+    /**
+     * @var string Cache key for permissions per user role ID. This cache key will be set and delete only in this model.
+     */
+    protected $cacheKeyPermissionUserRoleId = 'permissionUser.userRoleID.user_%user_id%';
+
+
+    /**
+     * @var string Cache key for permissions per user but can contain many role IDs. This cache key will be set and delete only in this model.
+     */
+    protected $cacheKeyPermissionUserRoleIdsData = 'permissionUser.userRoleIDsData.user_%user_id%';
+
+
+    /**
      * @var string Cache folder path.
      */
     protected $cachePath = STORAGE_PATH . '/cache/Modules/RdbAdmin/Models/UserPermissionsDb';
@@ -124,8 +142,16 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
         if (!isset($identity['userrole_id']) && isset($identity['user_id'])) {
             // if userrole_id was not set but user_id was set.
             // get user roles data for this user.
-            $cacheKey = 'user' . $identity['user_id'] . '.userRoleIDs';
-            $cacheKeyRolesData = 'user' . $identity['user_id'] . '.userRoleIDsData';
+            $cacheKey = str_replace(
+                ['%user_id%'],
+                [$identity['user_id']],
+                $this->cacheKeyPermissionUserRoleId
+            );
+            $cacheKeyRolesData = str_replace(
+                ['%user_id%'],
+                [$identity['user_id']],
+                $this->cacheKeyPermissionUserRoleIdsData
+            );
 
             if ($Cache->has($cacheKey)) {
                 $identity['userrole_id'] = $Cache->get($cacheKey);
@@ -157,7 +183,9 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
         if (isset($identity['userrole_id']) && is_array($identity['userrole_id'])) {
             // if userrole_id was set.
             if (!isset($cacheKeyRolesData)) {
-                $cacheKeyRolesData = 'userRoles' . json_encode($identity['userrole_id']) . '.userRoleIDsData';
+                // if there is no cache key of user's roles data before.
+                // The cache key below will be set and use only in this model. This cache has no deletion (no need). It can be cleared from admin > tools menu.
+                $cacheKeyRolesData = 'permissionUserRoles.userRoleIDsData.userRoleIDs_' . json_encode($identity['userrole_id']);
             }
 
             if (!$Cache->has($cacheKeyRolesData)) {
@@ -191,7 +219,11 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
         unset($cacheKeyRolesData);
 
         // get permission for selected module and put into cache.
-        $cacheKeyPermissionsModuleData = 'permissionsModuleData.' . $module . '.' . $page;
+        $cacheKeyPermissionsModuleData = str_replace(
+            ['%module_system_name%', '%permission_page%'], 
+            [$module, $page], 
+            $this->cachKeyPermissionModuleData
+        );
         if (!$Cache->has($cacheKeyPermissionsModuleData)) {
             $options = [];
             $options['where'] = [
@@ -308,8 +340,16 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
             // if user_id in was set
             // delete user roles data cache for this user.
             $options['user_id'] = (int) $options['user_id'];
-            $Cache->delete('user' . $options['user_id'] . '.userRoleIDs');
-            $Cache->delete('user' . $options['user_id'] . '.userRoleIDsData');
+            $Cache->delete(str_replace(
+                ['%user_id%'],
+                [$options['user_id']],
+                $this->cacheKeyPermissionUserRoleId
+            ));
+            $Cache->delete(str_replace(
+                ['%user_id%'],
+                [$options['user_id']],
+                $this->cacheKeyPermissionUserRoleIdsData
+            ));
         }
 
         if (
@@ -321,7 +361,11 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
             !empty($options['permission_page'])
         ) {
             // if module_system_name was set.
-            $cacheKeyPermissionsModuleData = 'permissionsModuleData.' . $options['module_system_name'] . '.' . $options['permission_page'];
+            $cacheKeyPermissionsModuleData = str_replace(
+                ['%module_system_name%', '%permission_page%'], 
+                [$options['module_system_name'], $options['permission_page']], 
+                $this->cachKeyPermissionModuleData
+            );
             $Cache->delete($cacheKeyPermissionsModuleData);
             unset($cacheKeyPermissionsModuleData);
         }

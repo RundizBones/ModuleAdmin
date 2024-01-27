@@ -35,27 +35,15 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
 
 
     /**
-     * @var string The cache name of device cookie based failed attempts.
+     * @var string The cache key of total login failed count. This cache key will be set and delete only in this controller.
      */
-    //protected $cacheNameDeviceCookieFailedAttempts = 'devicecookieBasedFailedAttempts';
+    protected $cacheKeyFailCount;
 
 
     /**
-     * @var string The cache name of device cookie based accounts lockout.
+     * @var string The cache key of latest login failed timestamp. This cache key will be set and delete only in this controller.
      */
-    //protected $cacheNameDeviceCookieLockout = 'devicecookieLockout';
-
-
-    /**
-     * @var string The cache name of total login failed count. 
-     */
-    protected $cacheNameFailCount;
-
-
-    /**
-     * @var string The cache name of latest login failed timestamp.
-     */
-    protected $cacheNameFailTime;
+    protected $cacheKeyFailTime;
 
 
     /**
@@ -108,8 +96,8 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
             $this->Container,
             ['cachePath' => $this->cacheBasedPath]
         ))->getCacheObject();
-        $this->cacheNameFailCount = 'ipBasedFailedAttempts.' . str_replace(['.', '/', '\\'], '', $this->Input->server('REMOTE_ADDR', '0.0.0.0')) . '.loginFailedCount';
-        $this->cacheNameFailTime = 'ipBasedFailedAttempts.' . str_replace(['.', '/', '\\'], '', $this->Input->server('REMOTE_ADDR', '0.0.0.0')) . '.loginFailedTime';
+        $this->cacheKeyFailCount = 'ipBasedFailedAttempts.' . str_replace(['.', '/', '\\'], '', $this->Input->server('REMOTE_ADDR', '0.0.0.0')) . '.loginFailedCount';
+        $this->cacheKeyFailTime = 'ipBasedFailedAttempts.' . str_replace(['.', '/', '\\'], '', $this->Input->server('REMOTE_ADDR', '0.0.0.0')) . '.loginFailedTime';
 
         $this->configDb = $configDb;
 
@@ -164,8 +152,8 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
             $this->configDb['rdbadmin_UserLoginBruteforcePreventByIp'] === '1'
         ) {
             // if enabled brute force prevention by IP.
-            $bfIpBasedFailedCount = $this->Cache->get($this->cacheNameFailCount, 0);
-            $bfIpBasedFailedTime = $this->Cache->get($this->cacheNameFailTime, false);
+            $bfIpBasedFailedCount = $this->Cache->get($this->cacheKeyFailCount, 0);
+            $bfIpBasedFailedTime = $this->Cache->get($this->cacheKeyFailTime, false);
             $bfIpBasedWaitLeft = ($bfIpBasedFailedTime !== false ? ((time() - $bfIpBasedFailedTime) / 60) : 0);
 
             if (
@@ -198,7 +186,7 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                 ) {
                     // if total login failed is over maximum limit AND currently wait time is more than max wait time (over wait time limit).
                     // clear login failed count to let user start again.
-                    $this->Cache->deleteMultiple([$this->cacheNameFailCount, $this->cacheNameFailTime]);
+                    $this->Cache->deleteMultiple([$this->cacheKeyFailCount, $this->cacheKeyFailTime]);
                 }
 
                 $output['status'] = 'authenticate';
@@ -339,7 +327,7 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
      */
     public function deleteBruteForceIpStatus()
     {
-        $this->Cache->deleteMultiple([$this->cacheNameFailCount, $this->cacheNameFailTime]);
+        $this->Cache->deleteMultiple([$this->cacheKeyFailCount, $this->cacheKeyFailTime]);
     }// deleteBruteForceIpStatus
 
 
@@ -447,15 +435,15 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
             $this->configDb['rdbadmin_UserLoginBruteforcePreventByIp'] === '1'
         ) {
             // if enabled brute force prevention by IP.
-            if ($this->Cache->has($this->cacheNameFailCount)) {
-                $loginFailedCount = (int) $this->Cache->get($this->cacheNameFailCount, 0);
+            if ($this->Cache->has($this->cacheKeyFailCount)) {
+                $loginFailedCount = (int) $this->Cache->get($this->cacheKeyFailCount, 0);
             } else {
                 $loginFailedCount = 0;
             }
             $bfIpBasedCacheTTL = (int) (($this->configDb['rdbadmin_UserLoginMaxFailWait'] ?? 60) * 60);
 
-            $this->Cache->set($this->cacheNameFailCount, (int) ($loginFailedCount + 1), $bfIpBasedCacheTTL);
-            $this->Cache->set($this->cacheNameFailTime, time(), $bfIpBasedCacheTTL);
+            $this->Cache->set($this->cacheKeyFailCount, (int) ($loginFailedCount + 1), $bfIpBasedCacheTTL);
+            $this->Cache->set($this->cacheKeyFailTime, time(), $bfIpBasedCacheTTL);
             unset($bfIpBasedCacheTTL, $loginFailedCount);
         }
         // end register authentication failed based on IP. -----------------------------------------------------------------

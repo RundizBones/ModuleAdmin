@@ -330,7 +330,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
 
 
     /**
-     * Get all timezones using PHP class.
+     * Get all timezones using PHP classes.
      * 
      * @return array
      */
@@ -342,8 +342,10 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/Settings/SettingsController',
             ]
         ))->getCacheObject();
-        $cacheKey = 'timezonesList';
-        $cacheExpire = (15 * 24 * 60 * 60);// 15 days
+        // This cache has no deletion (no need). It can be cleared from admin > tools menu.
+        $cacheKey = 'settingsTimezonesList';
+        // This cache's value retrieved from PHP classes. So, it will be rarely changed until admin upgraded PHP version.
+        $cacheExpire = (360 * 24 * 60 * 60);// days
 
         if ($Cache->has($cacheKey)) {
             return $Cache->get($cacheKey);

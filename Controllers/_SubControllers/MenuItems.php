@@ -310,7 +310,8 @@ class MenuItems
             }
 
             if ($cacheMenuItem === true) {
-                $Cache->set($cacheKey, $menuItems, 1 * 60 * 60);// cache for 1 hour.
+                $cacheExpires = (1 * 60 * 60);// hour(s).
+                $Cache->set($cacheKey, $menuItems, $cacheExpires);
             }
 
             $Config->setModule('');// restore to default.
@@ -318,7 +319,7 @@ class MenuItems
             unset($cacheMenuItem, $Config);
         }// endif; cached
 
-        unset($Cache, $cacheKey);
+        unset($Cache, $cacheExpires, $cacheKey);
 
         return $menuItems;
     }// getMenuItems

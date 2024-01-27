@@ -459,6 +459,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                         'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/ForgotLoginPassController',
                     ]
                 ))->getCacheObject();
+                // The cache key below will be set and delete only in this controller.
                 $cacheKey = 'forgotLPEmailSent_' . hash('sha512', $data['user_email']);
 
                 if ($Cache->has($cacheKey)) {
@@ -664,6 +665,7 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
                                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/ForgotLoginPassController',
                             ]
                         ))->getCacheObject();
+                        // The cache key below will be set and delete only in this controller.
                         $cacheKey = 'forgotLPEmailSent_' . hash('sha512', $output['user_email']);
                         $Cache->delete($cacheKey);
                         unset($Cache, $cacheKey);
