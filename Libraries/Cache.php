@@ -47,8 +47,9 @@ class Cache
      * </pre>
      * 
      * @param \Rdb\System\Container $Container The DI container.
-     * @param array $options Additional options or configuration in associative array.
-     *                                      For file system, it accept 'cachePath', 'umask' array keys.
+     * @param array $options Additional options or configuration in associative array with keys:<br>
+     *              `cachePath` (string) The file system cache path or incase of APCu, Memcache, Memcached it will be prefix for the cache key.<br>
+     *              `umask` (int) The file system cache `umask` option.<br>
      */
     public function __construct(\Rdb\System\Container $Container, array $options = [])
     {
