@@ -151,13 +151,13 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             0 => [
                 'id' => 'rdbadmin-home',
                 'permission' => [],
-                'icon' => 'fa-solid fa-gauge-high fa-fw',
+                'icon' => 'fa-solid fa-gauge-high fa-fw fontawesome-icon',
                 'name' => __('Admin home'),
                 'link' => $urlBaseWithLang . '/admin',
             ],// 0
             100 => [
                 'id' => 'rdbadmin-users',
-                'icon' => 'fa-solid fa-users fa-fw',
+                'icon' => 'fa-solid fa-users fa-fw fontawesome-icon',
                 'name' => __('Users'),
                 'link' => $urlBaseWithLang . '/admin/users',
                 'liAttributes' => [
@@ -233,7 +233,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                     ['RdbAdminModulesPlugins', 'listPlugins', 'managePlugins'],
                     ['RdbAdminModulesAssets', 'publishAssets'],
                 ],
-                'icon' => 'fa-solid fa-cubes fa-fw',
+                'icon' => 'fa-solid fa-cubes fa-fw fontawesome-icon',
                 'name' => __('Modules'),
                 'link' => $urlBaseWithLang . '/admin/modules',
                 'liAttributes' => [
@@ -268,7 +268,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             ],// 101
             102 => [
                 'id' => 'rdbadmin-settings',
-                'icon' => 'fa-solid fa-sliders fa-fw',
+                'icon' => 'fa-solid fa-sliders fa-fw fontawesome-icon',
                 'name' => __('Settings'),
                 'link' => $urlBaseWithLang . '/admin/settings',
                 'liAttributes' => [
@@ -287,7 +287,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
             ],// 102
             103 => [
                 'id' => 'rdbadmin-tools',
-                'icon' => 'fa-solid fa-screwdriver-wrench fa-fw',
+                'icon' => 'fa-solid fa-screwdriver-wrench fa-fw fontawesome-icon',
                 'name' => __('Tools'),
                 'link' => '#',
                 'liAttributes' => [

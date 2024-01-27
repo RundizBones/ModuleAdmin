@@ -64,7 +64,7 @@
                     <div class="form-group submit-button-row">
                         <div class="control-wrapper">
                             <button class="rd-button primary rdba-login-button" type="submit">
-                                <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> <?php echo __('Login'); ?>
+                                <i class="fa-solid fa-right-to-bracket fontawesome-icon" aria-hidden="true"></i> <?php echo __('Login'); ?>
                             </button>
                         </div>
                     </div>

@@ -171,7 +171,7 @@
                                                 <img id="rdbadmin-current-avatar-image" class="fluid current-avatar-image" src="{{this.rdbadmin_uf_avatar}}" alt="">
                                             </div>
                                             <button id="rdbadmin-delete-current-avatar-button" class="rd-button warning" type="button">
-                                                <i class="fa-solid fa-xmark"></i>
+                                                <i class="fa-solid fa-xmark fontawesome-icon"></i>
                                                 <?php echo __('Delete this profile picture'); ?>
                                             </button>
                                             <span id="rdbadmin-delete-avatar-status-placeholder"></span>
@@ -183,7 +183,7 @@
                                             </span>
                                             <span class="rd-input-files-queue"></span>
                                             <template class="rd-inputfile-reset-button">
-                                                <button class="rd-button tiny" type="button" onclick="return RundizTemplateAdmin.resetInputFile(this);" title="<?php echo esc__('Remove file'); ?>"><i class="fa-solid fa-xmark"></i><span class="screen-reader-only"><?php echo esc__('Remove file'); ?></span></button>
+                                                <button class="rd-button tiny" type="button" onclick="return RundizTemplateAdmin.resetInputFile(this);" title="<?php echo esc__('Remove file'); ?>"><i class="fa-solid fa-xmark fontawesome-icon"></i><span class="screen-reader-only"><?php echo esc__('Remove file'); ?></span></button>
                                             </template>
                                             <div id="rdbadmin-avatar-upload-status-placeholder"></div>
                                         </div><!--.rdbadmin-select-avatar-dropzone-->

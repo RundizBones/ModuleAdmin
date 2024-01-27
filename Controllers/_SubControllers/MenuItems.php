@@ -199,6 +199,7 @@ class MenuItems
                 'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/_SubControllers/MenuItems',
             ]
         ))->getCacheObject();
+        // The cache key below will only be set in this controller. This cache has no deletion. It can be cleared from admin > tools menu.
         $cacheKey = 'menuItemsForUserId_' . ($cookieData['user_id'] ?? '0') . '_' . ($_SERVER['RUNDIZBONES_LANGUAGE'] ?? '');
 
         if ($Cache->has($cacheKey)) {
@@ -230,7 +231,7 @@ class MenuItems
                     0 => [
                         'id' => 'rdbadmin-home',
                         'permission' => [],
-                        'icon' => 'fa-solid fa-gauge-high fa-fw',
+                        'icon' => 'fa-solid fa-gauge-high fa-fw fontawesome-icon',
                         'name' => __('Admin home'),
                         'link' => $Url->getAppBasedPath(true) . '/admin',
                     ],

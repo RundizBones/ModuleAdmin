@@ -78,12 +78,12 @@ $Plugins = $this->Container->get('Plugins');
                                         <div class="control-wrapper">
                                             <div id="current-favicon-preview"></div>
                                             <button id="prog-delete-favicon-button" class="prog-delete-favicon-button rd-hidden rd-button danger" type="button">
-                                                <i class="fa-solid fa-trash"></i>
+                                                <i class="fa-solid fa-trash fontawesome-icon"></i>
                                                 <?php echo __('Delete this favicon'); ?> 
                                             </button>
                                             <div id="rdbadmin-favicon-dropzone" class="rdbadmin-favicon-dropzone rdbadmin-file-dropzone" title="<?php echo esc__('Drop a file into this area to start upload.'); ?>">
                                                 <span id="rdbadmin-favicon-choose-files-button" class="rd-button info rd-inputfile rdbadmin-button-upload-file" tabindex="0">
-                                                    <span class="label"><i class="fa-solid fa-file-arrow-up"></i> <?php echo __('Choose a file'); ?></span>
+                                                    <span class="label"><i class="fa-solid fa-file-arrow-up fontawesome-icon"></i> <?php echo __('Choose a file'); ?></span>
                                                     <input id="rdbadmin_SiteFavicon" type="file" name="rdbadmin_SiteFavicon" tabindex="-1" accept="<?php echo ($favicon['allowedFileExtensions'] ?? '.ico,.gif,.png'); ?>">
                                                 </span>
                                                 <span id="rdbadmin-favicon-upload-status-placeholder"></span>
@@ -111,7 +111,7 @@ $Plugins = $this->Container->get('Plugins');
                                                     printf(
                                                         __('The %1$s header to be sent to client. To set multiple origins, separate them with comma (%2$s) and the system will be use one per header.'),
                                                         '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><code>Access-Control-Allow-Origin</code></a>' .
-                                                        ' <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><i class="fa-solid fa-up-right-from-square"></i></a>',
+                                                        ' <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="cors-allow-origin"><i class="fa-solid fa-up-right-from-square fontawesome-icon"></i></a>',
                                                         '<code>,</code>'
                                                     );
                                                     ?>

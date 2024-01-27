@@ -47,7 +47,7 @@
                     <?php 
                     if (isset($login2StepVerification) && $login2StepVerification === true) {
                     ?> 
-                    <a class="rd-button primary" href="<?php echo ($loginPageUrl ?? ''); ?>"> <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> <?php echo __('Proceed to login'); ?></a>
+                    <a class="rd-button primary" href="<?php echo ($loginPageUrl ?? ''); ?>"> <i class="fa-solid fa-right-to-bracket fontawesome-icon" aria-hidden="true"></i> <?php echo __('Proceed to login'); ?></a>
                     <?php
                     } else {
                     ?> 
@@ -56,7 +56,7 @@
                     <div class="form-group submit-button-row">
                         <div class="control-wrapper">
                             <button class="rd-button primary rdba-submit-button" type="submit">
-                                <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> <?php echo __('Proceed to login'); ?>
+                                <i class="fa-solid fa-right-to-bracket fontawesome-icon" aria-hidden="true"></i> <?php echo __('Proceed to login'); ?>
                             </button>
                         </div>
                     </div>

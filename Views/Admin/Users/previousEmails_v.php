@@ -33,7 +33,7 @@
                                 <td class="column-primary" data-colname="<?php echo esc__('Email'); ?>">
                                     {{this.email}}
                                     <button class="toggle-row" type="button">
-                                        <i class="faicon fa-solid fa-caret-down fa-fw" data-toggle-icon="fa-caret-down fa-caret-up"></i>
+                                        <i class="faicon fa-solid fa-caret-down fa-fw fontawesome-icon" data-toggle-icon="fa-caret-down fa-caret-up"></i>
                                         <span class="screen-reader-only"><?php echo __('Show more details'); ?></span>
                                     </button>
                                 </td>
