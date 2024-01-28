@@ -129,32 +129,6 @@ class Plugins
                 foreach($items as $idHash => $subItem) {
                     array_unshift($args, $data);// put $data to front of $args.
                     $result = call_user_func_array($subItem['callback'], $args);
-                    if (is_null($result)) {
-                        // if this hook return nothing.
-                        // it is incorrect functional so warn the developers.
-                        $classString = '';
-                        if (is_array($subItem['callback']) && isset($subItem['callback'][0]) && isset($subItem['callback'][1])) {
-                            $classType = gettype($subItem['callback'][0]);
-                            if ($classType === 'object') {
-                                $classString = get_class($subItem['callback'][0]);
-                            } elseif ($classType === 'string') {
-                                $classString = $subItem['callback'][0];
-                            }
-                            unset($classType);
-
-                            $classString .= '::';
-
-                            $methodType = gettype($subItem['callback'][1]);
-                            if ($methodType === 'string') {
-                                $classString .= $subItem['callback'][1] . '()';
-                            }
-                            unset($methodType);
-                        } elseif (is_string($subItem['callback'])) {
-                            $classString = $subItem['callback'] . '()';
-                        }
-                        trigger_error('One of plugin that running this hook (' . $tag . ') return null. (Class name ' . $classString . '.)', E_USER_WARNING);
-                        unset($classString);
-                    }
                     $args = array_slice($args, 1);// now remove first array of $args which is $data out.
                     $data = $result;
                 }// endforeach;
