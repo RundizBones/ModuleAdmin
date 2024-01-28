@@ -92,6 +92,106 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
 
 
     /**
+     * Get APCu stats.
+     * 
+     * This method was called from `indexAction()`.
+     * 
+     * @since 1.2.9
+     * @param \Psr\SimpleCache\CacheInterface $Cache
+     * @return array
+     */
+    private function getApcuStats(\Psr\SimpleCache\CacheInterface $Cache): array
+    {
+        $apcuStats = apcu_cache_info();
+        $output = [];
+        $totalBytes = 0;
+        $totalItems = 0;
+
+        if (is_array($apcuStats)) {
+            $totalBytes = ($apcuStats['mem_size'] ?? 0);
+            if (isset($apcuStats['cache_list']) && is_countable($apcuStats['cache_list'])) {
+                $totalItems = count($apcuStats['cache_list']);
+            }
+        }
+
+        $output['totalSize'] = $totalBytes;
+        $output['totalItems'] = $totalItems;
+        unset($apcuStats, $totalBytes, $totalItems);
+        return $output;
+    }// getApcuStats
+
+
+    /**
+     * Get Memcached stats.
+     * 
+     * This method was called from `indexAction()`.
+     * 
+     * @since 1.2.9
+     * @param \Psr\SimpleCache\CacheInterface $Cache
+     * @return array
+     */
+    private function getMemcachedStats(\Psr\SimpleCache\CacheInterface $Cache): array
+    {
+        $memcacheStats = $Cache->getMemcached()->getStats();
+        $output = [];
+        $totalBytes = 0;
+        $totalItems = 0;
+
+        if (is_array($memcacheStats)) {
+            foreach ($memcacheStats as $server => $items) {
+                if (array_key_exists('bytes', $items) && is_numeric($items['bytes'])) {
+                    $totalBytes = ($totalBytes + $items['bytes']);
+                }
+                if (array_key_exists('curr_items', $items) && is_numeric($items['curr_items'])) {
+                    $totalItems = ($totalItems + $items['curr_items']);
+                }
+            }// endforeach;
+            unset($items, $server);
+        }
+
+        $output['totalSize'] = $totalBytes;
+        $output['totalItems'] = $totalItems;
+        unset($memcacheStats, $totalBytes, $totalItems);
+        return $output;
+    }// getMemcachedStats
+
+
+    /**
+     * Get Memcache stats.
+     * 
+     * This method was called from `indexAction()`.
+     * 
+     * @since 1.2.9
+     * @param \Psr\SimpleCache\CacheInterface $Cache
+     * @return array
+     */
+    private function getMemcacheStats(\Psr\SimpleCache\CacheInterface $Cache): array
+    {
+        $memcacheStats = $Cache->getMemcache()->getExtendedStats();
+        $output = [];
+        $totalBytes = 0;
+        $totalItems = 0;
+
+        if (is_array($memcacheStats)) {
+            foreach ($memcacheStats as $server => $items) {
+                if (array_key_exists('bytes', $items) && is_numeric($items['bytes'])) {
+                    $totalBytes = ($totalBytes + $items['bytes']);
+                }
+                if (array_key_exists('curr_items', $items) && is_numeric($items['curr_items'])) {
+                    $totalItems = ($totalItems + $items['curr_items']);
+                }
+            }// endforeach;
+            unset($items, $server);
+        }
+
+        $output['totalSize'] = $totalBytes;
+        $output['totalItems'] = $totalItems;
+        unset($memcacheStats, $totalBytes);
+        return $output;
+    }// getMemcacheStats
+
+
+    /**
      * Cache tool page.
      * 
      * @return string
@@ -125,7 +225,13 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
             );
             $Cache = $RdbaCache->getCacheObject();
             $output['cache']['driver'] = $RdbaCache->driver;
-            if ($RdbaCache->driver === 'filesystem') {
+            if ($RdbaCache->driver === 'apcu') {
+                $output['cache'] = array_merge($output['cache'], $this->getApcuStats($Cache));
+            } elseif ($RdbaCache->driver === 'memcache') {
+                $output['cache'] = array_merge($output['cache'], $this->getMemcacheStats($Cache));
+            } elseif ($RdbaCache->driver === 'memcached') {
+                $output['cache'] = array_merge($output['cache'], $this->getMemcachedStats($Cache));
+            } elseif ($RdbaCache->driver === 'filesystem') {
                 $Fs = new \Rdb\System\Libraries\FileSystem($output['cache']['basePath']);
                 $output['cache']['totalSize'] = $Fs->getFolderSize('');
                 $output['cache']['totalFilesFolders'] = count($Fs->listFilesSubFolders(''));

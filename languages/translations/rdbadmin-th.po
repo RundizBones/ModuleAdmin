@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2024-01-18 22:37+0700\n"
-"PO-Revision-Date: 2024-01-18 22:39+0700\n"
+"POT-Creation-Date: 2024-01-28 10:24+0700\n"
+"PO-Revision-Date: 2024-01-28 10:24+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -35,7 +35,7 @@ msgid "Forgot username or password?"
 msgstr "ลืมชื่อผู้ใช้หรือรหัสผ่าน?"
 
 #: Controllers/Admin/ForgotLoginPassController.php:273 Controllers/Admin/ForgotLoginPassController.php:281
-#: Controllers/Admin/ForgotLoginPassController.php:309 Controllers/Admin/ForgotLoginPassController.php:685
+#: Controllers/Admin/ForgotLoginPassController.php:309 Controllers/Admin/ForgotLoginPassController.php:687
 #: Controllers/Admin/LoginController.php:382 Controllers/Admin/LoginController.php:800
 #: Controllers/Admin/LoginController.php:808 Controllers/Admin/LoginController.php:837
 #: Controllers/Admin/Users/EditController.php:142
@@ -55,34 +55,34 @@ msgstr "กรุณากรอกอีเมลของคุณ."
 msgid "You have entered incorrect data."
 msgstr "คุณกรอกข้อมูลไม่ถูกต้อง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:467 Controllers/_SubControllers/LoginSubController.php:324
+#: Controllers/Admin/ForgotLoginPassController.php:468 Controllers/_SubControllers/LoginSubController.php:327
 msgid "The email has just been sent recently, please wait and try again later."
 msgstr "อีเมลเพิ่งถูกส่งไม่นานนี้, กรุณารอและลองใหม่ในภายหลัง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:480
+#: Controllers/Admin/ForgotLoginPassController.php:481
 msgid "The email was not found."
 msgstr "ไม่พบอีเมลดังกล่าว."
 
-#: Controllers/Admin/ForgotLoginPassController.php:487 Controllers/_SubControllers/LoginSubController.php:361
+#: Controllers/Admin/ForgotLoginPassController.php:488 Controllers/_SubControllers/LoginSubController.php:364
 #, php-format
 msgid "Your account has been disabled. (%1$s)"
 msgstr "บัญชีผู้ใช้ของคุณถูกระงับการใช้งาน. (%1$s)"
 
-#: Controllers/Admin/ForgotLoginPassController.php:514
+#: Controllers/Admin/ForgotLoginPassController.php:515
 msgid "You had requested to reset your password."
 msgstr "คุณได้ร้องขอตั้งค่ารหัสผ่านใหม่."
 
-#: Controllers/Admin/ForgotLoginPassController.php:534
+#: Controllers/Admin/ForgotLoginPassController.php:535
 msgid "An email has been sent, please check your email and follow instruction."
 msgstr "อีเมลถูกส่งแล้ว, โปรดตรวจอีเมลของคุณและทำตามคำแนะนำ."
 
-#: Controllers/Admin/ForgotLoginPassController.php:538 Controllers/Admin/ForgotLoginPassController.php:544
+#: Controllers/Admin/ForgotLoginPassController.php:539 Controllers/Admin/ForgotLoginPassController.php:545
 #: Controllers/Admin/RegisterController.php:764 Controllers/Admin/RegisterController.php:773
 #: Controllers/Admin/RegisterController.php:873 Controllers/Admin/Users/AddController.php:320
 msgid "An email could not be sent."
 msgstr "ไม่สามารถส่งอีเมลได้."
 
-#: Controllers/Admin/ForgotLoginPassController.php:560 Controllers/Admin/ForgotLoginPassController.php:693
+#: Controllers/Admin/ForgotLoginPassController.php:561 Controllers/Admin/ForgotLoginPassController.php:695
 #: Controllers/Admin/LoginController.php:250 Controllers/Admin/LoginController.php:390
 #: Controllers/Admin/LoginController.php:447 Controllers/Admin/LogoutController.php:69
 #: Controllers/Admin/Modules/ActionsController.php:93 Controllers/Admin/Modules/Assets/PublishController.php:304
@@ -92,7 +92,7 @@ msgstr "ไม่สามารถส่งอีเมลได้."
 #: Controllers/Admin/Roles/ActionsController.php:189 Controllers/Admin/Roles/AddController.php:102
 #: Controllers/Admin/Roles/EditController.php:103 Controllers/Admin/Roles/ReorderController.php:126
 #: Controllers/Admin/Settings/FaviconController.php:121 Controllers/Admin/Settings/FaviconController.php:527
-#: Controllers/Admin/Settings/SettingsController.php:210 Controllers/Admin/Settings/SettingsController.php:620
+#: Controllers/Admin/Settings/SettingsController.php:224 Controllers/Admin/Settings/SettingsController.php:636
 #: Controllers/Admin/Tools/CacheController.php:80 Controllers/Admin/Tools/EmailTesterController.php:109
 #: Controllers/Admin/Users/ActionsController.php:208 Controllers/Admin/Users/ActionsController.php:294
 #: Controllers/Admin/Users/ActionsController.php:398 Controllers/Admin/Users/AddController.php:254
@@ -102,19 +102,19 @@ msgid ""
 "Unable to validate token, please try again. If this problem still occur please reload the page and try again."
 msgstr "ไม่สามารถตรวจสอบโทเคน, โปรดลองอีกครั้ง. ถ้าปัญหานี้ยังอยู่ โปรดโหลดหน้านี้แล้วลองอีกครั้ง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:610 Controllers/Admin/LoginController.php:305
+#: Controllers/Admin/ForgotLoginPassController.php:611 Controllers/Admin/LoginController.php:305
 msgid "Please enter your new password."
 msgstr "กรุณากรอกรหัสผ่านใหม่ของคุณ."
 
-#: Controllers/Admin/ForgotLoginPassController.php:619 Controllers/Admin/LoginController.php:314
+#: Controllers/Admin/ForgotLoginPassController.php:620 Controllers/Admin/LoginController.php:314
 msgid "Your new password and confirm does not matched."
 msgstr "รหัสผ่านใหม่ของคุณและรหัสผ่านที่ยืนยันนั้นไม่ตรงกัน."
 
-#: Controllers/Admin/ForgotLoginPassController.php:645 Controllers/Admin/LoginController.php:342
+#: Controllers/Admin/ForgotLoginPassController.php:646 Controllers/Admin/LoginController.php:342
 msgid "Unable to update your new password, please try again."
 msgstr "ไม่สามารถอัปเดทรหัสผ่านใหม่ของคุณได้, โปรดลองอีกครั้ง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:673 Controllers/Admin/LoginController.php:370
+#: Controllers/Admin/ForgotLoginPassController.php:675 Controllers/Admin/LoginController.php:370
 msgid "Success, you can now login using your new password."
 msgstr "สำเร็จ, คุณสามารถเข้าสู่ระบบด้วยรหัสผ่านใหม่นี้ได้แล้ว."
 
@@ -150,7 +150,7 @@ msgid "Logout"
 msgstr "ออกจากระบบ"
 
 #: Controllers/Admin/Modules/ActionsController.php:82 Controllers/Admin/Modules/Plugins/ActionsController.php:100
-#: Controllers/Admin/Roles/ReorderController.php:105 Controllers/Admin/Settings/SettingsController.php:196
+#: Controllers/Admin/Roles/ReorderController.php:105 Controllers/Admin/Settings/SettingsController.php:210
 #: Controllers/Admin/Users/ActionsController.php:373
 msgid "Updated successfully."
 msgstr "อัพเดทเรียบร้อย."
@@ -288,7 +288,7 @@ msgstr "จัดการการอนุญาต"
 #: Controllers/Admin/Roles/AddController.php:146 Controllers/Admin/Roles/EditController.php:149
 #: Controllers/Admin/Roles/RolesController.php:148 Controllers/Admin/UI/Traits/CommonDataTrait.php:107
 #: Controllers/Admin/Users/ActionsController.php:57 Controllers/Admin/Users/EditController.php:994
-#: Controllers/Admin/Users/PreviousEmailsController.php:65 Controllers/_SubControllers/MenuItems.php:234
+#: Controllers/Admin/Users/PreviousEmailsController.php:65 Controllers/_SubControllers/MenuItems.php:235
 #: ModuleData/ModuleAdmin.php:155 Views/Admin/Index/index_v.php:7
 msgid "Admin home"
 msgstr "หน้าแรกผู้ดูแล"
@@ -532,44 +532,44 @@ msgstr "ไม่พบหน้าที่ที่เลือก."
 msgid "The image dimension in `imageSizes` constant is invalid."
 msgstr "ขนาดภาพในค่าคงที่ `imageSizes` ไม่ถูกต้อง."
 
-#: Controllers/Admin/Settings/SettingsController.php:128
+#: Controllers/Admin/Settings/SettingsController.php:142
 msgid "Please enter all required fields."
 msgstr "โปรดกรอกฟอร์มที่จำเป็น."
 
-#: Controllers/Admin/Settings/SettingsController.php:145
+#: Controllers/Admin/Settings/SettingsController.php:159
 msgid "Please enter API key."
 msgstr "กรุณากรอกกุญแจ API."
 
-#: Controllers/Admin/Settings/SettingsController.php:200
+#: Controllers/Admin/Settings/SettingsController.php:214
 msgid "Some setting value has not been update, please reload the page and see what was changed."
 msgstr "การตั้งค่าบางอย่างไม่ถูกอัพเดท, โปรดโหลดหน้านี้ใหม่แล้วดูว่ามีสิ่งใดเปลี่ยนแปลงไปบ้าง."
 
-#: Controllers/Admin/Settings/SettingsController.php:422 ModuleData/ModuleAdmin.php:283
+#: Controllers/Admin/Settings/SettingsController.php:438 ModuleData/ModuleAdmin.php:283
 #: Views/Admin/Settings/index_v.php:10
 msgid "Main settings"
 msgstr "การตั้งค่าหลัก"
 
-#: Controllers/Admin/Settings/SettingsController.php:460
+#: Controllers/Admin/Settings/SettingsController.php:476
 msgid "Are you sure to delete? This action cannot be undone."
 msgstr "คุณแน่ใจหรือไม่ว่าจะลบ? การกระทำนี้จะไม่สามารถยกเลิกได้."
 
-#: Controllers/Admin/Settings/SettingsController.php:461
+#: Controllers/Admin/Settings/SettingsController.php:477
 msgid "Please choose one file."
 msgstr "โปรดเลือกหนึ่งไฟล์."
 
-#: Controllers/Admin/Settings/SettingsController.php:462
+#: Controllers/Admin/Settings/SettingsController.php:478
 msgid "Uploading."
 msgstr "กำลังอัพโหลด."
 
-#: Controllers/Admin/Settings/SettingsController.php:547
+#: Controllers/Admin/Settings/SettingsController.php:563
 msgid "Unable to test other mail protocol."
 msgstr "ไม่สามารถทดสอบโปรโตคอลอีเมลอื่นๆได้."
 
-#: Controllers/Admin/Settings/SettingsController.php:581 Controllers/Admin/Settings/SettingsController.php:604
+#: Controllers/Admin/Settings/SettingsController.php:597 Controllers/Admin/Settings/SettingsController.php:620
 msgid "An error has been occurred."
 msgstr "มีข้อผิดพลาดเกิดขึ้น."
 
-#: Controllers/Admin/Settings/SettingsController.php:601
+#: Controllers/Admin/Settings/SettingsController.php:617
 msgid "Connection was successfull."
 msgstr "การเชื่อมต่อสำเร็จ."
 
@@ -581,12 +581,12 @@ msgstr "แคชถูกล้างหมดแล้ว."
 msgid "Unable to clear cache."
 msgstr "ไม่สามารถล้างแคชได้."
 
-#: Controllers/Admin/Tools/CacheController.php:145 ModuleData/ModuleAdmin.php:106 ModuleData/ModuleAdmin.php:305
+#: Controllers/Admin/Tools/CacheController.php:162 ModuleData/ModuleAdmin.php:106 ModuleData/ModuleAdmin.php:305
 #: Views/Admin/Tools/cache_v.php:8
 msgid "Manage cache"
 msgstr "จัดการแคช"
 
-#: Controllers/Admin/Tools/CacheController.php:173 Views/Admin/Tools/cache_v.php:40
+#: Controllers/Admin/Tools/CacheController.php:190 Views/Admin/Tools/cache_v.php:41
 msgid "Please choose a command"
 msgstr "โปรดเลือกคำสั่ง"
 
@@ -681,7 +681,7 @@ msgid "Sorry, this page is for request via XHR, REST API."
 msgstr "ขออภัย, หน้านี้สำหรับ XHR, REST API."
 
 #: Controllers/Admin/UI/XhrDashboardWidgetsController.php:214
-#: Controllers/_SubControllers/BruteForceLoginPrevention.php:300
+#: Controllers/_SubControllers/BruteForceLoginPrevention.php:288
 msgid "Please reload the page and try again."
 msgstr "กรุณาโหลดหน้านี้แล้วลองใหม่อีกครั้ง."
 
@@ -1029,49 +1029,49 @@ msgstr "ไม่สามารถดึงข้อมูลหน้าที
 msgid "Manage users"
 msgstr "จัดการผู้ใช้"
 
-#: Controllers/_SubControllers/BruteForceLoginPrevention.php:184
-#: Controllers/_SubControllers/BruteForceLoginPrevention.php:252
-#: Controllers/_SubControllers/BruteForceLoginPrevention.php:283
+#: Controllers/_SubControllers/BruteForceLoginPrevention.php:172
+#: Controllers/_SubControllers/BruteForceLoginPrevention.php:240
+#: Controllers/_SubControllers/BruteForceLoginPrevention.php:271
 #, php-format
 msgid ""
 "You have continuous login failed over %1$d times, you have to wait for %2$d minutes. Please try again in %3$s."
 msgstr "คุณได้เข้าสู่ระบบผิดพลาดต่อเนื่องเกิน %1$d ครั้ง, คุณต้องรอ %2$d นาที. โปรดลองใหม่อีกครั้งในเวลา %3$s."
 
-#: Controllers/_SubControllers/LoginSubController.php:181
+#: Controllers/_SubControllers/LoginSubController.php:184
 msgid "Unable to verify code or your code may expired."
 msgstr "ไม่สามารถตรวจสอบรหัสได้ หรือรหัสของคุณอาจหมดอายุแล้ว."
 
-#: Controllers/_SubControllers/LoginSubController.php:181
+#: Controllers/_SubControllers/LoginSubController.php:184
 msgid "If your code are expired, please try to login again."
 msgstr "ถ้ารหัสของคุณหมดอายุ, โปรดเข้าสู่ระบบอีกครั้ง."
 
-#: Controllers/_SubControllers/LoginSubController.php:186
+#: Controllers/_SubControllers/LoginSubController.php:189
 #, php-format
 msgid "You had submitted more than %d times, please try to login again."
 msgstr "คุณได้กรอกแล้วมากกว่า %d ครั้ง, โปรดเข้าสู่ระบบใหม่."
 
-#: Controllers/_SubControllers/LoginSubController.php:367 Controllers/_SubControllers/LoginSubController.php:373
+#: Controllers/_SubControllers/LoginSubController.php:370 Controllers/_SubControllers/LoginSubController.php:376
 msgid "The username or password is incorrect."
 msgstr "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง."
 
-#: Controllers/_SubControllers/LoginSubController.php:662
+#: Controllers/_SubControllers/LoginSubController.php:665
 msgid "Login successfully."
 msgstr "เข้าสู่ระบบเรียบร้อย."
 
-#: Controllers/_SubControllers/LoginSubController.php:711
+#: Controllers/_SubControllers/LoginSubController.php:715
 msgid "The 2 step verification code email has just been sent recently, please wait and try again later."
 msgstr "อีเมลรหัสขั้นตอนที่ 2 เพิ่งถูกส่งไม่นานนี้, กรุณารอและลองใหม่ในภายหลัง."
 
-#: Controllers/_SubControllers/LoginSubController.php:746 Views/Admin/Login/mfa_v.php:19
+#: Controllers/_SubControllers/LoginSubController.php:750 Views/Admin/Login/mfa_v.php:19
 #: Views/Admin/Login/mfa_v.php:21
 msgid "2 Step verification code"
 msgstr "รหัสการตรวจสอบ 2 ขั้นตอน"
 
-#: Controllers/_SubControllers/LoginSubController.php:766
+#: Controllers/_SubControllers/LoginSubController.php:770
 msgid "2 Step verification code was sent successfully, please enter the code you recieved."
 msgstr "รหัสยืนยัน 2 ขั้นตอนถูกส่งเรียบร้อยแล้ว. โปรดกรอกรหัสที่คุณได้รับ."
 
-#: Controllers/_SubControllers/LoginSubController.php:790
+#: Controllers/_SubControllers/LoginSubController.php:794
 msgid "A 2 step verification email could not be sent."
 msgstr "อีเมลตรวจสอบ 2 ขั้นตอนไม่สามารถส่งได้."
 
@@ -1183,7 +1183,7 @@ msgid "Please skip this field."
 msgstr "โปรดข้ามฟิลด์นี้."
 
 #: Views/Admin/ForgotLoginPass/index_v.php:49 Views/Admin/ForgotLoginPass/reset_v.php:39
-#: Views/Admin/Login/reset_v.php:40 Views/Admin/Tools/cache_v.php:52 Views/Admin/Tools/emailTester_v.php:24
+#: Views/Admin/Login/reset_v.php:40 Views/Admin/Tools/cache_v.php:53 Views/Admin/Tools/emailTester_v.php:24
 msgid "Submit"
 msgstr "ส่งข้อมูล"
 
@@ -1355,7 +1355,7 @@ msgstr "กรอง"
 msgid "Clear all permissions for this module (including roles and users)."
 msgstr "ล้างค่าการอนุญาตทั้งหมดสำหรับโมดูลนี้ (รวมหน้าที่และผู้ใช้ทั้งหมด)."
 
-#: Views/Admin/Permissions/index_v.php:50 Views/Admin/Tools/cache_v.php:44
+#: Views/Admin/Permissions/index_v.php:50 Views/Admin/Tools/cache_v.php:45
 msgid "Clear"
 msgstr "ล้างค่า"
 
@@ -1819,17 +1819,21 @@ msgstr "อีเมลที่จะใช้ในฐานะผู้ส่
 msgid "Cache driver"
 msgstr "ไดรเวอร์สำหรับแคช"
 
-#: Views/Admin/Tools/cache_v.php:21
+#: Views/Admin/Tools/cache_v.php:20
 msgid "Base path"
 msgstr "พาธพื้นฐาน"
 
-#: Views/Admin/Tools/cache_v.php:27
-msgid "Total file size"
-msgstr "ขนาดไฟล์ทั้งหมด"
+#: Views/Admin/Tools/cache_v.php:25
+msgid "Total size"
+msgstr "ขนาดทั้งหมด"
 
-#: Views/Admin/Tools/cache_v.php:33
+#: Views/Admin/Tools/cache_v.php:30
 msgid "Total files and folders"
 msgstr "จำนวนไฟล์และโฟลเดอร์ทั้งหมด"
+
+#: Views/Admin/Tools/cache_v.php:35
+msgid "Total items"
+msgstr "รายการทั้งหมด"
 
 #: Views/Admin/Tools/emailTester_v.php:15
 msgid "Target email"

@@ -39,14 +39,25 @@ class RdbaCacheController {
                 if (RdbaCommon.isset(() => response.cache) && _.isObject(response.cache)) {
                     let thisForm = document.getElementById('rdba-toolscache-form');
                     thisForm.querySelector('.cache-driver .control-wrapper').innerText = response.cache.driver;
-                    if (response.cache.driver === 'filesystem') {
+
+                    if (typeof(response.cache?.basePath) !== 'undefined') {
                         thisForm.querySelector('.cache-basePath .control-wrapper').innerText = response.cache.basePath;
-                        thisForm.querySelector('.cache-totalSize .control-wrapper').innerText = RdbaCommon.humanFileSize(response.cache.totalSize, true);
+                        thisForm.querySelector('.cache-basePath').classList.remove('rd-hidden');
+                    }
+
+                    if (typeof(response.cache?.totalFilesFolders) !== 'undefined') {
                         thisForm.querySelector('.cache-totalFilesFolders .control-wrapper').innerText = response.cache.totalFilesFolders;
-                    } else {
-                        thisForm.querySelector('.cache-basePath').classList.add('rd-hidden');
-                        thisForm.querySelector('.cache-totalSize').classList.add('rd-hidden');
-                        thisForm.querySelector('.cache-totalFilesFolders').classList.add('rd-hidden');
+                        thisForm.querySelector('.cache-totalFilesFolders').classList.remove('rd-hidden');
+                    }
+
+                    if (typeof(response.cache?.totalSize) !== 'undefined') {
+                        thisForm.querySelector('.cache-totalSize .control-wrapper').innerText = RdbaCommon.humanFileSize(response.cache.totalSize, true);
+                        thisForm.querySelector('.cache-totalSize').classList.remove('rd-hidden');
+                    }
+
+                    if (typeof(response.cache?.totalItems) !== 'undefined') {
+                        thisForm.querySelector('.cache-totalItems .control-wrapper').innerText = response.cache.totalItems;
+                        thisForm.querySelector('.cache-totalItems').classList.remove('rd-hidden');
                     }
                 }
 

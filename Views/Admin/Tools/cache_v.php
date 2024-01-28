@@ -14,25 +14,26 @@
                             <div class="form-group cache-driver">
                                 <label class="control-label"><?php echo __('Cache driver'); ?></label>
                                 <div class="control-wrapper">
-                                    
                                 </div>
                             </div>
-                            <div class="form-group cache-basePath">
+                            <div class="form-group cache-basePath rd-hidden">
                                 <label class="control-label"><?php echo __('Base path'); ?></label>
                                 <div class="control-wrapper">
-                                    
                                 </div>
                             </div>
-                            <div class="form-group cache-totalSize">
-                                <label class="control-label"><?php echo __('Total file size'); ?></label>
+                            <div class="form-group cache-totalSize rd-hidden">
+                                <label class="control-label"><?php echo __('Total size'); ?></label>
                                 <div class="control-wrapper">
-                                    
                                 </div>
                             </div>
-                            <div class="form-group cache-totalFilesFolders">
+                            <div class="form-group cache-totalFilesFolders rd-hidden">
                                 <label class="control-label"><?php echo __('Total files and folders'); ?></label>
                                 <div class="control-wrapper">
-                                    
+                                </div>
+                            </div>
+                            <div class="form-group cache-totalItems rd-hidden">
+                                <label class="control-label"><?php echo __('Total items'); ?></label>
+                                <div class="control-wrapper">
                                 </div>
                             </div>
 
