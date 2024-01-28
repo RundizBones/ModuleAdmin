@@ -85,6 +85,14 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
 
         // maybe run cron job.
         $this->maybeRunCron();
+
+        if (!$this->Container->has('controllers')) {
+            $controllers = [
+                'isAdmin' => false,// mark is not is admin page.
+            ];
+            $this->Container['controllers'] = $controllers;
+            unset($controllers);
+        }
     }// __construct
 
 

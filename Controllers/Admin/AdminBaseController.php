@@ -36,6 +36,14 @@ abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\Bas
 
         // check admin login. always check admin login to redirect user to /admin/login page.
         $this->checkLogin();
+
+        // processing come to this means this user is already logged in.
+        if ($this->Container->has('controllers')) {
+            $controllers = $this->Container->get('controllers');
+            $controllers['isAdmin'] = true;// update, override `isAdmin` mark that was set in **Controllers/BaseController.php**.
+            $this->Container['controllers'] = $controllers;
+            unset($controllers);
+        }
     }// __construct
 
 
