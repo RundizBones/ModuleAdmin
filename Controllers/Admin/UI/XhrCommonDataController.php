@@ -161,8 +161,9 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
             /*
              * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\UI\XhrCommonDataController->getPageAlertMessages.beforeGetSession
              * PluginHookDescription: Hook on XHR common pages, get alert messages, before get message from session.
-             * PluginHookParam: array $output This argument will be pass by reference, you can alter but variable type must be array. 
-             *              The output of alert messages that will be send to browser. 
+             * PluginHookParam: <br>
+             *              array $output This argument will be pass by reference, you can alter but variable type must be array. 
+             *              The output of alert messages that will be send to browser.  
              *              The format is `array(array('status' => 'error', 'message' => 'My error message.'), array('status' => 'success', 'message' => 'Success message.'))`.
              * PluginHookSince: 0.2.4
              */
@@ -192,7 +193,8 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
             /*
              * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\UI->getPageAlertMessages.afterGetSession
              * PluginHookDescription: Hook on XHR common pages, get alert messages, after get message from session.
-             * PluginHookParam: array $output This argument will be pass by reference, you can alter but variable type must be array. 
+             * PluginHookParam: <br>
+             *              array $output This argument will be pass by reference, you can alter but variable type must be array. 
              *              The output of alert messages that will be send to browser. 
              *              The format is `array(array('status' => 'error', 'message' => 'My error message.'), array('status' => 'success', 'message' => 'Success message.'))`.
              * PluginHookSince: 0.2.4

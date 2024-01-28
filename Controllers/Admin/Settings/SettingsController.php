@@ -175,8 +175,8 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                          * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\SettingsController->doUpdateAction.afterMainUpdate
                          * PluginHookDescription: Hook after RdbAdmin settings was updated in settings page controller.
                          * PluginHookParam: <br>
-                         *              `data` (array) The data to update in RdbAdmin module's settings only.<br>
-                         *              `updateResult` (bool) The main settings updated result.<br>
+                         *              array $data The data to update in RdbAdmin module's settings only.<br>
+                         *              bool $updateResult The main settings updated result.<br>
                          * PluginHookReturn: None.
                          * PluginHookSince: 1.1.7
                          */
@@ -484,8 +484,8 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                  * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\Settings\SettingsController->indexAction.afterAddAssets
                  * PluginHookDescription: Hook after added assets (such as CSS, JS) in settings page controller.
                  * PluginHookParam: <br>
-                 *              `Assets` (object) The `\Rdb\Modules\RdbAdmin\Libraries\Assets` class.<br>
-                 *              `rdbAdminAssets` (array) The RdbAdmin module's assets.<br>
+                 *              \Rdb\Modules\RdbAdmin\Libraries\Assets $Assets The `\Rdb\Modules\RdbAdmin\Libraries\Assets` class.<br>
+                 *              array $rdbAdminAssets The RdbAdmin module's assets.<br>
                  * PluginHookReturn: None.
                  * PluginHookSince: 1.1.7
                  */

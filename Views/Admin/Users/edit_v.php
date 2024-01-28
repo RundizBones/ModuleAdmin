@@ -212,6 +212,7 @@
                                 /*
                                  * PluginHook: Rdb\Modules\RdbAdmin\Views\Admin\Users\edit_v.bottomOtherInfo
                                  * PluginHookDescription: Hook on edit user page, at the bottom of other info section.
+                                 * PluginHookParam: None.
                                  * PluginHookSince: 1.2.6
                                  */
                                 $Plugins->doHook('Rdb\Modules\RdbAdmin\Views\Admin\Users\edit_v.bottomOtherInfo');
