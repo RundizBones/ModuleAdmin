@@ -40,9 +40,11 @@ class RdbaCacheController {
                     let thisForm = document.getElementById('rdba-toolscache-form');
                     thisForm.querySelector('.cache-driver .control-wrapper').innerText = response.cache.driver;
 
-                    if (typeof(response.cache?.basePath) !== 'undefined') {
-                        thisForm.querySelector('.cache-basePath .control-wrapper').innerText = response.cache.basePath;
-                        thisForm.querySelector('.cache-basePath').classList.remove('rd-hidden');
+                    if (response.cache?.driver === 'filesystem') {
+                        if (typeof(response.cache?.basePath) !== 'undefined') {
+                            thisForm.querySelector('.cache-basePath .control-wrapper').innerText = response.cache.basePath;
+                            thisForm.querySelector('.cache-basePath').classList.remove('rd-hidden');
+                        }
                     }
 
                     if (typeof(response.cache?.totalFilesFolders) !== 'undefined') {
