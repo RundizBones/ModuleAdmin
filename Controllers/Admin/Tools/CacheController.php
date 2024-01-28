@@ -52,28 +52,49 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
             // if validated token to prevent CSRF.
             unset($_DELETE[$csrfName], $_DELETE[$csrfValue]);
 
-            $output['cache'] = [];
-            $output['cache']['basePath'] = realpath(STORAGE_PATH . '/cache');
-            $RdbaCache = new \Rdb\Modules\RdbAdmin\Libraries\Cache(
-                $this->Container, 
-                [
-                    'cachePath' => $output['cache']['basePath'],
-                ]
-            );
-            $Cache = $RdbaCache->getCacheObject();
-            $output['cache']['driver'] = $RdbaCache->driver;
-            unset($RdbaCache);
-            $output['cleared'] = $Cache->clear();
+            $cacheCommand = $this->Input->delete('cache-command');
 
-            if ($output['cleared'] === true) {
-                $output['formResultStatus'] = 'success';
-                $output['formResultMessage'] = __('All cache was cleared.');
-                http_response_code(200);
-            } else {
-                $output['formResultStatus'] = 'warning';
-                $output['formResultMessage'] = __('Unable to clear cache.');
-                http_response_code(500);
+            // form validation. ----------------------------------------------------------------------------
+            $formValidated = true;
+            if (trim($cacheCommand) === '') {
+                $output['formResultStatus'] = 'error';
+                $output['formResultMessage'] = __('Please choose a command');
+                http_response_code(400);
+                $formValidated = false;
             }
+            // end form validation. ------------------------------------------------------------------------
+
+            if (isset($formValidated) && true === $formValidated) {
+                // if form validation passed.
+                $output['cache'] = [];
+                $output['cache']['basePath'] = realpath(STORAGE_PATH . '/cache');
+                $RdbaCache = new \Rdb\Modules\RdbAdmin\Libraries\Cache(
+                    $this->Container, 
+                    [
+                        'cachePath' => $output['cache']['basePath'],
+                    ]
+                );
+                $Cache = $RdbaCache->getCacheObject();
+                $output['cache']['driver'] = $RdbaCache->driver;
+                unset($RdbaCache);
+
+                if ('clear' === $cacheCommand) {
+                    // if cache command is clear all
+                    $output['cleared'] = $Cache->clear();
+
+                    if ($output['cleared'] === true) {
+                        $output['formResultStatus'] = 'success';
+                        $output['formResultMessage'] = __('All cache was cleared.');
+                        http_response_code(200);
+                    } else {
+                        $output['formResultStatus'] = 'warning';
+                        $output['formResultMessage'] = __('Unable to clear cache.');
+                        http_response_code(500);
+                    }
+                }// endif; cache command.
+            }// endif; form validated.
+
+            unset($Cache, $cacheCommand, $formValidated);
         } else {
             // if unable to validate token.
             $output['formResultStatus'] = 'error';
