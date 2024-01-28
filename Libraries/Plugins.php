@@ -46,6 +46,9 @@ class Plugins
     /**
      * Class constructor.
      * 
+     * You maybe load this class via framework's `Container` object named `Plugins`. Example: `$Plugins = $Container->get('Plugins');`.<br>
+     * This is depended on if you extended your controller from `Rdb\Modules\RdbAdmin\Controllers\BaseController`.
+     * 
      * @param \Rdb\System\Container $Container The DI container class.
      */
     public function __construct(\Rdb\System\Container $Container)
