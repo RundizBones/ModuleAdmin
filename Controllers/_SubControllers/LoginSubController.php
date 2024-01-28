@@ -315,6 +315,9 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                 ]
             ))->getCacheObject();
             $user_id = (int) $doLoginResult['user_id'];
+            // This cache is set, check, delete in 3 files: Controllers/Admin/LoginController.php, 
+            // Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php, 
+            // Controllers/_SubControllers/LoginSubController.php
             $cacheKey = 'simultaneousLoginResetEmailSent_' . hash('sha512', $user_id);
 
             if ($Cache->has($cacheKey)) {

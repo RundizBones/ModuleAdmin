@@ -226,6 +226,9 @@ trait SessionsTrait
                     'cachePath' => STORAGE_PATH . '/cache/Modules/RdbAdmin/Controllers/Admin/LoginController',
                 ]
             ))->getCacheObject();
+            // This cache is set, check, delete in 3 files: Controllers/Admin/LoginController.php, 
+            // Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php, 
+            // Controllers/_SubControllers/LoginSubController.php
             $cacheKey = 'simultaneousLoginResetEmailSent_' . hash('sha512', $user_id);
             $Cache->set($cacheKey, true, 120);
             unset($Cache, $cacheKey);
