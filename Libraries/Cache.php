@@ -11,6 +11,7 @@ namespace Rdb\Modules\RdbAdmin\Libraries;
  * Cache class.
  * 
  * @since 0.1
+ * @property-read string $driver Contain current cache driver.
  */
 class Cache
 {
@@ -130,7 +131,9 @@ class Cache
      */
     public function __get($name)
     {
-        if (isset($this->{$name})) {
+        $allowedAccessProps = ['Cache', 'driver'];
+
+        if (in_array($name, $allowedAccessProps) && isset($this->{$name})) {
             return $this->{$name};
         }
     }// __get

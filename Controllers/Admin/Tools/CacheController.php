@@ -68,19 +68,18 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
                 // if form validation passed.
                 $output['cache'] = [];
                 $output['cache']['basePath'] = realpath(STORAGE_PATH . '/cache');
-                $RdbaCache = new \Rdb\Modules\RdbAdmin\Libraries\Cache(
-                    $this->Container, 
-                    [
-                        'cachePath' => $output['cache']['basePath'],
-                    ]
-                );
-                $Cache = $RdbaCache->getCacheObject();
-                $output['cache']['driver'] = $RdbaCache->driver;
-                unset($RdbaCache);
 
                 if ('clear' === $cacheCommand) {
                     // if cache command is clear all
-                    $output['cleared'] = $Cache->clear();
+                    $actionResult = $this->doClearCache($output['cache']['basePath']);
+                    $output['cache']['driver'] = $actionResult['driver'];
+                    $output['cache']['configCacheCleared'] = ($actionResult['configCacheClear'] ?? false);
+                    $output['cache']['fileCacheCleared'] = ($actionResult['fileCacheClear'] ?? false);
+                    $output['cleared'] = (
+                        true === $output['cache']['configCacheCleared'] &&
+                        true === $output['cache']['fileCacheCleared']
+                    );
+                    unset($actionResult);
 
                     if ($output['cleared'] === true) {
                         $output['formResultStatus'] = 'success';
@@ -110,6 +109,44 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
         unset($Csrf, $Url);
         return $this->responseAcceptType($output);
     }// clearAction
+
+
+    /**
+     * Do clear the cache on both configuration based and the file system.
+     * 
+     * There are some cache that always use file system such as meta field cache. So, the file system cache must be always cleared.
+     * 
+     * @since 1.2.9
+     * @return array Return associative array with keys:<br>
+     *              `driver` (string) The cache driver in configuration file.<br>
+     *              `configCacheClear` (bool) Configuration cache driver clear result.<br>
+     *              `fileCacheClear` (bool) File cache clear result.<br>
+     */
+    private function doClearCache(string $cacheBasePath): array
+    {
+        $RdbaCache = new \Rdb\Modules\RdbAdmin\Libraries\Cache(
+            $this->Container, 
+            [
+                'cachePath' => $cacheBasePath,
+            ]
+        );
+        $Cache = $RdbaCache->getCacheObject();
+
+        $output = [];
+        $output['driver'] = $RdbaCache->driver;
+        unset($RdbaCache);
+        // clear configuration based cache. it can be apcu, file system, etc.
+        $output['configCacheClear'] = $Cache->clear();
+
+        // clear the file system cache.
+        $FileSystem = new \Rdb\System\Libraries\FileSystem(STORAGE_PATH);
+        $cacheBasePath = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $cacheBasePath);
+        $cacheBasePath = str_replace(STORAGE_PATH . DIRECTORY_SEPARATOR, '', $cacheBasePath);
+        $output['fileCacheClear'] = $FileSystem->deleteFolder($cacheBasePath);
+        unset($FileSystem);
+
+        return $output;
+    }// doClearCache
 
 
     /**
