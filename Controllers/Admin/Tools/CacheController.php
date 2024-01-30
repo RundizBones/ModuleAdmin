@@ -142,7 +142,8 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
         $FileSystem = new \Rdb\System\Libraries\FileSystem(STORAGE_PATH);
         $cacheBasePath = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $cacheBasePath);
         $cacheBasePath = str_replace(STORAGE_PATH . DIRECTORY_SEPARATOR, '', $cacheBasePath);
-        $output['fileCacheClear'] = $FileSystem->deleteFolder($cacheBasePath);
+        $FileSystem->deleteFolder($cacheBasePath);
+        $output['fileCacheClear'] = empty($FileSystem->listFilesSubFolders($cacheBasePath));
         unset($FileSystem);
 
         return $output;
