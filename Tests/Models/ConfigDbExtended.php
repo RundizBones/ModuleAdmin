@@ -19,6 +19,15 @@ class ConfigDbExtended extends \Rdb\Modules\RdbAdmin\Models\ConfigDb
     /**
      * {@inheritDoc}
      */
+    public function deleteCachedFile()
+    {
+        return parent::deleteCachedFile();
+    }// deleteCachedFile
+
+
+    /**
+     * {@inheritDoc}
+     */
     public function getMultiple(array $names, array $defaults = array()): array
     {
         return parent::getMultiple($names, $defaults);

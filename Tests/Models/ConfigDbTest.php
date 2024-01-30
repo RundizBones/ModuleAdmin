@@ -11,6 +11,18 @@ class ConfigDbTest extends \Rdb\Tests\BaseTestCase
 {
 
 
+    /**
+     * @var array
+     */
+    protected $ConfigDbVals = [];
+
+
+    /**
+     * @var \Rdb\System\Libraries\Db
+     */
+    protected $Db;
+
+
     public function setup(): void
     {
         $this->Container = new \Rdb\System\Container();
@@ -26,11 +38,23 @@ class ConfigDbTest extends \Rdb\Tests\BaseTestCase
         if ($this->Db->currentConnectionKey() === null) {
             $this->markTestIncomplete('Unable to connect to DB.');
         }
+
+        // put current value in DB to property to restore them later.
+        $Sth = $this->Db->PDO()->prepare('SELECT `config_name`, `config_value` FROM `' . $this->Db->tableName('config') . '` WHERE `config_name` = \'rdbadmin_SiteName\'');
+        $Sth->execute();
+        $result = $Sth->fetchObject();
+        $Sth->closeCursor();
+        unset($Sth);
+        $this->ConfigDbVals['rdbadmin_SiteName'] = $result->config_value;
+        unset($result);
     }// setup
 
 
     public function tearDown(): void
     {
+        // restore to original value in DB from property.
+        $this->Db->update($this->Db->tableName('config'), ['config_value' => $this->ConfigDbVals['rdbadmin_SiteName']], ['config_name' => 'rdbadmin_SiteName']);
+        // disconnect DB.
         $this->Db->disconnectAll();
     }// tearDown
 
@@ -96,6 +120,35 @@ class ConfigDbTest extends \Rdb\Tests\BaseTestCase
         $this->assertSame($defaults[0], $results[$names[0]]);// name[configxxx] = 'A'
         $this->assertSame($defaults[1], $results[$names[1]]);// name[anotherxxx] = 'B'
     }// testGetMultiple
+
+
+    public function testCache()
+    {
+        $ConfigDb = new ConfigDbExtended($this->Container);
+        /* @var $Db \Rdb\System\Libraries\Db */
+        $originalSitename = $ConfigDb->get('rdbadmin_SiteName', 'RundizBones');
+        $newSitename = 'Test config ' . time();
+        // update new name to DB.
+        $this->Db->update($this->Db->tableName('config'), ['config_value' => $newSitename], ['config_name' => 'rdbadmin_SiteName']);
+        // retrieve data via ConfigDb class. no change because cache is not expired yet.
+        $this->assertNotSame($newSitename, $ConfigDb->get('rdbadmin_SiteName', 'RundizBones'));
+        $this->assertSame($originalSitename, $ConfigDb->get('rdbadmin_SiteName', 'RundizBones'));
+        // delete cache.
+        $ConfigDb->deleteCachedFile();
+        // retrieve data via ConfigDb class again. now it should be same.
+        $this->assertSame($newSitename, $ConfigDb->get('rdbadmin_SiteName', 'RundizBones'));
+        $this->assertNotSame($originalSitename, $ConfigDb->get('rdbadmin_SiteName', 'RundizBones'));
+        // delete cache.
+        $ConfigDb->deleteCachedFile();
+
+        $newSitename = 'Test config ' . time() . microtime(true);
+        // update via `update()` method of `ConfigDb` class. now cache should be cleared automatically.
+        $ConfigDb->update(['config_value' => $newSitename], ['config_name' => 'rdbadmin_SiteName']);
+        // retrieve data via ConfigDb class. it should be same.
+        $this->assertSame($newSitename, $ConfigDb->get('rdbadmin_SiteName', 'RundizBones'));
+        // must delete cache again to let `tearDown()` restore the value and when retrieve this data again, it will be original from cached at first time.
+        $ConfigDb->deleteCachedFile();
+    }// testCache
 
 
 }

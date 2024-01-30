@@ -11,6 +11,7 @@ namespace Rdb\Modules\RdbAdmin\Models;
  * User fields DB model.
  * 
  * @since 0.1
+ * @property-read array $rdbaUserFields Registered fields data that come with this module.
  */
 class UserFieldsDb extends \Rdb\System\Core\Models\BaseModel
 {

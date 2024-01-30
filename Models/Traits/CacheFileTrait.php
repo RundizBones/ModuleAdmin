@@ -156,10 +156,10 @@ trait CacheFileTrait
      * Buld cache content from result that got from `PDOStatement::fetchAll()`.
      * 
      * @param mixed $result The result from `PDOStatement::fetchAll()`.
-     * @param string $formatMethod The format option. Value can be 'array', 'json_array', 'replace_setstate', 'serialize'.
+     * @param string $formatMethod The format option. Value can be 'array', 'json_array', 'replace_setstate', 'serialize', 'raw'. Default is 'raw'.
      * @return string Return generated content ready for cache.
      */
-    protected function buildCacheContentFromResult($result, string $formatMethod = 'serialize'): string
+    protected function buildCacheContentFromResult($result, string $formatMethod = 'raw'): string
     {
         if ($formatMethod === 'array') {
             $resultArr = json_decode(json_encode($result), true);
@@ -171,8 +171,10 @@ trait CacheFileTrait
             $resultString = var_export($result, true);
             $resultString = str_replace('stdClass::__set_state', '(object) ', $resultString);
             $resultString .= ';';
-        } else {
+        } elseif ($formatMethod === 'serialize') {
             $resultString = 'unserialize(\'' . str_replace('\'', '\\\'', serialize($result)) . '\');';
+        } else {
+            $resultString = var_export($result, true) . ';';
         }
 
         return '<?php' . PHP_EOL .
@@ -200,6 +202,38 @@ trait CacheFileTrait
         }
 
         $this->deleteCachedFile();
+
+        // add debug backtrace for checking how it created.
+        $content .= PHP_EOL . PHP_EOL . PHP_EOL;
+        $content .= '/**' . PHP_EOL;
+        $content .= ' * Debug backtrace:' . PHP_EOL;
+        $debugbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10);
+        if (is_array($debugbt) && !empty($debugbt)) {
+            foreach ($debugbt as $trace) {
+                $content .= ' * ';
+                if (isset($trace['class'])) {
+                    $content .= $trace['class'];
+                }
+                if (isset($trace['type'])) {
+                    $content .= $trace['type'];
+                }
+                if (isset($trace['function'])) {
+                    $content .= $trace['function'] . '()';
+                }
+                $content .= '; ';
+                if (isset($trace['file'])) {
+                    $content .= ' at ' . $trace['file'];
+                    if (isset($trace['line'])) {
+                        $content .= ' line ' . $trace['line'];
+                    }
+                }
+                $content .= PHP_EOL;
+            }// endforeach;
+            unset($trace);
+        }
+        unset($debugbt);
+        $content .= ' */' . PHP_EOL;
+        $content .= PHP_EOL;
 
         // write the php content to cache file.
         $buildResult = $this->FileSystem->writeFile($this->storageFile, $content);
