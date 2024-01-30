@@ -28,10 +28,24 @@ trait MetaFieldsTrait
 
 
     /**
+     * @var array The temporary result where the query will be queried to selected object ID. This will be reset to `null` once called `buildCacheContent()` method and found this temporary data.
+     * @since 1.2.9
+     */
+    protected $builtCacheContent;
+
+
+    /**
      * @var bool Indicate that `getFields()` and `getFieldsNoCache()` methods contain values or not. The result will be `true` if no value or no data, but will be `false` if there is at least a value or data.
      * @since 1.0.1
      */
     protected $getFieldsNoData = false;
+
+
+    /**
+     * @var array The result from `listObjectFields()` method. This property is for temporarily use while calling to `listObjectFields()` method.
+     * @since 1.2.9
+     */
+    protected $listObjectsFieldsResult = [];
 
 
     /**
@@ -86,7 +100,7 @@ trait MetaFieldsTrait
             $output = false;
         }
 
-        $this->storageFile = 'object-id-' . $objectId . '-' . $this->tableName . '.php';
+        $this->storageFile = $this->getStorageFileName($objectId);
         $this->deleteCachedFile();
 
         unset($data, $insertResult, $PDO);
@@ -117,14 +131,19 @@ trait MetaFieldsTrait
      */
     public function buildCacheContent(): string
     {
-        $sql = 'SELECT * FROM `' . $this->tableName . '` WHERE `' . $this->objectIdName . '` = :object_id';
-        $Pdo = $this->Db->PDO();
-        $Sth = $Pdo->prepare($sql);
-        $Sth->bindValue(':object_id', $this->objectId);
-        $Sth->execute();
-        $result = $Sth->fetchAll();
-        $Sth->closeCursor();
-        unset($Pdo, $sql, $Sth);
+        if (!empty($this->builtCacheContent)) {
+            $result = $this->builtCacheContent;
+            $this->builtCacheContent = null;
+        } else {
+            $sql = 'SELECT * FROM `' . $this->tableName . '` WHERE `' . $this->objectIdName . '` = :object_id';
+            $Pdo = $this->Db->PDO();
+            $Sth = $Pdo->prepare($sql);
+            $Sth->bindValue(':object_id', $this->objectId);
+            $Sth->execute();
+            $result = $Sth->fetchAll();
+            $Sth->closeCursor();
+            unset($Pdo, $sql, $Sth);
+        }
 
         return $this->buildCacheContentFromResult($result);
     }// buildCacheContent
@@ -146,7 +165,7 @@ trait MetaFieldsTrait
         $result = $this->Db->delete($this->tableName, $data);
         unset($data);
 
-        $this->storageFile = 'object-id-' . $objectId . '-' . $this->tableName . '.php';
+        $this->storageFile = $this->getStorageFileName($objectId);
         $this->deleteCachedFile();
 
         if (is_bool($result)) {
@@ -174,7 +193,7 @@ trait MetaFieldsTrait
         $result = $this->Db->delete($this->tableName, $data);
         unset($data);
 
-        $this->storageFile = 'object-id-' . $objectId . '-' . $this->tableName . '.php';
+        $this->storageFile = $this->getStorageFileName($objectId);
         $this->deleteCachedFile();
 
         if (is_bool($result)) {
@@ -195,7 +214,7 @@ trait MetaFieldsTrait
      */
     protected function getFields(int $objectId, string $field_name = '')
     {
-        $this->storageFile = 'object-id-' . $objectId . '-' . $this->tableName . '.php';
+        $this->storageFile = $this->getStorageFileName($objectId);
         $this->objectId = $objectId;
 
         $this->loadCacheData([$this, 'buildCacheContent']);
@@ -282,6 +301,107 @@ trait MetaFieldsTrait
 
 
     /**
+     * Get storage file name with .php extension.
+     * 
+     * @since 1.2.9
+     * @param int $objectId The object ID.
+     * @return string Return storage file name. Example: object-id-311-user_fields.php
+     */
+    protected function getStorageFileName(int $objectId): string
+    {
+        return 'object-id-' . $objectId . '-' . $this->tableName . '.php';
+    }// getStorageFileName
+
+
+    /**
+     * List multiple objects and their fields.
+     * 
+     * @since 1.2.9
+     * @param array $objectIds The object IDs to search in.
+     * @param string $field_name The field name to search in. If this is empty then it will return all.
+     * @return array Return associative array where key is each object ID in the `$objectIds` and its result will be the same as we get from `getFields()` method with `$field_name` parameter.
+     */
+    protected function listObjectsFields(array $objectIds, string $field_name = ''): array
+    {
+        $this->listObjectsFieldsResult = [];
+
+        // filter out the object ids that is already has a cache in storage file.
+        $objectIdsInPlaceholder = [];
+        $bindValues = [];
+        $i = 0;
+        $origObjectIds = $objectIds;
+        foreach ($objectIds as $index => $objectId) {
+            $this->storageFile = $this->getStorageFileName(intval($objectId));
+            if ($this->isNeedRebuildCache() === false) {
+                unset($objectIds[$index]);
+                continue;
+            }
+            $objectIdsInPlaceholder[] = ':objectIdsIn' . $i;
+            $bindValues[':objectIdsIn' . $i] = intval($objectId);
+            ++$i;
+        }// endforeach;
+        unset($i, $index, $objectId);
+
+        if (!empty($objectIds)) {
+            // if $objectIds is not empty. means there are some object IDs that is needed to build cache files.
+            // make DB query to retrieve all fields of selected object IDs. -----------------------
+            $sql = 'SELECT * FROM `' . $this->tableName . '` WHERE `' . $this->objectIdName . '` IN (' . implode(', ', $objectIdsInPlaceholder) . ')';
+            /* @var $Sth \PDOStatement */
+            $Sth = $this->Db->PDO()->prepare($sql);
+            unset($sql);
+            foreach ($bindValues as $placeholder => $value) {
+                $Sth->bindValue($placeholder, $value);
+            }// endforeach;
+            unset($placeholder, $value);
+            $Sth->execute();
+            $this->listObjectsFieldsResult = $Sth->fetchAll();
+            $Sth->closeCursor();
+            unset($Sth);
+            // end make DB query to retrieve all fields of selected object IDs. -------------------
+
+            // loop build cache files. ------------------------------------------------------------------
+            if (is_iterable($this->listObjectsFieldsResult)) {
+                foreach ($objectIds as $index => $objectId) {
+                    $this->storageFile = $this->getStorageFileName(intval($objectId));
+                    // create new result only for this object ID.
+                    $objectIdResult = [];
+                    foreach ($this->listObjectsFieldsResult as $lofrIndex => $row) {
+                        if (intval($row->{$this->objectIdName}) === intval($objectId)) {
+                            $objectIdResult[] = $row;
+                            unset($this->listObjectsFieldsResult[$lofrIndex]);
+                        }
+                    }// endforeach;
+                    unset($lofrIndex, $row);
+
+                    $this->builtCacheContent = $objectIdResult;
+                    $content = $this->buildCacheContent();
+                    $this->buildCacheFile($content);
+                    unset($content, $objectIdResult);
+                }// endforeach;
+                unset($index, $objectId);
+            }// endif; is iterable `listObjectsFieldsResult` property.
+            // end loop build cache files. -------------------------------------------------------------
+        }// endif; $objectIds is not empty.
+        unset($bindValues, $objectIdsInPlaceholder);
+
+        // populate output result. ------------------------------------------------------------------
+        $output = [];
+        if (is_iterable($origObjectIds)) {
+            foreach ($origObjectIds as $objectId) {
+                $this->resetGetData();
+                $output[intval($objectId)] = $this->getFields(intval($objectId), $field_name);
+            }// endforeach;
+            unset($objectId);
+            $this->resetGetData();
+        }
+        unset($origObjectIds);
+        // end populate output result. -------------------------------------------------------------
+
+        return $output;
+    }// listObjectsFields
+
+
+    /**
      * Update meta field data.
      * 
      * This will be add if the data is not exists.
@@ -342,7 +462,7 @@ trait MetaFieldsTrait
         $updateResult = $this->Db->update($this->tableName, $data, $identifier);
         unset($data, $identifier);
 
-        $this->storageFile = 'object-id-' . $objectId . '-' . $this->tableName . '.php';
+        $this->storageFile = $this->getStorageFileName($objectId);
         $this->deleteCachedFile();
 
         return $updateResult;

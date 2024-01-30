@@ -201,14 +201,6 @@ class UserFieldsDb extends \Rdb\System\Core\Models\BaseModel
             unset($DateTime, $RdbaString);
         }
 
-        //if ($this->Container->has('Logger')) {
-            /* @var $Logger \Rdb\System\Libraries\Logger */
-            //$Logger = $this->Container->get('Logger');
-            //$Logger->write('modules/rdbadmin/models/userfieldsdb/generatekeywithwaittime', 0, 'output debug {output}', ['output' => $output]);
-            //$Logger->write('modules/rdbadmin/models/userfieldsdb/generatekeywithwaittime', 0, 'hash key {hash}', ['hash' => $hashKey]);
-            //unset($Logger);
-        //}
-
         unset($Encryption, $hashKey, $regenerate);
 
         return $output;
@@ -219,7 +211,7 @@ class UserFieldsDb extends \Rdb\System\Core\Models\BaseModel
      * Get user fields data by name.
      * 
      * @param int $user_id The user ID.
-     * @param string $field_name meta field name. If this field is empty then it will get all fields that matched this user ID.
+     * @param string $field_name Meta field name. If this field is empty then it will get all fields that matched this user ID.
      * @return mixed Return the row(s) of user fields data. If it was not found then return null.<br>
      *                          The return value may be unserialize if it is not scalar and not `null`.
      */
@@ -227,6 +219,20 @@ class UserFieldsDb extends \Rdb\System\Core\Models\BaseModel
     {
         return $this->getFields($user_id, $field_name);
     }// get
+
+
+    /**
+     * List multiple users fields.
+     * 
+     * @since 1.2.9
+     * @param array $userIds The multiple user IDs to search in.
+     * @param string $field_name Meta field name. If this field is empty then it will get all fields that matched user IDs.
+     * @return array Return associative array where key is each object ID in the `$objectIds` and its result will be the same as we get from `getFields()` method with `$field_name` parameter.
+     */
+    public function listUsersFields(array $userIds, string $field_name = ''): array
+    {
+        return $this->listObjectsFields($userIds, $field_name);
+    }// listUsersFields
 
 
     /**

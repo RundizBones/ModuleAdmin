@@ -311,7 +311,7 @@ trait CacheFileTrait
     /**
      * Check if it is needed to rebuild the cache file.
      * 
-     * This method was called from `getCacheFilePath()`.
+     * This method was called from `getCacheFilePath()`, `MetaFieldsTrait->listObjectsFields()`.
      * 
      * @return bool Return `true` if it is need to build, rebuild the cache file, return `false` if it is not.
      */

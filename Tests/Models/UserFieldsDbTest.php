@@ -95,11 +95,47 @@ class UserFieldsDbTest extends \Rdb\Tests\BaseTestCase
 
         // test original stored data must matched those retrieve via UserFieldsDb class.
         foreach ($this->userFieldsVals as $userFieldsRow) {
+            $UserFieldsDb->resetGetData();
             $cacheVal = $UserFieldsDb->get($userFieldsRow->user_id, $userFieldsRow->field_name);
             $this->assertSame($cacheVal->field_value, $Serializer->maybeUnserialize($userFieldsRow->field_value));
         }// endforeach;
         unset($userFieldsRow);
+        $UserFieldsDb->resetGetData();
     }// testGet
+
+
+    public function testListUsersFields()
+    {
+        // get first user ID found in DB.
+        $Sth = $this->Db->PDO()->prepare('SELECT * FROM `' . $this->Db->tableName('user_fields') . '` ORDER BY `user_id` ASC LIMIT 0, 2');
+        $Sth->execute();
+        $results = $Sth->fetchAll();
+        $Sth->closeCursor();
+        unset($Sth);
+        $userIds = [];
+        foreach ($results as $row) {
+            $userIds[] = intval($row->user_id);
+        }// endforeach;
+        unset($results, $row);
+
+        if (empty($userIds)) {
+            $this->markTestIncomplete('Could not found user id from `user_fields`.');
+            return ;
+        }
+
+        $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
+        $firstUserId = $userIds[0];
+        // get first single user fields.
+        $singleUResult = $UserFieldsDb->get($firstUserId);
+        $UserFieldsDb->resetGetData();
+        // get multiple users fields.
+        $multipleUResults = $UserFieldsDb->listUsersFields($userIds);
+        // tests
+        $this->assertEquals($singleUResult, $multipleUResults[$firstUserId]);
+        $this->assertSame(count($singleUResult), count($multipleUResults[$firstUserId]));
+        $this->assertSame(gettype($singleUResult), gettype($multipleUResults[$firstUserId]));
+        unset($multipleUResults, $singleUResult);
+    }// testListUsersFields
 
 
 }
