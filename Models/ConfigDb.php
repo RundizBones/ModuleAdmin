@@ -294,10 +294,11 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
     /**
      * Update multiple values.
      * 
-     * @param array $data Associative array where key is match config_name column and value is match config_value column.
+     * @param array $data Associative array where key is match `config_name` column and value is match `config_value` column.
+     * @param array $dataDesc Associative array of config description where array key is the `config_name`column and its value is match `config_description` column.
      * @return bool Return `true` if **all** data has been updated, `false` for otherwise.
      */
-    public function updateMultipleValues(array $data): bool
+    public function updateMultipleValues(array $data, array $dataDesc = []): bool
     {
         $i = 0;
         $configPrefixes = [];
@@ -311,9 +312,23 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
             $Sth->closeCursor();
             unset($sql, $Sth);
             if (empty($checkResult) || is_null($checkResult) || !is_object($checkResult)) {
-                $result = $this->Db->insert($this->Db->tableName('config'), ['config_value' => $config_value, 'config_name' => $config_name]);
+                $insertData = [
+                    'config_name' => $config_name,
+                    'config_value' => $config_value,
+                ];
+                if (array_key_exists($config_name, $dataDesc) && is_scalar($dataDesc[$config_name])) {
+                    $insertData['config_description'] = $dataDesc[$config_name];
+                }
+                $result = $this->Db->insert($this->Db->tableName('config'), $insertData);
+                unset($insertData);
             } else {
-                $result = $this->Db->update($this->Db->tableName('config'), ['config_value' => $config_value], ['config_name' => $config_name]);
+                $updateData = [
+                    'config_value' => $config_value,
+                ];
+                if (array_key_exists($config_name, $dataDesc) && is_scalar($dataDesc[$config_name])) {
+                    $updateData['config_description'] = $dataDesc[$config_name];
+                }
+                $result = $this->Db->update($this->Db->tableName('config'), $updateData, ['config_name' => $config_name]);
             }
 
             if ($result === true) {

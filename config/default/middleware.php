@@ -20,7 +20,8 @@
 
 $beforeMiddleware = [];
 
-$beforeMiddleware[11] = '\Rdb\Modules\RdbAdmin\Middleware\APIAccess:init';
+$beforeMiddleware[11] = '\Rdb\Modules\RdbAdmin\Middleware\ValidDomain:init';
+$beforeMiddleware[12] = '\Rdb\Modules\RdbAdmin\Middleware\APIAccess:init';
 
 return [
     'beforeMiddleware' => $beforeMiddleware,

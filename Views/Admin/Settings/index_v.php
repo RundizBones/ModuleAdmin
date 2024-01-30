@@ -43,6 +43,28 @@ $Plugins = $this->Container->get('Plugins');
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label" for="rdbadmin_SiteDomain"><?php echo __('Domain name'); ?></label>
+                                        <div class="control-wrapper">
+                                            <input id="rdbadmin_SiteDomain" type="text" name="rdbadmin_SiteDomain" value="" maxlength="800" placeholder="<?php echo esc__('domain.tld'); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <label class="control-label" for="rdbadmin_SiteDomainCheckUsage"><?php echo __('Check requested domain'); ?></label>
+                                            <div class="control-wrapper">
+                                                <label>
+                                                    <input id="rdbadmin_SiteDomainCheckUsage" type="checkbox" name="rdbadmin_SiteDomainCheckUsage" value="1">
+                                                    <?php echo __('Check current requested domain must be matched or not.'); ?> 
+                                                </label>
+                                                <div class="form-description">
+                                                    <?php
+                                                    echo __('If current requested domain does not match then it will be redirect to the domain you entered above.');
+                                                    echo ' ';
+                                                    echo __('The field domain name is required.');
+                                                    ?> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="form-group">
                                         <label class="control-label" for="rdbadmin_SiteTimezone"><?php echo __('Timezone'); ?></label>
                                         <div class="control-wrapper">
                                             <select id="rdbadmin_SiteTimezone" name="rdbadmin_SiteTimezone">

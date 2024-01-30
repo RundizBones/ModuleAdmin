@@ -26,6 +26,8 @@ CREATE TABLE IF NOT EXISTS `%$config%` (
 
 INSERT INTO `%$config%` (`config_name`, `config_value`, `config_description`) VALUES
 ('rdbadmin_SiteName', 'RundizBones', 'Website name.'),
+('rdbadmin_SiteDomain', '', 'A domain for this website.'),
+('rdbadmin_SiteDomainCheckUsage', '0', 'Check usage that current requested domain must match site domain or not. Require `rdbadmin_SiteDomain` value.'),
 ('rdbadmin_SiteTimezone', 'Asia/Bangkok', 'Website timezone.'),
 ('rdbadmin_SiteAllowOrigins', '', 'Allow origins for CORS.'),
 ('rdbadmin_SiteAPILimitAccess', '0', '0 to not limited access, 1 to limited access and required API key.'),

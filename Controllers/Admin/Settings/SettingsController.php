@@ -108,9 +108,11 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
 
             // prepare data for save.
             $data = [];
-            foreach ($this->getConfigNames() as $configName) {
+            $dataDesc = [];
+            foreach ($this->getConfigNames() as $configName => $configDescription) {
                 if (isset($_PATCH[$configName])) {
                     $data[$configName] = $this->Input->patch($configName);
+                    $dataDesc[$configName] = $configDescription;
                 }
 
                 // sanitize and validate value again.
@@ -144,6 +146,35 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                 $formValidated = false;
             }
 
+            if (!empty($data['rdbadmin_SiteDomain']) && stripos($data['rdbadmin_SiteDomain'], '/') !== false) {
+                // if found slash in the domain name.
+                $parsedUrl = parse_url($data['rdbadmin_SiteDomain']);
+                $data['rdbadmin_SiteDomain'] = ($parsedUrl['host'] ?? '');
+                unset($parsedUrl);
+
+                if (empty($data['rdbadmin_SiteDomain']) || filter_var($data['rdbadmin_SiteDomain'], FILTER_VALIDATE_DOMAIN) === false) {
+                    $output['formResultStatus'] = 'error';
+                    $output['formResultMessage'] = __('Please enter valid domain name.');
+                    http_response_code(400);
+                    $formValidated = false;
+                }
+            }
+
+            if (!isset($data['rdbadmin_SiteDomainCheckUsage']) || $data['rdbadmin_SiteDomainCheckUsage'] !== '1') {
+                $data['rdbadmin_SiteDomainCheckUsage'] = '0';
+            }
+            if (
+                $formValidated === true && 
+                $data['rdbadmin_SiteDomainCheckUsage'] === '1' &&
+                (
+                    empty($data['rdbadmin_SiteDomain'])
+                )
+            ) {
+                $output['formResultStatus'] = 'error';
+                $output['formResultMessage'] = __('Please enter domain name.');
+                http_response_code(400);
+                $formValidated = false;
+            }
             if (!isset($data['rdbadmin_SiteAPILimitAccess']) || $data['rdbadmin_SiteAPILimitAccess'] !== '1') {
                 $data['rdbadmin_SiteAPILimitAccess'] = '0';
             }
@@ -167,7 +198,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                 // update to DB.
                 try {
                     $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
-                    $updateResult = $ConfigDb->updateMultipleValues($data);
+                    $updateResult = $ConfigDb->updateMultipleValues($data, $dataDesc);
                     unset($ConfigDb);
 
                     if (is_object($this->Plugins)) {
@@ -218,6 +249,8 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                     http_response_code(400);
                 }
             }
+
+            unset($data, $dataDesc);
         } else {
             // if unable to validate token.
             $output['formResultStatus'] = 'error';
@@ -270,7 +303,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         $sql = 'SELECT * FROM `' . $this->Db->tableName('config') . '` WHERE `config_name` IN (' . implode(', ', $placeholders) . ')';
         $Sth = $this->Db->PDO()->prepare($sql);
         unset($placeholders, $sql);
-        $Sth->execute($configNames);
+        $Sth->execute(array_keys($configNames));
         $result = $Sth->fetchAll();
         $Sth->closeCursor();
         unset($Sth);
@@ -287,44 +320,47 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
      * 
      * This method was called from `getConfigData()`, `doUpdateAction()` methods.
      * 
-     * @return array
+     * @return array Return associative array where key is the config name and value is config description.
      */
     protected function getConfigNames(): array
     {
         return [
-            'rdbadmin_SiteName',
-            'rdbadmin_SiteTimezone',
-            'rdbadmin_SiteAllowOrigins',
-            'rdbadmin_SiteAPILimitAccess',
-            'rdbadmin_SiteAPIKey',
-            'rdbadmin_SiteFavicon',
-            'rdbadmin_UserRegister',
-            'rdbadmin_UserRegisterNotifyAdmin',
-            'rdbadmin_UserRegisterNotifyAdminEmails',
-            'rdbadmin_UserRegisterVerification',
-            'rdbadmin_UserRegisterWaitVerification',
-            'rdbadmin_UserRegisterDisallowedName',
-            'rdbadmin_UserRegisterDefaultRoles',
-            'rdbadmin_UserLoginBruteforcePreventByIp',
-            'rdbadmin_UserLoginBruteforcePreventByDc',
-            'rdbadmin_UserLoginMaxFail',
-            'rdbadmin_UserLoginMaxFailWait',
-            'rdbadmin_UserLoginNotRememberLength',
-            'rdbadmin_UserLoginRememberLength',
-            'rdbadmin_UserLoginLogsKeep',
-            'rdbadmin_UserConfirmEmailChange',
-            'rdbadmin_UserConfirmWait',
-            'rdbadmin_UserDeleteSelfGrant',
-            'rdbadmin_UserDeleteSelfKeep',
-            'rdbadmin_MailProtocol',
-            'rdbadmin_MailPath',
-            'rdbadmin_MailSmtpHost',
-            'rdbadmin_MailSmtpPort',
-            'rdbadmin_MailSmtpSecure',
-            'rdbadmin_MailSmtpUser',
-            'rdbadmin_MailSmtpPass',
-            'rdbadmin_MailSenderEmail',
-            'rdbadmin_AdminItemsPerPage'
+            'rdbadmin_SiteName' => 'Website name.',
+            'rdbadmin_SiteDomain' => 'A domain for this website.',
+            'rdbadmin_SiteDomainCheckUsage' => 'Check usage that current requested domain must match site domain or not. Require `rdbadmin_SiteDomain` value.',
+            'rdbadmin_SiteTimezone' => 'Website timezone.',
+            'rdbadmin_SiteAllowOrigins' => 'Allow origins for CORS.',
+            'rdbadmin_SiteAPILimitAccess' => '0 to not limited access, 1 to limited access and required API key.',
+            'rdbadmin_SiteAPIKey' => 'API key to access via REST API.',
+            'rdbadmin_SiteFavicon' => 'Favicon file related from public (root web) path. Do not begins with slash.',
+            'rdbadmin_UserRegister' => '0 to not allowed register (add by admin only), 1 to allowed.',
+            'rdbadmin_UserRegisterNotifyAdmin' => 'Send email to notify admin when new member registered? 0=no, 1=yes.',
+            'rdbadmin_UserRegisterNotifyAdminEmails' => 'The emails of administrator to notify when new member registered. Use comma (,) to add more than one.',
+            'rdbadmin_UserRegisterVerification' => 'User registration verification method.\n0=never verify (always activated)\n1=by user\'\'s email\n2=by admin.',
+            'rdbadmin_UserRegisterWaitVerification' => 'How many days that user needs to take action to verify their email on register or added by admin?',
+            'rdbadmin_UserRegisterDisallowedName' => 'Disallowed user_login, user_email, user_display_name. Use comma (,) to add multiple values, use double quote to escape and enclosure ("name contain, comma").',
+            'rdbadmin_UserRegisterDefaultRoles' => 'Default roles for newly register user. Use comma (,) to add multiple values.',
+            'rdbadmin_UserLoginCaptcha' => 'Use captcha for login?\n0=do not use\n1=use until login success and next time do not use it\n2=always use.',
+            'rdbadmin_UserLoginBruteforcePreventByIp' => 'Use brute-force prevention by IP address?\n0=do not use\n1=use it.',
+            'rdbadmin_UserLoginBruteforcePreventByDc' => 'Use brute-force prevention by Device cookie?\n0=do not use\n1=use it.',
+            'rdbadmin_UserLoginMaxFail' => 'Maximum times that client can login failed continuously. (For brute-force prevent by IP).\n\nMaximum times that client can login failed continuously during time period. (For brute-force prevent by Device Cookie).',
+            'rdbadmin_UserLoginMaxFailWait' => 'How many minutes that client have to wait until they are able to try login again? (For brute-force prevent by IP).\n\nHow many minutes in time period that client can try login until maximum attempts? (For brute-force prevent by Device Cookie).',
+            'rdbadmin_UserLoginNotRememberLength' => 'How many days to keep cookie when user login without remember ticked? 0 = until browser close',
+            'rdbadmin_UserLoginRememberLength' => 'How many days that user can remember their logins?',
+            'rdbadmin_UserLoginLogsKeep' => 'How many days that user logins data to keep in database?',
+            'rdbadmin_UserConfirmEmailChange' => 'When user change their email, do they need to confirm? 1=yes, 0=no.',
+            'rdbadmin_UserConfirmWait' => 'How many minutes that the user needs to take action such as confirm reset password, change email?',
+            'rdbadmin_UserDeleteSelfGrant' => 'Allow user to delete themself?\n0=do not allowed\n1=allowed.',
+            'rdbadmin_UserDeleteSelfKeep' => 'On delete user wether delete themself or by admin, How many days before it gets actual delete?',
+            'rdbadmin_MailProtocol' => 'The mail sending protocol.\nmail, sendmail, smtp',
+            'rdbadmin_MailPath' => 'The sendmail path.',
+            'rdbadmin_MailSmtpHost' => 'SMTP host',
+            'rdbadmin_MailSmtpPort' => 'SMTP port',
+            'rdbadmin_MailSmtpSecure' => 'SMTP encryption\n\'\'\'\' (empty), ssl, tls',
+            'rdbadmin_MailSmtpUser' => 'SMTP username',
+            'rdbadmin_MailSmtpPass' => 'SMTP password',
+            'rdbadmin_MailSenderEmail' => 'The sender email (send from this email).',
+            'rdbadmin_AdminItemsPerPage' => 'Number of items will be display per page for admin pages.',
         ];
     }// getConfigNames
 
