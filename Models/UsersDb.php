@@ -485,6 +485,28 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
             $i = 0;
             $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
 
+            // loop set user IDs to retrieve all at once from tables.--------------
+            $userIds = [];
+            foreach ($result as $key => $row) {
+                $userIds[] = (int) $row->user_id;
+            }// endforeach;
+            unset($key, $row);
+            // end loop set user IDs to retrieve all at once from tables.----------
+
+            // retrieve data related to user all at once to save DB query. -----------
+            if (!empty($userIds)) {
+                $usersFieldsData = $UserFieldsDb->listUsersFields($userIds);
+                if (!is_array($usersFieldsData)) {
+                    $usersFieldsData = [];
+                }
+                $usersRolesData = $this->listUsersRolesForUserIds($userIds);
+                if (!is_array($usersRolesData)) {
+                    $usersRolesData = [];
+                }
+            }
+            unset($userIds);
+            // end retrieve data related to user all at once to save DB query. -------
+
             foreach ($result as $row) {
                 if (!empty($row->user_statustext) && function_exists('__')) {
                     $row->user_statustext = __($row->user_statustext);
@@ -492,31 +514,31 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
                 unset($row->user_password);
 
                 // set `user_fields` table
-                $resultFields = $UserFieldsDb->get($row->user_id);
-                if (is_array($resultFields)) {
-                    $row->user_fields = $resultFields;
+                if (
+                    isset($usersFieldsData) &&
+                    array_key_exists(intval($row->user_id), $usersFieldsData) && 
+                    is_array($usersFieldsData[intval($row->user_id)])
+                ) {
+                    $row->user_fields = $usersFieldsData[intval($row->user_id)];
                 } else {
                     $row->user_fields = [];
                 }
-                unset($resultFields);
 
                 // set `users_roles` table
-                $sql = 'SELECT * FROM `' . $this->Db->tableName('users_roles') . '` AS `usrs`
-                    INNER JOIN `' . $this->Db->tableName('user_roles') . '` AS `urs` ON `usrs`.`userrole_id` = `urs`.`userrole_id`
-                    WHERE `usrs`.`user_id` = :user_id
-                ';
-                $Sth = $this->Db->PDO()->prepare($sql);
-                unset($sql);
-                $Sth->bindValue(':user_id', $row->user_id, \PDO::PARAM_INT);
-                $Sth->execute();
-                $row->users_roles = $Sth->fetchAll();
-                $Sth->closeCursor();
-                unset($Sth);
+                if (
+                    isset($usersRolesData) && 
+                    array_key_exists(intval($row->user_id), $usersRolesData)
+                ) {
+                    $row->users_roles = $usersRolesData[intval($row->user_id)];
+                } else {
+                    $row->users_roles = [];
+                }
 
                 $newResult[$i] = $row;
                 $i++;
             }// endforeach;
             unset($row);
+            unset($usersFieldsData, $usersRolesData);
 
             $result = $newResult;
             unset($i, $newResult, $UserFieldsDb);
@@ -527,6 +549,59 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
         unset($result);
         return $output;
     }// listItems
+
+
+    /**
+     * List user's roles by search from multiple user IDs.
+     * 
+     * @since 1.2.9
+     * @param array $userIds The user IDs to search for.
+     * @return array Return result from `fetchAll()` or empty array if not found.
+     */
+    protected function listUsersRolesForUserIds(array $userIds): array
+    {
+        $userIdsInPlaceholder = [];
+        $bindValues = [];
+        $i = 0;
+        foreach ($userIds as $index => $user_id) {
+            $userIdsInPlaceholder[] = ':userIdsIn' . $i;
+            $bindValues[':userIdsIn' . $i] = intval($user_id);
+            ++$i;
+        }// endforeach;
+        unset($i, $index, $user_id);
+
+        $sql = 'SELECT * FROM `' . $this->Db->tableName('users_roles') . '` AS `usrs`
+            INNER JOIN `' . $this->Db->tableName('user_roles') . '` AS `urs` ON `usrs`.`userrole_id` = `urs`.`userrole_id`
+            WHERE `usrs`.`user_id` IN (' . implode(', ', $userIdsInPlaceholder) . ')
+        ';
+        $Sth = $this->Db->PDO()->prepare($sql);
+        unset($sql, $userIdsInPlaceholder);
+        foreach ($bindValues as $placeholder => $value) {
+            $Sth->bindValue($placeholder, $value);
+        }// endforeach;
+        unset($bindValues, $placeholder, $value);
+        $Sth->execute();
+        $result = $Sth->fetchAll();
+        $Sth->closeCursor();
+        unset($Sth);
+
+        $newResult = [];
+        foreach ($userIds as $index => $user_id) {
+            $newResult[intval($user_id)] = [];
+            if (is_iterable($result)) {
+                foreach ($result as $resultIndex => $row) {
+                    if (intval($row->user_id) === intval($user_id)) {
+                        $newResult[intval($user_id)][] = $row;
+                    }
+                }// endforeach;
+                unset($resultIndex, $row);
+            }
+        }// endforeach; user IDs.
+        unset($index, $user_id);
+        unset($result);
+
+        return $newResult;
+    }// listUsersRolesForUserIds
 
 
     /**

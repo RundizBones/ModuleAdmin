@@ -319,7 +319,7 @@ trait MetaFieldsTrait
      * @since 1.2.9
      * @param array $objectIds The object IDs to search in.
      * @param string $field_name The field name to search in. If this is empty then it will return all.
-     * @return array Return associative array where key is each object ID in the `$objectIds` and its result will be the same as we get from `getFields()` method with `$field_name` parameter.
+     * @return array Return associative array where key is each object ID (int) in the `$objectIds` and its result will be the same as we get from `getFields()` method with `$field_name` parameter.
      */
     protected function listObjectsFields(array $objectIds, string $field_name = ''): array
     {
@@ -362,17 +362,19 @@ trait MetaFieldsTrait
             // loop build cache files. ------------------------------------------------------------------
             if (is_iterable($this->listObjectsFieldsResult)) {
                 foreach ($objectIds as $index => $objectId) {
-                    $this->storageFile = $this->getStorageFileName(intval($objectId));
+                    $objectId = intval($objectId);
+                    $this->storageFile = $this->getStorageFileName($objectId);
                     // create new result only for this object ID.
                     $objectIdResult = [];
                     foreach ($this->listObjectsFieldsResult as $lofrIndex => $row) {
-                        if (intval($row->{$this->objectIdName}) === intval($objectId)) {
+                        if (intval($row->{$this->objectIdName}) === $objectId) {
                             $objectIdResult[] = $row;
                             unset($this->listObjectsFieldsResult[$lofrIndex]);
                         }
                     }// endforeach;
                     unset($lofrIndex, $row);
 
+                    $this->objectId = $objectId;
                     $this->builtCacheContent = $objectIdResult;
                     $content = $this->buildCacheContent();
                     $this->buildCacheFile($content);
