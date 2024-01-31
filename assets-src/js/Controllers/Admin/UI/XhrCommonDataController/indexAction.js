@@ -360,7 +360,8 @@ class RdbaUiXhrCommonDataController {
                 method: 'GET',
                 dataType: 'json',
                 headers: {
-                    'sessionKey': userData.userlogin_session_key
+                    'sessionKey': userData.userlogin_session_key,
+                    'rundizbones-no-profiler': 'true',
                 }
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
