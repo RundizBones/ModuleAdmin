@@ -52,40 +52,19 @@ abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\Bas
      */
     protected function checkLogin()
     {
-        $isLoggedin = $this->checkLoginFromContainer();
-        if (!isset($isLoggedin) || false === $isLoggedin) {
-            // if check from container return `false`. it is possible that user still logged in but older than N seconds.
-            // re-check again.
-            $recheckIsLoggedin = true;
-            $isLoggedin = $this->isUserLoggedIn();
-        }
-
         if (!$this->Container->has('UsersSessionsTrait')) {
-            $this->Container['UsersSessionsTrait'] = function ($c) use ($isLoggedin) {
-                $TraitAsClass = new \stdClass();
-                $TraitAsClass->totalLoggedInSessions = $this->totalLoggedInSessions;
-                $TraitAsClass->userSessionCookieData = $this->userSessionCookieData;
-                $TraitAsClass->isUserLoggedIn = new \stdClass();
-                $TraitAsClass->isUserLoggedIn->result = $isLoggedin;
-                $TraitAsClass->isUserLoggedIn->lastCheckUTC = gmdate('Y-m-d H:i:s');
-                return $TraitAsClass;
+            $this->Container['UsersSessionsTrait'] = function ($c) {
+                return new \stdClass();
             };
         }
 
-        if (isset($recheckIsLoggedin) && true === $recheckIsLoggedin) {
-            // if there is marked that there is recheck login.
-            // update the container data.
-            if ($this->Container->has('UsersSessionsTrait')) {
-                $TraitAsClass = $this->Container->get('UsersSessionsTrait');
-                $TraitAsClass->isUserLoggedIn = new \stdClass();
-                $TraitAsClass->isUserLoggedIn->result = $isLoggedin;
-                $TraitAsClass->isUserLoggedIn->lastCheckUTC = gmdate('Y-m-d H:i:s');
-                // that's it. no need to set back to container.
-                unset($TraitAsClass);
-            }
-        }
+        $isLoggedin = $this->isUserLoggedIn();
 
-        unset($recheckIsLoggedin);
+        if ($this->Container->has('UsersSessionsTrait')) {
+            $TraitAsClass = $this->Container->get('UsersSessionsTrait');
+            $TraitAsClass->totalLoggedInSessions = $this->totalLoggedInSessions;
+            $TraitAsClass->userSessionCookieData = $this->userSessionCookieData;
+        }
 
         if ($isLoggedin === false) {
             // if not logged in.

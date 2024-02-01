@@ -56,10 +56,15 @@ trait SessionsTrait
         $output = false;
 
         $UserLoginsDb = new \Rdb\Modules\RdbAdmin\Models\UserLoginsDb($this->Container);
-        $isLoggedIn = $UserLoginsDb->isUserLoggedIn(
-            $user_id, 
-            ['userlogin_session_key' => $userlogin_session_key]
-        );
+
+        list($TraitAsClass, $isLoggedIn) = $this->sessionsTraitCheckIsLoggedInFromContainer();
+
+        if (!isset($isLoggedIn)) {
+            $isLoggedIn = $UserLoginsDb->isUserLoggedIn(
+                $user_id, 
+                ['userlogin_session_key' => $userlogin_session_key]
+            );
+        }
 
         if ($isLoggedIn !== false) {
             // if user is logged in single session (true) or multiple sessions (int). NOT false.
@@ -125,7 +130,14 @@ trait SessionsTrait
                 $this->totalLoggedInSessions = 1;
                 $output = true;
             }
-        }
+
+            if (isset($TraitAsClass) && isset($output) && true === $output) {
+                // if there is object from container and result of checking is `true`.
+                $TraitAsClass->isUserLoggedIn = new \stdClass();
+                $TraitAsClass->isUserLoggedIn->result = $isLoggedIn;
+                $TraitAsClass->isUserLoggedIn->lastCheckUTC = gmdate('Y-m-d H:i:s');
+            }
+        }// endif; logged in check is NOT false.
         unset($isLoggedIn, $UserLoginsDb);
 
         return $output;
@@ -310,6 +322,44 @@ trait SessionsTrait
         $Sth->closeCursor();
         unset($sql, $Sth);
     }// sessionTraitLogoutPreviousSessions
+
+
+    /**
+     * Check is logged in from container if exists.
+     * 
+     * @since 1.2.9
+     * @return array Return indexed array where first index is `UsersSessionsTrait` object in the container if exists. This value can be `null`.<br>
+     *              Second index is result of "is logged in". This value can be `null`.<br>
+     */
+    private function sessionsTraitCheckIsLoggedInFromContainer(): array
+    {
+        $TraitAsClass = null;
+        $isLoggedIn = null;
+
+        if ($this->Container->has('UsersSessionsTrait')) {
+            $TraitAsClass = $this->Container->get('UsersSessionsTrait');
+            if (
+                isset($TraitAsClass->isUserLoggedIn->result) &&
+                isset($TraitAsClass->isUserLoggedIn->lastCheckUTC)
+            ) {
+                // if there is data in container.
+                // retrieve data from container instead of query from DB.
+                $DateTime = new \DateTime('now', new \DateTimeZone('UTC'));
+                $DateTimeInContainer = \DateTime::createFromFormat(
+                    'Y-m-d H:i:s', 
+                    $TraitAsClass->isUserLoggedIn->lastCheckUTC, 
+                    new \DateTimeZone('UTC')
+                );
+                if (($DateTime->getTimestamp() - $DateTimeInContainer->getTimestamp()) <= 180) {
+                    // if the data is still new.
+                    $isLoggedIn = $TraitAsClass->isUserLoggedIn->result;
+                }
+                unset($DateTime, $DateTimeInContainer);
+            }// endif; there is data in container.
+        }
+
+        return [$TraitAsClass, $isLoggedIn];
+    }// sessionsTraitCheckIsLoggedInFromContainer
 
 
 }
