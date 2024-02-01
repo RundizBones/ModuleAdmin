@@ -184,27 +184,32 @@ class WidgetsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         $PDO = $this->Db->PDO();
         $usersTable = $this->Db->tableName('users');
 
-        $sql = 'SELECT COUNT(*) FROM `' . $usersTable . '` WHERE `user_deleted` = 0';
+        $sql = 'SELECT `user_id`, `user_deleted`, `user_status` FROM `' . $usersTable . '` WHERE `user_deleted` = 0';
         $Sth = $PDO->prepare($sql);
+        unset($sql);
         $Sth->execute();
-        $output['totalUsers'] = $Sth->fetchColumn();
+        $results = $Sth->fetchAll();
         $Sth->closeCursor();
+        unset($PDO, $Sth);
 
-        $sql2 = $sql . ' AND `user_status` = 1';
-        $Sth = $PDO->prepare($sql2);
-        $Sth->execute();
-        $output['totalUsersEnabled'] = $Sth->fetchColumn();
-        $Sth->closeCursor();
-        unset($sql2);
+        $output['totalUsers'] = count($results);
+        $totalEnabled = 0;
+        $totalDisabled = 0;
+        if (is_iterable($results)) {
+            foreach ($results as $row) {
+                if ($row->user_status === '1') {
+                    ++$totalEnabled;
+                } elseif ($row->user_status === '0') {
+                    ++$totalDisabled;
+                }
+            }// endforeach;
+            unset($row);
+        }
+        unset($results);
 
-        $sql2 = $sql . ' AND `user_status` = 0';
-        $Sth = $PDO->prepare($sql2);
-        $Sth->execute();
-        $output['totalUsersDisabled'] = $Sth->fetchColumn();
-        $Sth->closeCursor();
-        unset($sql2);
-
-        unset($PDO, $sql, $Sth);
+        $output['totalUsersEnabled'] = $totalEnabled;
+        $output['totalUsersDisabled'] = $totalDisabled;
+        unset($totalDisabled, $totalEnabled);
 
         $return['content'] = $this->Views->render('Admin/UI/Widgets/userSummary_v', $output);
 
