@@ -52,17 +52,40 @@ abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\Bas
      */
     protected function checkLogin()
     {
-        $isLoggedin = $this->isUserLoggedIn();
+        $isLoggedin = $this->checkLoginFromContainer();
+        if (!isset($isLoggedin) || false === $isLoggedin) {
+            // if check from container return `false`. it is possible that user still logged in but older than N seconds.
+            // re-check again.
+            $recheckIsLoggedin = true;
+            $isLoggedin = $this->isUserLoggedIn();
+        }
 
         if (!$this->Container->has('UsersSessionsTrait')) {
-            $TraitAsClass = new \stdClass();
-            $TraitAsClass->totalLoggedInSessions = $this->totalLoggedInSessions;
-            $TraitAsClass->userSessionCookieData = $this->userSessionCookieData;
-            $this->Container['UsersSessionsTrait'] = function ($c) use ($TraitAsClass) {
+            $this->Container['UsersSessionsTrait'] = function ($c) use ($isLoggedin) {
+                $TraitAsClass = new \stdClass();
+                $TraitAsClass->totalLoggedInSessions = $this->totalLoggedInSessions;
+                $TraitAsClass->userSessionCookieData = $this->userSessionCookieData;
+                $TraitAsClass->isUserLoggedIn = new \stdClass();
+                $TraitAsClass->isUserLoggedIn->result = $isLoggedin;
+                $TraitAsClass->isUserLoggedIn->lastCheckUTC = gmdate('Y-m-d H:i:s');
                 return $TraitAsClass;
             };
-            unset($TraitAsClass);
         }
+
+        if (isset($recheckIsLoggedin) && true === $recheckIsLoggedin) {
+            // if there is marked that there is recheck login.
+            // update the container data.
+            if ($this->Container->has('UsersSessionsTrait')) {
+                $TraitAsClass = $this->Container->get('UsersSessionsTrait');
+                $TraitAsClass->isUserLoggedIn = new \stdClass();
+                $TraitAsClass->isUserLoggedIn->result = $isLoggedin;
+                $TraitAsClass->isUserLoggedIn->lastCheckUTC = gmdate('Y-m-d H:i:s');
+                // that's it. no need to set back to container.
+                unset($TraitAsClass);
+            }
+        }
+
+        unset($recheckIsLoggedin);
 
         if ($isLoggedin === false) {
             // if not logged in.
@@ -95,7 +118,7 @@ abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\Bas
             header('Location: ' . $redirectUrl);
             unset($domainProtocol, $redirectUrl, $Url);
             exit();
-        }
+        }// endif; not logged in.
 
         /*
          * PluginHook: Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseController->checkLogin.afterCheckLoggedIn
@@ -108,6 +131,47 @@ abstract class AdminBaseController extends \Rdb\Modules\RdbAdmin\Controllers\Bas
         $Plugins->doHook(__CLASS__.'->'.__FUNCTION__.'.afterCheckLoggedIn');
         unset($Plugins);
     }// checkLogin
+
+
+    /**
+     * Check login from container to reduce call to DB.
+     * 
+     * The check data in container must not older than N seconds.<br>
+     * This data in container will be create on every HTTP request but this admin base controller can be called multiple times per request.<br>
+     * It is depend on how other classes called to another controllers.
+     * 
+     * @return bool Return `true` if logged in not over than N seconds. Return `false` for otherwise.
+     */
+    private function checkLoginFromContainer(): bool
+    {
+        if ($this->Container->has('UsersSessionsTrait')) {
+            $TraitAsClass = $this->Container->get('UsersSessionsTrait');
+
+            if (
+                isset($TraitAsClass->isUserLoggedIn->result) &&
+                isset($TraitAsClass->isUserLoggedIn->lastCheckUTC) &&
+                true === $TraitAsClass->isUserLoggedIn->result
+            ) {
+                // if logged in.
+                $DateTime = new \DateTime('now', new \DateTimeZone('UTC'));
+                $DateTimeInContainer = \DateTime::createFromFormat(
+                    'Y-m-d H:i:s', 
+                    $TraitAsClass->isUserLoggedIn->lastCheckUTC, 
+                    new \DateTimeZone('UTC')
+                );
+
+                if (($DateTime->getTimestamp() - $DateTimeInContainer->getTimestamp()) <= 180) {
+                    // last check is less than or equal to N seconds. still fresh, use stored data in container to reduce DB call.
+                    unset($DateTime, $DateTimeInContainer);
+                    return $TraitAsClass->isUserLoggedIn->result;
+                }
+                unset($DateTime, $DateTimeInContainer);
+            }
+            unset($TraitAsClass);
+        }// endif; there is `UsersSessionsTrait` in container.
+
+        return false;
+    }// checkLoginFromContainer
 
 
     /**
