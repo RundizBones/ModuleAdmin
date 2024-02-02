@@ -135,7 +135,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
                     }
                 }
             }
-            unset($configName);
+            unset($configDescription, $configName);
 
             // form validation. ----------------------------------------------------------------------------
             $formValidated = true;
@@ -306,7 +306,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         $Sth->execute(array_keys($configNames));
         $result = $Sth->fetchAll();
         $Sth->closeCursor();
-        unset($Sth);
+        unset($configNames, $Sth);
 
         if (is_array($result)) {
             return $result;
