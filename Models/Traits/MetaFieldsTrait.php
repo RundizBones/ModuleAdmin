@@ -28,7 +28,8 @@ trait MetaFieldsTrait
 
 
     /**
-     * @var array The temporary result where the query will be queried to selected object ID. This will be reset to `null` once called `buildCacheContent()` method and found this temporary data.
+     * @var array|null The temporary result where the query was called to selected object ID. The result of DB queried will be array wether it is empty or not.<br>
+     *              This will be reset to `null` once called `buildCacheContent()` method and found that this is not `null`.
      * @since 1.2.9
      */
     protected $builtCacheContent;
@@ -131,11 +132,12 @@ trait MetaFieldsTrait
      */
     public function buildCacheContent(): string
     {
-        if (!empty($this->builtCacheContent)) {
+        if (!is_null($this->builtCacheContent)) {
             $result = $this->builtCacheContent;
             $this->builtCacheContent = null;
         } else {
             $sql = 'SELECT * FROM `' . $this->tableName . '` WHERE `' . $this->objectIdName . '` = :object_id';
+            /* @var $Pdo \PDO */
             $Pdo = $this->Db->PDO();
             $Sth = $Pdo->prepare($sql);
             $Sth->bindValue(':object_id', $this->objectId);
@@ -357,6 +359,7 @@ trait MetaFieldsTrait
             $this->listObjectsFieldsResult = $Sth->fetchAll();
             $Sth->closeCursor();
             unset($Sth);
+            $foundResults = [];
             // end make DB query to retrieve all fields of selected object IDs. -------------------
 
             // loop build cache files. ------------------------------------------------------------------
@@ -370,6 +373,10 @@ trait MetaFieldsTrait
                         if (intval($row->{$this->objectIdName}) === $objectId) {
                             $objectIdResult[] = $row;
                             unset($this->listObjectsFieldsResult[$lofrIndex]);
+                            if (!array_key_exists($objectId, $foundResults)) {
+                                // if there is no marked as found with this object id before, mark it.
+                                $foundResults[$objectId] = true;
+                            }
                         }
                     }// endforeach;
                     unset($lofrIndex, $row);
@@ -390,13 +397,14 @@ trait MetaFieldsTrait
         $output = [];
         if (is_iterable($origObjectIds)) {
             foreach ($origObjectIds as $objectId) {
+                $objectId = intval($objectId);
                 $this->resetGetData();
-                $output[intval($objectId)] = $this->getFields(intval($objectId), $field_name);
+                $output[$objectId] = (isset($foundResults[$objectId]) ? $this->getFields($objectId, $field_name) : null);
             }// endforeach;
             unset($objectId);
             $this->resetGetData();
         }
-        unset($origObjectIds);
+        unset($foundResults, $origObjectIds);
         // end populate output result. -------------------------------------------------------------
 
         return $output;
