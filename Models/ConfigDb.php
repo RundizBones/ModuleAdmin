@@ -73,6 +73,24 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
 
 
     /**
+     * Call to `bindValue()` from `$Sth` argument.
+     * 
+     * This is for work with `updateMultipleValues()` method.
+     * 
+     * @sin 1.2.9
+     * @param \PDOStatement $Sth
+     * @param array $bindValues The array of bind values where key is placeholder and value is its value.
+     */
+    private function bindValuesForUpdateMultipleVals(\PDOStatement $Sth, array $bindValues)
+    {
+        foreach ($bindValues as $bindPlaceholder => $bindValue) {
+            $Sth->bindValue($bindPlaceholder, $bindValue);
+        }// endforeach;
+        unset($bindPlaceholder, $bindValue);
+    }// bindValuesForUpdateMultipleVals
+
+
+    /**
      * Get DB result and build cache content.
      * 
      * @return string Return generated data in php language that is ready to use as cache.
@@ -116,6 +134,69 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
 
         return $output;
     }// buildCacheContent
+
+
+    /**
+     * Build/alter the variables for description column for use in `updateMultipleValues()` method.
+     * 
+     * @sin 1.2.9
+     * @param array $dataDesc The input data description.
+     * @param array $configNamesToCheck The config name to check input name (config name) must be matched. For example config for check with exists (will update), or not exists (will insert).
+     * @param array $cfvPlaceholders The config description placeholders to be altered.
+     * @param array $cfvBindValues The config description for use with bind values to be altered.
+     */
+    private function buildPlaceholdersAndBindValuesDescForUpdateMultipleVals(
+        array $dataDesc,
+        array $configNamesToCheck,
+        array &$cfdPlaceholders,
+        array &$cfdBindValues
+    ) {
+        $i = 0;
+        foreach ($dataDesc as $config_name => $config_description) {
+            if (in_array($config_name, $configNamesToCheck)) {
+                $cfdPlaceholders[$i] = ':config_description' . $i;
+                $cfdBindValues[':config_description' . $i] = $config_description;
+                ++$i;
+            }// endif;
+        }// endforeach;
+        unset($config_description, $config_name, $i);
+    }// buildPlaceholdersAndBindValuesDescForUpdateMultipleVals
+
+
+    /**
+     * Build/alter the variables for `updateMultipleValues()` method.
+     * 
+     * @since 1.2.9
+     * @param array $data The input data.
+     * @param array $configNamesToCheck The config name to check input name (config name) must be matched. For example config for check with exists (will update), or not exists (will insert).
+     * @param array $configPrefixes The config prefixes to use later with clear cache. This value will be alter.
+     * @param array $cfnPlaceholders The config name placeholders to be altered.
+     * @param array $cfnBindValues The config name for use with bind values to be altered.
+     * @param array $cfvPlaceholders The config value placeholders to be altered.
+     * @param array $cfvBindValues The config value for use with bind values to be altered.
+     */
+    private function buildPlaceholdersAndBindValuesForUpdateMultipleVals(
+        array $data,
+        array $configNamesToCheck,
+        array &$configPrefixes, 
+        array &$cfnPlaceholders,
+        array &$cfnBindValues,
+        array &$cfvPlaceholders,
+        array &$cfvBindValues
+    ) {
+        $i = 0;
+        foreach ($data as $config_name => $config_value) {
+            if (in_array($config_name, $configNamesToCheck)) {
+                $configPrefixes[] = $this->getConfigPrefix($config_name);
+                $cfnPlaceholders[$i] = ':config_name' . $i;
+                $cfnBindValues[':config_name' . $i] = $config_name;
+                $cfvPlaceholders[$i] = ':config_value' . $i;
+                $cfvBindValues[':config_value' . $i] = $config_value;
+                ++$i;
+            }// endif;
+        }// endforaech;
+        unset($config_name, $config_value, $i);
+    }// buildPlaceholdersAndBindValuesForUpdateMultipleVals
 
 
     /**
@@ -296,49 +377,176 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
      * 
      * @param array $data Associative array where key is match `config_name` column and value is match `config_value` column.
      * @param array $dataDesc Associative array of config description where array key is the `config_name`column and its value is match `config_description` column.
-     * @return bool Return `true` if **all** data has been updated, `false` for otherwise.
+     * @return bool Return `true` if **all** data have been updated, `false` for otherwise.
+     * @throws \OutOfRangeException Throw the exception if `$dataDesc` is not empty but have not same amount of array values.
      */
     public function updateMultipleValues(array $data, array $dataDesc = []): bool
     {
-        $i = 0;
-        $configPrefixes = [];
-        foreach ($data as $config_name => $config_value) {
-            $configPrefixes[] = $this->getConfigPrefix($config_name);
-            $sql = 'SELECT `config_name` FROM `' . $this->Db->tableName('config') . '` WHERE `config_name` = :config_name';
+        // use `INSERT ... ON DUPLICATE KEY UPDATE` ( https://stackoverflow.com/a/34866431/128761 ) can cause the data rows re-order and may have unwanted records.
+
+        // check arguments. -----------------
+        if (!empty($dataDesc)) {
+            if (count($data) !== count($dataDesc)) {
+                throw new \OutOfRangeException('The argument $data and $dataDesc should have the same amount of array values.');
+            }
+        }// endif;
+
+        if (empty($data)) {
+            return true;
+        }
+        // end check arguments. -----------
+
+        // retrieve check results, all at once. ----------------------------------------------------
+        $sql = 'SELECT `config_name` FROM `rdb_config` WHERE `config_name` IN (' . rtrim(str_repeat('?, ', count($data)), " \n\r\t\v\x00,") . ')';
+        $Sth = $this->Db->PDO()->prepare($sql);
+        unset($sql);
+        $Sth->execute(array_keys($data));
+        $checkResults = $Sth->fetchAll();
+        $Sth->closeCursor();
+        unset($Sth);
+
+        $configNameExists = [];
+        if (!empty($checkResults)) {
+            foreach ($checkResults as $row) {
+                $configNameExists[] = $row->config_name;
+            }// endforeach;
+            unset($row);
+        }
+        unset($checkResults);
+        $configNameNotExists = array_diff(array_keys($data), $configNameExists);
+        // end retrieve check results, all at once. -----------------------------------------------
+
+        $configPrefixes = [];// for use on the bottom of this method to clear config cache.
+        // build bind placeholders & values for `INSERT`. -------------
+        $insertCfnPlaceholders = [];
+        $insertCfnBindValues = [];
+        $insertCfvPlaceholders = [];
+        $insertCfvBindValues = [];
+        $this->buildPlaceholdersAndBindValuesForUpdateMultipleVals(
+            $data,
+            $configNameNotExists,
+            $configPrefixes,
+            $insertCfnPlaceholders,
+            $insertCfnBindValues,
+            $insertCfvPlaceholders,
+            $insertCfvBindValues
+        );
+
+        if (!empty($dataDesc)) {
+            $insertCfdPlaceholders = [];
+            $insertCfdBindValues = [];
+            $this->buildPlaceholdersAndBindValuesDescForUpdateMultipleVals(
+                $dataDesc,
+                $configNameNotExists,
+                $insertCfdPlaceholders,
+                $insertCfdBindValues
+            );
+        }
+        unset($configNameNotExists);
+        // end build bind placeholders & values for `INSERT`. --------
+
+        // build bind placeholders & values for `UPDATE`. ------------
+        $updateCfnPlaceholders = [];
+        $updateCfnBindValues = [];
+        $updateCfvPlaceholders = [];
+        $updateCfvBindValues = [];
+        $this->buildPlaceholdersAndBindValuesForUpdateMultipleVals(
+            $data,
+            $configNameExists,
+            $configPrefixes,
+            $updateCfnPlaceholders,
+            $updateCfnBindValues,
+            $updateCfvPlaceholders,
+            $updateCfvBindValues
+        );
+
+        if (!empty($dataDesc)) {
+            $updateCfdPlaceholders = [];
+            $updateCfdBindValues = [];
+            $this->buildPlaceholdersAndBindValuesDescForUpdateMultipleVals(
+                $dataDesc,
+                $configNameExists,
+                $updateCfdPlaceholders,
+                $updateCfdBindValues
+            );
+        }
+        unset($configNameExists);
+        // end build bind placeholders & values for `UPDATE`. -------
+
+        // execute `INSERT` command. --------------------------------
+        if (!empty($insertCfnPlaceholders)) {
+            $sql = 'INSERT INTO `' . $this->Db->tableName('config') . '` (`config_name`, `config_value`' . (!empty($dataDesc) ? ', `config_description`' : '') . ')' . PHP_EOL;
+            $sql .= 'VALUES' . PHP_EOL;
+            $totalPlaceholders = count($insertCfnPlaceholders);
+            for ($i = 0; $i < $totalPlaceholders; ++$i) {
+                $sql .= '    (' . $insertCfnPlaceholders[$i] . ', ' . $insertCfvPlaceholders[$i];
+                if (isset($insertCfdPlaceholders) && is_array($insertCfdPlaceholders) && array_key_exists($i, $insertCfdPlaceholders)) {
+                    $sql .= ', ' . $insertCfdPlaceholders[$i];
+                }
+                $sql .= ')';
+                if (($i + 1) < $totalPlaceholders) {
+                    $sql .= ', ';
+                }
+                $sql .= PHP_EOL;
+            }// endfor;
+            unset($i, $totalPlaceholders);
+
             $Sth = $this->Db->PDO()->prepare($sql);
-            $Sth->bindValue(':config_name', $config_name);
+            unset($sql);
+            $this->bindValuesForUpdateMultipleVals($Sth, $insertCfnBindValues);
+            $this->bindValuesForUpdateMultipleVals($Sth, $insertCfvBindValues);
+            if (isset($updateCfdBindValues) && is_array($updateCfdBindValues)) {
+                $this->bindValuesForUpdateMultipleVals($Sth, $insertCfdBindValues);
+            }
+            unset($insertCfdBindValues, $insertCfdPlaceholders);
+            unset($insertCfnBindValues, $insertCfnPlaceholders, $insertCfvBindValues, $insertCfvPlaceholders);
             $Sth->execute();
-            $checkResult = $Sth->fetchObject();
-            $Sth->closeCursor();
-            unset($sql, $Sth);
-            if (empty($checkResult) || is_null($checkResult) || !is_object($checkResult)) {
-                $insertData = [
-                    'config_name' => $config_name,
-                    'config_value' => $config_value,
-                ];
-                if (array_key_exists($config_name, $dataDesc) && is_scalar($dataDesc[$config_name])) {
-                    $insertData['config_description'] = $dataDesc[$config_name];
-                }
-                $result = $this->Db->insert($this->Db->tableName('config'), $insertData);
-                unset($insertData);
-            } else {
-                $updateData = [
-                    'config_value' => $config_value,
-                ];
-                if (array_key_exists($config_name, $dataDesc) && is_scalar($dataDesc[$config_name])) {
-                    $updateData['config_description'] = $dataDesc[$config_name];
-                }
-                $result = $this->Db->update($this->Db->tableName('config'), $updateData, ['config_name' => $config_name]);
-            }
+            $insertResult = $Sth->closeCursor();
+            unset($Sth);
+        }// endif; insert `config_name` placeholders is not empty.
+        // end execute `INSERT` command. ---------------------------
 
-            if ($result === true) {
-                $i++;
+        // execute `UPDATE` command. -------------------------------
+        if (!empty($updateCfnPlaceholders)) {
+            $sql = 'UPDATE `' . $this->Db->tableName('config') . '`' . PHP_EOL;
+            $sql .= '    SET `config_value` = CASE' . PHP_EOL;
+            $totalPlaceholders = count($updateCfnPlaceholders);
+            for ($i = 0; $i < $totalPlaceholders; ++$i) {
+                $sql .= '        WHEN `config_name` = ' . $updateCfnPlaceholders[$i] . ' THEN ' . $updateCfvPlaceholders[$i] . PHP_EOL;
+            }// endfor;
+            unset($i, $totalPlaceholders);
+            $sql .= '    END';
+            if (!empty($updateCfdPlaceholders)) {
+                $sql .= ',';
             }
-            unset($checkResult,  $result);
-        }// endforeach;
-        unset($config_name, $config_value);
+            $sql .= PHP_EOL;
+            if (!empty($updateCfdPlaceholders)) {
+                $sql .= '    `config_description` = CASE' . PHP_EOL;
+                $totalPlaceholders = count($updateCfdPlaceholders);
+                for ($i = 0; $i < $totalPlaceholders; ++$i) {
+                    $sql .= '        WHEN `config_name` = ' . $updateCfnPlaceholders[$i] . ' THEN ' . $updateCfdPlaceholders[$i] . PHP_EOL;
+                }// endfor;
+                unset($i, $totalPlaceholders);
+                $sql .= '    END' . PHP_EOL;
+            }// endif; config_description placeholders is not empty.
+            $sql .= 'WHERE `config_name` IN (' . implode(', ', $updateCfnPlaceholders) . ')' . PHP_EOL;
 
-        // loop delete cache from config names.
+            $Sth = $this->Db->PDO()->prepare($sql);
+            unset($sql);
+            $this->bindValuesForUpdateMultipleVals($Sth, $updateCfnBindValues);
+            $this->bindValuesForUpdateMultipleVals($Sth, $updateCfvBindValues);
+            if (isset($updateCfdBindValues) && is_array($updateCfdBindValues)) {
+                $this->bindValuesForUpdateMultipleVals($Sth, $updateCfdBindValues);
+            }
+            unset($updateCfdBindValues, $updateCfdPlaceholders);
+            unset($updateCfnBindValues, $updateCfnPlaceholders, $updateCfvBindValues, $updateCfvPlaceholders);
+            $Sth->execute();
+            $updateResult = $Sth->closeCursor();
+            unset($Sth);
+        }// endif; update `config_name` placeholders is not empty.
+        // end execute `UPDATE` command. --------------------------
+
+        // loop delete cache from config names. --------------
         $configPrefixes = array_unique($configPrefixes);
         foreach ($configPrefixes as $configPrefix) {
             $this->configPrefix = $configPrefix;
@@ -347,12 +555,26 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
             $this->deleteCachedFile();
         }// endforeach;
         unset($configPrefix, $configPrefixes);
+        // end loop delete cache from config names. ---------
 
-        if ($i == count($data)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (
+            (
+                isset($insertResult) && 
+                isset($updateResult) &&
+                true === $insertResult &&
+                true === $updateResult
+            ) ||
+            (
+                isset($insertResult) && 
+                true === $insertResult &&
+                !isset($updateResult)
+            ) ||
+            (
+                !isset($insertResult) && 
+                isset($updateResult) &&
+                true === $updateResult
+            )
+        );
     }// updateMultipleValues
 
 
