@@ -62,7 +62,7 @@ trait MetaFieldsTrait
 
 
     /**
-     * Add meta field data.
+     * Add a meta field data to meta `_fields` table.
      * 
      * This method is not recommended to call it directly, please call to `updateFieldsData()` method instead and if the data is not exists, it will be call this method automatically.
      * 
@@ -78,13 +78,11 @@ trait MetaFieldsTrait
             $field_description = null;
         }
 
-        $Serializer = new \Rundiz\Serializer\Serializer();
         $data = [];
         $data[$this->objectIdName] = $objectId;
         $data['field_name'] = $field_name;
-        $data['field_value'] = (is_scalar($field_value) || is_null($field_value) ? $field_value : $Serializer->maybeSerialize($field_value));
+        $data['field_value'] = $this->getFieldValueReformat($field_value, 'insert');
         $data['field_description'] = $field_description;
-        unset($Serializer);
 
         $PDO = $this->Db->PDO();
         $insertResult = $this->Db->insert($this->tableName, $data);
@@ -172,7 +170,7 @@ trait MetaFieldsTrait
 
 
     /**
-     * Delete meta field data.
+     * Delete a meta field data from meta `_fields` table.
      * 
      * Also delete cached data.
      * 
@@ -200,10 +198,10 @@ trait MetaFieldsTrait
 
 
     /**
-     * Get meta fields data by conditions.
+     * Get meta field(s) data by conditions.
      * 
      * @param int $objectId The object ID.
-     * @param string $field_name The field name to search in. If this is empty then it will return all.
+     * @param string $field_name The field name to search in. If this is empty then it will return all fields.
      * @return mixed Return a single row of field or all rows depend on field name to search. If it was not found then return null.<br>
      *                          The return value may be unserialize if it is not scalar and not `null`.<br>
      *                          You can call to property `getFieldsNoData` (boolean) to check that are there any data or value from this method.
@@ -218,25 +216,21 @@ trait MetaFieldsTrait
         $this->getFieldsNoData = false;
 
         if (is_array($this->storageData)) {
-            $Serializer = new \Rundiz\Serializer\Serializer();
-
             if (!empty($field_name)) {
                 foreach ($this->storageData as $item) {
                     if (is_object($item) && isset($item->field_name) && $item->field_name === $field_name) {
-                        $item->field_value = $Serializer->maybeUnserialize($item->field_value);
+                        $item->field_value = $this->getFieldValueReformat($item->field_value, 'read');
                         return $item;
                     }
                 }// endforeach;
                 unset($item);
             } else {
                 foreach ($this->storageData as $item) {
-                    $item->field_value = $Serializer->maybeUnserialize($item->field_value);
+                    $item->field_value = $this->getFieldValueReformat($item->field_value, 'read');
                 }// endforeach;
                 unset($item);
                 return $this->storageData;
             }
-
-            unset($Serializer);
         }
 
         $this->getFieldsNoData = true;
@@ -246,14 +240,14 @@ trait MetaFieldsTrait
 
 
     /**
-     * Get meta fields data by conditions but no cache.
+     * Get meta field(s) data by conditions but no cache.
      * 
      * This method work the same as `getFields()` method but connect to DB without cache to make very sure that data is really exists.
      * 
      * @see \Rdb\Modules\RdbAdmin\Models\Traits::getFields()
-	 * @since 1.0.1
+     * @since 1.0.1
      * @param int $objectId The object ID.
-     * @param string $field_name The field name to search in. If this is empty then it will return all.
+     * @param string $field_name The field name to search in. If this is empty then it will return all fields.
      * @return mixed Return a single row of field or all rows depend on field name to search. If it was not found then return null.<br>
      *                          The return value may be unserialize if it is not scalar and not `null`.<br>
      *                          You can call to property `getFieldsNoData` (boolean) to check that are there any data or value from this method.
@@ -271,19 +265,17 @@ trait MetaFieldsTrait
         $Sth->closeCursor();
         unset($Pdo, $sql, $Sth);
 
-        $Serializer = new \Rundiz\Serializer\Serializer();
-
         if (!empty($field_name)) {
             foreach ($result as $row) {
                 if (is_object($row) && isset($row->field_name) && $row->field_name === $field_name) {
-                    $row->field_value = $Serializer->maybeUnserialize($row->field_value);
+                    $row->field_value = $this->getFieldValueReformat($row->field_value, 'read');
                     return $row;
                 }
             }// endforeach;
             unset($result, $row);
         } else {
             foreach ($result as $row) {
-                $row->field_value = $Serializer->maybeUnserialize($row->field_value);
+                $row->field_value = $this->getFieldValueReformat($row->field_value, 'read');
             }// endforeach;
             unset($row);
             return $result;
@@ -291,9 +283,34 @@ trait MetaFieldsTrait
 
         $this->getFieldsNoData = true;
 
-        unset($Serializer);
         return null;
     }// getFieldsNoCache
+
+
+    /**
+     * Get field value that will be re-formatted for insert, update, read.
+     * 
+     * @since 1.2.9
+     * @param mixed $field_value The field value data that will be re-formatted.
+     * @param srting $getFor Get field value that will be re-formatted for. Accepted value: 'insert', 'update', 'read'.<br>
+     *              The 'insert' and 'update' value will use the same algorithm.
+     * @return mixed If 'insert', or 'update' value then the field value type scalar or `null` will be return as is. Otherwise it will be serialize.<br>
+     *              If 'read' value then it will be un-serialize the field value.
+     */
+    protected function getFieldValueReformat($field_value, string $getFor = 'update')
+    {
+        if ('insert' === $getFor || 'update' === $getFor) {
+            if (is_scalar($field_value) || is_null($field_value)) {
+                return $field_value;
+            } else {
+                $Serializer = new \Rundiz\Serializer\Serializer();
+                return $Serializer->maybeSerialize($field_value);
+            }
+        } elseif ('read' === $getFor) {
+            $Serializer = new \Rundiz\Serializer\Serializer();
+            return $Serializer->maybeUnserialize($field_value);
+        }
+    }// getFieldValueReformat
 
 
     /**
@@ -401,7 +418,7 @@ trait MetaFieldsTrait
 
 
     /**
-     * Update meta field data.
+     * Update a meta field data to meta `_fields` table.
      * 
      * This will be add if the data is not exists.
      * 
@@ -435,9 +452,9 @@ trait MetaFieldsTrait
             return $this->addFieldsData($objectId, $field_name, $field_value, $field_description);
         }
 
-        $Serializer = new \Rundiz\Serializer\Serializer();
 
         if ($previousValue !== false) {
+            $Serializer = new \Rundiz\Serializer\Serializer();
             $currentValue = $Serializer->maybeUnserialize($result->field_value);
             if ($currentValue != $previousValue) {
                 // if current value is not match to checking value (previous value).
@@ -452,11 +469,10 @@ trait MetaFieldsTrait
         $identifier[$this->objectIdName] = $objectId;
         $identifier['field_name'] = $field_name;
         $data = [];
-        $data['field_value'] = (is_scalar($field_value) || is_null($field_value) ? $field_value : $Serializer->maybeSerialize($field_value));
+        $data['field_value'] = $this->getFieldValueReformat($field_value);
         if ($field_description !== false) {
             $data['field_description'] = $field_description;
         }
-        unset($Serializer);
 
         $updateResult = $this->Db->update($this->tableName, $data, $identifier);
         unset($data, $identifier);
