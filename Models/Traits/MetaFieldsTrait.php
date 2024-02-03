@@ -359,7 +359,6 @@ trait MetaFieldsTrait
             $this->listObjectsFieldsResult = $Sth->fetchAll();
             $Sth->closeCursor();
             unset($Sth);
-            $foundResults = [];
             // end make DB query to retrieve all fields of selected object IDs. -------------------
 
             // loop build cache files. ------------------------------------------------------------------
@@ -373,10 +372,6 @@ trait MetaFieldsTrait
                         if (intval($row->{$this->objectIdName}) === $objectId) {
                             $objectIdResult[] = $row;
                             unset($this->listObjectsFieldsResult[$lofrIndex]);
-                            if (!array_key_exists($objectId, $foundResults)) {
-                                // if there is no marked as found with this object id before, mark it.
-                                $foundResults[$objectId] = true;
-                            }
                         }
                     }// endforeach;
                     unset($lofrIndex, $row);
@@ -404,7 +399,7 @@ trait MetaFieldsTrait
             unset($objectId);
             $this->resetGetData();
         }
-        unset($foundResults, $origObjectIds);
+        unset($origObjectIds);
         // end populate output result. -------------------------------------------------------------
 
         return $output;
