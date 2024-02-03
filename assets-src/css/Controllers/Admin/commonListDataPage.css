@@ -90,6 +90,8 @@ table.rdba-datatables-js thead th:not(.sorting_disabled) {
 .rdba-datatables-js tbody td,
 .rdba-datatables-js tbody th {
     vertical-align: top;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 .rdba-datatables-js tbody .control {
@@ -279,6 +281,7 @@ table.dataTable.dtr-column > tbody > tr.dt-hasChild th.dtr-control:before {
     font-weight: 900;
 }
 table.dataTable > tbody > tr.child ul.dtr-details {
+    max-width: fit-content;
     width: 100%;
 }
 
