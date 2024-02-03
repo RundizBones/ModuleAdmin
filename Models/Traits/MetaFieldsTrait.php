@@ -213,7 +213,7 @@ trait MetaFieldsTrait
                 $namePlaceholders[$i] = ':field_name' . $i;
                 $nameBindValues[':field_name' . $i] = $field_name;
                 $valuePlaceholders[$i] = ':field_value' . $i;
-                $valueBindValues[':field_value' . $i] = $field_value;
+                $valueBindValues[':field_value' . $i] = $this->getFieldValueReformat($field_value);
                 ++$i;
             }// endif;
         }// endforaech;
@@ -567,6 +567,7 @@ trait MetaFieldsTrait
      * 
      * It will be update if data exists, or it will be insert if data is not exists.
      * 
+     * @param int $objectId The object ID.
      * @param array $data Associative array where key is match `field_name` column and value is match `field_value` column.
      * @param array $dataDesc Associative array of field description where array key is the `field_name`column and its value is match `field_description` column.
      * @return bool Return `true` if **all** data have been updated, `false` for otherwise.
@@ -668,11 +669,14 @@ trait MetaFieldsTrait
             $sql .= 'VALUES' . PHP_EOL;
             $totalPlaceholders = count($insertFnPlaceholders);
             for ($i = 0; $i < $totalPlaceholders; ++$i) {
-                $sql .= '    (' . $objectId . ', ' . $insertFnPlaceholders[$i] . ', ' . $insertFvPlaceholders[$i] . ', ';
-                if (isset($insertFdPlaceholders) && is_array($insertFdPlaceholders) && array_key_exists($i, $insertFdPlaceholders)) {
-                    $sql .= $insertFdPlaceholders[$i];
-                } else {
-                    $sql .= '`field_description`';
+                $sql .= '    (' . $objectId . ', ' . $insertFnPlaceholders[$i] . ', ' . $insertFvPlaceholders[$i];
+                if (!empty($dataDesc)) {
+                    $sql .= ', ';
+                    if (isset($insertFdPlaceholders) && is_array($insertFdPlaceholders) && array_key_exists($i, $insertFdPlaceholders)) {
+                        $sql .= $insertFdPlaceholders[$i];
+                    } else {
+                        $sql .= '`field_description`';
+                    }
                 }
                 $sql .= ')';
                 if (($i + 1) < $totalPlaceholders) {
