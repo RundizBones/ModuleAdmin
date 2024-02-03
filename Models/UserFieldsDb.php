@@ -261,4 +261,38 @@ class UserFieldsDb extends \Rdb\System\Core\Models\BaseModel
     }// update
 
 
+    /**
+     * Update or insert multiple user fields at once.
+     * 
+     * If data is not exists in DB then it will be insert.
+     * 
+     * @param int $user_id The user ID.
+     * @param array $data Associative array where key is match `field_name` column and value is match `field_value` column. Example:<pre>
+     * array(
+     *     'field_name1' => 'field value1',
+     *     'field_name2' => 'field value2',
+     *     // ...
+     * )
+     * </pre>
+     * @param bool $updateFieldDescription Set to `true` to update/insert field description. Default is `true`.
+     * @return bool Return `true` if update or insert completed, return `false` for otherwise.
+     */
+    public function updateMultiple(int $user_id, array $data, bool $updateFieldDescription = true): bool
+    {
+        $dataDesc = [];
+        if (true === $updateFieldDescription) {
+            foreach ($data as $field_name => $field_value) {
+                if (is_array($this->rdbaUserFields) && array_key_exists($field_name, $this->rdbaUserFields)) {
+                    $dataDesc[$field_name] = $this->rdbaUserFields[$field_name];
+                } else {
+                    $dataDesc[$field_name] = null;
+                }
+            }// endforeach;
+            unset($field_name, $field_value);
+        }
+
+        return $this->updateFieldsMultipleData($user_id, $data, $dataDesc);
+    }// updateMultiple
+
+
 }

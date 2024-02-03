@@ -116,6 +116,24 @@ trait MetaFieldsTrait
 
 
     /**
+     * Call to `bindValue()` from `$Sth` argument.
+     * 
+     * This is for work with `updateFieldsMultipleData()` method.
+     * 
+     * @sin 1.2.9
+     * @param \PDOStatement $Sth
+     * @param array $bindValues The array of bind values where key is placeholder and value is its value.
+     */
+    private function bindValuesForUpdateFieldsMultipleData(\PDOStatement $Sth, array $bindValues)
+    {
+        foreach ($bindValues as $bindPlaceholder => $bindValue) {
+            $Sth->bindValue($bindPlaceholder, $bindValue);
+        }// endforeach;
+        unset($bindPlaceholder, $bindValue);
+    }// bindValuesForUpdateFieldsMultipleData
+
+
+    /**
      * Get DB result and build cache content.
      * 
      * This method must be public to be able to called from other method/class.
@@ -141,6 +159,66 @@ trait MetaFieldsTrait
 
         return $this->buildCacheContentFromResult($result);
     }// buildCacheContent
+
+
+    /**
+     * Build/alter the variables for description column for use in `updateFieldsMultipleData()` method.
+     * 
+     * @sin 1.2.9
+     * @param array $dataDesc The input data description.
+     * @param array $fieldNamesToCheck The list of field names to check input name (field name) that must be matched. For example field for check with exists (will update), or not exists (will insert).
+     * @param array $descPlaceholders The field description placeholders to be altered.
+     * @param array $descBindValues The field description for use with bind values to be altered.
+     */
+    private function buildPlaceholdersAndBindValuesDescForUpdateFieldsMultipleData(
+        array $dataDesc,
+        array $fieldNamesToCheck,
+        array &$descPlaceholders,
+        array &$descBindValues
+    ) {
+        $i = 0;
+        foreach ($dataDesc as $field_name => $field_description) {
+            if (in_array($field_name, $fieldNamesToCheck)) {
+                $descPlaceholders[$i] = ':field_description' . $i;
+                $descBindValues[':field_description' . $i] = $field_description;
+                ++$i;
+            }// endif;
+        }// endforeach;
+        unset($field_description, $field_name, $i);
+    }// buildPlaceholdersAndBindValuesDescForUpdateFieldsMultipleData
+
+
+    /**
+     * Build/alter the variables for use in `updateFieldsMultipleData()` method.
+     * 
+     * @since 1.2.9
+     * @param array $data The input data.
+     * @param array $fieldNamesToCheck The list of field names to check input name (field name) that must be matched. For example field for check with exists (will update), or not exists (will insert).
+     * @param array $namePlaceholders The field name placeholders to be altered.
+     * @param array $nameBindValues The field name for use with bind values to be altered.
+     * @param array $valuePlaceholders The field value placeholders to be altered.
+     * @param array $valueBindValues The field value for use with bind values to be altered.
+     */
+    private function buildPlaceholdersAndBindValuesForUpdateFieldsMultipleData(
+        array $data,
+        array $fieldNamesToCheck,
+        array &$namePlaceholders,
+        array &$nameBindValues,
+        array &$valuePlaceholders,
+        array &$valueBindValues
+    ) {
+        $i = 0;
+        foreach ($data as $field_name => $field_value) {
+            if (in_array($field_name, $fieldNamesToCheck)) {
+                $namePlaceholders[$i] = ':field_name' . $i;
+                $nameBindValues[':field_name' . $i] = $field_name;
+                $valuePlaceholders[$i] = ':field_value' . $i;
+                $valueBindValues[':field_value' . $i] = $field_value;
+                ++$i;
+            }// endif;
+        }// endforaech;
+        unset($field_name, $field_value, $i);
+    }// buildPlaceholdersAndBindValuesForUpdateFieldsMultipleData
 
 
     /**
@@ -482,6 +560,206 @@ trait MetaFieldsTrait
 
         return $updateResult;
     }// updateFieldsData
+
+
+    /**
+     * Update `_fields` table on multiple values.
+     * 
+     * It will be update if data exists, or it will be insert if data is not exists.
+     * 
+     * @param array $data Associative array where key is match `field_name` column and value is match `field_value` column.
+     * @param array $dataDesc Associative array of field description where array key is the `field_name`column and its value is match `field_description` column.
+     * @return bool Return `true` if **all** data have been updated, `false` for otherwise.
+     * @throws \OutOfRangeException Throw the exception if `$dataDesc` is not empty but have not same amount of array values.
+     */
+    protected function updateFieldsMultipleData(int $objectId, array $data, array $dataDesc = []): bool
+    {
+        // check arguments. -----------------
+        if (!empty($dataDesc)) {
+            if (count($data) !== count($dataDesc)) {
+                throw new \OutOfRangeException('The argument $data and $dataDesc must have the same amount of array values.');
+            }
+        }// endif;
+
+        if (empty($data)) {
+            return true;
+        }
+        // end check arguments. -----------
+
+        // retrieve check results, all at once. ----------------------------------------------------
+        $sql = 'SELECT `field_name` FROM `' . $this->tableName . '`
+            WHERE `' . $this->objectIdName . '` = ?
+                AND `field_name` IN (' . rtrim(str_repeat('?, ', count($data)), " \n\r\t\v\x00,") . ')';
+        $Sth = $this->Db->PDO()->prepare($sql);
+        unset($sql);
+        $Sth->execute(array_merge([$objectId], array_keys($data)));
+        $checkResults = $Sth->fetchAll();
+        $Sth->closeCursor();
+        unset($Sth);
+
+        $fieldNameExists = [];
+        if (!empty($checkResults)) {
+            foreach ($checkResults as $row) {
+                $fieldNameExists[] = $row->field_name;
+            }// endforeach;
+            unset($row);
+        }
+        unset($checkResults);
+        $fieldNameNotExists = array_diff(array_keys($data), $fieldNameExists);
+        // end retrieve check results, all at once. -----------------------------------------------
+
+        // build bind placeholders & values for `INSERT`. -------------
+        $insertFnPlaceholders = [];
+        $insertFnBindValues = [];
+        $insertFvPlaceholders = [];
+        $insertFvBindValues = [];
+        $this->buildPlaceholdersAndBindValuesForUpdateFieldsMultipleData(
+            $data,
+            $fieldNameNotExists,
+            $insertFnPlaceholders,
+            $insertFnBindValues,
+            $insertFvPlaceholders,
+            $insertFvBindValues
+        );
+
+        if (!empty($dataDesc)) {
+            $insertFdPlaceholders = [];
+            $insertFdBindValues = [];
+            $this->buildPlaceholdersAndBindValuesDescForUpdateFieldsMultipleData(
+                $dataDesc,
+                $fieldNameNotExists,
+                $insertFdPlaceholders,
+                $insertFdBindValues
+            );
+        }
+        unset($fieldNameNotExists);
+        // end build bind placeholders & values for `INSERT`. --------
+
+        // build bind placeholders & values for `UPDATE`. ------------
+        $updateFnPlaceholders = [];
+        $updateFnBindValues = [];
+        $updateFvPlaceholders = [];
+        $updateFvBindValues = [];
+        $this->buildPlaceholdersAndBindValuesForUpdateFieldsMultipleData(
+            $data,
+            $fieldNameExists,
+            $updateFnPlaceholders,
+            $updateFnBindValues,
+            $updateFvPlaceholders,
+            $updateFvBindValues
+        );
+
+        if (!empty($dataDesc)) {
+            $updateFdPlaceholders = [];
+            $updateFdBindValues = [];
+            $this->buildPlaceholdersAndBindValuesDescForUpdateFieldsMultipleData(
+                $dataDesc,
+                $fieldNameExists,
+                $updateFdPlaceholders,
+                $updateFdBindValues
+            );
+        }
+        unset($fieldNameExists);
+        // end build bind placeholders & values for `UPDATE`. -------
+
+        // execute `INSERT` command. --------------------------------
+        if (!empty($insertFnPlaceholders)) {
+            $sql = 'INSERT INTO `' . $this->tableName . '` (`' . $this->objectIdName . '`, `field_name`, `field_value`' . (!empty($dataDesc) ? ', `field_description`' : '') . ')' . PHP_EOL;
+            $sql .= 'VALUES' . PHP_EOL;
+            $totalPlaceholders = count($insertFnPlaceholders);
+            for ($i = 0; $i < $totalPlaceholders; ++$i) {
+                $sql .= '    (' . $objectId . ', ' . $insertFnPlaceholders[$i] . ', ' . $insertFvPlaceholders[$i] . ', ';
+                if (isset($insertFdPlaceholders) && is_array($insertFdPlaceholders) && array_key_exists($i, $insertFdPlaceholders)) {
+                    $sql .= $insertFdPlaceholders[$i];
+                } else {
+                    $sql .= '`field_description`';
+                }
+                $sql .= ')';
+                if (($i + 1) < $totalPlaceholders) {
+                    $sql .= ', ';
+                }
+                $sql .= PHP_EOL;
+            }// endfor;
+            unset($i, $totalPlaceholders);
+
+            $Sth = $this->Db->PDO()->prepare($sql);
+            unset($sql);
+            $this->bindValuesForUpdateFieldsMultipleData($Sth, $insertFnBindValues);
+            $this->bindValuesForUpdateFieldsMultipleData($Sth, $insertFvBindValues);
+            if (isset($insertFdBindValues) && is_array($insertFdBindValues)) {
+                $this->bindValuesForUpdateFieldsMultipleData($Sth, $insertFdBindValues);
+            }
+            unset($insertFdBindValues, $insertFdPlaceholders);
+            unset($insertFnBindValues, $insertFnPlaceholders, $insertFvBindValues, $insertFvPlaceholders);
+            $Sth->execute();
+            $insertResult = $Sth->closeCursor();
+            unset($Sth);
+        }// endif; insert `field_name` placeholders is not empty.
+        // end execute `INSERT` command. ---------------------------
+
+        // execute `UPDATE` command. -------------------------------
+        if (!empty($updateFnPlaceholders)) {
+            $sql = 'UPDATE `' . $this->tableName . '`' . PHP_EOL;
+            $sql .= '    SET `field_value` = CASE' . PHP_EOL;
+            $totalPlaceholders = count($updateFnPlaceholders);
+            for ($i = 0; $i < $totalPlaceholders; ++$i) {
+                $sql .= '        WHEN `field_name` = ' . $updateFnPlaceholders[$i] . ' THEN ' . $updateFvPlaceholders[$i] . PHP_EOL;
+            }// endfor;
+            unset($i, $totalPlaceholders);
+            $sql .= '    END';
+            if (!empty($updateFdPlaceholders)) {
+                $sql .= ',';
+            }
+            $sql .= PHP_EOL;
+            if (!empty($updateFdPlaceholders)) {
+                $sql .= '    `field_description` = CASE' . PHP_EOL;
+                $totalPlaceholders = count($updateFdPlaceholders);
+                for ($i = 0; $i < $totalPlaceholders; ++$i) {
+                    $sql .= '        WHEN `field_name` = ' . $updateFnPlaceholders[$i] . ' THEN ' . $updateFdPlaceholders[$i] . PHP_EOL;
+                }// endfor;
+                unset($i, $totalPlaceholders);
+                $sql .= '    END' . PHP_EOL;
+            }// endif; field_description placeholders is not empty.
+            $sql .= 'WHERE `' . $this->objectIdName . '` = :objectId AND `field_name` IN (' . implode(', ', $updateFnPlaceholders) . ')' . PHP_EOL;
+
+            $Sth = $this->Db->PDO()->prepare($sql);
+            unset($sql);
+            $Sth->bindValue(':objectId', $objectId, \PDO::PARAM_INT);
+            $this->bindValuesForUpdateFieldsMultipleData($Sth, $updateFnBindValues);
+            $this->bindValuesForUpdateFieldsMultipleData($Sth, $updateFvBindValues);
+            if (isset($updateFdBindValues) && is_array($updateFdBindValues)) {
+                $this->bindValuesForUpdateFieldsMultipleData($Sth, $updateFdBindValues);
+            }
+            unset($updateFdBindValues, $updateFdPlaceholders);
+            unset($updateFnBindValues, $updateFnPlaceholders, $updateFvBindValues, $updateFvPlaceholders);
+            $Sth->execute();
+            $updateResult = $Sth->closeCursor();
+            unset($Sth);
+        }// endif; update `field_name` placeholders is not empty.
+        // end execute `UPDATE` command. --------------------------
+
+        $this->storageFile = $this->getStorageFileName($objectId);
+        $this->deleteCachedFile();
+
+        return (
+            (
+                isset($insertResult) && 
+                isset($updateResult) &&
+                true === $insertResult &&
+                true === $updateResult
+            ) ||
+            (
+                isset($insertResult) && 
+                true === $insertResult &&
+                !isset($updateResult)
+            ) ||
+            (
+                !isset($insertResult) && 
+                isset($updateResult) &&
+                true === $updateResult
+            )
+        );
+    }// updateFieldsMultipleData
 
 
 }

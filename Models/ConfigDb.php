@@ -141,9 +141,9 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
      * 
      * @sin 1.2.9
      * @param array $dataDesc The input data description.
-     * @param array $configNamesToCheck The config name to check input name (config name) must be matched. For example config for check with exists (will update), or not exists (will insert).
-     * @param array $cfvPlaceholders The config description placeholders to be altered.
-     * @param array $cfvBindValues The config description for use with bind values to be altered.
+     * @param array $configNamesToCheck The list of config names to check input name (config name) that must be matched. For example config for check with exists (will update), or not exists (will insert).
+     * @param array $cfdPlaceholders The config description placeholders to be altered.
+     * @param array $cfdBindValues The config description for use with bind values to be altered.
      */
     private function buildPlaceholdersAndBindValuesDescForUpdateMultipleVals(
         array $dataDesc,
@@ -164,11 +164,11 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
 
 
     /**
-     * Build/alter the variables for `updateMultipleValues()` method.
+     * Build/alter the variables for use in `updateMultipleValues()` method.
      * 
      * @since 1.2.9
      * @param array $data The input data.
-     * @param array $configNamesToCheck The config name to check input name (config name) must be matched. For example config for check with exists (will update), or not exists (will insert).
+     * @param array $configNamesToCheck The list of config names to check input name (config name) that must be matched. For example config for check with exists (will update), or not exists (will insert).
      * @param array $configPrefixes The config prefixes to use later with clear cache. This value will be alter.
      * @param array $cfnPlaceholders The config name placeholders to be altered.
      * @param array $cfnBindValues The config name for use with bind values to be altered.
@@ -387,12 +387,12 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
         // check arguments. -----------------
         if (!empty($dataDesc)) {
             if (count($data) !== count($dataDesc)) {
-                throw new \OutOfRangeException('The argument $data and $dataDesc should have the same amount of array values.');
+                throw new \OutOfRangeException('The argument $data and $dataDesc must have the same amount of array values.');
             }
         }// endif;
 
         if (empty($data)) {
-            return true;
+            return false;
         }
         // end check arguments. -----------
 
@@ -479,9 +479,11 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
             $sql .= 'VALUES' . PHP_EOL;
             $totalPlaceholders = count($insertCfnPlaceholders);
             for ($i = 0; $i < $totalPlaceholders; ++$i) {
-                $sql .= '    (' . $insertCfnPlaceholders[$i] . ', ' . $insertCfvPlaceholders[$i];
+                $sql .= '    (' . $insertCfnPlaceholders[$i] . ', ' . $insertCfvPlaceholders[$i] . ', ';
                 if (isset($insertCfdPlaceholders) && is_array($insertCfdPlaceholders) && array_key_exists($i, $insertCfdPlaceholders)) {
-                    $sql .= ', ' . $insertCfdPlaceholders[$i];
+                    $sql .= $insertCfdPlaceholders[$i];
+                } else {
+                    $sql .= '`config_description`';
                 }
                 $sql .= ')';
                 if (($i + 1) < $totalPlaceholders) {
@@ -495,7 +497,7 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
             unset($sql);
             $this->bindValuesForUpdateMultipleVals($Sth, $insertCfnBindValues);
             $this->bindValuesForUpdateMultipleVals($Sth, $insertCfvBindValues);
-            if (isset($updateCfdBindValues) && is_array($updateCfdBindValues)) {
+            if (isset($insertCfdBindValues) && is_array($insertCfdBindValues)) {
                 $this->bindValuesForUpdateMultipleVals($Sth, $insertCfdBindValues);
             }
             unset($insertCfdBindValues, $insertCfdPlaceholders);
