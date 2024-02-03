@@ -96,7 +96,8 @@ class RdbaUsersController extends RdbaDatatables {
                                 return string.replace(find, replace);
                             });
                             row.RdbaUsers = RdbaUsers;
-                            let html = data + template(row);
+                            let html = '<a class="rdba-listpage-edit" href="' + RdbaUsers.editUserPageUrlBase + '/' + row.user_id + '">' + data + '</a>'
+                                + template(row);
                             return html;
                         }
                     },
