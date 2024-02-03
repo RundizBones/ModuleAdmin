@@ -414,8 +414,7 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                     // update user fields.
                     $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
                     if (isset($dataFields) && is_array($dataFields) && !empty($dataFields)) {
-                        $output['updateUserFields'] = [];
-                        $output['updateUserFields']['result'] = $UserFieldsDb->updateMultiple((int) $user_id, $dataFields);
+                        $output['updateUserFields'] = $UserFieldsDb->updateMultiple((int) $user_id, $dataFields);
                     }
 
                     // update roles.
