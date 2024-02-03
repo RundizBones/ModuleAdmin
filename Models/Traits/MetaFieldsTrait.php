@@ -29,6 +29,7 @@ trait MetaFieldsTrait
 
     /**
      * @var array|null The temporary result where the query was called to selected object ID. The result of DB queried will be array wether it is empty or not.<br>
+     *              This property's value was set in `listObjectsFields()` method.<br>
      *              This will be reset to `null` once called `buildCacheContent()` method and found that this is not `null`.
      * @since 1.2.9
      */
@@ -40,13 +41,6 @@ trait MetaFieldsTrait
      * @since 1.0.1
      */
     protected $getFieldsNoData = false;
-
-
-    /**
-     * @var array The result from `listObjectFields()` method. This property is for temporarily use while calling to `listObjectFields()` method.
-     * @since 1.2.9
-     */
-    protected $listObjectsFieldsResult = [];
 
 
     /**
@@ -325,8 +319,6 @@ trait MetaFieldsTrait
      */
     protected function listObjectsFields(array $objectIds, string $field_name = ''): array
     {
-        $this->listObjectsFieldsResult = [];
-
         // filter out the object ids that is already has a cache in storage file.
         $objectIdsInPlaceholder = [];
         $bindValues = [];
@@ -356,22 +348,22 @@ trait MetaFieldsTrait
             }// endforeach;
             unset($placeholder, $value);
             $Sth->execute();
-            $this->listObjectsFieldsResult = $Sth->fetchAll();
+            $objectIdResults = $Sth->fetchAll();
             $Sth->closeCursor();
             unset($Sth);
             // end make DB query to retrieve all fields of selected object IDs. -------------------
 
             // loop build cache files. ------------------------------------------------------------------
-            if (is_iterable($this->listObjectsFieldsResult)) {
+            if (is_iterable($objectIdResults)) {
                 foreach ($objectIds as $index => $objectId) {
                     $objectId = intval($objectId);
                     $this->storageFile = $this->getStorageFileName($objectId);
                     // create new result only for this object ID.
                     $objectIdResult = [];
-                    foreach ($this->listObjectsFieldsResult as $lofrIndex => $row) {
+                    foreach ($objectIdResults as $lofrIndex => $row) {
                         if (intval($row->{$this->objectIdName}) === $objectId) {
                             $objectIdResult[] = $row;
-                            unset($this->listObjectsFieldsResult[$lofrIndex]);
+                            unset($objectIdResults[$lofrIndex]);
                         }
                     }// endforeach;
                     unset($lofrIndex, $row);
@@ -383,8 +375,10 @@ trait MetaFieldsTrait
                     unset($content, $objectIdResult);
                 }// endforeach;
                 unset($index, $objectId);
-            }// endif; is iterable `listObjectsFieldsResult` property.
+            }// endif; is iterable `$objectIdResults` property.
             // end loop build cache files. -------------------------------------------------------------
+
+            unset($objectIdResults);
         }// endif; $objectIds is not empty.
         unset($bindValues, $objectIdsInPlaceholder);
 
