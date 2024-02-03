@@ -399,7 +399,7 @@ trait MetaFieldsTrait
             foreach ($origObjectIds as $objectId) {
                 $objectId = intval($objectId);
                 $this->resetGetData();
-                $output[$objectId] = (isset($foundResults[$objectId]) ? $this->getFields($objectId, $field_name) : null);
+                $output[$objectId] = $this->getFields($objectId, $field_name);
             }// endforeach;
             unset($objectId);
             $this->resetGetData();
