@@ -374,8 +374,6 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
             }
         }
 
-        // SQL_CALC_FOUND_ROWS is slower than [SELECT COUNT() and then SELECT *] in many cases.
-        // see https://stackoverflow.com/questions/186588/which-is-fastest-select-sql-calc-found-rows-from-table-or-select-count for more details.
         $bindValues = [];
         $output = [];
         // sql left join is required for user listing that filter role.
