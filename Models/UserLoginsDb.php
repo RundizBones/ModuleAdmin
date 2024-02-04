@@ -519,18 +519,6 @@ class UserLoginsDb extends \Rdb\System\Core\Models\BaseModel
         if (is_array($result)) {
             $Serializer = new \Rundiz\Serializer\Serializer();
 
-            if (!function_exists('__')) {
-                if ($this->Container->has('Languages')) {
-                    $Languages = $this->Container->get('Languages');
-                } else {
-                    $Languages = new \Rdb\Modules\RdbAdmin\Libraries\Languages($this->Container);
-                }
-                $Languages->bindTextDomain(
-                    'rdbadmin', 
-                    dirname(__DIR__) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'translations'
-                );
-            }
-
             foreach ($result as $row) {
                 if (!empty($row->userlogin_result_text_data)) {
                     $row->userlogin_result_text_data = $Serializer->maybeUnserialize($row->userlogin_result_text_data);
@@ -548,7 +536,7 @@ class UserLoginsDb extends \Rdb\System\Core\Models\BaseModel
                     if (!empty($row->userlogin_result_text_data)) {
                         $row->userlogin_result_text_withdata = sprintf(__($row->userlogin_result_text), ...$row->userlogin_result_text_data);
                     } else {
-                        $row->userlogin_result_text_withdata = __($row->userlogin_result_text);
+                        $row->userlogin_result_text_withdata = sprintf(__($row->userlogin_result_text), '');
                     }
                 }
             }// endforeach;

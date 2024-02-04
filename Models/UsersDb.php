@@ -480,7 +480,7 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
         unset($bindValues, $sql, $Sth);
 
         // populate result.
-        if (is_array($result)) {
+        if (is_array($result) && !empty($result)) {
             $newResult = [];
             $i = 0;
             $UserFieldsDb = new \Rdb\Modules\RdbAdmin\Models\UserFieldsDb($this->Container);
