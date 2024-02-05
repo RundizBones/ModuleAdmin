@@ -164,7 +164,48 @@ class Installer implements \Rdb\System\Interfaces\ModuleInstaller
      */
     public function update()
     {
-        
+        try {
+            if (method_exists($this->Db, 'alterStructure')) {
+                $sqlString = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'Installer.sql');
+                $expSql = explode(';' . "\n", str_replace(["\r\n", "\r", "\n"], "\n", $sqlString));
+                unset($sqlString);
+
+                if (is_array($expSql)) {
+                    foreach ($expSql as $eachStatement) {
+                        if (empty(trim($eachStatement))) {
+                            continue;
+                        }
+
+                        $eachStatement = trim($eachStatement) . ';';
+                        preg_match('/%\$(.[^ ]+)%/iu', $eachStatement, $matches);
+                        if (isset($matches[1])) {
+                            $tableName = $this->Db->tableName((string) $matches[1]);
+                        }
+                        unset($matches);
+
+                        if (isset($tableName)) {
+                            $eachStatement = preg_replace('/%\$(.[^ ]+)%/iu', $tableName, $eachStatement);
+
+                            if (empty($eachStatement)) {
+                                continue;
+                            }
+
+                            $this->Logger->write('modules/rdbadmin/installer', 0, $eachStatement);
+
+                            $alterResults = $this->Db->alterStructure($eachStatement);
+                            $this->Logger->write('modules/rdbadmin/installer', 0, 'Alter results: {alterResults}', ['alterResults' => $alterResults]);
+                            $this->Db->convertCharsetAndCollation($tableName, null);
+                            unset($alterResults, $tableName);
+                        }
+                    }// endforeach;
+                    unset($eachStatement);
+                }// endif;
+                unset($expSql);
+            }// endif; `alterStructure` method exists
+        } catch (\Exception $e) {
+            $this->Logger->write('modules/rdbadmin/installer', 3, $e->getMessage());
+            throw $e;
+        }
     }// update
 
 
