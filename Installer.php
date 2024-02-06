@@ -167,6 +167,7 @@ class Installer implements \Rdb\System\Interfaces\ModuleInstaller
         try {
             if (method_exists($this->Db, 'alterStructure')) {
                 $sqlString = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'Installer.sql');
+                $sqlString = $this->Db->removeSQLComments($sqlString);
                 $expSql = explode(';' . "\n", str_replace(["\r\n", "\r", "\n"], "\n", $sqlString));
                 unset($sqlString);
 
