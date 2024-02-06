@@ -98,7 +98,9 @@ class RdbaRolesController extends RdbaDatatables {
                             } else {
                                 sortableIcon = '<i class="fa-solid fa-up-down fa-fw sortable-icon sortable-handle"></i> ';
                             }
-                            let html = sortableIcon + data + template(row);
+                            let html = sortableIcon 
+                                + '<a class="rdba-listpage-edit" href="' + RdbaRoles.editRolePageUrlBase + '/' + row.userrole_id + '">' + data + '</a>'
+                                + template(row);
                             return html;
                         }
                     },
