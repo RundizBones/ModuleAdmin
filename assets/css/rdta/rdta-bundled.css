@@ -177,7 +177,7 @@ samp {
   padding: 0
 }
 /*!
- * Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2023 Fonticons, Inc.
  */
@@ -5155,7 +5155,6 @@ samp {
 .fa-database:before {
   content: "\f1c0"
 }
-.fa-arrow-turn-right:before,
 .fa-mail-forward:before,
 .fa-share:before {
   content: "\f064"
@@ -5518,6 +5517,9 @@ samp {
 .fa-ups:before {
   content: "\f7e0"
 }
+.fa-pixiv:before {
+  content: "\e640"
+}
 .fa-wpexplorer:before {
   content: "\f2de"
 }
@@ -5618,6 +5620,9 @@ samp {
 }
 .fa-deskpro:before {
   content: "\f38f"
+}
+.fa-brave:before {
+  content: "\e63c"
 }
 .fa-sistrix:before {
   content: "\f3ee"
@@ -5777,6 +5782,9 @@ samp {
 .fa-cloudsmith:before {
   content: "\f384"
 }
+.fa-opensuse:before {
+  content: "\e62b"
+}
 .fa-pied-piper-alt:before {
   content: "\f1a8"
 }
@@ -5913,6 +5921,9 @@ samp {
 .fa-bluetooth-b:before {
   content: "\f294"
 }
+.fa-square-letterboxd:before {
+  content: "\e62e"
+}
 .fa-sticker-mule:before {
   content: "\f3f7"
 }
@@ -5945,6 +5956,9 @@ samp {
 }
 .fa-confluence:before {
   content: "\f78d"
+}
+.fa-shoelace:before {
+  content: "\e60c"
 }
 .fa-mdb:before {
   content: "\f8ca"
@@ -6058,6 +6072,9 @@ samp {
 }
 .fa-envira:before {
   content: "\f299"
+}
+.fa-google-scholar:before {
+  content: "\e63b"
 }
 .fa-gitlab-square:before,
 .fa-square-gitlab:before {
@@ -6185,6 +6202,9 @@ samp {
 .fa-vine:before {
   content: "\f1ca"
 }
+.fa-signal-messenger:before {
+  content: "\e663"
+}
 .fa-paypal:before {
   content: "\f1ed"
 }
@@ -6218,6 +6238,9 @@ samp {
 .fa-nfc-symbol:before {
   content: "\e531"
 }
+.fa-mintbit:before {
+  content: "\e62f"
+}
 .fa-ethereum:before {
   content: "\f42e"
 }
@@ -6241,6 +6264,9 @@ samp {
 }
 .fa-bimobject:before {
   content: "\f378"
+}
+.fa-brave-reverse:before {
+  content: "\e63d"
 }
 .fa-facebook-f:before {
   content: "\f39e"
@@ -6339,6 +6365,9 @@ samp {
 }
 .fa-tencent-weibo:before {
   content: "\f1d5"
+}
+.fa-letterboxd:before {
+  content: "\e62d"
 }
 .fa-symfony:before {
   content: "\f83d"
@@ -6469,6 +6498,9 @@ samp {
 }
 .fa-cmplid:before {
   content: "\e360"
+}
+.fa-upwork:before {
+  content: "\e641"
 }
 .fa-facebook:before {
   content: "\f09a"
@@ -6637,6 +6669,9 @@ samp {
 }
 .fa-supple:before {
   content: "\f3f9"
+}
+.fa-webflow:before {
+  content: "\e65c"
 }
 .fa-rebel:before {
   content: "\f1d0"
@@ -8067,7 +8102,7 @@ input[type=range]:focus::-ms-fill-upper {
   background: #ddd
 }
 /*!
- * Rundiz template for admin V.2.3.0
+ * Rundiz template for admin V.2.3.1
  */
 :root {
   --background-primary-disabled-color: #97c3ea;
@@ -8951,7 +8986,7 @@ a.rd-button.tiny {
 .rd-datatable.responsive .toggle-row:active,
 .rd-datatable.responsive .toggle-row:focus,
 .rd-datatable.responsive .toggle-row:hover {
-  box-shadow: 0 0 0 1px #09a0bb,0 0 3px 2px #c4ebf2;
+  box-shadow: 0 0 0 1px #09a0bb,0 0 3px 2px rgba(196,235,242,.8);
   outline: 0
 }
 @media (min-width:1000px) {
