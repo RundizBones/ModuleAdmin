@@ -1,3 +1,4 @@
+.apidoc
 .backup
 .dev-notes/dummy data - users.sql
 .disabled
@@ -5,6 +6,7 @@
 .phpdoc
 .phpunit.result.cache
 .vscode
+.wiki
 assets-src/vendor
 config/development
 config/production

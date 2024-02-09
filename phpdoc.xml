@@ -5,16 +5,16 @@
     <target>.phpdoc/cache</target>
   </parser>
   <transformer>
-    <target>.wiki/apidoc</target>
+    <target>.apidoc</target>
   </transformer>
   <files>
     <directory>.</directory>
     <ignore>.*/*</ignore>
     <ignore>assets*/*</ignore>
     <ignore>config/*</ignore>
-    <ignore>gulpfile.js/*</ignore>
     <ignore>languages/*</ignore>
     <ignore>node_modules/*</ignore>
+    <ignore>node_tasks/*</ignore>
     <ignore>phinxdb/*</ignore>
     <ignore>Tests/*</ignore>
   </files>

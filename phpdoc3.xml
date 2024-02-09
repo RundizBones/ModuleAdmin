@@ -7,7 +7,7 @@
     <title><![CDATA[RdbAdmin Module]]></title>
     <paths>
         <cache>.phpdoc/cache</cache>
-        <output>.wiki/apidoc</output>
+        <output>.apidoc</output>
     </paths>
     <version number="latest">
         <api>
