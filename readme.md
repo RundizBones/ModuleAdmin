@@ -6,8 +6,9 @@ This module required [Languages][langmodule] module.
 * Download and extract files into **/Modules/RdbAdmin** folder.
 * Run this command from framework folder. `php rdb system:module install --mname="RdbAdmin"`.
 
-Continue reading inside [.wiki] folder.
+Continue reading inside [Wiki][wiki] ,
+[API doc][apidoc].
 
-[RundizBones]:https://github.com/RundizBones/framework
-[.wiki]:.wiki
+[wiki]:https://github.com/RundizBones/ModuleAdmin/wiki
+[apidoc]:https://rundizbones.github.io/ModuleAdmin/
 [langmodule]:https://github.com/RundizBones/ModuleLanguages
