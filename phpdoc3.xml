@@ -12,9 +12,7 @@
     <version number="latest">
         <api>
             <ignore>
-                <path>.backup/**/*</path>
-                <path>\.backup/**/*</path>
-                <path>\\.backup/**/*</path>
+                <path>./*backup/**/*</path>
                 <path>assets*/**/*</path>
                 <path>config/**/*</path>
                 <path>languages/**/*</path>
