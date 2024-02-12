@@ -327,6 +327,8 @@ trait SessionsTrait
     /**
      * Check is logged in from container if exists.
      * 
+     * The check data in container must not older than N seconds.
+     * 
      * @since 1.2.9
      * @return array Return indexed array where first index is `UsersSessionsTrait` object in the container if exists. This value can be `null`.<br>
      *              Second index is result of "is logged in". This value can be `null`.<br>
