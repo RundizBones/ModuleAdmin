@@ -23,9 +23,11 @@ table.dataTable td.dt-control:before {
 table.dataTable tr.dt-hasChild td.dt-control:before {
   content: "▼"
 }
+:root[data-bs-theme=dark] table.dataTable td.dt-control:before,
 html.dark table.dataTable td.dt-control:before {
   color: rgba(255,255,255,.5)
 }
+:root[data-bs-theme=dark] table.dataTable tr.dt-hasChild td.dt-control:before,
 html.dark table.dataTable tr.dt-hasChild td.dt-control:before {
   color: rgba(255,255,255,.5)
 }
@@ -324,7 +326,8 @@ table.dataTable.row-border > tbody > tr:first-child > th {
 }
 table.dataTable.display > tbody > tr.selected + tr.selected > td,
 table.dataTable.row-border > tbody > tr.selected + tr.selected > td {
-  border-top-color: #0262ef
+  border-top-color: rgba(13,110,253,.65);
+  border-top-color: rgba(var(--dt-row-selected),.65)
 }
 table.dataTable.cell-border > tbody > tr > td,
 table.dataTable.cell-border > tbody > tr > th {
@@ -410,17 +413,17 @@ table.dataTable.order-column.stripe > tbody > tr.odd.selected > .sorting_3 {
 table.dataTable.display > tbody > tr.even > .sorting_1,
 table.dataTable.order-column.stripe > tbody > tr.even > .sorting_1 {
   box-shadow: inset 0 0 0 9999px rgba(0,0,0,.019);
-  box-shadow: inset 0 0 0 9999px rgba(var(--dt-row-selected),.019)
+  box-shadow: inset 0 0 0 9999px rgba(var(--dt-column-ordering),.019)
 }
 table.dataTable.display > tbody > tr.even > .sorting_2,
 table.dataTable.order-column.stripe > tbody > tr.even > .sorting_2 {
   box-shadow: inset 0 0 0 9999px rgba(0,0,0,.011);
-  box-shadow: inset 0 0 0 9999px rgba(var(--dt-row-selected),.011)
+  box-shadow: inset 0 0 0 9999px rgba(var(--dt-column-ordering),.011)
 }
 table.dataTable.display > tbody > tr.even > .sorting_3,
 table.dataTable.order-column.stripe > tbody > tr.even > .sorting_3 {
   box-shadow: inset 0 0 0 9999px rgba(0,0,0,.003);
-  box-shadow: inset 0 0 0 9999px rgba(var(--dt-row-selected),.003)
+  box-shadow: inset 0 0 0 9999px rgba(var(--dt-column-ordering),.003)
 }
 table.dataTable.display > tbody > tr.even.selected > .sorting_1,
 table.dataTable.order-column.stripe > tbody > tr.even.selected > .sorting_1 {
@@ -666,7 +669,8 @@ html.dark table.dataTable.row-border > tbody > tr > th {
 }
 html.dark table.dataTable.display > tbody > tr.selected + tr.selected > td,
 html.dark table.dataTable.row-border > tbody > tr.selected + tr.selected > td {
-  border-top-color: #0257d5
+  border-top-color: rgba(13,110,253,.65);
+  border-top-color: rgba(var(--dt-row-selected),.65)
 }
 html.dark table.dataTable.cell-border > tbody > tr > td,
 html.dark table.dataTable.cell-border > tbody > tr > th {
