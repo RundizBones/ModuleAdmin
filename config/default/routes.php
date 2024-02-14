@@ -109,7 +109,7 @@ $Rc->addGroup('/admin', function(\FastRoute\RouteCollector $Rc) {
     // modules management. ----------------------------------------------------------------------
     // modules management page.
     $Rc->addRoute('GET', '/modules', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Modules:index');
-    $Rc->addRoute('PATCH', '/modules/actions', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Actions:doUpdate');
+    $Rc->addRoute('PATCH', '/modules/actions', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Actions:doActions');
 
     // modules plugins management.
     $Rc->addRoute('GET', '/modules/plugins', '\\Rdb\\Modules\\RdbAdmin\\Controllers\\Admin\\Modules\\Plugins\\Plugins:index');

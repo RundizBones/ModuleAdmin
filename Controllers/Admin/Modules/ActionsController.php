@@ -23,11 +23,12 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
 
 
     /**
-     * Do update action on selected modules.
+     * Doing a selected action on selected modules.
      * 
+     * @since 1.2.5 It was `doUpdateAction()`, renamed to `doActionsAction()`.
      * @return string
      */
-    public function doUpdateAction(): string
+    public function doActionsAction(): string
     {
         // processing part ----------------------------------------------------------------------------------------------------
         $this->checkPermission('RdbAdmin', 'RdbAdminModules', ['manageModules']);
@@ -101,7 +102,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         // display, response part ---------------------------------------------------------------------------------------------
         unset($Csrf, $Url);
         return $this->responseAcceptType($output);
-    }// doUpdateAction
+    }// doActionsAction
 
 
     /**
