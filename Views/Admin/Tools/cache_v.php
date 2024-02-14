@@ -46,6 +46,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div id="rdba-cache-local-form-group" class="form-group rd-hidden">
+                                <label class="control-label"></label>
+                                <div class="control-wrapper">
+                                    <label><input type="checkbox" name="clear-local-session-storage" value="1"> <?php echo __('Clear local &amp; session storage.'); ?></label>
+                                </div>
+                            </div>
 
                             <div class="form-group submit-button-row">
                                 <label class="control-label"></label>

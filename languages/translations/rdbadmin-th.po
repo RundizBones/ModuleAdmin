@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2024-01-30 12:10+0700\n"
-"PO-Revision-Date: 2024-01-30 12:10+0700\n"
+"POT-Creation-Date: 2024-02-14 15:59+0700\n"
+"PO-Revision-Date: 2024-02-14 15:59+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -25,7 +25,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-6: .vscode\n"
 "X-Poedit-SearchPathExcluded-7: .backup\n"
 
-#: Controllers/Admin/AdminBaseController.php:138 Controllers/Admin/AdminBaseController.php:150
+#: Controllers/Admin/AdminBaseController.php:140 Controllers/Admin/AdminBaseController.php:152
 #: Middleware/APIAccess.php:133
 msgid "Access denied!"
 msgstr "ปฏิเสธการเข้าถึง!"
@@ -97,7 +97,7 @@ msgstr "ไม่สามารถส่งอีเมลได้."
 #: Controllers/Admin/Users/ActionsController.php:208 Controllers/Admin/Users/ActionsController.php:294
 #: Controllers/Admin/Users/ActionsController.php:398 Controllers/Admin/Users/AddController.php:254
 #: Controllers/Admin/Users/AvatarController.php:106 Controllers/Admin/Users/AvatarController.php:278
-#: Controllers/Admin/Users/EditController.php:487 Controllers/Admin/Users/Sessions/SessionsController.php:131
+#: Controllers/Admin/Users/EditController.php:488 Controllers/Admin/Users/Sessions/SessionsController.php:131
 msgid ""
 "Unable to validate token, please try again. If this problem still occur please reload the page and try again."
 msgstr "ไม่สามารถตรวจสอบโทเคน, โปรดลองอีกครั้ง. ถ้าปัญหานี้ยังอยู่ โปรดโหลดหน้านี้แล้วลองอีกครั้ง."
@@ -287,7 +287,7 @@ msgstr "จัดการการอนุญาต"
 #: Controllers/Admin/Permissions/PermissionsController.php:407 Controllers/Admin/Roles/ActionsController.php:248
 #: Controllers/Admin/Roles/AddController.php:146 Controllers/Admin/Roles/EditController.php:149
 #: Controllers/Admin/Roles/RolesController.php:148 Controllers/Admin/UI/Traits/CommonDataTrait.php:107
-#: Controllers/Admin/Users/ActionsController.php:57 Controllers/Admin/Users/EditController.php:994
+#: Controllers/Admin/Users/ActionsController.php:57 Controllers/Admin/Users/EditController.php:995
 #: Controllers/Admin/Users/PreviousEmailsController.php:65 Controllers/_SubControllers/MenuItems.php:235
 #: ModuleData/ModuleAdmin.php:155 Views/Admin/Index/index_v.php:7
 msgid "Admin home"
@@ -401,7 +401,7 @@ msgstr "ชื่อผู้ใช้นี้มีคนใช้อยู่
 msgid "This email is already in use."
 msgstr "อีเมลนี้มีคนใช้อยู่แล้ว."
 
-#: Controllers/Admin/RegisterController.php:739 Models/UsersDb.php:579 Views/Admin/Roles/actions_v.php:7
+#: Controllers/Admin/RegisterController.php:739 Models/UsersDb.php:652 Views/Admin/Roles/actions_v.php:7
 #: Views/Admin/Users/actions_v.php:7
 msgid "Confirmation required."
 msgstr "ต้องการการยืนยัน."
@@ -581,7 +581,7 @@ msgstr "มีข้อผิดพลาดเกิดขึ้น."
 msgid "Connection was successfull."
 msgstr "การเชื่อมต่อสำเร็จ."
 
-#: Controllers/Admin/Tools/CacheController.php:61 Controllers/Admin/Tools/CacheController.php:337
+#: Controllers/Admin/Tools/CacheController.php:61 Controllers/Admin/Tools/CacheController.php:338
 #: Views/Admin/Tools/cache_v.php:41
 msgid "Please choose a command"
 msgstr "โปรดเลือกคำสั่ง"
@@ -594,7 +594,7 @@ msgstr "แคชถูกล้างหมดแล้ว."
 msgid "Unable to clear cache."
 msgstr "ไม่สามารถล้างแคชได้."
 
-#: Controllers/Admin/Tools/CacheController.php:309 ModuleData/ModuleAdmin.php:106 ModuleData/ModuleAdmin.php:305
+#: Controllers/Admin/Tools/CacheController.php:310 ModuleData/ModuleAdmin.php:106 ModuleData/ModuleAdmin.php:305
 #: Views/Admin/Tools/cache_v.php:8
 msgid "Manage cache"
 msgstr "จัดการแคช"
@@ -699,7 +699,7 @@ msgstr "กรุณาโหลดหน้านี้แล้วลองใ
 msgid "Delete my account"
 msgstr "ลบบัญชีผู้ใช้ของฉัน"
 
-#: Controllers/Admin/Users/ActionsController.php:61 Controllers/Admin/Users/EditController.php:998
+#: Controllers/Admin/Users/ActionsController.php:61 Controllers/Admin/Users/EditController.php:999
 #: Controllers/Admin/Users/PreviousEmailsController.php:69 ModuleData/ModuleAdmin.php:93
 #: ModuleData/ModuleAdmin.php:161 Views/Admin/Permissions/index_v.php:22
 #: Views/Admin/UI/Widgets/userSummary_v.php:1
@@ -707,7 +707,7 @@ msgid "Users"
 msgstr "ผู้ใช้"
 
 #: Controllers/Admin/Users/ActionsController.php:65 Controllers/Admin/Users/AddController.php:229
-#: Controllers/Admin/Users/EditController.php:989 Controllers/Admin/Users/EditController.php:1002
+#: Controllers/Admin/Users/EditController.php:990 Controllers/Admin/Users/EditController.php:1003
 #: Controllers/Admin/Users/PreviousEmailsController.php:73 Views/Admin/Users/edit_v.php:8
 msgid "Edit user"
 msgstr "แก้ไขผู้ใช้"
@@ -750,7 +750,7 @@ msgstr "ไม่สามารถแก้ไขผู้ใช้ guest."
 
 #: Controllers/Admin/Users/ActionsController.php:613 Controllers/Admin/Users/AvatarController.php:71
 #: Controllers/Admin/Users/AvatarController.php:191 Controllers/Admin/Users/EditController.php:266
-#: Controllers/Admin/Users/EditController.php:1010 Controllers/Admin/Users/PreviousEmailsController.php:43
+#: Controllers/Admin/Users/EditController.php:1011 Controllers/Admin/Users/PreviousEmailsController.php:43
 #: Controllers/Admin/Users/Sessions/SessionsController.php:70
 msgid "Unable to edit user who has higher priority role than you."
 msgstr "ไม่สามารถแก้ไขผู้ใช้ที่มีหน้าที่สูงกว่าคุณได้."
@@ -888,51 +888,51 @@ msgstr "อีเมลของคุณได้เปลี่ยนเรี
 msgid "Not found selected user."
 msgstr "ไม่พบผู้ใช้ที่เลือก."
 
-#: Controllers/Admin/Users/EditController.php:459
+#: Controllers/Admin/Users/EditController.php:460
 msgid "User updated."
 msgstr "ปรับปรุงผู้ใช้เรียบร้อยแล้ว."
 
-#: Controllers/Admin/Users/EditController.php:798
+#: Controllers/Admin/Users/EditController.php:799
 msgid "Email change request"
 msgstr "ร้องขอเปลี่ยนอีเมล"
 
-#: Controllers/Admin/Users/EditController.php:800
+#: Controllers/Admin/Users/EditController.php:801
 msgid "Email changed"
 msgstr "เปลี่ยนอีเมลแล้ว"
 
-#: Controllers/Admin/Users/EditController.php:843
+#: Controllers/Admin/Users/EditController.php:844
 msgid "Failed to change email."
 msgstr "ล้มเหลวในการเปลี่ยนอีเมล."
 
-#: Controllers/Admin/Users/EditController.php:844
+#: Controllers/Admin/Users/EditController.php:845
 msgid "A confirmation to your new email could not be sent."
 msgstr "ไม่สามารถส่งอีเมลยืนยันไปยังอีเมลใหม่ได้."
 
-#: Controllers/Admin/Users/EditController.php:847
+#: Controllers/Admin/Users/EditController.php:848
 msgid "There is a problem about changing email."
 msgstr "มีปัญหาเกี่ยวกับการเปลี่ยนอีเมล."
 
-#: Controllers/Admin/Users/EditController.php:848
+#: Controllers/Admin/Users/EditController.php:849
 msgid "The email was changed but a notification email could not be sent."
 msgstr "อีเมลถูกเปลี่ยนแล้วแต่ไม่สามารถส่งอีเมลแจ้งเตือนได้."
 
-#: Controllers/Admin/Users/EditController.php:1033 Controllers/Admin/Users/UsersController.php:253
+#: Controllers/Admin/Users/EditController.php:1034 Controllers/Admin/Users/UsersController.php:253
 msgid "Are you sure you want to delete this profile picture?"
 msgstr "คุณแน่ใจหรือไม่ว่าจะลบรูปโปรไฟล์นี้?"
 
-#: Controllers/Admin/Users/EditController.php:1034 Controllers/Admin/Users/UsersController.php:254
+#: Controllers/Admin/Users/EditController.php:1035 Controllers/Admin/Users/UsersController.php:254
 msgid "Are you sure you want to upload selected profile picture?"
 msgstr "คุณแน่ใจหรือไม่ว่าจะอัพโหลดรูปโปรไฟล์ที่เลือก?"
 
-#: Controllers/Admin/Users/EditController.php:1034 Controllers/Admin/Users/UsersController.php:254
+#: Controllers/Admin/Users/EditController.php:1035 Controllers/Admin/Users/UsersController.php:254
 msgid "Any existing profile picture will be changed."
 msgstr "รูปโปรไฟล์ใดๆที่มีอยู่แล้วจะเปลี่ยนไป."
 
-#: Controllers/Admin/Users/EditController.php:1035 Controllers/Admin/Users/UsersController.php:259
+#: Controllers/Admin/Users/EditController.php:1036 Controllers/Admin/Users/UsersController.php:259
 msgid "You can only select one file."
 msgstr "คุณสามารถเลือกได้เพียงไฟล์เดียว."
 
-#: Controllers/Admin/Users/EditController.php:1036 Controllers/Admin/Users/UsersController.php:261
+#: Controllers/Admin/Users/EditController.php:1037 Controllers/Admin/Users/UsersController.php:261
 msgid "Uploading"
 msgstr "กำลังอัพโหลด"
 
@@ -985,17 +985,17 @@ msgstr "สำเร็จ"
 msgid "Unknow"
 msgstr "ไม่ทราบ"
 
-#: Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php:176
+#: Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php:188
 msgid ""
 "Your account has been locked due to your simultaneous login setting, please login using link that has been "
 "sent to your email."
 msgstr "บัญชีผู้ใช้ของคุณถูกระงับเนื่องจากการตั้งค่าเข้าสู่ระบบซ้ำซ้อนของคุณ, โปรดเข้าสู่ระบบโดยใช้ลิ้งค์ที่ส่งไปยังอีเมลของคุณ."
 
-#: Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php:205
+#: Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php:217
 msgid "Your login link."
 msgstr "ลิ้งค์เข้าสู่ระบบของคุณ."
 
-#: Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php:269
+#: Controllers/Admin/Users/Sessions/Traits/SessionsTrait.php:281
 msgid "Simultaneous login detected but unable to send login link to your email."
 msgstr "ตรวจพบการเข้าสู่ระบบซ้ำซ้อน แต่ไม่สามารถส่งลิ้งเข้าสู่ระบบไปยังอีเมลของคุณ."
 
@@ -1092,7 +1092,7 @@ msgstr "ปิด"
 msgid "The API key does not matched."
 msgstr "กุญแจ API ไม่ตรงกัน."
 
-#: Models/UsersDb.php:580
+#: Models/UsersDb.php:653
 msgid "Please wait for administrator confirmation."
 msgstr "โปรดรอผู้ดูแลทำการยืนยันสมัครสมาชิก."
 
@@ -1192,7 +1192,7 @@ msgid "Please skip this field."
 msgstr "โปรดข้ามฟิลด์นี้."
 
 #: Views/Admin/ForgotLoginPass/index_v.php:49 Views/Admin/ForgotLoginPass/reset_v.php:39
-#: Views/Admin/Login/reset_v.php:40 Views/Admin/Tools/cache_v.php:53 Views/Admin/Tools/emailTester_v.php:24
+#: Views/Admin/Login/reset_v.php:40 Views/Admin/Tools/cache_v.php:59 Views/Admin/Tools/emailTester_v.php:24
 msgid "Submit"
 msgstr "ส่งข้อมูล"
 
@@ -1867,6 +1867,10 @@ msgstr "จำนวนไฟล์และโฟลเดอร์ทั้ง
 #: Views/Admin/Tools/cache_v.php:35
 msgid "Total items"
 msgstr "รายการทั้งหมด"
+
+#: Views/Admin/Tools/cache_v.php:52
+msgid "Clear local &amp; session storage."
+msgstr "ล้างค่าที่เก็บข้อมูลโลคอล &amp; เซสชั่น."
 
 #: Views/Admin/Tools/emailTester_v.php:15
 msgid "Target email"

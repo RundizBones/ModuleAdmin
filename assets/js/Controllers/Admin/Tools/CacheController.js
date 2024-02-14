@@ -9,29 +9,17 @@ class RdbaCacheController {
     /**
      * AJAX get form data.
      * 
+     * This method was called from `init()`.
+     * 
      * @returns {undefined}
      */
-    ajaxGetFormData() {
+    #ajaxGetFormData() {
         let promiseObj = new Promise(function(resolve, reject) {
             RdbaCommon.XHR({
                 'url': RdbaToolsCache.getCacheUrl,
                 'method': RdbaToolsCache.getCacheMethod,
                 'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'dataType': 'json'
-            })
-            .catch(function(responseObject) {
-                console.error(responseObject);
-                let response = (responseObject ? responseObject.response : {});
-
-                if (typeof(response) !== 'undefined') {
-                    if (typeof(response.formResultMessage) !== 'undefined') {
-                        let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
-                        let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
-                        document.querySelector('.form-result-placeholder').innerHTML = alertBox;
-                    }
-                }
-
-                reject(response);
             })
             .then(function(responseObject) {
                 let response = (responseObject ? responseObject.response : {});
@@ -68,46 +56,67 @@ class RdbaCacheController {
                 }
 
                 resolve(response);
-            });// end XHR
+            })
+            .catch(function(responseObject) {
+                console.error(responseObject);
+                let response = (responseObject ? responseObject.response : {});
+
+                if (typeof(response) !== 'undefined') {
+                    if (typeof(response.formResultMessage) !== 'undefined') {
+                        let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
+                        let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
+                        document.querySelector('.form-result-placeholder').innerHTML = alertBox;
+                    }
+                }
+
+                reject(response);
+            })
+            ;// end XHR
         });// end new Promise();
 
         return promiseObj;
-    }// ajaxGetFormData
+    }// #ajaxGetFormData
 
 
     /**
-     * Initialize the class.
+     * Listen cache command change and toggle show/hide other form group.
      * 
+     * This method was called from `init()`.
+     * 
+     * @since 1.2.10
      * @returns {undefined}
      */
-    init() {
-        let $ = jQuery.noConflict();
-        let thisClass = this;
+    #listenCacheCommandChange() {
+        const cacheCommand = document.getElementById('rdba-tools-cachecommand');
+        const localCacheFormGroup = document.getElementById('rdba-cache-local-form-group');
 
-        // wait for UI XHR common data finished then start working.
-        $.when(uiXhrCommonData)
-        .then(function() {
-            return thisClass.ajaxGetFormData();
-        })
-        .then(function() {
-            thisClass.listenOnFormSubmit();
-        })
-        ;
-    }// init
+        cacheCommand?.addEventListener('change', (event) => {
+            const thisTarget = event.target;
+            if (thisTarget.value === 'clear') {
+                localCacheFormGroup.classList.remove('rd-hidden');
+            } else {
+                localCacheFormGroup.classList.add('rd-hidden');
+            }
+        });
+    }// #listenCacheCommandChange
 
 
     /**
      * Listen on form submit.
      * 
+     * This method was called from `init()`.
+     * 
      * @returns {undefined}
      */
-    listenOnFormSubmit() {
-        let cacheForm = document.getElementById('rdba-toolscache-form');
+    #listenOnFormSubmit() {
+        const thisClass = this;
+        const cacheForm = document.getElementById('rdba-toolscache-form');
+
         if (cacheForm) {
             cacheForm.addEventListener('submit', function(event) {
                 event.preventDefault();
 
-                let selectCommand = cacheForm.querySelector('#rdba-tools-cachecommand');
+                const selectCommand = cacheForm.querySelector('#rdba-tools-cachecommand');
                 let restUrl, restMethod;
 
                 if (!selectCommand || (selectCommand && selectCommand.value === '')) {
@@ -138,6 +147,26 @@ class RdbaCacheController {
                     'data': new URLSearchParams(_.toArray(formData)).toString(),
                     'dataType': 'json'
                 })
+                .then(function(responseObject) {
+                    // XHR success.
+                    let response = responseObject.response;
+
+                    if (typeof(response) !== 'undefined') {
+                        if (typeof(response.formResultMessage) !== 'undefined') {
+                            let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
+                            let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
+                            cacheForm.querySelector('.form-result-placeholder').innerHTML = alertBox;
+                        }
+                    }
+
+                    if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                        RdbaToolsCache.csrfKeyPair = response.csrfKeyPair;
+                    }
+
+                    thisClass.#maybeClearLocalCache(cacheForm);
+
+                    return Promise.resolve(responseObject);
+                })
                 .catch(function(responseObject) {
                     // XHR failed.
                     let response = responseObject.response;
@@ -158,24 +187,6 @@ class RdbaCacheController {
 
                     return Promise.reject(responseObject);
                 })
-                .then(function(responseObject) {
-                    // XHR success.
-                    let response = responseObject.response;
-
-                    if (typeof(response) !== 'undefined') {
-                        if (typeof(response.formResultMessage) !== 'undefined') {
-                            let alertClass = RdbaCommon.getAlertClassFromStatus(response.formResultStatus);
-                            let alertBox = RdbaCommon.renderAlertHtml(alertClass, response.formResultMessage);
-                            cacheForm.querySelector('.form-result-placeholder').innerHTML = alertBox;
-                        }
-                    }
-
-                    if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
-                        RdbaToolsCache.csrfKeyPair = response.csrfKeyPair;
-                    }
-
-                    return Promise.resolve(responseObject);
-                })
                 .finally(function() {
                     // remove loading icon
                     cacheForm.querySelector('.loading-icon').remove();
@@ -183,8 +194,43 @@ class RdbaCacheController {
                     cacheForm.querySelector('.rdba-submit-button').removeAttribute('disabled');
                 });
             });
+        }// endif; there is cache form.
+    }// #listenOnFormSubmit
+
+
+    #maybeClearLocalCache(cacheForm) {
+        const selectCommand = cacheForm.querySelector('#rdba-tools-cachecommand');
+
+        if (selectCommand.value === 'clear') {
+            const clearLS = document.querySelector('input[name="clear-local-session-storage"]');
+            if (clearLS.checked) {
+                localStorage.clear();
+                sessionStorage.clear();
+            }
         }
-    }// listenOnFormSubmit
+    }// #maybeClearLocalCache
+
+
+    /**
+     * Initialize the class.
+     * 
+     * @returns {undefined}
+     */
+    init() {
+        let $ = jQuery.noConflict();
+        let thisClass = this;
+
+        // wait for UI XHR common data finished then start working.
+        $.when(uiXhrCommonData)
+        .then(function() {
+            return thisClass.#ajaxGetFormData();
+        })
+        .then(function() {
+            thisClass.#listenCacheCommandChange();
+            thisClass.#listenOnFormSubmit();
+        })
+        ;
+    }// init
 
 
 }
