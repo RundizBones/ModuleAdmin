@@ -86,6 +86,7 @@
                                         {{#if RdbaModulesObject.permissions.manageModules}}
                                         <option value="enable"><?php echo __('Enable'); ?></option>
                                         <option value="disable"><?php echo __('Disable'); ?></option>
+                                        <option value="update"><?php echo __('Update module'); ?></option>
                                         {{/if}}
                                     </select>
                                 </label>

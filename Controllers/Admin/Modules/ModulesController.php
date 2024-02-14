@@ -115,10 +115,16 @@ class ModulesController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
                     'csrfValue' => $output['csrfValue'],
                     'csrfKeyPair' => $output['csrfKeyPair'],
                     'permissions' => $output['permissions'],
+                    'txtConfirmUpdateModule' => sprintf(
+                        __('This will run update module with the same as command %1$s.'),
+                        '`php rdb system:module update`'
+                    ) . "\n" .
+                        __('Are you sure?'),
                     'txtDisabled' => __('Disabled'),
                     'txtEnabled' => __('Enabled'),
                     'txtPleaseSelectAction' => __('Please select an action.'),
                     'txtPleaseSelectAtLeastOneModule' => __('Please select at least one module.'),
+                    'txtPleaseSelectOneModule' => __('Please select only one module.'),
                     'urlAppBased' => $Url->getAppBasedPath(),
                     'urls' => $output['urls'],
                 ]

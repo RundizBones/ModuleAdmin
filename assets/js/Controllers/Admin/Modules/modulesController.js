@@ -23,25 +23,12 @@ class RdbaModulesController extends RdbaDatatables {
 
 
     /**
-     * Initialize the class.
-     * 
-     * @returns {undefined}
-     */
-    init() {
-        // initialize datatables.
-        this.initDataTables();
-        // listen on bulk action form submit and open as ajax.
-        this.listenFormSubmit();
-    }// init
-
-
-    /**
      * Initialize datatables.
      * 
      * @private This method was called from `init()` method.
      * @returns {undefined}
      */
-    initDataTables() {
+    #initDataTables() {
         let $ = jQuery.noConflict();
         let thisClass = this;
         let addedCustomResultControls = false;
@@ -188,7 +175,7 @@ class RdbaModulesController extends RdbaDatatables {
             })// datatables on draw complete.
             ;
         });// uiXhrCommonData.done()
-    }// initDataTables
+    }// #initDataTables
 
 
     /**
@@ -197,7 +184,7 @@ class RdbaModulesController extends RdbaDatatables {
      * @private This method was called from `init()` method.
      * @returns {undefined}
      */
-    listenFormSubmit() {
+    #listenFormSubmit() {
         let thisClass = this;
 
         document.addEventListener('submit', function(event) {
@@ -238,12 +225,33 @@ class RdbaModulesController extends RdbaDatatables {
                             'type': 'error'
                         });
                         formValidated = false;
+                    } else if (selectAction?.value === 'update') {
+                        // if selected action is running update (the same as command `php rdb system:module update --mname=xxx`).
+                        // this action is since v 1.2.10
+                        if (modulesIdArray.length > 1) {
+                            RDTAAlertDialog.alert({
+                                'text': RdbaModulesObject.txtPleaseSelectOneModule,
+                                'type': 'error'
+                            });
+                            formValidated = false;
+                        }
+
+                        if (formValidated === true) {
+                            const confirmVal = confirm(RdbaModulesObject.txtConfirmUpdateModule);
+                            if (confirmVal === true) {
+                                formValidated = true;
+                            } else {
+                                formValidated = false;
+                            }
+                        }
                     } else {
                         formValidated = true;
                     }
                 }
 
                 if (formValidated === true) {
+                    // if form validated.
+                    // start processing the form.
                     // lock button
                     thisForm.querySelector('#rdba-module-action-button').setAttribute('disabled', 'disabled');
 
@@ -261,26 +269,6 @@ class RdbaModulesController extends RdbaDatatables {
                         'contentType': 'application/x-www-form-urlencoded;charset=UTF-8',
                         'data': new URLSearchParams(_.toArray(formData)).toString(),
                         'dataType': 'json',
-                    })
-                    .catch(function(responseObject) {
-                        // XHR failed.
-                        let response = responseObject.response;
-                        console.error(responseObject);
-
-                        if (typeof(response) !== 'undefined') {
-                            if (typeof(response.formResultMessage) !== 'undefined') {
-                                RDTAAlertDialog.alert({
-                                    'type': response.formResultStatus,
-                                    'html': RdbaCommon.renderAlertContent(response.formResultMessage)
-                                });
-                            }
-                        }
-
-                        if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
-                            RdbaModulesObject.csrfKeyPair = response.csrfKeyPair;
-                        }
-
-                        return Promise.reject(responseObject);
                     })
                     .then(function(responseObject) {
                         // XHR success.
@@ -304,6 +292,26 @@ class RdbaModulesController extends RdbaDatatables {
 
                         return Promise.resolve(responseObject);
                     })
+                    .catch(function(responseObject) {
+                        // XHR failed.
+                        let response = responseObject.response;
+                        console.error(responseObject);
+
+                        if (typeof(response) !== 'undefined') {
+                            if (typeof(response.formResultMessage) !== 'undefined') {
+                                RDTAAlertDialog.alert({
+                                    'type': response.formResultStatus,
+                                    'html': RdbaCommon.renderAlertContent(response.formResultMessage)
+                                });
+                            }
+                        }
+
+                        if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
+                            RdbaModulesObject.csrfKeyPair = response.csrfKeyPair;
+                        }
+
+                        return Promise.reject(responseObject);
+                    })
                     .finally(function() {
                         // unlock submit button
                         thisForm.querySelector('#rdba-module-action-button').removeAttribute('disabled');
@@ -311,7 +319,20 @@ class RdbaModulesController extends RdbaDatatables {
                 }
             }
         });
-    }// listenFormSubmit
+    }// #listenFormSubmit
+
+
+    /**
+     * Initialize the class.
+     * 
+     * @returns {undefined}
+     */
+    init() {
+        // initialize datatables.
+        this.#initDataTables();
+        // listen on bulk action form submit and open as ajax.
+        this.#listenFormSubmit();
+    }// init
 
 
 }
