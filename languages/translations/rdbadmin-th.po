@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2024-02-15 00:49+0700\n"
-"PO-Revision-Date: 2024-02-15 00:49+0700\n"
+"POT-Creation-Date: 2024-02-15 21:20+0700\n"
+"PO-Revision-Date: 2024-02-15 21:21+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -85,7 +85,7 @@ msgstr "ไม่สามารถส่งอีเมลได้."
 #: Controllers/Admin/ForgotLoginPassController.php:561 Controllers/Admin/ForgotLoginPassController.php:695
 #: Controllers/Admin/LoginController.php:250 Controllers/Admin/LoginController.php:393
 #: Controllers/Admin/LoginController.php:450 Controllers/Admin/LogoutController.php:69
-#: Controllers/Admin/Modules/ActionsController.php:122 Controllers/Admin/Modules/Assets/PublishController.php:304
+#: Controllers/Admin/Modules/ActionsController.php:127 Controllers/Admin/Modules/Assets/PublishController.php:304
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:111
 #: Controllers/Admin/Permissions/EditController.php:84 Controllers/Admin/Permissions/EditController.php:191
 #: Controllers/Admin/RegisterController.php:288 Controllers/Admin/RegisterController.php:537
@@ -149,59 +149,64 @@ msgstr "คุณได้ออกจากระบบแล้ว."
 msgid "Logout"
 msgstr "ออกจากระบบ"
 
-#: Controllers/Admin/Modules/ActionsController.php:96
+#: Controllers/Admin/Modules/ActionsController.php:101
 msgid "Enabled the selected module successfully."
 msgid_plural "Enabled the selected modules successfully."
 msgstr[0] "เปิดใช้งานโมดูลที่เลือกเรียบร้อยแล้ว."
 
-#: Controllers/Admin/Modules/ActionsController.php:98
+#: Controllers/Admin/Modules/ActionsController.php:103
 msgid "Disabled the selected module successfully."
 msgid_plural "Disabled the selected modules successfully."
 msgstr[0] "ปิดใช้งานโมดูลที่เลือกเรียบร้อยแล้ว."
 
-#: Controllers/Admin/Modules/ActionsController.php:100
+#: Controllers/Admin/Modules/ActionsController.php:105
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:100 Controllers/Admin/Roles/ReorderController.php:105
 #: Controllers/Admin/Settings/SettingsController.php:241 Controllers/Admin/Users/ActionsController.php:373
 msgid "Updated successfully."
 msgstr "อัพเดทเรียบร้อย."
 
-#: Controllers/Admin/Modules/ActionsController.php:104
+#: Controllers/Admin/Modules/ActionsController.php:109
 #, php-format
 msgid ""
 "Due to some composer package maybe changed but it is unable to run command %1$s on this process, please run "
 "this command manually."
 msgstr "เนื่องจากแพ็คเกจ composer อาจเปลี่ยนแปลงแต่ว่ามันไม่สามารถเรียกคำสั่ง %1$s ในกระบวนการนี้ได้, โปรดสั่งคำสั่งนี้ด้วยตัวเอง."
 
-#: Controllers/Admin/Modules/ActionsController.php:156
+#: Controllers/Admin/Modules/ActionsController.php:164
 #, php-format
 msgid "The module you selected is not exists or not enabled (%1$s)."
 msgstr "โมดูลที่คุณเลือกไม่มีอยู่หรือไม่ได้เปิดใช้งาน (%1$s)."
 
-#: Controllers/Admin/Modules/ActionsController.php:175
+#: Controllers/Admin/Modules/ActionsController.php:183
 msgid "Please make sure that this file and folder are exists and writable."
 msgstr "โปรดตรวจให้แน่ใจว่าไฟล์และโฟลเดอร์นี้มีอยู่และสามารถเขียนทับได้."
 
-#: Controllers/Admin/Modules/ActionsController.php:260
+#: Controllers/Admin/Modules/ActionsController.php:198
+#, php-format
+msgid "Please update the framework to version %1$s or newer."
+msgstr "กรุณาอัปเดตเฟรมเวิร์คไปยังรุ่น %1$s หรือใหม่กว่า."
+
+#: Controllers/Admin/Modules/ActionsController.php:276
 #, php-format
 msgid "Unable to copy %1$s from some modules, here is the list (%2$s)."
 msgstr "ไม่สามารถคัดลองทำซ้ำ %1$s จากบางโมดูล, นี่คือรายการ (%2$s)."
 
-#: Controllers/Admin/Modules/ActionsController.php:266
+#: Controllers/Admin/Modules/ActionsController.php:282
 #, php-format
 msgid "Please try to manually edit your composer by merge the required dependency and then run %1$s command."
 msgstr "โปรดลองพยายามแก้ไขไฟล์ composer ของคุณโดยการรวมแพ็คเกจที่จำเป็นแล้วเรียกใช้คำสั่ง %1$s."
 
-#: Controllers/Admin/Modules/ActionsController.php:316 Controllers/Admin/Modules/Assets/AssetsController.php:153
+#: Controllers/Admin/Modules/ActionsController.php:332 Controllers/Admin/Modules/Assets/AssetsController.php:153
 #: Controllers/Admin/Modules/Assets/PublishController.php:267 Controllers/Admin/Modules/ModulesController.php:126
 msgid "Please select at least one module."
 msgstr "โปรดเลือกอย่างน้อยหนึ่งโมดูล."
 
-#: Controllers/Admin/Modules/ActionsController.php:325
+#: Controllers/Admin/Modules/ActionsController.php:341
 #, php-format
 msgid "You couldn't modify current module via web based (%1$s)."
 msgstr "คุณไม่สามารถปรับแต่งโมดูลปัจจุบันผ่านหน้าเว็บได้ (%1$s)."
 
-#: Controllers/Admin/Modules/ActionsController.php:335 Controllers/Admin/Modules/Assets/AssetsController.php:152
+#: Controllers/Admin/Modules/ActionsController.php:351 Controllers/Admin/Modules/Assets/AssetsController.php:152
 #: Controllers/Admin/Modules/ModulesController.php:125
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:161
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:176
@@ -212,7 +217,7 @@ msgstr "คุณไม่สามารถปรับแต่งโมดู
 msgid "Please select an action."
 msgstr "โปรดเลือกการทำงาน."
 
-#: Controllers/Admin/Modules/ActionsController.php:343 Controllers/Admin/Modules/ModulesController.php:127
+#: Controllers/Admin/Modules/ActionsController.php:359 Controllers/Admin/Modules/ModulesController.php:127
 msgid "Please select only one module."
 msgstr "โปรดเลือกเพียงแค่หนึ่งโมดูล."
 
