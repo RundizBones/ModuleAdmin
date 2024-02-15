@@ -167,6 +167,16 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
             http_response_code(400);
         }
 
+        if (true === $validated && !method_exists($this->Modules, 'getComposerDefault')) {
+            $output['formResultStatus'] = 'error';
+            $output['formResultMessage'] = sprintf(
+                __('Please update the framework to version %1$s or newer.'),
+                '1.1.8'
+            );
+            $validated = false;
+            http_response_code(500);
+        }
+
         if (
             true === $validated &&
             is_file(ROOT_PATH . DIRECTORY_SEPARATOR . 'composer.json') &&
@@ -191,16 +201,6 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
             $updated = false;
         }
         unset($validated);
-
-        if (true === $validated && !method_exists($this->Modules, 'getComposerDefault')) {
-            $output['formResultStatus'] = 'error';
-            $output['formResultMessage'] = sprintf(
-                __('Please update the framework to version %1$s or newer.'),
-                '1.1.8'
-            );
-            $validated = false;
-            $updated = false;
-        }
         // end validation. ======================================
 
         // the code below has been copied from `\Rdb\System\Core\Console\Module->executeUpdate()`.
