@@ -192,7 +192,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
         }
         unset($validated);
 
-        if (!method_exists($this->Modules, 'getComposerDefault')) {
+        if (true === $validated && !method_exists($this->Modules, 'getComposerDefault')) {
             $output['formResultStatus'] = 'error';
             $output['formResultMessage'] = sprintf(
                 __('Please update the framework to version %1$s or newer.'),
