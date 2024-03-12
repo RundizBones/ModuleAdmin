@@ -479,11 +479,9 @@ class ConfigDb extends \Rdb\System\Core\Models\BaseModel
             $sql .= 'VALUES' . PHP_EOL;
             $totalPlaceholders = count($insertCfnPlaceholders);
             for ($i = 0; $i < $totalPlaceholders; ++$i) {
-                $sql .= '    (' . $insertCfnPlaceholders[$i] . ', ' . $insertCfvPlaceholders[$i] . ', ';
+                $sql .= '    (' . $insertCfnPlaceholders[$i] . ', ' . $insertCfvPlaceholders[$i];
                 if (isset($insertCfdPlaceholders) && is_array($insertCfdPlaceholders) && array_key_exists($i, $insertCfdPlaceholders)) {
-                    $sql .= $insertCfdPlaceholders[$i];
-                } else {
-                    $sql .= '`config_description`';
+                    $sql .= ', ' . $insertCfdPlaceholders[$i];
                 }
                 $sql .= ')';
                 if (($i + 1) < $totalPlaceholders) {
