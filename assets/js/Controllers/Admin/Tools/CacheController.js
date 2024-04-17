@@ -204,8 +204,17 @@ class RdbaCacheController {
         if (selectCommand.value === 'clear') {
             const clearLS = document.querySelector('input[name="clear-local-session-storage"]');
             if (clearLS.checked) {
-                localStorage.clear();
-                sessionStorage.clear();
+                // If delete local & session storage was checked.
+                // Omit local storage word because we don't use it in both framework, RdbAdmin. So, nothing to clear.
+                // However, local storage and session storage should not be using **clear** but remove individually that was set by the framework or this module (if available).
+                Object.keys(sessionStorage).forEach((item) => {
+                    if (typeof(item) === 'string') {
+                        if (item.indexOf('rdba_') === 0 || item.indexOf('rdb_') === 0) {
+                            // if found item named begins with 'rdba_', 'rdb_'. delete it.
+                            sessionStorage.removeItem(item);
+                        }
+                    }// endif;
+                });
             }
         }
     }// #maybeClearLocalCache

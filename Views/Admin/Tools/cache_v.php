@@ -49,7 +49,11 @@
                             <div id="rdba-cache-local-form-group" class="form-group rd-hidden">
                                 <label class="control-label"></label>
                                 <div class="control-wrapper">
-                                    <label><input type="checkbox" name="clear-local-session-storage" value="1"> <?php echo __('Clear local &amp; session storage.'); ?></label>
+                                    <label><input type="checkbox" name="clear-local-session-storage" value="1"> <?php echo __('Delete session storage that was set by the framework and this module.'); ?></label>
+                                    <?php
+                                    // Omit local storage word because we don't use it in both framework, RdbAdmin. So, nothing to clear.
+                                    // However, local storage and session storage should not be using **clear** but remove individually that was set by the framework or this module (if available).
+                                    ?> 
                                 </div>
                             </div>
 
