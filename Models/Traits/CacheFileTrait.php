@@ -207,10 +207,11 @@ trait CacheFileTrait
         $content .= PHP_EOL . PHP_EOL . PHP_EOL;
         $content .= '/**' . PHP_EOL;
         $content .= ' * Debug backtrace:' . PHP_EOL;
+        $content .= ' * Generated from file: ' . __FILE__ . ' : ' . (__LINE__ - 3) . PHP_EOL;
         $debugbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10);
         if (is_array($debugbt) && !empty($debugbt)) {
             foreach ($debugbt as $trace) {
-                $content .= ' * ';
+                $content .= '   # ';
                 if (isset($trace['class'])) {
                     $content .= $trace['class'];
                 }
@@ -232,6 +233,7 @@ trait CacheFileTrait
             unset($trace);
         }
         unset($debugbt);
+        $content .= '/*' . PHP_EOL; // prevent something wrong and cause closed comment block before it close by this code.
         $content .= ' */' . PHP_EOL;
         $content .= PHP_EOL;
 
