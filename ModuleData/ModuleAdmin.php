@@ -221,6 +221,7 @@ class ModuleAdmin implements \Rdb\Modules\RdbAdmin\Interfaces\ModuleAdmin
                         'name' => __('Manage permissions'),
                         'link' => $urlBaseWithLang . '/admin/permissions',
                         'linksCurrent' => [
+                            $urlBase . '/admin/permissions',
                             $urlBase . '/admin/permissions/*',
                         ],
                     ],

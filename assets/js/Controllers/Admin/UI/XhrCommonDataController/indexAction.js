@@ -289,6 +289,9 @@ class RdbaUiXhrCommonDataController {
         let $ = jQuery.noConflict();
         let thisClass = this;
 
+        //console.debug('current URL in `RdbaUIXhrCommonData`: ', RdbaUIXhrCommonData.currentUrl);
+        //console.debug('current URL raw in `RdbaUIXhrCommonData`: ', RdbaUIXhrCommonData.currentUrlRaw);
+
         $.each(MenuItems, function(indexMenu, item) {
             if (
                 typeof(RdbaUIXhrCommonData.currentUrl) !== 'undefined' && 
@@ -304,7 +307,6 @@ class RdbaUiXhrCommonDataController {
                 typeof(RdbaUIXhrCommonData.currentUrl) !== 'undefined' && 
                 typeof(item.linksCurrent) !== 'undefined'
             ) {
-                //console.log(item.linksCurrent);
                 $.each(item.linksCurrent, function(indexLinksCurrent, eachLink) {
                     let currentUrlNoQuerystring = (RdbaUIXhrCommonData.currentUrl.split('?') ? RdbaUIXhrCommonData.currentUrl.split('?')[0] : RdbaUIXhrCommonData.currentUrl);
                     if (thisClass.matchUrlRule(currentUrlNoQuerystring, eachLink)) {
@@ -325,7 +327,7 @@ class RdbaUiXhrCommonDataController {
      * 
      * @private This method was called from `markCurrentMenuItem()`.
      * @param {string} url The URL.
-     * @param {string} rule The rule, for example: /admin/users/* will be match /admin/users/edit, /admin/users/edit/2
+     * @param {string} rule The rule, for example: /admin/users/* will be match /admin/users/edit, /admin/users/edit/2 but NOT /admin/users
      * @returns {Boolean} Return true on success, false on failure.
      */
     matchUrlRule(url, rule) {
