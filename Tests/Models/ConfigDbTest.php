@@ -90,7 +90,9 @@ class ConfigDbTest extends \Rdb\Tests\BaseTestCase
         $assertNot = (time() . microtime(true)*1000);
         $this->assertNotEquals($assertNot, $ConfigDb->getRow('rdbadmin_SiteName', $assertNot));
         $this->assertTrue(is_object($ConfigDb->getRow('rdbadmin_SiteName', $assertNot)));
-        $this->assertObjectHasAttribute('config_value', $ConfigDb->getRow('rdbadmin_SiteName', $assertNot));
+        $configValue = $ConfigDb->getRow('rdbadmin_SiteName', $assertNot);
+        $this->assertTrue(isset($configValue->config_value));
+        unset($configValue);
 
         // test config not found
         $this->assertSame('', $ConfigDb->getRow('configNameThatIsNotExists' . time(), ''));// not found must return default which is empty string.
