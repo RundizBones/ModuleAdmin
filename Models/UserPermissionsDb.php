@@ -88,132 +88,17 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
     public function checkPermission(string $module, string $page, $action, array $identity = []): bool
     {
         // make cache object ready.
-        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
-            $this->Container,
-            [
-                'cachePath' => $this->cachePath,
-            ]
-        ))->getCacheObject();
+        $Cache = $this->getCacheObject();
         $cacheExpire = (24 * 60 * 60);// 24 hours
 
         // verify and get identities. ---------------------------------------------------------------------------------
-        if (isset($identity['userrole_id'])) {
-            // if userrole_id in identity was set
-            if (!is_int($identity['userrole_id']) && !is_array($identity['userrole_id'])) {
-                // if userrole_id is not integer and not array.
-                // remove it.
-                unset($identity['userrole_id']);
-            } elseif (is_int($identity['userrole_id'])) {
-                // if userrole_id is integer.
-                // make it array.
-                $identity['userrole_id'] = [$identity['userrole_id']];
-            }
-        }
-
-        if (isset($identity['user_id']) && !is_int($identity['user_id'])) {
-            // if user_id in identity was set but not integer.
-            // remove it.
-            unset($identity['user_id']);
-        }
-
-        if (
-            empty($identity) || 
-            (!isset($identity['userrole_id']) && !isset($identity['user_id']))
-        ) {
-            // if no identity specified.
-            if ($this->Container->has('UsersSessionsTrait')) {
-                // if it was check logged in at admin base controller.
-                $identity['user_id'] = (int) ($this->Container['UsersSessionsTrait']->userSessionCookieData['user_id'] ?? 0);
-            } else {
-                // if it was not check logged in, this maybe because plugin register hook 
-                // ...maybe from admin base constructor -> front base constructor -> register hooks
-                // try to get user id from cookie.
-                $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
-                $Cookie->setEncryption('rdbaLoggedinKey');
-                $cookieData = $Cookie->get('rdbadmin_cookie_users');// contain `user_id`, `user_display_name`, `sessionKey`.
-                if (isset($cookieData['user_id'])) {
-                    $identity['user_id'] = (int) $cookieData['user_id'];
-                } else {
-                    $identity['user_id'] = 0;
-                }
-            }
-        }
-
-        if (!isset($identity['userrole_id']) && isset($identity['user_id'])) {
-            // if userrole_id was not set but user_id was set.
-            // get user roles data for this user.
-            $cacheKey = str_replace(
-                ['%user_id%'],
-                [$identity['user_id']],
-                $this->cacheKeyPermissionUserRoleId
-            );
-            $cacheKeyRolesData = str_replace(
-                ['%user_id%'],
-                [$identity['user_id']],
-                $this->cacheKeyPermissionUserRoleIdsData
-            );
-
-            if ($Cache->has($cacheKey)) {
-                $identity['userrole_id'] = $Cache->get($cacheKey);
-            } else {
-                $UsersRolesDb = new UsersRolesDb($this->Container);
-                $options = [];
-                $options['where'] = [
-                    'user_id' => $identity['user_id'],
-                ];
-                $options['unlimited'] = true;
-                $listRoles = $UsersRolesDb->listItems($options);
-                if (isset($listRoles['items']) && is_array($listRoles['items'])) {
-                    $identity['userrole_id'] = [];
-                    foreach ($listRoles['items'] as $row) {
-                        $identity['userrole_id'][] = $row->userrole_id;
-                    }// endforeach;
-                    unset($row);
-                    $Cache->set($cacheKey, $identity['userrole_id'], $cacheExpire);
-                    $Cache->set($cacheKeyRolesData, $listRoles['items'], $cacheExpire);
-                }
-                unset($listRoles, $options, $UsersRolesDb);
-            }
-
-            unset($cacheKey);
-        }
+        $cacheKeyRolesData = null;
+        $identity = $this->checkPermissionVerifyIdentity($identity, $Cache, $cacheExpire, $cacheKeyRolesData);
         // end verify and get identities. -----------------------------------------------------------------------------
 
         // verify that this user role is highest priority. -------------------------------------------------------------
-        if (isset($identity['userrole_id']) && is_array($identity['userrole_id'])) {
-            // if userrole_id was set.
-            if (!isset($cacheKeyRolesData)) {
-                // if there is no cache key of user's roles data before.
-                // The cache key below will be set and use only in this model. This cache has no deletion (no need). It can be cleared from admin > tools menu.
-                $cacheKeyRolesData = 'permissionUserRoles.userRoleIDsData.userRoleIDs_' . json_encode($identity['userrole_id']);
-            }
-
-            if (!$Cache->has($cacheKeyRolesData)) {
-                $UsersRolesDb = new UsersRolesDb($this->Container);
-                $options = [];
-                $options['roleIdsIn'] = $identity['userrole_id'];
-                $options['unlimited'] = true;
-                $listRoles = $UsersRolesDb->listItems($options);
-                if (isset($listRoles['items']) && is_array($listRoles['items'])) {
-                    $Cache->set($cacheKeyRolesData, $listRoles['items'], $cacheExpire);
-                }
-                unset($listRoles, $options, $UsersRolesDb);
-            }
-
-            if ($Cache->has($cacheKeyRolesData)) {
-                $listRoles = $Cache->get($cacheKeyRolesData);
-                if (is_array($listRoles)) {
-                    foreach ($listRoles as $row) {
-                        if (isset($row->userrole_priority) && $row->userrole_priority == '1') {
-                            // if this user role is highest priority.
-                            unset($Cache, $listRoles, $row);
-                            return true;
-                        }
-                    }// endforeach;
-                    unset($row);
-                }
-                unset($listRoles);
-            }
+        if (true === $this->checkPermissionVerifyRoleHighestPriority($identity, $Cache, $cacheExpire, $cacheKeyRolesData)) {
+            return true;
         }
         // verify that this user role is highest priority. -------------------------------------------------------------
         unset($cacheKeyRolesData);
@@ -286,6 +171,176 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
 
 
     /**
+     * Verify and get identities.
+     * 
+     * @since 1.2.10
+     * @param array $identity The identity.
+     * @see \Rdb\Modules\KPApartment\Models\UserPermissionsDb::checkPermissionPerBuilding() For reference.
+     * 
+     * @param \Psr\SimpleCache\CacheInterface $Cache The cache object.
+     * @param int $cacheExpire The cache expiration TTL.
+     * @param string|null $cacheKeyRolesData Cache key of roles data. This parameter will be altered for later usage.
+     * @return array Return verified and get identities.
+     */
+    protected function checkPermissionVerifyIdentity(
+        array $identity, 
+        \Psr\SimpleCache\CacheInterface $Cache,
+        int $cacheExpire,
+        ?string &$cacheKeyRolesData
+    ): array
+    {
+        if (isset($identity['userrole_id'])) {
+            // if userrole_id in identity was set
+            if (!is_int($identity['userrole_id']) && !is_array($identity['userrole_id'])) {
+                // if userrole_id is not integer and not array.
+                // remove it.
+                unset($identity['userrole_id']);
+            } elseif (is_int($identity['userrole_id'])) {
+                // if userrole_id is integer.
+                // make it array.
+                $identity['userrole_id'] = [$identity['userrole_id']];
+            }
+        }
+
+        if (isset($identity['user_id']) && !is_int($identity['user_id'])) {
+            // if user_id in identity was set but not integer.
+            // remove it.
+            unset($identity['user_id']);
+        }
+
+        if (
+            empty($identity) || 
+            (!isset($identity['userrole_id']) && !isset($identity['user_id']))
+        ) {
+            // if no identity specified.
+            if ($this->Container->has('UsersSessionsTrait')) {
+                // if it was check logged in at admin base controller.
+                $identity['user_id'] = (int) ($this->Container['UsersSessionsTrait']->userSessionCookieData['user_id'] ?? 0);
+            } else {
+                // if it was not check logged in, this maybe because plugin register hook 
+                // ...maybe from admin base constructor -> front base constructor -> register hooks
+                // try to get user id from cookie.
+                $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
+                $Cookie->setEncryption('rdbaLoggedinKey');
+                $cookieData = $Cookie->get('rdbadmin_cookie_users');// contain `user_id`, `user_display_name`, `sessionKey`.
+                unset($Cookie);
+
+                if (isset($cookieData['user_id'])) {
+                    $identity['user_id'] = (int) $cookieData['user_id'];
+                } else {
+                    $identity['user_id'] = 0;
+                }
+            }
+        }
+
+        if (!isset($identity['userrole_id']) && isset($identity['user_id'])) {
+            // if userrole_id was not set but user_id was set.
+            // get user roles data for this user.
+            $cacheKey = str_replace(
+                ['%user_id%'],
+                [$identity['user_id']],
+                $this->cacheKeyPermissionUserRoleId
+            );
+            $cacheKeyRolesData = str_replace(
+                ['%user_id%'],
+                [$identity['user_id']],
+                $this->cacheKeyPermissionUserRoleIdsData
+            );
+
+            if ($Cache->has($cacheKey)) {
+                $identity['userrole_id'] = $Cache->get($cacheKey);
+            } else {
+                $UsersRolesDb = new UsersRolesDb($this->Container);
+                $options = [];
+                $options['where'] = [
+                    'user_id' => $identity['user_id'],
+                ];
+                $options['unlimited'] = true;
+                $listRoles = $UsersRolesDb->listItems($options);
+                if (isset($listRoles['items']) && is_array($listRoles['items'])) {
+                    $identity['userrole_id'] = [];
+                    foreach ($listRoles['items'] as $row) {
+                        $identity['userrole_id'][] = $row->userrole_id;
+                    }// endforeach;
+                    unset($row);
+                    $Cache->set($cacheKey, $identity['userrole_id'], $cacheExpire);
+                    $Cache->set($cacheKeyRolesData, $listRoles['items'], $cacheExpire);
+                }
+                unset($listRoles, $options, $UsersRolesDb);
+            }
+
+            unset($cacheKey);
+        }
+
+        if (isset($identity) && is_array($identity)) {
+            return $identity;
+        } else {
+            return [];
+        }
+    }// checkPermissionVerifyIdentity
+
+
+    /**
+     * Verify that this user's role is highest priority.
+     * 
+     * @since 1.2.10
+     * @param array $identity The identity.
+     * @see \Rdb\Modules\KPApartment\Models\UserPermissionsDb::checkPermissionPerBuilding() For reference.
+     * 
+     * @param \Psr\SimpleCache\CacheInterface $Cache The cache object.
+     * @param int $cacheExpire The cache expiration TTL.
+     * @param string|null $cacheKeyRolesData Cache key of roles data. This parameter will be altered for later usage.
+     * @return bool Return `true` on success, `false` for otherwise. If return `false` it must be check with another process but if return `true` then check permission process should be ended.
+     */
+    protected function checkPermissionVerifyRoleHighestPriority(
+        array $identity, 
+        \Psr\SimpleCache\CacheInterface $Cache,
+        int $cacheExpire,
+        ?string &$cacheKeyRolesData
+    ): bool
+    {
+        if (isset($identity['userrole_id']) && is_array($identity['userrole_id'])) {
+            // if userrole_id was set.
+            if (!isset($cacheKeyRolesData)) {
+                // if there is no cache key of user's roles data before.
+                // The cache key below will be set and use only in this model. This cache has no deletion (no need). It can be cleared from admin > tools menu.
+                $cacheKeyRolesData = 'permissionUserRoles.userRoleIDsData.userRoleIDs_' . json_encode($identity['userrole_id']);
+            }
+
+            if (!$Cache->has($cacheKeyRolesData)) {
+                $UsersRolesDb = new UsersRolesDb($this->Container);
+                $options = [];
+                $options['roleIdsIn'] = $identity['userrole_id'];
+                $options['unlimited'] = true;
+                $listRoles = $UsersRolesDb->listItems($options);
+                unset($options, $UsersRolesDb);
+                if (isset($listRoles['items']) && is_array($listRoles['items'])) {
+                    $Cache->set($cacheKeyRolesData, $listRoles['items'], $cacheExpire);
+                }
+                unset($listRoles);
+            }
+
+            if ($Cache->has($cacheKeyRolesData)) {
+                $listRoles = $Cache->get($cacheKeyRolesData);
+                if (is_array($listRoles)) {
+                    foreach ($listRoles as $row) {
+                        if (isset($row->userrole_priority) && $row->userrole_priority == '1') {
+                            // if this user role is highest priority.
+                            unset($Cache, $listRoles, $row);
+                            return true;
+                        }
+                    }// endforeach;
+                    unset($row);
+                }
+                unset($listRoles);
+            }
+        }
+
+        return false;
+    }// checkPermissionVerifyRoleHighestPriority
+
+
+    /**
      * Delete permission.
      * 
      * Also delete permission cache.
@@ -329,12 +384,7 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
      */
     public function deleteCheckPermissionCache(array $options)
     {
-        $Cache = (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
-            $this->Container,
-            [
-                'cachePath' => $this->cachePath,
-            ]
-        ))->getCacheObject();
+        $Cache = $this->getCacheObject();
 
         if (isset($options['user_id']) && is_numeric($options['user_id'])) {
             // if user_id in was set
@@ -412,6 +462,23 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
 
         return $result;
     }// get
+
+
+    /**
+     * Get cache object.
+     * 
+     * @since 1.2.10
+     * @return \Psr\SimpleCache\CacheInterface
+     */
+    protected function getCacheObject(): \Psr\SimpleCache\CacheInterface
+    {
+        return (new \Rdb\Modules\RdbAdmin\Libraries\Cache(
+            $this->Container,
+            [
+                'cachePath' => $this->cachePath,
+            ]
+        ))->getCacheObject();
+    }// getCacheObject
 
 
     /**
