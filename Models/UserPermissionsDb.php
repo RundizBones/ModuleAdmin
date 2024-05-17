@@ -128,6 +128,7 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
             $permissionsModule = $Cache->get($cacheKeyPermissionsModuleData);
         }
         unset($cacheKeyPermissionsModuleData);
+        unset($Cache, $cacheExpire);
 
         // verify permissions. ----------------------------------------------------------------------------------------
         if (isset($permissionsModule) && is_array($permissionsModule)) {
@@ -141,30 +142,30 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
                         // if action is string and is matched.
                         $actionMatched = true;
                     } elseif (is_array($action) && in_array($row->permission_action, $action)) {
+                        // if action is array and found matched.
                         $actionMatched = true;
                     }
 
                     if (isset($actionMatched) && $actionMatched === true) {
                         // if checked for action and matched.
+                        // now, check for user role and/or user ID.
                         if (isset($identity['userrole_id']) && is_array($identity['userrole_id']) && in_array($row->userrole_id, $identity['userrole_id'])) {
                             // if matched with userrole_id.
+                            unset($actionMatched, $permissionsModule, $row);
                             return true;
                         }
                         if (isset($identity['user_id']) && $row->user_id == $identity['user_id']) {
                             // if matched with user_id.
+                            unset($actionMatched, $permissionsModule, $row);
                             return true;
                         }
                     }
-
-                    unset($actionMatched);
                 }
             }// endforeach;
             unset($actionMatched, $row);
         }
         unset($permissionsModule);
         // end verify permissions. -----------------------------------------------------------------------------------
-
-        unset($Cache, $cacheExpire);
 
         return false;
     }// checkPermission
