@@ -174,6 +174,8 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
     /**
      * Verify and get identities.
      * 
+     * This method's visibility must be `protected` to let extended class use it.
+     * 
      * @since 1.2.10
      * @param array $identity The identity.
      * @see \Rdb\Modules\KPApartment\Models\UserPermissionsDb::checkPermissionPerBuilding() For reference.
@@ -283,6 +285,8 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
 
     /**
      * Verify that this user's role is highest priority.
+     * 
+     * This method's visibility must be `protected` to let extended class use it.
      * 
      * @since 1.2.10
      * @param array $identity The identity.
@@ -467,6 +471,8 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
 
     /**
      * Get cache object.
+     * 
+     * This method's visibility must be `protected` to let extended class use it.
      * 
      * @since 1.2.10
      * @return \Psr\SimpleCache\CacheInterface
