@@ -1,8 +1,9 @@
 # Wiki tasks
 
 ## Generate API doc.
-Run command `phpdoc2` for using phpDocumentor 2. (API doc is no need to generate every commit, just when there are changes on release.)
+* Run command `phpdoc2` for using phpDocumentor 2. (API doc is no need to generate every commit, just when there are changes on release.)
     Or use `phpdoc3 --config=phpdoc3.xml` for using phpDocumentor 3.
+* Copy generated files (usually in .apidoc folder) to **rundizbones.github.io** repository in **ModuleAdmin** folder and then push to GitHub.
 
 ## Edit Wiki pages
 * Install [MkDocs](https://www.mkdocs.org).
