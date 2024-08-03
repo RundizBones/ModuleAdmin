@@ -567,6 +567,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
 
         $Csrf = new \Rdb\Modules\RdbAdmin\Libraries\Csrf();
         $Url = new \Rdb\System\Libraries\Url($this->Container);
+        $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
 
         $output = [];
         $output['configDb'] = $this->getConfigDb();
@@ -582,11 +583,11 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
 
             // prepare data
             $data = [];
-            $data['rdbadmin_MailProtocol'] = strip_tags(trim($this->Input->post('rdbadmin_MailProtocol', '')));
-            $data['rdbadmin_MailPath'] = htmlspecialchars(trim($this->Input->post('rdbadmin_MailPath', '')), ENT_QUOTES);
-            $data['rdbadmin_MailSmtpHost'] = htmlspecialchars(trim($this->Input->post('rdbadmin_MailSmtpHost', '')), ENT_QUOTES);
+            $data['rdbadmin_MailProtocol'] = $RdbaString->filterSanitizeString(trim($this->Input->post('rdbadmin_MailProtocol', '')));
+            $data['rdbadmin_MailPath'] = $RdbaString->filterSanitizeString(trim($this->Input->post('rdbadmin_MailPath', '')));
+            $data['rdbadmin_MailSmtpHost'] = $RdbaString->filterSanitizeString(trim($this->Input->post('rdbadmin_MailSmtpHost', '')));
             $data['rdbadmin_MailSmtpPort'] = trim($this->Input->post('rdbadmin_MailSmtpPort', '', FILTER_SANITIZE_NUMBER_INT));
-            $data['rdbadmin_MailSmtpSecure'] = strip_tags(trim($this->Input->post('rdbadmin_MailSmtpSecure', '')));
+            $data['rdbadmin_MailSmtpSecure'] = $RdbaString->filterSanitizeString(trim($this->Input->post('rdbadmin_MailSmtpSecure', '')));
             $data['rdbadmin_MailSmtpUser'] = trim($this->Input->post('rdbadmin_MailSmtpUser'));
             $data['rdbadmin_MailSmtpPass'] = trim($this->Input->post('rdbadmin_MailSmtpPass'));
             if (empty($data['rdbadmin_MailSmtpPort'])) {
@@ -678,7 +679,7 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
         $output = array_merge($output, $Csrf->createToken());
 
         // display, response part ---------------------------------------------------------------------------------------------
-        unset($Csrf, $Url);
+        unset($Csrf, $RdbaString, $Url);
         return $this->responseAcceptType($output);
     }// testSmtpAction
 

@@ -585,15 +585,16 @@ class UserLoginsDb extends \Rdb\System\Core\Models\BaseModel
         }
 
         $Input = new \Rdb\Modules\RdbAdmin\Libraries\Input();
+        $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
 
         $defaults = [
-            'userlogin_ua' => htmlspecialchars($Input->server('HTTP_USER_AGENT', null), ENT_QUOTES),
+            'userlogin_ua' => $RdbaString->filterSanitizeString($Input->server('HTTP_USER_AGENT', null)),
             'userlogin_ip' => $Input->server('REMOTE_ADDR', null, FILTER_VALIDATE_IP),
             'userlogin_date' => date('Y-m-d H:i:s'),
             'userlogin_date_gmt' => gmdate('Y-m-d H:i:s'),
         ];
         $data = array_merge($defaults, $data);
-        unset($defaults, $Input);
+        unset($defaults, $Input, $RdbaString);
 
         if (empty($data)) {
             return false;
