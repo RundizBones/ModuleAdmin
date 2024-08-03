@@ -136,7 +136,7 @@ class Input extends \Rdb\System\Libraries\Input
      * @link https://stackoverflow.com/questions/26458654/regular-expressions-for-a-range-of-unicode-points-php Original source code for wide range of Unicode support.
      * @link https://www.php.net/manual/en/function.preg-replace.php See more description about variable, pattern, replacement, and return value.
      * @param mixed $variable The string or an array with strings to search and replace.
-     * @param mixed $pattern The pattern to search for. It can be either a string or an array with strings. The default pattern is match English, numbers, non Unicode, and followed characters.
+     * @param mixed $pattern The pattern to search for. It can be either a string or an array with strings. The default pattern is match English, numbers, Unicode, and followed characters.
      * @param mixed $replacement The string or an array with strings to replace. The default replacement is empty string.
      * @return mixed Returns an array if the subject parameter is an array, or a string otherwise.
      */
