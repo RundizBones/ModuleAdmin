@@ -55,6 +55,9 @@ class InputTest extends \Rdb\Tests\BaseTestCase
     }// setup
 
 
+    /**
+     * @todo [rdb] Remove this test in v2.0
+     */
     public function testFilterRegexp()
     {
         $this->assertSame('div class=myclassdiv-element/div', $this->Input->filterRegexp($this->Input->get('gethtml')));

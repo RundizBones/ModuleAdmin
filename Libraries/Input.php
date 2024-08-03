@@ -131,11 +131,13 @@ class Input extends \Rdb\System\Libraries\Input
     /**
      * Filter data with regular expression.
      * 
-     * @link https://stackoverflow.com/questions/26458654/regular-expressions-for-a-range-of-unicode-points-php Original source code for wide range of unicode support.
+     * @deprecated 1.2.11 No more use anywhere. Use something else like `RdbaString->filterSanitizeString()` instead.
+     * @todo [rdb] Remove this method in v2.0
+     * @link https://stackoverflow.com/questions/26458654/regular-expressions-for-a-range-of-unicode-points-php Original source code for wide range of Unicode support.
      * @link https://www.php.net/manual/en/function.preg-replace.php See more description about variable, pattern, replacement, and return value.
      * @param mixed $variable The string or an array with strings to search and replace.
-     * @param mixed $pattern The pattern to search for. It can be either a string or an array with strings.
-     * @param mixed $replacement The string or an array with strings to replace.
+     * @param mixed $pattern The pattern to search for. It can be either a string or an array with strings. The default pattern is match English, numbers, non Unicode, and followed characters.
+     * @param mixed $replacement The string or an array with strings to replace. The default replacement is empty string.
      * @return mixed Returns an array if the subject parameter is an array, or a string otherwise.
      */
     public function filterRegexp(
