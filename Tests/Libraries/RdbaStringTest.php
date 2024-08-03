@@ -11,6 +11,25 @@ class RdbaStringTest extends \Rdb\Tests\BaseTestCase
 {
 
 
+    public function testFilterSanitizeString()
+    {
+        $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
+        $string = 'Hello \' \" & <Script>café</script> <!@#$';
+        $assert = 'Hello &#039; \&quot; &amp; café ';
+
+        $this->assertSame($assert, $RdbaString->filterSanitizeString($string));
+    }// testFilterSanitizeString
+
+
+    public function testStaticFilterSanitizeString()
+    {
+        $string = 'Hello \' \" & <Script>café</script> <!@#$';
+        $assert = 'Hello &#039; \&quot; &amp; café ';
+
+        $this->assertSame($assert, \Rdb\Modules\RdbAdmin\Libraries\RdbaString::staticFilterSanitizeString($string));
+    }// \Rdb\Modules\RdbAdmin\Libraries\RdbaString::
+
+
     public function testRandom()
     {
         $RdbaString = new \Rdb\Modules\RdbAdmin\Libraries\RdbaString();
@@ -26,6 +45,13 @@ class RdbaStringTest extends \Rdb\Tests\BaseTestCase
         $matchedResult = preg_match('/[a-z]+/iu', $randomSpecialChars);// contain any a to z (case insensitive).
         $this->assertSame(0, $matchedResult);// 0 must not contain that
     }// testRandom
+
+
+    public function testStaticRandom()
+    {
+        $this->assertSame(12, strlen(\Rdb\Modules\RdbAdmin\Libraries\RdbaString::staticrandom(12)));// can use lower case after word `static`.
+        $this->assertSame(33, strlen(\Rdb\Modules\RdbAdmin\Libraries\RdbaString::staticRandom(33)));
+    }// testStaticRandom
 
 
     public function testRandomUnicode()
@@ -45,6 +71,12 @@ class RdbaStringTest extends \Rdb\Tests\BaseTestCase
         $matchedResult = preg_match('/[a-zก-ฮ]+/iu', $randomSpecialChars);// contain any a to z (case insensitive), ก-ฮ.
         $this->assertSame(0, $matchedResult);// 0 must not contain that
     }// testRandomUnicode
+
+
+    public function testStaticRandomUnicode()
+    {
+        $this->assertSame(14, mb_strlen(\Rdb\Modules\RdbAdmin\Libraries\RdbaString::staticRandomUnicode(14)));
+    }// testStaticRandomUnicode
 
 
     public function testSanitizeDisplayname()
@@ -86,6 +118,12 @@ class RdbaStringTest extends \Rdb\Tests\BaseTestCase
 
         unset($RdbaString);
     }// testSanitizeDisplayname
+
+
+    public function testStaticSanitizeDisplayname()
+    {
+        $this->assertSame('display name', \Rdb\Modules\RdbAdmin\Libraries\RdbaString::staticSanitizeDisplayname(' display name '));
+    }// testStaticSanitizeDisplayname
 
 
     public function testSanitizeUsername()
@@ -131,6 +169,12 @@ class RdbaStringTest extends \Rdb\Tests\BaseTestCase
         $this->assertSame('user.name.lastname', $RdbaString->sanitizeUsername('user.........name..lastname'));
         $this->assertSame('user.name.lastname', $RdbaString->sanitizeUsername('user.. ....    ..name.   .lastname'));
     }// testSanitizeUsername
+
+
+    public function testStaticSanitizeUsername()
+    {
+        $this->assertSame('username', \Rdb\Modules\RdbAdmin\Libraries\RdbaString::staticSanitizeUsername(' user name '));
+    }// testStaticSanitizeUsername
 
 
 }

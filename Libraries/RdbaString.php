@@ -11,9 +11,50 @@ namespace Rdb\Modules\RdbAdmin\Libraries;
  * String class. (String class name is reserved, see https://www.php.net/manual/en/reserved.other-reserved-words.php for more details.)
  * 
  * @since 0.1
+ * @method static staticFilterSanitizeString(string $paramName)
+ * @method static staticRandom(int $length, string $characters)
+ * @method static staticRandomUnicode(int $length, string $characters)
+ * @method static staticSanitizeDisplayname(string $displayname)
+ * @method static staticSanitizeUsername(string $username)
  */
 class RdbaString
 {
+
+
+    /**
+     * For static methods on non-static methods.
+     * 
+     * @since 1.2.10
+     * @param string $name The method name.
+     * @param array $arguments The method's arguments.
+     * @return mixed
+     */
+    public static function __callStatic(string $name, array $arguments)
+    {
+        $thisClass = new static;
+        $methodName = preg_replace('/static(.+)/', '$1', $name);
+        if (is_string($methodName)) {
+            $methodName = lcfirst($methodName);
+        }
+
+        return $thisClass->{$methodName}(...$arguments);
+    }// __callStatic
+
+
+    /**
+     * Strip HTML tags and then do the `htmlspecialchars()` with single quotes.
+     * 
+     * This is for replacement that `FILTER_SANITIZE_STRING` constant has been deprecated since PHP 8.1<br>
+     * This method does not support any flags that `FILTER_SANITIZE_STRING` constant may have.
+     * 
+     * @since 1.2.10
+     * @param string $string The string to be filter and sanitize.
+     * @return string Return filtered and sanitized string.
+     */
+    public function filterSanitizeString(string $string): string
+    {
+        return htmlspecialchars(strip_tags($string), ENT_QUOTES);
+    }// filterSanitizeString
 
 
     /**
