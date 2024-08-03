@@ -161,8 +161,11 @@ class UserPermissionsDb extends \Rdb\System\Core\Models\BaseModel
                         }
                     }
                 }
+
+                // clear `$actionMatched` variable here to let new iteration work properly.
+                unset($actionMatched);
             }// endforeach;
-            unset($actionMatched, $row);
+            unset($row);
         }
         unset($permissionsModule);
         // end verify permissions. -----------------------------------------------------------------------------------
