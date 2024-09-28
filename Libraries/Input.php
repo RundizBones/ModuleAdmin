@@ -146,6 +146,8 @@ class Input extends \Rdb\System\Libraries\Input
         $replacement = ''
     )
     {
+        trigger_error('The method ' . __METHOD__ . '() has been deprecated since v1.2.11 and will be removed in v.2.0.', E_USER_DEPRECATED);
+
         if (is_null($variable) || is_object($variable) || is_callable($variable) || is_resource($variable)) {
             return $variable;
         }
