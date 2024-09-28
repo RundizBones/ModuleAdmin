@@ -37,13 +37,9 @@ class RdbaLogoutController {
                 $('.form-result-placeholder').html(alertBox);
 
                 if (response.loggedOut === true) {
-                    if (RdbaLogout.fastLogout === true) {
-                        window.location.replace(RdbaLogout.loginUrl);
-                    } else {
-                        setTimeout(function() {
-                            window.location.href = RdbaLogout.loginUrl;
-                        }, 2500);
-                    }
+                    setTimeout(function() {
+                        window.location.href = RdbaLogout.loginUrl;
+                    }, 2500);
                 }
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
@@ -137,7 +133,4 @@ jQuery(window).on('load', function() {
 
     // on fast logout, trigger submit logout.
     let urlParams = new URLSearchParams(location.search);
-    if (urlParams.get('fastLogout') === 'true') {
-        jQuery('#rdba-logout-form').trigger('submit');
-    }
 });

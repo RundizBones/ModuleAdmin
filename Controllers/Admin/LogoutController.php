@@ -124,10 +124,6 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         $output = [];
         $output = array_merge($output, $this->getConfig(), $Csrf->createToken());
 
-        if (isset($_GET['fastLogout']) && $_GET['fastLogout'] === 'true') {
-            // if fast logout.
-            $output['fastLogout'] = true;
-        }
         $output['loginUrl'] = ($_GET['goback'] ?? $Url->getAppBasedPath() . '/admin/login');
         if (stripos($output['loginUrl'], '//') !== false) {
             // if found double slash, this means it can go to other domain.
@@ -136,6 +132,16 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
         } else {
             $output['loginUrl'] = strip_tags($output['loginUrl']);
         }
+
+        if (isset($_GET['fastLogout']) && $_GET['fastLogout'] === 'true') {
+            // if fast logout.
+            $this->doLogout();
+            http_response_code(302);
+            $this->responseNoCache();
+            header('Location: ' . $output['loginUrl']);
+            exit();
+        }
+
         $output['logoutUrl'] = $Url->getCurrentUrl() . $Url->getQuerystring();
         $output['logoutMethod'] = 'DELETE';
 
@@ -165,7 +171,6 @@ class LogoutController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
                     'loginUrl' => $output['loginUrl'],
                     'logoutUrl' => $output['logoutUrl'],
                     'logoutMethod' => $output['logoutMethod'],
-                    'fastLogout' => (isset($_GET['fastLogout']) ? true : false),
                     'txtLoggintOut' => __('Logging you out.'),
                     'txtYouLoggedOut' => __('You are now logged out.'),
                 ]
