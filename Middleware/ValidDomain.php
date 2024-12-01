@@ -52,7 +52,6 @@ class ValidDomain
         // check settings. -------------------------
         $ConfigDb = new \Rdb\Modules\RdbAdmin\Models\ConfigDb($this->Container);
         $configVals = $ConfigDb->get(['rdbadmin_SiteDomain', 'rdbadmin_SiteDomainCheckUsage'], ['', '0']);
-        unset($ConfigDb);
         if (!isset($configVals['rdbadmin_SiteDomainCheckUsage']) || $configVals['rdbadmin_SiteDomainCheckUsage'] !== '1') {
             // if there is no config to check domain usage.
             unset($configVals);
@@ -77,6 +76,13 @@ class ValidDomain
             // send redirect location and stop process.
             header('Location: ' . $url);
             unset($configVals, $url);
+
+            if ($this->Container->has('Db')) {
+                /* @var $Db \Rdb\System\Libraries\Db */
+                $Db = $this->Container->get('Db');
+                $Db->disconnectAll();
+                unset($Db);
+            }
             exit();
         }// endif;
         unset($configVals);
