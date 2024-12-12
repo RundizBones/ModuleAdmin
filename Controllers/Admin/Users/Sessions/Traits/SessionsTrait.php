@@ -39,7 +39,7 @@ trait SessionsTrait
      * @param string $userlogin_session_key The logged in session key. Set to empty string (default) to auto detect from cookie.
      * @return bool Return `true` if logged in, `false` for not.
      */
-    protected function isUserLoggedIn(int $user_id = null, string $userlogin_session_key = ''): bool
+    protected function isUserLoggedIn(?int $user_id = null, string $userlogin_session_key = ''): bool
     {
         $Cookie = new \Rdb\Modules\RdbAdmin\Libraries\Cookie($this->Container);
         $Cookie->setEncryption('rdbaLoggedinKey');

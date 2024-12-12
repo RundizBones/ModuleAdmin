@@ -114,7 +114,7 @@ class UsersRolesDb extends \Rdb\System\Core\Models\BaseModel
      * @param array $roleIds The role IDs.
      * @return bool Return `true` on success, `false` for otherwise.
      */
-    public function delete(int $user_id = null, array $roleIds = []): bool
+    public function delete(?int $user_id = null, array $roleIds = []): bool
     {
         $values = [];
 

@@ -326,7 +326,7 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
      * @param array $options The password algorithm options. Leave empty to use config.
      * @return string|bool Return the hashed password or `false` for failure.
      */
-    public function hashPassword(string $password, int $algo = null, array $options = [])
+    public function hashPassword(string $password, ?int $algo = null, array $options = [])
     {
         if (is_null($algo)) {
             $algo = $this->passwordAlgo;
@@ -611,7 +611,7 @@ class UsersDb extends \Rdb\System\Core\Models\BaseModel
      * @param array $options The password algorithm options. Leave empty to use config.
      * @return bool Return `true` if hash should be rehash, `false` for otherwise.
      */
-    protected function passwordNeedsRehash(string $hashedPassword, int $algo = null, array $options = []): bool
+    protected function passwordNeedsRehash(string $hashedPassword, ?int $algo = null, array $options = []): bool
     {
         if (is_null($algo)) {
             $algo = $this->passwordAlgo;

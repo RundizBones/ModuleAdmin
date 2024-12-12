@@ -129,7 +129,7 @@ class UserLoginsDb extends \Rdb\System\Core\Models\BaseModel
      * @param string $userlogin_dc_sign The device cookie signature.
      * @return bool Return `true` if it is in lockout list, `false` if it is not.
      */
-    public function dcIsInLockoutList(string $user_login_email = null, string $userlogin_dc_sign = null): bool
+    public function dcIsInLockoutList(?string $user_login_email = null, ?string $userlogin_dc_sign = null): bool
     {
         if (
             (

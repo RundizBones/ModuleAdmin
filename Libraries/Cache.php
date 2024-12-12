@@ -69,7 +69,11 @@ class Cache
         $driver = $Config->get('driver', 'cache', 'filesystem');
 
         if ($driver === 'apcu' && function_exists('apcu_fetch')) {
-            $this->Cache = new Extended\RundizSimpleCache\Apcu(($options['cachePath'] ?? ''));
+            if (version_compare(PHP_VERSION, '8.0', '>=')) {
+                $this->Cache = new Extended\RundizSimpleCache\PHP80\Apcu(($options['cachePath'] ?? ''));
+            } else {
+                $this->Cache = new Extended\RundizSimpleCache\Apcu(($options['cachePath'] ?? ''));
+            }
             $this->driver = $driver;
         } elseif ($driver === 'memcache' || $driver === 'memcached') {
             $MemcacheObject = $Config->get('memcacheConfig', 'cache', null);
@@ -77,12 +81,20 @@ class Cache
                 try {
                     $result = $MemcacheObject->getStats();
                     if ($driver === 'memcache' && $result !== false) {
-                        $this->Cache = new Extended\RundizSimpleCache\Memcache($MemcacheObject, ($options['cachePath'] ?? ''));
+                        if (version_compare(PHP_VERSION, '8.0', '>=')) {
+                            $this->Cache = new Extended\RundizSimpleCache\PHP80\Memcache($MemcacheObject, ($options['cachePath'] ?? ''));
+                        } else {
+                            $this->Cache = new Extended\RundizSimpleCache\Memcache($MemcacheObject, ($options['cachePath'] ?? ''));
+                        }
                         $this->driver = $driver;
                     } elseif ($driver === 'memcached') {
                         foreach ($result as $key => $item) {
                             if (isset($item['pid']) && $item['pid'] > 0) {
-                                $this->Cache = new Extended\RundizSimpleCache\Memcached($MemcacheObject, ($options['cachePath'] ?? ''));
+                                if (version_compare(PHP_VERSION, '8.0', '>=')) {
+                                    $this->Cache = new Extended\RundizSimpleCache\PHP80\Memcached($MemcacheObject, ($options['cachePath'] ?? ''));
+                                } else {
+                                    $this->Cache = new Extended\RundizSimpleCache\Memcached($MemcacheObject, ($options['cachePath'] ?? ''));
+                                }
                                 $this->driver = $driver;
                                 break;
                             }

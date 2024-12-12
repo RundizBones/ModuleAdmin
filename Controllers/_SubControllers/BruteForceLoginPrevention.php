@@ -140,7 +140,7 @@ class BruteForceLoginPrevention extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
      *                          `statusCode` (may exists or not) The HTTP response status code.
      *                          `resultBy` (only visible on development mode) Result by which protection. It can be 'ipBase', 'deviceCookie'.
      */
-    public function checkBruteForceStatus(string $user_login_email = null): array
+    public function checkBruteForceStatus(?string $user_login_email = null): array
     {
         $output = [];
         $configMaxFailed = (int) ($this->configDb['rdbadmin_UserLoginMaxFail'] ?? 10);
