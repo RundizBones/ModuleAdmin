@@ -43,7 +43,7 @@ class CreateModule extends \Rdb\System\Core\Console\BaseConsole
     /**
      * {@inheritDoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('rdbadmin:create-module')
             ->setDescription('Create a module that is compatible with RdbAdmin module.')
@@ -117,7 +117,7 @@ class CreateModule extends \Rdb\System\Core\Console\BaseConsole
     /**
      * {@inheritDoc}
      */
-    protected function execute(InputInterface $Input, OutputInterface $Output)
+    protected function execute(InputInterface $Input, OutputInterface $Output): int
     {
         $Io = new SymfonyStyle($Input, $Output);
         $Io->title('Create a module');

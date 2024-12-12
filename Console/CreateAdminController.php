@@ -38,7 +38,7 @@ class CreateAdminController extends \Rdb\System\Core\Console\BaseConsole
     /**
      * {@inheritDoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('rdbadmin:create-adminct')
             ->setDescription('Create an admin controller that is compatible with RdbAdmin module.')
@@ -118,7 +118,7 @@ class CreateAdminController extends \Rdb\System\Core\Console\BaseConsole
     /**
      * {@inheritDoc}
      */
-    protected function execute(InputInterface $Input, OutputInterface $Output)
+    protected function execute(InputInterface $Input, OutputInterface $Output): int
     {
         $Io = new SymfonyStyle($Input, $Output);
         $Io->title('Create an admin controller');

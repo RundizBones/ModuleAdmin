@@ -25,7 +25,7 @@ class Cron extends \Rdb\System\Core\Console\BaseConsole
     /**
      * {@inheritDoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('rdbadmin:cron')
             ->setDescription('Run cron jobs via command line')
@@ -40,7 +40,7 @@ class Cron extends \Rdb\System\Core\Console\BaseConsole
     /**
      * {@inheritDoc}
      */
-    protected function execute(InputInterface $Input, OutputInterface $Output)
+    protected function execute(InputInterface $Input, OutputInterface $Output): int
     {
         $Cron = new \Rdb\Modules\RdbAdmin\Libraries\Cron($this->Container);
         $Io = new SymfonyStyle($Input, $Output);
