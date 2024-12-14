@@ -11,6 +11,12 @@ class UserPermissionsDbTest extends \Rdb\Tests\BaseTestCase
 {
 
 
+    /**
+     * @var \Rdb\System\Libraries\Db
+     */
+    protected $Db;
+
+
     protected $userIdSA = -1;
 
 

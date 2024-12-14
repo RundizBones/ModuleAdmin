@@ -11,6 +11,12 @@ class EmailTest extends \Rdb\Tests\BaseTestCase
 {
 
 
+    /**
+     * @var \Rdb\System\Libraries\Db
+     */
+    protected $Db;
+
+
     public function setup(): void
     {
         $_SERVER['RUNDIZBONES_LANGUAGE'] = 'th';

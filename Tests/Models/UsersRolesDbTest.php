@@ -12,6 +12,12 @@ class UsersRolesDbTest extends \Rdb\Tests\BaseTestCase
 
 
     /**
+     * @var \Rdb\System\Libraries\Db
+     */
+    protected $Db;
+
+
+    /**
      * @var int The ID of higher role than normal role.
      */
     protected $higherRoleId = -1;
