@@ -2,7 +2,7 @@
     "require": {
         "firebase/php-jwt": "^6.0",
         "phpmyadmin/motranslator": "^5.2",
-        "marcj/topsort": "^1.0",
+        "marcj/topsort": "^1.0||^2.0",
         "phpmailer/phpmailer": "^6.0",
         "rundiz/serializer": "^1.0",
         "rundiz/simple-cache": "^3.0||^3.1",
