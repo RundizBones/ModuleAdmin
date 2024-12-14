@@ -55,20 +55,6 @@ class InputTest extends \Rdb\Tests\BaseTestCase
     }// setup
 
 
-    /**
-     * @todo [rdb] Remove this test in v2.0
-     */
-    public function testFilterRegexp()
-    {
-        $this->assertSame('div class=myclassdiv-element/div', $this->Input->filterRegexp($this->Input->get('gethtml')));
-        $this->assertSame('div-element', $this->Input->filterRegexp(RdbaString::staticFilterSanitizeString($this->Input->get('gethtml', ''))));
-
-        $inputString = '0123456789 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ~!@#$%^&*()_+`-=[]\\{}|;\':",./<>? กขคงจฉช À Ω һ Ջ ت ڹ ন ບ ᡚ ᴩ Ⅻ ✅ 㯹 ㇸ 𝘈 𞢖 𞤤 𞥖 𞸇 𞺨 🅗 🆗 🛕 🪕 🩰';
-        $assertString = '0123456789 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ~!@#$%^&*()_+`-=[]\\{}|;:,./? กขคงจฉช À Ω һ Ջ ت ڹ ন ບ ᡚ ᴩ Ⅻ ✅ 㯹 ㇸ 𝘈 𞢖 𞤤 𞥖 𞸇 𞺨 🅗 🆗 🛕 🪕 🩰';
-        $this->assertSame($assertString, $this->Input->filterRegexp($inputString));
-    }// testFilterRegexp
-
-
     public function testInputCookie()
     {
         $this->assertEquals('my cookie value', $this->Input->cookie('mycookie'));
