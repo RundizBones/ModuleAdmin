@@ -145,7 +145,7 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
      * It is the same as running via command line `php rdb system:module update --mname=xxx` (where xxx is Module folder name).
      * 
      * @since 1.2.10
-     * @see \Rdb\System\Core\Console\Module:executeUpdate()
+     * @see \Rdb\System\Core\Console\Module::executeUpdate()
      * @param string $mname Module system name to be run with update command.
      * @return array Return associative array:<br>
      *              `formResultStatus` (string) The form result error status. This key exists only when there is an error.<br>
