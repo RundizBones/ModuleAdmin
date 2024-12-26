@@ -67,22 +67,27 @@ class ValidDomain
             header('Cache-Control: no-store, no-cache, must-revalidate');
             header('Cache-Control: post-check=0, pre-check=0', false);
             header('Pragma: no-cache');
+
             // build new URL.
             $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://';
             $url .= $configVals['rdbadmin_SiteDomain'];
             if (isset($_SERVER['REQUEST_URI'])) {
                 $url .= $_SERVER['REQUEST_URI'];
             }
-            // send redirect location and stop process.
-            header('Location: ' . $url);
-            unset($configVals, $url);
 
             if ($this->Container->has('Db')) {
+                // if there is Db class
+                // disconnect all of them before send redirect to prevent open too many connections.
                 /* @var $Db \Rdb\System\Libraries\Db */
                 $Db = $this->Container->get('Db');
                 $Db->disconnectAll();
                 unset($Db);
             }
+
+            // send redirect location and stop process.
+            header('Location: ' . $url);
+            unset($configVals, $url);
+
             exit();
         }// endif;
         unset($configVals);
