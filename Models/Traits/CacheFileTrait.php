@@ -208,24 +208,24 @@ trait CacheFileTrait
         $content .= '/**' . PHP_EOL;
         $content .= ' * Debug backtrace:' . PHP_EOL;
         $content .= ' * Generated from file: ' . __FILE__ . ' : ' . (__LINE__ - 3) . PHP_EOL;
-        $debugbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10);
+        $debugbt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 0);
         if (is_array($debugbt) && !empty($debugbt)) {
             foreach ($debugbt as $trace) {
                 $content .= '   # ';
                 if (isset($trace['class'])) {
-                    $content .= $trace['class'];
+                    $content .= trim($trace['class']);
                 }
                 if (isset($trace['type'])) {
-                    $content .= $trace['type'];
+                    $content .= trim($trace['type']);
                 }
                 if (isset($trace['function'])) {
-                    $content .= $trace['function'] . '()';
+                    $content .= trim($trace['function']) . '()';
                 }
                 $content .= '; ';
                 if (isset($trace['file'])) {
-                    $content .= ' at ' . $trace['file'];
+                    $content .= ' at ' . trim($trace['file']);
                     if (isset($trace['line'])) {
-                        $content .= ' line ' . $trace['line'];
+                        $content .= ' line ' . trim($trace['line']);
                     }
                 }
                 $content .= PHP_EOL;
@@ -233,12 +233,11 @@ trait CacheFileTrait
             unset($trace);
         }
         unset($debugbt);
-        $content .= '/*' . PHP_EOL; // prevent something wrong and cause closed comment block before it close by this code.
         $content .= ' */' . PHP_EOL;
         $content .= PHP_EOL;
 
         // write the php content to cache file.
-        $buildResult = $this->FileSystem->writeFile($this->storageFile, $content);
+        $buildResult = file_put_contents($this->storagePath . DIRECTORY_SEPARATOR . $this->storageFile, $content, LOCK_EX);
 
         if ($buildResult !== false && $this->Container->has('Logger')) {
             /* @var $Logger \Rdb\System\Libraries\Logger */
