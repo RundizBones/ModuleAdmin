@@ -1,2 +1,7 @@
 * notification system
 * use try..catch on add, update things and catch the PDO error message.
+
+Update from datatables.js 1.13.x to 2.x
+* Update `dom` to `layout`. ( https://datatables.net/reference/option/layout )
+* Remove `pagingType` option. ( https://cdn.datatables.net/2.1.0/#Deprecated )
+    * Use `'layout': {bottomEnd: 'inputPaging'}` instead. ( https://github.com/DataTables/Plugins/issues/592 )
