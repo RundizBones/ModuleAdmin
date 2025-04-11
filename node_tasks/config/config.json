@@ -40,10 +40,6 @@
         "copyAssetsToPublic": true,
         "copyNodePackages": [
             {
-                "patterns": "node_modules/datatables.net-dt/images/**",
-                "destination": "assets/vendor/datatables.net/images"
-            },
-            {
                 "patterns": "node_modules/datatables.net/License.txt",
                 "destination": "assets/vendor/datatables.net"
             },
