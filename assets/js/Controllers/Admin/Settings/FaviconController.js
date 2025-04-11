@@ -77,7 +77,7 @@ class RdbaSettingsFaviconController {
                     .catch((responseObject) => {
                         // XHR failed.
                         let response = responseObject.response;
-                        console.error(responseObject);
+                        console.error('[rdba] ', responseObject);
 
                         if (response.formResultMessage) {
                             RDTAAlertDialog.alert({

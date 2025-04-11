@@ -22,7 +22,7 @@ class RdbaIndexController {
                 'dataType': 'json',
             })
             .catch(function(responseObject) {
-                console.error(responseObject);
+                console.error('[rdba] ', responseObject);
                 let response = (responseObject ? responseObject.response : {});
 
                 reject(response);
@@ -80,16 +80,16 @@ class RdbaIndexController {
 
                 // wait until all promises resolved and dispatch custom event so those widgets can use as event ready.
                 Promise.all(promises)
-                .catch(function(event) {
-                    console.error('Inject JS, CSS error:', event);
-                })
                 .then(function() {
-                    //console.log('injected css, js of widgets.');
+                    //console.log('[rdba] injected css, js of widgets.');
                     let event = new Event('rdba.admindashboard.widgets.ready');
                     document.dispatchEvent(event);
+                })
+                .catch(function(event) {
+                    console.error('[rdba] Inject JS, CSS error:', event);
                 });
 
-                //console.log('finish render dashboard widgets.');
+                //console.log('[rdba] finish render dashboard widgets.');
                 resolve(response);
             });// end XHR
         });
@@ -187,7 +187,7 @@ class RdbaIndexController {
     makeWidgetsMasonry() {
         let promiseObj = new Promise(function(resolve, reject) {
             function resizeAllGridItems() {
-                //console.log('resizing grid items.');
+                //console.log('[rdba] resizing grid items.');
                 let allItems = document.getElementsByClassName("rdba-dashboard-widget-item");
                 for(let x=0;x<allItems.length;x++){
                   resizeGridItem(allItems[x]);
@@ -207,7 +207,7 @@ class RdbaIndexController {
             window.addEventListener('resize', resizeAllGridItems);
 
             resolve();
-            //console.log('finish make widgets masonry.');
+            //console.log('[rdba] finish make widgets masonry.');
         });
 
         return promiseObj;
@@ -229,7 +229,7 @@ class RdbaIndexController {
             sortable(rowHeroElement, 'hero');
 
             resolve();
-            //console.log('finish make widgets sortable.');
+            //console.log('[rdba] finish make widgets sortable.');
         });
 
         return promiseObj;
@@ -274,7 +274,7 @@ class RdbaIndexController {
                         })
                         .catch(function(responseObject) {
                             // XHR failed.
-                            console.error(responseObject);
+                            console.error('[rdba] ', responseObject);
                             let response = responseObject.response;
 
                             if (typeof(response) !== 'undefined') {

@@ -182,14 +182,14 @@ class RdbaUsersEditController {
             if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
                 RdbaUsers.csrfKeyPair = response.csrfKeyPair;
                 if (typeof(response.csrfName) !== 'undefined' && typeof(response.csrfValue) !== 'undefined') {
-                    //console.log('new token was set during get form data.', response.csrfKeyPair);
+                    //console.log('[rdba] new token was set during get form data.', response.csrfKeyPair);
                     editForm.querySelector('#rdba-form-csrf-name').value = response.csrfKeyPair[response.csrfName];
                     editForm.querySelector('#rdba-form-csrf-value').value = response.csrfKeyPair[response.csrfValue];
                 }
             }
         })
         .catch(function(responseObject) {
-            console.error(responseObject);
+            console.error('[rdba] ', responseObject);
             let response = (responseObject ? responseObject.response : {});
 
             if (typeof(response) !== 'undefined') {
@@ -303,12 +303,12 @@ class RdbaUsersEditController {
         // end prevent drag & drop image file outside drop zone. ---------------------------------------------
 
         window.addEventListener('drop', function(event) {
-            console.log(event.target.id);
+            console.log('[rdba] ', event.target.id);
             if (RdbaCommon.isset(() => event.target.id) && (event.target.id === dropzoneId || event.target.id === inputAvatarId)) {
                 // if dropped in drop zone or input file.
                 event.preventDefault();
 
-                //console.log('user dropped file.', event.dataTransfer.files);
+                //console.log('[rdba] user dropped file.', event.dataTransfer.files);
                 if (event.dataTransfer.files.length > 1) {
                     RDTAAlertDialog.alert({
                         'type': 'error',
@@ -318,18 +318,18 @@ class RdbaUsersEditController {
                     editForm = document.querySelector('#rdba-edit-user-form');// force get new data. (prevent re-open dialog and this action will not working).
                     inputAvatarElement = editForm.querySelector('#' + inputAvatarId);// force get new data. (prevent re-open dialog and this action will not working).
                     inputAvatarElement.files = event.dataTransfer.files;
-                    //console.log('success set files to input file.', inputAvatarElement);
+                    //console.log('[rdba] success set files to input file.', inputAvatarElement);
                     inputAvatarElement.dispatchEvent(new Event('change', { 'bubbles': true }));
                 }
             } else {
                 // if not dropped in drop zone and input file.
                 event.preventDefault();
-                //console.log('not in drop zone.');
+                //console.log('[rdba] not in drop zone.');
                 event.dataTransfer.effectAllowed = 'none';
                 event.dataTransfer.dropEffect = 'none';
             }
         });
-        //console.log('listening avatar upload.');
+        //console.log('[rdba] listening avatar upload.');
 
         if (inputAvatarElement) {
             document.addEventListener('rdta.custominputfile.change', function(event) {
@@ -365,7 +365,7 @@ class RdbaUsersEditController {
                     .catch(function(responseObject) {
                         // XHR failed.
                         let response = responseObject.response;
-                        console.error(responseObject);
+                        console.error('[rdba] ', responseObject);
 
                         if (typeof(response) !== 'undefined') {
                             if (typeof(response.formResultMessage) !== 'undefined') {
@@ -423,7 +423,7 @@ class RdbaUsersEditController {
                 } else {
                     // if user cancelled upload.
                     thisClass.resetInputAvatar();
-                    //console.log('user cancelled upload profile picture.');
+                    //console.log('[rdba] user cancelled upload profile picture.');
                 }
             });
         }
@@ -476,7 +476,7 @@ class RdbaUsersEditController {
                         .catch(function(responseObject) {
                             // XHR failed.
                             let response = responseObject.response;
-                            console.error(responseObject);
+                            console.error('[rdba] ', responseObject);
 
                             if (typeof(response) !== 'undefined') {
                                 if (typeof(response.formResultMessage) !== 'undefined') {
@@ -565,7 +565,7 @@ class RdbaUsersEditController {
                 .catch(function(responseObject) {
                     // XHR failed.
                     let response = responseObject.response;
-                    console.error(responseObject);
+                    console.error('[rdba] ', responseObject);
 
                     if (typeof(response) !== 'undefined') {
                         if (typeof(response.formResultMessage) !== 'undefined') {

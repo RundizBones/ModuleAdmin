@@ -48,7 +48,7 @@ class RdbaCommonAdminPublic {
                 })
                 .catch(function(responseObject) {
                     // XHR failed.
-                    console.error(responseObject);
+                    console.error('[rdba] ', responseObject);
                 })
                 .then(function(responseObject) {
                     // XHR success.

@@ -30,7 +30,7 @@ class RdbAdminPermissionsController {
         .catch(function(responseObject) {
             // XHR failed
             let response = responseObject.response;
-            console.error(responseObject);
+            console.error('[rdba] ', responseObject);
 
             if (typeof(response) !== 'undefined' && typeof(response.csrfKeyPair) !== 'undefined') {
                 RdbaPermissions.csrfKeyPair = response.csrfKeyPair;
@@ -184,7 +184,7 @@ class RdbAdminPermissionsController {
                 .catch(function(responseObject) {
                     // XHR failed.
                     let response = responseObject.response;
-                    console.error(responseObject);
+                    console.error('[rdba] ', responseObject);
 
                     $(checkboxElement).siblings('.rdba-permission-checkbox-action-status').html('');
 
@@ -276,7 +276,7 @@ class RdbAdminPermissionsController {
                     .catch(function(responseObject) {
                         // XHR failed.
                         let response = responseObject.response;
-                        console.error(responseObject);
+                        console.error('[rdba] ', responseObject);
 
                         if (typeof(response) !== 'undefined') {
                             if (typeof(response.formResultMessage) !== 'undefined') {
@@ -398,7 +398,7 @@ class RdbAdminPermissionsController {
                 .catch(function(responseObject) {
                     // XHR failed
                     let response = responseObject.response;
-                    console.error(responseObject);
+                    console.error('[rdba] ', responseObject);
 
                     if (typeof(response) !== 'undefined') {
                         if (typeof(response.formResultMessage) !== 'undefined') {
@@ -537,12 +537,12 @@ class RdbAdminPermissionsController {
 
             if (useReload === false) {
                 // if use ajax get data.
-                //console.log('contain state and required objects, use ajax get and render data table.');
+                //console.log('[rdba] contain state and required objects, use ajax get and render data table.');
                 // reset data table, validate filters, then ajax get data and render data table.
                 RdbAdminPermissionsController.resetDataTable();
             } else {
                 // if use reload.
-                //console.log('not contain state and required objects, use reload.');
+                //console.log('[rdba] not contain state and required objects, use reload.');
                 window.location.reload();
             }
         };

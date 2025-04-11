@@ -29,7 +29,7 @@ class RdbaRolesEditController {
             'method': RdbaRoles.getRoleMethod
         })
         .catch(function(responseObject) {
-            console.error(responseObject);
+            console.error('[rdba] ', responseObject);
             let response = (responseObject ? responseObject.response : {});
 
             if (typeof(response) !== 'undefined') {
@@ -118,7 +118,7 @@ class RdbaRolesEditController {
                 .catch(function(responseObject) {
                     // XHR failed.
                     let response = responseObject.response;
-                    console.error(responseObject);
+                    console.error('[rdba] ', responseObject);
 
                     if (typeof(response) !== 'undefined') {
                         if (typeof(response.formResultMessage) !== 'undefined') {

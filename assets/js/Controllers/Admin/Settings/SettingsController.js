@@ -41,7 +41,7 @@ class RdbaSettingsController {
                                 if (thisInputElement.type.toLowerCase() === 'checkbox') {
                                     if (thisInputElement.value == item.config_value) {
                                         thisInputElement.checked = true;
-                                        //console.log('mark ' + key + ' as checked.');
+                                        //console.log('[rdba] mark ' + key + ' as checked.');
                                     }
                                 } else if (thisInputElement.type.toLowerCase() === 'file') {
                                     // if it is input type file.
@@ -88,7 +88,7 @@ class RdbaSettingsController {
                 resolve(response);
             })
             .catch((responseObject) => {
-                console.error(responseObject);
+                console.error('[rdba] ', responseObject);
                 let response = (responseObject ? responseObject.response : {});
 
                 if (typeof(response) !== 'undefined') {
@@ -207,7 +207,7 @@ class RdbaSettingsController {
             .catch((responseObject) => {
                 // XHR failed.
                 let response = responseObject.response;
-                console.error(responseObject);
+                console.error('[rdba] ', responseObject);
 
                 if (response.formResultMessage) {
                     RDTAAlertDialog.alert({
@@ -296,7 +296,7 @@ class RdbaSettingsController {
             resolve('listening on search input key up.');
         });// end new Promise();
 
-        //console.log('listening on search input key up.');
+        //console.log('[rdba] listening on search input key up.');
         return promiseObj;
 
         /**
@@ -309,7 +309,7 @@ class RdbaSettingsController {
             let formGroupElements = document.querySelectorAll(thisClass.settingsFormIdSelector + ' .form-group');
 
             if (!inputSearchElement.value || inputSearchElement.value === null || inputSearchElement.value.trim() === '') {
-                //console.log('reset `.form-group` from hidden.');
+                //console.log('[rdba] reset `.form-group` from hidden.');
                 formGroupElements.forEach((item, index) => {
                     item.classList.remove('rd-hidden');
                 });
@@ -355,7 +355,7 @@ class RdbaSettingsController {
         if (searchForm) {
             searchForm.addEventListener('submit', (event) => {
                 event.preventDefault();
-                //console.log('prevented search form submit.');
+                //console.log('[rdba] prevented search form submit.');
             });
         }
     }// listenOnSearchSubmit
@@ -419,7 +419,7 @@ class RdbaSettingsController {
                 .catch((responseObject) => {
                     // XHR failed.
                     let response = responseObject.response;
-                    console.error(responseObject);
+                    console.error('[rdba] ', responseObject);
 
                     if (response && response.debugMessage) {
                         testSmtpResultPlaceholder.insertAdjacentHTML('beforeend', response.debugMessage);

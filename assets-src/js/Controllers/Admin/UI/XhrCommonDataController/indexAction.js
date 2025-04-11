@@ -114,7 +114,7 @@ class RdbaUiXhrCommonDataController {
 
         if (sessionObject && Date.parse(currentDate) >= Date.parse(sessionObject.expires)) {
             // if session storage is expired.
-            console.log('session storage name ' + storageName + ' was expired. removing it.');
+            console.log('[rdba] session storage name ' + storageName + ' was expired. removing it.');
             sessionStorage.removeItem(storageName);
         } else {
             // if session storage maybe not expired.
@@ -126,7 +126,7 @@ class RdbaUiXhrCommonDataController {
 
         if (!_.isEmpty(storageData)) {
             // if storage data was set.
-            //console.log('session storage ' + storageName + ' was set, use this to set UI.', storageData);
+            //console.log('[rdba] session storage ' + storageName + ' was set, use this to set UI.', storageData);
             // use it to render.
             this.ajaxGetUiCommonDataSetResponse(storageData.response);
         }
@@ -167,14 +167,14 @@ class RdbaUiXhrCommonDataController {
             ) {
                 // if not logged in (response from AdminBaseController).
                 // redirect to login page.
-                console.log('not logged in. redirecting to login page.');
+                console.log('[rdba] not logged in. redirecting to login page.');
                 window.location.href = response.loginUrlBaseDomain + response.loginUrlBase + '?goback=' + encodeURI(window.location.href) + '&fastlogout=true';
             }
             // jQuery .ajax.fail will send to .always and end process.
         })// .fail
         .always(function(data, textStatus, jqXHR) {
             let response = getResponseObject(data);
-            //console.log('Ajax get UI common data completed.');
+            //console.log('[rdba] Ajax get UI common data completed.');
 
             if (typeof(response) !== 'undefined') {
                 if (RdbaCommon.isset(() => response.urlsMenuItems.cacheMenuItem)) {
@@ -272,7 +272,7 @@ class RdbaUiXhrCommonDataController {
                 }
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
-                console.error(jqXHR);
+                console.error('[rdba] ', jqXHR);
             })
         });
     }// listenOnChangeLanguageNavbar
@@ -289,8 +289,8 @@ class RdbaUiXhrCommonDataController {
         let $ = jQuery.noConflict();
         let thisClass = this;
 
-        //console.debug('current URL in `RdbaUIXhrCommonData`: ', RdbaUIXhrCommonData.currentUrl);
-        //console.debug('current URL raw in `RdbaUIXhrCommonData`: ', RdbaUIXhrCommonData.currentUrlRaw);
+        //console.debug('[rdba] current URL in `RdbaUIXhrCommonData`: ', RdbaUIXhrCommonData.currentUrl);
+        //console.debug('[rdba] current URL raw in `RdbaUIXhrCommonData`: ', RdbaUIXhrCommonData.currentUrlRaw);
 
         $.each(MenuItems, function(indexMenu, item) {
             if (
@@ -382,7 +382,7 @@ class RdbaUiXhrCommonDataController {
                 rdbaUserLoggedIn = false;
 
                 clearInterval(intervalId);
-                console.error('stop pinging.');
+                console.error('[rdba] stop pinging.');
             })
             .always(function(data, textStatus, jqXHR) {
                 let response;

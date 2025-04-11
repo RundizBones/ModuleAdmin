@@ -17,7 +17,7 @@ class RdbaUsersPreviousEmailsController {
             'method': RdbaPreviousEmails.editUserPreviousEmailsMethod
         })
         .catch(function(responseObject) {
-            console.error(responseObject);
+            console.error('[rdba] ', responseObject);
             let response = (responseObject ? responseObject.response : {});
 
             if (typeof(response) !== 'undefined') {

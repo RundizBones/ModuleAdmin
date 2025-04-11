@@ -104,7 +104,7 @@ class RdbaDatatables {
                 controlsElement.insertAdjacentHTML('afterbegin', template(data));
             }
         } else {
-            console.warn('action controls template (bulk actions) was not found.' + this.actionsControlsTemplateSelector);
+            console.warn('[rdba] action controls template (bulk actions) was not found.' + this.actionsControlsTemplateSelector);
         }
     }// addActionsControls
 
@@ -133,7 +133,7 @@ class RdbaDatatables {
                 controlsElement.insertAdjacentHTML('afterbegin', template(data));
             }
         } else {
-            console.warn('result controls template (filters) was not found. ' + this.resultControlsTemplateSelector);
+            console.warn('[rdba] result controls template (filters) was not found. ' + this.resultControlsTemplateSelector);
         }
     }// addCustomResultControls
 
@@ -209,7 +209,7 @@ class RdbaDatatables {
                     // call DataTable search and draw.
                     dataTable.search(searchValue).draw();
                 } else {
-                    console.warn('the search input could not be found. ' + thisClass.inputFilterSearchSelector);
+                    console.warn('[rdba] the search input could not be found. ' + thisClass.inputFilterSearchSelector);
                 }
             }// endif; found selector of filter button.
         }// clickFilterToSearchDT
@@ -270,7 +270,7 @@ class RdbaDatatables {
                 paginationDOMWrapper.prepend(template(data));
             }
         } else {
-            console.warn('result controls pagination template was not found. ' + this.resultControlsPaginationTemplateSelector);
+            console.warn('[rdba] result controls pagination template was not found. ' + this.resultControlsPaginationTemplateSelector);
         }
     }// addCustomResultControlsPagination
 

@@ -20,7 +20,7 @@ class RdbaUsersDeleteMeController {
             'method': RdbaDeleteMe.getUserMethod
         })
         .catch(function(responseObject) {
-            console.error(responseObject);
+            console.error('[rdba] ', responseObject);
             let response = (responseObject ? responseObject.response : {});
 
             if (typeof(response) !== 'undefined') {
@@ -120,7 +120,7 @@ class RdbaUsersDeleteMeController {
             .catch(function(responseObject) {
                 // XHR failed.
                 let response = responseObject.response;
-                console.error(responseObject);
+                console.error('[rdba] ', responseObject);
 
                 if (typeof(response) !== 'undefined') {
                     if (typeof(response.formResultMessage) !== 'undefined') {

@@ -281,7 +281,7 @@ class RdbaAssetsController extends RdbaDatatables {
             .catch(function(responseObject) {
                 // XHR failed.
                 let response = responseObject.response;
-                console.error(responseObject);
+                console.error('[rdba] ', responseObject);
 
                 if (typeof(response) !== 'undefined') {
                     if (typeof(response.formResultMessage) !== 'undefined') {

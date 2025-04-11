@@ -202,14 +202,14 @@ class RdbaXhrDialog {
                 injectJs.id = jsItem.id;
                 injectJs.src = jsItem.src;
                 injectJs.type = jsItem.type;
-                console.log('trying to load ' + injectJs.id + '.');
+                console.log('[rdba] trying to load ' + injectJs.id + '.');
 
                 if (!document.querySelector('#' + jsItem.id)) {
                     // if this element is really not found.
                     // add onload listener
                     let promiseObj = new Promise(function(resolve) {
                         injectJs.onload = function() {
-                            console.log('js ' + injectJs.id + ' was loaded.');
+                            console.log('[rdba] js ' + injectJs.id + ' was loaded.');
                             dispatchDialogNewInit = true;
                             return resolve(index);
                         };
@@ -218,7 +218,7 @@ class RdbaXhrDialog {
                     // insert into page.
                     document.body.appendChild(injectJs);
                 } else {
-                    console.log('js ' + jsItem.id + ' is already loaded.');
+                    console.log('[rdba] js ' + jsItem.id + ' is already loaded.');
                     dispatchDialogReInit = true;
                     promises.push(index);
                 }
@@ -235,14 +235,14 @@ class RdbaXhrDialog {
                 injectCss.rel = cssItem.rel;
                 injectCss.type = cssItem.type;
                 injectCss.href = cssItem.href;
-                console.log('trying to load ' + cssItem.id + '.');
+                console.log('[rdba] trying to load ' + cssItem.id + '.');
 
                 if (!document.querySelector('#' + cssItem.id)) {
                     // if this element is really not found.
                     // insert into page.
                     let promiseObj = new Promise(function(resolve) {
                         injectCss.onload = function() {
-                            console.log('css ' + cssItem.id + ' was loaded.');
+                            console.log('[rdba] css ' + cssItem.id + ' was loaded.');
                             dispatchDialogNewInit = true;
                             return resolve(index);
                         };
@@ -250,7 +250,7 @@ class RdbaXhrDialog {
                     promises.push(promiseObj);
                     document.head.appendChild(injectCss);
                 } else {
-                    console.log('css ' + cssItem.id + ' is already loaded.');
+                    console.log('[rdba] css ' + cssItem.id + ' is already loaded.');
                     dispatchDialogReInit = true;
                     promises.push(index);
                 }
@@ -259,7 +259,7 @@ class RdbaXhrDialog {
 
         Promise.all(promises)
         .then(() => {
-            console.log('all css & js injection finished.', promises);
+            console.log('[rdba] all css & js injection finished.', promises);
             if (dispatchDialogNewInit === true) {
                 let event = new CustomEvent(
                     thisClass.dialogNewInitEvent, 
@@ -271,13 +271,13 @@ class RdbaXhrDialog {
                     }
                 );
                 document.dispatchEvent(event);
-                console.log('fired event ' + thisClass.dialogNewInitEvent + '.');
+                console.log('[rdba] fired event ' + thisClass.dialogNewInitEvent + '.');
             } else if (dispatchDialogReInit === true) {
                 if (typeof(thisClass.dialogInitEvent) !== 'undefined') {
                     // the legacy event property (RdbaXhrDialog.dialogInitEvent) will be remove in v 2.0.
                     // @todo [rdb] Remove this property (RdbaXhrDialog.dialogInitEvent) in v2.0.
                     this.dialogReInitEvent = this.dialogInitEvent;
-                    console.warn('The `dialogInitEvent` property will be remove in v2.0, please update your code by rename to `dialogReInitEvent`.');
+                    console.warn('[rdba] The `dialogInitEvent` property will be remove in v2.0, please update your code by rename to `dialogReInitEvent`.');
                 }
                 let event = new CustomEvent(
                     thisClass.dialogReInitEvent, 
@@ -289,7 +289,7 @@ class RdbaXhrDialog {
                     }
                 );
                 document.dispatchEvent(event);
-                console.log('fired event ' + thisClass.dialogReInitEvent + '.');
+                console.log('[rdba] fired event ' + thisClass.dialogReInitEvent + '.');
             }
         });
     }// injectCssAndJs
@@ -358,9 +358,9 @@ class RdbaXhrDialog {
                 ) {
                     // if contain state and page URL is add or edit or actions. 
                     // this condition is for prevent double go back.
-                    //console.log('on url: ' + window.location.href);
-                    //console.log('url is in add, edit, actions page.', pageUrl);
-                    //console.log('redirect back.');
+                    //console.log('[rdba] on url: ' + window.location.href);
+                    //console.log('[rdba] url is in add, edit, actions page.', pageUrl);
+                    //console.log('[rdba] redirect back.');
                     window.history.go(-1);
             }
         }, false);
@@ -381,9 +381,9 @@ class RdbaXhrDialog {
             if (!event.state) {
                 // no history, no state just listing page.
                 // trigger click on close dialog button.
-                //console.log('no history', event.state);
-                //console.log('on url: ' + window.location.href);
-                //console.log('trigger click on close dialog.');
+                //console.log('[rdba] no history', event.state);
+                //console.log('[rdba] on url: ' + window.location.href);
+                //console.log('[rdba] trigger click on close dialog.');
                 document.querySelector(thisClass.dialogIDSelector + ' [data-dismiss="dialog"]').click();
             } else {
                 let pageUrl = (event.state && typeof(event.state.pageUrl) !== 'undefined' ? event.state.pageUrl.trim() : '');
@@ -416,7 +416,7 @@ class RdbaXhrDialog {
                             let pageTitle = (parsedDoc.querySelector('.rdba-page-content-header') ? parsedDoc.querySelector('.rdba-page-content-header').innerHTML : '');
 
                             // assign dialog and activate and then inject js css.
-                            //console.log('assign dialog from storage.', {pageTitle, pageContent});
+                            //console.log('[rdba] assign dialog from storage.', {pageTitle, pageContent});
                             thisClass.assignDialogAndActivate(pageContent, pageTitle);
                             thisClass.injectCssAndJs(pageCss, pageJs);
                         }

@@ -402,7 +402,7 @@ class RdbaCommon {
                 }
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
-                console.error(jqXHR);
+                console.error('[rdba] ', jqXHR);
             })
             .always(function(data, textStatus, jqXHR) {
                 let response;
@@ -678,7 +678,7 @@ class RdbaCommon {
                             response = JSON.parse(response);
                         }
                     } catch (exception) {
-                        console.error(exception.message, response);
+                        console.error('[rdba] ', exception.message, response);
                     }
                 }
 
