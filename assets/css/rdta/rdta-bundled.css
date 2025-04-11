@@ -6984,10 +6984,10 @@ samp {
  * Recommended use with rundiz-template-admin.css file.
  */
 .sm-rdta {
-  z-index: var(--sidebar-z-index)
+  z-index: var(--rdta-sidebar-z-index)
 }
 .sm-rdta > li > a.current {
-  background-color: #52a0e5;
+  background-color: var(--rdta-background-primary-color);
   color: #fff
 }
 .sm-rdta > li > a > .sub-arrow {
@@ -7028,7 +7028,7 @@ samp {
   }
   .sm-rdta a span.sub-arrow::before {
     display: block;
-    font-family: "Font Awesome 5 Free";
+    font-family: "Font Awesome 6 Free";
     font-weight: 900;
     content: "\f0da"
   }
@@ -7042,16 +7042,16 @@ samp {
   box-shadow: inset 0 0 5px rgba(0,0,0,.3)
 }
 .sm-rdta ul a {
-  font-size: .875rem;
+  font-size: var(--sm-rdta-submenu-item-wrapper-font-size);
   overflow-wrap: break-word;
-  padding: var(--block-element-padding-vertical) 35px var(--block-element-padding-vertical) var(--block-element-padding-horizontal);
+  padding: var(--rdta-block-element-padding-vertical) 35px var(--rdta-block-element-padding-vertical) var(--rdta-block-element-padding-horizontal);
   word-break: break-all;
   word-wrap: break-word
 }
 .sm-rdta ul a.highlighted,
 .sm-rdta ul a:hover {
   background-color: transparent;
-  color: #52a0e5
+  color: var(--rdta-text-primary-color)
 }
 .sm-rdta ul a.current {
   font-weight: 700
@@ -7062,20 +7062,20 @@ samp {
 @media (min-width:1000px) {
   .sm-rdta ul {
     background-color: #fff;
-    border: 1px solid var(--block-border-color);
+    border: 1px solid var(--rdta-tpf-block-border-color);
     box-shadow: 0 1px 2px rgba(0,0,0,.3);
-    color: var(--page-text-color)
+    color: var(--rdta-tpf-page-text-color)
   }
   .sm-rdta ul a {
     color: inherit;
     padding-right: 18px
   }
   .sm-rdta ul a:hover span.sub-arrow {
-    color: var(--page-text-color)
+    color: var(--rdta-tpf-page-text-color)
   }
   .sm-rdta ul a.highlighted,
   .sm-rdta ul a:hover {
-    background-color: var(--block-background-color)
+    background-color: var(--rdta-tpf-block-background-color)
   }
   .sm-rdta ul ul {
     background-color: #fff
@@ -7093,17 +7093,17 @@ samp {
   }
   .sm-rdta span.scroll-down:hover,
   .sm-rdta span.scroll-up:hover {
-    background-color: var(--block-background-color)
+    background-color: var(--rdta-tpf-block-background-color)
   }
   .sm-rdta span.scroll-up:hover span.scroll-up-arrow {
-    border-color: transparent transparent var(--page-text-color) transparent
+    border-color: transparent transparent var(--rdta-tpf-page-text-color) transparent
   }
   .sm-rdta span.scroll-down:hover span.scroll-down-arrow {
-    border-color: var(--page-text-color) transparent transparent transparent
+    border-color: var(--rdta-tpf-page-text-color) transparent transparent transparent
   }
   .sm-rdta span.scroll-down-arrow,
   .sm-rdta span.scroll-up-arrow {
-    border-color: transparent transparent var(--block-border-color) transparent;
+    border-color: transparent transparent var(--rdta-tpf-block-border-color) transparent;
     border-style: dashed dashed solid dashed;
     border-width: 6px;
     height: 0;
@@ -7115,20 +7115,20 @@ samp {
     width: 0
   }
   .sm-rdta span.scroll-down-arrow {
-    border-color: var(--block-border-color) transparent transparent transparent;
+    border-color: var(--rdta-tpf-block-border-color) transparent transparent transparent;
     border-style: solid dashed dashed dashed;
     top: 8px
   }
 }
 .sm-rdta.navbar ul {
   background-color: #fff;
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   box-shadow: 0 1px 2px rgba(0,0,0,.2);
-  color: var(--page-text-color);
+  color: var(--rdta-tpf-page-text-color);
   font-size: 80%;
   height: auto;
   min-width: 150px;
-  top: calc(var(--navbar-height_mobilescreen)/ 2);
+  top: calc(var(--rdta-navbar-height_mobilescreen)/ 2);
   transition: none;
   width: auto
 }
@@ -7140,7 +7140,7 @@ samp {
 .sm-rdta.navbar ul a {
   color: inherit;
   font-size: inherit;
-  padding: var(--block-element-padding-vertical) .313rem
+  padding: var(--rdta-block-element-padding-vertical) .313rem
 }
 .sm-rdta.navbar ul a.highlighted,
 .sm-rdta.navbar ul a:hover {
@@ -7183,19 +7183,34 @@ samp {
  * Rundiz template typography and form
  */
 :root {
-  --basic-focus-color: rgba(153, 153, 153, 0.35);
-  --form-focus-color: rgba(255, 182, 0, 0.35);
-  --form-invalid-border-color: #bc0000;
-  --page-background-color: #FFF;
-  --page-text-color: #333;
-  --block-background-color: #eee;
-  --block-border-color: #ddd;
-  --content-block-element-margin-vertical: 0.625rem;
-  --inputrange-thumb-border-color: #AAA;
-  --text-link-color: #1280EF
+  --rdta-tpf-basic-focus-color: rgba(153, 153, 153, 0.35);
+  --rdta-tpf-form-focus-color: rgba(255, 182, 0, 0.35);
+  --rdta-tpf-form-invalid-border-color: #bc0000;
+  --rdta-tpf-button-3d-height: 2px;
+  --rdta-tpf-button-3d-pressed-height: 1px;
+  --rdta-tpf-button-3d-edge-color: rgba(0, 0, 0, 0.1);
+  --rdta-tpf-input-range-thumb-border-color: #aaa;
+  --rdta-tpf-input-range-track-color: #ddd;
+  --rdta-tpf-page-background-color: #fff;
+  --rdta-tpf-page-text-color: #333;
+  --rdta-tpf-block-background-color: #eee;
+  --rdta-tpf-block-border-color: #ddd;
+  --rdta-tpf-content-block-element-margin-vertical: 0.625rem;
+  --rdta-tpf-table-cell-padding: 0.313em;
+  --rdta-tpf-text-disabled-color: #999;
+  --rdta-tpf-text-link-color: #1280EF
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _focusable-elements.css
+* ----------------------------------------------------------------------------------------------
+* focusable elements
+* What are focusable elements?
+* https://www.deque.com/blog/give-site-focus-tips-designing-usable-focus-indicators/
+* https://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus
+*/
 :focus {
-  outline: 2px dotted var(--basic-focus-color)
+  outline: 2px dotted var(--rdta-tpf-basic-focus-color)
 }
 .rd-button:focus,
 .rd-pagination a:focus,
@@ -7203,7 +7218,7 @@ button:focus,
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 3px solid var(--form-focus-color)
+  outline: 3px solid var(--rdta-tpf-form-focus-color)
 }
 input[type=radio]:focus {
   border-radius: 50%
@@ -7212,13 +7227,19 @@ input[type=radio]:focus {
 [type=reset]:-moz-focusring,
 [type=submit]:-moz-focusring,
 button:-moz-focusring {
-  outline: 2px solid var(--form-focus-color)
+  outline: 2px solid var(--rdta-tpf-form-focus-color)
 }
 input[type=color]::-moz-focus-inner {
   border: none
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _typography.css
+* ----------------------------------------------------------------------------------------------
+* based html & typography
+*/
 html {
-  background-color: var(--page-background-color);
+  background-color: var(--rdta-tpf-page-background-color);
   cursor: auto;
   font-size: 107%
 }
@@ -7228,7 +7249,7 @@ html {
   }
 }
 body {
-  color: var(--page-text-color);
+  color: var(--rdta-tpf-page-text-color);
   cursor: auto;
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid sans","Helvetica Neue",Helvetica,Tahoma,Arial,sans-serif;
   font-size: 100%;
@@ -7237,7 +7258,7 @@ body {
   padding: 0
 }
 a {
-  color: var(--text-link-color);
+  color: var(--rdta-tpf-text-link-color);
   text-decoration: none;
   -webkit-tap-highlight-color: rgba(255,255,255,0)
 }
@@ -7250,19 +7271,19 @@ a:hover {
   -webkit-user-select: none
 }
 a:visited {
-  color: #0b5aa9
+  color: hsl(from var(--rdta-tpf-text-link-color) h s calc(l - 15))
 }
 a:focus,
 a:hover {
-  color: #5aa6f4
+  color: hsl(from var(--rdta-tpf-text-link-color) h s calc(l + 15))
 }
 abbr {
   cursor: help
 }
 blockquote {
-  border-left: 5px solid var(--block-border-color);
+  border-left: 5px solid var(--rdta-tpf-block-border-color);
   border-right: 0;
-  margin: 0 0 var(--content-block-element-margin-vertical) 0;
+  margin: 0 0 var(--rdta-tpf-content-block-element-margin-vertical) 0;
   padding: 0 0 0 .625em
 }
 code,
@@ -7275,7 +7296,7 @@ samp {
   padding: .125em .188em
 }
 details {
-  margin: 0 0 var(--content-block-element-margin-vertical) 0
+  margin: 0 0 var(--rdta-tpf-content-block-element-margin-vertical) 0
 }
 details details {
   margin-left: 1.111em;
@@ -7285,7 +7306,7 @@ details summary {
   cursor: pointer
 }
 dl {
-  margin: 0 0 var(--content-block-element-margin-vertical) 0
+  margin: 0 0 var(--rdta-tpf-content-block-element-margin-vertical) 0
 }
 dl dt {
   margin: 0
@@ -7304,7 +7325,7 @@ h4,
 h5,
 h6,
 p {
-  margin: 0 0 var(--content-block-element-margin-vertical) 0
+  margin: 0 0 var(--rdta-tpf-content-block-element-margin-vertical) 0
 }
 h1 {
   font-size: 2.44em;
@@ -7334,11 +7355,11 @@ hr {
   border-bottom: 0;
   border-left: 0;
   border-right: 0;
-  border-top: 1px solid var(--block-border-color);
+  border-top: 1px solid var(--rdta-tpf-block-border-color);
   margin: 1.25rem 0
 }
 iframe {
-  border: 1px solid var(--block-border-color)
+  border: 1px solid var(--rdta-tpf-block-border-color)
 }
 img.fluid {
   height: auto;
@@ -7346,7 +7367,7 @@ img.fluid {
 }
 kbd {
   background-color: #f1f1f1;
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   border-radius: 2px
 }
 label {
@@ -7357,7 +7378,7 @@ label [readonly] {
   cursor: not-allowed
 }
 meter {
-  background-color: var(--block-background-color);
+  background-color: var(--rdta-tpf-block-background-color);
   background-image: none;
   box-shadow: none;
   display: inline-block;
@@ -7390,7 +7411,7 @@ meter::-webkit-meter-even-less-good-value {
   background-image: none
 }
 meter::-webkit-meter-bar {
-  background-color: var(--block-background-color);
+  background-color: var(--rdta-tpf-block-background-color);
   background-image: none;
   border: none;
   border-radius: 0;
@@ -7398,7 +7419,7 @@ meter::-webkit-meter-bar {
   height: 1em
 }
 pre {
-  margin: 0 0 var(--content-block-element-margin-vertical) 0;
+  margin: 0 0 var(--rdta-tpf-content-block-element-margin-vertical) 0;
   overflow: auto;
   padding: .625em
 }
@@ -7414,7 +7435,7 @@ progress {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background-color: var(--block-background-color);
+  background-color: var(--rdta-tpf-block-background-color);
   border: none;
   height: 1em;
   width: 11.25em
@@ -7439,7 +7460,7 @@ progress::-ms-fill {
   background-color: green
 }
 progress::-webkit-progress-bar {
-  background-color: var(--block-background-color)
+  background-color: var(--rdta-tpf-block-background-color)
 }
 progress::-webkit-progress-value {
   background-color: green
@@ -7451,34 +7472,37 @@ q::before {
   content: "“"
 }
 samp {
-  background-color: var(--block-background-color);
+  background-color: var(--rdta-tpf-block-background-color);
   border-bottom: 0;
-  border-left: 3px solid var(--block-border-color);
+  border-left: 3px solid var(--rdta-tpf-block-border-color);
   border-right: 0;
   border-top: 0
 }
 table {
-  border: 1px solid var(--block-border-color);
-  margin-bottom: var(--content-block-element-margin-vertical)
+  border: 1px solid var(--rdta-tpf-block-border-color);
+  margin-bottom: var(--rdta-tpf-content-block-element-margin-vertical)
 }
 table tfoot td,
 table tfoot th,
 table thead td,
 table thead th {
-  background-color: var(--block-background-color);
+  background-color: var(--rdta-tpf-block-background-color);
   font-weight: 600;
   text-align: left
 }
 table td,
 table th {
-  border: 1px solid var(--block-border-color);
-  padding: .313em
+  border: 1px solid var(--rdta-tpf-block-border-color);
+  padding-bottom: var(--rdta-tpf-table-cell-padding);
+  padding-left: var(--rdta-tpf-table-cell-padding);
+  padding-right: var(--rdta-tpf-table-cell-padding);
+  padding-top: var(--rdta-tpf-table-cell-padding)
 }
 menu,
 ol,
 ul {
   line-height: 1.6;
-  margin: 0 0 var(--content-block-element-margin-vertical) 1.211em;
+  margin: 0 0 var(--rdta-tpf-content-block-element-margin-vertical) 1.211em;
   padding: 0
 }
 menu li,
@@ -7508,9 +7532,15 @@ ul {
   list-style: disc
 }
 var {
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   padding: .063em .375em .063em .188em
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _reset-form.css
+* ----------------------------------------------------------------------------------------------
+* Reset forms by overriding Sanitize's forms.css.
+*/
 button,
 input,
 select,
@@ -7523,6 +7553,12 @@ input[type=file],
 input[type=range] {
   border: none
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _form.css
+* ----------------------------------------------------------------------------------------------
+* form, fieldset, and all input controls.
+*/
 .rd-button,
 a.rd-button,
 button,
@@ -7532,14 +7568,14 @@ input[type=submit] {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background-color: var(--block-background-color);
-  border: 1px solid var(--block-border-color);
+  background-color: var(--rdta-tpf-block-background-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   border-radius: 0;
-  box-shadow: 0 2px 0 rgba(0,0,0,.1);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-tpf-button-3d-edge-color);
   color: inherit;
   cursor: pointer;
   display: inline-block;
-  margin-bottom: 2px;
+  margin-bottom: var(--rdta-tpf-button-3d-height);
   padding: .313em .625em;
   position: relative;
   top: 0;
@@ -7572,8 +7608,8 @@ input.active[type=submit],
 input[type=button]:active,
 input[type=reset]:active,
 input[type=submit]:active {
-  box-shadow: 0 1px 0 rgba(0,0,0,.1);
-  top: 1px
+  box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-tpf-button-3d-edge-color);
+  top: calc(var(--rdta-tpf-button-3d-height) - var(--rdta-tpf-button-3d-pressed-height))
 }
 .rd-button:hover,
 button:hover,
@@ -7592,9 +7628,9 @@ input.disabled[type=submit],
 input[disabled][type=button],
 input[disabled][type=reset],
 input[disabled][type=submit] {
-  background-color: #f3f3f3;
-  box-shadow: 0 2px 0 rgba(38,38,38,.1);
-  color: #999;
+  background-color: hsl(from var(--rdta-tpf-block-background-color) h s calc(l + 2));
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 hsl(from var(--rdta-tpf-button-3d-edge-color) h s calc(l + 15));
+  color: hsl(from var(--rdta-tpf-page-text-color) h s calc(l + 40));
   cursor: not-allowed;
   opacity: 1
 }
@@ -7611,12 +7647,12 @@ input[disabled][type=submit]:active {
   top: 0
 }
 fieldset {
-  border: 1px solid var(--block-border-color);
-  margin: 0 0 var(--content-block-element-margin-vertical) 0;
+  border: 1px solid var(--rdta-tpf-block-border-color);
+  margin: 0 0 var(--rdta-tpf-content-block-element-margin-vertical) 0;
   padding: .625em
 }
 fieldset legend {
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   padding: .125em .313em
 }
 input[type=date],
@@ -7631,14 +7667,14 @@ input[type=text],
 input[type=time],
 input[type=url],
 input[type=week] {
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   border-radius: 0;
   box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
   font-family: inherit;
   font-size: .99em;
+  height: 2.152em;
   line-height: 1.4;
-  padding: .313em .188em;
-  height: 2.152em
+  padding: .313em .188em
 }
 input[type=date]:active,
 input[type=date]:focus,
@@ -7690,39 +7726,38 @@ input[type=url][disabled],
 input[type=url][readonly],
 input[type=week][disabled],
 input[type=week][readonly] {
-  background-color: var(--block-background-color);
-  color: var(--text-disabled-color);
+  background-color: var(--rdta-tpf-block-background-color);
+  color: var(--rdta-tpf-text-disabled-color);
   cursor: not-allowed
 }
 input[type=date].rd-input-invalid,
-input[type=date]:invalid,
+input[type=date]:user-invalid,
 input[type=datetime-local].rd-input-invalid,
-input[type=datetime-local]:invalid,
+input[type=datetime-local]:user-invalid,
 input[type=email].rd-input-invalid,
-input[type=email]:invalid,
+input[type=email]:user-invalid,
 input[type=month].rd-input-invalid,
-input[type=month]:invalid,
+input[type=month]:user-invalid,
 input[type=number].rd-input-invalid,
-input[type=number]:invalid,
+input[type=number]:user-invalid,
 input[type=password].rd-input-invalid,
-input[type=password]:invalid,
+input[type=password]:user-invalid,
 input[type=search].rd-input-invalid,
-input[type=search]:invalid,
+input[type=search]:user-invalid,
 input[type=tel].rd-input-invalid,
-input[type=tel]:invalid,
+input[type=tel]:user-invalid,
 input[type=text].rd-input-invalid,
-input[type=text]:invalid,
+input[type=text]:user-invalid,
 input[type=time].rd-input-invalid,
-input[type=time]:invalid,
+input[type=time]:user-invalid,
 input[type=url].rd-input-invalid,
-input[type=url]:invalid,
+input[type=url]:user-invalid,
 input[type=week].rd-input-invalid,
-input[type=week]:invalid {
-  border-color: var(--form-invalid-border-color)
+input[type=week]:user-invalid {
+  border-color: var(--rdta-tpf-form-invalid-border-color)
 }
 input[type=color] {
-  cursor: pointer;
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   height: 2em;
   padding: 0
 }
@@ -7741,7 +7776,7 @@ input[type=radio] {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   color-adjust: exact;
   cursor: pointer;
   height: 1em;
@@ -7751,14 +7786,14 @@ input[type=checkbox][disabled],
 input[type=checkbox][readonly],
 input[type=radio][disabled],
 input[type=radio][readonly] {
-  background-color: var(--block-background-color);
+  background-color: var(--rdta-tpf-block-background-color);
   cursor: not-allowed
 }
 input[type=checkbox].rd-input-invalid,
-input[type=checkbox]:invalid,
+input[type=checkbox]:user-invalid,
 input[type=radio].rd-input-invalid,
-input[type=radio]:invalid {
-  border-color: var(--form-invalid-border-color)
+input[type=radio]:user-invalid {
+  border-color: var(--rdta-tpf-form-invalid-border-color)
 }
 input[type=checkbox]:checked {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e")
@@ -7782,8 +7817,8 @@ input[type=file] {
 }
 input[type=file]::-webkit-file-upload-button,
 input[type=file]::file-selector-button {
-  background-color: var(--block-background-color);
-  border: 1px solid var(--block-border-color);
+  background-color: var(--rdta-tpf-block-background-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   cursor: pointer;
   font: inherit
 }
@@ -7817,8 +7852,8 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background-color: var(--page-background-color);
-  border: 1px solid var(--block-border-color);
+  background-color: var(--rdta-tpf-page-background-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   border-radius: 0;
   font-family: inherit;
   font-size: .99em;
@@ -7827,19 +7862,19 @@ select {
 }
 select[disabled],
 select[readonly] {
-  background-color: var(--block-background-color);
-  color: var(--text-disabled-color);
+  background-color: var(--rdta-tpf-block-background-color);
+  color: var(--rdta-tpf-text-disabled-color);
   cursor: not-allowed
 }
 select.rd-input-invalid,
-select:invalid {
-  border-color: var(--form-invalid-border-color)
+select:user-invalid {
+  border-color: var(--rdta-tpf-form-invalid-border-color)
 }
 select:not([multiple]) {
   height: 2.152em
 }
 textarea {
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   border-radius: 0;
   box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
   font-family: inherit;
@@ -7853,61 +7888,34 @@ textarea:focus {
 }
 textarea[disabled],
 textarea[readonly] {
-  background-color: var(--block-background-color);
-  color: var(--text-disabled-color);
+  background-color: var(--rdta-tpf-block-background-color);
+  color: var(--rdta-tpf-text-disabled-color);
   cursor: not-allowed
 }
 textarea.rd-input-invalid,
-textarea:invalid {
-  border-color: var(--form-invalid-border-color)
+textarea:user-invalid {
+  border-color: var(--rdta-tpf-form-invalid-border-color)
 }
-.rd-inputfile {
-  overflow: hidden;
-  position: relative;
-  vertical-align: middle
-}
-.rd-inputfile:active,
-.rd-inputfile:focus {
-  outline: 3px solid var(--form-focus-color)
-}
-.rd-inputfile.rd-input-invalid {
-  border-color: var(--form-invalid-border-color)!important
-}
-.rd-inputfile input[type=file] {
-  display: block;
-  height: 100%;
-  left: 0;
-  margin: 0;
-  opacity: 0;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  width: 100%
-}
-.rd-input-files-queue {
-  vertical-align: middle;
-  white-space: normal;
-  word-break: break-all;
-  word-wrap: break-word
-}
-.rd-input-files-queue > * {
-  vertical-align: middle
-}
-.rd-input-files-queue > .rd-button,
-.rd-input-files-queue > button,
-.rd-input-files-queue > input[type=button] {
-  margin-top: -2px;
-  position: relative
-}
+/*!
+* ----------------------------------------------------------------------------------------------
+* _form-input-range.css
+* ----------------------------------------------------------------------------------------------
+* form > input[type="range"]
+*
+* Input range CSS generators:
+* http://danielstern.ca/range.css/
+* http://www.cssportal.com/style-input-range/
+*/
 input[type=range] {
   -webkit-appearance: none;
+  appearance: none;
   height: 37px;
   margin: 10px 0;
   -webkit-tap-highlight-color: rgba(255,255,255,0)
 }
 input[type=range]::-moz-range-thumb {
-  background: var(--block-background-color);
-  border: 1px solid var(--inputrange-thumb-border-color);
+  background: var(--rdta-tpf-block-background-color);
+  border: 1px solid var(--rdta-tpf-input-range-thumb-border-color);
   border-radius: 0;
   box-shadow: none;
   cursor: pointer;
@@ -7916,9 +7924,9 @@ input[type=range]::-moz-range-thumb {
 }
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  background: var(--block-background-color);
+  background: var(--rdta-tpf-block-background-color);
   box-shadow: none;
-  border: 1px solid var(--inputrange-thumb-border-color);
+  border: 1px solid var(--rdta-tpf-input-range-thumb-border-color);
   border-radius: 0;
   cursor: pointer;
   height: 30px;
@@ -7927,7 +7935,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 input[type=range]::-moz-range-track {
   animate: 0.2s;
-  background: #ddd;
+  background: var(--rdta-tpf-input-range-track-color);
   border: 0 solid #000;
   border-radius: 0;
   box-shadow: none;
@@ -7936,7 +7944,7 @@ input[type=range]::-moz-range-track {
 }
 input[type=range]::-webkit-slider-runnable-track {
   animate: 0.2s;
-  background: #ddd;
+  background: var(--rdta-tpf-input-range-track-color);
   border: 0 solid #000;
   border-radius: 0;
   box-shadow: none;
@@ -7944,7 +7952,7 @@ input[type=range]::-webkit-slider-runnable-track {
   height: 3px
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #ddd
+  background: var(--rdta-tpf-input-range-track-color)
 }
 input[type=range]::-ms-track {
   animate: 0.2s;
@@ -7955,8 +7963,8 @@ input[type=range]::-ms-track {
   height: 3px
 }
 input[type=range]::-ms-thumb {
-  background: var(--block-background-color);
-  border: 1px solid var(--inputrange-thumb-border-color);
+  background: var(--rdta-tpf-block-background-color);
+  border: 1px solid var(--rdta-tpf-input-range-thumb-border-color);
   border-radius: 0;
   box-shadow: none;
   cursor: pointer;
@@ -7966,67 +7974,74 @@ input[type=range]::-ms-thumb {
   width: 15px
 }
 input[type=range]::-ms-fill-lower {
-  background: #ddd;
+  background: var(--rdta-tpf-input-range-track-color);
   border: 0 solid #000;
   border-radius: 0;
   box-shadow: none
 }
 input[type=range]::-ms-fill-upper {
-  background: #ddd;
+  background: var(--rdta-tpf-input-range-track-color);
   border: 0 solid #000;
   border-radius: 0;
   box-shadow: none
 }
 input[type=range]:focus::-ms-fill-lower {
-  background: #ddd
+  background: var(--rdta-tpf-input-range-track-color)
 }
 input[type=range]:focus::-ms-fill-upper {
-  background: #ddd
+  background: var(--rdta-tpf-input-range-track-color)
 }
 /*!
- * Rundiz template for admin V.2.3.1
+ * Rundiz template for admin V.2.4.2
  */
 :root {
-  --background-primary-disabled-color: #97c3ea;
-  --background-primary-hover-color: #91c2ed;
-  --background-danger-disabled-color: #cf6464;
-  --background-danger-hover-color: #eeb9b9;
-  --background-info-disabled-color: #64abb8;
-  --background-info-hover-color: #afdfe7;
-  --background-success-disabled-color: #65b065;
-  --background-success-hover-color: #c0dcc0;
-  --background-warning-disabled-color: #efb247;
-  --background-warning-hover-color: #fac875;
-  --block-element-margin-horizontal: 0.625rem;
-  --block-element-margin-vertical: 1.25rem;
-  --block-element-padding-horizontal: 0.625rem;
-  --block-element-padding-vertical: 0.625rem;
-  --navbar-height_mobilescreen: 6.25rem;
-  --sidebar-expanded-width: 11.625rem;
-  --sidebar-collapsed-width: 3.75rem;
-  --sidebar-transition-seconds: 0s;
-  --text-danger-color: #bc0000;
-  --text-disabled-color: #999;
-  --text-info-color: #09a0bb;
-  --text-primary-color: #52A0E5;
-  --text-success-color: #007c00;
-  --text-warning-color: #e69200;
-  --text-white-color: #ffffff
-}
-.rd-button,
-.rd-form {
-  --form-large-font-size: 1.25em;
-  --form-small-font-size: 0.75em;
-  --form-tiny-font-size: 0.625em
+  --rdta-background-danger-disabled-color: #cf6464;
+  --rdta-background-danger-hover-color: #eeb9b9;
+  --rdta-background-danger-color: #f4d0d0;
+  --rdta-background-info-disabled-color: #64abb8;
+  --rdta-background-info-hover-color: #afdfe7;
+  --rdta-background-info-color: #c4ebf2;
+  --rdta-background-primary-disabled-color: #97c3ea;
+  --rdta-background-primary-hover-color: #91c2ed;
+  --rdta-background-primary-color: #52A0E5;
+  --rdta-background-success-disabled-color: #65b065;
+  --rdta-background-success-hover-color: #c0dcc0;
+  --rdta-background-success-color: #d1e6d1;
+  --rdta-background-warning-disabled-color: #efb247;
+  --rdta-background-warning-hover-color: #fac875;
+  --rdta-background-warning-color: #fbd38f;
+  --rdta-block-element-margin-horizontal: 0.625rem;
+  --rdta-block-element-margin-vertical: 1.25rem;
+  --rdta-block-element-padding-horizontal: 0.625rem;
+  --rdta-block-element-padding-vertical: 0.625rem;
+  --rdta-content-block-element-margin-vertical: calc(var(--rdta-block-element-margin-vertical) / 2);
+  --rdta-navbar-height_mobilescreen: 6.25rem;
+  --rdta-sidebar-collapsed-width: 3.75rem;
+  --rdta-sidebar-expanded-width: 11.625rem;
+  --rdta-text-danger-color: #bc0000;
+  --rdta-text-info-color: #09a0bb;
+  --rdta-text-primary-color: #52A0E5;
+  --rdta-text-success-color: #007c00;
+  --rdta-text-warning-color: #e69200;
+  --rdta-text-white-color: #fff;
+  --rdta-sm-min-width: 768px;
+  --rdta-md-min-width: 1000px
 }
 .rd-navbar,
 .rd-sidebar,
-.rd-sidebar-back {
-  --navbar-height: 3.125rem;
-  --navbar-z-index: 4;
-  --navbarsidebar-background-color: #222;
-  --sidebar-z-index: 2
+.rd-sidebar-back,
+.sm-rdta {
+  --rdta-navbar-height: 3.125rem;
+  --rdta-navbar-z-index: 4;
+  --rdta-navbar-sidebar-background-color: #222;
+  --rdta-sidebar-transition-seconds: 0s;
+  --rdta-sidebar-z-index: 2
 }
+.sm-rdta {
+  --sm-rdta-submenu-item-wrapper-font-size: 0.875rem
+}
+/*! layout/_layout-display-grid.css */
+/*! layout/_layout-common.css */
 html.rd-template-admin {
   height: 100%
 }
@@ -8035,35 +8050,36 @@ html.rd-template-admin {
 }
 @media (min-width:1000px) {
   .rd-template-admin body {
-    padding-top: calc(var(--navbar-height_mobilescreen)/ 2)
+    padding-top: calc(var(--rdta-navbar-height_mobilescreen)/ 2)
   }
 }
 .rd-page-content {
-  margin-bottom: var(--block-element-margin-vertical);
-  margin-left: var(--block-element-margin-horizontal);
-  margin-right: var(--block-element-margin-horizontal)
+  margin-bottom: var(--rdta-block-element-margin-vertical);
+  margin-left: var(--rdta-block-element-margin-horizontal);
+  margin-right: var(--rdta-block-element-margin-horizontal)
 }
 @media (min-width:1000px) {
   .rd-sidebar-back {
-    background-color: var(--navbarsidebar-background-color);
+    background-color: var(--rdta-navbar-sidebar-background-color);
     bottom: 0;
     display: block;
     position: fixed;
     top: 0;
-    transition: width var(--sidebar-transition-seconds);
-    width: var(--sidebar-expanded-width);
+    transition: width var(--rdta-sidebar-transition-seconds);
+    width: var(--rdta-sidebar-expanded-width);
     z-index: -1
   }
   .rd-page-wrapper.is-collapsed .rd-sidebar-back {
-    transition: width var(--sidebar-transition-seconds);
-    width: var(--sidebar-collapsed-width)
+    transition: width var(--rdta-sidebar-transition-seconds);
+    width: var(--rdta-sidebar-collapsed-width)
   }
 }
+/*! layout/_layout-display-grid-begins.css */
 .rd-page-wrapper {
   display: grid;
   grid-template-columns: 0px auto;
   grid-template-rows: auto;
-  min-height: calc(100vh - var(--navbar-height_mobilescreen));
+  min-height: calc(100vh - var(--rdta-navbar-height_mobilescreen));
   position: relative
 }
 .rd-page-wrapper > footer {
@@ -8072,7 +8088,7 @@ html.rd-template-admin {
   display: none;
   font-size: .688em;
   min-height: 1.25rem;
-  padding: .313rem var(--block-element-padding-horizontal)
+  padding: .313rem var(--rdta-block-element-padding-horizontal)
 }
 .rd-page-wrapper > footer a {
   color: inherit
@@ -8080,17 +8096,18 @@ html.rd-template-admin {
 .rd-page-wrapper > footer .rd-page-footer-left {
   margin-left: 0;
   margin-right: 0;
-  padding-right: var(--block-element-padding-horizontal)
+  padding-right: var(--rdta-block-element-padding-horizontal)
 }
 .rd-page-wrapper > footer .rd-page-footer-right {
   margin-left: auto;
   margin-right: 0;
-  padding-left: var(--block-element-padding-horizontal)
+  padding-left: var(--rdta-block-element-padding-horizontal)
 }
 .rd-page-wrapper > main {
   align-self: start;
   min-width: 0
 }
+/*! layout/_layout-display-grid-sidebar.css */
 .rd-page-wrapper .rd-sidebar {
   background-color: #2e2e2e;
   color: #ccc;
@@ -8100,15 +8117,16 @@ html.rd-template-admin {
   min-height: 100%;
   padding: 0;
   position: absolute;
-  width: var(--sidebar-expanded-width)
+  width: var(--rdta-sidebar-expanded-width)
 }
 .rd-page-wrapper .rd-sidebar a {
-  color: inherit
+  color: inherit;
+  text-decoration: none
 }
 .rd-page-wrapper .rd-sidebar ul.rd-sidebar-item-list > li > a {
   display: block;
   overflow-wrap: break-word;
-  padding: var(--block-element-padding-vertical) 2.125rem var(--block-element-padding-vertical) var(--block-element-padding-horizontal);
+  padding: var(--rdta-block-element-padding-vertical) 2.125rem var(--rdta-block-element-padding-vertical) var(--rdta-block-element-padding-horizontal);
   word-break: break-all
 }
 .rd-page-wrapper .rd-sidebar ul.rd-sidebar-item-list > li > a > span.rd-sidebar-menu-text {
@@ -8117,12 +8135,12 @@ html.rd-template-admin {
 }
 .rd-page-wrapper .rd-sidebar ul.rd-sidebar-item-list > li > a .sidebar-icon {
   font-size: 1.25rem;
-  transition: font-size var(--sidebar-transition-seconds)
+  transition: font-size var(--rdta-sidebar-transition-seconds)
 }
 .rd-page-wrapper .rd-sidebar ul.rd-sidebar-item-list li.divider {
-  border-bottom: 1px solid var(--block-border-color);
-  margin-bottom: var(--content-block-element-margin-vertical);
-  margin-top: var(--content-block-element-margin-vertical)
+  border-bottom: 1px solid var(--rdta-tpf-block-border-color);
+  margin-bottom: var(--rdta-content-block-element-margin-vertical);
+  margin-top: var(--rdta-content-block-element-margin-vertical)
 }
 .rd-page-wrapper .rd-sidebar ul.rd-sidebar-item-list li.divider a {
   display: none
@@ -8148,7 +8166,7 @@ html.rd-template-admin {
 }
 .rd-page-wrapper.mini-screen-sidebar-visible > footer,
 .rd-page-wrapper.mini-screen-sidebar-visible > main {
-  transform: translateX(var(--sidebar-expanded-width))
+  transform: translateX(var(--rdta-sidebar-expanded-width))
 }
 .rd-page-wrapper.mini-screen-sidebar-visible .rd-sidebar {
   display: block
@@ -8169,9 +8187,9 @@ html.rd-template-admin {
 }
 @media (min-width:1000px) {
   .rd-page-wrapper {
-    grid-template-columns: var(--sidebar-expanded-width) auto;
+    grid-template-columns: var(--rdta-sidebar-expanded-width) auto;
     grid-template-rows: auto 1.656rem;
-    min-height: calc(100vh - var(--navbar-height_mobilescreen)/ 2)
+    min-height: calc(100vh - var(--rdta-navbar-height_mobilescreen)/ 2)
   }
   .rd-page-wrapper > footer {
     display: flex;
@@ -8193,17 +8211,17 @@ html.rd-template-admin {
     grid-row-end: 3;
     grid-row-start: 1;
     position: relative;
-    transition: width var(--sidebar-transition-seconds);
-    width: var(--sidebar-expanded-width)
+    transition: width var(--rdta-sidebar-transition-seconds);
+    width: var(--rdta-sidebar-expanded-width)
   }
   .rd-page-wrapper .rd-sidebar ul.rd-sidebar-item-list > li > a {
-    padding: var(--block-element-padding-vertical) 1.125rem var(--block-element-padding-vertical) var(--block-element-padding-horizontal)
+    padding: var(--rdta-block-element-padding-vertical) 1.125rem var(--rdta-block-element-padding-vertical) var(--rdta-block-element-padding-horizontal)
   }
   .rd-page-wrapper.is-collapsed {
-    grid-template-columns: var(--sidebar-collapsed-width) auto
+    grid-template-columns: var(--rdta-sidebar-collapsed-width) auto
   }
   .rd-page-wrapper.is-collapsed .rd-sidebar {
-    width: var(--sidebar-collapsed-width)
+    width: var(--rdta-sidebar-collapsed-width)
   }
   .rd-page-wrapper.is-collapsed .rd-sidebar ul.rd-sidebar-item-list > li > a > span.rd-sidebar-menu-text {
     display: none
@@ -8212,9 +8230,10 @@ html.rd-template-admin {
     font-size: 1.563rem
   }
   .rd-page-wrapper .rd-sidebar-inner {
-    z-index: calc(var(--sidebar-z-index) + 1)
+    z-index: calc(var(--rdta-sidebar-z-index) + 1)
   }
 }
+/*! layout/_layout-common-sidebar-expand-collapse-controls.css */
 .rd-sidebar-expand-collapse-controls,
 ul.rd-sidebar-expand-collapse-controls {
   display: none
@@ -8227,7 +8246,7 @@ ul.rd-sidebar-expand-collapse-controls {
   }
   .rd-sidebar-expand-collapse-controls a,
   ul.rd-sidebar-expand-collapse-controls a {
-    background-color: var(--navbarsidebar-background-color);
+    background-color: var(--rdta-navbar-sidebar-background-color);
     cursor: pointer;
     margin-top: -2px;
     position: absolute;
@@ -8247,85 +8266,102 @@ ul.rd-sidebar-expand-collapse-controls {
     box-shadow: none
   }
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _alert-box.css
+* ----------------------------------------------------------------------------------------------
+*/
 .rd-alertbox {
-  --alertbox-z-index: 101
+  --rdta-alert-danger-active: hsl(from var(--rdta-text-danger-color) h s calc(l - 15));
+  --rdta-alert-danger-hover: hsl(from var(--rdta-text-danger-color) h s calc(l + 15));
+  --rdta-alert-fixfloat-danger-background-color: hsl(from var(--rdta-background-danger-color) h s calc(l + 7));
+  --rdta-alert-info-active: hsl(from var(--rdta-text-info-color) h s calc(l - 15));
+  --rdta-alert-info-hover: hsl(from var(--rdta-text-info-color) h s calc(l + 15));
+  --rdta-alert-fixfloat-info-background-color: hsl(from var(--rdta-background-info-color) h s calc(l + 7));
+  --rdta-alert-success-active: hsl(from var(--rdta-text-success-color) h s calc(l - 15));
+  --rdta-alert-success-hover: hsl(from var(--rdta-text-success-color) h s calc(l + 15));
+  --rdta-alert-fixfloat-success-background-color: hsl(from var(--rdta-background-success-color) h s calc(l + 7));
+  --rdta-alert-warning-active: hsl(from var(--rdta-text-warning-color) h s calc(l - 15));
+  --rdta-alert-warning-hover: hsl(from var(--rdta-text-warning-color) h s calc(l + 15));
+  --rdta-alert-fixfloat-warning-background-color: hsl(from var(--rdta-background-warning-color) h s calc(l + 7));
+  --rdta-alert-box-z-index: 101
 }
 .rd-alertbox {
   background-color: #fff;
-  border-left-color: var(--block-border-color);
+  border-left-color: var(--rdta-tpf-block-border-color);
   border-left-width: 5px;
   border-left-style: solid;
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
   color: inherit;
   font-size: .85em;
-  margin-bottom: var(--block-element-margin-vertical);
+  margin-bottom: var(--rdta-block-element-margin-vertical);
   padding: .625em;
   position: relative;
   width: 100%
 }
 .rd-alertbox.alert-danger {
-  border-left-color: #bc0000
+  border-left-color: var(--rdta-text-danger-color)
 }
 .rd-alertbox.alert-danger a {
-  color: #bc0000
+  color: var(--rdta-text-danger-color)
 }
 .rd-alertbox.alert-danger a:active {
-  color: #700000
+  color: var(--rdta-alert-danger-active)
 }
 .rd-alertbox.alert-danger a:focus,
 .rd-alertbox.alert-danger a:hover {
-  color: #ff0a0a
+  color: var(--rdta-alert-danger-hover)
 }
 .rd-alertbox.alert-danger a:visited {
-  color: var(--text-danger-color)
+  color: var(--rdta-text-danger-color)
 }
 .rd-alertbox.alert-info {
-  border-left-color: #09a0bb
+  border-left-color: var(--rdta-text-info-color)
 }
 .rd-alertbox.alert-info a {
-  color: #09a0bb
+  color: var(--rdta-text-info-color)
 }
 .rd-alertbox.alert-info a:active {
-  color: #056272
+  color: var(--rdta-alert-info-active)
 }
 .rd-alertbox.alert-info a:focus,
 .rd-alertbox.alert-info a:hover {
-  color: #1cd3f4
+  color: var(--rdta-alert-info-hover)
 }
 .rd-alertbox.alert-info a:visited {
-  color: var(--text-info-color)
+  color: var(--rdta-text-info-color)
 }
 .rd-alertbox.alert-success {
-  border-left-color: #007c00
+  border-left-color: var(--rdta-text-success-color)
 }
 .rd-alertbox.alert-success a {
-  color: #007c00
+  color: var(--rdta-text-success-color)
 }
 .rd-alertbox.alert-success a:active {
-  color: #003000
+  color: var(--rdta-alert-success-active)
 }
 .rd-alertbox.alert-success a:focus,
 .rd-alertbox.alert-success a:hover {
-  color: #00c900
+  color: var(--rdta-alert-success-hover)
 }
 .rd-alertbox.alert-success a:visited {
-  color: var(--text-success-color)
+  color: var(--rdta-text-success-color)
 }
 .rd-alertbox.alert-warning {
-  border-left-color: #e69200
+  border-left-color: var(--rdta-text-warning-color)
 }
 .rd-alertbox.alert-warning a {
-  color: #e69200
+  color: var(--rdta-text-warning-color)
 }
 .rd-alertbox.alert-warning a:active {
-  color: #9a6100
+  color: var(--rdta-alert-warning-active)
 }
 .rd-alertbox.alert-warning a:focus,
 .rd-alertbox.alert-warning a:hover {
-  color: #ffb534
+  color: var(--rdta-alert-warning-hover)
 }
 .rd-alertbox.alert-warning a:visited {
-  color: var(--text-warning-color)
+  color: var(--rdta-text-warning-color)
 }
 .rd-alertbox.fixed-bottom {
   bottom: 0;
@@ -8336,7 +8372,7 @@ ul.rd-sidebar-expand-collapse-controls {
 }
 @media (min-width:1000px) {
   .rd-alertbox.fixed-top {
-    min-height: calc(var(--navbar-height_mobilescreen)/ 2)
+    min-height: calc(var(--rdta-navbar-height_mobilescreen)/ 2)
   }
 }
 .rd-alertbox.fixed-bottom,
@@ -8355,7 +8391,7 @@ ul.rd-sidebar-expand-collapse-controls {
 .rd-alertbox.float-top {
   display: inline-block;
   left: .625rem;
-  margin-right: var(--block-element-margin-horizontal);
+  margin-right: var(--rdta-block-element-margin-horizontal);
   width: auto
 }
 .rd-alertbox.fixed-bottom,
@@ -8363,39 +8399,39 @@ ul.rd-sidebar-expand-collapse-controls {
 .rd-alertbox.float-bottom,
 .rd-alertbox.float-top {
   position: fixed;
-  z-index: var(--alertbox-z-index)
+  z-index: var(--rdta-alert-box-z-index)
 }
 .rd-alertbox.fixed-bottom.alert-danger,
 .rd-alertbox.fixed-top.alert-danger,
 .rd-alertbox.float-bottom.alert-danger,
 .rd-alertbox.float-top.alert-danger {
-  background-color: #fbeded;
+  background-color: var(--rdta-alert-fixfloat-danger-background-color);
   border-left-width: 10px;
-  box-shadow: 0 0 10px 2px rgba(188,0,0,.6)
+  box-shadow: 0 0 10px 2px color-mix(in srgb,var(--rdta-text-danger-color),transparent 40%)
 }
 .rd-alertbox.fixed-bottom.alert-info,
 .rd-alertbox.fixed-top.alert-info,
 .rd-alertbox.float-bottom.alert-info,
 .rd-alertbox.float-top.alert-info {
-  background-color: #e1f5f8;
+  background-color: var(--rdta-alert-fixfloat-info-background-color);
   border-left-width: 10px;
-  box-shadow: 0 0 10px 2px rgba(9,160,187,.6)
+  box-shadow: 0 0 10px 2px color-mix(in srgb,var(--rdta-text-info-color),transparent 40%)
 }
 .rd-alertbox.fixed-bottom.alert-success,
 .rd-alertbox.fixed-top.alert-success,
 .rd-alertbox.float-bottom.alert-success,
 .rd-alertbox.float-top.alert-success {
-  background-color: #e8f3e8;
+  background-color: var(--rdta-alert-fixfloat-success-background-color);
   border-left-width: 10px;
-  box-shadow: 0 0 10px 2px rgba(0,124,0,.6)
+  box-shadow: 0 0 10px 2px color-mix(in srgb,var(--rdta-text-success-color),transparent 40%)
 }
 .rd-alertbox.fixed-bottom.alert-warning,
 .rd-alertbox.fixed-top.alert-warning,
 .rd-alertbox.float-bottom.alert-warning,
 .rd-alertbox.float-top.alert-warning {
-  background-color: #fce1b1;
+  background-color: var(--rdta-alert-fixfloat-warning-background-color);
   border-left-width: 10px;
-  box-shadow: 0 0 10px 2px rgba(230,146,0,.6)
+  box-shadow: 0 0 10px 2px color-mix(in srgb,var(--rdta-text-warning-color),transparent 40%)
 }
 .rd-alertbox.is-dismissable {
   padding-right: 1.563em
@@ -8434,10 +8470,19 @@ ul.rd-sidebar-expand-collapse-controls {
 .rd-alertbox .rd-alert-list {
   margin-bottom: 0
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _badge.css
+* ----------------------------------------------------------------------------------------------
+*/
 .rd-notification-badge {
-  background-color: #555;
+  --rdta-badge-basic-background-color: hsl(from var(--rdta-tpf-page-text-color) h s calc(l + 13.5));
+  --rdta-badge-basic-color: var(--rdta-tpf-block-background-color)
+}
+.rd-notification-badge {
+  background-color: var(--rdta-badge-basic-background-color);
   border-radius: 1.1em;
-  color: #eee;
+  color: var(--rdta-badge-basic-color);
   display: inline-block;
   font-size: .813em;
   line-height: 1;
@@ -8447,39 +8492,50 @@ ul.rd-sidebar-expand-collapse-controls {
   text-align: center
 }
 .rd-notification-badge.badge-danger {
-  background-color: #bc0000
+  background-color: var(--rdta-text-danger-color)
 }
 .rd-notification-badge.badge-info {
-  background-color: #09a0bb
+  background-color: var(--rdta-text-info-color)
 }
 .rd-notification-badge.badge-primary {
-  background-color: #52a0e5
+  background-color: var(--rdta-text-primary-color)
 }
 .rd-notification-badge.badge-success {
-  background-color: #007c00
+  background-color: var(--rdta-text-success-color)
 }
 .rd-notification-badge.badge-warning {
-  background-color: #e69200
+  background-color: var(--rdta-text-warning-color)
 }
 .rd-notification-badge.tiny {
   font-size: .625em;
   padding: .1rem .29rem
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _breadcrumb.css
+* ----------------------------------------------------------------------------------------------
+*/
 .rd-breadcrumb {
-  background-color: var(--block-background-color);
-  color: #777;
+  --rdta-breadcrumb-text-color: #777
+}
+.rd-breadcrumb {
+  background-color: var(--rdta-tpf-block-background-color);
+  color: var(--rdta-breadcrumb-text-color);
   display: flex;
   font-size: .75em;
   list-style: none;
-  margin: 0 0 var(--content-block-element-margin-vertical) 0;
-  padding: .5rem var(--block-element-padding-horizontal)
+  margin: 0 0 var(--rdta-content-block-element-margin-vertical) 0;
+  padding: .5rem var(--rdta-block-element-padding-horizontal)
+}
+.rd-breadcrumb a {
+  text-decoration: none
 }
 .rd-breadcrumb li {
-  margin-right: var(--block-element-margin-horizontal)
+  margin-right: var(--rdta-block-element-margin-horizontal)
 }
 .rd-breadcrumb li::after {
   content: "/";
-  margin-left: var(--block-element-margin-horizontal)
+  margin-left: var(--rdta-block-element-margin-horizontal)
 }
 .rd-breadcrumb li:last-child {
   margin-right: 0
@@ -8494,6 +8550,45 @@ ul.rd-sidebar-expand-collapse-controls {
   color: inherit;
   cursor: default
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _button.css
+* ----------------------------------------------------------------------------------------------
+*/
+.rd-button,
+.rd-form {
+  --rdta-form-large-font-size: 1.25em;
+  --rdta-form-small-font-size: 0.75em;
+  --rdta-form-tiny-font-size: 0.625em
+}
+.rd-button {
+  --rdta-button-disabled-styled-text-color: #fff;
+  --rdta-button-styled-text-color: #fff;
+  --rdta-button-danger-disabled-border-color: hsl(from var(--rdta-background-danger-disabled-color) h s calc(l - 7));
+  --rdta-button-danger-disabled-3d-edge-color: hsl(from var(--rdta-background-danger-disabled-color) h s calc(l - 5));
+  --rdta-button-danger-border-color: hsl(from var(--rdta-text-danger-color) h s calc(l - 7));
+  --rdta-button-danger-3d-edge-color: hsl(from var(--rdta-text-danger-color) h s calc(l - 5));
+  --rdta-button-info-disabled-border-color: hsl(from var(--rdta-background-info-disabled-color) h s calc(l - 7));
+  --rdta-button-info-disabled-3d-edge-color: hsl(from var(--rdta-background-info-disabled-color) h s calc(l - 5));
+  --rdta-button-info-border-color: hsl(from var(--rdta-text-info-color) h s calc(l - 7));
+  --rdta-button-info-3d-edge-color: hsl(from var(--rdta-text-info-color) h s calc(l - 5));
+  --rdta-button-primary-disabled-border-color: hsl(from var(--rdta-background-primary-disabled-color) h s calc(l - 7));
+  --rdta-button-primary-disabled-3d-edge-color: hsl(from var(--rdta-background-primary-disabled-color) h s calc(l - 5));
+  --rdta-button-primary-border-color: hsl(from var(--rdta-text-primary-color) h s calc(l - 7));
+  --rdta-button-primary-3d-edge-color: hsl(from var(--rdta-text-primary-color) h s calc(l - 5));
+  --rdta-button-success-disabled-border-color: hsl(from var(--rdta-background-success-disabled-color) h s calc(l - 7));
+  --rdta-button-success-disabled-3d-edge-color: hsl(from var(--rdta-background-success-disabled-color) h s calc(l - 5));
+  --rdta-button-success-border-color: hsl(from var(--rdta-text-success-color) h s calc(l - 7));
+  --rdta-button-success-3d-edge-color: hsl(from var(--rdta-text-success-color) h s calc(l - 5));
+  --rdta-button-warning-disabled-border-color: hsl(from var(--rdta-background-warning-disabled-color) h s calc(l - 7));
+  --rdta-button-warning-disabled-3d-edge-color: hsl(from var(--rdta-background-warning-disabled-color) h s calc(l - 5));
+  --rdta-button-warning-border-color: hsl(from var(--rdta-text-warning-color) h s calc(l - 7));
+  --rdta-button-warning-3d-edge-color: hsl(from var(--rdta-text-warning-color) h s calc(l - 5))
+}
+.rd-button,
+a.rd-button {
+  text-decoration: none
+}
 .rd-button.danger,
 .rd-button.info,
 .rd-button.primary,
@@ -8504,7 +8599,7 @@ a.rd-button.info,
 a.rd-button.primary,
 a.rd-button.success,
 a.rd-button.warning {
-  color: #fff
+  color: var(--rdta-button-styled-text-color)
 }
 .rd-button.danger.disabled,
 .rd-button.danger[disabled],
@@ -8526,119 +8621,119 @@ a.rd-button.success.disabled,
 a.rd-button.success[disabled],
 a.rd-button.warning.disabled,
 a.rd-button.warning[disabled] {
-  color: #fff
+  color: var(--rdta-button-disabled-styled-text-color)
 }
 .rd-button.danger,
 a.rd-button.danger {
-  background-color: #bc0000;
-  border-color: #980000;
-  box-shadow: 0 2px 0 #a30000
+  background-color: var(--rdta-text-danger-color);
+  border-color: var(--rdta-button-danger-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-danger-3d-edge-color)
 }
 .rd-button.danger.active,
 .rd-button.danger:active,
 a.rd-button.danger.active,
 a.rd-button.danger:active {
-  box-shadow: 0 1px 0 #a30000
+  box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-danger-3d-edge-color)
 }
 .rd-button.danger.disabled,
 .rd-button.danger[disabled],
 a.rd-button.danger.disabled,
 a.rd-button.danger[disabled] {
-  background-color: var(--background-danger-disabled-color);
-  border-color: #c74949;
-  box-shadow: 0 2px 0 #c95151
+  background-color: var(--rdta-background-danger-disabled-color);
+  border-color: var(--rdta-button-danger-disabled-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-danger-disabled-3d-edge-color)
 }
 .rd-button.info,
 a.rd-button.info {
-  background-color: #09a0bb;
-  border-color: #078399;
-  box-shadow: 0 2px 0 #088ba3
+  background-color: var(--rdta-text-info-color);
+  border-color: var(--rdta-button-info-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-info-3d-edge-color)
 }
 .rd-button.info.active,
 .rd-button.info:active,
 a.rd-button.info.active,
 a.rd-button.info:active {
-  box-shadow: 0 1px 0 #088ba3
+  box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-info-3d-edge-color)
 }
 .rd-button.info.disabled,
 .rd-button.info[disabled],
 a.rd-button.info.disabled,
 a.rd-button.info[disabled] {
-  background-color: var(--background-info-disabled-color);
-  border-color: #4e9caa;
-  box-shadow: 0 2px 0 #53a2b0
+  background-color: var(--rdta-background-info-disabled-color);
+  border-color: var(--rdta-button-info-disabled-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-info-disabled-3d-edge-color)
 }
 .rd-button.primary,
 a.rd-button.primary {
-  background-color: #52a0e5;
-  border-color: #338fe0;
-  box-shadow: 0 2px 0 #3c94e2
+  background-color: var(--rdta-text-primary-color);
+  border-color: var(--rdta-button-primary-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-primary-3d-edge-color)
 }
 .rd-button.primary.active,
 .rd-button.primary:active,
 a.rd-button.primary.active,
 a.rd-button.primary:active {
-  box-shadow: 0 1px 0 #3c94e2
+  box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-primary-3d-edge-color)
 }
 .rd-button.primary.disabled,
 .rd-button.primary[disabled],
 a.rd-button.primary.disabled,
 a.rd-button.primary[disabled] {
-  background-color: var(--background-primary-disabled-color);
-  border-color: #79b2e4;
-  box-shadow: 0 2px 0 #82b7e6
+  background-color: var(--rdta-background-primary-disabled-color);
+  border-color: var(--rdta-button-primary-disabled-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-primary-disabled-3d-edge-color)
 }
 .rd-button.success,
 a.rd-button.success {
-  background-color: #007c00;
-  border-color: #005800;
-  box-shadow: 0 2px 0 #006300
+  background-color: var(--rdta-text-success-color);
+  border-color: var(--rdta-button-success-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-success-3d-edge-color)
 }
 .rd-button.success.active,
 .rd-button.success:active,
 a.rd-button.success.active,
 a.rd-button.success:active {
-  box-shadow: 0 1px 0 #006300
+  box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-success-3d-edge-color)
 }
 .rd-button.success.disabled,
 .rd-button.success[disabled],
 a.rd-button.success.disabled,
 a.rd-button.success[disabled] {
-  background-color: var(--background-success-disabled-color);
-  border-color: #529f52;
-  box-shadow: 0 2px 0 #55a655
+  background-color: var(--rdta-background-success-disabled-color);
+  border-color: var(--rdta-button-success-disabled-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-success-disabled-3d-edge-color)
 }
 .rd-button.warning,
 a.rd-button.warning {
-  background-color: #e69200;
-  border-color: #c27b00;
-  box-shadow: 0 2px 0 #cd8200
+  background-color: var(--rdta-text-warning-color);
+  border-color: var(--rdta-button-warning-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-warning-3d-edge-color)
 }
 .rd-button.warning.active,
 .rd-button.warning:active,
 a.rd-button.warning.active,
 a.rd-button.warning:active {
-  box-shadow: 0 1px 0 #cd8200
+  box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-warning-3d-edge-color)
 }
 .rd-button.warning.disabled,
 .rd-button.warning[disabled],
 a.rd-button.warning.disabled,
 a.rd-button.warning[disabled] {
-  background-color: var(--background-warning-disabled-color);
-  border-color: #eca426;
-  box-shadow: 0 2px 0 #eda830
+  background-color: var(--rdta-background-warning-disabled-color);
+  border-color: var(--rdta-button-warning-disabled-border-color);
+  box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-warning-disabled-3d-edge-color)
 }
 .rd-button.large,
 a.rd-button.large {
-  font-size: var(--form-large-font-size)
+  font-size: var(--rdta-form-large-font-size)
 }
 .rd-button.small,
 a.rd-button.small {
-  font-size: var(--form-small-font-size)
+  font-size: var(--rdta-form-small-font-size)
 }
 .rd-button.tiny,
 a.rd-button.tiny {
-  font-size: var(--form-tiny-font-size)
+  font-size: var(--rdta-form-tiny-font-size)
 }
 .rd-button-group {
   display: inline-flex;
@@ -8651,6 +8746,11 @@ a.rd-button.tiny {
 .rd-button-group .rd-button + .rd-button {
   margin-left: -1px
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _data-table.css
+* ----------------------------------------------------------------------------------------------
+*/
 .rd-datatable {
   width: 100%
 }
@@ -8661,7 +8761,7 @@ a.rd-button.tiny {
 .rd-datatable tfoot th a,
 .rd-datatable thead td a,
 .rd-datatable thead th a {
-  color: var(--text-link-color)
+  color: var(--rdta-tpf-text-link-color)
 }
 .rd-datatable td,
 .rd-datatable th {
@@ -8734,43 +8834,43 @@ a.rd-button.tiny {
 }
 .rd-datatable .table-cell-danger,
 .rd-datatable .table-row-danger {
-  background-color: #f4d0d0
+  background-color: var(--rdta-background-danger-color)
 }
 .rd-datatable .table-cell-danger:hover,
 .rd-datatable .table-row-danger:hover {
-  background-color: var(--background-danger-hover-color)
+  background-color: var(--rdta-background-danger-hover-color)
 }
 .rd-datatable .table-cell-info,
 .rd-datatable .table-row-info {
-  background-color: #c4ebf2
+  background-color: var(--rdta-background-info-color)
 }
 .rd-datatable .table-cell-info:hover,
 .rd-datatable .table-row-info:hover {
-  background-color: var(--background-info-hover-color)
+  background-color: var(--rdta-background-info-hover-color)
 }
 .rd-datatable .table-cell-primary,
 .rd-datatable .table-row-primary {
-  background-color: #a2ccf0
+  background-color: var(--rdta-background-primary-color)
 }
 .rd-datatable .table-cell-primary:hover,
 .rd-datatable .table-row-primary:hover {
-  background-color: var(--background-primary-hover-color)
+  background-color: var(--rdta-background-primary-hover-color)
 }
 .rd-datatable .table-cell-success,
 .rd-datatable .table-row-success {
-  background-color: #d1e6d1
+  background-color: var(--rdta-background-success-color)
 }
 .rd-datatable .table-cell-success:hover,
 .rd-datatable .table-row-success:hover {
-  background-color: var(--background-success-hover-color)
+  background-color: var(--rdta-background-success-hover-color)
 }
 .rd-datatable .table-cell-warning,
 .rd-datatable .table-row-warning {
-  background-color: #fbd38f
+  background-color: var(--rdta-background-warning-color)
 }
 .rd-datatable .table-cell-warning:hover,
 .rd-datatable .table-row-warning:hover {
-  background-color: var(--background-warning-hover-color)
+  background-color: var(--rdta-background-warning-hover-color)
 }
 .rd-datatable.responsive td,
 .rd-datatable.responsive th {
@@ -8788,13 +8888,13 @@ a.rd-button.tiny {
   }
 }
 .rd-datatable.responsive thead tr {
-  border-bottom: 2px solid var(--block-border-color)
+  border-bottom: 2px solid var(--rdta-tpf-block-border-color)
 }
 .rd-datatable.responsive tfoot tr {
-  border-top: 2px solid var(--block-border-color)
+  border-top: 2px solid var(--rdta-tpf-block-border-color)
 }
 .rd-datatable.responsive tr {
-  border-top: 1px solid var(--block-border-color)
+  border-top: 1px solid var(--rdta-tpf-block-border-color)
 }
 .rd-datatable.responsive tr:hover .row-actions {
   opacity: 1
@@ -8807,7 +8907,7 @@ a.rd-button.tiny {
 @media (min-width:1000px) {
   .rd-datatable.responsive .column-primary {
     display: table-cell;
-    padding-right: .313em
+    padding-right: var(--rdta-tpf-table-cell-padding)
   }
 }
 .rd-datatable.responsive .column-primary ~ td {
@@ -8819,7 +8919,7 @@ a.rd-button.tiny {
 .rd-datatable.responsive .column-primary ~ td::before {
   content: attr(data-colname);
   display: block;
-  left: .313em;
+  left: var(--rdta-tpf-table-cell-padding);
   overflow: hidden;
   position: absolute;
   text-overflow: ellipsis;
@@ -8834,12 +8934,18 @@ a.rd-button.tiny {
 @media (min-width:1000px) {
   .rd-datatable.responsive .column-primary ~ td {
     clear: none;
-    padding-left: .313em
+    padding-left: var(--rdta-tpf-table-cell-padding)
   }
 }
 .rd-datatable.responsive .is-expanded .column-primary ~ td {
   display: block;
   overflow: hidden
+}
+@media (min-width:1000px) {
+  .rd-datatable.responsive .is-expanded .column-primary ~ td {
+    display: table-cell;
+    overflow: visible
+  }
 }
 .rd-datatable.responsive .row-actions {
   font-size: .75em;
@@ -8868,7 +8974,7 @@ a.rd-button.tiny {
 .rd-datatable.responsive .toggle-row:active,
 .rd-datatable.responsive .toggle-row:focus,
 .rd-datatable.responsive .toggle-row:hover {
-  box-shadow: 0 0 0 1px #09a0bb,0 0 3px 2px rgba(196,235,242,.8);
+  box-shadow: 0 0 0 1px var(--rdta-text-info-color),0 0 3px 2px color-mix(in srgb,var(--rdta-background-info-color),transparent 20%);
   outline: 0
 }
 @media (min-width:1000px) {
@@ -8885,7 +8991,7 @@ a.rd-button.tiny {
   visibility: hidden
 }
 .rd-datatable .sortable-icon::before {
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 6 Free";
   font-weight: 900
 }
 .rd-datatable .sortable-icon.order-desc {
@@ -8912,9 +9018,15 @@ a.rd-button.tiny {
   overflow-y: visible;
   width: 100%
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _dropdown.css
+* ----------------------------------------------------------------------------------------------
+* commonly use with button (dropdown button).
+*/
 .rd-dropdown {
   background-color: #fff;
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   box-shadow: 0 1px 2px rgba(0,0,0,.2);
   font-size: .875em;
   list-style: none;
@@ -8928,9 +9040,9 @@ a.rd-button.tiny {
   background-color: rgba(0,0,0,.08)
 }
 .rd-dropdown li.divider {
-  border-bottom: 1px solid var(--block-border-color);
-  margin-bottom: var(--content-block-element-margin-vertical);
-  margin-top: var(--content-block-element-margin-vertical)
+  border-bottom: 1px solid var(--rdta-tpf-block-border-color);
+  margin-bottom: var(--rdta-content-block-element-margin-vertical);
+  margin-top: var(--rdta-content-block-element-margin-vertical)
 }
 .rd-dropdown li.divider a {
   display: none
@@ -8943,7 +9055,7 @@ a.rd-button.tiny {
   background-color: transparent;
   color: inherit;
   display: block;
-  padding: .313rem var(--block-element-padding-horizontal);
+  padding: .313rem var(--rdta-block-element-padding-horizontal);
   width: 100%
 }
 .rd-dropdown li button,
@@ -8962,6 +9074,11 @@ a.rd-button.tiny {
   box-shadow: none;
   top: auto
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _form.css
+* ----------------------------------------------------------------------------------------------
+*/
 input[type=date].input-large,
 input[type=datetime-local].input-large,
 input[type=email].input-large,
@@ -8977,7 +9094,7 @@ input[type=url].input-large,
 input[type=week].input-large,
 select.input-large,
 textarea.input-large {
-  font-size: var(--form-large-font-size)
+  font-size: var(--rdta-form-large-font-size)
 }
 input[type=date].input-small,
 input[type=datetime-local].input-small,
@@ -8994,23 +9111,23 @@ input[type=url].input-small,
 input[type=week].input-small,
 select.input-small,
 textarea.input-small {
-  font-size: var(--form-small-font-size)
+  font-size: var(--rdta-form-small-font-size)
 }
 .rd-form .disabled {
-  color: var(--text-disabled-color);
+  color: var(--rdta-tpf-text-disabled-color);
   cursor: not-allowed
 }
 .rd-form .form-group {
-  margin-bottom: var(--content-block-element-margin-vertical)
+  margin-bottom: var(--rdta-content-block-element-margin-vertical)
 }
 .rd-form .form-group .control-label {
   font-weight: 600
 }
 .rd-form .form-group .control-label.large {
-  font-size: var(--form-large-font-size)
+  font-size: var(--rdta-form-large-font-size)
 }
 .rd-form .form-group .control-label.small {
-  font-size: var(--form-small-font-size)
+  font-size: var(--rdta-form-small-font-size)
 }
 .rd-form .form-group .control-wrapper input[type=date],
 .rd-form .form-group .control-wrapper input[type=datetime-local],
@@ -9030,23 +9147,75 @@ textarea.input-small {
   display: block;
   width: 100%
 }
-.rd-form .form-description {
-  color: #777;
-  font-size: .875em;
-  font-style: italic
-}
 @media (min-width:1000px) {
   .rd-form.horizontal .form-group {
     display: flex
   }
   .rd-form.horizontal .form-group .control-label {
     flex: 0 0 180px;
-    margin-right: var(--block-element-margin-horizontal)
+    margin-right: var(--rdta-block-element-margin-horizontal)
   }
   .rd-form.horizontal .form-group .control-wrapper {
     flex-grow: 1
   }
 }
+.rd-form .form-description {
+  color: #777;
+  font-size: .875em;
+  font-style: italic
+}
+/*!
+* ----------------------------------------------------------------------------------------------
+* _form-input-file.css
+* ----------------------------------------------------------------------------------------------
+* form > input[type="file"][class="rd-inputfile"]
+*
+* Reference:
+* https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+*/
+.rd-inputfile {
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle
+}
+.rd-inputfile:active,
+.rd-inputfile:focus {
+  outline: 3px solid var(--rdta-tpf-form-focus-color)
+}
+.rd-inputfile.rd-input-invalid {
+  border-color: var(--rdta-tpf-form-invalid-border-color)!important
+}
+.rd-inputfile input[type=file] {
+  display: block;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 100%
+}
+.rd-input-files-queue {
+  vertical-align: middle;
+  white-space: normal;
+  word-break: break-all;
+  word-wrap: break-word
+}
+.rd-input-files-queue > * {
+  vertical-align: middle
+}
+.rd-input-files-queue > .rd-button,
+.rd-input-files-queue > button,
+.rd-input-files-queue > input[type=button] {
+  margin-top: calc(var(--rdta-tpf-button-3d-height) * -1);
+  position: relative
+}
+/*!
+* ----------------------------------------------------------------------------------------------
+* _input-group.css
+* ----------------------------------------------------------------------------------------------
+*/
 .rd-form .form-group .control-wrapper .rd-input-group {
   align-items: stretch;
   display: flex;
@@ -9071,33 +9240,38 @@ textarea.input-small {
 .rd-form .form-group .control-wrapper .rd-input-group .rd-input-group-block .rd-input-group-block-text {
   align-items: center;
   display: flex;
-  background-color: var(--block-background-color);
-  border: 1px solid var(--block-border-color);
+  background-color: var(--rdta-tpf-block-background-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   line-height: 1.4;
-  padding: .313rem var(--block-element-padding-horizontal)
+  padding: .313rem var(--rdta-block-element-padding-horizontal)
 }
 .rd-form .form-group .control-wrapper .rd-input-group.rd-input-group-lg {
-  font-size: var(--form-large-font-size)
+  font-size: var(--rdta-form-large-font-size)
 }
 .rd-form .form-group .control-wrapper .rd-input-group.rd-input-group-sm {
-  font-size: var(--form-small-font-size)
+  font-size: var(--rdta-form-small-font-size)
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _navbar.css
+* ----------------------------------------------------------------------------------------------
+*/
 .rd-navbar {
-  background-color: var(--navbarsidebar-background-color);
+  background-color: var(--rdta-navbar-sidebar-background-color);
   color: #aaa;
   display: flex;
   flex-wrap: wrap;
   height: auto;
   max-height: none;
-  min-height: var(--navbar-height_mobilescreen);
-  z-index: var(--navbar-z-index)
+  min-height: var(--rdta-navbar-height_mobilescreen);
+  z-index: var(--rdta-navbar-z-index)
 }
 @media (min-width:1000px) {
   .rd-navbar {
-    height: calc(var(--navbar-height_mobilescreen)/ 2);
+    height: calc(var(--rdta-navbar-height_mobilescreen)/ 2);
     left: 0;
-    margin-bottom: var(--block-element-margin-vertical);
-    min-height: calc(var(--navbar-height_mobilescreen)/ 2);
+    margin-bottom: var(--rdta-block-element-margin-vertical);
+    min-height: calc(var(--rdta-navbar-height_mobilescreen)/ 2);
     position: fixed;
     right: 0;
     top: 0
@@ -9110,17 +9284,17 @@ textarea.input-small {
   .rd-navbar .nav-right {
     flex-basis: auto;
     margin-left: auto;
-    margin-right: var(--block-element-margin-horizontal)
+    margin-right: var(--rdta-block-element-margin-horizontal)
   }
 }
 .rd-navbar .nav-right > ul {
   align-items: center;
   background-color: rgba(255,255,255,.055);
   display: flex;
-  height: calc(var(--navbar-height_mobilescreen)/ 2);
+  height: calc(var(--rdta-navbar-height_mobilescreen)/ 2);
   justify-content: space-around;
   margin: 0;
-  z-index: var(--navbar-z-index)
+  z-index: var(--rdta-navbar-z-index)
 }
 @media (min-width:1000px) {
   .rd-navbar .nav-right > ul {
@@ -9190,7 +9364,7 @@ textarea.input-small {
   border: none;
   box-shadow: none;
   color: inherit;
-  height: calc(var(--navbar-height_mobilescreen)/ 2);
+  height: calc(var(--rdta-navbar-height_mobilescreen)/ 2);
   margin: 0;
   min-width: 50px;
   padding: 0;
@@ -9216,7 +9390,7 @@ textarea.input-small {
 .rd-navbar .rd-site-brand {
   align-items: center;
   display: flex;
-  margin: 0 0 0 var(--block-element-margin-horizontal)
+  margin: 0 0 0 var(--rdta-block-element-margin-horizontal)
 }
 .rd-navbar .rd-site-brand a {
   color: inherit;
@@ -9225,16 +9399,21 @@ textarea.input-small {
 @media (min-width:1000px) {
   .rd-navbar .rd-site-brand {
     font-size: 1.188em;
-    height: var(--navbar-height)
+    height: var(--rdta-navbar-height)
   }
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _pagination.css
+* ----------------------------------------------------------------------------------------------
+*/
 .rd-pagination {
   display: inline-flex;
   list-style: none;
   margin: 0
 }
 .rd-pagination li {
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   min-width: 2.063em
 }
 .rd-pagination li + li {
@@ -9243,7 +9422,7 @@ textarea.input-small {
 .rd-pagination li > a,
 .rd-pagination li > button,
 .rd-pagination li > span {
-  color: var(--text-link-color);
+  color: var(--rdta-tpf-text-link-color);
   display: block;
   line-height: 1;
   padding: .438em .313em;
@@ -9258,7 +9437,7 @@ textarea.input-small {
 .rd-pagination li > span:active,
 .rd-pagination li > span:focus,
 .rd-pagination li > span:hover {
-  background-color: var(--block-background-color)
+  background-color: var(--rdta-tpf-block-background-color)
 }
 .rd-pagination li > a,
 .rd-pagination li > button {
@@ -9274,13 +9453,13 @@ textarea.input-small {
 .rd-pagination li > button:active,
 .rd-pagination li > button:focus,
 .rd-pagination li > button:hover {
-  background-color: var(--block-background-color)
+  background-color: var(--rdta-tpf-block-background-color)
 }
 .rd-pagination li > span {
   cursor: default
 }
 .rd-pagination li.current {
-  background-color: #52a0e5
+  background-color: var(--rdta-background-primary-color)
 }
 .rd-pagination li.current > a,
 .rd-pagination li.current > button,
@@ -9331,11 +9510,16 @@ textarea.input-small {
   margin-left: .313rem;
   margin-right: .313rem
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _helper.scss
+* ----------------------------------------------------------------------------------------------
+*/
 .rd-block-level-margin-bottom {
-  margin-bottom: var(--block-element-margin-vertical)
+  margin-bottom: var(--rdta-block-element-margin-vertical)
 }
 .rd-content-level-margin-bottom {
-  margin-bottom: var(--content-block-element-margin-vertical)
+  margin-bottom: var(--rdta-content-block-element-margin-vertical)
 }
 .clearfix {
   clear: both
@@ -9484,117 +9668,122 @@ textarea.input-small {
   white-space: nowrap;
   width: 1px
 }
+/*!
+* ----------------------------------------------------------------------------------------------
+* _text.css
+* ----------------------------------------------------------------------------------------------
+*/
 .text-color-danger {
-  color: var(--text-danger-color)
+  color: var(--rdta-text-danger-color)
 }
 a.text-color-danger {
-  color: var(--text-danger-color)
+  color: var(--rdta-text-danger-color)
 }
 a.text-color-danger:active {
-  color: #700000
+  color: hsl(from var(--rdta-text-danger-color) h s calc(l - 15))
 }
 a.text-color-danger:focus,
 a.text-color-danger:hover {
-  color: #ff0a0a
+  color: hsl(from var(--rdta-text-danger-color) h s calc(l + 15))
 }
 a.text-color-danger:visited {
-  color: var(--text-danger-color)
+  color: var(--rdta-text-danger-color)
 }
 .text-color-disabled {
-  color: var(--text-disabled-color)
+  color: var(--rdta-tpf-text-disabled-color)
 }
 a.text-color-disabled {
-  color: var(--text-disabled-color)
+  color: var(--rdta-tpf-text-disabled-color)
 }
 a.text-color-disabled:active {
-  color: #737373
+  color: hsl(from var(--rdta-tpf-text-disabled-color) h s calc(l - 15))
 }
 a.text-color-disabled:focus,
 a.text-color-disabled:hover {
-  color: #bfbfbf
+  color: hsl(from var(--rdta-tpf-text-disabled-color) h s calc(l + 15))
 }
 a.text-color-disabled:visited {
-  color: var(--text-disabled-color)
+  color: var(--rdta-tpf-text-disabled-color)
 }
 .text-color-info {
-  color: var(--text-info-color)
+  color: var(--rdta-text-info-color)
 }
 a.text-color-info {
-  color: var(--text-info-color)
+  color: var(--rdta-text-info-color)
 }
 a.text-color-info:active {
-  color: #056272
+  color: hsl(from var(--rdta-text-info-color) h s calc(l - 15))
 }
 a.text-color-info:focus,
 a.text-color-info:hover {
-  color: #1cd3f4
+  color: hsl(from var(--rdta-text-info-color) h s calc(l + 15))
 }
 a.text-color-info:visited {
-  color: var(--text-info-color)
+  color: var(--rdta-text-info-color)
 }
 .text-color-primary {
-  color: var(--text-primary-color)
+  color: var(--rdta-text-primary-color)
 }
 a.text-color-primary {
-  color: var(--text-primary-color)
+  color: var(--rdta-text-primary-color)
 }
 a.text-color-primary:active {
-  color: #1f7bcc
+  color: hsl(from var(--rdta-text-primary-color) h s calc(l - 15))
 }
 a.text-color-primary:focus,
 a.text-color-primary:hover {
-  color: #95c5ef
+  color: hsl(from var(--rdta-text-primary-color) h s calc(l + 15))
 }
 a.text-color-primary:visited {
-  color: var(--text-primary-color)
+  color: var(--rdta-text-primary-color)
 }
 .text-color-success {
-  color: var(--text-success-color)
+  color: var(--rdta-text-success-color)
 }
 a.text-color-success {
-  color: var(--text-success-color)
+  color: var(--rdta-text-success-color)
 }
 a.text-color-success:active {
-  color: #003000
+  color: hsl(from var(--rdta-text-success-color) h s calc(l - 15))
 }
 a.text-color-success:focus,
 a.text-color-success:hover {
-  color: #00c900
+  color: hsl(from var(--rdta-text-success-color) h s calc(l + 15))
 }
 a.text-color-success:visited {
-  color: var(--text-success-color)
+  color: var(--rdta-text-success-color)
 }
 .text-color-warning {
-  color: var(--text-warning-color)
+  color: var(--rdta-text-warning-color)
 }
 a.text-color-warning {
-  color: var(--text-warning-color)
+  color: var(--rdta-text-warning-color)
 }
 a.text-color-warning:active {
-  color: #9a6100
+  color: hsl(from var(--rdta-text-warning-color) h s calc(l - 15))
 }
 a.text-color-warning:focus,
 a.text-color-warning:hover {
-  color: #ffb534
+  color: hsl(from var(--rdta-text-warning-color) h s calc(l + 15))
 }
 a.text-color-warning:visited {
-  color: var(--text-warning-color)
+  color: var(--rdta-text-warning-color)
 }
 .text-color-white {
-  color: var(--text-white-color)
+  color: var(--rdta-text-white-color)
 }
 a.text-color-white {
-  color: var(--text-white-color)
+  color: var(--rdta-text-white-color)
 }
 a.text-color-white:active {
-  color: #d9d9d9
+  color: hsl(from var(--rdta-text-white-color) h s calc(l - 15))
 }
 a.text-color-white:focus,
 a.text-color-white:hover {
-  color: #fff
+  color: hsl(from var(--rdta-text-white-color) h s calc(l + 15))
 }
 a.text-color-white:visited {
-  color: var(--text-white-color)
+  color: var(--rdta-text-white-color)
 }
 .text-center {
   text-align: center
@@ -9639,8 +9828,8 @@ a.text-color-white:visited {
   flex-wrap: wrap
 }
 .rd-columns-flex-container.fix-columns-container-edge {
-  margin-left: calc(var(--block-element-margin-horizontal) * -1);
-  margin-right: calc(var(--block-element-margin-horizontal) * -1)
+  margin-left: calc(var(--rdta-block-element-margin-horizontal) * -1);
+  margin-right: calc(var(--rdta-block-element-margin-horizontal) * -1)
 }
 .rd-columns-flex-container .column {
   align-self: flex-start;
@@ -9648,7 +9837,7 @@ a.text-color-white:visited {
   flex-grow: 1;
   flex-shrink: 1;
   min-width: 0;
-  padding: 0 var(--block-element-padding-horizontal)
+  padding: 0 var(--rdta-block-element-padding-horizontal)
 }
 .rd-columns-flex-container .column-break {
   flex-basis: 100%;
@@ -10109,12 +10298,9 @@ a.text-color-white:visited {
   margin-left: 0
 }
 .rd-accordion .rd-accordion-group {
-  border-color: var(--block-border-color);
+  border-color: var(--rdta-tpf-block-border-color);
   border-style: solid;
-  border-bottom-width: 0;
-  border-top-width: 1px;
-  border-right-width: 1px;
-  border-left-width: 1px;
+  border-width: 1px 1px 0;
   margin: 0;
   padding: 0
 }
@@ -10122,7 +10308,7 @@ a.text-color-white:visited {
   border-bottom-width: 1px
 }
 .rd-accordion .rd-accordion-group .rd-accordion-body {
-  padding: var(--block-element-padding-vertical)
+  padding: var(--rdta-block-element-padding-vertical)
 }
 .rd-accordion .rd-accordion-group .rd-accordion-body.collapse {
   height: 0;
@@ -10133,46 +10319,87 @@ a.text-color-white:visited {
 }
 .rd-accordion .rd-accordion-group .rd-accordion-body.collapse.expanded {
   height: auto;
-  padding-bottom: var(--block-element-padding-vertical);
-  padding-top: var(--block-element-padding-vertical)
+  height: calc-size(auto,size);
+  padding-bottom: var(--rdta-block-element-padding-vertical);
+  padding-top: var(--rdta-block-element-padding-vertical)
 }
 .rd-accordion .rd-accordion-group .rd-accordion-header {
-  background-color: var(--block-background-color);
-  border-bottom: 1px solid var(--block-border-color);
+  background-color: var(--rdta-tpf-block-background-color);
+  border-bottom: 1px solid var(--rdta-tpf-block-border-color);
+  cursor: pointer;
+  font-weight: 400;
   margin: 0;
-  padding: .313rem var(--block-element-padding-horizontal)
+  padding: .313rem var(--rdta-block-element-padding-horizontal)
+}
+.rd-accordion .rd-accordion-group .rd-accordion-header > ::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f077  "
+}
+.rd-accordion .rd-accordion-group .rd-accordion-header.active > ::before {
+  content: "\f078  "
 }
 .rd-accordion .rd-accordion-group .rd-accordion-header > * {
   color: inherit;
+  cursor: inherit;
   display: block
 }
 ol.rd-accordion,
 ul.rd-accordion {
   list-style: none
 }
+.rd-accordion details.rd-accordion-group::details-content {
+  height: 0;
+  opacity: 0
+}
+.rd-accordion details.rd-accordion-group[open]::details-content {
+  height: calc-size(auto,size);
+  opacity: 1
+}
+.rd-accordion details.rd-accordion-group summary::marker {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f077  "
+}
+.rd-accordion details.rd-accordion-group[open] summary::marker {
+  content: "\f078  "
+}
+.rd-accordion details.rd-accordion-group .rd-accordion-body.collapse,
+.rd-accordion details.rd-accordion-group .rd-accordion-body.collapse.expanded {
+  height: auto;
+  padding-bottom: var(--rdta-block-element-padding-vertical);
+  padding-top: var(--rdta-block-element-padding-vertical);
+  transition: none
+}
 /*!
 * ----------------------------------------------------------------------------------------------
 * Rundiz template alert dialog -- styling alert dialog elements.
 * ----------------------------------------------------------------------------------------------
 */
-.rd-alertdialog-modal {
-  --alertdialog-backdrop-z-index: 2000
-}
-body.rd-alertdialog-modal-open {
-  overflow: hidden
-}
 .rd-alertdialog {
+  --rdta-alert-dialog-normal-breakpoint: 550px;
   background-color: #fff;
-  border: 1px solid var(--block-border-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   display: flex;
   flex-direction: column;
   padding: 0;
   position: relative
 }
-@media(min-width:550px) {
-  .rd-alertdialog {
-    max-width: 500px
-  }
+.rd-alertdialog-modal {
+  --rdta-alert-dialog-backdrop-z-index: 2000;
+  background-color: rgba(0,0,0,.5);
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: opacity .3s,visibility .3s;
+  visibility: hidden;
+  z-index: var(--rdta-alert-dialog-backdrop-z-index)
+}
+body.rd-alertdialog-modal-open {
+  overflow: hidden
 }
 .rd-alertdialog.hide {
   display: none
@@ -10180,19 +10407,14 @@ body.rd-alertdialog-modal-open {
 .rd-alertdialog.hide.show {
   display: flex!important
 }
-@media(min-width:768px)and (max-width:999px) {
+@media (min-width:768px) and (max-width:999px) {
   .rd-alertdialog.rd-dialog-size-large {
-    max-width: 728px
+    max-width: calc(var(--rdta-sm-min-width) - 40px)
   }
 }
-@media(min-width:1000px) {
+@media (min-width:1000px) {
   .rd-alertdialog.rd-dialog-size-large {
-    max-width: 960px
-  }
-}
-@media(min-width:550px) {
-  .rd-alertdialog.rd-dialog-size-fullwindow {
-    max-width: calc(100vw - 40px)
+    max-width: calc(var(--rdta-md-min-width) - 40px)
   }
 }
 .rd-alertdialog .rd-dialog-body {
@@ -10204,46 +10426,44 @@ body.rd-alertdialog-modal-open {
   padding: 1em
 }
 .rd-alertdialog .rd-dialog-close {
-  background-color: rgba(0,0,0,0);
+  background-color: transparent;
   border: none;
   box-shadow: none;
   margin: 0 0 0 auto
 }
 .rd-alertdialog .rd-dialog-header {
-  display: flex
+  display: flex;
+  border-bottom: 1px solid var(--rdta-tpf-block-border-color)
 }
 .rd-alertdialog .rd-dialog-footer {
-  border-top: 1px solid var(--block-border-color)
-}
-.rd-alertdialog .rd-dialog-header {
-  border-bottom: 1px solid var(--block-border-color)
+  border-top: 1px solid var(--rdta-tpf-block-border-color)
 }
 .rd-alertdialog .rd-dialog-title {
   margin: 0
 }
-.rd-alertdialog.alert-info {
-  border: 5px solid #09a0bb
-}
-.rd-alertdialog.alert-info .rd-alertdialog-icon {
-  color: #c4ebf2
-}
-.rd-alertdialog.alert-warning {
-  border: 5px solid #e69200
-}
-.rd-alertdialog.alert-warning .rd-alertdialog-icon {
-  color: #fbd38f
-}
-.rd-alertdialog.alert-success {
-  border: 5px solid #007c00
-}
-.rd-alertdialog.alert-success .rd-alertdialog-icon {
-  color: #d1e6d1
-}
 .rd-alertdialog.alert-danger {
-  border: 5px solid #bc0000
+  border: 5px solid var(--rdta-text-danger-color)
 }
 .rd-alertdialog.alert-danger .rd-alertdialog-icon {
-  color: #f4d0d0
+  color: var(--rdta-background-danger-color)
+}
+.rd-alertdialog.alert-info {
+  border: 5px solid var(--rdta-text-info-color)
+}
+.rd-alertdialog.alert-info .rd-alertdialog-icon {
+  color: var(--rdta-background-info-color)
+}
+.rd-alertdialog.alert-success {
+  border: 5px solid var(--rdta-text-success-color)
+}
+.rd-alertdialog.alert-success .rd-alertdialog-icon {
+  color: var(--rdta-background-success-color)
+}
+.rd-alertdialog.alert-warning {
+  border: 5px solid var(--rdta-text-warning-color)
+}
+.rd-alertdialog.alert-warning .rd-alertdialog-icon {
+  color: var(--rdta-background-warning-color)
 }
 .rd-alertdialog .rd-dialog-buttons {
   padding-bottom: 1em;
@@ -10254,7 +10474,46 @@ body.rd-alertdialog-modal-open {
 .rd-alertdialog .rd-alertdialog-icon {
   color: #999
 }
-.rd-alertdialog-modal {
+.rd-alertdialog-modal.show {
+  opacity: 1;
+  visibility: visible
+}
+.rd-alertdialog-modal .rd-alertdialog {
+  margin-left: .5rem;
+  margin-right: .5rem;
+  max-height: calc(100vh - var(--rdta-block-element-margin-vertical) * 2);
+  overflow: hidden;
+  top: 50%;
+  transform: translate(0,-50%)
+}
+@media (min-width:550px) {
+  .rd-alertdialog {
+    max-width: calc(var(--rdta-alert-dialog-normal-breakpoint) - 50px)
+  }
+  .rd-alertdialog.rd-dialog-size-fullwindow {
+    max-width: calc(100vw - 40px)
+  }
+  .rd-alertdialog-modal .rd-alertdialog {
+    margin-left: auto;
+    margin-right: auto
+  }
+}
+/*!
+* ----------------------------------------------------------------------------------------------
+* Rundiz template dialog -- styling dialog elements.
+* ----------------------------------------------------------------------------------------------
+*/
+.rd-dialog {
+  --rdta-dialog-normal-breakpoint: 550px;
+  background-color: #fff;
+  border: 1px solid var(--rdta-tpf-block-border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  position: relative
+}
+.rd-dialog-modal {
+  --rdta-dialog-backdrop-z-index: 1010;
   background-color: rgba(0,0,0,.5);
   bottom: 0;
   left: 0;
@@ -10264,56 +10523,17 @@ body.rd-alertdialog-modal-open {
   top: 0;
   transition: opacity .3s,visibility .3s;
   visibility: hidden;
-  z-index: var(--alertdialog-backdrop-z-index)
-}
-.rd-alertdialog-modal.show {
-  opacity: 1;
-  visibility: visible
-}
-.rd-alertdialog-modal .rd-alertdialog {
-  margin-left: .5rem;
-  margin-right: .5rem;
-  max-height: calc(100vh - var(--block-element-margin-vertical)*2);
-  overflow: hidden;
-  top: 50%;
-  transform: translate(0,-50%)
-}
-@media(min-width:550px) {
-  .rd-alertdialog-modal .rd-alertdialog {
-    margin-left: auto;
-    margin-right: auto
-  }
-}
-.rd-alertdialog-modal .rd-dialog-modal-backdrop {
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0
-}
-/*!
-* ----------------------------------------------------------------------------------------------
-* Rundiz template dialog -- styling dialog elements.
-* ----------------------------------------------------------------------------------------------
-*/
-.rd-dialog-modal {
-  --dialog-backdrop-z-index: 1010
+  z-index: var(--rdta-dialog-backdrop-z-index)
 }
 body.rd-modal-open {
   overflow: hidden
 }
-.rd-dialog {
-  background-color: #fff;
-  border: 1px solid var(--block-border-color);
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  position: relative
+dialog.rd-dialog {
+  margin: 0;
+  width: 100%
 }
-@media(min-width:550px) {
-  .rd-dialog {
-    max-width: 500px
-  }
+dialog.rd-dialog:not([open]) {
+  display: none
 }
 .rd-dialog.hide {
   display: none
@@ -10321,19 +10541,14 @@ body.rd-modal-open {
 .rd-dialog.hide.show {
   display: flex!important
 }
-@media(min-width:768px)and (max-width:999px) {
+@media (min-width:768px) and (max-width:999px) {
   .rd-dialog.rd-dialog-size-large {
-    max-width: 728px
+    max-width: calc(var(--rdta-sm-min-width) - 40px)
   }
 }
-@media(min-width:1000px) {
+@media (min-width:1000px) {
   .rd-dialog.rd-dialog-size-large {
-    max-width: 960px
-  }
-}
-@media(min-width:550px) {
-  .rd-dialog.rd-dialog-size-fullwindow {
-    max-width: calc(100vw - 40px)
+    max-width: calc(var(--rdta-md-min-width) - 40px)
   }
 }
 .rd-dialog .rd-dialog-body {
@@ -10345,34 +10560,20 @@ body.rd-modal-open {
   padding: 1em
 }
 .rd-dialog .rd-dialog-close {
-  background-color: rgba(0,0,0,0);
+  background-color: transparent;
   border: none;
   box-shadow: none;
   margin: 0 0 0 auto
 }
 .rd-dialog .rd-dialog-header {
-  display: flex
+  display: flex;
+  border-bottom: 1px solid var(--rdta-tpf-block-border-color)
 }
 .rd-dialog .rd-dialog-footer {
-  border-top: 1px solid var(--block-border-color)
-}
-.rd-dialog .rd-dialog-header {
-  border-bottom: 1px solid var(--block-border-color)
+  border-top: 1px solid var(--rdta-tpf-block-border-color)
 }
 .rd-dialog .rd-dialog-title {
   margin: 0
-}
-.rd-dialog-modal {
-  background-color: rgba(0,0,0,.5);
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  transition: opacity .3s,visibility .3s;
-  visibility: hidden;
-  z-index: var(--dialog-backdrop-z-index)
 }
 .rd-dialog-modal.show {
   opacity: 1;
@@ -10381,29 +10582,47 @@ body.rd-modal-open {
 .rd-dialog-modal .rd-dialog {
   margin-left: .5rem;
   margin-right: .5rem;
-  max-height: calc(100vh - var(--block-element-margin-vertical)*2);
+  max-height: calc(100vh - var(--rdta-block-element-margin-vertical) * 2);
   overflow: hidden;
   top: 50%;
   transform: translate(0,-50%)
 }
-@media(min-width:550px) {
+@media (min-width:550px) {
+  .rd-dialog {
+    max-width: calc(var(--rdta-dialog-normal-breakpoint) - 50px)
+  }
+  .rd-dialog.rd-dialog-size-fullwindow {
+    max-width: calc(100vw - 40px)
+  }
   .rd-dialog-modal .rd-dialog {
     margin-left: auto;
     margin-right: auto
   }
 }
-.rd-dialog-modal .rd-dialog-modal-backdrop {
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0
-}
 /*!
 * ----------------------------------------------------------------------------------------------
 * Rundiz template embeds -- styling responsive embeds elements.
 * ----------------------------------------------------------------------------------------------
+* @link https://www.w3schools.com/howto/howto_css_responsive_iframes.asp code reference.
 */
+.rd-embed-responsive21by9 {
+  --rdta-embeds-aspect-ratio: calc((9 / 21) * 100%)
+}
+.rd-embed-responsive16by9 {
+  --rdta-embeds-aspect-ratio: calc((9 / 16) * 100%)
+}
+.rd-embed-responsive8by5 {
+  --rdta-embeds-aspect-ratio: calc((5 / 8) * 100%)
+}
+.rd-embed-responsive4by3 {
+  --rdta-embeds-aspect-ratio: calc((3 / 4) * 100%)
+}
+.rd-embed-responsive3by2 {
+  --rdta-embeds-aspect-ratio: calc((2 / 3) * 100%)
+}
+.rd-embed-responsive1by1 {
+  --rdta-embeds-aspect-ratio: calc((1 / 1) * 100%)
+}
 .rd-embed-responsive {
   display: block;
   position: relative;
@@ -10412,7 +10631,7 @@ body.rd-modal-open {
 .rd-embed-responsive::before {
   content: "";
   display: block;
-  padding-top: var(--aspect-ratio)
+  padding-top: var(--rdta-embeds-aspect-ratio)
 }
 .rd-embed-responsive > * {
   height: 100%;
@@ -10424,23 +10643,75 @@ body.rd-modal-open {
 .rd-embed-responsive .rd-embed-responsive-item {
   border: none
 }
-.rd-embed-responsive21by9 {
-  --aspect-ratio: calc((9 / 21) * 100%)
+/*!
+* ----------------------------------------------------------------------------------------------
+* Rundiz template page options -- styling page options elements.
+* ----------------------------------------------------------------------------------------------
+*/
+.rd-page-options-button {
+  background-color: var(--rdta-tpf-page-background-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
+  box-shadow: inset 0 var(--rdta-tpf-button-3d-pressed-height) 0 color-mix(in srgb,from var(--rdta-tpf-button-3d-edge-color),transparent 100%);
+  margin: 0;
+  transition: background-color .15s,box-shadow .15s
 }
-.rd-embed-responsive16by9 {
-  --aspect-ratio: calc((9 / 16) * 100%)
+.rd-page-options-button.active,
+.rd-page-options-button:active {
+  background-color: var(--rdta-tpf-page-background-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
+  box-shadow: inset 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-tpf-button-3d-edge-color);
+  top: auto
 }
-.rd-embed-responsive8by5 {
-  --aspect-ratio: calc((5 / 8) * 100%)
+.rd-page-options-button.active {
+  border-bottom: none;
+  z-index: 2
 }
-.rd-embed-responsive4by3 {
-  --aspect-ratio: calc((3 / 4) * 100%)
+.rd-page-options-buttons-row {
+  column-gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end
 }
-.rd-embed-responsive3by2 {
-  --aspect-ratio: calc((2 / 3) * 100%)
+.rd-page-options-container {
+  margin-bottom: var(--rdta-block-element-margin-horizontal);
+  margin-left: var(--rdta-block-element-margin-horizontal);
+  margin-right: var(--rdta-block-element-margin-horizontal);
+  position: relative
 }
-.rd-embed-responsive1by1 {
-  --aspect-ratio: calc((1 / 1) * 100%)
+.rd-page-options-contents-row {
+  position: relative;
+  top: -1px
+}
+.rd-page-options-contents-row.opened {
+  clear: both
+}
+.rd-page-options-contents-row > * {
+  border: 1px solid var(--rdta-tpf-block-border-color);
+  display: none;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  padding-left: var(--rdta-content-block-element-margin-vertical);
+  padding-right: var(--rdta-content-block-element-margin-vertical);
+  padding-top: 0;
+  transition: height .3s,padding-bottom .3s,padding-top .3s
+}
+.rd-page-options-contents-row > .active {
+  display: block;
+  height: auto;
+  height: calc-size(auto,size);
+  padding-bottom: var(--rdta-content-block-element-margin-vertical);
+  padding-top: var(--rdta-content-block-element-margin-vertical)
+}
+@media (min-width:768px) {
+  .rd-page-options-buttons-row {
+    float: right
+  }
+  .rd-page-content > :first-child::after {
+    clear: both;
+    content: "";
+    display: block
+  }
 }
 /*!
 * ----------------------------------------------------------------------------------------------
@@ -10448,7 +10719,7 @@ body.rd-modal-open {
 * ----------------------------------------------------------------------------------------------
 */
 .rd-tabs {
-  padding: var(--block-element-padding-vertical);
+  padding: var(--rdta-block-element-padding-vertical);
   position: relative
 }
 .rd-tabs .rd-tabs-nav-container {
@@ -10478,13 +10749,13 @@ body.rd-modal-open {
 }
 .rd-tabs .rd-tabs-nav-container .rd-tabs-nav-hscroll-left a:hover,
 .rd-tabs .rd-tabs-nav-container .rd-tabs-nav-hscroll-right a:hover {
-  background-color: var(--block-background-color)
+  background-color: var(--rdta-tpf-block-background-color)
 }
 .rd-tabs .rd-tabs-nav-wrapper {
   overflow: hidden
 }
 .rd-tabs .rd-tabs-nav-wrapper-bottomline {
-  border-bottom: 1px solid var(--block-border-color)
+  border-bottom: 1px solid var(--rdta-tpf-block-border-color)
 }
 .rd-tabs .rd-tabs-nav-wrapper-bottomline .rd-tabs-nav {
   margin-bottom: -1px
@@ -10493,13 +10764,13 @@ body.rd-modal-open {
   display: block
 }
 .rd-tabs.tabs-vertical .rd-tabs-nav li {
-  border: 1px solid var(--block-border-color);
-  margin: 0 0 .313rem 0
+  border: 1px solid var(--rdta-tpf-block-border-color);
+  margin: 0 0 .313rem
 }
 .rd-tabs.tabs-vertical .rd-tabs-nav li.active {
   border-bottom: inherit
 }
-@media(min-width:1000px) {
+@media (min-width:1000px) {
   .rd-tabs.tabs-vertical {
     display: flex
   }
@@ -10508,30 +10779,27 @@ body.rd-modal-open {
   }
   .rd-tabs.tabs-vertical .rd-tabs-nav {
     border-bottom: 0;
-    border-right: 1px solid var(--block-border-color);
+    border-right: 1px solid var(--rdta-tpf-block-border-color);
     flex-direction: column;
     max-width: 160px;
     min-width: 80px;
-    padding-bottom: .313em;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: .313em
+    padding: .313em 0
   }
   .rd-tabs.tabs-vertical .rd-tabs-nav li {
-    border-bottom: 1px solid var(--block-border-color);
+    border-bottom: 1px solid var(--rdta-tpf-block-border-color);
     margin-bottom: .188rem;
     margin-right: -1px
   }
   .rd-tabs.tabs-vertical .rd-tabs-nav li.active {
-    border-bottom: 1px solid var(--block-border-color);
+    border-bottom: 1px solid var(--rdta-tpf-block-border-color);
     border-right: none
   }
   .rd-tabs.tabs-vertical .rd-tabs-nav li > a {
-    padding: var(--block-element-padding-vertical) .313rem
+    padding: var(--rdta-block-element-padding-vertical) .313rem
   }
 }
 .rd-tabs .rd-tabs-nav {
-  border-bottom: 1px solid var(--block-border-color);
+  border-bottom: 1px solid var(--rdta-tpf-block-border-color);
   display: flex;
   list-style: none;
   margin: 0;
@@ -10540,8 +10808,8 @@ body.rd-modal-open {
   transition: transform .5s
 }
 .rd-tabs .rd-tabs-nav li {
-  background-color: var(--block-background-color);
-  border: 1px solid var(--block-border-color);
+  background-color: var(--rdta-tpf-block-background-color);
+  border: 1px solid var(--rdta-tpf-block-border-color);
   margin: 0 0 -1px .188rem
 }
 .rd-tabs .rd-tabs-nav li.active {
@@ -10552,7 +10820,7 @@ body.rd-modal-open {
   color: inherit;
   cursor: pointer;
   display: block;
-  padding: var(--block-element-padding-vertical) .813rem
+  padding: var(--rdta-block-element-padding-vertical) .813rem
 }
 .rd-tabs .rd-tabs-content {
   display: none;

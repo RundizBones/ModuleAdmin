@@ -35,6 +35,7 @@ const cssFiles = [
     // keep rdta-datatables-js.min.css away until updated in RdbAdmin module to supported it and not conflict with one from module itself.
     'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-dialog.min.css',
     'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-embeds.min.css',
+    'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-page-options.min.css',
     'node_modules/rundiz-template-for-admin/assets/css/rdta/components/rdta-tabs.min.css',
 ];
 
@@ -55,6 +56,7 @@ const jsFiles = [
     'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-accordion.min.js',
     'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-alertdialog.min.js',
     'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-dialog.min.js',
+    'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-page-options.min.js',
     'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-tabs.min.js',
     // tooltips (tippy)
     'node_modules/tippy.js/dist/tippy-bundle.umd.min.js',
