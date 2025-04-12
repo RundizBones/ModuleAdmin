@@ -139,7 +139,7 @@ class RdbaDatatables {
 
 
     /**
-     * Add custom result controls event.
+     * Add custom result controls events.
      * 
      * This method was called from the method that initialize the datatables, after the table has been drawn.<br>
      * This will listen on **Enter** key inside filter form, and call data table search use filter search box (`dataTable.search('keyword').draw()`).
@@ -221,16 +221,15 @@ class RdbaDatatables {
 
 
     /**
-     * Add custom result controls information and/or pagination.
+     * Add custom result controls pagination and/or information.
+     * 
+     * The information is the number of total result found on the database. For example: (Found 24 items).
      * 
      * @private This method was called from the method that initialize the datatables.
      * @param {object} data
      * @returns {undefined}
      */
     addCustomResultControlsPagination(data) {
-        let $ = jQuery.noConflict();
-        let thisClass = this;
-
         Handlebars.registerHelper('ifGE', function (v1, v2, options) {
             if (v1 >= v2) {
                 return options.fn(this);
@@ -238,37 +237,55 @@ class RdbaDatatables {
             return options.inverse(this);
         });
 
-        let resultControlsPaginationTemplate = document.querySelector(this.resultControlsPaginationTemplateSelector);
-        if (resultControlsPaginationTemplate) {
-            let source = resultControlsPaginationTemplate.innerHTML;
-            let template = Handlebars.compile(source);
-            let paginationDOMWrapper = $(this.resultControlsPaginationDOMWrapperSelector);
+        const paginationDOMWrappers = document.querySelectorAll(this.resultControlsPaginationDOMWrapperSelector);
+        if (paginationDOMWrappers) {
+            // if found pagination HTML wrapper.
+            paginationDOMWrappers.forEach((eachPaginationDW) => {
+                // remove class for buttons that come with datatables, and add `.rd-button` class to pagination.
+                eachPaginationDW.querySelectorAll('.paginate_button')?.forEach((eachBtn) => {
+                    eachBtn.classList.remove('paginate_button');
+                    eachBtn.classList.add('rd-button');
+                });
+                // end remove class for buttons. ---------------------
 
-            if (paginationDOMWrapper) {
-                // remove class that come with datatables, and add `.rd-button` class to pagination.
-                paginationDOMWrapper.find('.paginate_button').removeClass('paginate_button').addClass('rd-button');
-                // move text from buttons to `aria-label` and add symbol.
-                paginationDOMWrapper.find('.rd-button').each(function(index, item) {
-                    $(this).attr('aria-label', item.innerText);
+                // move text from buttons to `aria-label` and add symbols.
+                eachPaginationDW.querySelectorAll('.rd-button')?.forEach((item) => {
+                    item.setAttribute('aria-label', item.innerText);
                     if (RdbaCommon.isset(() => RdbaUIXhrCommonData.paginationSymbol.first)) {
-                        if ($(this).hasClass('first')) {
-                            $(this).html(RdbaUIXhrCommonData.paginationSymbol.first);
+                        if (item.classList.contains('first')) {
+                            item.innerHTML = RdbaUIXhrCommonData.paginationSymbol.first;
                         }
-                        if ($(this).hasClass('last')) {
-                            $(this).html(RdbaUIXhrCommonData.paginationSymbol.last);
+                        if (item.classList.contains('last')) {
+                            item.innerHTML = RdbaUIXhrCommonData.paginationSymbol.last;
                         }
-                        if ($(this).hasClass('previous')) {
-                            $(this).html(RdbaUIXhrCommonData.paginationSymbol.previous);
+                        if (item.classList.contains('previous')) {
+                            item.innerHTML = RdbaUIXhrCommonData.paginationSymbol.previous;
                         }
-                        if ($(this).hasClass('next')) {
-                            $(this).html(RdbaUIXhrCommonData.paginationSymbol.next);
+                        if (item.classList.contains('next')) {
+                            item.innerHTML = RdbaUIXhrCommonData.paginationSymbol.next;
                         }
                     }
-                });
+                });// endforEach pagination's buttons.
+                // end move text and add symbols. ---------------------
+            });// endforEach paginationDomWrappers.
+        }// endif; found pagination HTML wrapper.
 
-                paginationDOMWrapper.find('.rdba-datatables-result-controls-info').remove();
-                paginationDOMWrapper.prepend(template(data));
-            }
+        const resultControlsPaginationTemplate = document.querySelector(this.resultControlsPaginationTemplateSelector);
+        if (resultControlsPaginationTemplate) {
+            if (paginationDOMWrappers) {
+                // if found pagination HTML wrapper.
+                let source = resultControlsPaginationTemplate.innerHTML;
+                let template = Handlebars.compile(source);
+
+                paginationDOMWrappers.forEach((eachPaginationDW) => {
+                    // remove any information that may already exists before prepend new one.
+                    eachPaginationDW.querySelectorAll('.rdba-datatables-result-controls-info')?.forEach((item) => {
+                        item.remove();
+                    });
+                    // prepend information to the pagination HTML wrapper.
+                    eachPaginationDW.insertAdjacentHTML('afterbegin', template(data));
+                });// endforEach paginationDomWrappers.
+            }// endif; found pagination HTML wrapper.
         } else {
             console.warn('[rdba] result controls pagination template was not found. ' + this.resultControlsPaginationTemplateSelector);
         }
