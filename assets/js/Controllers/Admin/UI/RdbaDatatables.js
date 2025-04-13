@@ -17,7 +17,11 @@ class RdbaDatatables {
         // Template ID that contain bulk actions. The selector should begins with # mark.
         this.actionsControlsTemplateSelector = '#rdba-datatables-actions-controls';
 
-        // Datatables DOM. (see https://datatables.net/reference/option/dom).
+        /**
+         * DataTables DOM. ( https://datatables.net/reference/option/dom )
+         * @deprecated Since DataTables v2 the option `dom` has been deprecated (read more in the link above). Use `layout` instead.
+         * @todo [rdb] Remove this property (RdbaDatatables.datatablesDOM) in v2.0
+         */
         this.datatablesDOM = '<"rdba-datatables-result-controls rd-columns-flex-container"\n\
             <"col-xs-12 col-sm-6 rdba-datatables-result-pagination"p>\n\
             >\n\
@@ -27,7 +31,27 @@ class RdbaDatatables {
                 <"col-xs-12 col-sm-6 rdba-datatables-result-pagination"p>\n\
             >\n\
             <"clear clearfix">';
-        // Datatables ID selector.
+        // DataTables layout. ( https://datatables.net/reference/option/layout )
+        // @since 1.2.12
+        this.datatablesLayout = {
+            'topStart': null,
+            'topEnd': {
+                'className': 'col-xs-12 col-sm-6 rdba-datatables-result-pagination',
+                'rowClass': 'rdba-datatables-result-controls rd-columns-flex-container',
+                'features': {
+                    'inputPaging': {},
+                },
+            },
+            'bottomStart': null,
+            'bottomEnd': {
+                'className': 'col-xs-12 col-sm-6 rdba-datatables-result-pagination',
+                'rowClass': 'rdba-datatables-actions-controls rd-columns-flex-container',
+                'features': {
+                    'inputPaging': {},
+                }
+            },
+        };
+        // DataTables ID selector.
         this.datatableIDSelector = '#listingTable';
 
         // Form ID of datatables.
@@ -72,7 +96,7 @@ class RdbaDatatables {
         document.addEventListener('keydown', (event) => {
             const thisTarget = event.target;
             if (
-                thisTarget.classList.contains('paginate_input') &&
+                thisTarget.closest('.dt-paging-input') &&
                 (
                     (event?.key === 'Enter' || event?.key === 'NumpadEnter')
                     ||
@@ -242,31 +266,45 @@ class RdbaDatatables {
             // if found pagination HTML wrapper.
             paginationDOMWrappers.forEach((eachPaginationDW) => {
                 // remove class for buttons that come with datatables, and add `.rd-button` class to pagination.
-                eachPaginationDW.querySelectorAll('.paginate_button')?.forEach((eachBtn) => {
-                    eachBtn.classList.remove('paginate_button');
+                eachPaginationDW.querySelectorAll('.dt-paging-button')?.forEach((eachBtn) => {
+                    eachBtn.classList.remove('dt-paging-button');
                     eachBtn.classList.add('rd-button');
+                    eachBtn.setAttribute('type', 'button');// fix bug https://github.com/DataTables/Plugins/issues/613
                 });
                 // end remove class for buttons. ---------------------
 
                 // move text from buttons to `aria-label` and add symbols.
                 eachPaginationDW.querySelectorAll('.rd-button')?.forEach((item) => {
-                    item.setAttribute('aria-label', item.innerText);
-                    if (RdbaCommon.isset(() => RdbaUIXhrCommonData.paginationSymbol.first)) {
-                        if (item.classList.contains('first')) {
-                            item.innerHTML = RdbaUIXhrCommonData.paginationSymbol.first;
+                    if (!item.hasAttribute('aria-label')) {
+                        // if HTML attribute `aria-label` is not exists.
+                        item.setAttribute('aria-label', item.innerText);
+                    }
+
+                    if (RdbaCommon.isset(() => RdbaUIXhrCommonData.paginationSymbol)) {
+                        if (item.matches(':first-child')) {
+                            item.innerHTML = RdbaUIXhrCommonData.paginationSymbol?.first;
                         }
-                        if (item.classList.contains('last')) {
-                            item.innerHTML = RdbaUIXhrCommonData.paginationSymbol.last;
+                        if (item.matches(':last-child')) {
+                            item.innerHTML = RdbaUIXhrCommonData.paginationSymbol?.last;
                         }
-                        if (item.classList.contains('previous')) {
+                        if (item.matches(':nth-child(2)')) {
                             item.innerHTML = RdbaUIXhrCommonData.paginationSymbol.previous;
                         }
-                        if (item.classList.contains('next')) {
+                        if (item.matches(':nth-child(4)')) {
                             item.innerHTML = RdbaUIXhrCommonData.paginationSymbol.next;
                         }
                     }
                 });// endforEach pagination's buttons.
                 // end move text and add symbols. ---------------------
+
+                // prepend Page word before the input page.
+                eachPaginationDW.querySelectorAll('.dt-paging-input')?.forEach((item) => {
+                    if (!item.querySelector('.rdba-paging-input-page-text')) {
+                        // if the text `Page` before pagination is not exists.
+                        item.insertAdjacentHTML('afterbegin', '<span class="rdba-paging-input-page-text">' + rdbaOtherTranslation.paginate.page + '</span> ');
+                    }
+                });
+                // end prepend Page word. --------------------
             });// endforEach paginationDomWrappers.
         }// endif; found pagination HTML wrapper.
 
@@ -278,7 +316,8 @@ class RdbaDatatables {
                 let template = Handlebars.compile(source);
 
                 paginationDOMWrappers.forEach((eachPaginationDW) => {
-                    // remove any information that may already exists before prepend new one.
+                    // remove any information that may already exists before prepend new one. 
+                    // the information result can be changed on each request. so, use remove and prepend instead of check for existing.
                     eachPaginationDW.querySelectorAll('.rdba-datatables-result-controls-info')?.forEach((item) => {
                         item.remove();
                     });
@@ -290,6 +329,48 @@ class RdbaDatatables {
             console.warn('[rdba] result controls pagination template was not found. ' + this.resultControlsPaginationTemplateSelector);
         }
     }// addCustomResultControlsPagination
+
+
+    /**
+     * Apply the options to default DataTable options.
+     * 
+     * @since 1.2.12
+     * @param {object} options The options that will be apply to default options.
+     * @returns {object} Return applied options with defaults.
+     */
+    applyToDefaultDataTableOptions(options) {
+        if (typeof options !== 'object') {
+            throw new Error('The options must be an object.');
+        }
+
+        const defaultOptions = {
+            'language': datatablesTranslation,// `datatablesTranslation` is a variable from file **/assets/js/Controllers/Admin/UI/XhrCommonDataController/indexAction.js**.
+            'layout': this.datatablesLayout,
+            'pageLength': parseInt(RdbaUIXhrCommonData.configDb.rdbadmin_AdminItemsPerPage),
+            'processing': true,
+            'responsive': {
+                'details': {
+                    'type': 'column',
+                    'target': 0,
+                },
+            },
+            'searchDelay': 1300,
+        };
+
+        _.defaults(options, defaultOptions);
+
+        if (options?.dom !== null && typeof(options?.dom) !== 'undefined') {
+            // if option `dom` was set. remove option `layout` because caller using deprecated option `dom` and it shouldn't be mixed.
+            delete options?.layout;
+        }
+        if (options?.paging === false) {
+            // if option `paging` is disabled. remove any `inputPaging` that exists in the layout.
+            delete options?.layout?.topEnd?.features?.inputPaging;
+            delete options?.layout?.bottomEnd?.features?.inputPaging;
+        }
+
+        return options;
+    }// applyToDefaultDataTableOptions
 
 
     /**

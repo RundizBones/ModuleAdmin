@@ -9,11 +9,11 @@
 
                         <form id="rdba-loginsessions-form" class="rdba-datatables-form">
                             <div class="form-result-placeholder"></div>
-                            <table id="userLoginsTable" class="userLoginsTable rdba-datatables-js responsive hover" width="100%">
+                            <table id="userLoginsTable" class="userLoginsTable rdba-datatables-js responsive hover">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.userLoginsTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.userLoginsTable', this);"></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('User agent'); ?></th>
                                         <th><?php echo __('IP address'); ?></th>
                                         <th><?php echo __('Date/time'); ?></th>
@@ -23,7 +23,7 @@
                                 <tfoot>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.userLoginsTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.userLoginsTable', this);"></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('User agent'); ?></th>
                                         <th><?php echo __('IP address'); ?></th>
                                         <th><?php echo __('Date/time'); ?></th>

@@ -3,11 +3,12 @@ For common use to display listing data in the data table page.
 */
 
 
-.dataTables_wrapper .dataTables_processing {
+/* datatables processing message element. */
+.dt-container .dt-processing {
     background: rgba(255,255,255,0.8);
     background: -ms-linear-gradient(left, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.95) 47%, rgba(255,255,255,0.95) 75%, rgba(255,255,255,0.8) 100%);
     background: linear-gradient(to right, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.95) 47%, rgba(255,255,255,0.95) 75%, rgba(255,255,255,0.8) 100%);
-    line-height: 40px;/* line height must match its original height value */
+    line-height: 40px;
     padding-top: 0;
 }
 
@@ -75,12 +76,6 @@ table.rdba-datatables-js thead td,
 table.rdba-datatables-js thead th {
     padding: 8px 10px;
 }
-table.rdba-datatables-js tfoot td:not(.sorting_disabled),
-table.rdba-datatables-js tfoot th:not(.sorting_disabled),
-table.rdba-datatables-js thead td:not(.sorting_disabled),
-table.rdba-datatables-js thead th:not(.sorting_disabled) {
-    padding-right: 1rem;
-}
 
 .rdba-datatables-js tbody tr:last-child td,
 .rdba-datatables-js tbody tr:last-child th {
@@ -124,15 +119,6 @@ table.rdba-datatables-js thead th:not(.sorting_disabled) {
     content: ' \00a0 | \00a0 ';
 }
 
-.rdba-datatables-js.fixedHeader-floating {
-    top: 0;
-}
-@media (min-width: 1000px) {
-    .rdba-datatables-js.fixedHeader-floating {
-        top: 50px !important;
-    }
-}
-
 /* About sortable (reorderable). */
 .rdba-datatables-js tbody tr .sortable-handle {
     cursor: ns-resize;
@@ -143,44 +129,26 @@ table.rdba-datatables-js thead th:not(.sorting_disabled) {
 }
 
 
-/* Override datatables sort icons */
-table.rdba-datatables-js thead td:not(.sorting_disabled),
-table.rdba-datatables-js thead th:not(.sorting_disabled) {
-    background-image: none;
-    position: relative;
-}
-table.rdba-datatables-js thead .sorting::after,
-table.rdba-datatables-js thead .sorting_asc::after,
-table.rdba-datatables-js thead .sorting_asc_disabled::after,
-table.rdba-datatables-js thead .sorting_desc::after,
-table.rdba-datatables-js thead .sorting_desc_disabled::after {
-    color: #aaa;
-    font-family: 'Font Awesome 5 Free';
-    font-size: 1rem;
-    font-weight: 900;
-    position: absolute;
-    right: .2em;
-    top: .45em;
-}
-table.rdba-datatables-js thead .sorting_asc_disabled::after,
-table.rdba-datatables-js thead .sorting_desc_disabled::after {
-    color: #ddd;
-}
-table.rdba-datatables-js thead .sorting::after {
-    content: '\f0dc';
-}
-table.rdba-datatables-js thead .sorting_asc::after {
-    content: '\f0de';
-}
-table.rdba-datatables-js thead .sorting_desc::after {
-    content: '\f0dd';
+/* override datatables hover on table head's cell (sortable, orderable column). */
+table.dataTable thead > tr > td.dt-orderable-asc:hover, 
+table.dataTable thead > tr > td.dt-orderable-desc:hover, 
+table.dataTable thead > tr > th.dt-orderable-asc:hover, 
+table.dataTable thead > tr > th.dt-orderable-desc:hover {
+    outline: none;
 }
 
 
 /* datatables controls (filter, pagination, bulk actions) */
-.rdba-datatables-result-controls label {
-    display: inline-block;
-    margin-bottom: 0.938em;
+.rdba-datatables-actions-controls,
+.rdba-datatables-result-controls {
+    row-gap: .9em;
+}
+.rdba-datatables-actions-controls.rd-columns-flex-container [class^='col'],
+.rdba-datatables-result-controls.rd-columns-flex-container [class^='col'] {
+    column-gap: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: .938em;
 }
 
 .rdba-datatables-actions-controls .rd-button,
@@ -200,42 +168,24 @@ table.rdba-datatables-js thead .sorting_desc::after {
 }
 @media (min-width: 768px) {
     .rdba-datatables-result-pagination {
+        justify-content: flex-end;
         text-align: right;
     }
 }
-.rdba-datatables-result-pagination > * {
-    display: inline-block;
-    margin-bottom: 0.938em;
-    padding-bottom: 0;
-    padding-top: 0;
-    vertical-align: top;
+.rdba-datatables-result-pagination .dt-inputpaging {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.313em;
 }
-.rdba-datatables-result-pagination .dataTables_paginate {
-    float: none;
-    padding-top: 0;
-}
-.rdba-datatables-result-pagination .dataTables_paginate > * {
-    display: inline-block;
-    margin-left: 0.313em;
-}
-.rdba-datatables-result-pagination .paginate_input {
+.rdba-datatables-result-pagination .dt-paging-input > input {
     width: 2.5em;
 }
 
-.rdba-datatables-actions-controls .rdba-datatables-result-pagination > * {
-    margin-bottom: 0;
-    margin-top: 0.938em;
-}
-.rdba-datatables-actions-controls label {
-    display: inline-block;
-    margin-top: 0.938em;
-}
-
 .rdba-datatables-result-controls-info {
+    align-self: center;
     margin-bottom: 0;
     margin-top: 0;
     position: relative;
-    top: 0.35em;
 }
 
 
@@ -252,7 +202,7 @@ table.dataTable.dtr-column > tbody > tr > th.dtr-control::before {
     content: '\f0d7';
     cursor: pointer;
     display: block;
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 6 Free';
     font-size: 1rem;
     font-weight: 900;
     height: 1.3em;
@@ -276,7 +226,7 @@ table.dataTable.dtr-column > tbody > tr.dt-hasChild th.dtr-control:before {
     border-radius: 50%;
     color: inherit;
     content: '\f0d8';
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 6 Free';
     font-size: 1rem;
     font-weight: 900;
 }

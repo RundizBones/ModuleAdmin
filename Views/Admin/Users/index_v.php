@@ -15,11 +15,11 @@
 
                         <form id="rdba-users-form" class="rdba-datatables-form">
                             <div class="form-result-placeholder"></div>
-                            <table id="usersTable" class="usersTable rdba-datatables-js responsive hover" width="100%">
+                            <table id="usersTable" class="usersTable rdba-datatables-js responsive hover">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.usersTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.usersTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('Username'); ?></th>
                                         <th><?php echo __('Display name'); ?></th>
@@ -32,7 +32,7 @@
                                 <tfoot>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.usersTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.usersTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('Username'); ?></th>
                                         <th><?php echo __('Display name'); ?></th>

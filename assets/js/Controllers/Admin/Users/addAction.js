@@ -53,7 +53,7 @@ class RdbaUsersAddController {
                             // this is opening in dialog, close the dialog and reload page.
                             document.querySelector('#rdba-users-dialog [data-dismiss="dialog"]').click();
                             //window.location.reload();// use datatables reload instead.
-                            jQuery('#usersTable').DataTable().ajax.reload(null, false);
+                            new DataTable('#usersTable').ajax.reload(null, false);
                         } else {
                             // this is in its page, redirect to the redirect back url.
                             window.location.href = response.redirectBack;

@@ -84,6 +84,7 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
      * Get translation for display in data tables from datatables.net.
      * 
      * @link https://datatables.net/reference/option/language Reference.
+     * @todo [rdb] Remove translation `paginate.info` in v2.0 due to plugin input is no longer work with DataTables v.2.
      * @return array
      */
     protected function getDataTablesTranslation()
@@ -126,6 +127,22 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
         unset($languagesResult);
         return $languagesResultDecode;
     }// getLanguages
+
+
+    /**
+     * Get other translations for use with something else on the page.
+     * 
+     * @since 1.2.12
+     * @return array
+     */
+    protected function getOtherTranslation(): array
+    {
+        return [
+            'paginate' => [
+                'page' => p__('translation for pagination showing Page text.', 'Page'),
+            ],
+        ];
+    }// getOtherTranslation
 
 
     /**
@@ -357,6 +374,9 @@ class XhrCommonDataController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Ad
                 }
                 if ($getData === 'pageAlertMessages' || $getData === 'all') {
                     $output['pageAlertMessages'] = $this->getPageAlertMessages();
+                }
+                if ($getData === 'otherTranslation' || $getData === 'all') {
+                    $output['otherTranslation'] = $this->getOtherTranslation();
                 }
             }// endforeach;
             unset($getData);

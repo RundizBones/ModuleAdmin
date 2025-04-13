@@ -16,19 +16,42 @@ class RdbaCommon {
     /**
      * Toggle all checkbox in a table.
      * 
-     * This is for fix datatables JS with 'fixed header' that cause checkbox cant toggle the same value properly.<br>
-     * Usage example:
+     * Usage example:<br>
+     * In jQuery style.
      * <pre>
      * &lt;input type=&quot;checkbox&quot; onclick=&quot;RdbaCommon.dataTableCheckboxToggler(jQuery('.table-class-selector'), jQuery(this));&quot;&gt;
      * </pre>
+     * In normal JS style. (New in v1.2.12)
+     * <pre>
+     * &lt;input type=&quot;checkbox&quot; onclick=&quot;RdbaCommon.dataTableCheckboxToggler('.table-class-selector', this);&quot;&gt;
+     * </pre>
      * 
-     * @param {jQuery}
-     * @param {jQuery} `jQuery(this)`
+     * @param {jQuery|string} tableSelector The table selector.
+     * @param {jQuery|Object} thisCheckbox Current interact checkbox.
      * @returns {undefined}
      */
-    static dataTableCheckboxToggler(jQueryObject, thisObj) {
-        jQueryObject.find('input[type="checkbox"]:not([disabled]').attr('checked', thisObj.is(':checked'));
-        jQueryObject.find('input[type="checkbox"]:not([disabled]').prop('checked', thisObj.is(':checked'));
+    static dataTableCheckboxToggler(tableSelector, thisCheckbox) {
+        if (
+            (tableSelector instanceof jQuery && !thisCheckbox instanceof jQuery) ||
+            (!tableSelector instanceof jQuery && thisCheckbox instanceof jQuery)
+        ) {
+            throw new Error('If any of arguments `tableSelector` or `thisCheckbox` is jQuery object, both of them must be jQuery object.')
+        }
+        if (
+            (typeof(tableSelector) === 'string' && !thisCheckbox instanceof HTMLElement) ||
+            (typeof(tableSelector) !== 'string' && thisCheckbox instanceof HTMLElement)
+        ) {
+            throw new Error('The arguments `tableSelector` must be string and `thisCheckbox` must be an instance of `HTMLElement`.');
+        }
+
+        if (tableSelector instanceof jQuery && thisCheckbox instanceof jQuery) {
+            tableSelector.find('input[type="checkbox"]:not([disabled]').attr('checked', thisCheckbox.is(':checked'));
+            tableSelector.find('input[type="checkbox"]:not([disabled]').prop('checked', thisCheckbox.is(':checked'));
+        } else if (typeof(tableSelector) === 'string' && thisCheckbox instanceof HTMLElement) {
+            document.querySelectorAll(tableSelector + ' input[type="checkbox"]:not([disabled])')?.forEach((eachCheckbox) => {
+                eachCheckbox.checked = thisCheckbox.checked;
+            });
+        }
     }// dataTableCheckboxToggler
 
 
@@ -179,7 +202,7 @@ class RdbaCommon {
      * @returns {string}
      */
     static escapeHtml(string) {
-        let map = {
+        const map = {
             '&': '&amp;',
             '<': '&lt;',
             '>': '&gt;',

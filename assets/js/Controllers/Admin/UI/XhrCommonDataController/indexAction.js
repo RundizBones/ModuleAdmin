@@ -90,6 +90,10 @@ class RdbaUiXhrCommonDataController {
             // set datatables translation.
             datatablesTranslation = response.datatablesTranslation;
         }
+
+        if (typeof(response.otherTranslation) === 'object') {
+            rdbaOtherTranslation = response.otherTranslation;
+        }
     }// ajaxGetUiCommonDataSetResponse
 
 
@@ -711,6 +715,7 @@ class RdbaUiXhrCommonDataController {
 var rdbaUserLoggedIn = true;
 var uiXhrCommonData;
 var datatablesTranslation = {};
+var rdbaOtherTranslation = {};
 
 
 document.addEventListener('DOMContentLoaded', function() {

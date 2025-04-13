@@ -10,11 +10,11 @@
 
                         <form id="rdba-modulesplugins-form" class="rdba-datatables-form">
                             <div class="form-result-placeholder"></div>
-                            <table id="modulePluginsTable" class="modulePluginsTable rdba-datatables-js responsive hover" width="100%">
+                            <table id="modulePluginsTable" class="modulePluginsTable rdba-datatables-js responsive hover">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.modulePluginsTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.modulePluginsTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('Plugin'); ?></th>
                                         <th class="min-tablet-l"><?php echo __('Location'); ?></th>
@@ -24,7 +24,7 @@
                                 <tfoot>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.modulePluginsTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.modulePluginsTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('Plugin'); ?></th>
                                         <th class="min-tablet-l"><?php echo __('Location'); ?></th>

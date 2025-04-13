@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2024-04-17 13:35+0700\n"
-"PO-Revision-Date: 2024-04-17 13:36+0700\n"
+"POT-Creation-Date: 2025-04-13 03:12+0700\n"
+"PO-Revision-Date: 2025-04-13 03:13+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -10,11 +10,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;d__:2;dn__:2,3;dnp__:2c,3,4;dp__:2c,3;n__:1,2;noop__;np__:1c,2,3;p__:1c,2;esc__;"
-"esc_d__:2;esc_dn__:2,3;esc_dnp__:2c,3,4;esc_dp__:2c,3;esc_n__:1,2;esc_np__:1c,2,3;esc_p__:1c,2\n"
+"X-Poedit-KeywordsList: "
+"__;d__:2;dn__:2,3;dnp__:2c,3,4;dp__:2c,3;n__:1,2;noop__;np__:1c,2,3;p__:1c,2;esc__;esc_d__:2;esc_dn__:2,3;esc_dnp__:2c,3,4;esc_dp__:2c,3;esc_n__:1,2;esc_np__:1c,2,3;esc_p__:1c,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: Tests\n"
@@ -92,7 +92,7 @@ msgstr "ไม่สามารถส่งอีเมลได้."
 #: Controllers/Admin/Roles/ActionsController.php:189 Controllers/Admin/Roles/AddController.php:102
 #: Controllers/Admin/Roles/EditController.php:103 Controllers/Admin/Roles/ReorderController.php:126
 #: Controllers/Admin/Settings/FaviconController.php:121 Controllers/Admin/Settings/FaviconController.php:527
-#: Controllers/Admin/Settings/SettingsController.php:257 Controllers/Admin/Settings/SettingsController.php:672
+#: Controllers/Admin/Settings/SettingsController.php:257 Controllers/Admin/Settings/SettingsController.php:673
 #: Controllers/Admin/Tools/CacheController.php:100 Controllers/Admin/Tools/EmailTesterController.php:109
 #: Controllers/Admin/Users/ActionsController.php:208 Controllers/Admin/Users/ActionsController.php:294
 #: Controllers/Admin/Users/ActionsController.php:398 Controllers/Admin/Users/AddController.php:254
@@ -136,15 +136,15 @@ msgstr "เข้าสู่ระบบ"
 msgid "Login recovery"
 msgstr "กู้คืนการเข้าสู่ระบบ"
 
-#: Controllers/Admin/LogoutController.php:169
+#: Controllers/Admin/LogoutController.php:174
 msgid "Logging you out."
 msgstr "กำลังนำคุณออกจากระบบ."
 
-#: Controllers/Admin/LogoutController.php:170
+#: Controllers/Admin/LogoutController.php:175
 msgid "You are now logged out."
 msgstr "คุณได้ออกจากระบบแล้ว."
 
-#: Controllers/Admin/LogoutController.php:174 Views/Admin/Logout/index_v.php:27
+#: Controllers/Admin/LogoutController.php:179 Views/Admin/Logout/index_v.php:27
 #: Views/common/Admin/mainLayout_v.php:135
 msgid "Logout"
 msgstr "ออกจากระบบ"
@@ -222,7 +222,7 @@ msgid "Please select only one module."
 msgstr "โปรดเลือกเพียงแค่หนึ่งโมดูล."
 
 #: Controllers/Admin/Modules/Assets/AssetsController.php:108 ModuleData/ModuleAdmin.php:89
-#: ModuleData/ModuleAdmin.php:264
+#: ModuleData/ModuleAdmin.php:265
 msgid "Modules Assets"
 msgstr "Assets ของโมดูล"
 
@@ -261,7 +261,7 @@ msgid "Success. The results is in a log file located at %1$s."
 msgstr "สำเร็จ. ผลลัพธ์ถูกบันทึกอยู่ในไฟล์ล็อกที่ %1$s."
 
 #: Controllers/Admin/Modules/ModulesController.php:86 ModuleData/ModuleAdmin.php:87
-#: ModuleData/ModuleAdmin.php:237 ModuleData/ModuleAdmin.php:248
+#: ModuleData/ModuleAdmin.php:238 ModuleData/ModuleAdmin.php:249
 msgid "Modules"
 msgstr "โมดูล"
 
@@ -286,7 +286,7 @@ msgid_plural "Disable plugins"
 msgstr[0] "ปิดใช้งานปลั๊กอิน"
 
 #: Controllers/Admin/Modules/Plugins/PluginsController.php:86 ModuleData/ModuleAdmin.php:88
-#: ModuleData/ModuleAdmin.php:256
+#: ModuleData/ModuleAdmin.php:257
 msgid "Modules Plugins"
 msgstr "โมดูลปลั๊กอิน"
 
@@ -602,7 +602,7 @@ msgstr "กรุณากรอกกุญแจ API."
 msgid "Some setting value has not been update, please reload the page and see what was changed."
 msgstr "การตั้งค่าบางอย่างไม่ถูกอัพเดท, โปรดโหลดหน้านี้ใหม่แล้วดูว่ามีสิ่งใดเปลี่ยนแปลงไปบ้าง."
 
-#: Controllers/Admin/Settings/SettingsController.php:474 ModuleData/ModuleAdmin.php:283
+#: Controllers/Admin/Settings/SettingsController.php:474 ModuleData/ModuleAdmin.php:284
 #: Views/Admin/Settings/index_v.php:10
 msgid "Main settings"
 msgstr "การตั้งค่าหลัก"
@@ -619,15 +619,15 @@ msgstr "โปรดเลือกหนึ่งไฟล์."
 msgid "Uploading."
 msgstr "กำลังอัพโหลด."
 
-#: Controllers/Admin/Settings/SettingsController.php:599
+#: Controllers/Admin/Settings/SettingsController.php:600
 msgid "Unable to test other mail protocol."
 msgstr "ไม่สามารถทดสอบโปรโตคอลอีเมลอื่นๆได้."
 
-#: Controllers/Admin/Settings/SettingsController.php:633 Controllers/Admin/Settings/SettingsController.php:656
+#: Controllers/Admin/Settings/SettingsController.php:634 Controllers/Admin/Settings/SettingsController.php:657
 msgid "An error has been occurred."
 msgstr "มีข้อผิดพลาดเกิดขึ้น."
 
-#: Controllers/Admin/Settings/SettingsController.php:653
+#: Controllers/Admin/Settings/SettingsController.php:654
 msgid "Connection was successfull."
 msgstr "การเชื่อมต่อสำเร็จ."
 
@@ -644,7 +644,7 @@ msgstr "แคชถูกล้างหมดแล้ว."
 msgid "Unable to clear cache."
 msgstr "ไม่สามารถล้างแคชได้."
 
-#: Controllers/Admin/Tools/CacheController.php:310 ModuleData/ModuleAdmin.php:106 ModuleData/ModuleAdmin.php:305
+#: Controllers/Admin/Tools/CacheController.php:310 ModuleData/ModuleAdmin.php:106 ModuleData/ModuleAdmin.php:306
 #: Views/Admin/Tools/cache_v.php:8
 msgid "Manage cache"
 msgstr "จัดการแคช"
@@ -654,7 +654,7 @@ msgid "Please enter target email."
 msgstr "กรุณากรอกอีเมลปลายทาง."
 
 #: Controllers/Admin/Tools/EmailTesterController.php:70 Controllers/Admin/Tools/EmailTesterController.php:154
-#: ModuleData/ModuleAdmin.php:103 ModuleData/ModuleAdmin.php:313
+#: ModuleData/ModuleAdmin.php:103 ModuleData/ModuleAdmin.php:314
 msgid "Email tester"
 msgstr "ทดสอบอีเมล"
 
@@ -731,11 +731,16 @@ msgctxt "translation for datatables."
 msgid "Processing..."
 msgstr "กำลังประมวลผล..."
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:282
+#: Controllers/Admin/UI/XhrCommonDataController.php:140
+msgctxt "translation for pagination showing Page text."
+msgid "Page"
+msgstr "หน้า"
+
+#: Controllers/Admin/UI/XhrCommonDataController.php:297
 msgid "Guest"
 msgstr "ผู้เยี่ยมชม"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:331 Controllers/Admin/UI/XhrDashboardWidgetsController.php:30
+#: Controllers/Admin/UI/XhrCommonDataController.php:346 Controllers/Admin/UI/XhrDashboardWidgetsController.php:30
 msgid "Sorry, this page is for request via XHR, REST API."
 msgstr "ขออภัย, หน้านี้สำหรับ XHR, REST API."
 
@@ -896,11 +901,11 @@ msgstr "ไม่สามารถตรวจสอบสกุลไฟล์
 #: Controllers/Admin/Users/AvatarController.php:140
 #, php-format
 msgid ""
-"Unable to validate the file extension and mime type. (%s). This file extension was not set in the &quot;"
-"file_extensions_mime_types&quot; property."
+"Unable to validate the file extension and mime type. (%s). This file extension was not set in the "
+"&quot;file_extensions_mime_types&quot; property."
 msgstr ""
-"ไม่สามารถตรวจสอบประเภท mime และนามสกุลไฟล์. (%s). นามสกุลไฟล์ไม่ได้กำหนดในพร็อพเพอร์ตี้ &quot;"
-"file_extensions_mime_types&quot;."
+"ไม่สามารถตรวจสอบประเภท mime และนามสกุลไฟล์. (%s). นามสกุลไฟล์ไม่ได้กำหนดในพร็อพเพอร์ตี้ "
+"&quot;file_extensions_mime_types&quot;."
 
 #: Controllers/Admin/Users/AvatarController.php:141
 #, php-format
@@ -1155,11 +1160,11 @@ msgstr "การอนุญาต"
 msgid "Roles"
 msgstr "หน้าที่"
 
-#: ModuleData/ModuleAdmin.php:91 ModuleData/ModuleAdmin.php:272
+#: ModuleData/ModuleAdmin.php:91 ModuleData/ModuleAdmin.php:273
 msgid "Settings"
 msgstr "ตั้งค่า"
 
-#: ModuleData/ModuleAdmin.php:92 ModuleData/ModuleAdmin.php:291
+#: ModuleData/ModuleAdmin.php:92 ModuleData/ModuleAdmin.php:292
 msgid "Tools"
 msgstr "เครื่องมือ"
 

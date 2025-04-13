@@ -51,19 +51,19 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/css/rdta/rdta-bundled.min.css',
-                    'version' => '2.3.1',
+                    'version' => '2.4.3',
                 ],
                 [
                     'handle' => 'rdta-components-datatablesjs',
                     'file' => $publicModuleUrl . '/assets/css/rdta/components/rdta-datatables-js.min.css',
-                    'version' => '2.3.1',
+                    'version' => '2.4.3',
                 ],
                 // end rundiz template for admin. -------
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/css/datatables-bundled.min.css',
-                    'version' => '1.13.11',
+                    'version' => '2.2.2',
                 ],
                 // end datatables----------.
                 [
@@ -114,7 +114,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/js/rdta/rdta-bundled.min.js',
-                    'version' => '2.3.1',
+                    'version' => '2.4.3',
                 ],
                 [
                     'handle' => 'handlebars',
@@ -134,20 +134,26 @@ class ModuleAssets
                 [
                     'handle' => 'sortableJS',
                     'file' => $publicModuleUrl . '/assets/vendor/sortablejs/Sortable.min.js',
-                    'version' => '1.15.2',
+                    'version' => '1.15.6',
                 ],
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/js/datatables-bundled.min.js',
                     'dependency' => ['rdta'],
-                    'version' => '1.13.11',
+                    'version' => '2.2.2',
                 ],
                 [
                     'handle' => 'datatables-plugins-pagination',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/plugins/pagination/input.js',
                     'dependency' => ['rdta', 'datatables'],
-                    'version' => '1.13.11',
+                    'version' => '2.2.2',
+                ],
+                [
+                    'handle' => 'datatables-features-inputpaging',
+                    'file' => $publicModuleUrl . '/assets/vendor/datatables.net/features/inputPaging/dataTables.inputPaging.min.js',
+                    'dependency' => ['rdta', 'datatables'],
+                    'version' => '2.2.2',
                 ],
                 // end datatables----------.
                 [
@@ -237,7 +243,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdbaUsers',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Users/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-plugins-pagination', 'rdbaCommon', 'rdbaUiXhrCommonData', 'moment.js'],
+                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-features-inputpaging', 'rdbaCommon', 'rdbaUiXhrCommonData', 'moment.js'],
                 ],
                 [
                     'handle' => 'rdbaUsersAdd',
@@ -276,7 +282,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdbaUserLoginSessions',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Users/sessionsAction.js',
-                    'dependency' => ['rdta', 'rdbaDatatables', 'datatables-plugins-pagination', 'rdbaCommon', 'rdbaUiXhrCommonData', 'moment.js'],
+                    'dependency' => ['rdta', 'rdbaDatatables', 'datatables-features-inputpaging', 'rdbaCommon', 'rdbaUiXhrCommonData', 'moment.js'],
                 ],
                 // end users.
 
@@ -323,19 +329,19 @@ class ModuleAssets
                 [
                     'handle' => 'rdbaModules',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Modules/modulesController.js',
-                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-plugins-pagination', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
+                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-features-inputpaging', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
                 ],
                 // modules plugins
                 [
                     'handle' => 'rdbaModulesPlugins',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Modules/PluginsController/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-plugins-pagination', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
+                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-features-inputpaging', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
                 ],
                 // modules assets
                 [
                     'handle' => 'rdbaModulesAssets',
                     'file' => $publicModuleUrl . '/assets/js/Controllers/Admin/Modules/AssetsController/indexAction.js',
-                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-plugins-pagination', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
+                    'dependency' => ['rdta', 'rdbaDatatables', 'rdbaXhrDialog', 'datatables-features-inputpaging', 'rdbaCommon', 'rdbaUiXhrCommonData', 'lodash'],
                 ],
 
                 // settings

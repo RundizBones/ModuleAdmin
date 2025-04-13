@@ -13,11 +13,11 @@
 
                         <form id="rdba-roles-form" class="rdba-datatables-form">
                             <div class="form-result-placeholder"></div>
-                            <table id="rolesTable" class="rolesTable rdba-datatables-js responsive hover" width="100%">
+                            <table id="rolesTable" class="rolesTable rdba-datatables-js responsive hover">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="all column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.rolesTable'), jQuery(this));"></th>
+                                        <th class="all column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.rolesTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="all column-primary" data-priority="1"><?php echo __('Role'); ?></th>
                                         <th class="min-tablet-p"><?php echo __('Description'); ?></th>
@@ -29,7 +29,7 @@
                                 <tfoot>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.rolesTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.rolesTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('Role'); ?></th>
                                         <th><?php echo __('Description'); ?></th>

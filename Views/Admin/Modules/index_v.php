@@ -10,11 +10,11 @@
 
                         <form id="rdba-modules-form" class="rdba-datatables-form">
                             <div class="form-result-placeholder"></div>
-                            <table id="modulesTable" class="modulesTable rdba-datatables-js responsive hover" width="100%">
+                            <table id="modulesTable" class="modulesTable rdba-datatables-js responsive hover">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.modulesTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.modulesTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('Module'); ?></th>
                                         <th class="min-tablet-l"><?php echo __('Location'); ?></th>
@@ -24,7 +24,7 @@
                                 <tfoot>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.modulesTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.modulesTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('Module'); ?></th>
                                         <th class="min-tablet-l"><?php echo __('Location'); ?></th>

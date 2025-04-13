@@ -10,11 +10,11 @@
 
                         <form id="rdba-modulesassets-form" class="rdba-datatables-form rd-form">
                             <div class="form-result-placeholder"></div>
-                            <table id="moduleAssetsTable" class="moduleAssetsTable rdba-datatables-js responsive hover" width="100%">
+                            <table id="moduleAssetsTable" class="moduleAssetsTable rdba-datatables-js responsive hover">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.moduleAssetsTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.moduleAssetsTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('Module'); ?></th>
                                         <th class="min-tablet-l"><?php echo __('Number of assets'); ?></th>
@@ -24,7 +24,7 @@
                                 <tfoot>
                                     <tr>
                                         <th></th>
-                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler(jQuery('.moduleAssetsTable'), jQuery(this));"></th>
+                                        <th class="column-checkbox"><input type="checkbox" onclick="RdbaCommon.dataTableCheckboxToggler('.moduleAssetsTable', this);"></th>
                                         <th class="rd-hidden"><?php echo __('ID'); ?></th>
                                         <th class="column-primary" data-priority="1"><?php echo __('Module'); ?></th>
                                         <th class="min-tablet-l"><?php echo __('Number of assets'); ?></th>
