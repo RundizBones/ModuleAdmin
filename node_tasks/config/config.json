@@ -45,7 +45,12 @@
             },
             {
                 "patterns": "node_modules/datatables.net-plugins/pagination/**",
-                "destination": "assets/vendor/datatables.net/plugins/pagination"
+                "destination": "assets/vendor/datatables.net/plugins/pagination",
+                "dev-notes": "@todo [rdb] Remove this custom Node tasks config in v2.0"
+            },
+            {
+                "patterns": "node_modules/datatables.net-plugins/features/inputPaging/dist/dataTables.inputPaging.min.js",
+                "destination": "assets/vendor/datatables.net/features/inputPaging"
             },
 
             {
@@ -140,7 +145,8 @@
                 "nodePackage": "datatables.net-dt",
                 "phpHandlesRegex": [
                     "datatables",
-                    "datatables\\-plugins\\-pagination"
+                    "datatables\\-plugins\\-pagination",
+                    "datatables\\-features\\-inputpaging"
                 ]
             },
             {

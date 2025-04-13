@@ -16,11 +16,10 @@ const {default: MinJS} = await import(url.pathToFileURL(RDBDEV_APPDIR + "/app/Rd
 
 
 const cssFiles = [
-    'node_modules/datatables.net-dt/css/jquery.dataTables.css',
+    'node_modules/datatables.net-dt/css/dataTables.dataTables.css',
 ];
 const jsFiles = [
-    './node_modules/datatables.net/js/jquery.dataTables.js',
-    './node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.js',
+    './node_modules/datatables.net/js/dataTables.js',
     './node_modules/datatables.net-responsive/js/dataTables.responsive.js',
 ];
 
