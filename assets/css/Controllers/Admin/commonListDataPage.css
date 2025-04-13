@@ -141,7 +141,7 @@ table.dataTable thead > tr > th.dt-orderable-desc:hover {
 /* datatables controls (filter, pagination, bulk actions) */
 .rdba-datatables-actions-controls,
 .rdba-datatables-result-controls {
-    row-gap: .9em;
+    row-gap: 1.2em;
 }
 .rdba-datatables-actions-controls.rd-columns-flex-container [class^='col'],
 .rdba-datatables-result-controls.rd-columns-flex-container [class^='col'] {
@@ -164,6 +164,7 @@ table.dataTable thead > tr > th.dt-orderable-desc:hover {
 }
 
 .rdba-datatables-result-pagination {
+    align-items: center;
     text-align: left;
 }
 @media (min-width: 768px) {
@@ -182,7 +183,6 @@ table.dataTable thead > tr > th.dt-orderable-desc:hover {
 }
 
 .rdba-datatables-result-controls-info {
-    align-self: center;
     margin-bottom: 0;
     margin-top: 0;
     position: relative;
