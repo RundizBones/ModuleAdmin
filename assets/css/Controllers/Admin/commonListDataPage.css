@@ -5,12 +5,26 @@ For common use to display listing data in the data table page.
 
 /* datatables processing message element. */
 .dt-container .dt-processing {
-    background: rgba(255,255,255,0.8);
-    background: -ms-linear-gradient(left, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.95) 47%, rgba(255,255,255,0.95) 75%, rgba(255,255,255,0.8) 100%);
-    background: linear-gradient(to right, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.95) 47%, rgba(255,255,255,0.95) 75%, rgba(255,255,255,0.8) 100%);
+    background: rgba(255,255,255,0.9);
     line-height: 40px;
-    padding-top: 0;
 }
+
+.dt-layout-table {
+    position: relative;/* make processing message related to div that wrap table. */
+}
+
+div.dt-processing {
+    box-shadow: 0 0 5px 0 rgba(100, 100, 100, 0.3);
+    bottom: 0;
+    left: 0;
+    margin-left: 0;
+    margin-top: 0;
+    right: 0;
+    top: 0;
+    width: auto;
+    z-index: 1;
+}
+/* end datatables processing message element. */
 
 
 /* update design of data table from datatables.net */
@@ -170,6 +184,7 @@ table.dataTable thead > tr > th.dt-orderable-desc:hover {
 @media (min-width: 768px) {
     .rdba-datatables-result-pagination {
         justify-content: flex-end;
+        margin-left: auto;
         text-align: right;
     }
 }
