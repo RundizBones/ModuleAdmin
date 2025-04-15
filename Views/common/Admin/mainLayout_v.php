@@ -8,6 +8,11 @@
 /* @var $Modules \Rdb\System\Modules */
 /* @var $Views \Rdb\System\Views */
 /* @var $Url \Rdb\System\Libraries\Url */
+
+if ($this->Container->has('Plugins')) {
+    /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+    $Plugins = $this->Container->get('Plugins');
+}
 ?>
 <?php include dirname(__DIR__) . '/htmlHead_v.php'; ?> 
         <header class="rd-navbar">
@@ -66,6 +71,19 @@
                         ?> 
                     </ul>
                 </nav>
+                <?php
+                if (isset($Plugins)) {
+                    /*
+                     * PluginHook: Rdb\Modules\RdbAdmin\Views\common\Admin\mainLayout_v.before_html.rd-page-content
+                     * PluginHookDescription: Hook on main page layout, before HTML with class `rd-page-content`.
+                     * PluginHookParam: None.<br>
+                     * PluginHookSince: 1.2.12
+                     */
+                    /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+                    $Plugins = $this->Container->get('Plugins');
+                    $Plugins->doHook('Rdb\Modules\RdbAdmin\Views\common\Admin\mainLayout_v.before_html.rd-page-content');
+                }// endif;
+                ?> 
                 <div class="rd-page-content">
                     <div class="rdba-page-alert-placeholder"><?php
                     if (function_exists('renderAlertHtml') && isset($pageAlertMessage)) {
@@ -78,15 +96,17 @@
                     ?></div><!--.rdba-page-alert-placeholder-->
                     <div class="rdba-page-content-wrapper">
                         <?php
-                        /*
-                         * PluginHook: Rdb\Modules\RdbAdmin\Views\common\Admin\mainLayout_v.before_pageContent
-                         * PluginHookDescription: Hook on main page layout, before render `$pageContent`.
-                         * PluginHookParam: None.<br>
-                         * PluginHookSince: 1.2.6
-                         */
-                        /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
-                        $Plugins = $this->Container->get('Plugins');
-                        $Plugins->doHook('Rdb\Modules\RdbAdmin\Views\common\Admin\mainLayout_v.before_pageContent');
+                        if (isset($Plugins)) {
+                            /*
+                             * PluginHook: Rdb\Modules\RdbAdmin\Views\common\Admin\mainLayout_v.before_pageContent
+                             * PluginHookDescription: Hook on main page layout, before render `$pageContent`.
+                             * PluginHookParam: None.<br>
+                             * PluginHookSince: 1.2.6
+                             */
+                            /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
+                            $Plugins = $this->Container->get('Plugins');
+                            $Plugins->doHook('Rdb\Modules\RdbAdmin\Views\common\Admin\mainLayout_v.before_pageContent');
+                        }// endif;
                         unset($Plugins);
 
                         if (isset($pageContent) && is_scalar($pageContent)) {
