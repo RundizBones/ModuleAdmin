@@ -7992,7 +7992,7 @@ input[type=range]:focus::-ms-fill-upper {
   background: var(--rdta-tpf-input-range-track-color)
 }
 /*!
- * Rundiz template for admin V.2.4.3
+ * Rundiz template for admin V.2.4.4dev-20250415
  */
 :root {
   --rdta-background-danger-disabled-color: #cf6464;
@@ -10721,6 +10721,9 @@ dialog.rd-dialog:not([open]) {
 .rd-tabs {
   padding: var(--rdta-block-element-padding-vertical);
   position: relative
+}
+.rd-tabs.rd-tabs-no-padding {
+  padding: 0
 }
 .rd-tabs .rd-tabs-nav-container {
   align-items: stretch;
