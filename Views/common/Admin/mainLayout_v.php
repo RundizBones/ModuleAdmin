@@ -79,8 +79,6 @@ if ($this->Container->has('Plugins')) {
                      * PluginHookParam: None.<br>
                      * PluginHookSince: 1.2.12
                      */
-                    /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
-                    $Plugins = $this->Container->get('Plugins');
                     $Plugins->doHook('Rdb\Modules\RdbAdmin\Views\common\Admin\mainLayout_v.before_html.rd-page-content');
                 }// endif;
                 ?> 
@@ -103,8 +101,6 @@ if ($this->Container->has('Plugins')) {
                              * PluginHookParam: None.<br>
                              * PluginHookSince: 1.2.6
                              */
-                            /* @var $Plugins \Rdb\Modules\RdbAdmin\Libraries\Plugins */
-                            $Plugins = $this->Container->get('Plugins');
                             $Plugins->doHook('Rdb\Modules\RdbAdmin\Views\common\Admin\mainLayout_v.before_pageContent');
                         }// endif;
                         unset($Plugins);
