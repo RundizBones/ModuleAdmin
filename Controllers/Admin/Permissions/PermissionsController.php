@@ -454,9 +454,6 @@ class PermissionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Admi
             include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Permissions/index_v', $output);
             $output['pageBreadcrumb'] = renderBreadcrumbHtml($output['breadcrumb']);
 

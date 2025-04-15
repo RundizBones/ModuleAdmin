@@ -434,9 +434,6 @@ class AddController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCon
             include_once dirname(dirname(dirname(__DIR__))) . '/Helpers/HTMLFunctions.php';
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Users/add_v', $output);
 
             unset($Assets, $rdbAdminAssets, $Url);

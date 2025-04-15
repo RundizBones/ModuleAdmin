@@ -599,9 +599,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Login/index_v', $output);
 
             unset($Assets, $MyModuleAssets, $rdbadmin_UserRegister, $Url);
@@ -735,9 +732,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             );
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Login/mfa_v', $output);
 
             unset($Assets, $MyModuleAssets, $Url);
@@ -885,9 +879,6 @@ class LoginController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Login/reset_v', $output);
 
             unset($Assets, $MyModuleAssets, $Url);

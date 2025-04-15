@@ -46,6 +46,8 @@ abstract class BaseController extends \Rdb\System\Core\Controllers\BaseControlle
     {
         parent::__construct($Container);
 
+        $this->Views = new \Rdb\Modules\RdbAdmin\Libraries\Views($Container);
+
         // set default timezone, etc.
         $this->setBasicConfig();
 

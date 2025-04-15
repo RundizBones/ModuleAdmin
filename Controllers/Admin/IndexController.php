@@ -96,9 +96,6 @@ class IndexController extends AdminBaseController
             include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Index/index_v', $output);
 
             unset($Assets, $rdbAdminAssets, $Url);

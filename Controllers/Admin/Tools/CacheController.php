@@ -343,9 +343,6 @@ class CacheController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseC
             $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Tools/cache_v', $output);
 
             unset($Assets, $rdbAdminAssets, $Url);

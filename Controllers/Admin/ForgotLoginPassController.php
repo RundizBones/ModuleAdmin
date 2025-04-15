@@ -161,9 +161,6 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
             $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle']);
             $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages']);
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/ForgotLoginPass/index_v', $output);
 
             unset($Assets, $Url);
@@ -359,9 +356,6 @@ class ForgotLoginPassController extends \Rdb\Modules\RdbAdmin\Controllers\BaseCo
             $output['pageHtmlTitle'] = $this->getPageHtmlTitle($output['pageTitle']);
             $output['pageHtmlClasses'] = $this->getPageHtmlClasses(['rdba-login-logout-pages']);
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/ForgotLoginPass/reset_v', $output);
 
             unset($Assets, $ModuleAssets, $Url);

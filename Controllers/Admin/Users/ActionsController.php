@@ -109,9 +109,6 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
             include_once MODULE_PATH . '/RdbAdmin/Helpers/HTMLFunctions.php';
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Users/deleteMe_v', $output);
             $output['pageBreadcrumb'] = renderBreadcrumbHtml($output['breadcrumb']);
 
@@ -480,9 +477,6 @@ class ActionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBas
             include_once dirname(dirname(dirname(__DIR__))) . '/Helpers/HTMLFunctions.php';
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Users/actions_v', $output);
 
             unset($Assets, $rdbAdminAssets, $Url);

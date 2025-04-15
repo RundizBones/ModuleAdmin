@@ -186,9 +186,6 @@ class EmailTesterController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\Admi
             $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Tools/emailTester_v', $output);
 
             unset($Assets, $rdbAdminAssets, $Url);

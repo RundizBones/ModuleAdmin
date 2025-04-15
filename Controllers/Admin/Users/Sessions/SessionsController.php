@@ -276,9 +276,6 @@ class SessionsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Users/sessions_v', $output);
 
             unset($Assets, $rdbAdminAssets, $Url);

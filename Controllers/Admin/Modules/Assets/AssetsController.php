@@ -160,9 +160,6 @@ class AssetsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBase
             $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Modules/Assets/index_v', $output);
 
             unset($Assets, $rdbAdminAssets, $Url);

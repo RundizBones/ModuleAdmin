@@ -539,9 +539,6 @@ class SettingsController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBa
             $this->setJsAssetsAndObject($Assets, $rdbAdminAssets);
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Settings/index_v', $output);
 
             unset($Assets, $rdbAdminAssets, $Url);

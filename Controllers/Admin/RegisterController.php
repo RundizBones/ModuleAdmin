@@ -94,9 +94,6 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
             );
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Register/confirm_v', $output);
 
             unset($Assets, $MyModuleAssets, $Url);
@@ -1004,9 +1001,6 @@ class RegisterController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
             );
 
             $output['Assets'] = $Assets;
-            $output['Modules'] = $this->Modules;
-            $output['Url'] = $Url;
-            $output['Views'] = $this->Views;
             $output['pageContent'] = $this->Views->render('Admin/Register/index_v', $output);
 
             unset($Assets, $MyModuleAssets, $Url);
