@@ -27,6 +27,11 @@ div.dt-processing {
 /* end datatables processing message element. */
 
 
+.rdba-datatables-form .rdba-datatables-result-controls {
+    margin-bottom: var(--rdta-tpf-content-block-element-margin-vertical);
+}
+
+
 /* update design of data table from datatables.net */
 table.rdba-datatables-js {
     border-collapse: collapse;
