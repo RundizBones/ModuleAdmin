@@ -7992,7 +7992,7 @@ input[type=range]:focus::-ms-fill-upper {
   background: var(--rdta-tpf-input-range-track-color)
 }
 /*!
- * Rundiz template for admin V.2.4.4dev-20250415
+ * Rundiz template for admin V.2.4.5
  */
 :root {
   --rdta-background-danger-disabled-color: #cf6464;
@@ -10672,6 +10672,11 @@ dialog.rd-dialog:not([open]) {
   flex-wrap: wrap;
   justify-content: flex-end
 }
+@media (min-width:768px) {
+  .rd-page-options-buttons-row {
+    float: right
+  }
+}
 .rd-page-options-container {
   margin-bottom: var(--rdta-block-element-margin-horizontal);
   margin-left: var(--rdta-block-element-margin-horizontal);
@@ -10702,16 +10707,6 @@ dialog.rd-dialog:not([open]) {
   height: calc-size(auto,size);
   padding-bottom: var(--rdta-content-block-element-margin-vertical);
   padding-top: var(--rdta-content-block-element-margin-vertical)
-}
-@media (min-width:768px) {
-  .rd-page-options-buttons-row {
-    float: right
-  }
-  .rd-page-content > :first-child::after {
-    clear: both;
-    content: "";
-    display: block
-  }
 }
 /*!
 * ----------------------------------------------------------------------------------------------
