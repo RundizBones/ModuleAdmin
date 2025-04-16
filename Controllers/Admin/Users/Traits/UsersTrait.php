@@ -138,7 +138,7 @@ trait UsersTrait
                             );
                             $errors['user_roles']['fieldsValidation'] = 'invalid';
                         }
-                    }// endforeach1;
+                    }// endforeach;
                     unset($row);
                 } else {
                     $errors['user_roles']['message'] = __('Unable to retrieve new user\'s role. Cannot save user, please contact administrator.');
