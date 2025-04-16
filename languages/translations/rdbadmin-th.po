@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rdba\n"
-"POT-Creation-Date: 2025-04-13 03:12+0700\n"
-"PO-Revision-Date: 2025-04-13 03:13+0700\n"
+"POT-Creation-Date: 2025-04-16 13:22+0700\n"
+"PO-Revision-Date: 2025-04-16 13:22+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -34,87 +34,87 @@ msgstr "ปฏิเสธการเข้าถึง!"
 msgid "Forgot username or password?"
 msgstr "ลืมชื่อผู้ใช้หรือรหัสผ่าน?"
 
-#: Controllers/Admin/ForgotLoginPassController.php:273 Controllers/Admin/ForgotLoginPassController.php:281
-#: Controllers/Admin/ForgotLoginPassController.php:309 Controllers/Admin/ForgotLoginPassController.php:687
-#: Controllers/Admin/LoginController.php:385 Controllers/Admin/LoginController.php:803
-#: Controllers/Admin/LoginController.php:811 Controllers/Admin/LoginController.php:840
+#: Controllers/Admin/ForgotLoginPassController.php:270 Controllers/Admin/ForgotLoginPassController.php:278
+#: Controllers/Admin/ForgotLoginPassController.php:306 Controllers/Admin/ForgotLoginPassController.php:681
+#: Controllers/Admin/LoginController.php:385 Controllers/Admin/LoginController.php:797
+#: Controllers/Admin/LoginController.php:805 Controllers/Admin/LoginController.php:834
 #: Controllers/Admin/Users/EditController.php:142
 msgid "Unable to validate token or your token may expired."
 msgstr "ไม่สามารถตรวจสอบโทเคนได้ หรือโทเคนของคุณอาจหมดอายุแล้ว."
 
-#: Controllers/Admin/ForgotLoginPassController.php:358
+#: Controllers/Admin/ForgotLoginPassController.php:355
 msgid "Reset your password"
 msgstr "ตั้งค่ารหัสผ่านใหม่"
 
-#: Controllers/Admin/ForgotLoginPassController.php:406
+#: Controllers/Admin/ForgotLoginPassController.php:400
 msgid "Please enter your email."
 msgstr "กรุณากรอกอีเมลของคุณ."
 
-#: Controllers/Admin/ForgotLoginPassController.php:422 Controllers/Admin/LoginController.php:206
-#: Controllers/Admin/RegisterController.php:618
+#: Controllers/Admin/ForgotLoginPassController.php:416 Controllers/Admin/LoginController.php:206
+#: Controllers/Admin/RegisterController.php:615
 msgid "You have entered incorrect data."
 msgstr "คุณกรอกข้อมูลไม่ถูกต้อง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:468 Controllers/_SubControllers/LoginSubController.php:330
+#: Controllers/Admin/ForgotLoginPassController.php:462 Controllers/_SubControllers/LoginSubController.php:330
 msgid "The email has just been sent recently, please wait and try again later."
 msgstr "อีเมลเพิ่งถูกส่งไม่นานนี้, กรุณารอและลองใหม่ในภายหลัง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:481
+#: Controllers/Admin/ForgotLoginPassController.php:475
 msgid "The email was not found."
 msgstr "ไม่พบอีเมลดังกล่าว."
 
-#: Controllers/Admin/ForgotLoginPassController.php:488 Controllers/_SubControllers/LoginSubController.php:367
+#: Controllers/Admin/ForgotLoginPassController.php:482 Controllers/_SubControllers/LoginSubController.php:367
 #, php-format
 msgid "Your account has been disabled. (%1$s)"
 msgstr "บัญชีผู้ใช้ของคุณถูกระงับการใช้งาน. (%1$s)"
 
-#: Controllers/Admin/ForgotLoginPassController.php:515
+#: Controllers/Admin/ForgotLoginPassController.php:509
 msgid "You had requested to reset your password."
 msgstr "คุณได้ร้องขอตั้งค่ารหัสผ่านใหม่."
 
-#: Controllers/Admin/ForgotLoginPassController.php:535
+#: Controllers/Admin/ForgotLoginPassController.php:529
 msgid "An email has been sent, please check your email and follow instruction."
 msgstr "อีเมลถูกส่งแล้ว, โปรดตรวจอีเมลของคุณและทำตามคำแนะนำ."
 
-#: Controllers/Admin/ForgotLoginPassController.php:539 Controllers/Admin/ForgotLoginPassController.php:545
-#: Controllers/Admin/RegisterController.php:764 Controllers/Admin/RegisterController.php:773
-#: Controllers/Admin/RegisterController.php:873 Controllers/Admin/Users/AddController.php:320
+#: Controllers/Admin/ForgotLoginPassController.php:533 Controllers/Admin/ForgotLoginPassController.php:539
+#: Controllers/Admin/RegisterController.php:761 Controllers/Admin/RegisterController.php:770
+#: Controllers/Admin/RegisterController.php:870 Controllers/Admin/Users/AddController.php:320
 msgid "An email could not be sent."
 msgstr "ไม่สามารถส่งอีเมลได้."
 
-#: Controllers/Admin/ForgotLoginPassController.php:561 Controllers/Admin/ForgotLoginPassController.php:695
+#: Controllers/Admin/ForgotLoginPassController.php:555 Controllers/Admin/ForgotLoginPassController.php:689
 #: Controllers/Admin/LoginController.php:250 Controllers/Admin/LoginController.php:393
 #: Controllers/Admin/LoginController.php:450 Controllers/Admin/LogoutController.php:69
 #: Controllers/Admin/Modules/ActionsController.php:127 Controllers/Admin/Modules/Assets/PublishController.php:304
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:111
 #: Controllers/Admin/Permissions/EditController.php:84 Controllers/Admin/Permissions/EditController.php:191
-#: Controllers/Admin/RegisterController.php:288 Controllers/Admin/RegisterController.php:537
+#: Controllers/Admin/RegisterController.php:285 Controllers/Admin/RegisterController.php:534
 #: Controllers/Admin/Roles/ActionsController.php:189 Controllers/Admin/Roles/AddController.php:102
 #: Controllers/Admin/Roles/EditController.php:103 Controllers/Admin/Roles/ReorderController.php:126
 #: Controllers/Admin/Settings/FaviconController.php:121 Controllers/Admin/Settings/FaviconController.php:527
-#: Controllers/Admin/Settings/SettingsController.php:257 Controllers/Admin/Settings/SettingsController.php:673
+#: Controllers/Admin/Settings/SettingsController.php:257 Controllers/Admin/Settings/SettingsController.php:670
 #: Controllers/Admin/Tools/CacheController.php:100 Controllers/Admin/Tools/EmailTesterController.php:109
-#: Controllers/Admin/Users/ActionsController.php:208 Controllers/Admin/Users/ActionsController.php:294
-#: Controllers/Admin/Users/ActionsController.php:398 Controllers/Admin/Users/AddController.php:254
+#: Controllers/Admin/Users/ActionsController.php:205 Controllers/Admin/Users/ActionsController.php:291
+#: Controllers/Admin/Users/ActionsController.php:395 Controllers/Admin/Users/AddController.php:254
 #: Controllers/Admin/Users/AvatarController.php:106 Controllers/Admin/Users/AvatarController.php:278
 #: Controllers/Admin/Users/EditController.php:488 Controllers/Admin/Users/Sessions/SessionsController.php:131
 msgid ""
 "Unable to validate token, please try again. If this problem still occur please reload the page and try again."
 msgstr "ไม่สามารถตรวจสอบโทเคน, โปรดลองอีกครั้ง. ถ้าปัญหานี้ยังอยู่ โปรดโหลดหน้านี้แล้วลองอีกครั้ง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:611 Controllers/Admin/LoginController.php:305
+#: Controllers/Admin/ForgotLoginPassController.php:605 Controllers/Admin/LoginController.php:305
 msgid "Please enter your new password."
 msgstr "กรุณากรอกรหัสผ่านใหม่ของคุณ."
 
-#: Controllers/Admin/ForgotLoginPassController.php:620 Controllers/Admin/LoginController.php:314
+#: Controllers/Admin/ForgotLoginPassController.php:614 Controllers/Admin/LoginController.php:314
 msgid "Your new password and confirm does not matched."
 msgstr "รหัสผ่านใหม่ของคุณและรหัสผ่านที่ยืนยันนั้นไม่ตรงกัน."
 
-#: Controllers/Admin/ForgotLoginPassController.php:646 Controllers/Admin/LoginController.php:342
+#: Controllers/Admin/ForgotLoginPassController.php:640 Controllers/Admin/LoginController.php:342
 msgid "Unable to update your new password, please try again."
 msgstr "ไม่สามารถอัปเดทรหัสผ่านใหม่ของคุณได้, โปรดลองอีกครั้ง."
 
-#: Controllers/Admin/ForgotLoginPassController.php:675 Controllers/Admin/LoginController.php:373
+#: Controllers/Admin/ForgotLoginPassController.php:669 Controllers/Admin/LoginController.php:373
 msgid "Success, you can now login using your new password."
 msgstr "สำเร็จ, คุณสามารถเข้าสู่ระบบด้วยรหัสผ่านใหม่นี้ได้แล้ว."
 
@@ -126,13 +126,13 @@ msgstr "หน้าแรกผู้ดูแล"
 msgid "Please enter username and password."
 msgstr "กรุณากรอกชื่อผู้ใช้หรือรหัสผ่าน."
 
-#: Controllers/Admin/LoginController.php:541 Controllers/Admin/LoginController.php:703
+#: Controllers/Admin/LoginController.php:541 Controllers/Admin/LoginController.php:700
 #: Views/Admin/ForgotLoginPass/index_v.php:56 Views/Admin/Login/index_v.php:67
 #: Views/Admin/Register/confirm_v.php:39 Views/Admin/Register/index_v.php:96
 msgid "Login"
 msgstr "เข้าสู่ระบบ"
 
-#: Controllers/Admin/LoginController.php:850
+#: Controllers/Admin/LoginController.php:844
 msgid "Login recovery"
 msgstr "กู้คืนการเข้าสู่ระบบ"
 
@@ -145,7 +145,7 @@ msgid "You are now logged out."
 msgstr "คุณได้ออกจากระบบแล้ว."
 
 #: Controllers/Admin/LogoutController.php:179 Views/Admin/Logout/index_v.php:27
-#: Views/common/Admin/mainLayout_v.php:135
+#: Views/common/Admin/mainLayout_v.php:151
 msgid "Logout"
 msgstr "ออกจากระบบ"
 
@@ -161,7 +161,7 @@ msgstr[0] "ปิดใช้งานโมดูลที่เลือกเ
 
 #: Controllers/Admin/Modules/ActionsController.php:105
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:100 Controllers/Admin/Roles/ReorderController.php:105
-#: Controllers/Admin/Settings/SettingsController.php:241 Controllers/Admin/Users/ActionsController.php:373
+#: Controllers/Admin/Settings/SettingsController.php:241 Controllers/Admin/Users/ActionsController.php:370
 msgid "Updated successfully."
 msgstr "อัพเดทเรียบร้อย."
 
@@ -210,9 +210,9 @@ msgstr "คุณไม่สามารถปรับแต่งโมดู
 #: Controllers/Admin/Modules/ModulesController.php:125
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:161
 #: Controllers/Admin/Modules/Plugins/ActionsController.php:176
-#: Controllers/Admin/Modules/Plugins/PluginsController.php:121 Controllers/Admin/Roles/ActionsController.php:355
-#: Controllers/Admin/Roles/RolesController.php:180 Controllers/Admin/Users/ActionsController.php:540
-#: Controllers/Admin/Users/ActionsController.php:566 Controllers/Admin/Users/Sessions/SessionsController.php:79
+#: Controllers/Admin/Modules/Plugins/PluginsController.php:121 Controllers/Admin/Roles/ActionsController.php:352
+#: Controllers/Admin/Roles/RolesController.php:180 Controllers/Admin/Users/ActionsController.php:534
+#: Controllers/Admin/Users/ActionsController.php:560 Controllers/Admin/Users/Sessions/SessionsController.php:79
 #: Controllers/Admin/Users/Sessions/SessionsController.php:268 Controllers/Admin/Users/UsersController.php:257
 msgid "Please select an action."
 msgstr "โปรดเลือกการทำงาน."
@@ -305,12 +305,12 @@ msgid ""
 msgstr "ไม่สามารถปรับปรุงได้. โปรดโหลดหน้านี้แล้วลองใหม่อีกครั้ง, ถ้าปัญหายังอยู่โปรดติดต่อผู้ดูแล."
 
 #: Controllers/Admin/Permissions/EditController.php:230 Controllers/Admin/Roles/ActionsController.php:172
-#: Controllers/Admin/Users/ActionsController.php:183 Controllers/Admin/Users/ActionsController.php:275
+#: Controllers/Admin/Users/ActionsController.php:180 Controllers/Admin/Users/ActionsController.php:272
 #: Controllers/Admin/Users/Sessions/SessionsController.php:124
 msgid "Deleted successfully."
 msgstr "ลบสำเร็จ."
 
-#: Controllers/Admin/Permissions/EditController.php:244 Controllers/Admin/Users/ActionsController.php:282
+#: Controllers/Admin/Permissions/EditController.php:244 Controllers/Admin/Users/ActionsController.php:279
 msgid "Unable to delete."
 msgstr "ไม่สามารถลบได้."
 
@@ -337,7 +337,7 @@ msgstr "จัดการการอนุญาต"
 #: Controllers/Admin/Permissions/PermissionsController.php:407 Controllers/Admin/Roles/ActionsController.php:248
 #: Controllers/Admin/Roles/AddController.php:146 Controllers/Admin/Roles/EditController.php:149
 #: Controllers/Admin/Roles/RolesController.php:148 Controllers/Admin/UI/Traits/CommonDataTrait.php:107
-#: Controllers/Admin/Users/ActionsController.php:57 Controllers/Admin/Users/EditController.php:995
+#: Controllers/Admin/Users/ActionsController.php:57 Controllers/Admin/Users/EditController.php:992
 #: Controllers/Admin/Users/PreviousEmailsController.php:65 Controllers/_SubControllers/MenuItems.php:235
 #: ModuleData/ModuleAdmin.php:155 Views/Admin/Index/index_v.php:7
 msgid "Admin home"
@@ -352,9 +352,9 @@ msgstr "คุณแน่ใจหรือไม่ที่จะล้าง
 msgid "This cannot be undone, any users that are in the highest role priority will always have full control."
 msgstr "นี่จะไม่สามารถเลิกทำได้, ผู้ใช้ใดๆที่มีหน้าที่สำคัญที่สุดจะยังคงเข้าถึงการควบคุมได้ทุกอย่างเสมอ."
 
-#: Controllers/Admin/Permissions/PermissionsController.php:442 Views/common/Admin/mainLayout_v.php:18
-#: Views/common/Admin/mainLayout_v.php:23 Views/common/Admin/mainLayout_v.php:28
-#: Views/common/Admin/mainLayout_v.php:33 Views/common/Admin/mainLayout_v.php:45
+#: Controllers/Admin/Permissions/PermissionsController.php:442 Views/common/Admin/mainLayout_v.php:23
+#: Views/common/Admin/mainLayout_v.php:28 Views/common/Admin/mainLayout_v.php:33
+#: Views/common/Admin/mainLayout_v.php:38 Views/common/Admin/mainLayout_v.php:50
 msgid "Loading &hellip;"
 msgstr "กำลังโหลด &hellip;"
 
@@ -371,132 +371,132 @@ msgstr "การอนุญาตสำหรับหน้าที่นี
 msgid "Confirm register"
 msgstr "ยืนยันสมัครสมาชิก"
 
-#: Controllers/Admin/RegisterController.php:172
+#: Controllers/Admin/RegisterController.php:169
 msgid "Please set your password."
 msgstr "กรุณากำหนดรหัสผ่านของคุณ."
 
-#: Controllers/Admin/RegisterController.php:177 Controllers/Admin/RegisterController.php:611
+#: Controllers/Admin/RegisterController.php:174 Controllers/Admin/RegisterController.php:608
 msgid "Your password and confirm does not matched."
 msgstr "รหัสผ่านของคุณและรหัสผ่านที่ยืนยันนั้นไม่ตรงกัน."
 
-#: Controllers/Admin/RegisterController.php:186 Controllers/Admin/RegisterController.php:415
+#: Controllers/Admin/RegisterController.php:183 Controllers/Admin/RegisterController.php:412
 #: Controllers/Admin/Users/AddController.php:142 Controllers/Admin/Users/EditController.php:283
 msgid "The password hashing was error, please contact administrator."
 msgstr "มีข้อผิดพลาดในการเก็บรหัสผ่าน, โปรดติดต่อผู้ดูแล."
 
-#: Controllers/Admin/RegisterController.php:212 Controllers/Admin/RegisterController.php:279
+#: Controllers/Admin/RegisterController.php:209 Controllers/Admin/RegisterController.php:276
 msgid "User was not found."
 msgstr "ไม่พบผู้ใช้."
 
-#: Controllers/Admin/RegisterController.php:236
+#: Controllers/Admin/RegisterController.php:233
 msgid "The registration confirm key was not match, please check your link that is correctly."
 msgstr "รหัสยืนยันการสมัครสมาชิกไม่ถูกต้อง, โปรดตรวจสอบลิ้งค์ว่าถูกต้อง."
 
-#: Controllers/Admin/RegisterController.php:264
+#: Controllers/Admin/RegisterController.php:261
 #, php-format
 msgid "Success, you can use your username and password to login now. Go to %1$slogin page%2$s."
 msgstr "สำเร็จ, คุณสามารถใช้ชื่อผู้ใช้และรหัสผ่านเข้าสู่ระบบได้เลย. ไปยังหน้า%1$sเข้าสู่ระบบ%2$s."
 
-#: Controllers/Admin/RegisterController.php:274
+#: Controllers/Admin/RegisterController.php:271
 msgid "The registration was already confirmed."
 msgstr "การสมัครสมาชิกได้รับการยืนยันแล้ว."
 
-#: Controllers/Admin/RegisterController.php:326 Controllers/Admin/RegisterController.php:952
+#: Controllers/Admin/RegisterController.php:323 Controllers/Admin/RegisterController.php:949
 msgid "Access denied! The registration is currently disabled."
 msgstr "ปฏิเสธการเข้าถึง! ยังไม่เปิดใช้งานการลงทะเบียนสมัครสมาชิก."
 
-#: Controllers/Admin/RegisterController.php:522
+#: Controllers/Admin/RegisterController.php:519
 msgid "Your registration was success!"
 msgstr "การสมัครสมาชิกของคุณสำเร็จแล้ว!"
 
-#: Controllers/Admin/RegisterController.php:522
+#: Controllers/Admin/RegisterController.php:519
 msgid "You can use your username and password to login now."
 msgstr "คุณสามารถใช้ชื่อผู้ใช้และรหัสผ่านเข้าสู่ระบบได้เลย."
 
-#: Controllers/Admin/RegisterController.php:577
+#: Controllers/Admin/RegisterController.php:574
 msgid "Please fill all required form."
 msgstr "โปรดกรอกฟอร์มที่จำเป็น."
 
-#: Controllers/Admin/RegisterController.php:589 Controllers/Admin/Users/Traits/UsersTrait.php:54
+#: Controllers/Admin/RegisterController.php:586 Controllers/Admin/Users/Traits/UsersTrait.php:54
 msgid "Please enter a valid username."
 msgstr "กรุณากรอกชื่อผู้ใช้ที่ถูกต้อง."
 
-#: Controllers/Admin/RegisterController.php:596 Controllers/Admin/Users/Traits/UsersTrait.php:69
+#: Controllers/Admin/RegisterController.php:593 Controllers/Admin/Users/Traits/UsersTrait.php:69
 msgid "Please enter your correct email."
 msgstr "โปรดกรอกอีเมลที่ถูกต้อง."
 
-#: Controllers/Admin/RegisterController.php:603 Controllers/Admin/Users/Traits/UsersTrait.php:89
+#: Controllers/Admin/RegisterController.php:600 Controllers/Admin/Users/Traits/UsersTrait.php:89
 msgid "Username and password could not be same."
 msgstr "ชื่อผู้ใช้และรหัสผ่านไม่สามารถเหมือนกันได้."
 
-#: Controllers/Admin/RegisterController.php:637
+#: Controllers/Admin/RegisterController.php:634
 msgid "Disallowed username."
 msgstr "ไม่อนุญาตชื่อผู้ใช้."
 
-#: Controllers/Admin/RegisterController.php:648
+#: Controllers/Admin/RegisterController.php:645
 msgid "Disallowed email."
 msgstr "ไม่อนุญาตอีเมล."
 
-#: Controllers/Admin/RegisterController.php:653
+#: Controllers/Admin/RegisterController.php:650
 msgid "Disallowed display name."
 msgstr "ไม่อนุญาตชื่อแสดง."
 
-#: Controllers/Admin/RegisterController.php:668 Controllers/Admin/Users/Traits/UsersTrait.php:159
-#: Controllers/Admin/Users/Traits/UsersTrait.php:179
+#: Controllers/Admin/RegisterController.php:665 Controllers/Admin/Users/Traits/UsersTrait.php:166
+#: Controllers/Admin/Users/Traits/UsersTrait.php:186
 msgid "This username is already in use."
 msgstr "ชื่อผู้ใช้นี้มีคนใช้อยู่แล้ว."
 
-#: Controllers/Admin/RegisterController.php:674 Controllers/Admin/Users/Traits/UsersTrait.php:164
-#: Controllers/Admin/Users/Traits/UsersTrait.php:195
+#: Controllers/Admin/RegisterController.php:671 Controllers/Admin/Users/Traits/UsersTrait.php:171
+#: Controllers/Admin/Users/Traits/UsersTrait.php:202
 msgid "This email is already in use."
 msgstr "อีเมลนี้มีคนใช้อยู่แล้ว."
 
-#: Controllers/Admin/RegisterController.php:739 Models/UsersDb.php:652 Views/Admin/Roles/actions_v.php:7
+#: Controllers/Admin/RegisterController.php:736 Models/UsersDb.php:652 Views/Admin/Roles/actions_v.php:7
 #: Views/Admin/Users/actions_v.php:7
 msgid "Confirmation required."
 msgstr "ต้องการการยืนยัน."
 
-#: Controllers/Admin/RegisterController.php:758
+#: Controllers/Admin/RegisterController.php:755
 msgid "Success! Your registration needs confirmation, please open your email and follow instruction."
 msgstr "สำเร็จ! การสมัครสมาชิกของคุณต้องการการยืนยัน, โปรดเปิดอีเมลของคุณและทำตามคำแนะนำ."
 
-#: Controllers/Admin/RegisterController.php:763 Controllers/Admin/RegisterController.php:772
-#: Controllers/Admin/RegisterController.php:872
+#: Controllers/Admin/RegisterController.php:760 Controllers/Admin/RegisterController.php:769
+#: Controllers/Admin/RegisterController.php:869
 msgid "Your registration was successfull."
 msgstr "การสมัครสมาชิกสำเร็จแล้ว."
 
-#: Controllers/Admin/RegisterController.php:765 Controllers/Admin/RegisterController.php:774
-#: Controllers/Admin/RegisterController.php:874
+#: Controllers/Admin/RegisterController.php:762 Controllers/Admin/RegisterController.php:771
+#: Controllers/Admin/RegisterController.php:871
 msgid "Please contact administrator to confirm your account."
 msgstr "โปรดติดต่อผู้ดูแลเพื่อยืนยันบัญชีผู้ใช้ของคุณ."
 
-#: Controllers/Admin/RegisterController.php:818
+#: Controllers/Admin/RegisterController.php:815
 msgid "There is a user registration."
 msgstr "มีผู้ใช้สมัครสมาชิก."
 
-#: Controllers/Admin/RegisterController.php:818
+#: Controllers/Admin/RegisterController.php:815
 msgid "Action required."
 msgstr "ต้องมีการดำเนินการ."
 
-#: Controllers/Admin/RegisterController.php:825
+#: Controllers/Admin/RegisterController.php:822
 msgid "The user needs administrator to confirm their registration."
 msgstr "ผู้ใช้ต้องการผู้ดูแลยืนยันการสมัครสมาชิก."
 
-#: Controllers/Admin/RegisterController.php:825
+#: Controllers/Admin/RegisterController.php:822
 #, php-format
 msgid "Please go to %1$sadministrator page%2$s."
 msgstr "โปรดไปยัง%1$sหน้าผู้ดูแล%2$s."
 
-#: Controllers/Admin/RegisterController.php:827
+#: Controllers/Admin/RegisterController.php:824
 #, php-format
 msgid "Go to %1$sadministrator page%2$s."
 msgstr "ไปยัง%1$sหน้าผู้ดูแล%2$s."
 
-#: Controllers/Admin/RegisterController.php:844
+#: Controllers/Admin/RegisterController.php:841
 msgid "Success! You have to wait for administrator to confirm your registration."
 msgstr "สำเร็จ! คุณต้องรอผู้ดูแลยืนยันการสมัครสมาชิกของคุณ."
 
-#: Controllers/Admin/RegisterController.php:972 Views/Admin/Login/index_v.php:75
+#: Controllers/Admin/RegisterController.php:969 Views/Admin/Login/index_v.php:75
 msgid "Create new account"
 msgstr "สร้างบัญชีผู้ใช้ใหม่"
 
@@ -509,7 +509,7 @@ msgid "Please select replace user's role."
 msgstr "โปรดเลือกหน้าที่ที่จะแทนที่ของผู้ใช้ที่มีอยู่และจะถูกลบไป."
 
 #: Controllers/Admin/Roles/ActionsController.php:243 Controllers/Admin/Roles/ActionsController.php:256
-#: Controllers/Admin/Users/ActionsController.php:451
+#: Controllers/Admin/Users/ActionsController.php:448
 msgid "Confirmation required"
 msgstr "ต้องการการยืนยัน"
 
@@ -519,16 +519,16 @@ msgstr "ต้องการการยืนยัน"
 msgid "Manage roles"
 msgstr "จัดการหน้าที่"
 
-#: Controllers/Admin/Roles/ActionsController.php:348 Controllers/Admin/Roles/RolesController.php:181
+#: Controllers/Admin/Roles/ActionsController.php:345 Controllers/Admin/Roles/RolesController.php:181
 msgid "Please select at least one role."
 msgstr "โปรดเลือกหน้าที่อย่างน้อยหนึ่งรายการ."
 
-#: Controllers/Admin/Roles/ActionsController.php:362
+#: Controllers/Admin/Roles/ActionsController.php:359
 msgid "Delete role"
 msgid_plural "Delete roles"
 msgstr[0] "ลบหน้าที่"
 
-#: Controllers/Admin/Roles/ActionsController.php:408
+#: Controllers/Admin/Roles/ActionsController.php:405
 msgid "Unable to delete restricted roles."
 msgstr "ไม่สามารถลบหน้าที่ที่ถูกจำกัดไว้."
 
@@ -619,15 +619,15 @@ msgstr "โปรดเลือกหนึ่งไฟล์."
 msgid "Uploading."
 msgstr "กำลังอัพโหลด."
 
-#: Controllers/Admin/Settings/SettingsController.php:600
+#: Controllers/Admin/Settings/SettingsController.php:597
 msgid "Unable to test other mail protocol."
 msgstr "ไม่สามารถทดสอบโปรโตคอลอีเมลอื่นๆได้."
 
-#: Controllers/Admin/Settings/SettingsController.php:634 Controllers/Admin/Settings/SettingsController.php:657
+#: Controllers/Admin/Settings/SettingsController.php:631 Controllers/Admin/Settings/SettingsController.php:654
 msgid "An error has been occurred."
 msgstr "มีข้อผิดพลาดเกิดขึ้น."
 
-#: Controllers/Admin/Settings/SettingsController.php:654
+#: Controllers/Admin/Settings/SettingsController.php:651
 msgid "Connection was successfull."
 msgstr "การเชื่อมต่อสำเร็จ."
 
@@ -691,56 +691,56 @@ msgstr "รุ่น %1$s"
 msgid "Administration module for RundizBones"
 msgstr "โมดูลผู้ดูแลสำหรับ RundizBones"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:93 Controllers/Admin/UI/XhrCommonDataController.php:103
+#: Controllers/Admin/UI/XhrCommonDataController.php:94 Controllers/Admin/UI/XhrCommonDataController.php:104
 msgctxt "translation for datatables."
 msgid "No data"
 msgstr "ไม่มีข้อมูล"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:94
+#: Controllers/Admin/UI/XhrCommonDataController.php:95
 msgctxt "translation for datatables."
 msgid "Search:"
 msgstr "ค้นหา:"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:96
+#: Controllers/Admin/UI/XhrCommonDataController.php:97
 msgctxt "translation for datatables."
 msgid "First"
 msgstr "หน้าแรก"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:97
+#: Controllers/Admin/UI/XhrCommonDataController.php:98
 msgctxt "translation for datatables."
 msgid "Last"
 msgstr "หน้าสุดท้าย"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:98
+#: Controllers/Admin/UI/XhrCommonDataController.php:99
 msgctxt "translation for datatables."
 msgid "Next"
 msgstr "ถัดไป"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:99
+#: Controllers/Admin/UI/XhrCommonDataController.php:100
 msgctxt "translation for datatables."
 msgid "Previous"
 msgstr "ก่อนหน้า"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:100
+#: Controllers/Admin/UI/XhrCommonDataController.php:101
 msgctxt "translation for datatables."
 msgid "Page _INPUT_ of _TOTAL_"
 msgstr "หน้า _INPUT_ จาก _TOTAL_"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:102
+#: Controllers/Admin/UI/XhrCommonDataController.php:103
 msgctxt "translation for datatables."
 msgid "Processing..."
 msgstr "กำลังประมวลผล..."
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:140
+#: Controllers/Admin/UI/XhrCommonDataController.php:142
 msgctxt "translation for pagination showing Page text."
 msgid "Page"
 msgstr "หน้า"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:297
+#: Controllers/Admin/UI/XhrCommonDataController.php:299
 msgid "Guest"
 msgstr "ผู้เยี่ยมชม"
 
-#: Controllers/Admin/UI/XhrCommonDataController.php:346 Controllers/Admin/UI/XhrDashboardWidgetsController.php:30
+#: Controllers/Admin/UI/XhrCommonDataController.php:348 Controllers/Admin/UI/XhrDashboardWidgetsController.php:30
 msgid "Sorry, this page is for request via XHR, REST API."
 msgstr "ขออภัย, หน้านี้สำหรับ XHR, REST API."
 
@@ -754,7 +754,7 @@ msgstr "กรุณาโหลดหน้านี้แล้วลองใ
 msgid "Delete my account"
 msgstr "ลบบัญชีผู้ใช้ของฉัน"
 
-#: Controllers/Admin/Users/ActionsController.php:61 Controllers/Admin/Users/EditController.php:999
+#: Controllers/Admin/Users/ActionsController.php:61 Controllers/Admin/Users/EditController.php:996
 #: Controllers/Admin/Users/PreviousEmailsController.php:69 ModuleData/ModuleAdmin.php:93
 #: ModuleData/ModuleAdmin.php:161 Views/Admin/Permissions/index_v.php:22
 #: Views/Admin/UI/Widgets/userSummary_v.php:1
@@ -762,50 +762,51 @@ msgid "Users"
 msgstr "ผู้ใช้"
 
 #: Controllers/Admin/Users/ActionsController.php:65 Controllers/Admin/Users/AddController.php:229
-#: Controllers/Admin/Users/EditController.php:990 Controllers/Admin/Users/EditController.php:1003
+#: Controllers/Admin/Users/EditController.php:987 Controllers/Admin/Users/EditController.php:1000
 #: Controllers/Admin/Users/PreviousEmailsController.php:73 Views/Admin/Users/edit_v.php:8
 msgid "Edit user"
 msgstr "แก้ไขผู้ใช้"
 
-#: Controllers/Admin/Users/ActionsController.php:78 Controllers/Admin/Users/ActionsController.php:603
+#: Controllers/Admin/Users/ActionsController.php:78 Controllers/Admin/Users/ActionsController.php:597
 msgid "Site setting is not allowed user to delete themself."
 msgstr "การตั้งค่าของเว็บไซต์ไม่อนุญาตให้ผู้ใช้ลบบัญชีของตนเอง."
 
-#: Controllers/Admin/Users/ActionsController.php:196
+#: Controllers/Admin/Users/ActionsController.php:193
 msgid "Unable to delete users."
 msgstr "ไม่สามารถลบผู้ใช้."
 
-#: Controllers/Admin/Users/ActionsController.php:386
+#: Controllers/Admin/Users/ActionsController.php:383
 msgid "Unable to update users."
 msgstr "ไม่สามารถอัพเดทผู้ใช้."
 
-#: Controllers/Admin/Users/ActionsController.php:533 Controllers/Admin/Users/UsersController.php:258
+#: Controllers/Admin/Users/ActionsController.php:527 Controllers/Admin/Users/UsersController.php:258
 msgid "Please select at least one user."
 msgstr "โปรดเลือกผู้ใช้อย่างน้อยหนึ่งราย."
 
-#: Controllers/Admin/Users/ActionsController.php:550
+#: Controllers/Admin/Users/ActionsController.php:544
 msgid "Delete user"
 msgid_plural "Delete users"
 msgstr[0] "ลบผู้ใช้"
 
-#: Controllers/Admin/Users/ActionsController.php:555
+#: Controllers/Admin/Users/ActionsController.php:549
 msgid "Enable user"
 msgid_plural "Enable users"
 msgstr[0] "เปิดใช้งานผู้ใช้"
 
-#: Controllers/Admin/Users/ActionsController.php:560
+#: Controllers/Admin/Users/ActionsController.php:554
 msgid "Disable user"
 msgid_plural "Disable users"
 msgstr[0] "ปิดใช้งานผู้ใช้"
 
-#: Controllers/Admin/Users/ActionsController.php:591 Controllers/Admin/Users/AvatarController.php:87
+#: Controllers/Admin/Users/ActionsController.php:585 Controllers/Admin/Users/AvatarController.php:87
 #: Controllers/Admin/Users/AvatarController.php:200 Controllers/Admin/Users/EditController.php:254
+#: Controllers/Admin/Users/EditController.php:1008
 msgid "Unable to edit guest user."
 msgstr "ไม่สามารถแก้ไขผู้ใช้ guest."
 
-#: Controllers/Admin/Users/ActionsController.php:613 Controllers/Admin/Users/AvatarController.php:71
+#: Controllers/Admin/Users/ActionsController.php:607 Controllers/Admin/Users/AvatarController.php:71
 #: Controllers/Admin/Users/AvatarController.php:191 Controllers/Admin/Users/EditController.php:266
-#: Controllers/Admin/Users/EditController.php:1011 Controllers/Admin/Users/PreviousEmailsController.php:43
+#: Controllers/Admin/Users/EditController.php:1014 Controllers/Admin/Users/PreviousEmailsController.php:43
 #: Controllers/Admin/Users/Sessions/SessionsController.php:70
 msgid "Unable to edit user who has higher priority role than you."
 msgstr "ไม่สามารถแก้ไขผู้ใช้ที่มีหน้าที่สูงกว่าคุณได้."
@@ -971,23 +972,23 @@ msgstr "มีปัญหาเกี่ยวกับการเปลี่
 msgid "The email was changed but a notification email could not be sent."
 msgstr "อีเมลถูกเปลี่ยนแล้วแต่ไม่สามารถส่งอีเมลแจ้งเตือนได้."
 
-#: Controllers/Admin/Users/EditController.php:1034 Controllers/Admin/Users/UsersController.php:253
+#: Controllers/Admin/Users/EditController.php:1037 Controllers/Admin/Users/UsersController.php:253
 msgid "Are you sure you want to delete this profile picture?"
 msgstr "คุณแน่ใจหรือไม่ว่าจะลบรูปโปรไฟล์นี้?"
 
-#: Controllers/Admin/Users/EditController.php:1035 Controllers/Admin/Users/UsersController.php:254
+#: Controllers/Admin/Users/EditController.php:1038 Controllers/Admin/Users/UsersController.php:254
 msgid "Are you sure you want to upload selected profile picture?"
 msgstr "คุณแน่ใจหรือไม่ว่าจะอัพโหลดรูปโปรไฟล์ที่เลือก?"
 
-#: Controllers/Admin/Users/EditController.php:1035 Controllers/Admin/Users/UsersController.php:254
+#: Controllers/Admin/Users/EditController.php:1038 Controllers/Admin/Users/UsersController.php:254
 msgid "Any existing profile picture will be changed."
 msgstr "รูปโปรไฟล์ใดๆที่มีอยู่แล้วจะเปลี่ยนไป."
 
-#: Controllers/Admin/Users/EditController.php:1036 Controllers/Admin/Users/UsersController.php:259
+#: Controllers/Admin/Users/EditController.php:1039 Controllers/Admin/Users/UsersController.php:259
 msgid "You can only select one file."
 msgstr "คุณสามารถเลือกได้เพียงไฟล์เดียว."
 
-#: Controllers/Admin/Users/EditController.php:1037 Controllers/Admin/Users/UsersController.php:261
+#: Controllers/Admin/Users/EditController.php:1040 Controllers/Admin/Users/UsersController.php:261
 msgid "Uploading"
 msgstr "กำลังอัพโหลด"
 
@@ -1079,11 +1080,16 @@ msgstr "คุณไม่สามารถกำหนดหน้าที่
 msgid "%1$s has higher priority than %2$s"
 msgstr "%1$s มีความสำคัญมากกว่า %2$s"
 
-#: Controllers/Admin/Users/Traits/UsersTrait.php:137
+#: Controllers/Admin/Users/Traits/UsersTrait.php:136
+#, php-format
+msgid "Unable to set user role to %1$s."
+msgstr "ไม่สามารถกำหนดหน้าที่ผู้ใช้เป็น %1$s."
+
+#: Controllers/Admin/Users/Traits/UsersTrait.php:144
 msgid "Unable to retrieve new user's role. Cannot save user, please contact administrator."
 msgstr "ไม่สามารถดึงข้อมูลหน้าของผู้ใช้ใหม่ได้. ไม่สามารถบันทึกผู้ใช้, โปรดติดต่อผู้ดูแล."
 
-#: Controllers/Admin/Users/Traits/UsersTrait.php:143
+#: Controllers/Admin/Users/Traits/UsersTrait.php:150
 msgid ""
 "Unable to retrieve your user role to check with new user's role. Cannot save user, please contact "
 "administrator."
@@ -2161,20 +2167,20 @@ msgstr "ลบ/ออกจากระบบ"
 msgid "Delete/Logout all"
 msgstr "ลบ/ออกจากระบบทั้งหมด"
 
-#: Views/common/Admin/mainLayout_v.php:14 Views/common/Admin/mainLayout_v.php:16
+#: Views/common/Admin/mainLayout_v.php:19 Views/common/Admin/mainLayout_v.php:21
 msgid "Toggle side bar menu"
 msgstr "ปรับแสดงเมนูด้านข้าง"
 
-#: Views/common/Admin/mainLayout_v.php:49 Views/common/Admin/mainLayout_v.php:51
+#: Views/common/Admin/mainLayout_v.php:54 Views/common/Admin/mainLayout_v.php:56
 msgid "Expane/collapse menu"
 msgstr "ขยาย/ย่อเมนู"
 
-#: Views/common/Admin/mainLayout_v.php:133
+#: Views/common/Admin/mainLayout_v.php:149
 #, php-format
 msgid "Hello, %1$s"
 msgstr "สวัสดี, %1$s"
 
-#: Views/common/Admin/mainLayout_v.php:134
+#: Views/common/Admin/mainLayout_v.php:150
 msgid "Edit your account"
 msgstr "แก้ไขบัญชีผู้ใช้ของคุณ"
 

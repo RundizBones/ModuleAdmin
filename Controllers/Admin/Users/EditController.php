@@ -897,9 +897,6 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
         $output = [];
         $options = [];
         $options['unlimited'] = true;
-        $options['where'] = [
-            'userrole_priority' => '< 10000',
-        ];
         $options['sortOrders'] = [['sort' => 'userrole_priority', 'order' => 'ASC']];
         $UserRolesDb = new \Rdb\Modules\RdbAdmin\Models\UserRolesDb($this->Container);
         $output['listRoles'] = $UserRolesDb->listItems($options);
@@ -1004,6 +1001,12 @@ class EditController extends \Rdb\Modules\RdbAdmin\Controllers\Admin\AdminBaseCo
                 'link' => $Url->getAppBasedPath(true) . '/admin/users/edit/' . $user_id,
             ],
         ];
+
+        if ($user_id <= 0) {
+            http_response_code(403);
+            $output['formResultStatus'] = 'error';
+            $output['formResultMessage'] = __('Unable to edit guest user.');
+        }
 
         if ($this->isEditingHigherRole($user_id) === true) {
             http_response_code(403);

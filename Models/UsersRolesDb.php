@@ -197,11 +197,6 @@ class UsersRolesDb extends \Rdb\System\Core\Models\BaseModel
             if (isset($listUsers['items']) && is_array($listUsers['items'])) {
                 // if found selected user(s).
                 foreach ($listUsers['items'] as $eachUser) {
-                    if ($eachUser->user_id <= 0) {
-                        // if guest.
-                        return true;
-                    }
-
                     if (isset($eachUser->users_roles) && is_array($eachUser->users_roles)) {
                         foreach ($eachUser->users_roles as $eachRole) {
                             if ($eachRole->userrole_priority < $myRoles->userrole_priority) {

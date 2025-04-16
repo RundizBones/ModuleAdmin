@@ -130,8 +130,15 @@ trait UsersTrait
                             $errors['user_roles']['message'] = __('You cannot set new user\'s role that is higher than you.') . 
                                 ' (' . sprintf(__('%1$s has higher priority than %2$s'), '<strong>' . $row->userrole_name . '</strong>', '<strong>' . $myRoles->userrole_name . '</strong>') . ')';
                             $errors['user_roles']['fieldsValidation'] = 'invalid';
+                        } elseif ($row->userrole_priority >= 10000) {
+                            $errors['user_roles']['message'] = sprintf(
+                                /* translators: %1$s user role name from DB. */
+                                __('Unable to set user role to %1$s.'),
+                                $row->userrole_name
+                            );
+                            $errors['user_roles']['fieldsValidation'] = 'invalid';
                         }
-                    }// endforeach;
+                    }// endforeach1;
                     unset($row);
                 } else {
                     $errors['user_roles']['message'] = __('Unable to retrieve new user\'s role. Cannot save user, please contact administrator.');
