@@ -1,13 +1,13 @@
-.apidoc
-.backup
-.dev-notes/dummy data - users.sql
-.disabled
-.dist
-.phpdoc
+/.apidoc
+/.backup/
+/.dev-notes/dummy data - users.sql
+/.disabled
+/.dist/
+/.phpdoc/
 .phpunit.result.cache
-.vscode
-.wiki
-assets-src/vendor
-config/development
-config/production
-node_modules
+/.vscode
+/.wiki/
+/assets-src/vendor/
+/config/development/
+/config/production/
+/node_modules/
