@@ -43,7 +43,7 @@ class CronController extends \Rdb\Modules\RdbAdmin\Controllers\BaseController
             unset($output);
             return '';
         } else {
-            return $this->responseAcceptType($output);
+            return $this->responseJson($output);
         }
     }// indexAction
 
