@@ -51,12 +51,12 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/css/rdta/rdta-bundled.min.css',
-                    'version' => '2.4.4',
+                    'version' => '2.4.5',
                 ],
                 [
                     'handle' => 'rdta-components-datatablesjs',
                     'file' => $publicModuleUrl . '/assets/css/rdta/components/rdta-datatables-js.min.css',
-                    'version' => '2.4.4',
+                    'version' => '2.4.5',
                 ],
                 // end rundiz template for admin. -------
                 // datatables----------------.
@@ -114,7 +114,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/js/rdta/rdta-bundled.min.js',
-                    'version' => '2.4.4',
+                    'version' => '2.4.5',
                 ],
                 [
                     'handle' => 'handlebars',
