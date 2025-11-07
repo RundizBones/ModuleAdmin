@@ -7186,13 +7186,17 @@ samp {
   --rdta-tpf-basic-focus-color: rgba(153, 153, 153, 0.35);
   --rdta-tpf-form-focus-color: rgba(255, 182, 0, 0.35);
   --rdta-tpf-form-invalid-border-color: #bc0000;
+  --rdta-tpf-form-readonly-background-color: #f9f9f9;
   --rdta-tpf-button-3d-height: 2px;
   --rdta-tpf-button-3d-pressed-height: 1px;
   --rdta-tpf-button-3d-edge-color: rgba(0, 0, 0, 0.1);
+  --rdta-tpf-input-range-progress-color: #52A0E5;
   --rdta-tpf-input-range-thumb-border-color: #aaa;
   --rdta-tpf-input-range-track-color: #ddd;
   --rdta-tpf-page-background-color: #fff;
   --rdta-tpf-page-text-color: #333;
+  --rdta-tpf-code-background-color: #f1f1f1;
+  --rdta-tpf-code-text-color: #555;
   --rdta-tpf-block-background-color: #eee;
   --rdta-tpf-block-border-color: #ddd;
   --rdta-tpf-content-block-element-margin-vertical: 0.625rem;
@@ -7290,10 +7294,14 @@ code,
 kbd,
 pre,
 samp {
-  background-color: #f1f1f1;
-  color: #555;
   font-family: Consolas,"Lucida Console","DejaVu Sans Mono","Liberation Mono","Courier New",monospace,sans-serif;
   padding: .125em .188em
+}
+code,
+pre,
+samp {
+  background-color: var(--rdta-tpf-code-background-color);
+  color: var(--rdta-tpf-code-text-color)
 }
 details {
   margin: 0 0 var(--rdta-tpf-content-block-element-margin-vertical) 0
@@ -7366,15 +7374,14 @@ img.fluid {
   max-width: 100%
 }
 kbd {
-  background-color: #f1f1f1;
   border: 1px solid var(--rdta-tpf-block-border-color);
-  border-radius: 2px
+  border-bottom-width: 2px;
+  border-radius: 4px
 }
 label {
   cursor: pointer
 }
-label [disabled],
-label [readonly] {
+label :disabled {
   cursor: not-allowed
 }
 meter {
@@ -7619,32 +7626,21 @@ input[type=submit]:hover {
   color: inherit
 }
 .disabled.rd-button,
-[disabled].rd-button,
+.rd-button:disabled,
 button.disabled,
-button[disabled],
+button:disabled,
 input.disabled[type=button],
 input.disabled[type=reset],
 input.disabled[type=submit],
-input[disabled][type=button],
-input[disabled][type=reset],
-input[disabled][type=submit] {
+input[type=button]:disabled,
+input[type=reset]:disabled,
+input[type=submit]:disabled {
   background-color: hsl(from var(--rdta-tpf-block-background-color) h s calc(l + 2));
   box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 hsl(from var(--rdta-tpf-button-3d-edge-color) h s calc(l + 15));
   color: hsl(from var(--rdta-tpf-page-text-color) h s calc(l + 40));
   cursor: not-allowed;
-  opacity: 1
-}
-.disabled.rd-button:active,
-[disabled].rd-button:active,
-button.disabled:active,
-button[disabled]:active,
-input.disabled[type=button]:active,
-input.disabled[type=reset]:active,
-input.disabled[type=submit]:active,
-input[disabled][type=button]:active,
-input[disabled][type=reset]:active,
-input[disabled][type=submit]:active {
-  top: 0
+  opacity: 1;
+  pointer-events: none
 }
 fieldset {
   border: 1px solid var(--rdta-tpf-block-border-color);
@@ -7702,33 +7698,28 @@ input[type=week]:active,
 input[type=week]:focus {
   box-shadow: 0 1px 2px rgba(0,0,0,.1) inset
 }
-input[type=date][disabled],
-input[type=date][readonly],
-input[type=datetime-local][disabled],
-input[type=datetime-local][readonly],
-input[type=email][disabled],
-input[type=email][readonly],
-input[type=month][disabled],
-input[type=month][readonly],
-input[type=number][disabled],
-input[type=number][readonly],
-input[type=password][disabled],
-input[type=password][readonly],
-input[type=search][disabled],
-input[type=search][readonly],
-input[type=tel][disabled],
-input[type=tel][readonly],
-input[type=text][disabled],
-input[type=text][readonly],
-input[type=time][disabled],
-input[type=time][readonly],
-input[type=url][disabled],
-input[type=url][readonly],
-input[type=week][disabled],
-input[type=week][readonly] {
+input[type=color]:disabled {
+  cursor: not-allowed
+}
+input[type=date]:disabled,
+input[type=datetime-local]:disabled,
+input[type=email]:disabled,
+input[type=month]:disabled,
+input[type=number]:disabled,
+input[type=password]:disabled,
+input[type=search]:disabled,
+input[type=tel]:disabled,
+input[type=text]:disabled,
+input[type=time]:disabled,
+input[type=url]:disabled,
+input[type=week]:disabled {
   background-color: var(--rdta-tpf-block-background-color);
   color: var(--rdta-tpf-text-disabled-color);
   cursor: not-allowed
+}
+input[readonly],
+textarea[readonly] {
+  background-color: var(--rdta-tpf-form-readonly-background-color)
 }
 input[type=date].rd-input-invalid,
 input[type=date]:user-invalid,
@@ -7756,6 +7747,10 @@ input[type=week].rd-input-invalid,
 input[type=week]:user-invalid {
   border-color: var(--rdta-tpf-form-invalid-border-color)
 }
+input[type=range].rd-input-invalid,
+input[type=range]:user-invalid {
+  border: 1px solid var(--rdta-tpf-form-invalid-border-color)
+}
 input[type=color] {
   border: 1px solid var(--rdta-tpf-block-border-color);
   height: 2em;
@@ -7782,10 +7777,8 @@ input[type=radio] {
   height: 1em;
   width: 1em
 }
-input[type=checkbox][disabled],
-input[type=checkbox][readonly],
-input[type=radio][disabled],
-input[type=radio][readonly] {
+input[type=checkbox]:disabled,
+input[type=radio]:disabled {
   background-color: var(--rdta-tpf-block-background-color);
   cursor: not-allowed
 }
@@ -7798,17 +7791,15 @@ input[type=radio]:user-invalid {
 input[type=checkbox]:checked {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e")
 }
-input[type=checkbox]:checked[disabled] {
-  opacity: .5
+input[type=checkbox]:checked:disabled,
+input[type=radio]:checked:disabled {
+  background-blend-mode: color-burn
 }
 input[type=radio] {
   border-radius: 50%
 }
 input[type=radio]:checked {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23333333'/%3e%3c/svg%3e")
-}
-input[type=radio]:checked[disabled] {
-  opacity: .5
 }
 input[type=file] {
   max-width: 240px;
@@ -7822,11 +7813,12 @@ input[type=file]::file-selector-button {
   cursor: pointer;
   font: inherit
 }
-input[type=file][disabled] {
+input[type=file]:disabled {
   cursor: not-allowed
 }
-input[type=file][disabled]::-webkit-file-upload-button,
-input[type=file][disabled]::file-selector-button {
+input[type=file]:disabled::-webkit-file-upload-button,
+input[type=file]:disabled::file-selector-button {
+  color: var(--rdta-tpf-text-disabled-color);
   cursor: not-allowed
 }
 input[type=image] {
@@ -7843,10 +7835,9 @@ input[type=image] {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: rgba(255,255,255,0)
 }
-input[type=image]:disabled,
-input[type=image][disabled] {
+input[type=image]:disabled {
   cursor: not-allowed;
-  opacity: .7
+  filter: brightness(130%) contrast(50%) saturate(60%)
 }
 select {
   -moz-appearance: none;
@@ -7860,8 +7851,7 @@ select {
   line-height: 1.4;
   padding: .313em 1.5em .313em .188em
 }
-select[disabled],
-select[readonly] {
+select:disabled {
   background-color: var(--rdta-tpf-block-background-color);
   color: var(--rdta-tpf-text-disabled-color);
   cursor: not-allowed
@@ -7886,8 +7876,7 @@ textarea:active,
 textarea:focus {
   box-shadow: 0 1px 2px rgba(0,0,0,.1) inset
 }
-textarea[disabled],
-textarea[readonly] {
+textarea:disabled {
   background-color: var(--rdta-tpf-block-background-color);
   color: var(--rdta-tpf-text-disabled-color);
   cursor: not-allowed
@@ -7910,11 +7899,13 @@ input[type=range] {
   -webkit-appearance: none;
   appearance: none;
   height: 37px;
-  margin: 10px 0;
   -webkit-tap-highlight-color: rgba(255,255,255,0)
 }
+input[type=range]:disabled {
+  cursor: not-allowed
+}
 input[type=range]::-moz-range-thumb {
-  background: var(--rdta-tpf-block-background-color);
+  background-color: var(--rdta-tpf-block-background-color);
   border: 1px solid var(--rdta-tpf-input-range-thumb-border-color);
   border-radius: 0;
   box-shadow: none;
@@ -7922,77 +7913,62 @@ input[type=range]::-moz-range-thumb {
   height: 30px;
   width: 15px
 }
+input[type=range]:disabled::-moz-range-thumb {
+  background-color: var(--rdta-tpf-block-background-color);
+  border-color: hsl(from var(--rdta-tpf-block-background-color) h s calc(l - 15));
+  cursor: not-allowed
+}
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  background: var(--rdta-tpf-block-background-color);
-  box-shadow: none;
+  background-color: var(--rdta-tpf-block-background-color);
   border: 1px solid var(--rdta-tpf-input-range-thumb-border-color);
   border-radius: 0;
+  box-shadow: none;
   cursor: pointer;
   height: 30px;
   margin-top: -14px;
   width: 15px
 }
+input[type=range]:disabled::-webkit-slider-thumb {
+  background-color: var(--rdta-tpf-block-background-color);
+  border-color: hsl(from var(--rdta-tpf-block-background-color) h s calc(l - 15));
+  cursor: not-allowed
+}
 input[type=range]::-moz-range-track {
-  animate: 0.2s;
-  background: var(--rdta-tpf-input-range-track-color);
-  border: 0 solid #000;
+  background-color: var(--rdta-tpf-input-range-track-color);
+  border: none;
   border-radius: 0;
   box-shadow: none;
   cursor: pointer;
   height: 3px
+}
+input[type=range]:disabled::-moz-range-track {
+  background-color: var(--rdta-tpf-block-background-color);
+  cursor: not-allowed
 }
 input[type=range]::-webkit-slider-runnable-track {
-  animate: 0.2s;
-  background: var(--rdta-tpf-input-range-track-color);
-  border: 0 solid #000;
+  background-color: var(--rdta-tpf-input-range-track-color);
+  border: none;
   border-radius: 0;
   box-shadow: none;
   cursor: pointer;
   height: 3px
+}
+input[type=range]:disabled::-webkit-slider-runnable-track {
+  background-color: var(--rdta-tpf-block-background-color);
+  cursor: not-allowed
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: var(--rdta-tpf-input-range-track-color)
+  background-color: var(--rdta-tpf-input-range-track-color)
 }
-input[type=range]::-ms-track {
-  animate: 0.2s;
-  background: 0 0;
-  border-color: transparent;
-  color: transparent;
-  cursor: pointer;
-  height: 3px
+input[type=range]::-moz-range-progress {
+  background-color: var(--rdta-tpf-input-range-progress-color)
 }
-input[type=range]::-ms-thumb {
-  background: var(--rdta-tpf-block-background-color);
-  border: 1px solid var(--rdta-tpf-input-range-thumb-border-color);
-  border-radius: 0;
-  box-shadow: none;
-  cursor: pointer;
-  height: 30px;
-  margin-top: 1px;
-  top: 22px;
-  width: 15px
-}
-input[type=range]::-ms-fill-lower {
-  background: var(--rdta-tpf-input-range-track-color);
-  border: 0 solid #000;
-  border-radius: 0;
-  box-shadow: none
-}
-input[type=range]::-ms-fill-upper {
-  background: var(--rdta-tpf-input-range-track-color);
-  border: 0 solid #000;
-  border-radius: 0;
-  box-shadow: none
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: var(--rdta-tpf-input-range-track-color)
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: var(--rdta-tpf-input-range-track-color)
+input[type=range]:disabled::-moz-range-progress {
+  background-color: hsl(from var(--rdta-tpf-block-background-color) h s calc(l - 10))
 }
 /*!
- * Rundiz template for admin V.2.4.5
+ * Rundiz template for admin V.2.4.9
  */
 :root {
   --rdta-background-danger-disabled-color: #cf6464;
@@ -8602,25 +8578,25 @@ a.rd-button.warning {
   color: var(--rdta-button-styled-text-color)
 }
 .rd-button.danger.disabled,
-.rd-button.danger[disabled],
+.rd-button.danger:disabled,
 .rd-button.info.disabled,
-.rd-button.info[disabled],
+.rd-button.info:disabled,
 .rd-button.primary.disabled,
-.rd-button.primary[disabled],
+.rd-button.primary:disabled,
 .rd-button.success.disabled,
-.rd-button.success[disabled],
+.rd-button.success:disabled,
 .rd-button.warning.disabled,
-.rd-button.warning[disabled],
+.rd-button.warning:disabled,
 a.rd-button.danger.disabled,
-a.rd-button.danger[disabled],
+a.rd-button.danger:disabled,
 a.rd-button.info.disabled,
-a.rd-button.info[disabled],
+a.rd-button.info:disabled,
 a.rd-button.primary.disabled,
-a.rd-button.primary[disabled],
+a.rd-button.primary:disabled,
 a.rd-button.success.disabled,
-a.rd-button.success[disabled],
+a.rd-button.success:disabled,
 a.rd-button.warning.disabled,
-a.rd-button.warning[disabled] {
+a.rd-button.warning:disabled {
   color: var(--rdta-button-disabled-styled-text-color)
 }
 .rd-button.danger,
@@ -8636,9 +8612,9 @@ a.rd-button.danger:active {
   box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-danger-3d-edge-color)
 }
 .rd-button.danger.disabled,
-.rd-button.danger[disabled],
+.rd-button.danger:disabled,
 a.rd-button.danger.disabled,
-a.rd-button.danger[disabled] {
+a.rd-button.danger:disabled {
   background-color: var(--rdta-background-danger-disabled-color);
   border-color: var(--rdta-button-danger-disabled-border-color);
   box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-danger-disabled-3d-edge-color)
@@ -8656,9 +8632,9 @@ a.rd-button.info:active {
   box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-info-3d-edge-color)
 }
 .rd-button.info.disabled,
-.rd-button.info[disabled],
+.rd-button.info:disabled,
 a.rd-button.info.disabled,
-a.rd-button.info[disabled] {
+a.rd-button.info:disabled {
   background-color: var(--rdta-background-info-disabled-color);
   border-color: var(--rdta-button-info-disabled-border-color);
   box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-info-disabled-3d-edge-color)
@@ -8676,9 +8652,9 @@ a.rd-button.primary:active {
   box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-primary-3d-edge-color)
 }
 .rd-button.primary.disabled,
-.rd-button.primary[disabled],
+.rd-button.primary:disabled,
 a.rd-button.primary.disabled,
-a.rd-button.primary[disabled] {
+a.rd-button.primary:disabled {
   background-color: var(--rdta-background-primary-disabled-color);
   border-color: var(--rdta-button-primary-disabled-border-color);
   box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-primary-disabled-3d-edge-color)
@@ -8696,9 +8672,9 @@ a.rd-button.success:active {
   box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-success-3d-edge-color)
 }
 .rd-button.success.disabled,
-.rd-button.success[disabled],
+.rd-button.success:disabled,
 a.rd-button.success.disabled,
-a.rd-button.success[disabled] {
+a.rd-button.success:disabled {
   background-color: var(--rdta-background-success-disabled-color);
   border-color: var(--rdta-button-success-disabled-border-color);
   box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-success-disabled-3d-edge-color)
@@ -8716,9 +8692,9 @@ a.rd-button.warning:active {
   box-shadow: 0 var(--rdta-tpf-button-3d-pressed-height) 0 var(--rdta-button-warning-3d-edge-color)
 }
 .rd-button.warning.disabled,
-.rd-button.warning[disabled],
+.rd-button.warning:disabled,
 a.rd-button.warning.disabled,
-a.rd-button.warning[disabled] {
+a.rd-button.warning:disabled {
   background-color: var(--rdta-background-warning-disabled-color);
   border-color: var(--rdta-button-warning-disabled-border-color);
   box-shadow: 0 var(--rdta-tpf-button-3d-height) 0 var(--rdta-button-warning-disabled-3d-edge-color)
@@ -9210,6 +9186,38 @@ textarea.input-small {
 .rd-input-files-queue > input[type=button] {
   margin-top: calc(var(--rdta-tpf-button-3d-height) * -1);
   position: relative
+}
+/*!
+* ----------------------------------------------------------------------------------------------
+* _form-input-range.css
+* ----------------------------------------------------------------------------------------------
+* form > input[type="range"]
+*/
+.rd-input-range-with-datalist {
+  display: block
+}
+.rd-input-range-with-datalist .rd-input-range-custom-ticks-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: calc(100% - (15px))
+}
+.rd-input-range-with-datalist .rd-input-range-custom-ticks-container > .rd-input-range-custom-tick {
+  color: hsl(from var(--rdta-tpf-input-range-thumb-border-color) h s calc(l - 25));
+  font-size: small;
+  font-weight: lighter;
+  font-style: normal;
+  padding: 0;
+  position: absolute
+}
+.rd-input-range-with-datalist .rd-input-range-custom-ticks-container > .rd-input-range-custom-tick::before {
+  border-left: 1px solid var(--rdta-tpf-input-range-thumb-border-color);
+  content: "";
+  display: block;
+  min-height: 10px
 }
 /*!
 * ----------------------------------------------------------------------------------------------
