@@ -360,7 +360,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
 
         if (is_array($doLoginResult) && array_key_exists('errorCode', $doLoginResult)) {
             switch ($doLoginResult['errorCode']) {
-                case $UsersDb::LOGIN_ERR_ACCOUNT_DISABLED;
+                case $UsersDb::LOGIN_ERR_ACCOUNT_DISABLED:
                     if (!isset($doLoginResult['userStatusText'])) {
                         $doLoginResult['userStatusText'] = '';
                     }
@@ -368,7 +368,7 @@ class LoginSubController extends \Rdb\Modules\RdbAdmin\Controllers\BaseControlle
                     $output['formResultMessage'] = sprintf(__($untranslatedMessage), __($doLoginResult['userStatusText']));
                     http_response_code(403);
                     break;
-                case $UsersDb::LOGIN_ERR_USERPASSWORD_INCORRECT;
+                case $UsersDb::LOGIN_ERR_USERPASSWORD_INCORRECT:
                 default:
                     $untranslatedMessage = noop__('The username or password is incorrect.');
                     $output['formResultMessage'] = __($untranslatedMessage);
