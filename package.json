@@ -17,7 +17,7 @@
         "datatables.net-responsive-dt": "^3.0.0",
         "handlebars": "^4.7.7",
         "jquery": "^3.6.0",
-        "lodash": "^4.17.21",
+        "lodash": "^4.17.23",
         "moment": "^2.29.3",
         "moment-timezone": "^0.5.34",
         "rundiz-template-for-admin": "^2.2.2",
