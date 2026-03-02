@@ -106,11 +106,6 @@
                 "destination": "assets/vendor"
             },
             {
-                "patterns": "node_modules/@popperjs/core/README*",
-                "rename": "popper-readme.md",
-                "destination": "assets/vendor"
-            },
-            {
                 "patterns": "node_modules/rundiz-template-for-admin/assets/js/smartmenus/LICENSE*",
                 "rename": "smartmenus-license.txt",
                 "destination": "assets/vendor"

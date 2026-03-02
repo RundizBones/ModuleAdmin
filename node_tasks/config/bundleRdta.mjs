@@ -44,8 +44,9 @@ const jsFiles = [
     'node_modules/jquery/dist/jquery.min.js', 
     // use smartmenus from its package directly.
     'node_modules/smartmenus/dist/jquery.smartmenus.min.js',
-    // use popper from its package directly.
-    'node_modules/@popperjs/core/dist/umd/popper.min.js',
+    // use floating-ui from its package directly.
+    'node_modules/@floating-ui/core/dist/floating-ui.core.umd.min.js',
+    'node_modules/@floating-ui/dom/dist/floating-ui.dom.umd.min.js',
     // use sticky-sidebar from its package directly.
     'node_modules/sticky-sidebar/dist/jquery.sticky-sidebar.min.js',
     // use resizesensor from its package directly.
@@ -58,8 +59,6 @@ const jsFiles = [
     'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-dialog.min.js',
     'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-page-options.min.js',
     'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-tabs.min.js',
-    // tooltips (tippy)
-    'node_modules/tippy.js/dist/tippy-bundle.umd.min.js',
     'node_modules/rundiz-template-for-admin/assets/js/rdta/components/rdta-tooltips.min.js',
 ];
 

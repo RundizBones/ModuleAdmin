@@ -51,19 +51,19 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/css/rdta/rdta-bundled.min.css',
-                    'version' => '2.4.9',
+                    'version' => '2.4.11',
                 ],
                 [
                     'handle' => 'rdta-components-datatablesjs',
                     'file' => $publicModuleUrl . '/assets/css/rdta/components/rdta-datatables-js.min.css',
-                    'version' => '2.4.9',
+                    'version' => '2.4.11',
                 ],
                 // end rundiz template for admin. -------
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/css/datatables-bundled.min.css',
-                    'version' => '2.3.4',
+                    'version' => '2.3.7',
                 ],
                 // end datatables----------.
                 [
@@ -114,7 +114,7 @@ class ModuleAssets
                 [
                     'handle' => 'rdta',
                     'file' => $publicModuleUrl . '/assets/js/rdta/rdta-bundled.min.js',
-                    'version' => '2.4.9',
+                    'version' => '2.4.11',
                 ],
                 [
                     'handle' => 'handlebars',
@@ -129,31 +129,31 @@ class ModuleAssets
                 [
                     'handle' => 'lodash',
                     'file' => $publicModuleUrl . '/assets/vendor/lodash/lodash.min.js',
-                    'version' => '4.17.21',
+                    'version' => '4.17.23',
                 ],
                 [
                     'handle' => 'sortableJS',
                     'file' => $publicModuleUrl . '/assets/vendor/sortablejs/Sortable.min.js',
-                    'version' => '1.15.6',
+                    'version' => '1.15.7',
                 ],
                 // datatables----------------.
                 [
                     'handle' => 'datatables',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/js/datatables-bundled.min.js',
                     'dependency' => ['rdta'],
-                    'version' => '2.3.4',
+                    'version' => '2.3.7',
                 ],
                 [
                     'handle' => 'datatables-plugins-pagination',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/plugins/pagination/input.js',
                     'dependency' => ['rdta', 'datatables'],
-                    'version' => '2.3.4',
+                    'version' => '2.3.7',
                 ],
                 [
                     'handle' => 'datatables-features-inputpaging',
                     'file' => $publicModuleUrl . '/assets/vendor/datatables.net/features/inputPaging/dataTables.inputPaging.min.js',
                     'dependency' => ['rdta', 'datatables'],
-                    'version' => '2.3.4',
+                    'version' => '2.3.7',
                 ],
                 // end datatables----------.
                 [

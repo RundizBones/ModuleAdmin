@@ -7968,7 +7968,7 @@ input[type=range]:disabled::-moz-range-progress {
   background-color: hsl(from var(--rdta-tpf-block-background-color) h s calc(l - 10))
 }
 /*!
- * Rundiz template for admin V.2.4.9
+ * Rundiz template for admin V.2.4.10
  */
 :root {
   --rdta-background-danger-disabled-color: #cf6464;
@@ -9824,6 +9824,29 @@ a.text-color-white:visited {
 }
 .text-transform-capitalize {
   text-transform: capitalize
+}
+/*!
+RDTA tooltips.
+*/
+.rdta-tooltips {
+  background: #222;
+  border-radius: 4px;
+  color: #fff;
+  display: none;
+  font-size: 90%;
+  font-weight: 400;
+  position: absolute;
+  left: 0;
+  padding: 5px;
+  top: 0;
+  width: max-content
+}
+.rdta-tooltip-arrow {
+  background: #222;
+  height: 8px;
+  position: absolute;
+  transform: rotate(45deg);
+  width: 8px
 }
 /*!
 * ----------------------------------------------------------------------------------------------

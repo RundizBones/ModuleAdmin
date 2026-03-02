@@ -10,7 +10,6 @@
     "repository": {},
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.0.0",
-        "@popperjs/core": "^2.11.5",
         "css-element-queries": "^1.2.3",
         "datatables.net-dt": "^2.0.0",
         "datatables.net-plugins": "^2.0.0",
@@ -19,13 +18,12 @@
         "jquery": "^3.6.0",
         "lodash": "^4.17.23",
         "moment": "^2.29.3",
-        "moment-timezone": "^0.5.34",
+        "moment-timezone": "^0.6.0",
         "rundiz-template-for-admin": "^2.2.2",
         "sanitize.css": "^13.0.0",
         "smartmenus": "^1.1.1",
         "sortablejs": "^1.15.0",
-        "sticky-sidebar": "^3.3.1",
-        "tippy.js": "^6.3.7"
+        "sticky-sidebar": "^3.3.1"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
